@@ -1,0 +1,5 @@
+*/.metadata/*
+*/bin/*
+client-app/cordovaLib/bin/*
+client-app/ffmpeg4androidLib/.settings/*
+client-app/ffmpeg4androidLib/bin/*
