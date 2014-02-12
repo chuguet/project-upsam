@@ -3,9 +3,7 @@ package com.upsam.hospital.controller.security;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -17,7 +15,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-
 import com.upsam.hospital.model.beans.Rol;
 import com.upsam.hospital.model.beans.Usuario;
 import com.upsam.hospital.model.service.IUsuarioService;
@@ -36,22 +33,20 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	private IUsuarioService usuarioService;
 
 	/** The logger. */
-	protected static Log LOG = LogFactory
-			.getLog(CustomAuthenticationProvider.class);
+	protected static Log LOG = LogFactory.getLog(CustomAuthenticationProvider.class);
 
 	// We need an Md5 encoder since our passwords in the database are Md5
 	// encoded.
 	/** The password encoder. */
-	private Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
+	private final Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see org.springframework.security.authentication.AuthenticationProvider#
 	 * authenticate(org.springframework.security.core.Authentication)
 	 */
-	public Authentication authenticate(Authentication auth)
-			throws AuthenticationException {
+	@Override
+	public Authentication authenticate(Authentication auth) throws AuthenticationException {
 
 		LOG.debug("Performing custom authentication");
 
@@ -61,7 +56,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		try {
 			// Retrieve user details from database
 			usuario = usuarioService.selectByUser(auth.getName());
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			// logger.error("User does not exists!");
 			throw new BadCredentialsException("El usuario no existe");
 		}
@@ -70,17 +66,17 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			LOG.error("Usuario incorrecto!");
 			throw new BadCredentialsException("Acceso incorrecto");
 		}
+
+		String pwd = passwordEncoder.encodePassword("1", null);
 		// Compare passwords
 		// Make sure to encode the password first before comparing
-		if (passwordEncoder.isPasswordValid(usuario.getPassword(),
-				(String) auth.getCredentials(), null) == false) {
+		if (passwordEncoder.isPasswordValid(usuario.getPassword(), (String) auth.getCredentials(), null) == false) {
 			LOG.error("Contraseña incorrecta!");
 			throw new BadCredentialsException("Contraseña incorrecta");
 		}
 
 		LOG.debug("Los detalles del usuario son correctos");
-		return new UsernamePasswordAuthenticationToken(usuario,
-				auth.getCredentials(), getAuthorities(usuario.getRol()));
+		return new UsernamePasswordAuthenticationToken(usuario, auth.getCredentials(), getAuthorities(usuario.getRol()));
 	}
 
 	/**
@@ -108,13 +104,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * org.springframework.security.authentication.AuthenticationProvider#supports
 	 * (java.lang.Class)
 	 */
+	@Override
 	public boolean supports(Class<?> authentication) {
-		return (UsernamePasswordAuthenticationToken.class
-				.isAssignableFrom(authentication));
+		return (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication));
 	}
 }

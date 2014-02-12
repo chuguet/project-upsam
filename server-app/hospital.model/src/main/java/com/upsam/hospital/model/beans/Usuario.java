@@ -13,176 +13,96 @@ import javax.persistence.Table;
  * The Class Usuario.
  */
 @Entity
-@Table(name = "USUARIO")
+@Table(name = "Usuario")
 public class Usuario implements IModelHospital {
-
-	/** The apellidos. */
-	@Basic
-	@Column(name = "APELLIDOS")
-	private String apellidos;
-
-	/** The email. */
-	@Basic
-	@Column(name = "EMAIL", unique = true)
-	private String email;
 
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_USUARIO")
+	@Column(name = "id")
 	private Integer id;
 
 	/** The nombre. */
 	@Basic
-	@Column(name = "NOMBRE")
+	@Column(name = "nombre", nullable = false, length = 100)
 	private String nombre;
+
+	/** The apellidos. */
+	@Basic
+	@Column(name = "apellidos", nullable = false, length = 200)
+	private String apellidos;
+
+	/** The email. */
+	@Basic
+	@Column(name = "email", unique = true, length = 200)
+	private String email;
+
+	@Basic
+	@Column(name = "usuario", unique = true, nullable = false, length = 20)
+	private String usuario;
 
 	/** The password. */
 	@Basic
-	@Column(name = "PASSWORD")
+	@Column(name = "pwd", nullable = false, length = 200)
 	private String password;
 
-	/** The admin. */
 	@Basic
-	@Column(name = "ROL")
+	@Column(name = "rol_id", nullable = false)
 	private Rol rol;
 
-	/** The user. */
-	@Basic
-	@Column(name = "USER", unique = true)
-	private String user;
-
-	/**
-	 * Gets the apellidos.
-	 * 
-	 * @return the apellidos
-	 */
-	public String getApellidos() {
-		return apellidos;
-	}
-
-	/**
-	 * Gets the email.
-	 * 
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * Gets the id.
-	 * 
-	 * @return the id
-	 */
 	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * Gets the nombre.
-	 * 
-	 * @return the nombre
-	 */
-	public String getNombre() {
-		return nombre;
-	}
-
-	/**
-	 * Gets the password.
-	 * 
-	 * @return the password
-	 */
-	public String getPassword() {
-		return password;
-	}
-
-	/**
-	 * Gets the rol.
-	 * 
-	 * @return the rol
-	 */
-	public Rol getRol() {
-		return rol;
-	}
-
-	/**
-	 * Gets the user.
-	 * 
-	 * @return the user
-	 */
-	public String getUser() {
-		return user;
-	}
-
-	/**
-	 * Sets the apellidos.
-	 * 
-	 * @param apellidos
-	 *            the new apellidos
-	 */
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-
-	/**
-	 * Sets the email.
-	 * 
-	 * @param email
-	 *            the new email
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id
-	 *            the new id
-	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**
-	 * Sets the nombre.
-	 * 
-	 * @param nombre
-	 *            the new nombre
-	 */
+	public String getNombre() {
+		return nombre;
+	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	/**
-	 * Sets the password.
-	 * 
-	 * @param password
-	 *            the new password
-	 */
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	/**
-	 * Sets the rol.
-	 * 
-	 * @param rol
-	 *            the new rol
-	 */
+	public Rol getRol() {
+		return rol;
+	}
+
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
-
-	/**
-	 * Sets the user.
-	 * 
-	 * @param user
-	 *            the new user
-	 */
-	public void setUser(String user) {
-		this.user = user;
-	}
-
 }

@@ -5,9 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.PacienteDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
@@ -52,8 +49,7 @@ public class PacienteController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/form/{operacion}", method = RequestMethod.GET, produces = "text/html")
-	public String createForm(@PathVariable("operacion") String operacion,
-			final Model uiModel) {
+	public String createForm(@PathVariable("operacion") String operacion, final Model uiModel) {
 		uiModel.addAttribute("operacion", operacion);
 		if (!operacion.equals("list")) {
 			operacion = "form";
@@ -78,12 +74,11 @@ public class PacienteController {
 			Paciente paciente = pacienteUtilDTO.toBusiness(pacienteDTO);
 			pacienteService.save(paciente);
 			return new MensajeDTO("Paciente creado correctamente", true);
-		} catch (DataBaseException e) {
-			return new MensajeDTO(new StringBuffer(
-					"Ya existe el paciente con expediente ")
-					.append(pacienteDTO.getExpediente())
-					.append(" en base de datos.").toString(), false);
-		} catch (TransferObjectException e) {
+		}
+		catch (DataBaseException e) {
+			return new MensajeDTO(new StringBuffer("Ya existe el paciente con expediente ").append(pacienteDTO.getExpediente()).append(" en base de datos.").toString(), false);
+		}
+		catch (TransferObjectException e) {
 			return new MensajeDTO(e.getMessage(), false);
 		}
 	}
@@ -104,9 +99,11 @@ public class PacienteController {
 				PacienteDTO e = pacienteUtilDTO.toRest(paciente);
 				pacientesDTO.add(e);
 			}
-		} catch (DataBaseException e) {
+		}
+		catch (DataBaseException e) {
 
-		} catch (TransferObjectException e) {
+		}
+		catch (TransferObjectException e) {
 
 		}
 		return pacientesDTO;
@@ -132,7 +129,8 @@ public class PacienteController {
 			paciente.setId(id);
 			this.pacienteService.delete(paciente);
 			return new MensajeDTO("Paciente eliminado correctamente", true);
-		} catch (DataBaseException e) {
+		}
+		catch (DataBaseException e) {
 			return new MensajeDTO(e.getMessage(), false);
 		}
 	}
@@ -151,9 +149,11 @@ public class PacienteController {
 		try {
 			Paciente paciente = pacienteService.findOne(id);
 			pacienteDTO = pacienteUtilDTO.toRest(paciente);
-		} catch (TransferObjectException e) {
+		}
+		catch (TransferObjectException e) {
 
-		} catch (DataBaseException e) {
+		}
+		catch (DataBaseException e) {
 
 		}
 		return pacienteDTO;
@@ -176,20 +176,20 @@ public class PacienteController {
 			Paciente paciente = pacienteUtilDTO.toBusiness(pacienteDTO);
 			pacienteService.update(paciente);
 			return new MensajeDTO("Paciente modificado correctamente", true);
-		} catch (DataBaseException e) {
-			return new MensajeDTO(
-					"Error al actualizar el paciente en base de datos.", false);
-		} catch (TransferObjectException e) {
+		}
+		catch (DataBaseException e) {
+			return new MensajeDTO("Error al actualizar el paciente en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
 			return new MensajeDTO(e.getMessage(), false);
 		}
 	}
 
 	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public @ResponseBody
-	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file)
-			throws IOException {
+	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file) throws IOException {
 		if (file.getSize() > 0) { // writing file to a directory
-			File upLoadedfile = new File("C:/"+file.getOriginalFilename());
+			File upLoadedfile = new File("D:/" + file.getOriginalFilename());
 
 			upLoadedfile.createNewFile();
 			FileOutputStream fos = new FileOutputStream(upLoadedfile);

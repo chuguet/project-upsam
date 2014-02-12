@@ -3,3 +3,12 @@
 client-app/cordovaLib/bin/*
 client-app/ffmpeg4androidLib/.settings/*
 client-app/ffmpeg4androidLib/bin/*
+.metadata/*
+RemoteSystemsTempFiles/*
+Servers/*
+*.settings/*
+*/.settings/*
+*/.classpath
+.classpath
+org.eclipse.*
+.jsdtscope
