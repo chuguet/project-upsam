@@ -1,0 +1,14 @@
+Instalar Node.js [node-v0.10.25-x64.msi]
+instalar ant
+meter ANT_HOME y en path %ANT_HOME%\bin
+meter en variables de entorno la ruta de  node.js: ;C:\Users\username\AppData\Roaming\npm
+meter en variables de entorno la ruta del adt bundle : ;C:\Development\adt-bundle\sdk\platform-tools;C:\Development\adt-bundle\sdk\tools
+meter en variables de entorno la java y ant:  ;%JAVA_HOME%\bin;%ANT_HOME%\bin
+instalar cordova: npm install -g cordova
+
+
+Para crear un proyecto:
+ $ cordova create hello com.example.hello "HelloWorld"
+    $ cd hello
+    $ cordova platform add android
+    $ cordova build
