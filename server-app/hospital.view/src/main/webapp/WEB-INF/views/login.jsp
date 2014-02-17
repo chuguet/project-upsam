@@ -13,7 +13,6 @@
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
 <script src="resources/js/jquery-1.8.2.min.js" type="text/javascript"></script>
-<script src="resources/js/jquery.alerts.js" type="text/javascript"></script>
 <script src="resources/js/jquery-ui-1.9.1.min.js" type="text/javascript"></script>
 <script src="resources/js/jquery.alerts.js" type="text/javascript"></script>
 <script src="resources/js/generic.js" type="text/javascript"></script>

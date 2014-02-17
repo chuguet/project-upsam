@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Locale;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.upsam.hospital.model.beans.Rol;
 import com.upsam.hospital.model.beans.Usuario;
 
@@ -25,8 +23,7 @@ import com.upsam.hospital.model.beans.Usuario;
 public class LoginController {
 
 	/** The Constant sdf. */
-	private static final SimpleDateFormat sdf = new SimpleDateFormat(
-			"EEEE, d 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
+	private static final SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d 'de' MMMM 'de' yyyy", new Locale("es", "ES"));
 
 	/**
 	 * Contiene algun rol de acceso.
@@ -35,12 +32,8 @@ public class LoginController {
 	 *            the authorities
 	 * @return true, if successful
 	 */
-	private boolean contieneAlgunRolDeAcceso(
-			Collection<GrantedAuthority> authorities) {
-		return authorities.contains(new SimpleGrantedAuthority(Rol.ROLE_ADMIN
-				.getRoleName()))
-				|| authorities.contains(new SimpleGrantedAuthority(
-						Rol.ROLE_USER.getRoleName()));
+	private boolean contieneAlgunRolDeAcceso(Collection<GrantedAuthority> authorities) {
+		return authorities.contains(new SimpleGrantedAuthority(Rol.ROLE_ADMIN.getRoleName())) || authorities.contains(new SimpleGrantedAuthority(Rol.ROLE_USER.getRoleName()));
 	}
 
 	/**
@@ -111,10 +104,10 @@ public class LoginController {
 			Usuario usuario = (Usuario) u.getPrincipal();
 			model.addAttribute("nombre", usuario.getNombre());
 			model.addAttribute("apellidos", usuario.getApellidos());
-			model.addAttribute("fecha",
-					sdf.format(Calendar.getInstance().getTime()));
+			model.addAttribute("fecha", sdf.format(Calendar.getInstance().getTime()));
 			return "home";
-		} else {
+		}
+		else {
 			model.addAttribute("noAccess", true);
 			return "login";
 		}

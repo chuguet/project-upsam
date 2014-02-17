@@ -25,7 +25,13 @@
 		
 		<script src="resources/js/views/usuario.js" type="text/javascript"></script>
 		<script src="resources/js/views/paciente.js" type="text/javascript"></script>
-		
+		<script type="text/javascript">
+			function captureVideo(){
+				alert(window.parent);
+				alert(window.parent.captureVideo);
+				window.parent.captureVideo();
+			}
+		</script>
 	</head>
 	<body id="hospital" class="web" >
 		
@@ -48,6 +54,7 @@
 		
 		
 		<div id="content">
+		<button onclick="captureVideo();">Capture Video</button> <br>
 		</div>
 		
 		<div id="footer">

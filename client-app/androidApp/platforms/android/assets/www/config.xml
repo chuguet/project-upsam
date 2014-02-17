@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.example.hello" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>HelloWorld</name>
+    <name>LAM</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+       Aplicaci&oacute;n desarrollada para el Hospital Ni&ntilde;o de Jes&uacute;s
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="david.llamazares.juarez@gmail.com" href="http://cordova.io">
+        Yamaradas Team
     </author>
-    <content src="index.html" />
+    <content src="login.html" />
     <access origin="*" />
 </widget>

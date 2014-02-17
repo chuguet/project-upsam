@@ -15,12 +15,15 @@
 		<intercept-url pattern="/home" access="ROLE_ADMIN, ROLE_USER" />
 		<intercept-url pattern="/usuario/**" access="ROLE_ADMIN" />
 		<intercept-url pattern="/logout" access="ROLE_USER, ROLE_ADMIN" />
+		
+		<form-login authentication-failure-handler-ref="ajaxAuthenticationFailureHandler" authentication-success-handler-ref="ajaxAuthenticationSuccessHandler" login-page="/login" /> 
+		
 		<form-login login-page="/login" default-target-url="/home" authentication-failure-url="/loginfailed" login-processing-url="/j_spring_security_check" />
 		<logout logout-success-url="/login" />
 		
 		<custom-filter ref="botonVolverFilter" after="LAST"/>
 	 	<custom-filter ref="recordarLoginFilter" before="FORM_LOGIN_FILTER"/> 
-	</http>
+	</http> 
 	
 	<authentication-manager>
 		<authentication-provider ref="customAuthenticationProvider" />
@@ -28,4 +31,5 @@
 	
 	<beans:bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint" p:loginFormUrl="/login" />
 
+	
 </beans:beans>

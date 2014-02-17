@@ -1,0 +1,114 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>Ejes Coordenadas</title>
+        
+        <style>
+        	body.landscape { text-align:center; margin: 0; padding: 0;}
+        	body.landscape div.ui-content {padding:0px;}
+        </style>
+        
+        <link href="../css/jquery.mobile-1.4.1.min.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src='../js/3d/surface-plot.js'></script>
+        <script type="text/javascript" src='../js/3d/colour-gradient.js'></script>
+		
+        <script type="text/javascript" src="../js/cordova.js"></script>
+        <script type="text/javascript" src="../js/index.js"></script>
+        
+        <script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
+        <script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
+        <script type="text/javascript" src="../js/3d/jsapi"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    
+        <script type="text/javascript">
+            google.load("visualization", "1");
+            google.setOnLoadCallback(setUp);
+            
+            function setUp(){
+                var numRows = 45.0;
+                var numCols = 45;
+                
+                var tooltipStrings = new Array();
+                var data = new google.visualization.DataTable();
+                
+                for (var i = 0; i < numCols; i++){
+                    data.addColumn('number', 'col'+i);
+                }
+                
+                data.addRows(numRows);
+                var d = 360 / numRows;
+                var idx = 0;
+                
+                for (var i = 0; i < numRows; i++) {
+                    for (var j = 0; j < numCols; j++) {
+//								var x = i - numRows/2;
+//                                var y = j - numCols/2;
+//                                var value = (Math.cos(i * d * Math.PI / 180.0) * Math.cos(j * d * Math.PI / 180.0));
+//                                value = (Math.sqrt(x*x+y*y)+5*Math.cos(Math.sqrt((x*x+y*y) * d * Math.PI / 180.0)))/15.0
+								
+                        var value = (Math.cos(i * d * Math.PI / 180.0) * Math.cos(j * d * Math.PI / 180.0));
+                        
+                        data.setValue(i, j, value / 4.0);
+                        
+                        tooltipStrings[idx] = "x:" + i + ", y:" + j + " = " + value;
+                        idx++;
+                    }
+                }
+        
+                surfacePlot = new greg.ross.visualisation.SurfacePlot(document.getElementById("surfacePlotDiv"));
+                
+                // Don't fill polygons in IE. It's too slow.
+                var fillPly = true;
+                
+                // Define a colour gradient.
+                var colour1 = {red:0, green:0, blue:255};
+                var colour2 = {red:0, green:255, blue:255};
+                var colour3 = {red:0, green:255, blue:0};
+                var colour4 = {red:255, green:255, blue:0};
+                var colour5 = {red:255, green:0, blue:0};
+                var colours = [colour1, colour2, colour3, colour4, colour5];
+                
+                // Axis labels.
+                var xAxisHeader = "X";
+                var yAxisHeader = "Y";
+                var zAxisHeader = "Z";
+                
+                var myWidth = $(window).width();
+                var myHeight = $(window).height();
+               	
+                var options = {xPos: 0, yPos: 0, width: myWidth, height: myHeight, colourGradient: colours, fillPolygons: fillPly,
+                    tooltips: tooltipStrings, xTitle: xAxisHeader, yTitle: yAxisHeader, zTitle: zAxisHeader, restrictXRotation: false};
+                
+                surfacePlot.draw(data, options);                       
+            }	
+                    
+            function resize() {
+				var theCanvas = $("#surfacePlotCanvas")
+				theCanvas.width = theCanvas.offsetWidth;
+				theCanvas.height = theCanvas.offsetHeight;
+			}
+                    
+            window.onload = window.onresize = resize;
+                    	
+			var supportsOrientationChange = "onorientationchange" in window, orientationEvent = supportsOrientationChange ? "orientationchange" : "resize";
+
+			window.addEventListener(orientationEvent, function() {
+                window.location.reload();
+			}, false);
+					
+        </script>
+                
+        </head>
+        <body class="landscape">
+        	<div data-role="page" id="Home">
+				<div data-role="header"><h1>Simulaci&oacute;n 3D</h1></div>
+				<div role="main" class="ui-content">
+					<div id="surfacePlotDiv"></div>
+				</div>
+			</div>
+        </body>
+</html>
