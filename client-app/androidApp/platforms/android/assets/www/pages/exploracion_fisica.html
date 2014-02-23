@@ -7,74 +7,19 @@
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 
 		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-1.4.1.min.css">
-		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-datebox.min.css" /> 
+		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-icon.pack.css" /> 
+		<link type="text/css" rel="stylesheet" href="../css/jquery.generic.css" /> 
 		
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
 		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>
+		<script type="text/javascript" src="../js/index.js"></script>
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
 		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
-		<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.datebox.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>
+		<script type="text/javascript" src="../js/ctrl.datePicker.js"></script>
 		
 		<script type="text/javascript">
-			app.initialize();
-			
-			$(document).bind("pageinit", function() {
-            	processSpeech();                 
-            });
-			
-			function processSpeech(){
-				$(".txt-speech").each(function (index) {
-					var that = $(this);
-					var id = $(this).attr('id');
-					var button = $( "<button id='btnSpeech-" + id + "' class='btn-speech' title='Escritura por voz'>&nbsp;</button>" );
-					button.bind('click', function() {
-						$.mobile.loading( 'show', {
-							text: 'Grabando',
-							textVisible: true,
-							theme: "b",
-							textonly: false
-						});
-						var speech = new SpeechRecognition(
-										function(){
-											$.mobile.loading('hide');
-										}, 
-										function onResult(x){
-											that.val(x['results'][0][0]['transcript']);
-										}
-									);
-						speech.start();
-					});
-					
-					$(this).parent().append(button);
-				});
-			};
+			generic.initialize();
 		</script>
-		<style>
-			.btn-speech {
-				position: absolute;
-				z-index: 100;
-				top: 0px;
-				right: 1px;
-				padding: .4em;
-				line-height: 1.4em;
-				color:transparent;
-				background: #DDD;
-				border-color: #ddd;
-				color: #333;
-				background-image: url("../img/ico_micro.png");
-				width: 32px;
-				cursor: pointer;
-				border: 0px;
-				-webkit-appearance: none;
-				-webkit-border-radius: inherit;
-				border-radius: inherit;
-				background-repeat: no-repeat;
-				background-position-x: 4px;
-				background-position-y: center;
-			}
-		</style>
 	</head>
 
 	<body>
@@ -87,60 +32,64 @@
 			
 			<div data-role="content">
 				
-					<h2>DATOS PERSONALES</h2>
-					<div data-role="fieldcontain">
-						<label for="numID">N&deg; de identificaci&oacute;n:</label>	
-						<input type="text" id="numID" name="numID"/>						
-					</div>
+				<h2>DATOS PERSONALES</h2>
+				<div data-role="fieldcontain">
+					<label for="numID">N&deg; de identificaci&oacute;n:</label>	
+					<input type="text" id="numID" name="numID" class="txt-speech"/>						
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="nombre">Nombre</label>	
+					<input type="text" id="nombre" name="nombre" class="txt-speech"/>
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="apellidos">Apellidos</label>	
+					<input type="text" id="apellidos" name="apellidos" class="txt-speech"/>
+				</div>
 					
-					<div data-role="fieldcontain">
-						<label for="nombrePaciente">Nombre y apellidos del paciente:</label>	
-						<input type="text" id="nombrePaciente" name="nombrePaciente" class="txt-speech"/>
-					</div>
-						
-					<div data-role="fieldcontain">
-						<label for="fecEval">Fecha de evaluaci&oacute;n:</label>
-						<input id="fecEval" name="fecEval" id="mydate" type="date" data-role="datebox" data-options='{"mode": "datebox"}'>
-					</div>
-					
-					<div data-role="fieldcontain">
-						<label for="viajar">Sexo</label>
-						<select id="viajar" name="viajar" data-role="slider" style="width: 150px">
-							<option value="1">Hombre</option>
-							<option value="0">Mujer</option>
-						</select>
-						
-						<div data-role="fieldcontain">
-							<label for="fecNac">Fecha de nacimiento:</label>
-							<input type="text" id="fecNac" name="fecNac"/>
-						</div>
-					</div>
-					
-					<div data-role="fieldcontain">
-						<label for="estadocivil">Escolarizaci&oacute;n:</label>
-						<select id="estadocivil" name="estadocivil" data-native-menu="false">
-							<option value="0"></option>
-							<option value="0">Educaci&oacute;n especial</option>
-							<option value="1">Integraci&oacute;n</option>
-							<option value="2">Sin adaptaciones</option>		                    
-						</select>		            
-					</div>
-					
-					<div data-role="fieldcontain">
-						<label for="curso">Curso:</label>
-						<input type="text" id="curso" name="curso"/>		            
-					</div>
-					
-					<div data-role="fieldcontain" data-theme="d">
-						<label for="examinador">Examinador:</label>
-						<select id="examinador" name="examinador" data-native-menu="false">
-							<option value="0"></option>
-							<option value="0">examinador 1</option>
-							<option value="1">examinador 2</option>
-							<option value="2">examinador 3</option>		                    
-						</select>		            
-					</div>
-			</div>
+				<div data-role="fieldcontain">
+					<label for="fecEval">Fecha de evaluaci&oacute;n:</label>
+					<input id="fecEval" name="fecEval" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" />
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="fecNac">Fecha de nacimiento:</label>
+					<input id="fecNac" name="fecNac" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" />
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="viajar">Sexo</label>
+					<select id="viajar" name="viajar" data-role="slider" style="width: 150px">
+						<option value="1">Hombre</option>
+						<option value="0">Mujer</option>
+					</select>
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="estadocivil">Escolarizaci&oacute;n:</label>
+					<select id="estadocivil" name="estadocivil" data-native-menu="false">
+						<option value="0"></option>
+						<option value="0">Educaci&oacute;n especial</option>
+						<option value="1">Integraci&oacute;n</option>
+						<option value="2">Sin adaptaciones</option>		                    
+					</select>		            
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="curso">Curso:</label>
+					<input type="text" id="curso" name="curso"/>		            
+				</div>
+				
+				<div data-role="fieldcontain" data-theme="d">
+					<label for="examinador">Examinador:</label>
+					<select id="examinador" name="examinador" data-native-menu="false">
+						<option value="0"></option>
+						<option value="0">examinador 1</option>
+						<option value="1">examinador 2</option>
+						<option value="2">examinador 3</option>		                    
+					</select>		            
+				</div>
 	
 				<ul data-role="listview" data-inset="true" data-filter="false" data-theme="c" data-dividertheme="b">
 					<li data-role="list-divider" >DATOS CL&Iacute;NICOS</li>
@@ -170,8 +119,7 @@
 				
 				<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
 					<li><a data-transition="slidedown" href="functional_mobility_scale.html">FUNCTIONAL MOBILITY SCALE (FMS)</a></li>
-				</ul>				
-				<br/><br/>
+				</ul>
 			</div>
 			<div data-role="footer">
 				<h4>&copy; Copyright Info or Site URL</h4>

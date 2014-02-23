@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: D:\\Projects\\workspace_proyecto_fin_carrera\\client-app\\ffmpeg4androidLib\\src\\com\\netcompss\\ffmpeg4android\\IFfmpgefRemoteServiceBridge.aidl
+ * Original file: D:\\Projects\\workspace_project-upsam\\client-app\\ffmpeg4androidLib\\src\\com\\netcompss\\ffmpeg4android\\IFfmpgefRemoteServiceBridge.aidl
  */
 package com.netcompss.ffmpeg4android;
 public interface IFfmpgefRemoteServiceBridge extends android.os.IInterface

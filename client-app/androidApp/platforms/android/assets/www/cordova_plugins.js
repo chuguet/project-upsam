@@ -134,6 +134,27 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/org.apache.cordova.plugin.datepicker/www/datepicker.js",
+        "id": "org.apache.cordova.plugin.datepicker.Datepicker",
+        "clobbers": [
+            "window.plugins.datePicker"
+        ]
+    },
+    {
+        "file": "plugins/com.bikasv.plugins.datepicker/scripts/datePickerPlugin.js",
+        "id": "com.bikasv.plugins.datepicker.datePicker",
+        "clobbers": [
+            "datePicker"
+        ]
+    },
+    {
+        "file": "plugins/com.bikasv.plugins.datepicker/scripts/share.js",
+        "id": "com.bikasv.plugins.datepicker.share",
+        "clobbers": [
+            "share"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.file/www/DirectoryEntry.js",
         "id": "org.apache.cordova.file.DirectoryEntry",
         "clobbers": [
@@ -262,6 +283,8 @@ module.exports.metadata =
     "org.apache.cordova.media-capture": "0.2.6",
     "org.apache.cordova.camera": "0.2.6",
     "org.apache.cordova.speech.speechrecognition": "0.1.0",
+    "org.apache.cordova.plugin.datepicker": "1.0.0",
+    "com.bikasv.plugins.datepicker": "0.1.1",
     "org.apache.cordova.file": "0.2.5"
 }
 // BOTTOM OF METADATA

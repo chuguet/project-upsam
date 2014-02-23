@@ -5,6 +5,12 @@
     <feature name="App">
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
+    <feature name="DatePickerPlugin">
+        <param name="android-package" value="com.bikasv.plugins.datepicker.DatePickerPlugin" />
+    </feature>
+    <feature name="Share">
+        <param name="android-package" value="com.bikasv.plugins.share.Share" />
+    </feature>
     <feature name="Camera">
         <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
     </feature>
@@ -13,6 +19,9 @@
     </feature>
     <feature name="Capture">
         <param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
+    </feature>
+    <feature name="Datepicker">
+        <param name="android-package" value="org.apache.cordova.datepicker.Datepicker" />
     </feature>
     <feature name="SpeechRecognition">
         <param name="android-package" value="org.apache.cordova.speech.SpeechRecognition" />
@@ -24,6 +33,6 @@
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team
     </author>
-    <content src="home.html" />
+    <content src="pages/exploracion_fisica.html" />
     <access origin="*" />
 </widget>

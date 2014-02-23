@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        
+        <title>Speech</title>
+        
+        <link rel="stylesheet" type="text/css" href="speech.css" />
+        <link href="../css/jquery.mobile-1.4.1.min.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="../cordova.js"></script>
+        <script type="text/javascript" src="../js/index.js"></script>
+        <script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
+        <script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
+        <script type="text/javascript">
+            app.initialize();
+        	
+		
+			console.log("MY SPEECH " + speech);
+			function capturarAudio(){
+				$.mobile.loading( 'show', {
+					text: 'Grabando',
+					textVisible: true,
+					theme: "b",
+					textonly: false
+					});
+				var speech = new SpeechRecognition(onSpeechEnd, onResult);
+				speech.start();
+			}
+			
+			function onSpeechEnd(){
+				$.mobile.loading('hide');
+				var speech = window.sessionStorage.getItem('speech');
+				//speech.stop();
+			}
+			 
+			function onResult(x){
+				$("#txtCapturado").val(x['results'][0][0]['transcript']);
+				//alert(x['results'][0][0]['transcript']);
+			};
+		</script>
+    </head>
+    <body>
+		<div data-role="page" id="loginpage">
+			<div data-role="header"><h1>Captura de voz</h1></div>
+			<div role="main" class="ui-content">
+	            <div id="capture" class="ui-field-contain">
+					<input type="text" id="txtCapturado" />
+					<button id="btnAceptar" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-left" onclick="javascript:capturarAudio();">Grabar</button>
+				</div>
+            </div>
+       	</div>
+    </body>
+</html>
