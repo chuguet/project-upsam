@@ -14,7 +14,7 @@
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
 		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.flipbox.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.datebox.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>
 		
 		<script type="text/javascript">
@@ -100,7 +100,7 @@
 						
 					<div data-role="fieldcontain">
 						<label for="fecEval">Fecha de evaluaci&oacute;n:</label>
-						<input type="text" id="fecEval" name="fecEval"/>
+						<input id="fecEval" name="fecEval" id="mydate" type="date" data-role="datebox" data-options='{"mode": "datebox"}'>
 					</div>
 					
 					<div data-role="fieldcontain">
