@@ -37,7 +37,7 @@
 			}
 			
 			function anadirFecha(divName){			
-				var htmlToAdd = "fieldset><div data-role='fieldcontain'><label for='fec1'>Fecha:</label><input name='fec1' id='fec1' type='text' data-role='datebox' data-options='{'mode':'flipbox'}'  /></div><br>";
+				var htmlToAdd = "fieldset><div data-role='fieldcontain'><label for='fec1'>Fecha:</label><input name='fec1' id='fec1' type='text' class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{'mode':'flipbox'}'  /></div><br>";
 				$(htmlToAdd).appendTo("#" + divName).trigger("create");
 				
 				
@@ -72,56 +72,56 @@
 					<!-- Tipo epilepsia: si epilepsia = SI -->
 					<div data-role="fieldcontain">  
 						<label for="tipoEpilepsia">Tipo epilepsia:</label>  
-						<input type="text" name="tipoEpilepsia" id="tipoEpilepsia" value=""  />
+						<input type="text" class="txt-speech" name="tipoEpilepsia" id="tipoEpilepsia" value=""  />
 					</div>
 				
 					<!-- Fecha ultima crisis: si epilepsia = SI -->			
 					<div data-role="fieldcontain">  				
 						<label for="fecCrisis">Fecha &uacute;ltima crisis</label>
-						<input name="fecCrisis" id="fecCrisis" type="text" data-role="datebox" data-options='{"mode":"flipbox", "useNewStyle":false}' />				
+						<input name="fecCrisis" id="fecCrisis" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />				
 					</div>
 				
 					<!-- Fecha convulsi&oacute;n: si epilepsia = SI -->			
 					<div data-role="fieldcontain">  				
 						<label for="fecConvulsion">Fecha &uacute;ltima convulsi&oacute;n</label>
-						<input name="fecConvulsion" id="fecConvulsion" type="text" data-role="datebox" data-options='{"mode":"flipbox", "useNewStyle":false}' />				
+						<input name="fecConvulsion" id="fecConvulsion" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />				
 					</div>
 				
 					<!-- Numero de crisis -->			
 					<div data-role="fieldcontain">  				
-						<label for="numCrisis">Nº Crisis</label>				
+						<label for="numCrisis">Nï¿½ Crisis</label>				
 						<input type="range" name="numCrisis" id="numCrisis" value="0" min="0" max="100" />
 					</div>
 				</div>	
 				
-				<!-- Historial de caidas ultimo año -->			
+				<!-- Historial de caidas ultimo aï¿½o -->			
 				<div data-role="fieldcontain">  				
-					<label for="numCaidas">Nº ca&iacute;das en el &uacute;ltimo año</label>				
+					<label for="numCaidas">Nï¿½ ca&iacute;das en el &uacute;ltimo aï¿½o</label>				
 					<input type="range" name="numCaidas" id="numCaidas" value="0" min="0" max="100" />
 				</div>
 				
 				<!-- Fecha de &uacute;ltima caida -->			
 				<div data-role="fieldcontain">  				
 					<label for="fecCaida">Fecha de la &uacute;ltima ca&iacute;da</label>
-					<input name="fecCaida" id="fecCaida" type="text" data-role="datebox" data-options='{"mode":"flipbox", "useNewStyle":false}' />				
+					<input name="fecCaida" id="fecCaida" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />				
 				</div>
 
 				<!-- Audici&oacute;n -->			
 				<div data-role="fieldcontain">  				
 					<label for="audicion">Audici&oacute;n</label>
-					<textarea name="audicion" id="audicion"></textarea>
+					<textarea name="audicion" class="txt-speech" id="audicion"></textarea>
 				</div>
 
 				<!-- Visi&oacute;n -->			
 				<div data-role="fieldcontain">  				
 					<label for="vision">Visi&oacute;n</label>
-					<textarea name="vision" id="vision"></textarea>
+					<textarea name="vision" class="txt-speech" id="vision"></textarea>
 				</div>
 				
 				<!-- Lenguaje y cognici&oacute;n alteraciones -->			
 				<div data-role="fieldcontain">  				
 					<label for="lenguaje">Lenguaje y cognici&oacute;n - alteraciones</label>
-					<select onchange="javascript:onchangeLenguaje();" name="lenguaje" id="lenguaje" data-role="slider" data-theme="c" data-track-theme="a"º>    
+					<select onchange="javascript:onchangeLenguaje();" name="lenguaje" id="lenguaje" data-role="slider" data-theme="c" data-track-theme="a"ï¿½>    
 						<option value="0">No</option>    
 						<option value="1">Si</option>  
 					</select>
@@ -156,7 +156,7 @@
 					<!-- Necesidades y dolor -->			
 					<div data-role="fieldcontain">  				
 						<label for="neceDolor">Capaz de expresar necesidades y dolor</label>
-						<select name="neceDolor" id="neceDolor" data-role="slider" data-theme="c" data-track-theme="a"º>    
+						<select name="neceDolor" id="neceDolor" data-role="slider" data-theme="c" data-track-theme="a"ï¿½>    
 							<option value="0">No</option>    
 							<option value="1">Si</option>  
 						</select>
@@ -164,47 +164,47 @@
 				</div>	
 					
 				<div data-role="fieldcontain" id="divFechaGral">  
-					<h3>ANTECEDENTES QUIRURGICOS GENERALES</h3><a title="Añadir fecha" href="javascript:anadirFecha('divFechaGral');" data-role="button" data-icon="plus" data-iconpos="notext" style="align:right">Añadir fecha</a> 				
+					<h3>ANTECEDENTES QUIRURGICOS GENERALES</h3><a title="Aï¿½adir fecha" href="javascript:anadirFecha('divFechaGral');" data-role="button" data-icon="plus" data-iconpos="notext" style="align:right">Aï¿½adir fecha</a> 				
 				</div>			
 					
 				<div data-role="fieldcontain" id="divFechaOrto">  				
-					<h3>ANTECEDENTES ORTOP&Eacute;DICOS</h3><a title="Añadir fecha" href="javascript:anadirFecha('divFechaOrto');" data-role="button" data-icon="plus" data-iconpos="notext" style="align:right">Añadir fecha</a> 
+					<h3>ANTECEDENTES ORTOP&Eacute;DICOS</h3><a title="Aï¿½adir fecha" href="javascript:anadirFecha('divFechaOrto');" data-role="button" data-icon="plus" data-iconpos="notext" style="align:right">Aï¿½adir fecha</a> 
 				</div>
 				
 				<h3>ANTECEDENTES INYECCIONES CON TOXINA BOTUL&Iacute;NICA/FENOL</h3>
-				<!-- Nº año 1-4 -->			
+				<!-- Nï¿½ aï¿½o 1-4 -->			
 				<div data-role="fieldcontain">  				
-					<label for="numCaidas">Nº aprox./año</label>				
+					<label for="numCaidas">Nï¿½ aprox./aï¿½o</label>				
 					<input type="range" name="numCaidas" id="numCaidas" value="0" min="0" max="4" />
 				</div>
 
 				<!-- Fecha de dos ultimas sesiones -->			
 				<div data-role="fieldcontain">  				
 					<label for="fecUltSes">Fecha &uacute;ltima sesi&oacute;n</label>				
-					<input name="fecUltSes" id="fecUltSes" type="text" data-role="datebox" data-options='{"mode":"flipbox", "useNewStyle":false}' />					
+					<input name="fecUltSes" id="fecUltSes" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />					
 				</div>
 				<div data-role="fieldcontain">  				
 					<label for="fecPenSes">Fecha penultima sesi&oacute;n</label>				
-					<input name="fecPenSes" id="fecPenSes" type="text" data-role="datebox" data-options='{"mode":"flipbox", "useNewStyle":false}' />					
+					<input name="fecPenSes" id="fecPenSes" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />					
 				</div>
 				
 				<!-- Localizaci&oacute;n del tratamiento -->			
 				<div data-role="fieldcontain">  				
 					<label for="localTratamiento">Localizaci&oacute;n del tratamiento</label>				
-					<textarea name="localTratamiento" id="localTratamiento"></textarea>
+					<textarea name="localTratamiento" class="txt-speech" id="localTratamiento"></textarea>
 				</div>
 				
 				<h3>OTROS</h3>			
 				<!-- Alergias medicamentosas -->			
 				<div data-role="fieldcontain">  				
 					<label for="alergias">Alergias medicamentosas conocidas</label>
-					<textarea name="alergias" id="alergias"></textarea>
+					<textarea name="alergias" class="txt-speech" id="alergias"></textarea>
 				</div>
 
 				<!-- Tratamiento actual -->			
 				<div data-role="fieldcontain">  				
 					<label for="tratamiento">Tratamiento actual</label>
-					<textarea name="tratamiento" id="tratamiento"></textarea>
+					<textarea name="tratamiento" class="txt-speech" id="tratamiento"></textarea>
 				</div>
 			</div>
 		</div>
