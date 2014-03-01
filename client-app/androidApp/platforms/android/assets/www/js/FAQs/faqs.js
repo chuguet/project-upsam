@@ -62,15 +62,16 @@ $(document).ready(function(){
 
         self.handler = function handler(answerText){
             if(hasToBeVisible())
-                showAnswer(answerText);
+                self._questions_answers.removeClass("hide");
+
+            buildAnswer(answerText);
         };
 
         function hasToBeVisible(){
             return self._questions_answers.hasClass("hide");
         }
 
-        function showAnswer(answerText){
-            self._questions_answers.removeClass("hide");
+        function buildAnswer(answerText){
             self._faqAnswer.text(answerText);
         }
 
@@ -93,7 +94,7 @@ $(document).ready(function(){
         function listenImageMapEvents(handler){
             self._mapzone.click(function(event){
                 event.preventDefault();
-                handler($(this));
+                handler($(this).attr("info"));
             });
         }
 
