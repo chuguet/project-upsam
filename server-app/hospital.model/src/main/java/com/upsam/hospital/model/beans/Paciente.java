@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @Table(name = "PACIENTE")
 public class Paciente implements IModelHospital {
 
+	private static final long serialVersionUID = 4317366090024096036L;
+
 	/** The apellidos. */
 	@Basic
 	@Column(name = "APELLIDOS")

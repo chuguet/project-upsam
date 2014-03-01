@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @Table(name = "Usuario")
 public class Usuario implements IModelHospital {
 
+	private static final long serialVersionUID = -5147827634279571103L;
+
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
