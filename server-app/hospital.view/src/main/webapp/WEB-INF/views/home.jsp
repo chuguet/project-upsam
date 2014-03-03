@@ -13,25 +13,20 @@
 		<link href="resources/css/generic.css" rel="stylesheet" type="text/css" />
 		<link href="resources/css/jquery.alerts.css" rel="stylesheet" type="text/css">
 		<link href="resources/css/ui.jqgrid.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/jquery.ui.plupload.css" rel="stylesheet" type="text/css">
 
 		<script src="resources/js/jquery.require.js" type="text/javascript"></script>
 		<script src="resources/js/jquery-1.8.2.min.js" type="text/javascript"></script>
 		<script src="resources/js/jquery-ui-1.9.1.min.js" type="text/javascript"></script>
 		<script src="resources/js/generic.js" type="text/javascript"></script>
 		
+		<script src="resources/js/jquery.ui.plupload.min.js" type="text/javascript"></script>
 		<script src="resources/js/jquery.alerts.js" type="text/javascript"></script>
 		<script src="resources/js/jquery.jqGrid.min.js" type="text/javascript"></script>
 		<script src="resources/js/i18n/grid.locale-es.js" type="text/javascript"></script>
 		
 		<script src="resources/js/views/usuario.js" type="text/javascript"></script>
 		<script src="resources/js/views/paciente.js" type="text/javascript"></script>
-		<script type="text/javascript">
-			function captureVideo(){
-				alert(window.parent);
-				alert(window.parent.captureVideo);
-				window.parent.captureVideo();
-			}
-		</script>
 	</head>
 	<body id="hospital" class="web" >
 		
@@ -53,9 +48,7 @@
 		</div>
 		
 		
-		<div id="content">
-		<button onclick="captureVideo();">Capture Video</button> <br>
-		</div>
+		<div id="content"></div>
 		
 		<div id="footer">
 			&#169; Hospital S.L. &#174;

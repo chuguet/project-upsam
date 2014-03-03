@@ -1,12 +1,19 @@
 package com.upsam.hospital.model.beans;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -16,6 +23,7 @@ import javax.persistence.Table;
 @Table(name = "PACIENTE")
 public class Paciente implements IModelHospital {
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 4317366090024096036L;
 
 	/** The apellidos. */
@@ -33,16 +41,35 @@ public class Paciente implements IModelHospital {
 	@Column(name = "EXPEDIENTE", unique = true)
 	private String expediente;
 
+	/** The exploracion3 d. */
+	@OneToMany(mappedBy = "paciente")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Exploracion3D> exploracion3D;
+
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_USUARIO")
+	@Column(name = "ID_PACIENTE")
 	private Integer id;
 
 	/** The nombre. */
 	@Basic
 	@Column(name = "NOMBRE")
 	private String nombre;
+
+	/**
+	 * Adds the exploracion3 d.
+	 * 
+	 * @param exploracion3D
+	 *            the exploracion3 d
+	 */
+	public void addExploracion3D(Exploracion3D exploracion3D) {
+		if (this.getExploracion3D() == null) {
+			this.setExploracion3D(new ArrayList<Exploracion3D>());
+		}
+		this.getExploracion3D().add(exploracion3D);
+	}
 
 	/**
 	 * Gets the apellidos.
@@ -69,6 +96,15 @@ public class Paciente implements IModelHospital {
 	 */
 	public String getExpediente() {
 		return expediente;
+	}
+
+	/**
+	 * Gets the exploracion3 d.
+	 * 
+	 * @return the exploracion3 d
+	 */
+	public List<Exploracion3D> getExploracion3D() {
+		return exploracion3D;
 	}
 
 	/**
@@ -117,6 +153,16 @@ public class Paciente implements IModelHospital {
 	 */
 	public void setExpediente(String expediente) {
 		this.expediente = expediente;
+	}
+
+	/**
+	 * Sets the exploracion3 d.
+	 * 
+	 * @param exploracion3d
+	 *            the new exploracion3 d
+	 */
+	public void setExploracion3D(List<Exploracion3D> exploracion3d) {
+		exploracion3D = exploracion3d;
 	}
 
 	/**

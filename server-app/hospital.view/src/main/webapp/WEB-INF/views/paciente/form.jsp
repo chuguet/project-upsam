@@ -13,9 +13,9 @@
 		$('input[id=email]').val(paciente.email);
 		$('input[id=expediente]').val(paciente.expediente);
 	};
+
 	</c:if>
 </script>
-<form id="alta">
 	<fieldset>
 		<legend>
 			<c:choose>
@@ -42,6 +42,15 @@
 				type="textbox" maxlength="200"
 				class="text ui-widget-content ui-corner-all" />
 		</p>
+		<c:choose><c:when test="${operacion == 'edit'}">
+		<div class="file">
+			<form id="formFile" method="POST" enctype="multipart/form-data">
+				<input id="file" type="file" name="file"/> 
+				<input type="submit" />
+			</form>
+		</div>
+<!-- 		<div id="uploader">Subida de fichero: </div> -->
+		</c:when></c:choose>
 		<div class="botonera">
 			<c:choose>
 				<c:when test="${operacion == 'new'}">
@@ -54,9 +63,4 @@
 			<input type="button" id="btnCancel" value="Cancelar" />
 		</div>
 	</fieldset>
-</form>
 
-<form method="POST" action="paciente/fileUpload" enctype="multipart/form-data">
-	<input id="file" type="file" name="file"/> 
-	<input type="submit" />
-</form>

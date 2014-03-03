@@ -185,17 +185,16 @@ public class PacienteController {
 		}
 	}
 
-	@RequestMapping(value = "/fileUpload", method = RequestMethod.POST, consumes = "multipart/form-data")
-	public @ResponseBody
-	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+	@RequestMapping(value = "/fileUpload/{id}", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) throws IOException {
 		if (file.getSize() > 0) { // writing file to a directory
-			File upLoadedfile = new File("D:/" + file.getOriginalFilename());
+			File upLoadedfile = new File("D:/" + file.getOriginalFilename() + "_PACIENTE_" + id);
 
 			upLoadedfile.createNewFile();
 			FileOutputStream fos = new FileOutputStream(upLoadedfile);
 			fos.write(file.getBytes());
 			fos.close(); // setting the value of fileUploaded variable
 		}
-		return new MensajeDTO("Error al procesar el fichero", false);
+		return new MensajeDTO("Archivo subido correctamente.", true);
 	}
 }
