@@ -109,6 +109,12 @@ public class PacienteService implements IPacienteService {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IPacienteService#fileReader(java.io.
+	 * File, com.upsam.hospital.model.beans.Paciente)
+	 */
 	@Override
 	public Exploracion3D fileReader(File file, Paciente paciente) throws IOException {
 		List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
@@ -153,6 +159,13 @@ public class PacienteService implements IPacienteService {
 		return result;
 	}
 
+	/**
+	 * Read line.
+	 * 
+	 * @param line
+	 *            the line
+	 * @return the list
+	 */
 	private List<String> readLine(String line) {
 		List<String> result = new ArrayList<String>();
 		String[] stringSplitted = line.split(" ");
