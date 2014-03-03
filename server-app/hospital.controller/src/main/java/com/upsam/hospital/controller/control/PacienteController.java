@@ -190,7 +190,7 @@ public class PacienteController {
 	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) throws IOException {
 		if (file.getSize() > 0) { // writing file to a directory
 			File upLoadedfile = new File("D:/" + file.getOriginalFilename() + "_PACIENTE_" + id);
-
+			System.out.println();
 			upLoadedfile.createNewFile();
 			FileOutputStream fos = new FileOutputStream(upLoadedfile);
 			fos.write(file.getBytes());
