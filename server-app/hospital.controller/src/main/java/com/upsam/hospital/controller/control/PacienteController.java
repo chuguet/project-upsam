@@ -186,7 +186,8 @@ public class PacienteController {
 	}
 
 	@RequestMapping(value = "/fileUpload/{id}", method = RequestMethod.POST, consumes = "multipart/form-data")
-	public MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) throws IOException {
+	public @ResponseBody
+	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) throws IOException {
 		if (file.getSize() > 0) { // writing file to a directory
 			File upLoadedfile = new File("D:/" + file.getOriginalFilename() + "_PACIENTE_" + id);
 
