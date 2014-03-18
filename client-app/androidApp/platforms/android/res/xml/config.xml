@@ -33,6 +33,6 @@
     <author email="dev@cordova.apache.org" href="http://cordova.io">
         Apache Cordova Team
     </author>
-    <content src="pages/exploracion_fisica.html" />
+    <content src="pages/3dSimulation.html" />
     <access origin="*" />
 </widget>

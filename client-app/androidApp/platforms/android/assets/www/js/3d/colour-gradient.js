@@ -43,7 +43,7 @@
  * @param rgbColourArray the set of colours that defines the dirctional path through RGB space.
  * The length of the array must be greater than two.
  */
-greg.ross.visualisation.ColourGradient = function(minValue, maxValue, rgbColourArray)
+animation.ColourGradient = function(minValue, maxValue, rgbColourArray)
 {
 	function RGB2HTML(red, green, blue)
 	{
@@ -55,7 +55,7 @@ greg.ross.visualisation.ColourGradient = function(minValue, maxValue, rgbColourA
 	 * Return a colour from a position on the path in RGB space that is proportioal to
 	 * the number specified in relation to the minimum and maximum values from which the
 	 * bounds of the path are derived.
-	 * @member greg.ross.visualisation.ColourGradient
+	 * @member animation.ColourGradient
 	 * @param value
 	 */
 	this.getColour = function(value)
