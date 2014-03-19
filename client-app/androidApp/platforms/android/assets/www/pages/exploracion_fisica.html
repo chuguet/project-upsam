@@ -15,7 +15,8 @@
 		<script type="text/javascript" src="../js/index.js"></script>
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
 		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
-		<script type="text/javascript" src="../js/ctrl.datePicker.js"></script>
+		<script type="text/javascript" src="../js/views/exploracion_fisica.js"></script>
+		<script type="text/javascript" src="../js/server.js"></script>
 		
 		<script type="text/javascript">
 			generic.initialize();
@@ -27,7 +28,7 @@
 			<div data-role="header" >                    
 				<h2>Exploraci&oacute;n F&iacute;sica</h2>
 				<a href="../home.html" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
-				<a href="../home.html" data-icon="check" data-theme="a">Guardar</a>
+				<a onClick="javascript:postForm()" href="../home.html" data-icon="check" data-theme="a">Guardar</a>
 			</div>
 			
 			<div data-role="content">
@@ -50,29 +51,29 @@
 					
 				<div data-role="fieldcontain">
 					<label for="fecEval">Fecha de evaluaci&oacute;n:</label>
-					<input id="fecEval" name="fecEval" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" />
+					<input id="fecEval" name="fecEval" readonly class="txt-date"  placeholder="dd/mm/yyyy" />
 				</div>
 				
 				<div data-role="fieldcontain">
 					<label for="fecNac">Fecha de nacimiento:</label>
-					<input id="fecNac" name="fecNac" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" />
+					<input id="fecNac" name="fecNac" readonly class="txt-date" placeholder="dd/mm/yyyy" />
 				</div>
 				
 				<div data-role="fieldcontain">
-					<label for="viajar">Sexo</label>
-					<select id="viajar" name="viajar" data-role="slider" style="width: 150px">
-						<option value="1">Hombre</option>
-						<option value="0">Mujer</option>
+					<label for="sexo">Sexo</label>
+					<select id="sexo" name="viajar" data-role="slider" style="width: 150px">
+						<option value="0">Hombre</option>
+						<option value="1">Mujer</option>
 					</select>
 				</div>
 				
 				<div data-role="fieldcontain">
-					<label for="estadocivil">Escolarizaci&oacute;n:</label>
-					<select id="estadocivil" name="estadocivil" data-native-menu="false">
+					<label for="escolarizacion">Escolarizaci&oacute;n:</label>
+					<select id="escolarizacion" name="escolarizacion" data-native-menu="false">
 						<option value="0"></option>
-						<option value="0">Educaci&oacute;n especial</option>
-						<option value="1">Integraci&oacute;n</option>
-						<option value="2">Sin adaptaciones</option>		                    
+						<option value="1">Educaci&oacute;n especial</option>
+						<option value="2">Integraci&oacute;n</option>
+						<option value="3">Sin adaptaciones</option>		                    
 					</select>		            
 				</div>
 				
@@ -85,9 +86,9 @@
 					<label for="examinador">Examinador:</label>
 					<select id="examinador" name="examinador" data-native-menu="false">
 						<option value="0"></option>
-						<option value="0">examinador 1</option>
-						<option value="1">examinador 2</option>
-						<option value="2">examinador 3</option>		                    
+						<option value="1">examinador 1</option>
+						<option value="2">examinador 2</option>
+						<option value="3">examinador 3</option>		                    
 					</select>		            
 				</div>
 	
