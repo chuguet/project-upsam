@@ -91,42 +91,89 @@ var paciente = {
 		$("#btnCancel").button().click(function() {
 			generic.getList('paciente');
 		});
-		$("#btnSavePaciente").button().click(function() {
-			paciente.getParams();
+		$("#btnSavePaciente").button().click(function(e) {
+			var uploader = $('#uploader').pluploadQueue();
+			 
+	        // Validate number of uploaded files
+	        if (uploader.total.uploaded == 0) {
+	            // Files in queue upload them first
+	            if (uploader.files.length > 0) {
+	                uploader.start();
+	            } else{
+	            	paciente.submitForm();
+	            }
+	 
+	            e.preventDefault();
+	        }
 		});
-		$("#formFile").submit(function(ev) {
-		    ev.preventDefault(); // to stop the form from submitting
-		    var url = "paciente/fileUpload/"+$("#id").val();
-		    this.action=url;
-		    this.submit(function success(ev){
-		    	alert("YEAH");
-		    }); // If all the validations succeeded
-		});
-// $("#formFile").onSucces(function(ev) {
-// generic.getForm('paciente', $("#id").val());
-// });
-// $("#uploader").plupload();
-		/*
-		 * $("#uploader").plupload({ // General settings runtimes :
-		 * 'html5,flash,silverlight,html4', url : "examples/upload", // Maximum
-		 * file size max_file_size : '2mb',
-		 * 
-		 * chunk_size: '1mb', // Resize images on clientside if we can resize : {
-		 * width : 200, height : 200, quality : 90, crop: true // crop to exact
-		 * dimensions }, // Specify what files to browse for filters : [ {title :
-		 * "Image files", extensions : "jpg,gif,png"}, {title : "Zip files",
-		 * extensions : "zip,avi"} ], // Rename files by clicking on their
-		 * titles rename: true, // Sort files sortable: true, // Enable ability
-		 * to drag'n'drop files onto the widget // (currently only HTML5
-		 * supports that) dragdrop: true, // Views to activate views: { list:
-		 * true, thumbs: true, // Show thumbs active: 'thumbs' }, // Flash
-		 * settings flash_swf_url :
-		 * 'http://rawgithub.com/moxiecode/moxie/master/bin/flash/Moxie.cdn.swf', //
-		 * Silverlight settings silverlight_xap_url :
-		 * 'http://rawgithub.com/moxiecode/moxie/master/bin/silverlight/Moxie.cdn.xap'
-		 * });
-		 */
 	},
+	'prepareUploader' : function(idPaciente){
+		$("#uploader").pluploadQueue({
+	        // General settings
+	        runtimes : 'html4',
+	        url : "../paciente/fileUpload/" + idPaciente,
+	 
+	        // Maximum file size
+	        max_file_size : '2mb',
+	 
+	        chunk_size: '1mb',
+	 
+	        // Resize images on clientside if we can
+	        resize : {
+	            width : 200,
+	            height : 200,
+	            quality : 90,
+	            crop: true // crop to exact dimensions
+	        },
+	 
+	        // Specify what files to browse for
+	        filters : [
+	            {title : "Image files", extensions : "jpg,gif,png"},
+	            {title : "Zip files", extensions : "zip,avi"}
+	        ],
+	 
+	        // Rename files by clicking on their titles
+	        rename: false,
+	         
+	        // Sort files
+	        sortable: true,
+	 
+	        // Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
+	        dragdrop: true,
+	 
+	        // Views to activate
+	        views: {
+	            list: true,
+	            thumbs: false, // Show thumbs
+	            active: 'list'
+	        }
+	    });
+	 
+		
+		var uploader = $('#uploader').pluploadQueue();
+		
+		var total_upload_files = 0;
+		uploader.bind('FileUploaded', function(up, file, res) {
+		     total_upload_files--;
+		         if(total_upload_files == 0){
+		        	 paciente.submitForm();
+		         }
+		 });
+		
+		 uploader.bind('QueueChanged', function(up, files) {
+		     total_upload_files = uploader.files.length;
+		 });
+	},
+	'submitForm' : function() {
+		var data = paciente.getParams();
+		if (data != null){
+			var entity = (id != null) ? 'paciente/' + id : 'paciente';
+			generic.post(entity, data, function() {
+				generic.getList('paciente');
+			});
+		}
+	},
+	
 	'getParams' : function() {
 		var id = ($("#id").val()) ? $("#id").val() : null;
 		var nombre = $("input[id=nombre]").val();
@@ -149,6 +196,7 @@ var paciente = {
 		}
 		if (errores != '') {
 			jAlert(errores, "Validaci&oacute;n");
+			return null;
 		}
 		else {
 			var data = {
@@ -159,11 +207,8 @@ var paciente = {
 				expediente : expediente,
 				fichero : fichero
 			};
-			var entity = (id != null) ? 'paciente/' + id : 'paciente';
-			generic.post(entity, data, function() {
-				generic.getList('paciente');
-			});
-		};
+			return data;
+		}
 	}
 };
 function validarEmail(valor) {
