@@ -41,7 +41,7 @@ public class ServicePacienteTest extends AbstractTest {
 				System.out.println("\n");
 			}
 		}
-		System.out.println(paciente.getExpediente());
+		System.out.println(paciente.getNumeroIdentificacion());
 
 	}
 }
