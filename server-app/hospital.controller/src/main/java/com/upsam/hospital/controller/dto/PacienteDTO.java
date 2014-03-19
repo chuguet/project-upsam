@@ -11,17 +11,32 @@ public class PacienteDTO extends AbstractDTO {
 	/** The apellidos. */
 	private String apellidos;
 
-	/** The email. */
-	private String email;
+	/** The curso. */
+	private String curso;
 
-	/** The password. */
-	private String expediente;
+	/** The escolarizacion. */
+	private String escolarizacion;
+
+	/** The examinador. */
+	private String examinador;
+
+	/** The fecha evaluacion. */
+	private String fechaEvaluacion;
+
+	/** The fecha nacimiento. */
+	private String fechaNacimiento;
 
 	/** The fichero. */
 	private MultipartFile fichero;
 
 	/** The nombre. */
 	private String nombre;
+
+	/** The numero identificacion. */
+	private String numeroIdentificacion;
+
+	/** The sexo. */
+	private String sexo;
 
 	/**
 	 * Gets the apellidos.
@@ -33,29 +48,56 @@ public class PacienteDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Gets the email.
+	 * Gets the curso.
 	 * 
-	 * @return the email
+	 * @return the curso
 	 */
-	public String getEmail() {
-		return email;
+	public String getCurso() {
+		return curso;
 	}
 
 	/**
-	 * Gets the expediente.
+	 * Gets the escolarizacion.
 	 * 
-	 * @return the expediente
+	 * @return the escolarizacion
 	 */
-	public String getExpediente() {
-		return expediente;
+	public String getEscolarizacion() {
+		return escolarizacion;
 	}
 
 	/**
-	 * Gets the multipart file.
+	 * Gets the examinador.
 	 * 
-	 * @return the multipart file
+	 * @return the examinador
 	 */
-	public MultipartFile getMultipartFile() {
+	public String getExaminador() {
+		return examinador;
+	}
+
+	/**
+	 * Gets the fecha evaluacion.
+	 * 
+	 * @return the fecha evaluacion
+	 */
+	public String getFechaEvaluacion() {
+		return fechaEvaluacion;
+	}
+
+	/**
+	 * Gets the fecha nacimiento.
+	 * 
+	 * @return the fecha nacimiento
+	 */
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	/**
+	 * Gets the fichero.
+	 * 
+	 * @return the fichero
+	 */
+	public MultipartFile getFichero() {
 		return fichero;
 	}
 
@@ -69,6 +111,24 @@ public class PacienteDTO extends AbstractDTO {
 	}
 
 	/**
+	 * Gets the numero identificacion.
+	 * 
+	 * @return the numero identificacion
+	 */
+	public String getNumeroIdentificacion() {
+		return numeroIdentificacion;
+	}
+
+	/**
+	 * Gets the sexo.
+	 * 
+	 * @return the sexo
+	 */
+	public String getSexo() {
+		return sexo;
+	}
+
+	/**
 	 * Sets the apellidos.
 	 * 
 	 * @param apellidos
@@ -79,32 +139,62 @@ public class PacienteDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Sets the email.
+	 * Sets the curso.
 	 * 
-	 * @param email
-	 *            the new email
+	 * @param curso
+	 *            the new curso
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCurso(String curso) {
+		this.curso = curso;
 	}
 
 	/**
-	 * Sets the expediente.
+	 * Sets the escolarizacion.
 	 * 
-	 * @param expediente
-	 *            the new expediente
+	 * @param escolarizacion
+	 *            the new escolarizacion
 	 */
-	public void setExpediente(String expediente) {
-		this.expediente = expediente;
+	public void setEscolarizacion(String escolarizacion) {
+		this.escolarizacion = escolarizacion;
 	}
 
 	/**
-	 * Sets the multipart file.
+	 * Sets the examinador.
+	 * 
+	 * @param examinador
+	 *            the new examinador
+	 */
+	public void setExaminador(String examinador) {
+		this.examinador = examinador;
+	}
+
+	/**
+	 * Sets the fecha evaluacion.
+	 * 
+	 * @param fechaEvaluacion
+	 *            the new fecha evaluacion
+	 */
+	public void setFechaEvaluacion(String fechaEvaluacion) {
+		this.fechaEvaluacion = fechaEvaluacion;
+	}
+
+	/**
+	 * Sets the fecha nacimiento.
+	 * 
+	 * @param fechaNacimiento
+	 *            the new fecha nacimiento
+	 */
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	/**
+	 * Sets the fichero.
 	 * 
 	 * @param fichero
-	 *            the new multipart file
+	 *            the new fichero
 	 */
-	public void setMultipartFile(MultipartFile fichero) {
+	public void setFichero(MultipartFile fichero) {
 		this.fichero = fichero;
 	}
 
@@ -116,6 +206,26 @@ public class PacienteDTO extends AbstractDTO {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	/**
+	 * Sets the numero identificacion.
+	 * 
+	 * @param numeroIdentificacion
+	 *            the new numero identificacion
+	 */
+	public void setNumeroIdentificacion(String numeroIdentificacion) {
+		this.numeroIdentificacion = numeroIdentificacion;
+	}
+
+	/**
+	 * Sets the sexo.
+	 * 
+	 * @param sexo
+	 *            the new sexo
+	 */
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 }

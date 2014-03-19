@@ -1,6 +1,7 @@
 package com.upsam.hospital.model.beans;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -31,21 +32,36 @@ public class Paciente implements IModelHospital {
 	@Column(name = "APELLIDOS")
 	private String apellidos;
 
-	/** The email. */
+	/** The curso. */
 	@Basic
-	@Column(name = "EMAIL", unique = true)
-	private String email;
+	@Column(name = "CURSO")
+	private String curso;
 
-	/** The expediente. */
+	/** The escolarizacion. */
 	@Basic
-	@Column(name = "EXPEDIENTE", unique = true)
-	private String expediente;
+	@Column(name = "ESCOLARIZACION")
+	private String escolarizacion;
+
+	/** The examinador. */
+	@Basic
+	@Column(name = "EXAMINADOR")
+	private String examinador;
 
 	/** The exploracion3 d. */
 	@OneToMany(mappedBy = "paciente")
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Exploracion3D> exploracion3D;
+
+	/** The fecha evaluacion. */
+	@Basic
+	@Column(name = "FECHA_EVALUACION")
+	private Date fechaEvaluacion;
+
+	/** The email. */
+	@Basic
+	@Column(name = "FECHA_NACIMIENTO")
+	private Date fechaNacimiento;
 
 	/** The id. */
 	@Id
@@ -57,6 +73,16 @@ public class Paciente implements IModelHospital {
 	@Basic
 	@Column(name = "NOMBRE")
 	private String nombre;
+
+	/** The expediente. */
+	@Basic
+	@Column(name = "NUMERO_IDENTIFICACION", unique = true)
+	private String numeroIdentificacion;
+
+	/** The sexo. */
+	@Basic
+	@Column(name = "SEXO")
+	private String sexo;
 
 	/**
 	 * Adds the exploracion3 d.
@@ -81,21 +107,30 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
-	 * Gets the email.
+	 * Gets the curso.
 	 * 
-	 * @return the email
+	 * @return the curso
 	 */
-	public String getEmail() {
-		return email;
+	public String getCurso() {
+		return curso;
 	}
 
 	/**
-	 * Gets the expediente.
+	 * Gets the escolarizacion.
 	 * 
-	 * @return the expediente
+	 * @return the escolarizacion
 	 */
-	public String getExpediente() {
-		return expediente;
+	public String getEscolarizacion() {
+		return escolarizacion;
+	}
+
+	/**
+	 * Gets the examinador.
+	 * 
+	 * @return the examinador
+	 */
+	public String getExaminador() {
+		return examinador;
 	}
 
 	/**
@@ -105,6 +140,24 @@ public class Paciente implements IModelHospital {
 	 */
 	public List<Exploracion3D> getExploracion3D() {
 		return exploracion3D;
+	}
+
+	/**
+	 * Gets the fecha evaluacion.
+	 * 
+	 * @return the fecha evaluacion
+	 */
+	public Date getFechaEvaluacion() {
+		return fechaEvaluacion;
+	}
+
+	/**
+	 * Gets the fecha nacimiento.
+	 * 
+	 * @return the fecha nacimiento
+	 */
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
 	}
 
 	/**
@@ -126,6 +179,24 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
+	 * Gets the numero identificacion.
+	 * 
+	 * @return the numero identificacion
+	 */
+	public String getNumeroIdentificacion() {
+		return numeroIdentificacion;
+	}
+
+	/**
+	 * Gets the sexo.
+	 * 
+	 * @return the sexo
+	 */
+	public String getSexo() {
+		return sexo;
+	}
+
+	/**
 	 * Sets the apellidos.
 	 * 
 	 * @param apellidos
@@ -136,23 +207,33 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
-	 * Sets the email.
+	 * Sets the curso.
 	 * 
-	 * @param email
-	 *            the new email
+	 * @param curso
+	 *            the new curso
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCurso(String curso) {
+		this.curso = curso;
 	}
 
 	/**
-	 * Sets the expediente.
+	 * Sets the escolarizacion.
 	 * 
-	 * @param expediente
-	 *            the new expediente
+	 * @param escolarizacion
+	 *            the new escolarizacion
 	 */
-	public void setExpediente(String expediente) {
-		this.expediente = expediente;
+	public void setEscolarizacion(String escolarizacion) {
+		this.escolarizacion = escolarizacion;
+	}
+
+	/**
+	 * Sets the examinador.
+	 * 
+	 * @param examinador
+	 *            the new examinador
+	 */
+	public void setExaminador(String examinador) {
+		this.examinador = examinador;
 	}
 
 	/**
@@ -163,6 +244,26 @@ public class Paciente implements IModelHospital {
 	 */
 	public void setExploracion3D(List<Exploracion3D> exploracion3d) {
 		exploracion3D = exploracion3d;
+	}
+
+	/**
+	 * Sets the fecha evaluacion.
+	 * 
+	 * @param fechaEvaluacion
+	 *            the new fecha evaluacion
+	 */
+	public void setFechaEvaluacion(Date fechaEvaluacion) {
+		this.fechaEvaluacion = fechaEvaluacion;
+	}
+
+	/**
+	 * Sets the fecha nacimiento.
+	 * 
+	 * @param fechaNacimiento
+	 *            the new fecha nacimiento
+	 */
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
 	}
 
 	/**
@@ -183,6 +284,26 @@ public class Paciente implements IModelHospital {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	/**
+	 * Sets the numero identificacion.
+	 * 
+	 * @param numeroIdentificacion
+	 *            the new numero identificacion
+	 */
+	public void setNumeroIdentificacion(String numeroIdentificacion) {
+		this.numeroIdentificacion = numeroIdentificacion;
+	}
+
+	/**
+	 * Sets the sexo.
+	 * 
+	 * @param sexo
+	 *            the new sexo
+	 */
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 }

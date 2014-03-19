@@ -76,7 +76,7 @@ public class PacienteController {
 			return new MensajeDTO("Paciente creado correctamente", true);
 		}
 		catch (DataBaseException e) {
-			return new MensajeDTO(new StringBuffer("Ya existe el paciente con expediente ").append(pacienteDTO.getExpediente()).append(" en base de datos.").toString(), false);
+			return new MensajeDTO(new StringBuffer("Ya existe el paciente con el numero de identificacion ").append(pacienteDTO.getNumeroIdentificacion()).append(" en base de datos.").toString(), false);
 		}
 		catch (TransferObjectException e) {
 			return new MensajeDTO(e.getMessage(), false);
@@ -188,13 +188,13 @@ public class PacienteController {
 	@RequestMapping(value = "/fileUpload/{id}", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public @ResponseBody
 	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) throws IOException {
-		if (file.getSize() > 0) { // writing file to a directory
-			File upLoadedfile = new File("D:/" + file.getOriginalFilename() + "_PACIENTE_" + id);
-			System.out.println();
-			upLoadedfile.createNewFile();
+		if (file.getSize() > 0) {
+			// writing file to a directory
+			File upLoadedfile = new File("D:/PACIENTE_" + id + "_" + file.getOriginalFilename());
 			FileOutputStream fos = new FileOutputStream(upLoadedfile);
 			fos.write(file.getBytes());
-			fos.close(); // setting the value of fileUploaded variable
+			fos.close();
+			// setting the value of fileUploaded variable
 		}
 		return new MensajeDTO("Archivo subido correctamente.", true);
 	}
