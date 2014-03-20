@@ -1,0 +1,34 @@
+FORMULARIOS [Cambiar estilos y control de caracteres especiales y pantallas a español]
+	
+	- Exploración física ==> Carlos y David
+		Meter un listado para los videos con un boton para capturar nuevo video
+		El listado y el botón los hace Carlos. La captura de video y compresión la hago yo y Carlos la parte servidora para almacenarlos
+		Cambiar el texto Functional Mobility Scale a español.
+		
+    - Antecedentes personales  ==> Ángel
+		Queda por implementar un popup para meter fechas en antecedentes quirúrgicos generales y ortopedicos y que se vayan mostrando en un listado
+	- Antecedentes relacionados PCI ==> Carlos
+	- Control Motor selectivo ==> Angel
+		Falta la tabla ver puntuaciones
+	- Evaluación muscular manual  ==> Angel
+		Falta la tabla ver puntuaciones
+	- Escala de movilidad funcional ==> Carlos
+		Falta la tabla ver puntuaciones
+	- gross motor function ==> Carlos
+	- Longitud de miembros  ==> Carlos
+	- Tono muscular ashwroth  ==> Angel
+		Falta la tabla ver puntuaciones
+	- Valoracion articular y muscular  ==> Angel
+	- Analisis_observacional_marcha  ==> Carlos
+	
+	- Login
+		Recordar contraseña a través email al usuario. Debe introducir el usuario o email para que se le envíe un correo
+3D
+	- David
+	
+FAQS
+	
+	- Jaime
+	
+Documentación
+	- Mas adelante

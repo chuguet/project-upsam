@@ -5,13 +5,15 @@
 
 <script type="text/javascript">
 	paciente.formatForm();
+	
 	<c:if test="${operacion == 'edit'}">
-	function showInformationIntoView(paciente) {
-		$('input[id=id]').val(paciente.id);
-		$('input[id=nombre]').val(paciente.nombre);
-		$('input[id=apellidos]').val(paciente.apellidos);
-		$('input[id=email]').val(paciente.email);
-		$('input[id=expediente]').val(paciente.expediente);
+	function showInformationIntoView(p) {
+		$('input[id=id]').val(p.id);
+		$('input[id=nombre]').val(p.nombre);
+		$('input[id=apellidos]').val(p.apellidos);
+		$('input[id=email]').val(p.email);
+		$('input[id=expediente]').val(p.expediente);
+		paciente.prepareUploader(p.id);
 	};
 
 	</c:if>
@@ -25,31 +27,26 @@
 		</legend>
 		<input type="hidden" id="id" />
 		<p>
-			<label for="nombre">Nombre:</label> <input id="nombre" type="textbox"
-				maxlength="200" class="text ui-widget-content ui-corner-all" />
+			<label for="nombre">Nombre:</label> 
+			<input id="nombre" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
 		</p>
 		<p>
-			<label for="apellidos">Apellidos:</label> <input id="apellidos"
-				type="textbox" maxlength="200"
-				class="text ui-widget-content ui-corner-all" />
+			<label for="apellidos">Apellidos:</label> 
+			<input id="apellidos" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
 		</p>
 		<p>
-			<label for="email">Email:</label> <input id="email" type="textbox"
-				maxlength="200" class="text ui-widget-content ui-corner-all" />
+			<label for="email">Email:</label>
+			<input id="email" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
 		</p>
 		<p>
-			<label for="expediente">Expediente:</label> <input id="expediente"
-				type="textbox" maxlength="200"
-				class="text ui-widget-content ui-corner-all" />
+			<label for="expediente">Expediente:</label>
+			<input id="expediente" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
 		</p>
 		<c:choose><c:when test="${operacion == 'edit'}">
-		<div class="file">
-			<form id="formFile" method="POST" enctype="multipart/form-data">
-				<input id="file" type="file" name="file"/> 
-				<input type="submit" />
-			</form>
-		</div>
-<!-- 		<div id="uploader">Subida de fichero: </div> -->
+			<div id="uploader">
+			    <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+			</div>
+			 
 		</c:when></c:choose>
 		<div class="botonera">
 			<c:choose>

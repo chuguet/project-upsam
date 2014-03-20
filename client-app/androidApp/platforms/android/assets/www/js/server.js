@@ -1,5 +1,5 @@
 var server = {
-	"URI" : "http://localhost:8080/hospitalServer/paciente/",
+	"URI" : "http://localhost:8080/hospitalServer/",
 	"post" : function(action, params, callback) {
 		this.executeJSon('POST', action, params, callback);
 	},
