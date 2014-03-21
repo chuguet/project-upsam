@@ -58,6 +58,7 @@ var usuario = {
 			pager : '#paginadorLista',
 			sortname : 'nombre',
 			sortorder : 'asc',
+			ondblClickRow : function(rowid){generic.getForm('usuario', rowid);},
 			viewrecords : true,
 			rownumbers : false,
 			scroll : false,
@@ -90,12 +91,7 @@ var usuario = {
 		});
 		$("#btnEliminar").button("disable");
 	},
-
 	'formatForm' : function() {
-		$(window).bind('resize', function() {
-			$('#lista').setGridWidth($('.ui-jqgrid').parent().innerWidth() - 30);
-		}).trigger('resize');
-		
 		$("#btnCancel").button().click(function() {
 			generic.getList('usuario');
 		});
@@ -103,6 +99,8 @@ var usuario = {
 		$("#btnSaveUsuario").button().click(function() {
 			usuario.getParams();
 		});
+
+		$("#rol").buttonset();
 	},
 	'getParams' : function() {
 		var id = ($("#id").val()) ? $("#id").val() : null;
@@ -132,7 +130,7 @@ var usuario = {
 			errores += '- Debe seleccionar un rol';
 		}
 		if (errores != '') {
-			jAlert(errores, "Validaci&oacute;n");
+			generic.alert(errores, "Validaci&oacute;n");
 		}
 		else {
 			var data = {
