@@ -41,16 +41,16 @@
 				<input id="apellidos" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
 			</p>
 			<p>
-				<label for="curso">Curso:</label>
-				<input id="curso" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-			</p>
-			<p>
 				<label for="sexo">Sexo:</label>
 				<input id="sexo" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
 			</p>
 			<p>
-				<label for="numeroIdentificacion">N&uacute;mero de identificaci&oacute;n:</label>
-				<input id="numeroIdentificacion" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
+				<label for="fechaEvaluacion">Fecha de evaluaci&oacute;n:</label>
+				<input id="fechaEvaluacion" type="textbox" maxlength="200" readonly class="text ui-widget-content ui-corner-all" />
+			</p>
+			<p>
+				<label for="fechaNacimiento">Fecha de nacimiento:</label>
+				<input id="fechaNacimiento" type="textbox" maxlength="200" readonly class="text ui-widget-content ui-corner-all" />
 			</p>
 		</div>
 		<div class="displayTable">
@@ -63,12 +63,12 @@
 				<input id="examinador" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
 			</p>
 			<p>
-				<label for="fechaEvaluacion">Fecha de evaluaci&oacute;n:</label>
-				<input id="fechaEvaluacion" type="textbox" maxlength="200" readonly class="text ui-widget-content ui-corner-all" />
+				<label for="curso">Curso:</label>
+				<input id="curso" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
 			</p>
 			<p>
-				<label for="fechaNacimiento">Fecha de Nacimiento:</label>
-				<input id="fechaNacimiento" type="textbox" maxlength="200" readonly class="text ui-widget-content ui-corner-all" />
+				<label for="numeroIdentificacion">N&uacute;mero de identificaci&oacute;n:</label>
+				<input id="numeroIdentificacion" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
 			</p>
 		</div>
 		<c:choose><c:when test="${operacion == 'edit'}">

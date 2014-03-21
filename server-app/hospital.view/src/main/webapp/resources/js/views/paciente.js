@@ -214,23 +214,14 @@ var paciente = {
 		var fichero = $("input[id=fichero]").val();
 
 		var errores = '';
-		if (numeroIdentificacion == ''){
-			errores += '- Debe introducir el numero de identificaci&oacute;n<br/>';
-		}
 		if (nombre == '') {
 			errores += '- Debe introducir el nombre<br/>';
 		}
 		if (apellidos == '') {
 			errores += '- Debe introducir los apellidos<br/>';
 		}
-		if (curso == ''){
-			errores += '- Debe introducir el curso<br/>';
-		}
-		if (escolarizacion == '') {
-			errores += '- Debe introducir la escolarizaci&oacute;n<br/>';
-		}
-		if (examinador == '') {
-			errores += '- Debe introducir un examinador<br/>';
+		if (sexo == '') {
+			errores += '- Debe introducir el sexo<br/>';
 		}
 		if (fechaEvaluacion == '') {
 			errores += '- Debe introducir la fecha de evaluaci&oacute;n<br/>';
@@ -238,8 +229,17 @@ var paciente = {
 		if (fechaNacimiento == '') {
 			errores += '- Debe introducir la fecha de nacimiento<br/>';
 		}
-		if (sexo == '') {
-			errores += '- Debe introducir el sexo<br/>';
+		if (escolarizacion == '') {
+			errores += '- Debe introducir la escolarizaci&oacute;n<br/>';
+		}
+		if (examinador == '') {
+			errores += '- Debe introducir un examinador<br/>';
+		}
+		if (curso == ''){
+			errores += '- Debe introducir el curso<br/>';
+		}
+		if (numeroIdentificacion == ''){
+			errores += '- Debe introducir el n&uacute;mero de identificaci&oacute;n<br/>';
 		}
 		if (errores != '') {
 			generic.alert(errores, "Validaci&oacute;n");

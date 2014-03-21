@@ -118,7 +118,7 @@ var usuario = {
 			errores += '- Debe introducir los apellidos<br/>';
 		}
 		if (!validarEmail(email)){
-			errores += '- Debe introducir un correo electronico correcto<br/>';
+			errores += '- Debe introducir un correo electr&oacute;nico correcto<br/>';
 		}
 		if (user == '') {
 			errores += '- Debe introducir un usuario<br/>';
