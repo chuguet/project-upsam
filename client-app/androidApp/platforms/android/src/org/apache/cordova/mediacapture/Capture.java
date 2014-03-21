@@ -358,11 +358,7 @@ public class Capture extends CordovaPlugin {
                         else
                         {
                         	JSONObject result = createMediaFile(data);
-                        	
-							
                             results.put(result);
-
-                            that.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, results));
                             
                             try {
 								String fullPath = result.get("fullPath").toString();
@@ -375,7 +371,8 @@ public class Capture extends CordovaPlugin {
 							    b.putString("fullPath", fullPath);
 							    intent.putExtra("fullPath", fullPath);
 							    BaseWizard x = (BaseWizard)cordova.getActivity();
-							    x.compress(fullPath);
+							    //x.compress(fullPath);
+	                            that.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, results));
 								
 							} catch (JSONException e) {
 								e.printStackTrace();

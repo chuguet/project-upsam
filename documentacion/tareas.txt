@@ -7,7 +7,7 @@ FORMULARIOS [Cambiar estilos y control de caracteres especiales y pantallas a es
 		
     - Antecedentes personales  ==> Ángel
 		Queda por implementar un popup para meter fechas en antecedentes quirúrgicos generales y ortopedicos y que se vayan mostrando en un listado
-	- Antecedentes relacionados PCI ==> Carlos
+	- Antecedentes relacionados PCI ==> Angel
 	- Control Motor selectivo ==> Angel
 		Falta la tabla ver puntuaciones
 	- Evaluación muscular manual  ==> Angel
@@ -19,10 +19,12 @@ FORMULARIOS [Cambiar estilos y control de caracteres especiales y pantallas a es
 	- Tono muscular ashwroth  ==> Angel
 		Falta la tabla ver puntuaciones
 	- Valoracion articular y muscular  ==> Angel
-	- Analisis_observacional_marcha  ==> Carlos
+	- Analisis_observacional_marcha  ==> Angel
 	
 	- Login
-		Recordar contraseña a través email al usuario. Debe introducir el usuario o email para que se le envíe un correo
+		Recordar contraseña a través email al usuario. Debe introducir el usuario o email para que se le envíe un correo  ==> Carlos
+		
+	- Subida y parseo de ficheros de coordenadas de fichero xml para el tema del 3D ==> Carlos
 3D
 	- David
 	

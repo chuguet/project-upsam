@@ -9,14 +9,12 @@
     // Called when capture operation is finished
     //
     function captureSuccess(mediaFiles) {
-        var i, len;
-        for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+    	for (var i = 0; i < mediaFiles.length; i++) {
             uploadFile(mediaFiles[i]);
         }
     }
 
     // Called if something bad happens.
-    //
     function captureError(error) {
         var msg = 'An error occurred during capture: ' + error.code;
         navigator.notification.alert(msg, null, 'Uh oh!');
@@ -25,24 +23,25 @@
     // A button will call this function
     //
     function captureVideo() {
-        // Launch device video recording application,
-        // allowing user to capture up to 2 video clips
-        alert("llega");
         navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 2});
     }
 
     // Upload files to server
     function uploadFile(mediaFile) {
-        var ft = new FileTransfer(),
-            path = mediaFile.fullPath,
-            name = mediaFile.name;
+    	alert(new FileTransfer());
+        var ft = new FileTransfer();
+        var path = mediaFile.fullPath;
+        var name = mediaFile.name;
+        alert(path);
+        alert(name);
         ft.upload(path,
-            "http://my.domain.com/upload.php",
+            "http://localhost:8080/hospitalServer/paciente/fileUpload/1",
             function(result) {
                 console.log('Upload success: ' + result.responseCode);
                 console.log(result.bytesSent + ' bytes sent');
             },
             function(error) {
+            	alert(error);
                 console.log('Error uploading file ' + path + ': ' + error.code);
             },
             { fileName: name });
@@ -54,6 +53,6 @@
     html, body, iframe { height: 100%; width:100%; padding:0px; margin:0px; border:0px;}
     </style>
     <body>
-        <iframe src="http://192.168.1.134:8080/com.upsam.hospital.view" id="nav" ></iframe>
+        <input type="button" onclick="captureVideo();" value="Capturar" />
     </body>
 </html>
