@@ -53,7 +53,7 @@ $(document).ready(function(){
 	}
 
     function QuestionsAndAnswersWidget(){
-        var elements = ['questions_answers', 'faqAnswer'];
+        var elements = ['questions_answers', 'searchInput'];
         var self = {};
 
         function init(){
@@ -72,7 +72,7 @@ $(document).ready(function(){
         }
 
         function buildAnswer(answerText){
-            self._faqAnswer.text(answerText);
+            self._searchInput.val(answerText);
         }
 
         init();

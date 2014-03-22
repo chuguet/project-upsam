@@ -9,12 +9,10 @@
 <meta name="description" content="Pantalla de acceso al sistema" />
 
 <link href="resources/css/generic.css" rel="stylesheet" type="text/css" />
-<link href="resources/css/jquery.alerts.css" rel="stylesheet" type="text/css">
 <link href="resources/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
 <script src="resources/js/jquery-1.8.2.min.js" type="text/javascript"></script>
 <script src="resources/js/jquery-ui-1.9.1.min.js" type="text/javascript"></script>
-<script src="resources/js/jquery.alerts.js" type="text/javascript"></script>
 <script src="resources/js/generic.js" type="text/javascript"></script>
 </head>
 <body  onload='document.f.j_username.focus();'  class="web">

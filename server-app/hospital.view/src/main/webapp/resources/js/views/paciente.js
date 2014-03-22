@@ -5,7 +5,7 @@ var paciente = {
 			datatype : 'local',
 			data : [],
 			colNames : [
-					"Id", "Nombre", "Apellidos", "Email", "Expediente"
+					"Id", "Nombre", "Apellidos", "Num. Identificaci&oacute;n", "Sexo", "Fecha Nacimiento"
 			],
 			colModel : [
 					{
@@ -27,16 +27,23 @@ var paciente = {
 						sorttype : 'string',
 						sortable : true,
 						align : 'left'
-					},  {
-						name : 'email',
-						index : 'email',
-						width : 40,
+					}, {
+						name : 'numeroIdentificacion',
+						index : 'numeroIdentificacion',
+						width : 20,
 						sorttype : 'string',
 						sortable : true,
-						align : 'left'
-					},{
-						name : 'expediente',
-						index : 'expediente',
+						align : 'right'
+					}, {
+						name : 'sexo',
+						index : 'sexo',
+						width : 20,
+						sorttype : 'string',
+						sortable : true,
+						align : 'right'
+					}, {
+						name : 'fechaNacimiento',
+						index : 'fechaNacimiento',
 						width : 20,
 						sorttype : 'string',
 						sortable : true,
@@ -85,27 +92,46 @@ var paciente = {
 	},
 
 	'formatForm' : function() {
-		$(window).bind('resize', function() {
-			$('#lista').setGridWidth($('.ui-jqgrid').parent().innerWidth() - 30);
-		}).trigger('resize');
 		$("#btnCancel").button().click(function() {
 			generic.getList('paciente');
 		});
+		
 		$("#btnSavePaciente").button().click(function(e) {
-			var uploader = $('#uploader').pluploadQueue();
-			 
-	        // Validate number of uploaded files
-	        if (uploader.total.uploaded == 0) {
-	            // Files in queue upload them first
-	            if (uploader.files.length > 0) {
-	                uploader.start();
-	            } else{
-	            	paciente.submitForm();
-	            }
-	 
-	            e.preventDefault();
-	        }
+			if($("#id").val() != "") {
+				var uploader = $('#uploader').pluploadQueue();
+				 
+		        // Validate number of uploaded files
+		        if (uploader.total.uploaded == 0) {
+		            // Files in queue upload them first
+		            if (uploader.files.length > 0) {
+		                uploader.start();
+		            } else{
+		            	paciente.submitForm();
+		            }
+		 
+		            e.preventDefault();
+		        }
+			} else{
+            	paciente.submitForm();
+			}
 		});
+		var datePickerParams = {
+                "dateFormat" : 'dd/mm/yy',
+                "yearRange":"-90:+0",
+                "dayNamesMin" : [
+                                "D", "L", "M", "X", "J", "V", "S"
+                ],
+                "firstDay" : 1,
+                "monthNames" : [
+                                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                ],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                                  'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        		changeMonth: true,
+        		changeYear: true,
+        };
+		$("#fechaEvaluacion").datepicker(datePickerParams);
+		$("#fechaNacimiento").datepicker(datePickerParams);
 	},
 	'prepareUploader' : function(idPaciente){
 		$("#uploader").pluploadQueue({
@@ -138,7 +164,8 @@ var paciente = {
 	        // Sort files
 	        sortable: true,
 	 
-	        // Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
+	        // Enable ability to drag'n'drop files onto the widget (currently
+			// only HTML5 supports that)
 	        dragdrop: true,
 	 
 	        // Views to activate
@@ -167,20 +194,25 @@ var paciente = {
 	'submitForm' : function() {
 		var data = paciente.getParams();
 		if (data != null){
-			var entity = (id != null) ? 'paciente/' + id : 'paciente';
+			var entity = (data.id != null) ? 'paciente/' + id : 'paciente';
 			generic.post(entity, data, function() {
 				generic.getList('paciente');
 			});
 		}
 	},
-	
 	'getParams' : function() {
 		var id = ($("#id").val()) ? $("#id").val() : null;
+		var numeroIdentificacion = $("input[id=numeroIdentificacion]").val();
 		var nombre = $("input[id=nombre]").val();
 		var apellidos = $("input[id=apellidos]").val();
-		var email = $("input[id=email]").val();
-		var expediente = $("input[id=expediente]").val();
+		var curso = $("input[id=curso]").val();
+		var escolarizacion = $("input[id=escolarizacion]").val();
+		var examinador = $("input[id=examinador]").val();
+		var fechaEvaluacion = $("input[id=fechaEvaluacion]").val();
+		var fechaNacimiento = $("input[id=fechaNacimiento]").val();
+		var sexo = $("input[id=sexo]").val();
 		var fichero = $("input[id=fichero]").val();
+
 		var errores = '';
 		if (nombre == '') {
 			errores += '- Debe introducir el nombre<br/>';
@@ -188,33 +220,46 @@ var paciente = {
 		if (apellidos == '') {
 			errores += '- Debe introducir los apellidos<br/>';
 		}
-		if (!validarEmail(email)){
-			errores += '- Debe introducir un correo electronico correcto<br/>';
+		if (sexo == '') {
+			errores += '- Debe introducir el sexo<br/>';
 		}
-		if (expediente == '') {
-			errores += '- Debe introducir un c&oacute;digo de expediente<br/>';
+		if (fechaEvaluacion == '') {
+			errores += '- Debe introducir la fecha de evaluaci&oacute;n<br/>';
+		}
+		if (fechaNacimiento == '') {
+			errores += '- Debe introducir la fecha de nacimiento<br/>';
+		}
+		if (escolarizacion == '') {
+			errores += '- Debe introducir la escolarizaci&oacute;n<br/>';
+		}
+		if (examinador == '') {
+			errores += '- Debe introducir un examinador<br/>';
+		}
+		if (curso == ''){
+			errores += '- Debe introducir el curso<br/>';
+		}
+		if (numeroIdentificacion == ''){
+			errores += '- Debe introducir el n&uacute;mero de identificaci&oacute;n<br/>';
 		}
 		if (errores != '') {
-			jAlert(errores, "Validaci&oacute;n");
+			generic.alert(errores, "Validaci&oacute;n");
 			return null;
 		}
 		else {
 			var data = {
 				id : id,
+				numeroIdentificacion : numeroIdentificacion,
 				nombre : nombre,
 				apellidos : apellidos,
-				email : email,
-				expediente : expediente,
+				curso : curso,
+				escolarizacion : escolarizacion,
+				examinador : examinador,
+				fechaEvaluacion : fechaEvaluacion,
+				fechaNacimiento : fechaNacimiento,
+				sexo : sexo,
 				fichero : fichero
 			};
 			return data;
 		}
 	}
-};
-function validarEmail(valor) {
-	  if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(valor)){
-		  return true;
-	  } else {
-		  return false;
-	  }
 };
