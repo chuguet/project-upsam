@@ -20,6 +20,12 @@
             .hide {
                 display: none;
             }
+            .padding {
+                padding: 3px;
+            }
+            .halfWidth{
+                width: 45%;
+            }
         </style>
 
 </head>
@@ -32,55 +38,111 @@
 			</div>
 
 			<div data-role="content">
-                <a href="#" class="ui-btn ui-corner-all ui-icon-search ui-btn-icon-left showSearch">Buscar</a>
-                <a href="#" class="ui-btn ui-corner-all ui-icon-plus ui-btn-icon-left showCreate">Crear</a>
+                <div class="ui-field-contain">
+                    <a href="#" class="halfWidth ui-btn ui-corner-all ui-btn-inline ui-icon-search ui-btn-icon-left showSearch">Buscador</a>
+                    <a href="#" class="halfWidth ui-btn ui-corner-all ui-btn-inline ui-icon-plus ui-btn-icon-left showCreate">Crear</a>
+                </div>
                 <div class="searchPanel hide">
-
-                    <div data-role="fieldcontain">
-                        <input placeholder="Escribe una pregunta o busca por contenido, puedes usar la imagen para filtrar" type="text" id="searchInput" name="searchInput" class="txt-speech"/>
-                    </div>
-
-    				<div style="float:left;">
-    		            <img class="map" src="../img/human-body.jpg" usemap="#map">
-    		            <map name="map">
-    						<area info="cabeza"
-                            shape="poly" coords="130,39,136,13,161,7,183,17,186,38,193,56,177,74,157,98,134,80,133,66,121,47,125,45,132,40" href="#" class="mapzone" />
-                            <area shape="poly" coords="117,114,106,165,207,168,207,106"  href="#" class="mapzone" info="pecho"/>
-                            <area shape="poly" coords="114,197,110,255,208,267,203,195"  href="#" class="mapzone" info="estomago"/>
-                            <area shape="poly" coords="381,113,433,86,473,85,531,118,510,151,497,243,401,241,398,194,389,174,390,138,388,104,389,105" href="#" class="mapzone" info="espalda" />
-                            <area shape="poly" coords="201,106,216,162,243,124,230,117" href="#" class="mapzone" info="hombro izquierdo" />
-                            <area shape="poly" coords="80,118,114,106,107,140,65,140,71,137"  href="#" class="mapzone" info="hombro derecho"/>
-                            <area shape="poly" coords="535,214,562,194,565,228,538,240,530,207"  href="#" class="mapzone" info="codo derecho"/>
-                            <area shape="poly" coords="361,219,346,205,347,210,331,222,329,206"  href="#" class="mapzone" info="code derecho"/>
-                            <area shape="poly" coords="338,202,370,202,367,230,335,216,337,200"  href="#" class="mapzone" info="codo izquierdo"/>
-                            <area shape="poly" coords="29,270,19,298,25,335,33,324,32,310,41,298,48,311,59,306,45,270,36,273" href="#" class="mapzone" info="mano derecha" />
-                            <area shape="poly" coords="321,265,348,271,356,308,345,291,334,315,324,323,317,295,322,266"  href="#"class="mapzone" info="mano izquierda"/>
-                            <area shape="poly" coords="263,293,258,306,272,294" href="#" class="mapzone" info="dedo gordo de la mano izquierda" />
-                            <area shape="poly" coords="105,280,156,300,137,412,101,399,92,342,102,279,103,279" href="#" class="mapzone" info="muslo derecho" />
-                            <area shape="poly" coords="163,302,207,273,220,315,213,392,203,386,172,405"  href="#" class="mapzone" info="muslo izquierdo"/>
-                            <area shape="poly" coords="387,304,394,412,431,415,446,308,387,306,388,305" href="#" class="mapzone" info="muslo posterior izquierdo" />
-                            <area shape="poly" coords="456,309,470,423,510,417,512,303" href="#" class="mapzone" info="muslo posterior derecho" />
-                            <area shape="poly" coords="180,400,175,408,185,440,221,423,210,389,191,399" href="#" class="mapzone" info="rodilla izquierda" />
-                            <area shape="poly" coords="101,399,97,431,134,440,137,415"  href="#" class="mapzone" info="rodilla derecha"/>
-                            <area shape="poly" coords="382,444,382,501,420,497,426,442,408,443" href="#" class="mapzone" info="gemelo izquierdo"/>
-                            <area shape="poly" coords="477,453,512,443,515,520,490,521,476,477"  href="#"class="mapzone" info="gemelo derecho" />
-                            <area shape="poly" coords="96,532,67,576,94,580,119,546,118,544"  href="#" class="mapzone" info="pie derecho"/>
-                            <area shape="poly" coords="196,540,221,538,239,570,215,587,194,544,195,544,218,536"  href="#"class="mapzone" info="pie izquierdo" />
-                            <area shape="poly" coords="389,570,407,571,404,588,390,581"  href="#" class="mapzone" info="talon izquierdo"/>
-                            <area shape="poly" coords="498,576,514,576,505,588,495,582,498,573"  href="#"class="mapzone" info="talon derecho"/>
-
-                        </map>
+    				<div style="float:left; width: 25%">
+                        <img src="../img/human_body.gif" width="313" height="598" border="0" usemap="#map" />
+                            <map name="map">
+                            <area shape="rect" coords="52,101,250,154"  href="#" class="mapzone" info="@hombro" />
+                            <area shape="rect" coords="68,250,243,327"  href="#" class="mapzone" info="@cadera" />
+                            <area shape="rect" coords="64,379,240,443"  href="#" class="mapzone" info="@rodilla" />
+                            <area shape="rect" coords="53,526,259,590"  href="#" class="mapzone" info="@pie" />
+                       </map>
     		        </div>
 
-                    <div class="questions_answers" class="hide" style="float:left;margin-left:20px;">
-                        <p><b>Pregunta de contenido:</b> <span class="faqAnswer">general</span></p>
+                    <div style="float:left; width: 74%">
+                        <p><b>Escribe una pregunta o busca por contenido, puedes usar la imagen para filtrar</b></p>
+                        <div class="ui-field-contain" style="width:100%;float:left;">
+                            <div style="float:left;width: 85%">
+                                <input placeholder="Usa @ para buscar por @tag" type="search" id="searchInput" name="searchInput" class="searchInput"/>
+                            </div>
+                            <div style="float:right">
+                                <a href="#" class="ui-btn ui-corner-all ui-btn-inline ui-icon-search ui-btn-icon-left showSearch">Buscar</a>
+                            </div>
+                        </div>
+                        <div class="questions_answers" class="hide">
+                            <div class="ui-field-contain">
+                                <ul data-role="listview" data-inset="true" data-divider-theme="a">
+                                    <li data-role="list-divider">Hombro</li>
+                                    <li><a href="#">Pregunta 1</a>
+                                        <div id="answersContainer1" style="margin-left:5px;">
+                                            <div class="ui-field-contain">
+                                                20-03-2014 17:47&nbsp;&nbsp;Respuesta 1.........................................
+                                            </div>
+                                            <div class="ui-field-contain">
+                                                12-03-2014 14:42&nbsp;&nbsp;Respuesta 2.........................................
+                                            </div>
+                                            <div class="ui-field-contain">
+                                                10-02-2014 17:30&nbsp;&nbsp;Respuesta 3.........................................
+                                            </div>
+                                            <div class="ui-field-contain">
+                                                20-01-2014 09:13&nbsp;&nbsp;Respuesta 4.........................................
+                                            </div>
+                                            <div class="ui-field-contain">
+                                                09-01-2014 10:24&nbsp;&nbsp;Respuesta 5.........................................
+                                            </div>
+                                        </div>
+                                        <div class="ui-field-contain" style="margin-left:5px;">
+                                            <a href="#" class="ui-btn ui-mini ui-btn-inline ui-icon-eye ui-btn-icon-left"  style="width: 20%;">Ver más</a>
+                                            <a href="#" class="ui-btn ui-mini ui-btn-inline ui-icon-plus ui-btn-icon-left"  style="width: 20%;">Responder</a>
+                                        </div>
+                                        <div class="ui-field-contain" style="margin-left:5px;margin-right:5px;">
+                                            <textarea name="addinfo" id="info" maxlength="1000" placeholder="Escriba su respuesta..."></textarea>
+                                        </div>
+                                    </li>
+                                    <li><a href="#">Pregunta 2</a></li>
+                                    <li data-role="list-divider">Cadera</li>
+                                    <li><a href="#">Pregunta 1</a></li>
+                                    <li><a href="#">Pregunta 2</a></li>
+                                    <li data-role="list-divider">Rodilla</li>
+                                    <li><a href="#">Pregunta 1</a></li>
+                                    <li><a href="#">Pregunta 2</a></li>
+                                    <li data-role="list-divider">Pie</li>
+                                    <li><a href="#">Pregunta 1</a></li>
+                                    <li><a href="#">Pregunta 2</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="ui-field-contain creationPanel hide">
-                    <input placeholder="Escribe tu pregunta" type="text" id="searchInput" name="searchInput" class="txt-speech"/>
-                    <textarea placeholder="Añade tu respuesta" name="addinfo" id="info"></textarea>
-                    <input type="button" data-inline="true" value="Guardar">
+                    <p style="text-align:center;">
+                        <b>Crea una pregunta con su respuesta o únicamente formula tu pregunta. Puedes añadir etiquetas para que sea más fácil encontrarla.</b>
+                    </p>
+
+                    <div class="ui-field-contain">
+                        <label for="section">Sección</label>
+                        <select name="section">
+                            <option>Hombro</option>
+                            <option>Cadera</option>
+                            <option>Rodilla</option>
+                            <option>Pie</option>
+                        </select>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="section">*Título - Pregunta</label>
+                        <input type="text" id="title" name="title" class="txt-speech" maxlength="200"/>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="section">Respuesta</label>
+                        <textarea name="addinfo" id="info" maxlength="1000"></textarea>
+                    </div>
+
+                    <div class="ui-field-contain">
+                        <label for="section">Etiquetas</label>
+                        <input placeholder="Añade tus etiquetas separadas por comas" maxlength="200"/>
+                    </div>
+
+                    <div class="ui-field-contain" style="text-align:center;">
+                        <a href="#" class="ui-btn ui-btn-inline ui-icon-plus ui-btn-icon-left"  style="width: 20%;">Guardar</a>
+                    </div>
+
                 </div>
 
 			</div>
