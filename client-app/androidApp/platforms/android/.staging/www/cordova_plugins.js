@@ -155,6 +155,20 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/org.apache.cordova.file-transfer/www/FileTransferError.js",
+        "id": "org.apache.cordova.file-transfer.FileTransferError",
+        "clobbers": [
+            "window.FileTransferError"
+        ]
+    },
+    {
+        "file": "plugins/org.apache.cordova.file-transfer/www/FileTransfer.js",
+        "id": "org.apache.cordova.file-transfer.FileTransfer",
+        "clobbers": [
+            "window.FileTransfer"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.file/www/DirectoryEntry.js",
         "id": "org.apache.cordova.file.DirectoryEntry",
         "clobbers": [
@@ -285,6 +299,7 @@ module.exports.metadata =
     "org.apache.cordova.speech.speechrecognition": "0.1.0",
     "org.apache.cordova.plugin.datepicker": "1.0.0",
     "com.bikasv.plugins.datepicker": "0.1.1",
+    "org.apache.cordova.file-transfer": "0.4.2",
     "org.apache.cordova.file": "0.2.5"
 }
 // BOTTOM OF METADATA

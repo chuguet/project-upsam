@@ -5,7 +5,6 @@
 
     <script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
     <script type="text/javascript" charset="utf-8">
-
     // Called when capture operation is finished
     //
     function captureSuccess(mediaFiles) {
@@ -28,23 +27,62 @@
 
     // Upload files to server
     function uploadFile(mediaFile) {
-    	alert(new FileTransfer());
         var ft = new FileTransfer();
         var path = mediaFile.fullPath;
         var name = mediaFile.name;
+        path = "file:/mnt/sdcard/DCIM/Camera/20140321_211845.mp4";
+        name = "20140321_211845.mp4";
         alert(path);
         alert(name);
+        var options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = mediaFile.name;
+        options.mimeType = "multipart/form-data";
+        options.chunkedMode = false;
+        options.headers = { Connection: "close" };
+        alert(encodeURI("http://localhost:8080/hospitalServer/paciente/fileUpload/1"));
+        
         ft.upload(path,
-            "http://localhost:8080/hospitalServer/paciente/fileUpload/1",
+            encodeURI("http://localhost:8080/hospitalServer/paciente/fileUpload/1"),
             function(result) {
                 console.log('Upload success: ' + result.responseCode);
                 console.log(result.bytesSent + ' bytes sent');
             },
             function(error) {
-            	alert(error);
+            	alert("An error has occurred: Code = " + error.code);
+                alert("upload error source " + error.source);
+                alert("upload error target " + error.target);
                 console.log('Error uploading file ' + path + ': ' + error.code);
             },
-            { fileName: name });
+            options);
+    }
+    
+    function uploadFile2() {
+        var ft = new FileTransfer();
+        var path = "file:/mnt/sdcard/DCIM/Camera/20140321_211845.mp4";
+        
+        var name = "20140321_211845.mp4";
+        
+        var options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = name;
+        options.mimeType = "multipart/form-data";
+        options.chunkedMode = false;
+        options.headers = { Connection: "close" };
+        
+        ft.upload(path,
+            encodeURI("http://192.168.1.134:8080/hospitalServer/paciente/fileUpload/1"),
+            function(result) {
+                console.log('Upload success: ' + result.responseCode);
+                console.log(result.bytesSent + ' bytes sent');
+            },
+            function(error) {
+            	alert("An error has occurred: Code = " + error.code);
+                alert("upload error source " + error.source);
+                alert("upload error target " + error.target);
+                console.log('Error uploading file ' + path + ': ' + error.code);
+            },
+            options);
     }
 
     </script>
@@ -54,5 +92,6 @@
     </style>
     <body>
         <input type="button" onclick="captureVideo();" value="Capturar" />
+        <input type="button" onclick="uploadFile2();" value="Subir" />
     </body>
 </html>
