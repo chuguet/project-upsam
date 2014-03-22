@@ -11,7 +11,6 @@
 		
 		<link href="resources/css/jquery-ui.css" rel="stylesheet" type="text/css" />
 		<link href="resources/css/generic.css" rel="stylesheet" type="text/css" />
-		<link href="resources/css/jquery.alerts.css" rel="stylesheet" type="text/css">
 		<link href="resources/css/ui.jqgrid.css" rel="stylesheet" type="text/css">
 		<link href="resources/css/jquery.ui.plupload.css" rel="stylesheet" type="text/css">
 		<link href="resources/css/jquery.plupload.queue.css" rel="stylesheet" type="text/css">
@@ -21,7 +20,6 @@
 		<script src="resources/js/jquery-ui-1.9.1.min.js" type="text/javascript"></script>
 		<script src="resources/js/generic.js" type="text/javascript"></script>
 		
-		<script src="resources/js/jquery.alerts.js" type="text/javascript"></script>
 		<script src="resources/js/jquery.jqGrid.min.js" type="text/javascript"></script>
 		<script src="resources/js/i18n/grid.locale-es.js" type="text/javascript"></script>
 		
@@ -38,7 +36,7 @@
 		
 		<div id="header">
 			<h3>Hoy es ${fecha}</h3>
-			<h1>Aplicai&oacute;n de Hospital</h1>
+			<h1>Aplicaci&oacute;n de Hospital</h1>
 		</div>
 		
 		<div id="menu">
@@ -59,6 +57,9 @@
 		<div id="footer">
 			&#169; Hospital S.L. &#174;
 		</div>
+		
+		<div class="modal"></div>
+		
 	</body>
 	<script type="text/javascript">
 		generic.resizeEvent();

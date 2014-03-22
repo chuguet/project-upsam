@@ -20,5 +20,10 @@ body.web div#footer {background-color:#009900; position:absolute; bottom:0px; wi
 body.web div#content {overflow:auto;position:absolute; top:81px; width:100%;}
 body.web div#content img{position:absolute; top: 150px; left:63%;margin-left:-212px;}
 body.web div#content fieldset {border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; margin:20px;}
-body.web div#content form label {width:115px; display:inline-block;}
-body.web div#content form input.text {width:220px; }
+body.web div#content label {width:115px; display:inline-block;}
+body.web div#content input.text {width:220px; }
+body.web div#content .displayTable {display:inline-block; vertical-align:top; margin-left:20px; }
+
+body div.modal {display:none; position:fixed; z-index:1000; top:0; left: 0; height:100%; width:100%; background: rgba( 255, 255, 255, .8 ) url(../imgs/loading.gif) 50% 50% no-repeat;}
+body.loading {overflow: hidden;}
+body.loading .modal {display: block;}
