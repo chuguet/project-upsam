@@ -155,7 +155,8 @@ var paciente = {
 	        // Specify what files to browse for
 	        filters : [
 	            {title : "Image files", extensions : "jpg,gif,png"},
-	            {title : "Zip files", extensions : "zip,avi"}
+	            {title : "Zip files", extensions : "zip,avi"},
+	            {title : "3D", extensions : "mdx,emt"}
 	        ],
 	 
 	        // Rename files by clicking on their titles
@@ -181,9 +182,14 @@ var paciente = {
 		
 		var total_upload_files = 0;
 		uploader.bind('FileUploaded', function(up, file, res) {
-		     total_upload_files--;
-		         if(total_upload_files == 0){
+       	 		 total_upload_files--;
+		         if(total_upload_files == 0 && res.response.indexOf('"correcto":false')==-1){
 		        	 paciente.submitForm();
+		         }else{
+		        	 var mensaje = res.response.substring(res.response.indexOf('"mensaje":"')+11,res.response.indexOf('","parameter"'));
+		        	 generic.alert(mensaje, "Error");
+		        	 uploader.splice();
+		        	 uploader.refresh();
 		         }
 		 });
 		

@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +24,7 @@ import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.PacienteDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
+import com.upsam.hospital.model.beans.Exploracion3D;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.service.IPacienteService;
@@ -32,6 +36,11 @@ import com.upsam.hospital.model.service.IPacienteService;
 @Controller
 @RequestMapping("/paciente")
 public class PacienteController {
+
+	private final static Log LOG = LogFactory.getLog(PacienteController.class);
+
+	private static final String MDX_FILE = ".mdx";
+	private static final String EMT_FILE = ".emt";
 
 	/** The usuario service. */
 	@Inject
@@ -187,16 +196,46 @@ public class PacienteController {
 		}
 	}
 
+	@Inject
+	private ServletContext servletContext;
+
 	@RequestMapping(value = "/fileUpload/{id}", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public @ResponseBody
-	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) throws IOException {
-		if (file.getSize() > 0) {
-			// writing file to a directory
-			File upLoadedfile = new File("D:/PACIENTE_" + id + "_" + file.getOriginalFilename());
-			FileOutputStream fos = new FileOutputStream(upLoadedfile);
-			fos.write(file.getBytes());
-			fos.close();
-			// setting the value of fileUploaded variable
+	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) {
+		try {
+			if (file.getSize() > 0) {
+				File uploadedFile = new File(servletContext.getRealPath(new StringBuffer("/resources/files/").append("PACIENTE_").append(id).append("_").append(file.getOriginalFilename()).toString()));
+				FileOutputStream fos = new FileOutputStream(uploadedFile);
+				fos.write(file.getBytes());
+				fos.close();
+				Paciente paciente = pacienteService.findOne(id);
+				if (uploadedFile.getName().toLowerCase().contains(EMT_FILE)) {
+					Exploracion3D exploracion3D = pacienteService.fileReader(uploadedFile, paciente);
+					paciente.addExploracion3D(exploracion3D);
+				}
+				else if (uploadedFile.getName().toLowerCase().contains(MDX_FILE)) {
+
+				}
+				else {
+					uploadedFile.delete();
+					return new MensajeDTO("Extension de archivo incorrecto.", false);
+				}
+				if (uploadedFile.delete()) {
+					pacienteService.update(paciente);
+					return new MensajeDTO("Archivo subido correctamente.", true);
+				}
+				else {
+					return new MensajeDTO("Error al borrar el archivo.", false);
+				}
+			}
+		}
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+			return new MensajeDTO("El paciente asociado al fichero no existe.", false);
+		}
+		catch (IOException e) {
+			LOG.error(e.getMessage());
+			return new MensajeDTO("El fichero esta en un formato incorrecto.", false);
 		}
 		return new MensajeDTO("Archivo subido correctamente.", true);
 	}
@@ -204,7 +243,7 @@ public class PacienteController {
 	@RequestMapping(value = "/videoUpload/{id}")
 	public @ResponseBody
 	MensajeDTO videoUpload(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String contentType = request.getContentType();
+		// String contentType = request.getContentType();
 		// if (file.getSize() > 0) {
 		// // writing file to a directory
 		// File upLoadedfile = new File("D:/PACIENTE_" + id + "_" +
