@@ -1,10 +1,14 @@
 package com.upsam.hospital.model.service;
 
-import com.upsam.hospital.model.beans.Video;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import com.upsam.hospital.model.exceptions.DataBaseException;
 
 /**
  * The Interface IVideoService.
  */
-public interface IVideoService extends IModelService<Video> {
+public interface IVideoService {
+
+	void save(byte[] content, Integer idPaciente) throws FileNotFoundException, IOException, DataBaseException;
 
 }

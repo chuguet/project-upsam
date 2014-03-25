@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +22,7 @@ import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.service.IPacienteService;
+import com.upsam.hospital.model.service.IVideoService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -40,6 +39,9 @@ public class PacienteController {
 	/** The paciente util dto. */
 	@Inject
 	private IPacienteUtilDTO pacienteUtilDTO;
+
+	@Inject
+	private IVideoService videoService;
 
 	/**
 	 * Creates the form.
@@ -201,19 +203,12 @@ public class PacienteController {
 		return new MensajeDTO("Archivo subido correctamente.", true);
 	}
 
-	@RequestMapping(value = "/videoUpload/{id}")
+	@RequestMapping(value = "/videoUpload/{id}", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public @ResponseBody
-	MensajeDTO videoUpload(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String contentType = request.getContentType();
-		// if (file.getSize() > 0) {
-		// // writing file to a directory
-		// File upLoadedfile = new File("D:/PACIENTE_" + id + "_" +
-		// file.getOriginalFilename());
-		// FileOutputStream fos = new FileOutputStream(upLoadedfile);
-		// fos.write(file.getBytes());
-		// fos.close();
-		// // setting the value of fileUploaded variable
-		// }
-		return new MensajeDTO("Archivo subido correctamente.", true);
+	MensajeDTO videoUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) throws IOException, DataBaseException {
+		if (file.getSize() > 0) {
+			videoService.save(file.getBytes(), id);
+		}
+		return new MensajeDTO("Video guardado correctamente.", true);
 	}
 }

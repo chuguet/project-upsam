@@ -25,8 +25,8 @@ public class Video implements IModelHospital {
 	private static final long serialVersionUID = 8823797142615984016L;
 
 	@Basic
-	@Column(name = "duracion")
-	private Integer duracion;
+	@Column(name = "duracion", length = 20)
+	private String duracion;
 
 	/** The fecha. */
 	@Basic
@@ -42,7 +42,7 @@ public class Video implements IModelHospital {
 	/** The paciente. */
 	@ManyToOne
 	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "id_pacioente")
+	@JoinColumn(name = "id_paciente")
 	private Paciente paciente;
 
 	/** The unidad medida. */
@@ -50,11 +50,11 @@ public class Video implements IModelHospital {
 	@Column(name = "nombre")
 	private String nombre;
 
-	public Integer getDuracion() {
+	public String getDuracion() {
 		return duracion;
 	}
 
-	public void setDuracion(Integer duracion) {
+	public void setDuracion(String duracion) {
 		this.duracion = duracion;
 	}
 

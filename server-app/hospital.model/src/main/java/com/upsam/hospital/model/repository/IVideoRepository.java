@@ -1,13 +1,13 @@
 package com.upsam.hospital.model.repository;
 
 import java.sql.SQLException;
-
 import com.upsam.hospital.model.beans.Usuario;
+import com.upsam.hospital.model.beans.Video;
 
 /**
- * The Interface IUsuarioRepository.
+ * The Interface IVideoRepository.
  */
-public interface IVideoRepository extends IRepositoryDAO<Usuario> {
+public interface IVideoRepository extends IRepositoryDAO<Video> {
 
 	/**
 	 * Select by user.
@@ -18,5 +18,5 @@ public interface IVideoRepository extends IRepositoryDAO<Usuario> {
 	 * @throws SQLException
 	 *             the sql exception
 	 */
-	Usuario selectByUser(String user) throws SQLException;
+	Usuario selectByPaciente() throws SQLException;
 }
