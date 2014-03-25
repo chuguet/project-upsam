@@ -2,11 +2,18 @@ package com.upsam.hospital.controller.dto.util.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import org.springframework.stereotype.Component;
 import com.upsam.hospital.controller.dto.PacienteDTO;
+import com.upsam.hospital.controller.dto.Video3dDTO;
+import com.upsam.hospital.controller.dto.Video3dInfoDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
+import com.upsam.hospital.model.beans.Fichero3D;
 import com.upsam.hospital.model.beans.Paciente;
+import com.upsam.hospital.model.jaxb.EmxDataFile;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -17,6 +24,41 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 
 	/** The Constant DATE_FORMATTER. */
 	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy");
+
+	/** The Constant DATE_TIME_FORMATTER. */
+	private static final SimpleDateFormat DATE_TIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.controller.dto.util.IPacienteUtilDTO#file3dToDTO(com
+	 * .upsam.hospital.model.jaxb.EmxDataFile)
+	 */
+	@Override
+	public Video3dDTO file3dToDTO(EmxDataFile emxDataFile) {
+		System.out.println("LLEGO");
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.controller.dto.util.IPacienteUtilDTO#getVideo3dInfoList
+	 * (java.util.List)
+	 */
+	@Override
+	public List<Video3dInfoDTO> getVideo3dInfoList(List<Fichero3D> ficheros) {
+		List<Video3dInfoDTO> result = new ArrayList<Video3dInfoDTO>();
+		Video3dInfoDTO video3dInfoDTO;
+		for (Fichero3D fichero3D : ficheros) {
+			video3dInfoDTO = new Video3dInfoDTO();
+			video3dInfoDTO.setFecha(DATE_TIME_FORMATTER.format(new Date(fichero3D.getFecha())));
+			video3dInfoDTO.setNombre(fichero3D.getNombre());
+			video3dInfoDTO.setId(fichero3D.getId());
+			result.add(video3dInfoDTO);
+		}
+		return result;
+	}
 
 	/*
 	 * (non-Javadoc)

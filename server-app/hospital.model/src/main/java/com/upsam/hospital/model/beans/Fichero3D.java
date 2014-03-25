@@ -1,6 +1,5 @@
 package com.upsam.hospital.model.beans;
 
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,41 +14,27 @@ import org.hibernate.annotations.CascadeType;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Exploracion3D.
+ * The Class Fichero3D.
  */
 @Entity
-@Table(name = "VIDEO")
-public class Video implements IModelHospital {
+@Table(name = "FICHERO3D")
+public class Fichero3D implements IModelHospital {
 
 	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 8823797142615984016L;
-
-	/**
-	 * Gets the serialversionuid.
-	 * 
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	/** The duracion. */
-	@Basic
-	@Column(name = "DURACION")
-	private Integer duracion;
+	private static final long serialVersionUID = 4200185823989932569L;
 
 	/** The fecha. */
 	@Basic
 	@Column(name = "FECHA")
-	private Date fecha;
+	private Long fecha;
 
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_VIDEO")
+	@Column(name = "ID_FICHERO3D")
 	private Integer id;
 
-	/** The unidad medida. */
+	/** The nombre. */
 	@Basic
 	@Column(name = "NOMBRE")
 	private String nombre;
@@ -61,20 +46,11 @@ public class Video implements IModelHospital {
 	private Paciente paciente;
 
 	/**
-	 * Gets the duracion.
-	 * 
-	 * @return the duracion
-	 */
-	public Integer getDuracion() {
-		return duracion;
-	}
-
-	/**
 	 * Gets the fecha.
 	 * 
 	 * @return the fecha
 	 */
-	public Date getFecha() {
+	public Long getFecha() {
 		return fecha;
 	}
 
@@ -106,22 +82,12 @@ public class Video implements IModelHospital {
 	}
 
 	/**
-	 * Sets the duracion.
-	 * 
-	 * @param duracion
-	 *            the new duracion
-	 */
-	public void setDuracion(Integer duracion) {
-		this.duracion = duracion;
-	}
-
-	/**
 	 * Sets the fecha.
 	 * 
 	 * @param fecha
 	 *            the new fecha
 	 */
-	public void setFecha(Date fecha) {
+	public void setFecha(Long fecha) {
 		this.fecha = fecha;
 	}
 

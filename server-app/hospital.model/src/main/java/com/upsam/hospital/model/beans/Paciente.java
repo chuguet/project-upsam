@@ -63,6 +63,12 @@ public class Paciente implements IModelHospital {
 	@Column(name = "FECHA_NACIMIENTO")
 	private Date fechaNacimiento;
 
+	/** The fichero3 d. */
+	@OneToMany(mappedBy = "paciente")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Fichero3D> fichero3D;
+
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -95,6 +101,19 @@ public class Paciente implements IModelHospital {
 			this.setExploracion3D(new ArrayList<Exploracion3D>());
 		}
 		this.getExploracion3D().add(exploracion3D);
+	}
+
+	/**
+	 * Adds the fichero3 d.
+	 * 
+	 * @param fichero3D
+	 *            the fichero3 d
+	 */
+	public void addFichero3D(Fichero3D fichero3D) {
+		if (this.getFichero3D() == null) {
+			this.setFichero3D(new ArrayList<Fichero3D>());
+		}
+		this.getFichero3D().add(fichero3D);
 	}
 
 	/**
@@ -158,6 +177,15 @@ public class Paciente implements IModelHospital {
 	 */
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
+	}
+
+	/**
+	 * Gets the fichero3 d.
+	 * 
+	 * @return the fichero3 d
+	 */
+	public List<Fichero3D> getFichero3D() {
+		return fichero3D;
 	}
 
 	/**
@@ -264,6 +292,16 @@ public class Paciente implements IModelHospital {
 	 */
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	/**
+	 * Sets the fichero3 d.
+	 * 
+	 * @param fichero3d
+	 *            the new fichero3 d
+	 */
+	public void setFichero3D(List<Fichero3D> fichero3d) {
+		fichero3D = fichero3d;
 	}
 
 	/**
