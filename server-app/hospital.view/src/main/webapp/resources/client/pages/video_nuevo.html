@@ -15,9 +15,7 @@
 		<script type="text/javascript" src="../index.js"></script>		
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
 		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>		
-		<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.flipbox.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>		
+
 				
 		<script type="text/javascript">
 			app.initialize();
@@ -40,14 +38,13 @@
 				<div class="content2">
 					<!--Descripcion del video -->			
 					<div data-role="fieldcontain">  
-						<label for="descVideo">Descripción del video:</label>  
-						<input type="text" class="txt-speech" name="descVideo" id="descVideo" />				
+						<label for="descVideo">Descripción del video:</label>						
+						<textarea name="descVideo" class="txt-speech" id="descVideo"></textarea>				
 					</div>
 
-					<!--Fichero -->			
-					<div data-role="fieldcontain">  
-						<label for="grabar">Grabar:</label>  
-						<a data-role="button" data-icon="plus" data-iconpos="notext" style="align:right"></a> 			
+					<!--Grabacion -->
+					<div data-role="fieldcontain">					
+						<a data-role="button" data-icon="video" data-iconpos="top">Grabar video</a>
 					</div>
 				</div>				
 			</div>

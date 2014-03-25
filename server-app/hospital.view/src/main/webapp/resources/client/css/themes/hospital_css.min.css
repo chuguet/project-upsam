@@ -228,3 +228,9 @@ html .ui-alt-icon .ui-radio-off:after {
 h2 {
 	color:#77CDF1;
 }
+
+.videoFeatures{
+	white-space:normal; 
+	font-size: small;
+	color: #848484;			
+}
