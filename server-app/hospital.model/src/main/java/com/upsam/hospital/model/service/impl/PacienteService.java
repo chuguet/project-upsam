@@ -1,5 +1,6 @@
 package com.upsam.hospital.model.service.impl;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
+import javax.xml.bind.JAXBException;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import com.upsam.hospital.model.beans.Exploracion3D;
@@ -18,6 +20,8 @@ import com.upsam.hospital.model.beans.TablaDatos;
 import com.upsam.hospital.model.beans.TipoMedida;
 import com.upsam.hospital.model.beans.UnidadMedida;
 import com.upsam.hospital.model.exceptions.DataBaseException;
+import com.upsam.hospital.model.jaxb.EmxDataFile;
+import com.upsam.hospital.model.jaxb.JaxbUtils;
 import com.upsam.hospital.model.repository.IPacienteRepository;
 import com.upsam.hospital.model.service.IPacienteService;
 
@@ -27,6 +31,10 @@ import com.upsam.hospital.model.service.IPacienteService;
  */
 @Service
 public class PacienteService implements IPacienteService {
+
+	/** The jaxb util. */
+	@Inject
+	private JaxbUtils jaxbUtil;
 
 	/** The paciente repository. */
 	@Inject
@@ -50,73 +58,12 @@ public class PacienteService implements IPacienteService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.upsam.hospital.model.service.IModelService#findAll()
-	 */
-	@Override
-	public List<Paciente> findAll() throws DataBaseException {
-		try {
-			return pacienteRepository.findAll();
-		}
-		catch (SQLException e1) {
-			throw new DataBaseException(e1);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.service.IModelService#findOne(java.lang.Integer)
-	 */
-	@Override
-	public Paciente findOne(Integer pId) throws DataBaseException {
-		try {
-			return pacienteRepository.findOne(pId);
-		}
-		catch (SQLException e1) {
-			throw new DataBaseException(e1);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.service.IModelService#save(com.upsam.hospital
-	 * .model.beans.IModelHospital)
-	 */
-	@Override
-	public Integer save(Paciente paciente) throws DataBaseException {
-		try {
-			return pacienteRepository.save(paciente);
-		}
-		catch (SQLException e1) {
-			throw new DataBaseException(e1);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.service.IModelService#update(com.upsam.hospital
-	 * .model.beans.IModelHospital)
-	 */
-	@Override
-	public void update(Paciente paciente) throws DataBaseException {
-		try {
-			pacienteRepository.update(paciente);
-		}
-		catch (SQLException e1) {
-			throw new DataBaseException(e1);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
 	 * @see
 	 * com.upsam.hospital.model.service.IPacienteService#fileReader(java.io.
 	 * File, com.upsam.hospital.model.beans.Paciente)
 	 */
 	@Override
-	public Exploracion3D fileReader(File file, Paciente paciente) throws IOException {
+	public Exploracion3D fileReaderExploracion3D(File file, Paciente paciente) throws IOException {
 		List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
 		Exploracion3D result = new Exploracion3D();
 		result.setPaciente(paciente);
@@ -159,6 +106,48 @@ public class PacienteService implements IPacienteService {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IPacienteService#fileReaderVideo3D(java
+	 * .io.File)
+	 */
+	@Override
+	public EmxDataFile fileReaderVideo3D(File file) throws JAXBException, IOException {
+		String fileXML = jaxbUtil.removeHeaderXmlFile(FileUtils.readFileToString(file, StandardCharsets.UTF_8));
+		EmxDataFile emxDataFile = (EmxDataFile) jaxbUtil.readXML(new ByteArrayInputStream(fileXML.getBytes(StandardCharsets.UTF_8)), EmxDataFile.class);
+		return emxDataFile;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.upsam.hospital.model.service.IModelService#findAll()
+	 */
+	@Override
+	public List<Paciente> findAll() throws DataBaseException {
+		try {
+			return pacienteRepository.findAll();
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IModelService#findOne(java.lang.Integer)
+	 */
+	@Override
+	public Paciente findOne(Integer pId) throws DataBaseException {
+		try {
+			return pacienteRepository.findOne(pId);
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
+	}
+
 	/**
 	 * Read line.
 	 * 
@@ -175,5 +164,37 @@ public class PacienteService implements IPacienteService {
 			}
 		}
 		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IModelService#save(com.upsam.hospital
+	 * .model.beans.IModelHospital)
+	 */
+	@Override
+	public Integer save(Paciente paciente) throws DataBaseException {
+		try {
+			return pacienteRepository.save(paciente);
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IModelService#update(com.upsam.hospital
+	 * .model.beans.IModelHospital)
+	 */
+	@Override
+	public void update(Paciente paciente) throws DataBaseException {
+		try {
+			pacienteRepository.update(paciente);
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
 	}
 }

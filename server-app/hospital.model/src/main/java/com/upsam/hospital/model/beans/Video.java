@@ -24,32 +24,51 @@ public class Video implements IModelHospital {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8823797142615984016L;
 
+	/**
+	 * Gets the serialversionuid.
+	 * 
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	/** The duracion. */
 	@Basic
-	@Column(name = "duracion", length = 20)
+	@Column(name = "DURACION", length = 20)
 	private String duracion;
 
 	/** The fecha. */
 	@Basic
-	@Column(name = "fecha")
+	@Column(name = "FECHA")
 	private Date fecha;
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "ID_VIDEO")
 	private Integer id;
+
+	/** The unidad medida. */
+	@Basic
+	@Column(name = "NOMBRE")
+	private String nombre;
 
 	/** The paciente. */
 	@ManyToOne
 	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "id_paciente")
+	@JoinColumn(name = "ID_PACIENTE")
 	private Paciente paciente;
 
-	/** The unidad medida. */
-	@Basic
-	@Column(name = "nombre")
-	private String nombre;
-
+	/**
+	 * Gets the duracion.
+	 * 
+	 * @return the duracion
+	 */
 	public String getDuracion() {
 		return duracion;
 	}
@@ -58,40 +77,70 @@ public class Video implements IModelHospital {
 		this.duracion = duracion;
 	}
 
+	/**
+	 * Gets the fecha.
+	 * 
+	 * @return the fecha
+	 */
 	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-
+	/**
+	 * Gets the id.
+	 * 
+	 * @return the id
+	 */
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
-
+	/**
+	 * Gets the nombre.
+	 * 
+	 * @return the nombre
+	 */
 	public String getNombre() {
 		return nombre;
 	}
 
+	/**
+	 * Gets the paciente.
+	 * 
+	 * @return the paciente
+	 */
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	/**
+	 * Sets the id.
+	 * 
+	 * @param id
+	 *            the new id
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * Sets the nombre.
+	 * 
+	 * @param nombre
+	 *            the new nombre
+	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	/**
+	 * Sets the paciente.
+	 * 
+	 * @param paciente
+	 *            the new paciente
+	 */
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 }
