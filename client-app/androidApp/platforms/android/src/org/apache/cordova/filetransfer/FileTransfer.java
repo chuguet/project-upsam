@@ -47,8 +47,8 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import org.apache.cordova.Config;
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.Config;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaResourceApi;
 import org.apache.cordova.CordovaResourceApi.OpenForReadResult;
@@ -58,13 +58,19 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.netcompss.ffmpeg4android.R;
+import com.netcompss.ffmpeg4android_client.Prefs;
+
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import android.webkit.CookieManager;
 
 public class FileTransfer extends CordovaPlugin {
-
+	protected ProgressDialog progressDialog;
+	
     private static final String LOG_TAG = "FileTransfer";
     private static final String LINE_START = "--";
     private static final String LINE_END = "\r\n";
@@ -170,6 +176,27 @@ public class FileTransfer extends CordovaPlugin {
         }
     }
 
+    private void prepareProgressDialog(){
+    	progressDialog = new ProgressDialog(this.webView.getContext());
+		//progressDialog.setCancelable(true);
+		progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+		
+		progressDialog.setTitle("Subiendo video");
+		progressDialog.setMessage("Se está subiendo el video al servidor. Puede tardar varios minutos dependiendo del tamaño");
+		progressDialog.setCancelable(true);
+		progressDialog.setButton("Cancel", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface dialog, int id) {
+				Log.i(Prefs.TAG, "Cancel clicked");
+				Prefs.forceStopFlag = false;
+	    		
+			}
+		}
+		);
+		progressDialog.setMax(100);
+		progressDialog.setProgress(0);
+		progressDialog.show();
+    }
+    
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
         if (action.equals("upload") || action.equals("download")) {
@@ -275,6 +302,7 @@ public class FileTransfer extends CordovaPlugin {
         synchronized (activeRequests) {
             activeRequests.put(objectId, context);
         }
+        prepareProgressDialog();
         
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
@@ -423,6 +451,7 @@ public class FileTransfer extends CordovaPlugin {
                             PluginResult progressResult = new PluginResult(PluginResult.Status.OK, progress.toJSONObject());
                             progressResult.setKeepCallback(true);
                             context.sendPluginResult(progressResult);
+                            progressDialog.setProgress(totalBytes * 100 / fixedLength);
                         }
     
                         // send multipart form data necessary after file data...
@@ -490,6 +519,7 @@ public class FileTransfer extends CordovaPlugin {
                     Log.e(LOG_TAG, error.toString(), t);
                     context.sendPluginResult(new PluginResult(PluginResult.Status.IO_EXCEPTION, error));
                 } finally {
+                	progressDialog.hide();
                     synchronized (activeRequests) {
                         activeRequests.remove(objectId);
                     }

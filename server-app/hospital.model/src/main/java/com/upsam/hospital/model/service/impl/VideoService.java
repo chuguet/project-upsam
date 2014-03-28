@@ -1,125 +1,101 @@
 package com.upsam.hospital.model.service.impl;
 
-import java.sql.SQLException;
-import java.util.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import javax.inject.Inject;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
-import com.upsam.hospital.model.beans.Usuario;
+import com.coremedia.iso.IsoFile;
+import com.upsam.hospital.model.beans.Paciente;
+import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.IUsuarioRepository;
-import com.upsam.hospital.model.service.IUsuarioService;
+import com.upsam.hospital.model.service.IPacienteService;
+import com.upsam.hospital.model.service.IVideoService;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class VideoService.
  */
 @Service
-class VideoService implements IUsuarioService {
+@PropertySource("classpath:/application.properties")
+class VideoService implements IVideoService {
 
-	/** The usuario repository. */
+	@Value("${videos.location}")
+	private String videosLocation;
+
 	@Inject
-	private IUsuarioRepository usuarioRepository;
+	private IPacienteService pacienteService;
 
 	@Override
-	public void delete(Usuario usuario) throws DataBaseException {
-		try {
-			usuarioRepository.delete(usuario);
-		}
-		catch (SQLException e) {
-			throw new DataBaseException(e);
+	public void save(byte[] content, Integer idPaciente) throws FileNotFoundException, IOException, DataBaseException {
+		String nombre = saveInFolder(content, idPaciente);
+		String lengthInSeconds = getDuration(getFolderPath(idPaciente) + nombre);
+		Paciente paciente = pacienteService.findOne(idPaciente);
+
+		Video video = new Video();
+		video.setDuracion(lengthInSeconds);
+		video.setFecha(new Date());
+		video.setPaciente(paciente);
+		video.setNombre(nombre);
+		paciente.getVideos().add(video);
+		pacienteService.update(paciente);
+	}
+
+	private String saveInFolder(byte[] content, Integer idPaciente) throws FileNotFoundException, IOException {
+		String folderPath = getFolderPath(idPaciente);
+		validateFolderExist(folderPath);
+		String nombre = getCurrentTimestamp() + ".mp4";
+		String filePath = folderPath + nombre;
+		FileUtils.writeByteArrayToFile(new File(filePath), content);
+		return nombre;
+	}
+
+	public String getFolderPath(Integer idPaciente) {
+		return videosLocation.replace("xx", idPaciente.toString()).replace("/", File.separator);
+	}
+
+	private void validateFolderExist(String folderPath) {
+		File folder = new File(folderPath);
+		if (!folder.exists()) {
+			folder.mkdirs();
 		}
 	}
 
-	/**
-	 * Encript user.
-	 * 
-	 * @param usuario
-	 *            the usuario
-	 * @return the usuario
-	 */
-	private Usuario encriptUser(Usuario usuario) {
-		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
-		String pwd = passwordEncoder.encodePassword(usuario.getPassword(), null);
-		usuario.setPassword(pwd);
-		return usuario;
+	private String getCurrentTimestamp() {
+		Calendar calendar = Calendar.getInstance();
+		java.util.Date now = calendar.getTime();
+		java.sql.Timestamp currentTimestamp = new java.sql.Timestamp(now.getTime());
+		return currentTimestamp.getTime() + "";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see com.upsam.apuestas.model.service.IModelService#findAll()
-	 */
-	@Override
-	public List<Usuario> findAll() throws DataBaseException {
-		try {
-			return usuarioRepository.findAll();
-		}
-		catch (SQLException e) {
-			throw new DataBaseException(e);
-		}
+	private String getDuration(String filePath) throws IOException {
+		IsoFile isoFile = new IsoFile(filePath);
+		double doubleSeconds = (double) isoFile.getMovieBox().getMovieHeaderBox().getDuration() / isoFile.getMovieBox().getMovieHeaderBox().getTimescale();
+		isoFile.close();
+		return getDurationString(doubleSeconds);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.apuestas.model.service.IModelService#findOne(java.lang.Integer)
-	 */
-	@Override
-	public Usuario findOne(Integer pId) throws DataBaseException {
-		try {
-			return usuarioRepository.findOne(pId);
-		}
-		catch (SQLException e) {
-			throw new DataBaseException(e);
-		}
+	private String getDurationString(double doubleSeconds) {
+		String milliseconds = String.valueOf(doubleSeconds - Math.floor(doubleSeconds)).substring(2, 5);
+		int seconds = (int) doubleSeconds;
+		int hours = seconds / 3600;
+		int minutes = (seconds % 3600) / 60;
+		seconds = seconds % 60;
+		return twoDigitString(hours) + "h " + twoDigitString(minutes) + "m " + twoDigitString(seconds) + "s " + milliseconds + "ms";
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.apuestas.model.service.IModelService#save(com.upsam.apuestas
-	 * .model.bean.IModelTable)
-	 */
-	@Override
-	public Integer save(Usuario usuario) throws DataBaseException {
-		try {
-			return usuarioRepository.save(encriptUser(usuario));
+	private String twoDigitString(int number) {
+		if (number == 0) {
+			return "00";
 		}
-		catch (SQLException e1) {
-			throw new DataBaseException(e1);
+		if (number / 10 == 0) {
+			return "0" + number;
 		}
+		return String.valueOf(number);
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.apuestas.model.service.IUsuarioService#selectByUser(java.lang
-	 * .String)
-	 */
-	@Override
-	public Usuario selectByUser(String user) throws DataBaseException {
-		try {
-			return usuarioRepository.selectByUser(user);
-		}
-		catch (SQLException e) {
-			throw new DataBaseException(e);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.apuestas.model.service.IModelService#update(com.upsam.apuestas
-	 * .model.bean.IModelTable)
-	 */
-	@Override
-	public void update(Usuario usuario) throws DataBaseException {
-		try {
-			usuarioRepository.update(encriptUser(usuario));
-		}
-		catch (SQLException e1) {
-			throw new DataBaseException(e1);
-		}
-	}
-
 }

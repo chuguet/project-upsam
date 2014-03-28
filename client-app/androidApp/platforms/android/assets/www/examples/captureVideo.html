@@ -27,23 +27,19 @@
 
     // Upload files to server
     function uploadFile(mediaFile) {
+    	alert("comienza la subida");
         var ft = new FileTransfer();
         var path = mediaFile.fullPath;
         var name = mediaFile.name;
-        path = "file:/mnt/sdcard/DCIM/Camera/20140321_211845.mp4";
-        name = "20140321_211845.mp4";
-        alert(path);
-        alert(name);
         var options = new FileUploadOptions();
         options.fileKey = "file";
         options.fileName = mediaFile.name;
         options.mimeType = "multipart/form-data";
         options.chunkedMode = false;
         options.headers = { Connection: "close" };
-        alert(encodeURI("http://localhost:8080/hospitalServer/paciente/fileUpload/1"));
         
         ft.upload(path,
-            encodeURI("http://localhost:8080/hospitalServer/paciente/fileUpload/1"),
+            encodeURI("http://192.168.1.134:8080/hospitalServer/paciente/videoUpload/1"),
             function(result) {
                 console.log('Upload success: ' + result.responseCode);
                 console.log(result.bytesSent + ' bytes sent');
@@ -71,7 +67,7 @@
         options.headers = { Connection: "close" };
         
         ft.upload(path,
-            encodeURI("http://192.168.1.134:8080/hospitalServer/paciente/fileUpload/1"),
+            encodeURI("http://192.168.1.134:8080/hospitalServer/paciente/videoUpload/1"),
             function(result) {
                 console.log('Upload success: ' + result.responseCode);
                 console.log(result.bytesSent + ' bytes sent');

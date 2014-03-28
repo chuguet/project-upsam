@@ -35,13 +35,17 @@ public class Video implements IModelHospital {
 
 	/** The duracion. */
 	@Basic
-	@Column(name = "DURACION")
-	private Integer duracion;
+	@Column(name = "DURACION", length = 20)
+	private String duracion;
 
 	/** The fecha. */
 	@Basic
 	@Column(name = "FECHA")
 	private Date fecha;
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 
 	/** The id. */
 	@Id
@@ -65,8 +69,12 @@ public class Video implements IModelHospital {
 	 * 
 	 * @return the duracion
 	 */
-	public Integer getDuracion() {
+	public String getDuracion() {
 		return duracion;
+	}
+
+	public void setDuracion(String duracion) {
+		this.duracion = duracion;
 	}
 
 	/**
@@ -103,26 +111,6 @@ public class Video implements IModelHospital {
 	 */
 	public Paciente getPaciente() {
 		return paciente;
-	}
-
-	/**
-	 * Sets the duracion.
-	 * 
-	 * @param duracion
-	 *            the new duracion
-	 */
-	public void setDuracion(Integer duracion) {
-		this.duracion = duracion;
-	}
-
-	/**
-	 * Sets the fecha.
-	 * 
-	 * @param fecha
-	 *            the new fecha
-	 */
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
 	}
 
 	/**

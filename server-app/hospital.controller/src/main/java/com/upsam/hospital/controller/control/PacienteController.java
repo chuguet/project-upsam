@@ -35,6 +35,7 @@ import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
 import com.upsam.hospital.model.service.IFichero3DService;
 import com.upsam.hospital.model.service.IPacienteService;
+import com.upsam.hospital.model.service.IVideoService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -59,6 +60,9 @@ public class PacienteController {
 	/** The paciente util dto. */
 	@Inject
 	private IPacienteUtilDTO pacienteUtilDTO;
+
+	@Inject
+	private IVideoService videoService;
 
 	/**
 	 * Creates the form.
@@ -264,20 +268,13 @@ public class PacienteController {
 		return result;
 	}
 
-	@RequestMapping(value = "/videoUpload/{id}")
+		@RequestMapping(value = "/videoUpload/{id}", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public @ResponseBody
-	MensajeDTO videoUpload(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// String contentType = request.getContentType();
-		// if (file.getSize() > 0) {
-		// // writing file to a directory
-		// File upLoadedfile = new File("D:/PACIENTE_" + id + "_" +
-		// file.getOriginalFilename());
-		// FileOutputStream fos = new FileOutputStream(upLoadedfile);
-		// fos.write(file.getBytes());
-		// fos.close();
-		// // setting the value of fileUploaded variable
-		// }
-		return new MensajeDTO("Archivo subido correctamente.", true);
+	MensajeDTO videoUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) throws IOException, DataBaseException {
+		if (file.getSize() > 0) {
+			videoService.save(file.getBytes(), id);
+		}
+		return new MensajeDTO("Video guardado correctamente.", true);
 	}
 
 	@RequestMapping(value = "/videos3D/{id}")

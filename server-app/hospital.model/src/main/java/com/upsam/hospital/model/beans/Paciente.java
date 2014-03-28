@@ -53,6 +53,12 @@ public class Paciente implements IModelHospital {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Exploracion3D> exploracion3D;
 
+	/** The exploracion3 d. */
+	@OneToMany(mappedBy = "paciente")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Video> videos;
+
 	/** The fecha evaluacion. */
 	@Basic
 	@Column(name = "FECHA_EVALUACION")
@@ -101,6 +107,13 @@ public class Paciente implements IModelHospital {
 			this.setExploracion3D(new ArrayList<Exploracion3D>());
 		}
 		this.getExploracion3D().add(exploracion3D);
+	}
+
+	public void addVideo(Video video) {
+		if (this.getVideos() == null) {
+			this.setVideos(new ArrayList<Video>());
+		}
+		this.getVideos().add(video);
 	}
 
 	/**
@@ -159,6 +172,10 @@ public class Paciente implements IModelHospital {
 	 */
 	public List<Exploracion3D> getExploracion3D() {
 		return exploracion3D;
+	}
+
+	public List<Video> getVideos() {
+		return this.videos;
 	}
 
 	/**
@@ -271,7 +288,11 @@ public class Paciente implements IModelHospital {
 	 *            the new exploracion3 d
 	 */
 	public void setExploracion3D(List<Exploracion3D> exploracion3d) {
-		exploracion3D = exploracion3d;
+		this.exploracion3D = exploracion3d;
+	}
+
+	public void setVideos(List<Video> videos) {
+		this.videos = videos;
 	}
 
 	/**

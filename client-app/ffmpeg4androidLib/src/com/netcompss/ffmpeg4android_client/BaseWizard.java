@@ -8,44 +8,30 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URI;
 import java.util.List;
 import java.util.Random;
 
-import com.netcompss.ffmpeg4android.IFfmpgefRemoteServiceBridge;
-import com.netcompss.ffmpeg4android.LicenseCheckJNI;
-import com.netcompss.ffmpeg4android.R;
+import org.apache.cordova.PluginResult;
+import org.json.JSONArray;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.content.res.Resources;
 import android.database.Cursor;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.netcompss.ffmpeg4android.IFfmpgefRemoteServiceBridge;
+import com.netcompss.ffmpeg4android.R;
 
 /**
  * This class use the Template Method design pattern, 
@@ -75,7 +61,8 @@ public class BaseWizard extends Base {
 	
 	protected String commandStr;
 	
-	
+	private String callbackId;
+	private JSONArray results;
 	private String progressDialogMessage;
 	private String progressDialogTitle;
 	
@@ -86,15 +73,25 @@ public class BaseWizard extends Base {
 	private String notificationStoppedMessage = null;
 	private String notificationfinishedMessageDesc = null;
 	
-	public void setNotificationfinishedMessageDesc(
-			String notificationfinishedMessageDesc) {
+	public void setNotificationfinishedMessageDesc(String notificationfinishedMessageDesc) {
 		this.notificationfinishedMessageDesc = notificationfinishedMessageDesc;
 	}
 
-
 	protected String[] commandComplex;
 	
+	public JSONArray getResults() {
+		return results;
+	}
+	public void setResults(JSONArray results) {
+		this.results = results;
+	}
 	
+	public String getCallbackId() {
+		return callbackId;
+	}
+	public void setCallbackId(String callbackId) {
+		this.callbackId = callbackId;
+	}
 	public String[] getCommandComplex() {
 		return commandComplex;
 	}
@@ -259,27 +256,6 @@ public class BaseWizard extends Base {
 		Prefs.setWorkFolder(workingFolder);
 	}
 	
-	
-//	public boolean isLicenseValid() {
-//		 LicenseCheckJNI lm = new LicenseCheckJNI();
-//		  int rc = lm.licenseCheck(Prefs.getWorkingFolderForNative());
-//		  if (rc < 0) {
-//			  if (rc == -1)
-//				  Toast.makeText(this, "Trail Expired. contact support.", Toast.LENGTH_SHORT).show();
-//			  else if (rc == -2) 
-//				  Toast.makeText(this, "License invalid contact support", Toast.LENGTH_SHORT).show();
-//			  else 
-//				  Toast.makeText(this, "License check failed. contact support." + rc, Toast.LENGTH_SHORT).show();
-//			  
-//			  return false;
-//			  
-//		  }
-//		  else {
-//			  return true;
-//		  }
-//	}
-	
-
 	public void runTranscoing() {
 		setRemoteNotificaitonIcon();
 		releaseService();
@@ -479,159 +455,141 @@ public class BaseWizard extends Base {
 		}
 	}
 	
-	
-	
 	 public class RemoteServiceConnection implements ServiceConnection {
-	    	public void onServiceConnected(ComponentName className, 
-	    			IBinder boundService ) {
-	    		Log.d( Prefs.TAG, "Client onServiceConnected()" );
-	    		remoteService = IFfmpgefRemoteServiceBridge.Stub.asInterface((IBinder)boundService);
-	    		
-	    		
-	    		if (invokeFileInfoServiceFlag)
-	    			invokeFileInfoService(inputFilePath);
-	    		else
-	    			invokeService();
+    	public void onServiceConnected(ComponentName className, IBinder boundService ) {
+    		Log.d( Prefs.TAG, "Client onServiceConnected()" );
+    		remoteService = IFfmpgefRemoteServiceBridge.Stub.asInterface((IBinder)boundService);
+    		
+    		if (invokeFileInfoServiceFlag)
+    			invokeFileInfoService(inputFilePath);
+    		else
+    			invokeService();
+    	}
 
-	    	}
+        public void onServiceDisconnected(ComponentName className) {
+          remoteService = null;
+		  Log.d( Prefs.TAG, "onServiceDisconnected" );
+        }
+    };
+	    
+    public void handleServiceFinished() {
+    	Log.i(Prefs.TAG, "FFMPEG finished.");
+    	//Toast.makeText(this, getString(R.string.notif_message_ok), Toast.LENGTH_LONG).show();
+    	//remove the sticky notification
+    	// fix 4.4.2 bug, should not effect other versions.
+    	releaseService();
+		stopService();
+		appView.sendPluginResult(new PluginResult(PluginResult.Status.OK, this.getResults()), this.getCallbackId());
+    }
+	    
+    protected void handleInfoServiceFinished() {
+    	Log.i(Prefs.TAG, "FFMPEG finished (info).");
+    	removeDialog(FILE_INFO_DIALOG);
+    	showDialog(FILE_INFO_DIALOG);
+    	invokeFileInfoServiceFlag = false;
+    }
+    
+    private String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+    
+    public void invokeFileInfoService(String inputFilePath) {
+		  Log.i(Prefs.TAG, "invokeFileInfoService called");
+		  
+		  if (invokeFlag) {
 
-	        public void onServiceDisconnected(ComponentName className) {
-	          remoteService = null;
-			  Log.d( Prefs.TAG, "onServiceDisconnected" );
-	        }
-	    };
-	    
-	    
-
-	    
-	    public void handleServiceFinished() {
-	    	Log.i(Prefs.TAG, "FFMPEG finished.");
-	    	Toast.makeText(this, getString(R.string.notif_message_ok), Toast.LENGTH_LONG).show();
-	    	
-	    	//remove the sticky notification
-	    	// fix 4.4.2 bug, should not effect other versions.
-	    	releaseService();
-    		stopService();
-
-	    }
-	    
-	    protected void handleInfoServiceFinished() {
-	    	Log.i(Prefs.TAG, "FFMPEG finished (info).");
-	    	removeDialog(FILE_INFO_DIALOG);
-	    	showDialog(FILE_INFO_DIALOG);
-	    	invokeFileInfoServiceFlag = false;
-	    	
-	    	
-	    }
-	    
-	   
-	    
-	    private String getRealPathFromURI(Uri contentUri) {
-	        String[] proj = { MediaStore.Images.Media.DATA };
-	        Cursor cursor = managedQuery(contentUri, proj, null, null, null);
-	        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-	        cursor.moveToFirst();
-	        return cursor.getString(column_index);
-	    }
-	    
-	    public void invokeFileInfoService(String inputFilePath) {
-			  Log.i(Prefs.TAG, "invokeFileInfoService called");
-			  
-			  if (invokeFlag) {
-
-				  if(conn == null) {
-					  Toast.makeText(this, "Cannot invoke - service not bound", Toast.LENGTH_SHORT).show();
-				  } else {
-					  try {
-						  //FileUtils.deleteFile(workingFolder + outputFile);
-						  String command = "ffmpeg -i " + inputFilePath;
-						  if (remoteService != null) {
-							  deleteLogs();
-							  FileUtils.writeToLocalLog("command: " + command);
-							  Log.i(Prefs.TAG, "command: " + command);
-							  remoteService.setFfmpegCommand(command);
-							  Log.d( Prefs.TAG, "Client invokeService()" );
-							  remoteService.runTranscoding();
-						  }
-						  else {
-							  Log.w( Prefs.TAG, "Invoke failed, remoteService is null." );
-						  }
-
-					  } catch (android.os.DeadObjectException e) {
-						 
-						  Log.d( Prefs.TAG, "ignoring DeadObjectException (FFmpeg process exit)");
-
-					  } catch (RemoteException re) {
-						  Log.e( Prefs.TAG, re.getMessage(), re );
+			  if(conn == null) {
+				  Toast.makeText(this, "Cannot invoke - service not bound", Toast.LENGTH_SHORT).show();
+			  } else {
+				  try {
+					  //FileUtils.deleteFile(workingFolder + outputFile);
+					  String command = "ffmpeg -i " + inputFilePath;
+					  if (remoteService != null) {
+						  deleteLogs();
+						  FileUtils.writeToLocalLog("command: " + command);
+						  Log.i(Prefs.TAG, "command: " + command);
+						  remoteService.setFfmpegCommand(command);
+						  Log.d( Prefs.TAG, "Client invokeService()" );
+						  remoteService.runTranscoding();
 					  }
+					  else {
+						  Log.w( Prefs.TAG, "Invoke failed, remoteService is null." );
+					  }
+
+				  } catch (android.os.DeadObjectException e) {
+					 
+					  Log.d( Prefs.TAG, "ignoring DeadObjectException (FFmpeg process exit)");
+
+				  } catch (RemoteException re) {
+					  Log.e( Prefs.TAG, re.getMessage(), re );
 				  }
-				  handleInfoServiceFinished();
-				  invokeFlag = false;
 			  }
-			  else {
-				  Log.d(Prefs.TAG, "Not invoking");
-				  
-			  }
+			  handleInfoServiceFinished();
+			  invokeFlag = false;
 		  }
-	    
-	    
-	    public void deleteLogs() {
-		      FileUtils.deleteFile(Prefs.getVkLogFilePath());
-		      FileUtils.deleteFile(Prefs.getFfmpeg4androidLogFilePath());
-		      FileUtils.deleteFile(Prefs.getVideoKitLogFilePath());
-	    }
-		public void setOutputFilePath(String outputFilePath) {
-			this.outputFilePath = outputFilePath;
-			this.outputFile = FileUtils.getFileNameFromFilePath(outputFilePath);
-		}
-	    
-	    
-		public void compress(String fullPath){
-			fullPath = fullPath.replace("file:/mnt", "");
-			String outputFullPath = fullPath.replace(".mp4", "_out.mp4");
-				//String commandStr = "ffmpeg -y -i /sdcard/videokit/in.mp4 -strict experimental -vf transpose=1 -s 160x120 -r 30 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k /sdcard/videokit/out.mp4";
-			String commandStr = "ffmpeg -y -i " + fullPath + " -strict experimental -vf transpose=1 -s 160x120 -r 30 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k " + outputFullPath;
-					
-			//Log.i(Prefs.TAG, "Overriding the command with hard coded command");
-			//commandStr = "ffmpeg -y -i /sdcard/videokit/in.mp4 -strict experimental -vf transpose=1 -s 160x120 -r 30 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k /sdcard/videokit/vid_trans.mp4";
-			
-			//commandStr = "ffmpeg -y -i /sdcard/videokit/in.mp4 -strict experimental -s 160x120 -r 5 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k -vcodec mpeg4 /sdcard/videokit/out.mp4";
-			
-			//increase video speed
-			//String[] complexCommand = {"ffmpeg","-y" ,"-i", "/sdcard/videokit/in.mp4","-strict","experimental", "-an", "-filter:v", "setpts=0.5*PTS", "-b", "2097k","-r","60", "-vcodec", "mpeg4", "/sdcard/videokit/out.mp4"};
-			
-			// increase video and audio speed
-			//String[] complexCommand = {"ffmpeg","-y" ,"-i", "/sdcard/videokit/in.mp4","-strict","experimental", "-filter_complex", "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]","-map","[v]","-map","[a]", "-b", "2097k","-r","60", "-vcodec", "mpeg4", "/sdcard/videokit/out.mp4"};
-			
-			// complex command should be used in cases sub-commands and embedded commands (for example quotations inside a command).
-			//String[] complexCommand = {"ffmpeg","-y" ,"-i", "/sdcard/videokit/sample.mp4","-strict","experimental", "-vf", "crop=iw/2:ih:0:0,split[tmp],pad=2*iw[left]; [tmp]hflip[right]; [left][right] overlay=W/2", "-vb", "20M", "-r", "23.956", "/sdcard/videokit/out.mp4"};
-			
-							
-			////////////////////////////////////////////////////////////////////////////////
-			////// commands to needed to run the transcoding, only
-			////// the setCommand and runTranscoding are mandatory.
-			////// All the other commands are optional
-			setCommand(commandStr);
-			//setCommandComplex(complexCommand);
+		  else {
+			  Log.d(Prefs.TAG, "Not invoking");
+			  
+		  }
+	}
+    
+    public void deleteLogs() {
+      FileUtils.deleteFile(Prefs.getVkLogFilePath());
+      FileUtils.deleteFile(Prefs.getFfmpeg4androidLogFilePath());
+      FileUtils.deleteFile(Prefs.getVideoKitLogFilePath());
+    }
+    
+	public void setOutputFilePath(String outputFilePath) {
+		this.outputFilePath = outputFilePath;
+		this.outputFile = FileUtils.getFileNameFromFilePath(outputFilePath);
+	}
+    
+    
+	public void compress(String fullPath){
+		fullPath = fullPath.replace("file:/mnt", "");
+		String outputFullPath = fullPath.replace(".mp4", "_out.mp4");
+			//String commandStr = "ffmpeg -y -i /sdcard/videokit/in.mp4 -strict experimental -vf transpose=1 -s 160x120 -r 30 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k /sdcard/videokit/out.mp4";
+		String commandStr = "ffmpeg -y -i " + fullPath + " -strict experimental -vf transpose=1 -s 160x120 -r 30 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k " + outputFullPath;
+				
+		//Log.i(Prefs.TAG, "Overriding the command with hard coded command");
+		//commandStr = "ffmpeg -y -i /sdcard/videokit/in.mp4 -strict experimental -vf transpose=1 -s 160x120 -r 30 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k /sdcard/videokit/vid_trans.mp4";
+		
+		//commandStr = "ffmpeg -y -i /sdcard/videokit/in.mp4 -strict experimental -s 160x120 -r 5 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k -vcodec mpeg4 /sdcard/videokit/out.mp4";
+		
+		//increase video speed
+		//String[] complexCommand = {"ffmpeg","-y" ,"-i", "/sdcard/videokit/in.mp4","-strict","experimental", "-an", "-filter:v", "setpts=0.5*PTS", "-b", "2097k","-r","60", "-vcodec", "mpeg4", "/sdcard/videokit/out.mp4"};
+		
+		// increase video and audio speed
+		//String[] complexCommand = {"ffmpeg","-y" ,"-i", "/sdcard/videokit/in.mp4","-strict","experimental", "-filter_complex", "[0:v]setpts=0.5*PTS[v];[0:a]atempo=2.0[a]","-map","[v]","-map","[a]", "-b", "2097k","-r","60", "-vcodec", "mpeg4", "/sdcard/videokit/out.mp4"};
+		
+		// complex command should be used in cases sub-commands and embedded commands (for example quotations inside a command).
+		//String[] complexCommand = {"ffmpeg","-y" ,"-i", "/sdcard/videokit/sample.mp4","-strict","experimental", "-vf", "crop=iw/2:ih:0:0,split[tmp],pad=2*iw[left]; [tmp]hflip[right]; [left][right] overlay=W/2", "-vb", "20M", "-r", "23.956", "/sdcard/videokit/out.mp4"};
+		
+						
+		////////////////////////////////////////////////////////////////////////////////
+		////// commands to needed to run the transcoding, only
+		////// the setCommand and runTranscoding are mandatory.
+		////// All the other commands are optional
+		setCommand(commandStr);
+		//setCommandComplex(complexCommand);
 
-			///optional////
-			setOutputFilePath(outputFullPath);
-			setProgressDialogTitle("Comprimiendo video MP4");
-			setProgressDialogMessage("Dependiendo del tamaño del video, puede llevar varios minutos");
-			//setNotificationIcon(R.drawable.icon2);
-			setNotificationMessage("Demo is running...");
-			setNotificationTitle("Demo Client");
-			setNotificationfinishedMessageTitle("Demo Transcoding finished");
-			setNotificationfinishedMessageDesc("Click to play demo");
-			setNotificationStoppedMessage("Demo Transcoding stopped");
-			///////////////
+		///optional////
+		setOutputFilePath(outputFullPath);
+		setProgressDialogTitle("Comprimiendo video MP4");
+		setProgressDialogMessage("Dependiendo del tamaño del video, puede llevar varios minutos");
+		//setNotificationIcon(R.drawable.icon2);
+		setNotificationMessage("Demo is running...");
+		setNotificationTitle("Demo Client");
+		setNotificationfinishedMessageTitle("Demo Transcoding finished");
+		setNotificationfinishedMessageDesc("Click to play demo");
+		setNotificationStoppedMessage("Demo Transcoding stopped");
+		///////////////
 
-			Log.i(Prefs.TAG, "ffmpeg4android library version: " + Prefs.getLibraryVersionName());
-			runTranscoing();
-			
-	    
-		}
-	    
-
-
+		Log.i(Prefs.TAG, "ffmpeg4android library version: " + Prefs.getLibraryVersionName());
+		runTranscoing();
+	}
 }
