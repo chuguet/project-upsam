@@ -1,93 +1,69 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Capture Video</title>
-
-    <script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
-    <script type="text/javascript" charset="utf-8">
-    // Called when capture operation is finished
-    //
-    function captureSuccess(mediaFiles) {
-    	for (var i = 0; i < mediaFiles.length; i++) {
-            uploadFile(mediaFiles[i]);
+	<head>
+    	<title>Capture Video</title>
+	    <script type="text/javascript" charset="utf-8" src="../cordova.js"></script>
+	    <script type="text/javascript" charset="utf-8">
+	    // Called when capture operation is finished
+	    //
+	    function captureSuccess(mediaFiles) {
+	    	for (var i = 0; i < mediaFiles.length; i++) {
+	            uploadFile(mediaFiles[i]);
+	        }
+	    }
+	
+	    // Called if something bad happens.
+	    function captureVideoError() {
+	        var msg = "Se ha producido un error durante la grabación de vídeo";
+	        navigator.notification.alert(msg, null, 'Grabación fallida');
+	    }
+	
+	    // A button will call this function
+	    //
+	    function captureVideo() {
+	        navigator.device.capture.captureVideo(captureSuccess, captureVideoError, {limit: 2});
+	    }
+	
+		function uploadFileSuccess(result){
+            console.log('Upload success: ' + result.responseCode);
+            console.log(result.bytesSent + ' bytes sent');
+            var msg = "El vídeo se ha grabado y se ha subido correctamente al servidor";
+	        navigator.notification.alert(msg, null, 'Grabación correcta');
         }
-    }
-
-    // Called if something bad happens.
-    function captureError(error) {
-        var msg = 'An error occurred during capture: ' + error.code;
-        navigator.notification.alert(msg, null, 'Uh oh!');
-    }
-
-    // A button will call this function
-    //
-    function captureVideo() {
-        navigator.device.capture.captureVideo(captureSuccess, captureError, {limit: 2});
-    }
-
-    // Upload files to server
-    function uploadFile(mediaFile) {
-    	alert("comienza la subida");
-        var ft = new FileTransfer();
-        var path = mediaFile.fullPath;
-        var name = mediaFile.name;
-        var options = new FileUploadOptions();
-        options.fileKey = "file";
-        options.fileName = mediaFile.name;
-        options.mimeType = "multipart/form-data";
-        options.chunkedMode = false;
-        options.headers = { Connection: "close" };
         
-        ft.upload(path,
-            encodeURI("http://192.168.1.134:8080/hospitalServer/paciente/videoUpload/1"),
-            function(result) {
-                console.log('Upload success: ' + result.responseCode);
-                console.log(result.bytesSent + ' bytes sent');
-            },
-            function(error) {
-            	alert("An error has occurred: Code = " + error.code);
-                alert("upload error source " + error.source);
-                alert("upload error target " + error.target);
-                console.log('Error uploading file ' + path + ': ' + error.code);
-            },
-            options);
-    }
-    
-    function uploadFile2() {
-        var ft = new FileTransfer();
-        var path = "file:/mnt/sdcard/DCIM/Camera/20140321_211845.mp4";
+        function uploadFileError(error){
+        	var msg = "Se ha producido un error durante la subida del vídeo al servidor";
+	        navigator.notification.alert(msg, null, 'Grabación fallida');
+        	console.log("An error has occurred: Code = " + error.code);
+            console.log("upload error source " + error.source);
+            console.log("upload error target " + error.target);
+            console.log('Error uploading file ' + path + ': ' + error.code);
+        }
         
-        var name = "20140321_211845.mp4";
-        
-        var options = new FileUploadOptions();
-        options.fileKey = "file";
-        options.fileName = name;
-        options.mimeType = "multipart/form-data";
-        options.chunkedMode = false;
-        options.headers = { Connection: "close" };
-        
-        ft.upload(path,
-            encodeURI("http://192.168.1.134:8080/hospitalServer/paciente/videoUpload/1"),
-            function(result) {
-                console.log('Upload success: ' + result.responseCode);
-                console.log(result.bytesSent + ' bytes sent');
-            },
-            function(error) {
-            	alert("An error has occurred: Code = " + error.code);
-                alert("upload error source " + error.source);
-                alert("upload error target " + error.target);
-                console.log('Error uploading file ' + path + ': ' + error.code);
-            },
-            options);
-    }
-
-    </script>
+	    // Upload files to server
+	    function uploadFile(mediaFile) {
+	        var ft = new FileTransfer();
+	        var path = mediaFile.fullPath;
+	        var name = mediaFile.name;
+	        var options = new FileUploadOptions();
+	        options.fileKey = "file";
+	        options.fileName = mediaFile.name;
+	        options.mimeType = "multipart/form-data";
+	        options.chunkedMode = false;
+	        options.headers = { Connection: "close" };
+	        
+	        ft.upload(path,
+	            encodeURI("http://192.168.1.134:8080/hospitalServer/paciente/1/videoUpload"),
+	            uploadFileSuccess,
+	            uploadFileError,
+	            options);
+	    }
+	    </script>
     </head>
     <style>
     html, body, iframe { height: 100%; width:100%; padding:0px; margin:0px; border:0px;}
     </style>
     <body>
         <input type="button" onclick="captureVideo();" value="Capturar" />
-        <input type="button" onclick="uploadFile2();" value="Subir" />
     </body>
 </html>

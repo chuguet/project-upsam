@@ -58,15 +58,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.netcompss.ffmpeg4android.R;
-import com.netcompss.ffmpeg4android_client.Prefs;
-
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import android.webkit.CookieManager;
+import android.widget.Toast;
+
+import com.netcompss.ffmpeg4android.R;
+import com.netcompss.ffmpeg4android_client.Prefs;
 
 public class FileTransfer extends CordovaPlugin {
 	protected ProgressDialog progressDialog;
@@ -453,7 +454,7 @@ public class FileTransfer extends CordovaPlugin {
                             context.sendPluginResult(progressResult);
                             progressDialog.setProgress(totalBytes * 100 / fixedLength);
                         }
-    
+                        progressDialog.setProgress(100);
                         // send multipart form data necessary after file data...
                         sendStream.write(tailParamsBytes);
                         totalBytes += tailParamsBytes.length;
@@ -462,6 +463,8 @@ public class FileTransfer extends CordovaPlugin {
                         safeClose(readResult.inputStream);
                         safeClose(sendStream);
                     }
+                    progressDialog.dismiss();
+                    cleanFiles(source);
                     context.currentOutputStream = null;
                     Log.d(LOG_TAG, "Sent " + totalBytes + " of " + fixedLength);
 
@@ -492,6 +495,8 @@ public class FileTransfer extends CordovaPlugin {
                         context.currentInputStream = null;
                         safeClose(inStream);
                     }
+
+                    
                     
                     Log.d(LOG_TAG, "got response from server");
                     Log.d(LOG_TAG, responseString.substring(0, Math.min(256, responseString.length())));
@@ -519,7 +524,7 @@ public class FileTransfer extends CordovaPlugin {
                     Log.e(LOG_TAG, error.toString(), t);
                     context.sendPluginResult(new PluginResult(PluginResult.Status.IO_EXCEPTION, error));
                 } finally {
-                	progressDialog.hide();
+                	progressDialog.dismiss();
                     synchronized (activeRequests) {
                         activeRequests.remove(objectId);
                     }
@@ -534,10 +539,26 @@ public class FileTransfer extends CordovaPlugin {
                         }
                     }
                 }                
-            }
+           }
+
+			
         });
     }
 
+    private void cleanFiles(String source) {
+    	source= source.replace("file:/", "");
+		File file = new File(source);
+		if (file.exists()){
+			file.delete();
+		}
+
+		source = source.replace("_out.mp4", ".mp4");
+		file = new File(source);
+		if (file.exists()){
+			file.delete();
+		}
+	}
+    
     private static void safeClose(Closeable stream) {
         if (stream != null) {
             try {

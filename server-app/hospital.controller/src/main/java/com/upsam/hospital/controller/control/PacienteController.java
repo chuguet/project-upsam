@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -268,7 +266,7 @@ public class PacienteController {
 		return result;
 	}
 
-		@RequestMapping(value = "/videoUpload/{id}", method = RequestMethod.POST, consumes = "multipart/form-data")
+	@RequestMapping(value = "{id}/videoUpload", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public @ResponseBody
 	MensajeDTO videoUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) throws IOException, DataBaseException {
 		if (file.getSize() > 0) {
