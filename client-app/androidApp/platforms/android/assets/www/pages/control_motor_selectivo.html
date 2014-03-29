@@ -1,89 +1,87 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>Evaluaci&oacute;n Muscular Manual</title>
+		<title>Exploraci&oacute;n f&iacute;sica - Laboratorio de An&acute;lisis de Movimientos</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="format-detection" content="telephone=no" />
 		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
 
-		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-1.4.1.min.css">
+		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
+		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
 		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-datebox.min.css" /> 
 		
 		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>
+		<script type="text/javascript" src="../index.js"></script>		
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
+		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>		
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.flipbox.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>
+		<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>		
+		<script type="text/javascript" src="../js/views/control_motor_selectivo.js"></script>
 		
 		<script type="text/javascript">
 			app.initialize();
-			
-			function puntuaciones(){			
-				if(document.all.divPuntuaciones.style.display == "none"){
-					document.all.divPuntuaciones.style.display = "block";
-					$("#textPuntuaciones").text("Ocultar puntuaciones");
-				}else{
-					document.all.divPuntuaciones.style.display = "none";
-					$("#textPuntuaciones").text("Ver puntuaciones");
-				}	
-			}
-			
 		</script>
 	</head>
 	<body>
-
-		<div data-role="page" data-theme="a">
-			<!-- Header -->
+		<div data-role="page">
+			<!-- Cabecera -->
 			<div data-role="header" >                    
-				<h2>Control motor selectivo</h2>
+				<h3>Control motor selectivo - LAM</h3>
 				<a data-rel="back" data-icon="back">Volver</a>
-			   <a href="index.html" data-icon="check" data-theme="a">Save</a>
+			   <a href="index.html" data-icon="check" onclick="javascript:server()" >Guardar</a>
 			</div>
-			
 			
 			<!-- Contenido -->
 			<div data-role="content">
-				<!--Valoracion numerica -->			
-				<div data-role="fieldcontain">  
-					<label for="valoracionCtrlMotor">Valoraci&oacute;n:</label>  
-					<input type="range" name="valoracionCtrlMotor" id="valoracionCtrlMotor" value=""  min="0" max="3"/>				
-				</div>
+				<h2>Control motor selectivo</h2>			
 				
-				<a href="javascript:puntuaciones();" data-role="button"><label id="textPuntuaciones" name="textPuntuaciones">Ver Puntuaciones</label></a> 
-				
-				<fieldset>
-					<div id="divPuntuaciones" style="display:none">
-						<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
-							  <thead>
-								<tr>
-								  <th data-priority="1">Puntuaci&oacute;n</th>							  
-								  <th data-priority="2">Descripci&oacute;n</th>							  
-								</tr>
-							  </thead>
-							  <tbody>
-								<tr>
-								  <th>1</th>
-								  <td>Incapacidad de aislar el movimiento</td>
-								</tr>
-
-								<tr>
-								  <th>2</th>
-								  <td>Logra aislar parcialmente el movimiento</td>
-								</tr>
-
-								<tr>
-								  <th>3</th>
-								  <td>Logra aislar completamente el movimiento</td>
-								</tr>
-							  </tbody>
-						</table>
+				<div class="content2">
+					<!--Valoracion numerica -->			
+					<div data-role="fieldcontain">  
+						<label for="valoracionCtrlMotor">Valoraci&oacute;n:</label>  
+						<input type="range" name="valoracionCtrlMotor" id="valoracionCtrlMotor" value=""  min="0" max="3"/>				
 					</div>
-				</fieldset>
+					
+					<a href="javascript:puntuaciones();" data-role="button"><label id="textPuntuaciones" name="textPuntuaciones">Ver Puntuaciones</label></a> 
+					
+					<fieldset>
+						<div id="divPuntuaciones" style="display:none">
+							<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
+								  <thead>
+									<tr>
+									  <th data-priority="1">Puntuaci&oacute;n</th>							  
+									  <th data-priority="2">Descripci&oacute;n</th>							  
+									</tr>
+								  </thead>
+								  <tbody>
+									<tr>
+									  <th>1</th>
+									  <td>Incapacidad de aislar el movimiento</td>
+									</tr>
+	
+									<tr>
+									  <th>2</th>
+									  <td>Logra aislar parcialmente el movimiento</td>
+									</tr>
+	
+									<tr>
+									  <th>3</th>
+									  <td>Logra aislar completamente el movimiento</td>
+									</tr>
+								  </tbody>
+							</table>
+						</div>
+					</fieldset>
+				</div>	
 			</div>
-		</div>
-			 
+			
+			<!-- Footer -->
+			<div data-role="footer" data-position="inline" data-theme="c">
+				<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>
+			</div>	
+		</div>	 
 
 	</body>
 </html>

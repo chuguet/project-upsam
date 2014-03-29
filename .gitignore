@@ -12,3 +12,4 @@ Servers/*
 .classpath
 org.eclipse.*
 .jsdtscope
+server-app/hospital.view/src/main/webapp/resources/client/img/record_icon.png
