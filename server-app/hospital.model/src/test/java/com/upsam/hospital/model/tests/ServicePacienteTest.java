@@ -12,6 +12,7 @@ import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Row;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
+import com.upsam.hospital.model.service.IFichero3DService;
 import com.upsam.hospital.model.service.IPacienteService;
 
 public class ServicePacienteTest extends AbstractTest {
@@ -19,21 +20,24 @@ public class ServicePacienteTest extends AbstractTest {
 	@Inject
 	private IPacienteService pacienteService;
 
+	@Inject
+	private IFichero3DService fichero3DService;
+
 	@Test
-	public void pacienteTest() throws IOException, DataBaseException {
+	public void pacienteExploracion3DTest() throws IOException, DataBaseException {
 		File file = new File("C:\\Users\\Huguet\\Desktop\\ficheros\\13-9-05-01-2011.emt");
 		Paciente paciente = pacienteService.findOne(1);
 		writePaciente(paciente);
-		Exploracion3D exploracion3D = pacienteService.fileReaderExploracion3D(file, paciente);
+		Exploracion3D exploracion3D = fichero3DService.fileReaderExploracion3D(file, paciente);
 		paciente.addExploracion3D(exploracion3D);
 		pacienteService.update(paciente);
 		System.out.println("YEAH");
 	}
 
 	@Test
-	public void pacienteTestVideo() throws IOException, JAXBException {
+	public void pacienteVideo3DTest() throws IOException, JAXBException {
 		File file = new File("C:\\Users\\Huguet\\Desktop\\ficheros\\file.mdx");
-		EmxDataFile result = pacienteService.fileReaderVideo3D(file);
+		EmxDataFile result = fichero3DService.fileReaderVideo3D(file);
 		assertNotNull(result);
 	}
 

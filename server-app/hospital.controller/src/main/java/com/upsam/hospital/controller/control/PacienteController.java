@@ -229,7 +229,7 @@ public class PacienteController {
 				fos.close();
 				if (uploadedFile.getName().toLowerCase().contains(EMT_FILE)) {
 					paciente = pacienteService.findOne(id);
-					Exploracion3D exploracion3D = pacienteService.fileReaderExploracion3D(uploadedFile, paciente);
+					Exploracion3D exploracion3D = fichero3DService.fileReaderExploracion3D(uploadedFile, paciente);
 					paciente.addExploracion3D(exploracion3D);
 					if (uploadedFile.delete()) {
 						pacienteService.update(paciente);
@@ -296,7 +296,7 @@ public class PacienteController {
 		try {
 			Fichero3D fichero3D = fichero3DService.findOne(id);
 			File file = new File(new StringBuffer(servletContext.getRealPath("/resources/files/PACIENTE_")).append(fichero3D.getPaciente().getId()).append("/").append(fichero3D.getFecha()).append("_").append(fichero3D.getNombre()).toString());
-			EmxDataFile emxDataFile = pacienteService.fileReaderVideo3D(file);
+			EmxDataFile emxDataFile = fichero3DService.fileReaderVideo3D(file);
 			result = pacienteUtilDTO.file3dToDTO(emxDataFile);
 		}
 		catch (DataBaseException e) {
