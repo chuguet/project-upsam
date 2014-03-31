@@ -18,70 +18,44 @@
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.flipbox.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>		
-		<script type="text/javascript" src="../js/views/control_motor_selectivo.js"></script>
-		
+				
 		<script type="text/javascript">
 			app.initialize();
 		</script>
 	</head>
 	<body>
+
 		<div data-role="page">
 			<!-- Cabecera -->
-			<div data-role="header" >                    
-				<h3>Control motor selectivo - LAM</h3>
+			<div data-role="header">                    
+				<h3>Longitud de miembros inferiores - LAM</h3>
 				<a data-rel="back" data-icon="back">Volver</a>
-			   <a href="index.html" data-icon="check" onclick="javascript:server()" >Guardar</a>
-			</div>
+			   <a href="index.html" data-icon="check">Guardar</a>
+			</div>			
 			
 			<!-- Contenido -->
-			<div data-role="content">
-				<h2>Control motor selectivo</h2>			
+			<div data-role="content">			
+				<h2>Longitud de miembros inferiores</h2>
 				
 				<div class="content2">
-					<!--Valoracion numerica -->			
-					<div data-role="fieldcontain">  
-						<label for="valoracionCtrlMotor">Valoraci&oacute;n:</label>  
-						<input type="range" name="valoracionCtrlMotor" id="valoracionCtrlMotor" value=""  min="0" max="3"/>				
-					</div>
-					
-					<a href="javascript:puntuaciones();" data-role="button"><label id="textPuntuaciones" name="textPuntuaciones">Ver Puntuaciones</label></a> 
-					
-					<fieldset>
-						<div id="divPuntuaciones" style="display:none">
-							<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
-								  <thead>
-									<tr>
-									  <th data-priority="1">Puntuaci&oacute;n</th>							  
-									  <th data-priority="2">Descripci&oacute;n</th>							  
-									</tr>
-								  </thead>
-								  <tbody>
-									<tr>
-									  <th>1</th>
-									  <td>Incapacidad de aislar el movimiento</td>
-									</tr>
-	
-									<tr>
-									  <th>2</th>
-									  <td>Logra aislar parcialmente el movimiento</td>
-									</tr>
-	
-									<tr>
-									  <th>3</th>
-									  <td>Logra aislar completamente el movimiento</td>
-									</tr>
-								  </tbody>
-							</table>
-						</div>
-					</fieldset>
-				</div>	
+					<!-- Derecho -->
+				<div data-role="fieldcontain">  
+					<label for="derecho">Derecho: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
+					<input type="text" class="txt-speech" name="derecho" id="derecho" value=""  />
+				</div>
+
+				<!-- Izquierdo -->
+				<div data-role="fieldcontain">  
+					<label for="izquierdo">Izquierdo: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
+					<input type="text" class="txt-speech" name="izquierdo" id="izquierdo" value=""  />
+				</div>
+				</div>				
 			</div>
 			
 			<!-- Footer -->
 			<div data-role="footer" data-position="inline" data-theme="c">
 				<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>
 			</div>	
-		</div>	 
-
+		</div>
 	</body>
 </html>
