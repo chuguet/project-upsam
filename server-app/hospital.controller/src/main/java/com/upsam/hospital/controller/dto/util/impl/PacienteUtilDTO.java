@@ -5,14 +5,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 import com.upsam.hospital.controller.dto.PacienteDTO;
 import com.upsam.hospital.controller.dto.Video3dDTO;
 import com.upsam.hospital.controller.dto.Video3dInfoDTO;
+import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
+import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Fichero3D;
 import com.upsam.hospital.model.beans.Paciente;
+import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
 
 // TODO: Auto-generated Javadoc
@@ -27,6 +31,8 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 
 	/** The Constant DATE_TIME_FORMATTER. */
 	private static final SimpleDateFormat DATE_TIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	@Inject
+	private IVideoUtilDTO videoUtilDTO;
 
 	/*
 	 * (non-Javadoc)
@@ -56,6 +62,15 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 			video3dInfoDTO.setNombre(fichero3D.getNombre());
 			video3dInfoDTO.setId(fichero3D.getId());
 			result.add(video3dInfoDTO);
+		}
+		return result;
+	}
+
+	@Override
+	public List<VideoDTO> getVideosList(List<Video> videos) throws TransferObjectException {
+		List<VideoDTO> result = new ArrayList<VideoDTO>();
+		for (Video video : videos) {
+			result.add(this.videoUtilDTO.toRest(video));
 		}
 		return result;
 	}

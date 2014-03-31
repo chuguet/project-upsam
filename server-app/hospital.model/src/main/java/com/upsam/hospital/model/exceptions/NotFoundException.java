@@ -1,12 +1,12 @@
 package com.upsam.hospital.model.exceptions;
 
-public class DataBaseException extends ControlledException {
+public class NotFoundException extends ControlledException {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Instantiates a new app exception.
 	 */
-	public DataBaseException() {
+	public NotFoundException() {
 		super();
 	}
 
@@ -16,7 +16,7 @@ public class DataBaseException extends ControlledException {
 	 * @param e
 	 *            the e
 	 */
-	public DataBaseException(Exception e) {
+	public NotFoundException(Exception e) {
 		super(e);
 	}
 
@@ -26,7 +26,7 @@ public class DataBaseException extends ControlledException {
 	 * @param message
 	 *            the message
 	 */
-	public DataBaseException(String message) {
+	public NotFoundException(String message) {
 		super(message);
 	}
 
@@ -38,7 +38,7 @@ public class DataBaseException extends ControlledException {
 	 * @param exception
 	 *            the exception
 	 */
-	public DataBaseException(String message, Exception exception) {
+	public NotFoundException(String message, Exception exception) {
 		super(message, exception);
 	}
 }

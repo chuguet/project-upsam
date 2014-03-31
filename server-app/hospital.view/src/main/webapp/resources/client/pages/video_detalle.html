@@ -10,48 +10,68 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
 		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-datebox.min.css" /> 
+		<link type="text/css" rel="stylesheet" href="../css/video-js.min.css" /> 
+		
 		
 		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
+		<script type="text/javascript" src="../index.js"></script>
+		<script type="text/javascript" src='../js/server.js'></script>
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
 		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>		
+		<script type="text/javascript" src="../js/video.js"></script>
 				
 		<script type="text/javascript">
-			app.initialize();
+			generic.initialize(cargarVideo);
+			videojs.options.flash.swf = "video-js.swf";
+			
+			function cargarVideo(){
+				var id = generic.getURLParameter("id");
+	            server.get('1/video/' + id, null, mostrarVideo);
+			}
+			
+			function mostrarVideo(parameters){
+				alert("llega");
+				$("#reproductorVideo").append("<source src='http://localhost:8080/hospitalServer/paciente/1/videoReproduce/" + parameters.id + "' type='video/mp4' />");
+			}
+			
 		</script>
 	</head>
-<body>
-
-<div data-role="page">
-	<!-- Cabecera -->
-	<div data-role="header" >                    
-	    <h3>Detalle v&iacute;deo - LAM</h3>
-	    <a data-rel="back" data-icon="back">Volver</a>
-	   <a href="index.html" data-icon="check">Guardar</a>
-	</div>	
 	
-	<!-- Contenido -->
-	<div data-role="content"> 	
-		<h2>Detalle de V&iacute;deo</h2>
-		
-		<div class="content2">
-			Video 1<br>
-			<span class="videoFeatures">Archivo: archivo_001.mp4</span><br>
-			<span class="videoFeatures">Duración: 00:58 min</span><br>
+	<body>
+		<div data-role="page">
+			<!-- Cabecera -->
+			<div data-role="header" >                    
+			    <h3>Detalle v&iacute;deo - LAM</h3>
+			    <a data-rel="back" data-icon="back">Volver</a>
+			   <a href="index.html" data-icon="check">Guardar</a>
+			</div>	
 			
-			<div data-role="fieldcontain">  
-				<!-- Aqui iria el video -->
-				aqui iria el frame del video
+			<!-- Contenido -->
+			<div data-role="content"> 	
+				<h2>Detalle de V&iacute;deo</h2>
+				
+				<div class="content2">
+					Video 1<br>
+					<span class="videoFeatures">Archivo: archivo_001.mp4</span><br>
+					<span class="videoFeatures">Duración: 00:58 min</span><br>
+					
+					<div data-role="fieldcontain">  
+						<video id="reproductorVideo" class="video-js vjs-default-skin" controls preload="none" width="640" height="264" poster="http://video-js.zencoder.com/oceans-clip.png" data-setup="{}">
+							<source src='http://localhost:8080/hospitalServer/paciente/1/videoReproduce/1' type='video/mp4' />
+							
+							<!-- <source src="http://video-js.zencoder.com/oceans-clip.mp4" type='video/mp4' />-->
+						</video>
+					</div>
+				</div>		
 			</div>
-		</div>		
-	</div>
+			
+			<!-- Footer -->
+			<div data-role="footer" data-position="inline" data-theme="c">
+				<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>
+			</div>	
+		</div>
+			 
 	
-	<!-- Footer -->
-	<div data-role="footer" data-position="inline" data-theme="c">
-		<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>
-	</div>	
-</div>
-		 
-
-</body>
+	</body>
 </html>

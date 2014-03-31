@@ -64,6 +64,10 @@ public class Video implements IModelHospital {
 	@JoinColumn(name = "ID_PACIENTE")
 	private Paciente paciente;
 
+	@Basic
+	@Column(name = "DESCRIPCIN", length = 1000)
+	private String descripcion;
+
 	/**
 	 * Gets the duracion.
 	 * 
@@ -141,6 +145,14 @@ public class Video implements IModelHospital {
 	 */
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 }

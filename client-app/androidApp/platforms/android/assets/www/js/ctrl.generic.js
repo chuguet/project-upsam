@@ -1,13 +1,18 @@
 var generic = {
-	'initialize' : function() {
-		if (this.isMobile()){
-			app.initialize();		
-			var that = this;			
-			$(document).bind("pageinit", function() {
-				that.processSpeech();     
-				that.processDatebox();            
-			});
+	'initialize' : function(methodToExecute) {
+		if (typeof app + "" != "undefined"){
+			app.initialize();
 		}
+		
+		var that = this;			
+		$(document).bind("pageinit", function() {
+	    	that.processSpeech();     
+	    	that.processDatebox();
+	    	
+	    	if (methodToExecute && methodToExecute != null){
+	    		methodToExecute.apply(this, null);
+	    	}
+	    });
 	},
 	
 	'processSpeech' : function() {
@@ -53,7 +58,34 @@ var generic = {
 		});
 	},
 	
-	'isMobile' : function() {
-        return navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/iPhone|iPad|iPod/i) || navigator.userAgent.match(/Opera Mini/i) || navigator.userAgent.match(/IEMobile/i);
-    }
+	'changePage' : function(uri, parameters){
+		var uriWithParameters = uri;
+		if (parameters != null){
+			uriWithParameters += "?";
+			var count = 1;
+			for(var name in parameters) {
+				if (count > 1)
+					action += "&";
+				uriWithParameters += name + "=" + parameters[name];
+				count++;
+			}
+		}
+		$.mobile.changePage(uri, { dataUrl : uriWithParameters, data : parameters, reloadPage : true, changeHash : true });
+	},
+	/*
+	'getURLParameter' : function(sParam) {
+	    var sPageURL = window.location.search.substring(1);
+	    var sURLVariables = sPageURL.split('&');
+	    for (var i = 0; i < sURLVariables.length; i++) {
+	        var sParameterName = sURLVariables[i].split('=');
+	        if (sParameterName[0] == sParam) {
+	            return sParameterName[1];
+	        }
+	    }
+	},
+	*/
+	'getURLParameter' : function(name){
+	    var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+	    return results[1] || 0;
+	}
 };

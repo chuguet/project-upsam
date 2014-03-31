@@ -12,17 +12,38 @@
 		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-datebox.min.css" /> 
 		
 		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
+		<script type="text/javascript" src="../index.js"></script>
+		<script type="text/javascript" src='../js/server.js'></script>
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
 		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>		
 			
 		<script type="text/javascript">
-			app.initialize();
-		</script>
-		
-		<style>
+			generic.initialize(buscarVideos);
 			
-		</style>
+			function buscarVideos(){
+				server.get('1/video', null, mostrarListado);
+	        }
+	        
+	        function mostrarListado(parameters){
+	        	for (var i = 0; i < parameters.length; i++){
+	        		var li = $("<li></li>");
+	        		var hyperlink = $("<a rel='external' id='linkVideo" + parameters[i].id + "' href='#' alt='Acceder al video' data-transition='fade'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a>");
+	        		
+	        		hyperlink.click(function() {
+	        			var params = {'id' :  this.id.replace('linkVideo', '')};
+						generic.changePage('video_detalle.html', params);
+	        		});
+	        		//$("#videoList").append("<li><a rel='external' href='video_detalle.html?id=" + parameters[i].id + "' data-transition='fade'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
+	        		li.append(hyperlink);
+	        		$("#videoList").append(li);
+	        	}
+	        	$("#videoList").listview('refresh');
+	        }
+	        
+	        
+	        
+		</script>
 	</head>
 	<body>
 		<div data-role="page">
@@ -40,44 +61,8 @@
 				<div class="content2">
 					<!--Listado de videos -->								
 					
-					<ul data-role="listview" data-inset="true">	            
-     					<li>
-     						<a rel="external" href="video_detalle.html" data-transition="fade">
-     							Video 1<br>
-     							<span class="videoFeatures">archivo_001.mp4 | 02:28 min</span>     						
-     						</a>
-     					</li>
-     					
-     					<li>
-     						<a rel="external" href="video_detalle.html" data-transition="fade">
-     							Video 2<br>
-     							<span class="videoFeatures">archivo_002.mp4 | 00:09 min</span>     						
-     						</a>
-     					</li>
-     					<li>
-     						<a rel="external" href="video_detalle.html" data-transition="fade">
-     							Video 3<br>
-     							<span class="videoFeatures">archivo_003.mp4 | 12:56 min</span>     						
-     						</a>
-     					</li>
-     					<li>
-     						<a rel="external" href="video_detalle.html" data-transition="fade">
-     							Video 4<br>
-     							<span class="videoFeatures">archivo_004.mp4 | 00:15 min</span>     						
-     						</a>
-     					</li>
-     					<li>
-     						<a rel="external" href="video_detalle.html" data-transition="fade">
-     							Video 5<br>
-     							<span class="videoFeatures">archivo_005.mp4 | 02:01 min</span>     						
-     						</a>
-     					</li>
-     					<li>
-     						<a rel="external" href="video_detalle.html" data-transition="fade">
-     							Video 6<br>
-     							<span class="videoFeatures">archivo_006.mp4 | 00:28 min</span>     						
-     						</a>
-     					</li>
+					<ul data-role="listview" data-inset="true" id="videoList">	     
+					
      				</ul>
 				</div>	
 			</div>

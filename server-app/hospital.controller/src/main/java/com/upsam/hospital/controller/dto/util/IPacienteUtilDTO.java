@@ -4,9 +4,11 @@ import java.util.List;
 import com.upsam.hospital.controller.dto.PacienteDTO;
 import com.upsam.hospital.controller.dto.Video3dDTO;
 import com.upsam.hospital.controller.dto.Video3dInfoDTO;
+import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Fichero3D;
 import com.upsam.hospital.model.beans.Paciente;
+import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
 
 // TODO: Auto-generated Javadoc
@@ -47,5 +49,7 @@ public interface IPacienteUtilDTO {
 	 *             the transfer object exception
 	 */
 	PacienteDTO toRest(Paciente paciente) throws TransferObjectException;
+
+	List<VideoDTO> getVideosList(List<Video> videos) throws TransferObjectException;
 
 }

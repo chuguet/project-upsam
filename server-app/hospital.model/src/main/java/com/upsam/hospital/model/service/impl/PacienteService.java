@@ -93,7 +93,7 @@ public class PacienteService implements IPacienteService {
 			pacienteRepository.update(paciente);
 		}
 		catch (SQLException e1) {
-			throw new DataBaseException(e1);
+			throw new DataBaseException("Se ha producido un error al actualizar un paciente");
 		}
 	}
 }

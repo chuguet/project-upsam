@@ -1,5 +1,5 @@
 var server = {
-	"URI" : "http://192.168.1.134:8080/hospitalServer/paciente/",
+	"URI" : "http://localhost:8080/hospitalServer/paciente/",
 	"post" : function(action, params, callback) {
 		this.executeJSon('POST', action, params, callback);
 	},
@@ -25,7 +25,6 @@ var server = {
 	},
 	"executeJSon" : function($method, action, data, callback) {
 		$("body").addClass("loading");
-		
 		if (data != null) {
 			data = JSON.stringify(data);
 		}

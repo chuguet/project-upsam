@@ -1,10 +1,14 @@
 package com.upsam.hospital.model.service.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Calendar;
 import java.util.Date;
+import javassist.NotFoundException;
 import javax.inject.Inject;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -97,5 +101,47 @@ class VideoService implements IVideoService {
 			return "0" + number;
 		}
 		return String.valueOf(number);
+	}
+
+	@Override
+	public Video findOne(Integer idPaciente, Integer id) throws DataBaseException, NotFoundException {
+		Paciente paciente = pacienteService.findOne(idPaciente);
+		for (Video video : paciente.getVideos()) {
+			if (video.getId().equals(id)) {
+				return video;
+			}
+		}
+		throw new NotFoundException("Se ha producido un error al recuperar un vídeo de un paciente");
+	}
+
+	@Override
+	public void recuperarVideo(OutputStream outStream, String nombre, Integer idPaciente) throws FileNotFoundException {
+		String folderPath = getFolderPath(idPaciente);
+
+		String filePath = folderPath + nombre;
+		File video = new File(filePath);
+		if (!video.exists()) {
+			throw new FileNotFoundException();
+		}
+		byte[] buf = new byte[8192];
+
+		InputStream is = new FileInputStream(video);
+
+		int c = 0;
+
+		try {
+			while ((c = is.read(buf, 0, buf.length)) > 0) {
+				outStream.write(buf, 0, c);
+			}
+
+			is.close();
+			// outStream.flush();
+			// outStream.close();
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }
