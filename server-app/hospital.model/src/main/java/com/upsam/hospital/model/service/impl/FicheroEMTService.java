@@ -10,10 +10,10 @@ import java.util.List;
 import javax.inject.Inject;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
+import com.upsam.hospital.model.beans.Angle;
 import com.upsam.hospital.model.beans.FicheroEMT;
-import com.upsam.hospital.model.beans.Field;
 import com.upsam.hospital.model.beans.Paciente;
-import com.upsam.hospital.model.beans.Row;
+import com.upsam.hospital.model.beans.Point;
 import com.upsam.hospital.model.beans.TablaDatos;
 import com.upsam.hospital.model.beans.TipoMedida;
 import com.upsam.hospital.model.beans.UnidadMedida;
@@ -58,11 +58,11 @@ public class FicheroEMTService implements IFicheroEMTService {
 		List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
 		FicheroEMT result = new FicheroEMT();
 		result.setPaciente(paciente);
-		Field field;
+		Point field;
 		TablaDatos tablaDatos = new TablaDatos();
 		tablaDatos.setFicheroEMT(result);
-		List<Row> rows;
-		Row row;
+		List<Angle> rows;
+		Angle row;
 		result.setFecha(new Date());
 		List<String> lineSplitted;
 		for (String line : lines) {
@@ -80,17 +80,17 @@ public class FicheroEMTService implements IFicheroEMTService {
 			}
 			else if (line.matches(".*\\d.*")) {
 				lineSplitted = readLine(line);
-				row = new Row();
-				rows = new ArrayList<Row>();
+				row = new Angle();
+				rows = new ArrayList<Angle>();
 				for (String split : lineSplitted) {
-					field = new Field();
-					field.setText(split);
-					field.setRow(row);
-					row.addField(field);
+					field = new Point();
+					// field.setText(split);
+					// field.setRow(row);
+					// row.addField(field);
 					row.setTablaDatos(tablaDatos);
 					rows.add(row);
 				}
-				tablaDatos.addRow(row);
+				// tablaDatos.addRow(row);
 			}
 		}
 		result.setTablaDatos(tablaDatos);

@@ -6,10 +6,10 @@ import java.io.IOException;
 import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
 import org.junit.Test;
+import com.upsam.hospital.model.beans.Angle;
 import com.upsam.hospital.model.beans.FicheroEMT;
-import com.upsam.hospital.model.beans.Field;
 import com.upsam.hospital.model.beans.Paciente;
-import com.upsam.hospital.model.beans.Row;
+import com.upsam.hospital.model.beans.Point;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
 import com.upsam.hospital.model.service.IFicheroEMTService;
@@ -52,9 +52,9 @@ public class ServicePacienteTest extends AbstractTest {
 			System.out.println(ficheroEMT.getFecha());
 			System.out.println(ficheroEMT.getTipoMedida().getNameId());
 			System.out.println(ficheroEMT.getUnidadMedida().getNameId());
-			for (Row row : ficheroEMT.getTablaDatos().getRows()) {
-				for (Field field : row.getFields()) {
-					System.out.print(field.getText() + " ");
+			for (Angle angle : ficheroEMT.getTablaDatos().getAngles()) {
+				for (Point point : angle.getPoints()) {
+					System.out.print(point.getCoord() + " ");
 				}
 				System.out.println("\n");
 			}

@@ -27,6 +27,12 @@ public class TablaDatos implements IModelHospital {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -344787572420124374L;
 
+	/** The rows. */
+	@OneToMany(mappedBy = "tablaDatos")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Angle> angles;
+
 	/** The exploracion3 d. */
 	@OneToOne
 	@Cascade(value = CascadeType.SAVE_UPDATE)
@@ -39,23 +45,26 @@ public class TablaDatos implements IModelHospital {
 	@Column(name = "ID_TABLA_DATOS")
 	private Integer id;
 
-	/** The rows. */
-	@OneToMany(mappedBy = "tablaDatos")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Row> rows;
-
 	/**
-	 * Adds the row.
+	 * Adds the angle.
 	 * 
 	 * @param row
-	 *            the row
+	 *            the angle
 	 */
-	public void addRow(Row row) {
-		if (this.getRows() == null) {
-			this.setRows(new ArrayList<Row>());
+	public void addAngle(Angle angle) {
+		if (this.getAngles() == null) {
+			this.setAngles(new ArrayList<Angle>());
 		}
-		this.getRows().add(row);
+		this.getAngles().add(angle);
+	}
+
+	/**
+	 * Gets the angles.
+	 * 
+	 * @return the angles
+	 */
+	public List<Angle> getAngles() {
+		return angles;
 	}
 
 	/**
@@ -77,12 +86,13 @@ public class TablaDatos implements IModelHospital {
 	}
 
 	/**
-	 * Gets the rows.
+	 * Sets the angles.
 	 * 
-	 * @return the rows
+	 * @param angles
+	 *            the new angles
 	 */
-	public List<Row> getRows() {
-		return rows;
+	public void setAngles(List<Angle> angles) {
+		this.angles = angles;
 	}
 
 	/**
@@ -103,16 +113,6 @@ public class TablaDatos implements IModelHospital {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	/**
-	 * Sets the rows.
-	 * 
-	 * @param rows
-	 *            the new rows
-	 */
-	public void setRows(List<Row> rows) {
-		this.rows = rows;
 	}
 
 }

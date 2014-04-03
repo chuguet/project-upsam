@@ -2,6 +2,7 @@ package com.upsam.hospital.model.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,23 +22,28 @@ import org.hibernate.annotations.LazyCollectionOption;
  * The Class Row.
  */
 @Entity
-@Table(name = "ROW")
-public class Row implements IModelHospital {
+@Table(name = "ANGLE")
+public class Angle implements IModelHospital {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -844048965044155217L;
-
-	/** The fields. */
-	@OneToMany(mappedBy = "row")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Field> fields;
 
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_ROW")
 	private Integer id;
+
+	/** The name. */
+	@Basic
+	@Column(name = "NAME")
+	private String name;
+
+	/** The fields. */
+	@OneToMany(mappedBy = "angle")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Point> points;
 
 	/** The tabla datos. */
 	@ManyToOne
@@ -48,23 +54,14 @@ public class Row implements IModelHospital {
 	/**
 	 * Adds the field.
 	 * 
-	 * @param field
-	 *            the field
+	 * @param point
+	 *            the point
 	 */
-	public void addField(Field field) {
-		if (this.getFields() == null) {
-			this.setFields(new ArrayList<Field>());
+	public void addPoint(Point point) {
+		if (this.getPoints() == null) {
+			this.setPoints(new ArrayList<Point>());
 		}
-		this.getFields().add(field);
-	}
-
-	/**
-	 * Gets the fields.
-	 * 
-	 * @return the fields
-	 */
-	public List<Field> getFields() {
-		return fields;
+		this.getPoints().add(point);
 	}
 
 	/**
@@ -77,22 +74,30 @@ public class Row implements IModelHospital {
 	}
 
 	/**
+	 * Gets the name.
+	 * 
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Gets the points.
+	 * 
+	 * @return the points
+	 */
+	public List<Point> getPoints() {
+		return points;
+	}
+
+	/**
 	 * Gets the tabla datos.
 	 * 
 	 * @return the tabla datos
 	 */
 	public TablaDatos getTablaDatos() {
 		return tablaDatos;
-	}
-
-	/**
-	 * Sets the fields.
-	 * 
-	 * @param fields
-	 *            the new fields
-	 */
-	public void setFields(List<Field> fields) {
-		this.fields = fields;
 	}
 
 	/**
@@ -103,6 +108,26 @@ public class Row implements IModelHospital {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	/**
+	 * Sets the name.
+	 * 
+	 * @param name
+	 *            the new name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Sets the points.
+	 * 
+	 * @param points
+	 *            the new points
+	 */
+	public void setPoints(List<Point> points) {
+		this.points = points;
 	}
 
 	/**
