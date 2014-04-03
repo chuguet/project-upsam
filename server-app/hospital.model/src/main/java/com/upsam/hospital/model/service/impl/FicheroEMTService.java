@@ -60,7 +60,7 @@ public class FicheroEMTService implements IFicheroEMTService {
 		result.setPaciente(paciente);
 		Field field;
 		TablaDatos tablaDatos = new TablaDatos();
-		tablaDatos.setExploracion3D(result);
+		tablaDatos.setFicheroEMT(result);
 		List<Row> rows;
 		Row row;
 		result.setFecha(new Date());
