@@ -1,11 +1,14 @@
 package com.upsam.hospital.controller.dto.util;
 
 import java.util.List;
+import com.upsam.hospital.controller.dto.FicheroEMTDTO;
+import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXInfoDTO;
 import com.upsam.hospital.controller.dto.PacienteDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
+import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Video;
@@ -18,6 +21,15 @@ import com.upsam.hospital.model.jaxb.EmxDataFile;
 public interface IPacienteUtilDTO {
 
 	/**
+	 * File emt to dto.
+	 * 
+	 * @param ficheroEMT
+	 *            the fichero emt
+	 * @return the fichero emtdto
+	 */
+	FicheroEMTDTO fileEMTToDTO(FicheroEMT ficheroEMT);
+
+	/**
 	 * File3d to dto.
 	 * 
 	 * @param emxDataFile
@@ -25,6 +37,15 @@ public interface IPacienteUtilDTO {
 	 * @return the video3d dto
 	 */
 	FicheroMDXDTO fileMDXToDTO(EmxDataFile emxDataFile);
+
+	/**
+	 * Gets the ficheros emt info list.
+	 * 
+	 * @param ficheros
+	 *            the ficheros
+	 * @return the ficheros emt info list
+	 */
+	List<FicheroEMTInfoDTO> getFicherosEMTInfoList(List<FicheroEMT> ficheros);
 
 	/**
 	 * Gets the video3d info list.

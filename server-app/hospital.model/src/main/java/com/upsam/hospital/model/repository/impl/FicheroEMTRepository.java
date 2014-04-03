@@ -15,6 +15,9 @@ import com.upsam.hospital.model.repository.IFicheroEMTRepository;
 @Repository
 public class FicheroEMTRepository implements IFicheroEMTRepository {
 
+	/** The Constant QUERY_PACIENTE. */
+	private static final String QUERY_PACIENTE = "from FicheroEMT where id_paciente = ?";
+
 	/** The hibernate template. */
 	@Inject
 	private HibernateTemplate hibernateTemplate;
@@ -37,6 +40,18 @@ public class FicheroEMTRepository implements IFicheroEMTRepository {
 	@Override
 	public List<FicheroEMT> findAll() throws SQLException {
 		return hibernateTemplate.loadAll(FicheroEMT.class);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.repository.IFicheroEMTRepository#findByPaciente
+	 * (java.lang.Integer)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<FicheroEMT> findByPaciente(Integer pId) throws SQLException {
+		return hibernateTemplate.find(QUERY_PACIENTE, pId);
 	}
 
 	/*

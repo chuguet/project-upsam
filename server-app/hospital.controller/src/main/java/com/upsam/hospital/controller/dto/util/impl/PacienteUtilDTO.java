@@ -7,15 +7,23 @@ import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Component;
+import com.upsam.hospital.controller.dto.AngleDTO;
+import com.upsam.hospital.controller.dto.FicheroEMTDTO;
+import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXInfoDTO;
 import com.upsam.hospital.controller.dto.PacienteDTO;
+import com.upsam.hospital.controller.dto.PointDTO;
+import com.upsam.hospital.controller.dto.TablaDatosDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
+import com.upsam.hospital.model.beans.Angle;
+import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.beans.Paciente;
+import com.upsam.hospital.model.beans.Point;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
 
@@ -31,8 +39,44 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 
 	/** The Constant DATE_TIME_FORMATTER. */
 	private static final SimpleDateFormat DATE_TIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+	/** The video util dto. */
 	@Inject
 	private IVideoUtilDTO videoUtilDTO;
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.controller.dto.util.IPacienteUtilDTO#fileEMTToDTO(
+	 * com.upsam.hospital.model.beans.FicheroEMT)
+	 */
+	@Override
+	public FicheroEMTDTO fileEMTToDTO(FicheroEMT ficheroEMT) {
+		AngleDTO angleDTO;
+		PointDTO pointDTO;
+		FicheroEMTDTO result = new FicheroEMTDTO();
+		result.setId(ficheroEMT.getId());
+		result.setCiclos(ficheroEMT.getCiclos());
+		result.setFecha(DATE_TIME_FORMATTER.format(ficheroEMT.getFecha()));
+		result.setTipoMedida(ficheroEMT.getTipoMedida().getNameId());
+		result.setUnidadMedida(ficheroEMT.getUnidadMedida().getNameId());
+		TablaDatosDTO tablaDatosDTO = new TablaDatosDTO();
+		tablaDatosDTO.setId(ficheroEMT.getTablaDatos().getId());
+		result.setTablaDatos(tablaDatosDTO);
+		for (Angle angle : ficheroEMT.getTablaDatos().getAngles()) {
+			angleDTO = new AngleDTO();
+			angleDTO.setId(angle.getId());
+			angleDTO.setName(angle.getName());
+			for (Point point : angle.getPoints()) {
+				pointDTO = new PointDTO();
+				pointDTO.setId(point.getId());
+				pointDTO.setCoord(point.getCoord());
+				angleDTO.addPointDTO(pointDTO);
+			}
+			tablaDatosDTO.addAngleDTO(angleDTO);
+		}
+		return result;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -44,6 +88,24 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 	public FicheroMDXDTO fileMDXToDTO(EmxDataFile emxDataFile) {
 		System.out.println("LLEGO");
 		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.upsam.hospital.controller.dto.util.IPacienteUtilDTO#
+	 * getFicherosEMTInfoList(java.util.List)
+	 */
+	@Override
+	public List<FicheroEMTInfoDTO> getFicherosEMTInfoList(List<FicheroEMT> ficherosEMT) {
+		List<FicheroEMTInfoDTO> result = new ArrayList<FicheroEMTInfoDTO>();
+		FicheroEMTInfoDTO ficheroEMTInfoDTO;
+		for (FicheroEMT ficheroEMT : ficherosEMT) {
+			ficheroEMTInfoDTO = new FicheroEMTInfoDTO();
+			ficheroEMTInfoDTO.setId(ficheroEMT.getId());
+			ficheroEMTInfoDTO.setFecha(DATE_TIME_FORMATTER.format(ficheroEMT.getFecha()));
+			result.add(ficheroEMTInfoDTO);
+		}
+		return result;
 	}
 
 	/*
@@ -66,6 +128,12 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 		return result;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.controller.dto.util.IPacienteUtilDTO#getVideosList
+	 * (java.util.List)
+	 */
 	@Override
 	public List<VideoDTO> getVideosList(List<Video> videos) throws TransferObjectException {
 		List<VideoDTO> result = new ArrayList<VideoDTO>();

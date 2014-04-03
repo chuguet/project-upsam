@@ -28,6 +28,7 @@ import com.upsam.hospital.model.service.IFicheroEMTService;
 @Service
 public class FicheroEMTService implements IFicheroEMTService {
 
+	/** The fichero emt repository. */
 	@Inject
 	private IFicheroEMTRepository ficheroEMTRepository;
 
@@ -112,6 +113,22 @@ public class FicheroEMTService implements IFicheroEMTService {
 	public List<FicheroEMT> findAll() throws DataBaseException {
 		try {
 			return ficheroEMTRepository.findAll();
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IFicheroEMTService#findByPaciente(java
+	 * .lang.Integer)
+	 */
+	@Override
+	public List<FicheroEMT> findByPaciente(Integer pId) throws DataBaseException {
+		try {
+			return ficheroEMTRepository.findByPaciente(pId);
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);

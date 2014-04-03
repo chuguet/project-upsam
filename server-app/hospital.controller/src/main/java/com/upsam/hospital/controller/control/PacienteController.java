@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import com.upsam.hospital.controller.dto.FicheroEMTDTO;
+import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXInfoDTO;
 import com.upsam.hospital.controller.dto.MensajeDTO;
@@ -52,28 +54,40 @@ import com.upsam.hospital.model.service.IVideoService;
 @RequestMapping("/paciente")
 public class PacienteController {
 
+	/** The Constant EMT_FILE. */
+	private static final String EMT_FILE = ".emt";
+
+	/** The Constant LOG. */
 	private final static Log LOG = LogFactory.getLog(PacienteController.class);
 
+	/** The Constant MDX_FILE. */
 	private static final String MDX_FILE = ".mdx";
-	private static final String EMT_FILE = ".emt";
+
+	/** The fichero emt service. */
+	@Inject
+	private IFicheroEMTService ficheroEMTService;
+
+	/** The fichero mdx service. */
+	@Inject
+	private IFicheroMDXService ficheroMDXService;
 
 	/** The usuario service. */
 	@Inject
 	private IPacienteService pacienteService;
 
-	@Inject
-	private IFicheroMDXService ficheroMDXService;
-
-	@Inject
-	private IFicheroEMTService ficheroEMTService;
-
 	/** The paciente util dto. */
 	@Inject
 	private IPacienteUtilDTO pacienteUtilDTO;
 
+	/** The servlet context. */
+	@Inject
+	private ServletContext servletContext;
+
+	/** The video service. */
 	@Inject
 	private IVideoService videoService;
 
+	/** The video util dto. */
 	@Inject
 	private IVideoUtilDTO videoUtilDTO;
 
@@ -93,6 +107,255 @@ public class PacienteController {
 			operacion = "form";
 		}
 		return new StringBuffer("paciente/").append(operacion).toString();
+	}
+
+	/**
+	 * Fichero emt.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the fichero emtdto
+	 */
+	@RequestMapping(value = "/ficheroEMT/{id}")
+	public @ResponseBody
+	FicheroEMTDTO ficheroEMT(@PathVariable("id") Integer id) {
+		FicheroEMTDTO result = null;
+		try {
+			FicheroEMT ficheroEMT = ficheroEMTService.findOne(id);
+			result = pacienteUtilDTO.fileEMTToDTO(ficheroEMT);
+		}
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+		}
+		return result;
+	}
+
+	/**
+	 * Fichero mdx.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param id
+	 *            the id
+	 * @return the fichero mdxdto
+	 */
+	@RequestMapping(value = "{idPaciente}/ficheroMDX/{id}")
+	public @ResponseBody
+	FicheroMDXDTO ficheroMDX(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("id") Integer id) {
+		FicheroMDXDTO result = null;
+		try {
+			FicheroMDX ficheroMDX = ficheroMDXService.findOne(id);
+			File file = new File(new StringBuffer(servletContext.getRealPath("/resources/files/PACIENTE_")).append(idPaciente).append("/").append(ficheroMDX.getFecha()).append("_").append(ficheroMDX.getNombre()).toString());
+			EmxDataFile emxDataFile = ficheroMDXService.fileReaderMDX(file);
+			result = pacienteUtilDTO.fileMDXToDTO(emxDataFile);
+		}
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+		}
+		catch (JAXBException e) {
+			LOG.error(e.getMessage());
+		}
+		catch (IOException e) {
+			LOG.error(e.getMessage());
+		}
+		return result;
+	}
+
+	/**
+	 * Ficheros emt info.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the list
+	 */
+	@RequestMapping(value = "{id}/ficherosEMT")
+	public @ResponseBody
+	List<FicheroEMTInfoDTO> ficherosEMTInfo(@PathVariable("id") Integer id) {
+		List<FicheroEMTInfoDTO> result = new ArrayList<FicheroEMTInfoDTO>();
+		try {
+			List<FicheroEMT> ficherosEMT = ficheroEMTService.findByPaciente(id);
+			result.addAll(pacienteUtilDTO.getFicherosEMTInfoList(ficherosEMT));
+		}
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+		}
+		return result;
+	}
+
+	/**
+	 * Ficheros mdx info.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the list
+	 */
+	@RequestMapping(value = "{id}/ficherosMDX")
+	public @ResponseBody
+	List<FicheroMDXInfoDTO> ficherosMDXInfo(@PathVariable("id") Integer id) {
+		List<FicheroMDXInfoDTO> result = new ArrayList<FicheroMDXInfoDTO>();
+		try {
+			Paciente paciente = pacienteService.findOne(id);
+			result.addAll(pacienteUtilDTO.getFicherosMDXInfoList(paciente.getFicheroMDX()));
+		}
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+		}
+		return result;
+	}
+
+	/**
+	 * File upload.
+	 * 
+	 * @param file
+	 *            the file
+	 * @param id
+	 *            the id
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/fileUpload/{id}", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public @ResponseBody
+	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) {
+		MensajeDTO result = null;
+		Date now = new Date();
+		Paciente paciente;
+		try {
+			if (file.getSize() > 0) {
+				File folder = new File(servletContext.getRealPath(new StringBuffer("/resources/files").toString()));
+				if (!folder.exists()) {
+					folder.mkdir();
+				}
+				folder = new File(servletContext.getRealPath(new StringBuffer("/resources/files/PACIENTE_").append(id).toString()));
+				if (!folder.exists()) {
+					folder.mkdir();
+				}
+				File uploadedFile = new File(new StringBuffer(folder.getAbsolutePath()).append("/").append(now.getTime()).append("_").append(file.getOriginalFilename()).toString());
+				FileOutputStream fos = new FileOutputStream(uploadedFile);
+				fos.write(file.getBytes());
+				fos.close();
+				if (uploadedFile.getName().toLowerCase().contains(EMT_FILE)) {
+					paciente = pacienteService.findOne(id);
+					FicheroEMT ficheroEMT = ficheroEMTService.fileReaderEMT(uploadedFile, paciente);
+					paciente.addFicheroEMT(ficheroEMT);
+					if (uploadedFile.delete()) {
+						pacienteService.update(paciente);
+						result = new MensajeDTO("Archivo subido correctamente.", true);
+					}
+					else {
+						result = new MensajeDTO("Error al borrar el archivo.", false);
+					}
+				}
+				else if (uploadedFile.getName().toLowerCase().contains(MDX_FILE)) {
+					paciente = pacienteService.findOne(id);
+					FicheroMDX ficheroMDX = new FicheroMDX();
+					ficheroMDX.setFecha(now.getTime());
+					ficheroMDX.setNombre(file.getOriginalFilename());
+					ficheroMDX.setPaciente(paciente);
+					paciente.addFicheroMDX(ficheroMDX);
+					pacienteService.update(paciente);
+					result = new MensajeDTO("Archivo subido correctamente.", true);
+				}
+				else {
+					uploadedFile.delete();
+					result = new MensajeDTO("Extension de archivo incorrecto.", false);
+				}
+			}
+		}
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+			result = new MensajeDTO("El paciente asociado al fichero no existe.", false);
+		}
+		catch (IOException e) {
+			LOG.error(e.getMessage());
+			result = new MensajeDTO("El fichero esta en un formato incorrecto.", false);
+		}
+		return result;
+	}
+
+	/**
+	 * Gets the all videos from paciente.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @return the all videos from paciente
+	 */
+	@RequestMapping(value = "{idPaciente}/video")
+	public @ResponseBody
+	List<VideoDTO> getAllVideosFromPaciente(@PathVariable("idPaciente") Integer idPaciente) {
+		List<VideoDTO> result = new ArrayList<VideoDTO>();
+		try {
+			Paciente paciente = pacienteService.findOne(idPaciente);
+			result.addAll(pacienteUtilDTO.getVideosList(paciente.getVideos()));
+		}
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+		}
+		catch (TransferObjectException e) {
+			// TODO Auto-generated catch block
+			LOG.error(e.getMessage());
+		}
+		return result;
+	}
+
+	/**
+	 * Gets the video from paciente.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param id
+	 *            the id
+	 * @return the video from paciente
+	 */
+	@RequestMapping(value = "{idPaciente}/video/{id}")
+	public @ResponseBody
+	VideoDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("id") Integer id) {
+		VideoDTO result = null;
+		Video video;
+		try {
+			video = this.videoService.findOne(idPaciente, id);
+			result = this.videoUtilDTO.toRest(video);
+		}
+		catch (DataBaseException | NotFoundException e1) {
+			e1.printStackTrace();
+		}
+		catch (TransferObjectException e) {
+			LOG.error(e.getMessage());
+		}
+
+		return result;
+	}
+
+	/**
+	 * Informe excel.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param id
+	 *            the id
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the model and view
+	 * @throws Exception
+	 *             the exception
+	 */
+	@RequestMapping(value = "{idPaciente}/videoReproduce/{id}", method = RequestMethod.GET)
+	public ModelAndView informeExcel(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("id") Integer id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		try {
+			Video video = this.videoService.findOne(idPaciente, id);
+			response.setContentType("video/mp4");
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + video.getNombre() + "\"");
+			ServletOutputStream outStream = response.getOutputStream();
+			this.videoService.recuperarVideo(outStream, video.getNombre(), idPaciente);
+
+			outStream.flush();
+			outStream.close();
+			response.flushBuffer();
+		}
+		catch (IOException ex) {
+			throw ex;
+		}
+		return null;
 	}
 
 	/**
@@ -223,118 +486,19 @@ public class PacienteController {
 		}
 	}
 
-	@Inject
-	private ServletContext servletContext;
-
-	@RequestMapping(value = "/fileUpload/{id}", method = RequestMethod.POST, consumes = "multipart/form-data")
-	public @ResponseBody
-	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) {
-		MensajeDTO result = null;
-		Date now = new Date();
-		Paciente paciente;
-		try {
-			if (file.getSize() > 0) {
-				File folder = new File(servletContext.getRealPath(new StringBuffer("/resources/files").toString()));
-				if (!folder.exists()) {
-					folder.mkdir();
-				}
-				folder = new File(servletContext.getRealPath(new StringBuffer("/resources/files/PACIENTE_").append(id).toString()));
-				if (!folder.exists()) {
-					folder.mkdir();
-				}
-				File uploadedFile = new File(new StringBuffer(folder.getAbsolutePath()).append("/").append(now.getTime()).append("_").append(file.getOriginalFilename()).toString());
-				FileOutputStream fos = new FileOutputStream(uploadedFile);
-				fos.write(file.getBytes());
-				fos.close();
-				if (uploadedFile.getName().toLowerCase().contains(EMT_FILE)) {
-					paciente = pacienteService.findOne(id);
-					FicheroEMT ficheroEMT = ficheroEMTService.fileReaderEMT(uploadedFile, paciente);
-					paciente.addFicheroEMT(ficheroEMT);
-					if (uploadedFile.delete()) {
-						pacienteService.update(paciente);
-						result = new MensajeDTO("Archivo subido correctamente.", true);
-					}
-					else {
-						result = new MensajeDTO("Error al borrar el archivo.", false);
-					}
-				}
-				else if (uploadedFile.getName().toLowerCase().contains(MDX_FILE)) {
-					paciente = pacienteService.findOne(id);
-					FicheroMDX ficheroMDX = new FicheroMDX();
-					ficheroMDX.setFecha(now.getTime());
-					ficheroMDX.setNombre(file.getOriginalFilename());
-					ficheroMDX.setPaciente(paciente);
-					paciente.addFicheroMDX(ficheroMDX);
-					pacienteService.update(paciente);
-					result = new MensajeDTO("Archivo subido correctamente.", true);
-				}
-				else {
-					uploadedFile.delete();
-					result = new MensajeDTO("Extension de archivo incorrecto.", false);
-				}
-			}
-		}
-		catch (DataBaseException e) {
-			LOG.error(e.getMessage());
-			result = new MensajeDTO("El paciente asociado al fichero no existe.", false);
-		}
-		catch (IOException e) {
-			LOG.error(e.getMessage());
-			result = new MensajeDTO("El fichero esta en un formato incorrecto.", false);
-		}
-		return result;
-	}
-
-	@RequestMapping(value = "{id}/ficherosMDX")
-	public @ResponseBody
-	List<FicheroMDXInfoDTO> ficherosMDXInfo(@PathVariable("id") Integer id) {
-		List<FicheroMDXInfoDTO> result = new ArrayList<FicheroMDXInfoDTO>();
-		try {
-			Paciente paciente = pacienteService.findOne(id);
-			result.addAll(pacienteUtilDTO.getFicherosMDXInfoList(paciente.getFicheroMDX()));
-		}
-		catch (DataBaseException e) {
-			LOG.error(e.getMessage());
-		}
-		return result;
-	}
-
-	@RequestMapping(value = "{id}/ficherosEMT")
-	public @ResponseBody
-	List<FicheroMDXInfoDTO> ficherosEMTInfo(@PathVariable("id") Integer id) {
-		List<FicheroMDXInfoDTO> result = new ArrayList<FicheroMDXInfoDTO>();
-		try {
-			Paciente paciente = pacienteService.findOne(id);
-			result.addAll(pacienteUtilDTO.getFicherosMDXInfoList(paciente.getFicheroMDX()));
-		}
-		catch (DataBaseException e) {
-			LOG.error(e.getMessage());
-		}
-		return result;
-	}
-
-	@RequestMapping(value = "{idPaciente}/ficheroMDX/{id}")
-	public @ResponseBody
-	FicheroMDXDTO ficheroMDXInfo(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("id") Integer id) {
-		FicheroMDXDTO result = null;
-		try {
-			FicheroMDX ficheroMDX = ficheroMDXService.findOne(id);
-			File file = new File(new StringBuffer(servletContext.getRealPath("/resources/files/PACIENTE_")).append(idPaciente).append("/").append(ficheroMDX.getFecha()).append("_").append(ficheroMDX.getNombre()).toString());
-			EmxDataFile emxDataFile = ficheroMDXService.fileReaderMDX(file);
-			result = pacienteUtilDTO.fileMDXToDTO(emxDataFile);
-		}
-		catch (DataBaseException e) {
-			LOG.error(e.getMessage());
-		}
-		catch (JAXBException e) {
-			LOG.error(e.getMessage());
-		}
-		catch (IOException e) {
-			LOG.error(e.getMessage());
-		}
-		return result;
-	}
-
+	/**
+	 * Video upload.
+	 * 
+	 * @param file
+	 *            the file
+	 * @param id
+	 *            the id
+	 * @return the mensaje dto
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws DataBaseException
+	 *             the data base exception
+	 */
 	@RequestMapping(value = "{id}/videoUpload", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public @ResponseBody
 	MensajeDTO videoUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) throws IOException, DataBaseException {
@@ -342,61 +506,5 @@ public class PacienteController {
 			videoService.save(file.getBytes(), id);
 		}
 		return new MensajeDTO("Video guardado correctamente.", true);
-	}
-
-	@RequestMapping(value = "{idPaciente}/video")
-	public @ResponseBody
-	List<VideoDTO> getAllVideosFromPaciente(@PathVariable("idPaciente") Integer idPaciente) {
-		List<VideoDTO> result = new ArrayList<VideoDTO>();
-		try {
-			Paciente paciente = pacienteService.findOne(idPaciente);
-			result.addAll(pacienteUtilDTO.getVideosList(paciente.getVideos()));
-		}
-		catch (DataBaseException e) {
-			LOG.error(e.getMessage());
-		}
-		catch (TransferObjectException e) {
-			// TODO Auto-generated catch block
-			LOG.error(e.getMessage());
-		}
-		return result;
-	}
-
-	@RequestMapping(value = "{idPaciente}/video/{id}")
-	public @ResponseBody
-	VideoDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("id") Integer id) {
-		VideoDTO result = null;
-		Video video;
-		try {
-			video = this.videoService.findOne(idPaciente, id);
-			result = this.videoUtilDTO.toRest(video);
-		}
-		catch (DataBaseException | NotFoundException e1) {
-			e1.printStackTrace();
-		}
-		catch (TransferObjectException e) {
-			LOG.error(e.getMessage());
-		}
-
-		return result;
-	}
-
-	@RequestMapping(value = "{idPaciente}/videoReproduce/{id}", method = RequestMethod.GET)
-	public ModelAndView informeExcel(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("id") Integer id, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		try {
-			Video video = this.videoService.findOne(idPaciente, id);
-			response.setContentType("video/mp4");
-			response.setHeader("Content-Disposition", "attachment; filename=\"" + video.getNombre() + "\"");
-			ServletOutputStream outStream = response.getOutputStream();
-			this.videoService.recuperarVideo(outStream, video.getNombre(), idPaciente);
-
-			outStream.flush();
-			outStream.close();
-			response.flushBuffer();
-		}
-		catch (IOException ex) {
-			throw ex;
-		}
-		return null;
 	}
 }
