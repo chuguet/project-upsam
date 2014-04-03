@@ -1,12 +1,12 @@
 package com.upsam.hospital.controller.dto.util;
 
 import java.util.List;
+import com.upsam.hospital.controller.dto.FicheroMDXDTO;
+import com.upsam.hospital.controller.dto.FicheroMDXInfoDTO;
 import com.upsam.hospital.controller.dto.PacienteDTO;
-import com.upsam.hospital.controller.dto.Video3dDTO;
-import com.upsam.hospital.controller.dto.Video3dInfoDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
-import com.upsam.hospital.model.beans.Fichero3D;
+import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
@@ -24,9 +24,27 @@ public interface IPacienteUtilDTO {
 	 *            the emx data file
 	 * @return the video3d dto
 	 */
-	Video3dDTO file3dToDTO(EmxDataFile emxDataFile);
+	FicheroMDXDTO fileMDXToDTO(EmxDataFile emxDataFile);
 
-	List<Video3dInfoDTO> getVideo3dInfoList(List<Fichero3D> ficheros);
+	/**
+	 * Gets the video3d info list.
+	 * 
+	 * @param ficheros
+	 *            the ficheros
+	 * @return the video3d info list
+	 */
+	List<FicheroMDXInfoDTO> getFicherosMDXInfoList(List<FicheroMDX> ficheros);
+
+	/**
+	 * Gets the videos list.
+	 * 
+	 * @param videos
+	 *            the videos
+	 * @return the videos list
+	 * @throws TransferObjectException
+	 *             the transfer object exception
+	 */
+	List<VideoDTO> getVideosList(List<Video> videos) throws TransferObjectException;
 
 	/**
 	 * To business.
@@ -49,7 +67,5 @@ public interface IPacienteUtilDTO {
 	 *             the transfer object exception
 	 */
 	PacienteDTO toRest(Paciente paciente) throws TransferObjectException;
-
-	List<VideoDTO> getVideosList(List<Video> videos) throws TransferObjectException;
 
 }

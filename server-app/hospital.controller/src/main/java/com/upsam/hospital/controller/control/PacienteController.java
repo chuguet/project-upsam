@@ -25,21 +25,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import com.upsam.hospital.controller.dto.FicheroMDXDTO;
+import com.upsam.hospital.controller.dto.FicheroMDXInfoDTO;
 import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.PacienteDTO;
-import com.upsam.hospital.controller.dto.Video3dDTO;
-import com.upsam.hospital.controller.dto.Video3dInfoDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
-import com.upsam.hospital.model.beans.Exploracion3D;
-import com.upsam.hospital.model.beans.Fichero3D;
+import com.upsam.hospital.model.beans.FicheroEMT;
+import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
-import com.upsam.hospital.model.service.IFichero3DService;
+import com.upsam.hospital.model.service.IFicheroEMTService;
+import com.upsam.hospital.model.service.IFicheroMDXService;
 import com.upsam.hospital.model.service.IPacienteService;
 import com.upsam.hospital.model.service.IVideoService;
 
@@ -61,7 +62,10 @@ public class PacienteController {
 	private IPacienteService pacienteService;
 
 	@Inject
-	private IFichero3DService fichero3DService;
+	private IFicheroMDXService ficheroMDXService;
+
+	@Inject
+	private IFicheroEMTService ficheroEMTService;
 
 	/** The paciente util dto. */
 	@Inject
@@ -240,8 +244,8 @@ public class PacienteController {
 				fos.close();
 				if (uploadedFile.getName().toLowerCase().contains(EMT_FILE)) {
 					paciente = pacienteService.findOne(id);
-					Exploracion3D exploracion3D = fichero3DService.fileReaderExploracion3D(uploadedFile, paciente);
-					paciente.addExploracion3D(exploracion3D);
+					FicheroEMT ficheroEMT = ficheroEMTService.fileReaderEMT(uploadedFile, paciente);
+					paciente.addFicheroEMT(ficheroEMT);
 					if (uploadedFile.delete()) {
 						pacienteService.update(paciente);
 						result = new MensajeDTO("Archivo subido correctamente.", true);
@@ -252,11 +256,11 @@ public class PacienteController {
 				}
 				else if (uploadedFile.getName().toLowerCase().contains(MDX_FILE)) {
 					paciente = pacienteService.findOne(id);
-					Fichero3D fichero3D = new Fichero3D();
-					fichero3D.setFecha(now.getTime());
-					fichero3D.setNombre(file.getOriginalFilename());
-					fichero3D.setPaciente(paciente);
-					paciente.addFichero3D(fichero3D);
+					FicheroMDX ficheroMDX = new FicheroMDX();
+					ficheroMDX.setFecha(now.getTime());
+					ficheroMDX.setNombre(file.getOriginalFilename());
+					ficheroMDX.setPaciente(paciente);
+					paciente.addFicheroMDX(ficheroMDX);
 					pacienteService.update(paciente);
 					result = new MensajeDTO("Archivo subido correctamente.", true);
 				}
@@ -277,13 +281,13 @@ public class PacienteController {
 		return result;
 	}
 
-	@RequestMapping(value = "{id}/videos3D")
+	@RequestMapping(value = "{id}/ficherosMDX")
 	public @ResponseBody
-	List<Video3dInfoDTO> videos3dInfo(@PathVariable("id") Integer id) {
-		List<Video3dInfoDTO> result = new ArrayList<Video3dInfoDTO>();
+	List<FicheroMDXInfoDTO> ficherosMDXInfo(@PathVariable("id") Integer id) {
+		List<FicheroMDXInfoDTO> result = new ArrayList<FicheroMDXInfoDTO>();
 		try {
 			Paciente paciente = pacienteService.findOne(id);
-			result.addAll(pacienteUtilDTO.getVideo3dInfoList(paciente.getFichero3D()));
+			result.addAll(pacienteUtilDTO.getFicherosMDXInfoList(paciente.getFicheroMDX()));
 		}
 		catch (DataBaseException e) {
 			LOG.error(e.getMessage());
@@ -291,15 +295,29 @@ public class PacienteController {
 		return result;
 	}
 
-	@RequestMapping(value = "{idPaciente}/video3D/{id}")
+	@RequestMapping(value = "{id}/ficherosEMT")
 	public @ResponseBody
-	Video3dDTO video3dInfo(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("id") Integer id) {
-		Video3dDTO result = null;
+	List<FicheroMDXInfoDTO> ficherosEMTInfo(@PathVariable("id") Integer id) {
+		List<FicheroMDXInfoDTO> result = new ArrayList<FicheroMDXInfoDTO>();
 		try {
-			Fichero3D fichero3D = fichero3DService.findOne(id);
-			File file = new File(new StringBuffer(servletContext.getRealPath("/resources/files/PACIENTE_")).append(idPaciente).append("/").append(fichero3D.getFecha()).append("_").append(fichero3D.getNombre()).toString());
-			EmxDataFile emxDataFile = fichero3DService.fileReaderVideo3D(file);
-			result = pacienteUtilDTO.file3dToDTO(emxDataFile);
+			Paciente paciente = pacienteService.findOne(id);
+			result.addAll(pacienteUtilDTO.getFicherosMDXInfoList(paciente.getFicheroMDX()));
+		}
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "{idPaciente}/ficheroMDX/{id}")
+	public @ResponseBody
+	FicheroMDXDTO ficheroMDXInfo(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("id") Integer id) {
+		FicheroMDXDTO result = null;
+		try {
+			FicheroMDX ficheroMDX = ficheroMDXService.findOne(id);
+			File file = new File(new StringBuffer(servletContext.getRealPath("/resources/files/PACIENTE_")).append(idPaciente).append("/").append(ficheroMDX.getFecha()).append("_").append(ficheroMDX.getNombre()).toString());
+			EmxDataFile emxDataFile = ficheroMDXService.fileReaderMDX(file);
+			result = pacienteUtilDTO.fileMDXToDTO(emxDataFile);
 		}
 		catch (DataBaseException e) {
 			LOG.error(e.getMessage());

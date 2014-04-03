@@ -31,7 +31,7 @@ public class TablaDatos implements IModelHospital {
 	@OneToOne
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "ID_EXPLORACION3D")
-	private Exploracion3D exploracion3D;
+	private FicheroEMT exploracion3D;
 
 	/** The id. */
 	@Id
@@ -63,7 +63,7 @@ public class TablaDatos implements IModelHospital {
 	 * 
 	 * @return the exploracion3 d
 	 */
-	public Exploracion3D getExploracion3D() {
+	public FicheroEMT getExploracion3D() {
 		return exploracion3D;
 	}
 
@@ -91,7 +91,7 @@ public class TablaDatos implements IModelHospital {
 	 * @param exploracion3d
 	 *            the new exploracion3 d
 	 */
-	public void setExploracion3D(Exploracion3D exploracion3d) {
+	public void setExploracion3D(FicheroEMT exploracion3d) {
 		exploracion3D = exploracion3d;
 	}
 

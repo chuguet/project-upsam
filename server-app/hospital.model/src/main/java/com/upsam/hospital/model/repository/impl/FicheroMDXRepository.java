@@ -5,15 +5,15 @@ import java.util.List;
 import javax.inject.Inject;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import com.upsam.hospital.model.beans.Fichero3D;
-import com.upsam.hospital.model.repository.IFichero3DRepository;
+import com.upsam.hospital.model.beans.FicheroMDX;
+import com.upsam.hospital.model.repository.IFicheroMDXRepository;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Fichero3DRepository.
+ * The Class FicheroMDXRepository.
  */
 @Repository
-public class Fichero3DRepository implements IFichero3DRepository {
+public class FicheroMDXRepository implements IFicheroMDXRepository {
 
 	/** The hibernate template. */
 	@Inject
@@ -26,8 +26,8 @@ public class Fichero3DRepository implements IFichero3DRepository {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void delete(Fichero3D fichero3D) throws SQLException {
-		hibernateTemplate.delete(fichero3D);
+	public void delete(FicheroMDX ficheroMDX) throws SQLException {
+		hibernateTemplate.delete(ficheroMDX);
 	}
 
 	/*
@@ -35,8 +35,8 @@ public class Fichero3DRepository implements IFichero3DRepository {
 	 * @see com.upsam.hospital.model.repository.IRepositoryDAO#findAll()
 	 */
 	@Override
-	public List<Fichero3D> findAll() throws SQLException {
-		return hibernateTemplate.loadAll(Fichero3D.class);
+	public List<FicheroMDX> findAll() throws SQLException {
+		return hibernateTemplate.loadAll(FicheroMDX.class);
 	}
 
 	/*
@@ -46,8 +46,8 @@ public class Fichero3DRepository implements IFichero3DRepository {
 	 * Integer)
 	 */
 	@Override
-	public Fichero3D findOne(Integer pId) throws SQLException {
-		return hibernateTemplate.get(Fichero3D.class, pId);
+	public FicheroMDX findOne(Integer pId) throws SQLException {
+		return hibernateTemplate.get(FicheroMDX.class, pId);
 	}
 
 	/*
@@ -57,8 +57,8 @@ public class Fichero3DRepository implements IFichero3DRepository {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public Integer save(Fichero3D fichero3D) throws SQLException {
-		return (Integer) hibernateTemplate.save(fichero3D);
+	public Integer save(FicheroMDX ficheroMDX) throws SQLException {
+		return (Integer) hibernateTemplate.save(ficheroMDX);
 	}
 
 	/*
@@ -68,8 +68,8 @@ public class Fichero3DRepository implements IFichero3DRepository {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void update(Fichero3D fichero3D) throws SQLException {
-		hibernateTemplate.update(fichero3D);
+	public void update(FicheroMDX ficheroMDX) throws SQLException {
+		hibernateTemplate.update(ficheroMDX);
 	}
 
 }

@@ -7,14 +7,14 @@ import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Component;
+import com.upsam.hospital.controller.dto.FicheroMDXDTO;
+import com.upsam.hospital.controller.dto.FicheroMDXInfoDTO;
 import com.upsam.hospital.controller.dto.PacienteDTO;
-import com.upsam.hospital.controller.dto.Video3dDTO;
-import com.upsam.hospital.controller.dto.Video3dInfoDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
-import com.upsam.hospital.model.beans.Fichero3D;
+import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
@@ -41,7 +41,7 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 	 * .upsam.hospital.model.jaxb.EmxDataFile)
 	 */
 	@Override
-	public Video3dDTO file3dToDTO(EmxDataFile emxDataFile) {
+	public FicheroMDXDTO fileMDXToDTO(EmxDataFile emxDataFile) {
 		System.out.println("LLEGO");
 		return null;
 	}
@@ -53,11 +53,11 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 	 * (java.util.List)
 	 */
 	@Override
-	public List<Video3dInfoDTO> getVideo3dInfoList(List<Fichero3D> ficheros) {
-		List<Video3dInfoDTO> result = new ArrayList<Video3dInfoDTO>();
-		Video3dInfoDTO video3dInfoDTO;
-		for (Fichero3D fichero3D : ficheros) {
-			video3dInfoDTO = new Video3dInfoDTO();
+	public List<FicheroMDXInfoDTO> getFicherosMDXInfoList(List<FicheroMDX> ficheros) {
+		List<FicheroMDXInfoDTO> result = new ArrayList<FicheroMDXInfoDTO>();
+		FicheroMDXInfoDTO video3dInfoDTO;
+		for (FicheroMDX fichero3D : ficheros) {
+			video3dInfoDTO = new FicheroMDXInfoDTO();
 			video3dInfoDTO.setFecha(DATE_TIME_FORMATTER.format(new Date(fichero3D.getFecha())));
 			video3dInfoDTO.setNombre(fichero3D.getNombre());
 			video3dInfoDTO.setId(fichero3D.getId());

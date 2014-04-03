@@ -4,7 +4,7 @@ package com.upsam.hospital.controller.dto;
 /**
  * The Class Video3dInfoDTO.
  */
-public class Video3dInfoDTO extends AbstractDTO {
+public class FicheroMDXInfoDTO extends AbstractDTO {
 
 	/** The fecha. */
 	private String fecha;

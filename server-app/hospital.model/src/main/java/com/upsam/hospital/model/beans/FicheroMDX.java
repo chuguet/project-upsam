@@ -14,11 +14,11 @@ import org.hibernate.annotations.CascadeType;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Fichero3D.
+ * The Class FicheroMDX.
  */
 @Entity
-@Table(name = "FICHERO3D")
-public class Fichero3D implements IModelHospital {
+@Table(name = "FICHERO_MDX")
+public class FicheroMDX implements IModelHospital {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 4200185823989932569L;
@@ -31,7 +31,7 @@ public class Fichero3D implements IModelHospital {
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_FICHERO3D")
+	@Column(name = "ID_FICHERO_MDX")
 	private Integer id;
 
 	/** The nombre. */
