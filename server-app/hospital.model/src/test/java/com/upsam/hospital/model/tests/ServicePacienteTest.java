@@ -28,7 +28,7 @@ public class ServicePacienteTest extends AbstractTest {
 	private IFicheroEMTService ficheroEMTService;
 
 	@Test
-	public void pacienteExploracion3DTest() throws IOException, DataBaseException {
+	public void pacienteFicheroEMTTest() throws IOException, DataBaseException {
 		File file = new File("C:\\Users\\Huguet\\Desktop\\ficheros\\13-9-05-01-2011.emt");
 		Paciente paciente = pacienteService.findOne(1);
 		writePaciente(paciente);
@@ -39,10 +39,27 @@ public class ServicePacienteTest extends AbstractTest {
 	}
 
 	@Test
-	public void pacienteVideo3DTest() throws IOException, JAXBException {
+	public void pacienteFicheroMDXTest() throws IOException, JAXBException {
 		File file = new File("C:\\Users\\Huguet\\Desktop\\ficheros\\file.mdx");
 		EmxDataFile result = ficheroMDXService.fileReaderMDX(file);
 		assertNotNull(result);
+	}
+
+	@Test
+	public void writeFicheroEMT() throws DataBaseException {
+		FicheroEMT ficheroEMT = ficheroEMTService.findOne(1);
+		System.out.println(ficheroEMT.getCiclos());
+		System.out.println(ficheroEMT.getFecha());
+		System.out.println(ficheroEMT.getTipoMedida().getNameId());
+		System.out.println(ficheroEMT.getUnidadMedida().getNameId());
+		System.out.println("\n");
+		for (Angle angle : ficheroEMT.getTablaDatos().getAngles()) {
+			System.out.println(angle.getName());
+			for (Point point : angle.getPoints()) {
+				System.out.print(point.getCoord() + " ");
+			}
+			System.out.println("\n");
+		}
 	}
 
 	private void writePaciente(Paciente paciente) {
@@ -53,6 +70,7 @@ public class ServicePacienteTest extends AbstractTest {
 			System.out.println(ficheroEMT.getTipoMedida().getNameId());
 			System.out.println(ficheroEMT.getUnidadMedida().getNameId());
 			for (Angle angle : ficheroEMT.getTablaDatos().getAngles()) {
+				System.out.println(angle.getName());
 				for (Point point : angle.getPoints()) {
 					System.out.print(point.getCoord() + " ");
 				}

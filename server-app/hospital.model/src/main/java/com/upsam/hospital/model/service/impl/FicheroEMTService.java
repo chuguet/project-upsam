@@ -58,11 +58,10 @@ public class FicheroEMTService implements IFicheroEMTService {
 		List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
 		FicheroEMT result = new FicheroEMT();
 		result.setPaciente(paciente);
-		Point field;
+		Point point;
 		TablaDatos tablaDatos = new TablaDatos();
 		tablaDatos.setFicheroEMT(result);
-		List<Angle> rows;
-		Angle row;
+		Angle angle;
 		result.setFecha(new Date());
 		List<String> lineSplitted;
 		for (String line : lines) {
@@ -78,19 +77,27 @@ public class FicheroEMTService implements IFicheroEMTService {
 				lineSplitted = readLine(line);
 				result.setCiclos(Integer.valueOf(lineSplitted.get(1)));
 			}
+			else if (line.contains("Sample")) {
+				lineSplitted = readLine(line);
+				lineSplitted = lineSplitted.subList(1, lineSplitted.size());
+				for (String split : lineSplitted) {
+					angle = new Angle();
+					angle.setName(split);
+					angle.setTablaDatos(tablaDatos);
+					tablaDatos.addAngle(angle);
+				}
+			}
 			else if (line.matches(".*\\d.*")) {
 				lineSplitted = readLine(line);
-				row = new Angle();
-				rows = new ArrayList<Angle>();
+				lineSplitted = lineSplitted.subList(1, lineSplitted.size());
+				int i = 0;
 				for (String split : lineSplitted) {
-					field = new Point();
-					// field.setText(split);
-					// field.setRow(row);
-					// row.addField(field);
-					row.setTablaDatos(tablaDatos);
-					rows.add(row);
+					point = new Point();
+					point.setCoord(split);
+					point.setAngle(tablaDatos.getAngles().get(i));
+					tablaDatos.getAngles().get(i).addPoint(point);
+					i++;
 				}
-				// tablaDatos.addRow(row);
 			}
 		}
 		result.setTablaDatos(tablaDatos);

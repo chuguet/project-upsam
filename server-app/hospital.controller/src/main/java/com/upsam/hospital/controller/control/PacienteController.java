@@ -234,7 +234,11 @@ public class PacienteController {
 		Paciente paciente;
 		try {
 			if (file.getSize() > 0) {
-				File folder = new File(servletContext.getRealPath(new StringBuffer("/resources/files/PACIENTE_").append(id).toString()));
+				File folder = new File(servletContext.getRealPath(new StringBuffer("/resources/files").toString()));
+				if (!folder.exists()) {
+					folder.mkdir();
+				}
+				folder = new File(servletContext.getRealPath(new StringBuffer("/resources/files/PACIENTE_").append(id).toString()));
 				if (!folder.exists()) {
 					folder.mkdir();
 				}
