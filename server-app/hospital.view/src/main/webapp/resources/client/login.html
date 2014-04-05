@@ -17,7 +17,7 @@
             function login() {
 				$.ajax({
 					type : 'POST',
-					url : "http://192.168.1.134:8080/hospitalServer/j_spring_security_check",
+					url : "http://localhost:8080/hospitalServer/j_spring_security_check",
 					data : {'j_username': $("#txtUsuario").val(), 'j_password': $("#txtPwd").val()},
 					dataType : 'json',
 					beforeSend: function (request) {
@@ -69,7 +69,7 @@
     </head>
     <body>
     	<div data-role="page" id="loginpage">
-			<div data-role="header"><h1>Acceso de usuarios</h1></div>
+			<div data-role="header"><h1>Accesao de usuarios</h1></div>
 			<div role="main" class="ui-content">
 	            <div id="login" class="ui-field-contain login">
 					<span>Usuario:</span> <input type="text" id="txtUsuario" />

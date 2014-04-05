@@ -1,19 +1,20 @@
-//Muestra/Oculta la tabla de puntuaciones del control motor selectivo
-function puntuaciones() {
-	if ($('#divPuntuaciones').css('display') == 'none') {
-		$('#divPuntuaciones').show();
-		$('#textPuntuaciones').text('Ocultar puntuaciones');
-	}
-	else {
-		$('#textPuntuaciones').text('Ver puntuaciones');
-		$('#divPuntuaciones').hide();
-	}
-}
+var control_motor_selectivo = {
+	'puntuaciones' : function() {
+		if ($('#divPuntuaciones').css('display') == 'none') {
+			$('#divPuntuaciones').show();
+			$('#textPuntuaciones').text('Ocultar puntuaciones');
+		}
+		else {
+			$('#textPuntuaciones').text('Ver puntuaciones');
+			$('#divPuntuaciones').hide();
+		}
+	},
+	'server' : function() {
+		var pacienteDTO = {
+			id : "2",
+			controlMotorSelectivo : $("#valoracionCtrlMotor").val()
+		};
 
-function server() {
-	var pacienteDTO = {
-		id : "1",
-		expediente : $("#valoracionCtrlMotor").val()
+		server.post(pacienteDTO.id, pacienteDTO, null);
 	}
-	generic.post(pacienteDTO.id, pacienteDTO, null);
-}
+};

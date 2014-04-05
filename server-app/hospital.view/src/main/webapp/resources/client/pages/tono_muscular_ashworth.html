@@ -18,7 +18,8 @@
 	<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
 	<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.flipbox.min.js"></script>
 	<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>		
-	<script type="text/javascript" src="../js/tono_muscular_ashwroth.js"></script>
+	<script type="text/javascript" src="../js/tono_muscular_ashworth.js"></script>
+	<script type="text/javascript" src="server.js"></script>
 	
 	<script type="text/javascript">
 		app.initialize();
@@ -31,7 +32,7 @@
 	<div data-role="header" >                    
 	    <h3>Tono muscular - Escala Ashworth - LAM</h3>
 	    <a data-rel="back" data-icon="back">Volver</a>
-	   	<a href="index.html" data-icon="check">Guardar</a>
+	   	<a onclick="javascript:tono_muscular_ashworth.server()" data-icon="check">Guardar</a>
 	</div>	
 	
 	<!-- Contenido -->
@@ -90,7 +91,7 @@
 				  </tbody>
 			</table>			
 			
-			<a href="javascript:puntuaciones();" data-role="button"><label id="textPuntuaciones" name="textPuntuaciones">Ver Puntuaciones</label></a> 
+			<a href="javascript:tono_muscular_ashworth.puntuaciones();" data-role="button"><label id="textPuntuaciones" name="textPuntuaciones">Ver Puntuaciones</label></a> 
 			
 			<fieldset>
 				<div id="divPuntuaciones" style="display:none">
