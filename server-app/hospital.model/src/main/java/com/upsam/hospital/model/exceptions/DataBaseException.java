@@ -1,12 +1,6 @@
 package com.upsam.hospital.model.exceptions;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class AppException.
- */
-public class DataBaseException extends Exception {
-
-	/** The Constant serialVersionUID. */
+public class DataBaseException extends ControlledException {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -18,8 +12,9 @@ public class DataBaseException extends Exception {
 
 	/**
 	 * Instantiates a new data base exception.
-	 *
-	 * @param e the e
+	 * 
+	 * @param e
+	 *            the e
 	 */
 	public DataBaseException(Exception e) {
 		super(e);
@@ -37,9 +32,11 @@ public class DataBaseException extends Exception {
 
 	/**
 	 * Instantiates a new data base exception.
-	 *
-	 * @param message the message
-	 * @param exception the exception
+	 * 
+	 * @param message
+	 *            the message
+	 * @param exception
+	 *            the exception
 	 */
 	public DataBaseException(String message, Exception exception) {
 		super(message, exception);

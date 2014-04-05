@@ -47,11 +47,11 @@ public class Paciente implements IModelHospital {
 	@Column(name = "EXAMINADOR")
 	private String examinador;
 
-	/** The exploracion3 d. */
+	/** The fichero emt. */
 	@OneToMany(mappedBy = "paciente")
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Exploracion3D> exploracion3D;
+	private List<FicheroEMT> ficheroEMT;
 
 	/** The exploracion3 d. */
 	@OneToMany(mappedBy = "paciente")
@@ -69,11 +69,11 @@ public class Paciente implements IModelHospital {
 	@Column(name = "FECHA_NACIMIENTO")
 	private Date fechaNacimiento;
 
-	/** The fichero3 d. */
+	/** The fichero mdx. */
 	@OneToMany(mappedBy = "paciente")
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Fichero3D> fichero3D;
+	private List<FicheroMDX> ficheroMDX;
 
 	/** The id. */
 	@Id
@@ -97,18 +97,24 @@ public class Paciente implements IModelHospital {
 	private String sexo;
 
 	/**
-	 * Adds the exploracion3 d.
+	 * Adds the fichero emt.
 	 * 
-	 * @param exploracion3D
-	 *            the exploracion3 d
+	 * @param ficheroEMT
+	 *            the fichero emt
 	 */
-	public void addExploracion3D(Exploracion3D exploracion3D) {
-		if (this.getExploracion3D() == null) {
-			this.setExploracion3D(new ArrayList<Exploracion3D>());
+	public void addFicheroEMT(FicheroEMT ficheroEMT) {
+		if (this.getFicheroEMT() == null) {
+			this.setFicheroEMT(new ArrayList<FicheroEMT>());
 		}
-		this.getExploracion3D().add(exploracion3D);
+		this.getFicheroEMT().add(ficheroEMT);
 	}
 
+	/**
+	 * Adds the video.
+	 * 
+	 * @param video
+	 *            the video
+	 */
 	public void addVideo(Video video) {
 		if (this.getVideos() == null) {
 			this.setVideos(new ArrayList<Video>());
@@ -117,16 +123,16 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
-	 * Adds the fichero3 d.
+	 * Adds the fichero mdx.
 	 * 
-	 * @param fichero3D
-	 *            the fichero3 d
+	 * @param ficheroMDX
+	 *            the fichero mdx
 	 */
-	public void addFichero3D(Fichero3D fichero3D) {
-		if (this.getFichero3D() == null) {
-			this.setFichero3D(new ArrayList<Fichero3D>());
+	public void addFicheroMDX(FicheroMDX ficheroMDX) {
+		if (this.getFicheroMDX() == null) {
+			this.setFicheroMDX(new ArrayList<FicheroMDX>());
 		}
-		this.getFichero3D().add(fichero3D);
+		this.getFicheroMDX().add(ficheroMDX);
 	}
 
 	/**
@@ -166,14 +172,19 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
-	 * Gets the exploracion3 d.
+	 * Gets the fichero emt.
 	 * 
-	 * @return the exploracion3 d
+	 * @return the fichero emt
 	 */
-	public List<Exploracion3D> getExploracion3D() {
-		return exploracion3D;
+	public List<FicheroEMT> getFicheroEMT() {
+		return ficheroEMT;
 	}
 
+	/**
+	 * Gets the videos.
+	 * 
+	 * @return the videos
+	 */
 	public List<Video> getVideos() {
 		return this.videos;
 	}
@@ -197,12 +208,12 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
-	 * Gets the fichero3 d.
+	 * Gets the fichero mdx.
 	 * 
-	 * @return the fichero3 d
+	 * @return the fichero mdx
 	 */
-	public List<Fichero3D> getFichero3D() {
-		return fichero3D;
+	public List<FicheroMDX> getFicheroMDX() {
+		return ficheroMDX;
 	}
 
 	/**
@@ -282,15 +293,21 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
-	 * Sets the exploracion3 d.
+	 * Sets the fichero emt.
 	 * 
-	 * @param exploracion3d
-	 *            the new exploracion3 d
+	 * @param ficheroEMT
+	 *            the new fichero emt
 	 */
-	public void setExploracion3D(List<Exploracion3D> exploracion3d) {
-		this.exploracion3D = exploracion3d;
+	public void setFicheroEMT(List<FicheroEMT> ficheroEMT) {
+		this.ficheroEMT = ficheroEMT;
 	}
 
+	/**
+	 * Sets the videos.
+	 * 
+	 * @param videos
+	 *            the new videos
+	 */
 	public void setVideos(List<Video> videos) {
 		this.videos = videos;
 	}
@@ -316,13 +333,13 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
-	 * Sets the fichero3 d.
+	 * Sets the fichero mdx.
 	 * 
-	 * @param fichero3d
-	 *            the new fichero3 d
+	 * @param ficheroMDX
+	 *            the new fichero mdx
 	 */
-	public void setFichero3D(List<Fichero3D> fichero3d) {
-		fichero3D = fichero3d;
+	public void setFicheroMDX(List<FicheroMDX> ficheroMDX) {
+		this.ficheroMDX = ficheroMDX;
 	}
 
 	/**

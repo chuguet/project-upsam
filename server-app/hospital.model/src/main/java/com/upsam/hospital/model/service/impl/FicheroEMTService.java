@@ -1,6 +1,5 @@
 package com.upsam.hospital.model.service.impl;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -9,37 +8,29 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
-import javax.xml.bind.JAXBException;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
-import com.upsam.hospital.model.beans.Exploracion3D;
-import com.upsam.hospital.model.beans.Fichero3D;
-import com.upsam.hospital.model.beans.Field;
+import com.upsam.hospital.model.beans.Angle;
+import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.Paciente;
-import com.upsam.hospital.model.beans.Row;
+import com.upsam.hospital.model.beans.Point;
 import com.upsam.hospital.model.beans.TablaDatos;
 import com.upsam.hospital.model.beans.TipoMedida;
 import com.upsam.hospital.model.beans.UnidadMedida;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.jaxb.EmxDataFile;
-import com.upsam.hospital.model.jaxb.JaxbUtils;
-import com.upsam.hospital.model.repository.IFichero3DRepository;
-import com.upsam.hospital.model.service.IFichero3DService;
+import com.upsam.hospital.model.repository.IFicheroEMTRepository;
+import com.upsam.hospital.model.service.IFicheroEMTService;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Fichero3DService.
+ * The Class FicheroEMTService.
  */
 @Service
-public class Fichero3DService implements IFichero3DService {
+public class FicheroEMTService implements IFicheroEMTService {
 
-	/** The fichero3 d repository. */
+	/** The fichero emt repository. */
 	@Inject
-	private IFichero3DRepository fichero3DRepository;
-
-	/** The jaxb util. */
-	@Inject
-	private JaxbUtils jaxbUtil;
+	private IFicheroEMTRepository ficheroEMTRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -48,9 +39,9 @@ public class Fichero3DService implements IFichero3DService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void delete(Fichero3D fichero3D) throws DataBaseException {
+	public void delete(FicheroEMT ficheroEMT) throws DataBaseException {
 		try {
-			fichero3DRepository.delete(fichero3D);
+			ficheroEMTRepository.delete(ficheroEMT);
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);
@@ -60,30 +51,18 @@ public class Fichero3DService implements IFichero3DService {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.upsam.hospital.model.service.IPacienteService#fileReader(java.io.
-	 * File, com.upsam.hospital.model.beans.Paciente)
-	 */
-	/**
-	 * File reader exploracion3 d.
-	 * 
-	 * @param file
-	 *            the file
-	 * @param paciente
-	 *            the paciente
-	 * @return the exploracion3 d
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * com.upsam.hospital.model.service.IFicheroEMTService#fileReaderEMT(java
+	 * .io.File, com.upsam.hospital.model.beans.Paciente)
 	 */
 	@Override
-	public Exploracion3D fileReaderExploracion3D(File file, Paciente paciente) throws IOException {
+	public FicheroEMT fileReaderEMT(File file, Paciente paciente) throws IOException {
 		List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
-		Exploracion3D result = new Exploracion3D();
+		FicheroEMT result = new FicheroEMT();
 		result.setPaciente(paciente);
-		Field field;
+		Point point;
 		TablaDatos tablaDatos = new TablaDatos();
-		tablaDatos.setExploracion3D(result);
-		List<Row> rows;
-		Row row;
+		tablaDatos.setFicheroEMT(result);
+		Angle angle;
 		result.setFecha(new Date());
 		List<String> lineSplitted;
 		for (String line : lines) {
@@ -99,19 +78,27 @@ public class Fichero3DService implements IFichero3DService {
 				lineSplitted = readLine(line);
 				result.setCiclos(Integer.valueOf(lineSplitted.get(1)));
 			}
+			else if (line.contains("Sample")) {
+				lineSplitted = readLine(line);
+				lineSplitted = lineSplitted.subList(1, lineSplitted.size());
+				for (String split : lineSplitted) {
+					angle = new Angle();
+					angle.setName(split);
+					angle.setTablaDatos(tablaDatos);
+					tablaDatos.addAngle(angle);
+				}
+			}
 			else if (line.matches(".*\\d.*")) {
 				lineSplitted = readLine(line);
-				row = new Row();
-				rows = new ArrayList<Row>();
+				lineSplitted = lineSplitted.subList(1, lineSplitted.size());
+				int i = 0;
 				for (String split : lineSplitted) {
-					field = new Field();
-					field.setText(split);
-					field.setRow(row);
-					row.addField(field);
-					row.setTablaDatos(tablaDatos);
-					rows.add(row);
+					point = new Point();
+					point.setCoord(split);
+					point.setAngle(tablaDatos.getAngles().get(i));
+					tablaDatos.getAngles().get(i).addPoint(point);
+					i++;
 				}
-				tablaDatos.addRow(row);
 			}
 		}
 		result.setTablaDatos(tablaDatos);
@@ -120,36 +107,28 @@ public class Fichero3DService implements IFichero3DService {
 
 	/*
 	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.service.IPacienteService#fileReaderVideo3D(java
-	 * .io.File)
-	 */
-	/**
-	 * File reader video3 d.
-	 * 
-	 * @param file
-	 *            the file
-	 * @return the emx data file
-	 * @throws JAXBException
-	 *             the jAXB exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @see com.upsam.hospital.model.service.IModelService#findAll()
 	 */
 	@Override
-	public EmxDataFile fileReaderVideo3D(File file) throws JAXBException, IOException {
-		String fileXML = jaxbUtil.removeHeaderXmlFile(FileUtils.readFileToString(file, StandardCharsets.UTF_8));
-		EmxDataFile emxDataFile = (EmxDataFile) jaxbUtil.readXML(new ByteArrayInputStream(fileXML.getBytes(StandardCharsets.UTF_8)), EmxDataFile.class);
-		return emxDataFile;
+	public List<FicheroEMT> findAll() throws DataBaseException {
+		try {
+			return ficheroEMTRepository.findAll();
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * @see com.upsam.hospital.model.service.IModelService#findAll()
+	 * @see
+	 * com.upsam.hospital.model.service.IFicheroEMTService#findByPaciente(java
+	 * .lang.Integer)
 	 */
 	@Override
-	public List<Fichero3D> findAll() throws DataBaseException {
+	public List<FicheroEMT> findByPaciente(Integer pId) throws DataBaseException {
 		try {
-			return fichero3DRepository.findAll();
+			return ficheroEMTRepository.findByPaciente(pId);
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);
@@ -162,9 +141,9 @@ public class Fichero3DService implements IFichero3DService {
 	 * com.upsam.hospital.model.service.IModelService#findOne(java.lang.Integer)
 	 */
 	@Override
-	public Fichero3D findOne(Integer pId) throws DataBaseException {
+	public FicheroEMT findOne(Integer pId) throws DataBaseException {
 		try {
-			return fichero3DRepository.findOne(pId);
+			return ficheroEMTRepository.findOne(pId);
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);
@@ -196,9 +175,9 @@ public class Fichero3DService implements IFichero3DService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public Integer save(Fichero3D fichero3D) throws DataBaseException {
+	public Integer save(FicheroEMT ficheroEMT) throws DataBaseException {
 		try {
-			return fichero3DRepository.save(fichero3D);
+			return ficheroEMTRepository.save(ficheroEMT);
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);
@@ -212,9 +191,9 @@ public class Fichero3DService implements IFichero3DService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void update(Fichero3D fichero3D) throws DataBaseException {
+	public void update(FicheroEMT ficheroEMT) throws DataBaseException {
 		try {
-			fichero3DRepository.update(fichero3D);
+			ficheroEMTRepository.update(ficheroEMT);
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);

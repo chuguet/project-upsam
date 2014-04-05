@@ -17,8 +17,8 @@ import org.hibernate.annotations.CascadeType;
  * The Class Field.
  */
 @Entity
-@Table(name = "FIELD")
-public class Field implements IModelHospital {
+@Table(name = "POINT")
+public class Point implements IModelHospital {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -844048965044155217L;
@@ -26,19 +26,19 @@ public class Field implements IModelHospital {
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_FIELD")
+	@Column(name = "ID_POINT")
 	private Integer id;
 
-	/** The row. */
+	/** The angle. */
 	@ManyToOne
 	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "ID_ROW")
-	private Row row;
+	@JoinColumn(name = "ID_ANGLE")
+	private Angle angle;
 
-	/** The text. */
+	/** The coord. */
 	@Basic
-	@Column(name = "TEXT")
-	private String text;
+	@Column(name = "COORD")
+	private String coord;
 
 	/**
 	 * Gets the id.
@@ -47,24 +47,6 @@ public class Field implements IModelHospital {
 	 */
 	public Integer getId() {
 		return id;
-	}
-
-	/**
-	 * Gets the row.
-	 * 
-	 * @return the row
-	 */
-	public Row getRow() {
-		return row;
-	}
-
-	/**
-	 * Gets the text.
-	 * 
-	 * @return the text
-	 */
-	public String getText() {
-		return text;
 	}
 
 	/**
@@ -78,23 +60,41 @@ public class Field implements IModelHospital {
 	}
 
 	/**
-	 * Sets the row.
+	 * Gets the angle.
 	 * 
-	 * @param row
-	 *            the new row
+	 * @return the angle
 	 */
-	public void setRow(Row row) {
-		this.row = row;
+	public Angle getAngle() {
+		return angle;
 	}
 
 	/**
-	 * Sets the text.
+	 * Sets the angle.
 	 * 
-	 * @param text
-	 *            the new text
+	 * @param angle
+	 *            the new angle
 	 */
-	public void setText(String text) {
-		this.text = text;
+	public void setAngle(Angle angle) {
+		this.angle = angle;
+	}
+
+	/**
+	 * Gets the coord.
+	 * 
+	 * @return the coord
+	 */
+	public String getCoord() {
+		return coord;
+	}
+
+	/**
+	 * Sets the coord.
+	 * 
+	 * @param coord
+	 *            the new coord
+	 */
+	public void setCoord(String coord) {
+		this.coord = coord;
 	}
 
 }

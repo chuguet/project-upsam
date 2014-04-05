@@ -27,11 +27,17 @@ public class TablaDatos implements IModelHospital {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -344787572420124374L;
 
+	/** The rows. */
+	@OneToMany(mappedBy = "tablaDatos")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Angle> angles;
+
 	/** The exploracion3 d. */
 	@OneToOne
 	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "ID_EXPLORACION3D")
-	private Exploracion3D exploracion3D;
+	@JoinColumn(name = "ID_FICHERO_EMT")
+	private FicheroEMT ficheroEMT;
 
 	/** The id. */
 	@Id
@@ -39,32 +45,35 @@ public class TablaDatos implements IModelHospital {
 	@Column(name = "ID_TABLA_DATOS")
 	private Integer id;
 
-	/** The rows. */
-	@OneToMany(mappedBy = "tablaDatos")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Row> rows;
-
 	/**
-	 * Adds the row.
+	 * Adds the angle.
 	 * 
 	 * @param row
-	 *            the row
+	 *            the angle
 	 */
-	public void addRow(Row row) {
-		if (this.getRows() == null) {
-			this.setRows(new ArrayList<Row>());
+	public void addAngle(Angle angle) {
+		if (this.getAngles() == null) {
+			this.setAngles(new ArrayList<Angle>());
 		}
-		this.getRows().add(row);
+		this.getAngles().add(angle);
 	}
 
 	/**
-	 * Gets the exploracion3 d.
+	 * Gets the angles.
 	 * 
-	 * @return the exploracion3 d
+	 * @return the angles
 	 */
-	public Exploracion3D getExploracion3D() {
-		return exploracion3D;
+	public List<Angle> getAngles() {
+		return angles;
+	}
+
+	/**
+	 * Gets the fichero emt.
+	 * 
+	 * @return the fichero emt
+	 */
+	public FicheroEMT getFicheroEMT() {
+		return ficheroEMT;
 	}
 
 	/**
@@ -77,22 +86,23 @@ public class TablaDatos implements IModelHospital {
 	}
 
 	/**
-	 * Gets the rows.
+	 * Sets the angles.
 	 * 
-	 * @return the rows
+	 * @param angles
+	 *            the new angles
 	 */
-	public List<Row> getRows() {
-		return rows;
+	public void setAngles(List<Angle> angles) {
+		this.angles = angles;
 	}
 
 	/**
-	 * Sets the exploracion3 d.
+	 * Sets the fichero emt.
 	 * 
-	 * @param exploracion3d
-	 *            the new exploracion3 d
+	 * @param ficheroEMT
+	 *            the new fichero emt
 	 */
-	public void setExploracion3D(Exploracion3D exploracion3d) {
-		exploracion3D = exploracion3d;
+	public void setFicheroEMT(FicheroEMT ficheroEMT) {
+		this.ficheroEMT = ficheroEMT;
 	}
 
 	/**
@@ -103,16 +113,6 @@ public class TablaDatos implements IModelHospital {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	/**
-	 * Sets the rows.
-	 * 
-	 * @param rows
-	 *            the new rows
-	 */
-	public void setRows(List<Row> rows) {
-		this.rows = rows;
 	}
 
 }

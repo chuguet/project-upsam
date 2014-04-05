@@ -10,48 +10,67 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
 		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-datebox.min.css" /> 
+		<link type="text/css" rel="stylesheet" href="../css/video-js.min.css" /> 
+		
 		
 		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
+		<script type="text/javascript" src="../index.js"></script>
+		<script type="text/javascript" src='../js/server.js'></script>
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
 		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>		
+		<script type="text/javascript" src="../js/video.js"></script>
 				
 		<script type="text/javascript">
-			app.initialize();
+			generic.initialize(cargarVideo);
+			videojs.options.flash.swf = "video-js.swf";
+			
+			function cargarVideo(){
+				var id = generic.getURLParameter("id");
+	            server.get('1/video/' + id, null, mostrarVideo);
+			}
+			
+			function mostrarVideo(parameters){
+				var numero = generic.getURLParameter("numero");
+				
+				$("#reproductorVideo").append("<source src='http://192.168.1.134:8080/hospitalServer/paciente/1/videoReproduce/" + parameters.id + "' type='video/mp4' />");
+				$("#numeroVideo").html("Video  " + numero);
+				$("#nombreVideo").html("Archivo: " + parameters.nombre);
+				$("#duracionVideo").html("Duraci&oacute;n: " + parameters.duracion);
+			}
+			
 		</script>
 	</head>
-<body>
-
-<div data-role="page">
-	<!-- Cabecera -->
-	<div data-role="header" >                    
-	    <h3>Detalle v&iacute;deo - LAM</h3>
-	    <a data-rel="back" data-icon="back">Volver</a>
-	   <a href="index.html" data-icon="check">Guardar</a>
-	</div>	
 	
-	<!-- Contenido -->
-	<div data-role="content"> 	
-		<h2>Detalle de V&iacute;deo</h2>
-		
-		<div class="content2">
-			Video 1<br>
-			<span class="videoFeatures">Archivo: archivo_001.mp4</span><br>
-			<span class="videoFeatures">Duración: 00:58 min</span><br>
+	<body>
+		<div data-role="page">
+			<!-- Cabecera -->
+			<div data-role="header" >                    
+			    <h3>Detalle v&iacute;deo - LAM</h3>
+			    <a data-rel="back" data-icon="back">Volver</a>
+			</div>	
 			
-			<div data-role="fieldcontain">  
-				<!-- Aqui iria el video -->
-				aqui iria el frame del video
+			<!-- Contenido -->
+			<div data-role="content"> 	
+				<h2>Detalle de V&iacute;deo</h2>
+				
+				<div class="content2">
+					<span id="numeroVideo"></span><br>
+					<span class="videoFeatures" id="nombreVideo"></span><br>
+					<span class="videoFeatures" id="duracionVideo"></span><br>
+					
+					<div data-role="fieldcontain">  
+						<video id="reproductorVideo" class="video-js vjs-default-skin" controls preload="none" width="400" height="378" poster="../img/videoPreview.png" data-setup="{}"></video>
+					</div>
+				</div>		
 			</div>
-		</div>		
-	</div>
+			
+			<!-- Footer -->
+			<div data-role="footer" data-position="inline" data-theme="c">
+				<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>
+			</div>	
+		</div>
+			 
 	
-	<!-- Footer -->
-	<div data-role="footer" data-position="inline" data-theme="c">
-		<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>
-	</div>	
-</div>
-		 
-
-</body>
+	</body>
 </html>

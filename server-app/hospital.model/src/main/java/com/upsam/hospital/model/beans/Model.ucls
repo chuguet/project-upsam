@@ -31,8 +31,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="com.upsam.hospital.model.beans.Field" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Field.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="4" language="java" name="com.upsam.hospital.model.beans.Point" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Point.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1040" y="29"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -79,8 +79,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="9" language="java" name="com.upsam.hospital.model.beans.Exploracion3D" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Exploracion3D.java" binary="false" 
+  <class id="9" language="java" name="com.upsam.hospital.model.beans.FicheroEMT" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/FicheroEMT.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="386" y="330"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -89,8 +89,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="com.upsam.hospital.model.beans.Row" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Row.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="com.upsam.hospital.model.beans.Angle" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Angle.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1124" y="407"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
