@@ -234,3 +234,7 @@ h2 {
 	font-size: small;
 	color: #848484;			
 }
+
+[data-role=page]{height: 100% !important; position:relative !important; margin-bottom:40px}
+[data-role=footer]{bottom:0px; position:absolute !important; top: auto !important; width:100%; padding:5px 0px;}
+.ui-btn-icon-textbox { position: absolute; top: 1px; max-width: 25px; margin: 0px; right: 1px; padding: 1em 0px 0px 2.5em; max-height: 35px; border-width: 0px; background-color: transparent; }

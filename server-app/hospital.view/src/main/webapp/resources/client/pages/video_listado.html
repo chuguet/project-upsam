@@ -26,17 +26,10 @@
 	        }
 	        
 	        function mostrarListado(parameters){
+	        	$("#videoList li").remove();
 	        	for (var i = 0; i < parameters.length; i++){
-	        		var li = $("<li></li>");
-	        		var hyperlink = $("<a rel='external' id='linkVideo" + parameters[i].id + "' href='#' alt='Acceder al video' data-transition='fade'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a>");
+	        		$("#videoList").append("<li><a rel='external' alt='Acceder al video' href='video_detalle.html?id=" + parameters[i].id + "&numero=" + (i + 1) + "' data-transition='fade'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
 	        		
-	        		hyperlink.click(function() {
-	        			var params = {'id' :  this.id.replace('linkVideo', '')};
-						generic.changePage('video_detalle.html', params);
-	        		});
-	        		//$("#videoList").append("<li><a rel='external' href='video_detalle.html?id=" + parameters[i].id + "' data-transition='fade'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
-	        		li.append(hyperlink);
-	        		$("#videoList").append(li);
 	        	}
 	        	$("#videoList").listview('refresh');
 	        }
@@ -61,15 +54,13 @@
 				<div class="content2">
 					<!--Listado de videos -->								
 					
-					<ul data-role="listview" data-inset="true" id="videoList">	     
-					
-     				</ul>
+					<ul data-role="listview" data-inset="true" id="videoList"></ul>
 				</div>	
 			</div>
 			
 			<!-- Footer -->
-			<div data-role="footer" data-position="inline" data-theme="c">
-				<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>
+			<div data-role="footer" data-position="inline" data-theme="c" data-position="fixed" data-tap-toggle="false">
+				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>
 			</div>	
 		</div>	 
 

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Exploraci&oacute;n f&iacute;sica - Laboratorio de An&acute;lisis de Movimientos</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+		<link rel="stylesheet" type="text/css" href="../css/themes/hospital_css.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
+		<link rel="stylesheet" type="text/css" href="../css/jquery.mobile-datebox.min.css" /> 
+		<link rel="stylesheet" type="text/css" type="text/css" href="../css/jquery.jqplot.min.css" />
+		
+		<script type="text/javascript" src="../cordova.js"></script>
+		<script type="text/javascript" src="../index.js"></script>		
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>	
+		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
+		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
+		<script type="text/javascript" src="../js/jquery.jqplot.js"></script>
+		<script type="text/javascript" src="../js/jqplot.pointLabels.min.js"></script>
+		
+		<script type="text/javascript" src="../js/server.js"></script>
+		<script type="text/javascript">
+			var anglesDTO = null;
+			generic.initialize(cargarGrafica);
+			
+			function cargarGrafica(){
+				var id = generic.getURLParameter("id");
+	            server.get('1/ficheroEMT/' + id, null, callbackCargarGrafica);
+	            $("#angleType").change( function(){
+	            	var value = this.value;
+	            	mostrarGrafica("aR" + value, "aL" + value);
+	            });
+			}
+			
+			function callbackCargarGrafica(parameters){
+				var numero = generic.getURLParameter("numero");
+				$("#numeroGrafica").html("Gr&acute;fica  " + numero);
+				anglesDTO = parameters.tablaDatos.anglesDTO;
+				mostrarGrafica("aRAFE.M", "aLAFE.M")
+			}
+			
+			function mostrarGrafica(firstGraphic, secondGraphic){
+				var line1 = recoverPoints(firstGraphic);
+				var line2 = recoverPoints(secondGraphic);
+				$("#firstGraphic").html(firstGraphic);
+				$("#secondGraphic").html(secondGraphic);
+				if (line1 != null){
+				 	var size = line1.length * 50;
+				 	$("#chart1").empty();
+				  	$("#chart1").width(size);
+				  	var plot1 = $.jqplot('chart1', [line1, line2], {
+						title: 'Chart with Point Labels', 
+					  	seriesDefaults: { 
+							showMarker:false,
+							pointLabels: { show:true, formatString: "%#.3f" } 
+					  	}
+				  	});
+				}
+			}
+			
+			function recoverPoints(angleName){
+				for (var i = 0; i < anglesDTO.length; i++){
+					if (anglesDTO[i].name == angleName){
+						var points = [];
+						for (var j = 0; j < anglesDTO[i].pointsDTO.length; j++){
+							points.push([j, parseFloat(anglesDTO[i].pointsDTO[j].coord)]);
+						}
+						return points;
+					}
+				}
+				return null;
+			}
+		</script>
+		<style>
+			.blueLegend {border:solid 1px #666; background-color:#4bb2c5; height:15px; width:30px; display:block; float:left;}
+			.yellowLegend {border:solid 1px #666; background-color:#eaa228; height:15px; width:30px; display:block; float:left;}
+			.textLegend {margin:0px 35px 0px 3px; float:left;}
+			.legend {margin-top:5px;}
+		</style>
+	</head>
+	<body>
+
+		<div data-role="page">
+			<!-- Cabecera -->
+			<div data-role="header">                    
+				<h3>Gr&aacute;fica</h3>
+				<a data-rel="back" data-icon="back">Volver</a>
+			</div>			
+			
+			<!-- Contenido -->
+			<div data-role="content">			
+				<h2>Gr&aacute;fica</h2>
+				
+				<div class="content2">
+					<div data-role="fieldcontain">	
+						<select id="angleType">
+							<option value="AFE.M">aRAFE.M - aLAFE.M</option>
+							<option value="AFE.S">aRAFE.S - aLAFE.S</option>
+							<option value="AIE.M">aRAIE.M - aLAIE.M</option>
+							<option value="AIE.S">aRAIE.S - aLAIE.S</option>
+							<option value="KFE.M">aRKFE.M - aLKFE.M</option>
+							<option value="KFE.S">aRKFE.S - aLKFE.S</option>
+							<option value="KAA.M">aRKAA.M - aLKAA.M</option>
+							<option value="KAA.S">aRKAA.S - aLKAA.S</option>
+							<option value="KIE.M">aRKIE.M - aLKIE.M</option>
+							<option value="KIE.S">aRKIE.S - aLKIE.S</option>
+							<option value="HPFE.M">aRHPFE.M - aLHPFE.M</option>
+							<option value="HPFE.S">aRHPFE.S - aLHPFE.S</option>
+							<option value="HPAA.M">aRHPAA.M - aLHPAA.M</option>
+							<option value="HPAA.S">aRHPAA.S - aLHPAA.S</option>
+							<option value="HPIE.M">aRHPIE.M - aLHPIE.M</option>
+							<option value="HPIE.S">aRHPIE.S - aLHPIE.S</option>
+							<option value="PTILT.M">aRPTILT.M - aLPTILT.M</option>
+							<option value="PTILT.S">aRPTILT.S - aLPTILT.S</option>
+							<option value="POBLI.M">aRPOBLI.M - aLPOBLI.M</option>
+							<option value="POBLI.S">aRPOBLI.S - aLPOBLI.S</option>
+							<option value="PROT.M">aRPROT.M - aLPROT.M</option>
+							<option value="HPROT.S">aRPROT.S - aLPROT.S</option>
+						</select>
+						<div style="width:100%; overflow-y:hidden; overflow-x: visible;height:300px; border:solid 1px black;">
+							<div id="chart1" style="height:300px; width:500px;"></div>
+						</div>
+						<div class="legend">
+							<span class="blueLegend"></span> <span id="firstGraphic" class="textLegend"></span>
+							<span class="yellowLegend"></span> <span id="secondGraphic" class="textLegend"></span>
+						</div>
+						
+					</div>
+				</div>				
+			</div>
+			
+			<!-- Footer -->
+			<div data-role="footer" data-position="inline" data-theme="c">
+				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>
+			</div>	
+		</div>
+	</body>
+</html>

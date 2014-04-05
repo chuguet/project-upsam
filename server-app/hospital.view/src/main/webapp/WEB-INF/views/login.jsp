@@ -3,7 +3,7 @@
 <html>
 
 <head>
-<title>Apuestas porras de f&uacute;tbol</title>
+<title>Hospital Ni&ntilde;o de Jes&uacute;s</title>
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <meta name="description" content="Pantalla de acceso al sistema" />
