@@ -11,8 +11,8 @@
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
 		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-datebox.min.css" /> 
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
+		<script type="text/javascript" src="../cordova.js"></script> 
+		<script type="text/javascript" src="../index.js"></script>
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
 		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>		
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
@@ -29,106 +29,214 @@
 			<!-- Cabecera -->
 			<div data-role="header" >                    
 				<h3>Exploraci&oacute;n F&iacute;sica - LAM</h3>
-				<a href="../home.html" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+				<a data-rel="back" data-icon="back">Volver</a>
 				<a onClick="javascript:postForm()" href="../home.html" data-icon="check">Guardar</a>
+			</div>
+			<div data-role="header"  data-theme="c"> 	
+				<div data-role="content">
+					<div data-role="fieldcontain">
+						<label for="evalMuscularManual"><b>Actualizado a:</b></label>
+						<label for="evalMuscularManual">24-05-2014 15:25</label>    
+						
+						<label for="evalMuscularManual"><b>por:</b></label>
+						<label for="evalMuscularManual">Jos&eacute; Miguel Gonzalez</label>							
+					</div>
+					<div data-role="fieldcontain">
+						<label for="evalMuscularManual"><b>Fecha evaluaci&oacute;n:</b></label>
+						<label for="evalMuscularManual">22-05-2014 09:02</label>   
+						
+						<label for="evalMuscularManual"><b>Paciente:</b></label>
+						<label for="evalMuscularManual">Daniel Sanchez del Valle</label>   
+													
+					</div>
+				</div>	
 			</div>
 			
 			<!-- contenido -->
-			<div data-role="content">
-				<h2>Exploraci&oacute;n f&iacute;sica</h2>
+			<div data-role="content">				
 				
-				<div class="content2">		
-					<h4>DATOS PERSONALES</h4>
-					<div data-role="fieldcontain">
-						<label for="numID">N&deg; de identificaci&oacute;n:</label>	
-						<input type="text" id="numID" name="numID" class="txt-speech"/>						
-					</div>
-					
-					<div data-role="fieldcontain">
-						<label for="nombre">Nombre</label>	
-						<input type="text" id="nombre" name="nombre" class="txt-speech"/>
-					</div>
-					
-					<div data-role="fieldcontain">
-						<label for="apellidos">Apellidos</label>	
-						<input type="text" id="apellidos" name="apellidos" class="txt-speech"/>
-					</div>
-						
-					<div data-role="fieldcontain">
-						<label for="fecEval">Fecha de evaluaci&oacute;n:</label>
-						<input id="fecEval" name="fecEval" class="txt-date"  placeholder="dd/mm/yyyy" />
-					</div>
+				<h1>Exploraci&oacute;n f&iacute;sica</h1>			
 				
-					<div data-role="fieldcontain">
-						<label for="fecNac">Fecha de nacimiento:</label>
-						<input id="fecNac" name="fecNac" class="txt-date" placeholder="dd/mm/yyyy" />
-					</div>
-					
-					<div data-role="fieldcontain">
-						<label for="sexo">Sexo</label>
-						<select id="sexo" name="sexo" data-role="slider" style="width: 150px">
-							<option value="0">Hombre</option>
-							<option value="1">Mujer</option>
-						</select>
-					</div>
-				
-					<div data-role="fieldcontain">
-						<label for="escolarizacion">Escolarizaci&oacute;n:</label>
-						<select id="escolarizacion" name="escolarizacion" data-native-menu="false">
-							<option value="0"></option>
-							<option value="1">Educaci&oacute;n especial</option>
-							<option value="2">Integraci&oacute;n</option>
-							<option value="3">Sin adaptaciones</option>		                    
-						</select>		            
-					</div>
-					
-					<div data-role="fieldcontain">
-						<label for="curso">Curso:</label>
-						<input type="text" id="curso" name="curso" class="txt-speech"/>		            
-					</div>
-				
-					<div data-role="fieldcontain">
-						<label for="examinador">Examinador:</label>
-						<select id="examinador" name="examinador" data-native-menu="false">
-							<option value="0"></option>
-							<option value="1">examinador 1</option>
-							<option value="2">examinador 2</option>
-							<option value="3">examinador 3</option>		                    
-						</select>		            
-					</div>
-		
+				<h2>Antecedentes</h2>	
+				<div class="content2">					
 					<ul data-role="listview" data-inset="true" data-filter="false">
-						<li data-role="list-divider" >DATOS CL&Iacute;NICOS</li>
-						<li><a data-transition="slidedown" rel="external" href="antecedentes_personales.html">Antecedentes personales</a></li>
-						<li><a data-transition="slidedown" rel="external" href="antecedentes_relacionados_PCI.html">Antecedentes relacionados PCI</a></li>             
-					</ul>
-					
-					<ul data-role="listview" data-inset="true">	
-						<li data-role="list-divider">EXPLORACI&Oacute;N F&Iacute;SICA</li>	
-						<li><a data-transition="slidedown" rel="external" href="longitud_miembros_infe.html">Longitud de miembros inferiores</a></li>
-						<li><a data-transition="slidedown" rel="external" href="analisis_marcha.html">An&aacute;lisis observacional de la marcha</a></li>								
-						<li><a data-transition="slidedown" rel="external" href="tono_muscular_ashwroth.html">Tono muscular - Escala Ashworth</a></li>	
-						<li><a data-transition="slidedown" rel="external" href="val_articular_muscular.html">Valoraci&oacute;n articular/muscular</a></li>	
-						<li><a data-transition="slidedown" rel="external" href="control_motor_selectivo.html">Control motor selectivo</a></li>	
-						<li><a data-transition="slidedown" rel="external" href="evaluacion_muscular_manual.html">Evaluaci&oacute;n muscular manual</a></li>	
-						<li><a data-transition="slidedown" rel="external" href="#">Test espec&iacute;ficos/exploraci&oacute;n</a></li>	
-					</ul>
-					
-					<ul data-role="listview" data-inset="true">	
-						<li data-role="list-divider">V&Iacute;DEOS</li>	
-						<li><a href="video_listado.html" data-transition="slide">Vídeos asociados al paciente<span class="ui-li-count">6</span></a></li>
-					</ul>
-					
-					<ul data-role="listview" data-inset="true"  data-theme="c">
-						<li><a href="gross_motor_function.html" rel="external" data-transition="slide" >GROSS MOTOR FUNCTION CLASSIFICATION SYSTEM</a></li>
-					</ul>
-					
-					<ul data-role="listview" data-inset="true" data-theme="c">
-						<li><a data-transition="slidedown" rel="external" href="functional_mobility_scale.html">Escala de movibilidad funcional</a></li>
+						<li><a data-transition="slidedown" rel="external" href="antecedentes_personales.html">Personales</a></li>
+						<li><a data-transition="slidedown" rel="external" href="antecedentes_relacionados_PCI.html">Relacionados con PCI</a></li>						            
 					</ul>
 				</div>
-			</div>	
-			
+				
+				<h2>V&iacute;deos sobre la exploraci&oacute;n</h2>			
+				
+				<div class="content2">
+					<!--Listado de videos -->						
+					<ul data-role="listview" data-inset="true">	            
+     					<li>
+     						<a rel="external" href="video_detalle.html" data-transition="fade">
+     							Video 1<br><span class="videoFeatures">archivo_001.mp4 | 02:28 min</span>     						
+     						</a>
+     					</li>
+     					
+     					<li>
+     						<a rel="external" href="video_detalle.html" data-transition="fade">
+     							Video 2<br><span class="videoFeatures">archivo_002.mp4 | 00:09 min</span>     						
+     						</a>
+     					</li>
+     					<li>
+     						<a rel="external" href="video_detalle.html" data-transition="fade">
+     							Video 3<br><span class="videoFeatures">archivo_003.mp4 | 12:56 min</span>     						
+     						</a>
+     					</li>     					
+     				</ul>
+				</div>
+								
+				<h2>Valoraciones</h2>		
+				<div class="content2">
+					<div data-role="fieldcontain">  
+						<label for="valoracionCtrlMotor">Control motor selectivo:</label>  
+						<input type="range" name="valoracionCtrlMotor" id="valoracionCtrlMotor" value=""  min="0" max="3"/>				
+					</div>
+					<div data-role="fieldcontain">  
+						<label for="evalMuscularManual">Muscular manual:</label>  
+						<input type="text" class="txt-speech" name="evalMuscularManual" id="evalMuscularManual"/>
+					</div>
+						
+								
+					<div data-role="fieldcontain">
+						<table width="100%">
+							<tr>
+								<td width="80%">GROSS MOTOR FUNCTION CLASSIFICATION SYSTEM</td>
+								<td width="20%"><a href="gross_motor_function.html" data-icon="arrow-r" data-role="button" data-iconpos="notext">Detalle</a> </td>
+							</tr>
+							<tr>
+								<td>Articular / muscular</td>
+								<td><a href="val_articular_muscular.html" data-icon="arrow-r" data-role="button" data-iconpos="notext">Detalle</a></td>
+							</tr>
+						</table>						  									
+					</div>						
+				</div>	
+				
+				<h2>Longitud de miembros inferiores</h2>				
+				<div class="content2">
+					<!-- Derecho -->
+					<div data-role="fieldcontain">  
+						<label for="lonMiembroInfDcho">Derecho: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
+						<input type="text" class="txt-speech" name="lonMiembroInfDcho" id="lonMiembroInfDcho" value=""  />
+					</div>
+
+					<!-- Izquierdo -->
+					<div data-role="fieldcontain">  
+						<label for="lonMiembroInfIzdo">Izquierdo: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
+						<input type="text" class="txt-speech" name="lonMiembroInfIzdo" id="lonMiembroInfIzdo" value=""  />
+					</div>
+				</div>	
+				 
+				<h2>Escala de movilidad funcional</h2>
+				<div class="content2">					
+					<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
+					  <thead>
+							<tr>
+							  <th data-priority="1">Distancia al caminar</th>
+							  <th data-priority="persist">Puntuaci&oacute;n</th>
+							</tr>
+					  </thead>
+					  <tbody>
+							<tr>
+							  <th>5 metros</th>
+							  <td><input type="text" class="txt-speech" name="cincoMetros" id="cincoMetros"></td>
+							</tr>		
+							<tr>
+							  <th>50 metros</th>
+							  <td><input type="text" class="txt-speech" name="cincuentaMetros" id="cincuentaMetros"></td>
+							</tr>		
+							<tr>
+							  <th>500 metros</th>
+							  <td><input type="text" class="txt-speech" name="quinientosMetros" id="quinientosMetros"></td>
+							</tr>	
+						</tbody>
+					</table>		
+				</div>
+				
+				<h2>Tono muscular - Escala Ashworth</h2>		
+				<div class="content2">					
+					<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
+						<thead>
+							<tr>
+							  <th data-priority="1">Escala de Ashworth</th>
+							  <th data-priority="persist">&nbsp;</th>
+							  <th data-priority="2">Izquierda</th>
+							  <th data-priority="3">Derecha</th>          
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							  <th>CADERA</th>
+							  <td>Flexi&oacute;n</td>
+							  <td><input type="text" class="txt-speech" id="caderaIzFlex" name="caderaIzFlex"/></td>
+							  <td><input type="text" class="txt-speech" id="caderaDerFlex" name="caderaDerFlex"/></td>          
+							</tr>		
+							<tr>
+							  <th></th>
+							  <td>Inflexi&oacute;n</td>
+							  <td><input type="text" class="txt-speech" name="caderaIzInflex" id="caderaIzInflex"  ></td>
+							  <td><input type="text" class="txt-speech" name="caderaDerInflex" id="caderaDerInflex" ></td>         
+							</tr>
+							
+							<tr>
+							  <th>RODILLA</th>
+							  <td>Flexi&oacute;n</td>
+							  <td><input type="text" class="txt-speech" name="rodillaIzFlex" id="rodillaIzFlex"  ></td>
+							  <td><input type="text" class="txt-speech" name="rodillaDerFlex" id="rodillaDerFlex"  ></td>        
+							</tr>		
+							<tr>
+								<th></th>
+								<td>Inflexi&oacute;n</td>
+								<td><input type="text" class="txt-speech" name="rodillaIzInflex" id="rodillaIzInflex" ></td>
+								<td><input type="text" class="txt-speech" name="rodillaDerInflex" id="rodillaDerInflex"   ></td>  
+							</tr>        
+							<tr>
+								<th>TOBILLO</th>
+								<td>Flexi&oacute;n</td>
+								<td><input type="text" class="txt-speech" name="tobilloIzflex" id="tobilloIzflex" ></td>
+								<td><input type="text" class="txt-speech" name="tobilloDerflex" id="tobilloDerflex" ></td>     
+							</tr>		
+							<tr>
+								<th></th>
+								<td>Inflexi&oacute;n</td>
+								<td><input type="text" class="txt-speech" name="tobilloIzInflex" id="tobilloIzInflex"></td>
+								<td><input type="text" class="txt-speech" name="tobilloDerInflex" id="tobilloDerInflex" ></td>     
+							</tr>
+						  </tbody>
+					</table>	
+				</div>	
+				
+				<h2>An&aacute;lisis observacional de la marcha</h2>				
+				<div class="content2">										
+					<h4>Common gait patterns: Spastic Diplegia</h4>	
+					<div data-role="fieldcontain" style="text-align:center">
+						<table width="90%">
+							<tr>
+								<td><input type="radio" name="52" id="1" value="1" /><b>True equinus</b></td>
+								<td><input type="radio" name="52" id="1" value="1" /><b>Jump knee</b></td>
+								<td><input type="radio" name="52" id="1" value="1" /><b>Apparent equinus</b></td>
+								<td><input type="radio" name="52" id="1" value="1" /><b>Crouch gait</b></td>
+							</tr>
+							<tr>
+								<td><img src="../img/analisisMarcha1.png"/></td>
+								<td><img src="../img/analisisMarcha2.png"/></td>
+								<td><img src="../img/analisisMarcha3.png"/></td>
+								<td><img src="../img/analisisMarcha4.png"/></td>
+							</tr>
+							<tr>
+								<td>&>90º<br>Gastroc<br>-<br>-<br>Hinged AFO</td>
+								<td>&>90º<br>Gastroc<br>Hamstrings/RF<br>(Psoas)<br>Hinged AFO</td>
+								<td>&=90º<br>(Gastroc)<br>Hamstrings/RF<br>Psoas<br>Solid AFO</td>
+								<td>&<90º<br>-<br>Hamstrings/RF<br>Psoas<br>Grafo</td>
+							</tr>
+							
+						</table>  						
+					</div>					
+				</div>	
+			</div>
 			<!-- Footer -->
 			<div data-role="footer" data-position="inline" data-theme="c">
 				<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>		

@@ -18,7 +18,9 @@
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.flipbox.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>		
-				
+		
+		<script type="text/javascript" src="../js/server.js"></script>
+		<script type="text/javascript" src="../js/longitud_miembros_infe.js"></script>
 		<script type="text/javascript">
 			app.initialize();
 		</script>
@@ -30,25 +32,24 @@
 			<div data-role="header">                    
 				<h3>Longitud de miembros inferiores - LAM</h3>
 				<a data-rel="back" data-icon="back">Volver</a>
-			   <a href="index.html" data-icon="check">Guardar</a>
+			   	<a onclick="javascript:longitud_miembros_inferiores.server()" data-icon="check">Guardar</a>
 			</div>			
 			
 			<!-- Contenido -->
 			<div data-role="content">			
-				<h2>Longitud de miembros inferiores</h2>
-				
+				<h2>Longitud de miembros inferiores</h2>				
 				<div class="content2">
 					<!-- Derecho -->
-				<div data-role="fieldcontain">  
-					<label for="derecho">Derecho: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
-					<input type="text" class="txt-speech" name="derecho" id="derecho" value=""  />
-				</div>
+					<div data-role="fieldcontain">  
+						<label for="lonMiembroInfDcho">Derecho: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
+						<input type="text" class="txt-speech" name="lonMiembroInfDcho" id="lonMiembroInfDcho" value=""  />
+					</div>
 
-				<!-- Izquierdo -->
-				<div data-role="fieldcontain">  
-					<label for="izquierdo">Izquierdo: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
-					<input type="text" class="txt-speech" name="izquierdo" id="izquierdo" value=""  />
-				</div>
+					<!-- Izquierdo -->
+					<div data-role="fieldcontain">  
+						<label for="lonMiembroInfIzdo">Izquierdo: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
+						<input type="text" class="txt-speech" name="lonMiembroInfIzdo" id="lonMiembroInfIzdo" value=""  />
+					</div>
 				</div>				
 			</div>
 			

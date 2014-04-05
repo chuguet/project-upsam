@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Paciente - Laboratorio de An&acute;lisis de Movimientos</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
+		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
+		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-datebox.min.css" /> 
+		
+		<script type="text/javascript" src="../cordova.js"></script> 		
+		<script type="text/javascript" src="../index.js"></script>
+		
+		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
+		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>		
+		<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.flipbox.min.js"></script>
+		<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>		
+		
+		<script type="text/javascript">
+			app.initialize();
+		</script>
+	</head>
+
+	<body>
+		<div data-role="page" id="page1">
+			<!-- Cabecera -->
+			<div data-role="header" >                    
+				<h3>Login - LAM</h3>
+			</div>
+			
+			<!-- contenido -->
+			<div data-role="content">							
+				<div>					
+					<img width="100%" src="../img/cabecera.jpg"/>
+				</div>
+				
+				<h2 style="color:#77CDF1">Acceso al sistema</h2>
+				<div style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:10px;background-color:rgb(240,240,240)">
+					<h5><font style="font-weight: normal">Introduzca los</font> datos de acceso:</h5>
+					
+					<div data-role="fieldcontain" >
+						<label for="login">Login</label>
+						<input type="text" id="login" name="login"/>						
+					</div>	
+					<div data-role="fieldcontain" >
+						<label for="Password">Password</label>
+						<input type="password" id="Password" name="Password" />						
+					</div>
+					
+					<ul data-role="listview" data-inset="true" data-filter="false" data-theme="b">						
+						<li><a data-transition="slidedown" rel="external" href="menu.html">Entrar</a></li>
+						<li><a data-transition="slidedown" rel="external" href="#">Recordar clave</a></li>             
+					</ul>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<div data-role="footer" data-position="inline" data-theme="c">
+				<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>		
+			</div>							
+		</div>
+	</body>
+</html>
