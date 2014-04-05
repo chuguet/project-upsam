@@ -21,14 +21,14 @@
 		<script type="text/javascript">
 			generic.initialize(buscarGraficas);
 			
-			function buscarVideos(){
+			function buscarGraficas(){
 				server.get('1/ficherosEMT', null, mostrarListado);
 	        }
 	        
 	        function mostrarListado(parameters){
 	        	$("#graficaList li").remove();
 	        	for (var i = 0; i < parameters.length; i++){
-	        		$("#graficaList").append("<li><a rel='external' alt='Acceder a la gr&aacute;fica' href='grafica_detalle.html?id=" + parameters[i].id + "&numero=" + (i + 1) + "' data-transition='fade'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre + " | " + parameters[i].duracion + "</span></a></li>");
+	        		$("#graficaList").append("<li><a rel='external' alt='Acceder a la gr&aacute;fica' href='grafica_detalle.html?id=" + parameters[i].id + "&numero=" + (i + 1) + "' data-transition='fade'>Gr&aacute;fica " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].fecha + "</span></a></li>");
 	        		
 	        	}
 	        	$("#graficaList").listview('refresh');

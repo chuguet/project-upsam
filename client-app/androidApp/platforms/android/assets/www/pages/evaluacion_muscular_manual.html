@@ -18,7 +18,8 @@
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.flipbox.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>		
-		<script type="text/javascript" src="../js/views/evaluacion_muscular_manual.js"></script>
+		<script type="text/javascript" src="../js/evaluacion_muscular_manual.js"></script>
+		<script type="text/javascript" src="../js/server.js"></script>
 		
 		<script type="text/javascript">
 			app.initialize();
@@ -31,7 +32,7 @@
 	<div data-role="header" >                    
 		<h3>Evaluaci&oacute;n muscular manual - LAM</h3>
 		<a data-rel="back" data-icon="back">Volver</a>
-	   <a href="index.html" data-icon="check">Guardar</a>
+	   <a onclick="javascript:evaluacion_muscular_manual.server()" data-icon="check">Guardar</a>
 	</div>	
 	
 	<!-- Contenido -->
@@ -43,11 +44,11 @@
 				 			
 				<!--Valoracion numerica -->			
 				<div data-role="fieldcontain">  
-					<label for="valoracionMuscular">Valoraci&oacute;n:</label>  
-					<input type="text" class="txt-speech" name="valoracionMuscular" id="valoracionMuscular"/>				
+					<label for="evalMuscularManual">Valoraci&oacute;n:</label>  
+					<input type="text" class="txt-speech" name="evalMuscularManual" id="evalMuscularManual"/>				
 				</div>				
 				
-				<a href="javascript:puntuaciones();" data-role="button"><label id="textPuntuaciones" name="textPuntuaciones">Ver Puntuaciones</label></a> 
+				<a href="javascript:evaluacion_muscular_manual.puntuaciones();" data-role="button"><label id="textPuntuaciones" name="textPuntuaciones">Ver Puntuaciones</label></a> 
 				
 				<fieldset>
 					<div id="divPuntuaciones" style="display:none">

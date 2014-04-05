@@ -18,7 +18,8 @@
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.flipbox.min.js"></script>
 		<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>		
-		<script type="text/javascript" src="../js/views/control_motor_selectivo.js"></script>
+		<script type="text/javascript" src="../js/control_motor_selectivo.js"></script>
+		<script type="text/javascript" src="../js/server.js"></script>
 		
 		<script type="text/javascript">
 			app.initialize();
@@ -30,7 +31,7 @@
 			<div data-role="header" >                    
 				<h3>Control motor selectivo - LAM</h3>
 				<a data-rel="back" data-icon="back">Volver</a>
-			   <a href="index.html" data-icon="check" onclick="javascript:server()" >Guardar</a>
+			   <a data-icon="check" onclick="javascript:control_motor_selectivo.server()" >Guardar</a>
 			</div>
 			
 			<!-- Contenido -->
@@ -44,7 +45,7 @@
 						<input type="range" name="valoracionCtrlMotor" id="valoracionCtrlMotor" value=""  min="0" max="3"/>				
 					</div>
 					
-					<a href="javascript:puntuaciones();" data-role="button"><label id="textPuntuaciones" name="textPuntuaciones">Ver Puntuaciones</label></a> 
+					<a href="javascript:control_motor_selectivo.puntuaciones();" data-role="button"><label id="textPuntuaciones" name="textPuntuaciones">Ver Puntuaciones</label></a> 
 					
 					<fieldset>
 						<div id="divPuntuaciones" style="display:none">
