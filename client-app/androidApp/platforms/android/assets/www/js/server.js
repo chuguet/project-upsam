@@ -24,7 +24,6 @@ var server = {
 		this.executeJSon('GET', action, null, callback);
 	},
 	"executeJSon" : function($method, action, data, callback) {
-		$("body").addClass("loading");
 		
 		if (data != null) {
 			data = JSON.stringify(data);
@@ -82,7 +81,6 @@ var server = {
 				navigator.notification.alert(message, null, 'Error de conexion');
 			},
 			complete : function() {
-				$("body").removeClass("loading");
 			}
 		});
 	}

@@ -4,13 +4,21 @@ var generic = {
 			app.initialize();
 		}
 		
-		var that = this;			
+		var that = this;	
+		$(document).bind("pagebeforecreate",function(event){
+			generic.loading();
+		}); 
+
+		
 		$(document).bind("pageinit", function() {
 	    	that.processSpeech();     
 	    	that.processDatebox();
 	    	
 	    	if (methodToExecute && methodToExecute != null){
 	    		methodToExecute.apply(this, null);
+	    	}
+	    	else{
+	    		generic.noLoading();
 	    	}
 	    });
 	},
@@ -87,5 +95,16 @@ var generic = {
 	'getURLParameter' : function(name){
 	    var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
 	    return results[1] || 0;
+	},
+	'loading' : function(){
+		$.mobile.loading( 'show', {
+			text: 'Cargando',
+			textVisible: true,
+			theme: "b",
+			textonly: false
+		});
+	},
+	'noLoading': function(){
+		$.mobile.loading( 'hide');
 	}
 };

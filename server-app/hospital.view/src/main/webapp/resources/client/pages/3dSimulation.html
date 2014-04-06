@@ -4,24 +4,26 @@
 	<head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <title>Ejes Coordenadas</title>
+
+        <link href="../css/jquery.mobile-1.4.1.min.css" rel="stylesheet" type="text/css">
+        
+        <script type="text/javascript" src="../cordova.js"></script>
+		<script type="text/javascript" src="../index.js"></script>		
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
+		<script type="text/javascript" src="../js/server.js"></script>	
+		
+        <script type="text/javascript" src='../js/3d/surface-plot.js'></script>
+        <script type="text/javascript" src='../js/3d/colour-gradient.js'></script>
+        <script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
+        <script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>
+        <script type="text/javascript" src="../js/3d/jsapi"></script>
         
         <style>
         	body.landscape { text-align:center; margin: 0; padding: 0;}
         	body.landscape div.ui-content {padding:0px;}
         </style>
-        
-        <link href="../css/jquery.mobile-1.4.1.min.css" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src='../js/3d/surface-plot.js'></script>
-        <script type="text/javascript" src='../js/3d/colour-gradient.js'></script>
-		
-        <script type="text/javascript" src="../cordova.js"></script>
-        <script type="text/javascript" src="../index.js"></script>
-        
-        <script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-        <script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
-        <script type="text/javascript" src="../js/3d/jsapi"></script>
         <script type="text/javascript">
-            app.initialize();
+            generic.initialize();
         
             google.load("visualization", "1");
             google.setOnLoadCallback(setUp);
@@ -103,9 +105,19 @@
         </head>
         <body class="landscape">
         	<div data-role="page" id="Home">
-				<div data-role="header"><h1>Simulaci&oacute;n 3D</h1></div>
+        		<!-- Cabecera -->
+				<div data-role="header" >                    
+					<h3>Simulaci&oacute;n 3D</h3>
+					<a data-rel="back" data-icon="back">Volver</a>
+				</div>
+				
 				<div role="main" class="ui-content">
 					<div id="surfacePlotDiv"></div>
+				</div>
+				
+				<!-- Pie -->
+				<div data-role="footer" data-position="inline" data-theme="c">
+					<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>
 				</div>
 			</div>
         </body>
