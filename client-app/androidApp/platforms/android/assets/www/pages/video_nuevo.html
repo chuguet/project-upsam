@@ -8,19 +8,18 @@
 
 		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
-		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
-		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-datebox.min.css" /> 
+		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
 		<script type="text/javascript" src="../cordova.js"></script>
 		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>	
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
+		<script type="text/javascript" src="../js/server.js"></script>	
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
 		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
-		<script type="text/javascript" src="../js/server.js"></script>
-
-				
+	
 		<script type="text/javascript">
 			generic.initialize();
+			
 			function captureSuccess(mediaFiles) {
 		    	for (var i = 0; i < mediaFiles.length; i++) {
 		            uploadFile(mediaFiles[i]);
@@ -29,8 +28,8 @@
 		
 		    // Called if something bad happens.
 		    function captureVideoError() {
-		        var msg = "Se ha producido un error durante la grabación de vídeo";
-		        navigator.notification.alert(msg, null, 'Grabación fallida');
+		        var msg = "Se ha producido un error durante la grabaciï¿½n de vï¿½deo";
+		        navigator.notification.alert(msg, null, 'Grabaciï¿½n fallida');
 		    }
 		
 		    // A button will call this function
@@ -42,13 +41,13 @@
 			function uploadFileSuccess(result){
 	            console.log('Upload success: ' + result.responseCode);
 	            console.log(result.bytesSent + ' bytes sent');
-	            var msg = "El vídeo se ha grabado y se ha subido correctamente al servidor";
-		        navigator.notification.alert(msg, null, 'Grabación correcta');
+	            var msg = "El vï¿½deo se ha grabado y se ha subido correctamente al servidor";
+		        navigator.notification.alert(msg, null, 'Grabaciï¿½n correcta');
 	        }
 	        
 	        function uploadFileError(error){
-	        	var msg = "Se ha producido un error durante la subida del vídeo al servidor";
-		        navigator.notification.alert(msg, null, 'Grabación fallida');
+	        	var msg = "Se ha producido un error durante la subida del vï¿½deo al servidor";
+		        navigator.notification.alert(msg, null, 'Grabaciï¿½n fallida');
 	        	console.log("An error has occurred: Code = " + error.code);
 	            console.log("upload error source " + error.source);
 	            console.log("upload error target " + error.target);
@@ -102,10 +101,10 @@
 				</div>				
 			</div>
 			
-			<!-- Footer -->
+			<!-- Pie -->
 			<div data-role="footer" data-position="inline" data-theme="c">
 				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>
-			</div>	
+			</div>
 		</div>
 	</body>
 </html>

@@ -8,19 +8,18 @@
 
 		<link rel="stylesheet" type="text/css" href="../css/themes/hospital_css.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/themes/jquery.mobile.icons.min.css" />
-		<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
-		<link rel="stylesheet" type="text/css" href="../css/jquery.mobile-datebox.min.css" /> 
+		<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		<link rel="stylesheet" type="text/css" type="text/css" href="../css/jquery.jqplot.min.css" />
 		
 		<script type="text/javascript" src="../cordova.js"></script>
 		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>	
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
+		<script type="text/javascript" src="../js/server.js"></script>	
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
+		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>
 		<script type="text/javascript" src="../js/jquery.jqplot.js"></script>
 		<script type="text/javascript" src="../js/jqplot.pointLabels.min.js"></script>
 		
-		<script type="text/javascript" src="../js/server.js"></script>
 		<script type="text/javascript">
 			var anglesDTO = null;
 			generic.initialize(cargarGrafica);
@@ -42,21 +41,22 @@
 			}
 			
 			function mostrarGrafica(firstGraphic, secondGraphic){
+				generic.loading();
 				var line1 = recoverPoints(firstGraphic, "firstGraphic");
 				var line2 = recoverPoints(secondGraphic, "secondGraphic");
 				
 				if (line1 != null){
 				 	var size = line1.length * 50;
-				 	$("#chart1").empty();
+				 	$("#chart1").children().remove();
 				  	$("#chart1").width(size);
 				  	var plot1 = $.jqplot('chart1', [line1, line2], {
-						title: 'Chart with Point Labels', 
-					  	seriesDefaults: { 
+						seriesDefaults: { 
 							showMarker:false,
-							pointLabels: { show:true, formatString: "%#.3f" } 
+							pointLabels: { show:true, formatString: "%#.3f", edgeTolerance : -10 } 
 					  	}
 				  	});
 				}
+				generic.noLoading();
 			}
 			
 			function recoverPoints(angleName, labelId){
