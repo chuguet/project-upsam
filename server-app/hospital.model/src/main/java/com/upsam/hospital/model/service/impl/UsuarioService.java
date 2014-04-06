@@ -15,7 +15,7 @@ import com.upsam.hospital.model.service.IUsuarioService;
  * The Class UsuarioService.
  */
 @Service
-class UsuarioService implements IUsuarioService {
+public class UsuarioService implements IUsuarioService {
 
 	/** The usuario repository. */
 	@Inject

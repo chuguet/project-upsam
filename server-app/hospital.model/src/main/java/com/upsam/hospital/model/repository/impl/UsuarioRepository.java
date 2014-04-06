@@ -13,7 +13,7 @@ import com.upsam.hospital.model.repository.IUsuarioRepository;
  * The Class UsuarioRepository.
  */
 @Repository
-class UsuarioRepository implements IUsuarioRepository {
+public class UsuarioRepository implements IUsuarioRepository {
 
 	/** The Constant QUERY_USER. */
 	private static final String QUERY_USER = "from Usuario where usuario = ?";
