@@ -11,6 +11,7 @@ import org.junit.Test;
 import unit.UnitTest;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.upsam.hospital.model.beans.Faqs;
 import com.upsam.hospital.model.exceptions.DataBaseException;
@@ -61,6 +62,16 @@ public class FaqsServiceTest extends UnitTest{
         Faqs expectedFaqs = faqsService.findOne(178);
 		
 		assertThat("anyDescription", is(equalTo(expectedFaqs.getDescripcion())));
+    }
+    
+    @Test
+    public void canFindAllFaqs() throws SQLException, DataBaseException {
+    	List<Faqs> faqs = null;
+        when(faqsRepository.findAll()).thenReturn(faqs);
+        			
+        List<Faqs>expectedFaqs = faqsService.findAll();
+        
+		assertThat(faqs, is(equalTo(expectedFaqs)));
     }
     
     private Faqs aFaqs(){
