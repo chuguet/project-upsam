@@ -71,7 +71,7 @@ public class FicheroEMTRepositoryTest extends UnitTest{
     public void canFindByPatient() throws SQLException, DataBaseException {
     	List<FicheroEMT> files = new ArrayList<FicheroEMT>();
     	files.add(ficheroEMT());
-        when(hibernateTemplate.find("from FicheroEMT where id_paciente = ?",FicheroEMT.class,1)).thenReturn(files);
+        when(hibernateTemplate.find("from FicheroEMT where id_paciente = ?",1)).thenReturn(files);
         			
         List<FicheroEMT> expectedFiles = ficheroEMTRepository.findByPaciente(1);
         
