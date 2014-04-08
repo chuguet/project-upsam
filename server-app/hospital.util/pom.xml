@@ -13,6 +13,10 @@
 	<packaging>jar</packaging>
 	<name>${project.groupId}.${project.artifactId}</name>
 
+	<build>
+		<finalName>${project.groupId}.${project.artifactId}</finalName>
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>javax.mail</groupId>
