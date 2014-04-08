@@ -42,6 +42,8 @@
 		<div id="menu">
 			<sec:authorize ifAnyGranted="ROLE_ADMIN">
 				<a href="javascript:void" onclick="javascript:generic.getList('usuario');" title="Ver usuarios" class="itemMenu">Usuarios</a>
+			</sec:authorize>
+			<sec:authorize ifAnyGranted="ROLE_USER">
 				<a href="javascript:void" onclick="javascript:generic.getList('paciente');" title="Ver pacientes" class="itemMenu">Pacientes</a>
 			</sec:authorize>
 			<div id="usuario">

@@ -7,7 +7,6 @@ import java.util.UUID;
 import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +47,6 @@ public class UsuarioController {
 	@Inject
 	private IMailUtil mailUtil;
 
-	@Secured("permitAll")
 	@RequestMapping(value = "/forget", method = RequestMethod.POST)
 	public @ResponseBody
 	MensajeDTO forgetPassword(@RequestBody ForgetDTO forgetDTO) {
@@ -63,12 +61,11 @@ public class UsuarioController {
 			}
 			else {
 				String token = UUID.randomUUID().toString().substring(0, 5);
-				Date generateToken = new Date();
-				usuario.setGenerate_token(generateToken);
-				usuario.setToken(token);
-				usuarioService.update(usuario);
 				StringBuffer sb = new StringBuffer("Este es su token de seguridad ").append(token).append("<br>Estará activo durante 5 minutos.");
 				mailUtil.sendMail(new Mail(usuario.getEmail(), sb.toString(), "Recuperación de contraseña"));
+				usuario.setGenerate_token(new Date());
+				usuario.setToken(token);
+				usuarioService.update(usuario);
 				result = new MensajeDTO(new StringBuffer("Se le ha enviado un correo electr&oacute;nico a ").append(usuario.getEmail()).toString(), true);
 			}
 		}
@@ -79,7 +76,6 @@ public class UsuarioController {
 		return result;
 	}
 
-	@Secured("permitAll")
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
 	public @ResponseBody
 	MensajeDTO changePassword(@RequestBody ChangePasswordDTO changePasswordDTO) {
@@ -92,12 +88,12 @@ public class UsuarioController {
 			else {
 				Date dateNow = new Date();
 				Date dateCreation = usuario.getGenerate_token();
-				if (dateNow.getTime() - dateCreation.getTime() < 300000) {
+				if (dateNow.getTime() - dateCreation.getTime() > 300000) {
 					result = new MensajeDTO("Han pasado m&aacute;s de 5 minutos. Vuelva a realizar el proceso.", false);
 				}
 				else {
 					usuario.setPassword(changePasswordDTO.getPassword());
-					usuarioService.update(usuarioService.encriptUser(usuario));
+					usuarioService.update(usuario);
 					result = new MensajeDTO("Su contrase&ntilde;a ha sido modificada correctamente.", true);
 				}
 			}

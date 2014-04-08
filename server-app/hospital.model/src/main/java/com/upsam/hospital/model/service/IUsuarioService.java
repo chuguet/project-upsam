@@ -10,15 +10,6 @@ import com.upsam.hospital.model.exceptions.DataBaseException;
 public interface IUsuarioService extends IModelService<Usuario> {
 
 	/**
-	 * Encript user.
-	 * 
-	 * @param usuario
-	 *            the usuario
-	 * @return the usuario
-	 */
-	Usuario encriptUser(Usuario usuario);
-
-	/**
 	 * Find user by email.
 	 * 
 	 * @param email

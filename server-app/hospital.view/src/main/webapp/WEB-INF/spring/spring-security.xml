@@ -11,14 +11,14 @@
 
 	<context:component-scan base-package="com.upsam.hospital.controller" />
 
-<!-- 	<global-method-security secured-annotations="enabled"> -->
-<!-- 	</global-method-security> -->
-
-	<http auto-config="true" use-expressions="false"
+	<http auto-config="true" use-expressions="true"
 		entry-point-ref="authenticationEntryPoint">
-		<intercept-url pattern="/home" access="ROLE_ADMIN, ROLE_USER" />
-<!-- 		<intercept-url pattern="/usuario/**" access="ROLE_ADMIN" /> -->
-		<intercept-url pattern="/logout" access="ROLE_USER, ROLE_ADMIN" />
+		<intercept-url pattern="/home" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')" />
+		<intercept-url pattern="/usuario/changePassword" access="permitAll" />
+		<intercept-url pattern="/usuario/forget" access="permitAll" />
+		<intercept-url pattern="/usuario/**" access="hasAnyRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/paciente/**" access="hasAnyRole('ROLE_USER')" />
+		<intercept-url pattern="/logout" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 
 
 		<form-login authentication-failure-handler-ref="ajaxAuthenticationFailureHandler"

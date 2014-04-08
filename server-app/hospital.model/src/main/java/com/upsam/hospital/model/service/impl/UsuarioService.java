@@ -37,14 +37,14 @@ public class UsuarioService implements IUsuarioService {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.service.IUsuarioService#encriptUser(com.upsam
-	 * .hospital.model.beans.Usuario)
+	/**
+	 * Encript user.
+	 * 
+	 * @param usuario
+	 *            the usuario
+	 * @return the usuario
 	 */
-	@Override
-	public Usuario encriptUser(Usuario usuario) {
+	private Usuario encriptUser(Usuario usuario) {
 		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
 		String pwd = passwordEncoder.encodePassword(usuario.getPassword(), null);
 		usuario.setPassword(pwd);
