@@ -1,5 +1,5 @@
 var server = {
-	"URI" : "http://192.168.1.134:8080/hospitalServer/paciente/",
+	"URI" : "http://192.168.1.130:8080/hospitalServer/paciente/",
 	"post" : function(action, params, callback) {
 		this.executeJSon('POST', action, params, callback);
 	},
@@ -24,7 +24,6 @@ var server = {
 		this.executeJSon('GET', action, null, callback);
 	},
 	"executeJSon" : function($method, action, data, callback) {
-		$("body").addClass("loading");
 		
 		if (data != null) {
 			data = JSON.stringify(data);
@@ -54,12 +53,12 @@ var server = {
 				else {
 					var cabeceraMensaje;
 					if (response.correcto) {
-						cabeceraMensaje = 'Operaci&oacute;n correcta';
+						cabeceraMensaje = 'Operacion correcta';
 					}
 					else {
-						cabeceraMensaje = 'Operaci&oacute;n incorrecta';
+						cabeceraMensaje = 'Operacion incorrecta';
 					}
-					generic.alert(response.mensaje, cabeceraMensaje);
+					navigator.notification.alert(response.mensaje, null, cabeceraMensaje);
 					if (response.correcto) {
 						if (callback) {
 							var param = new Array();
@@ -70,19 +69,18 @@ var server = {
 				}
 			},
 			error : function(e) {
-				var message = 'Se ha producido un error al procesar la acci&oacute;n';
+				var message = 'Se ha producido el siguiente error al procesar la accion: '+ e.responseText;
 				switch (e.status) {
 				case 404:
-					message = 'La p&aacute;gina a la que intenta acceder no existe';
+					message = 'La pagina a la que intenta acceder no existe';
 					break;
 				case 403:
 					message = 'No tiene permisos para acceder a esta funcionalidad';
 					break;
 				}
-				alert(message, 'Error');
+				navigator.notification.alert(message, null, 'Error de conexion');
 			},
 			complete : function() {
-				$("body").removeClass("loading");
 			}
 		});
 	}

@@ -8,18 +8,70 @@
 
 		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
-		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
-		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-datebox.min.css" /> 
+		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
 		<script type="text/javascript" src="../cordova.js"></script>
 		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>	
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
+		<script type="text/javascript" src="../js/server.js"></script>	
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>		
-
-				
+		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
+	
 		<script type="text/javascript">
 			generic.initialize();
+			
+			function captureSuccess(mediaFiles) {
+		    	for (var i = 0; i < mediaFiles.length; i++) {
+		            uploadFile(mediaFiles[i]);
+		        }
+		    }
+		
+		    // Called if something bad happens.
+		    function captureVideoError() {
+		        var msg = "Se ha producido un error durante la grabaci�n de v�deo";
+		        navigator.notification.alert(msg, null, 'Grabaci�n fallida');
+		    }
+		
+		    // A button will call this function
+		    //
+		    function captureVideo() {
+		        navigator.device.capture.captureVideo(captureSuccess, captureVideoError, {limit: 2});
+		    }
+		
+			function uploadFileSuccess(result){
+	            console.log('Upload success: ' + result.responseCode);
+	            console.log(result.bytesSent + ' bytes sent');
+	            var msg = "El v�deo se ha grabado y se ha subido correctamente al servidor";
+		        navigator.notification.alert(msg, null, 'Grabaci�n correcta');
+	        }
+	        
+	        function uploadFileError(error){
+	        	var msg = "Se ha producido un error durante la subida del v�deo al servidor";
+		        navigator.notification.alert(msg, null, 'Grabaci�n fallida');
+	        	console.log("An error has occurred: Code = " + error.code);
+	            console.log("upload error source " + error.source);
+	            console.log("upload error target " + error.target);
+	            console.log('Error uploading file ' + path + ': ' + error.code);
+	        }
+	        
+		    // Upload files to server
+		    function uploadFile(mediaFile) {
+		        var ft = new FileTransfer();
+		        var path = mediaFile.fullPath;
+		        var name = mediaFile.name;
+		        var options = new FileUploadOptions();
+		        options.fileKey = "file";
+		        options.fileName = mediaFile.name;
+		        options.mimeType = "multipart/form-data";
+		        options.chunkedMode = false;
+		        options.headers = { Connection: "close" };
+		        
+		        ft.upload(path,
+		            encodeURI(server.URI + "1/videoUpload"),
+		            uploadFileSuccess,
+		            uploadFileError,
+		            options);
+		    }
 		</script>
 	</head>
 	<body>
@@ -29,7 +81,6 @@
 			<div data-role="header">                    
 				<h3>Nuevo v&iacute;deo - LAM</h3>
 				<a data-rel="back" data-icon="back">Volver</a>
-			   <a href="index.html" data-icon="check">Guardar</a>
 			</div>			
 			
 			<!-- Contenido -->
@@ -39,21 +90,21 @@
 				<div class="content2">
 					<!--Descripcion del video -->			
 					<div data-role="fieldcontain">  
-						<label for="descVideo">Descripción del video:</label>						
-						<textarea name="descVideo" class="txt-speech" id="descVideo"></textarea>				
+						<label for="descVideo">Descripci&oacute;n del video:</label>						
+						<input type="text" name="descVideo" class="txt-speech" id="descVideo" />				
 					</div>
 
 					<!--Grabacion -->
 					<div data-role="fieldcontain">					
-						<a data-role="button" data-icon="video" data-iconpos="top">Grabar video</a>
+						<a data-role="button" data-icon="video" data-iconpos="top" onclick="captureVideo();">Grabar video</a>
 					</div>
 				</div>				
 			</div>
 			
-			<!-- Footer -->
+			<!-- Pie -->
 			<div data-role="footer" data-position="inline" data-theme="c">
-				<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>
-			</div>	
+				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>
+			</div>
 		</div>
 	</body>
 </html>

@@ -8,19 +8,18 @@
 
 		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
-		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
-		<link type="text/css" rel="stylesheet" href="../css/jquery.mobile-datebox.min.css" /> 
+		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" /> 
 		
 		<script type="text/javascript" src="../cordova.js"></script>
 		<script type="text/javascript" src="../index.js"></script>		
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
+		<script type="text/javascript" src="../js/server.js"></script>		
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>		
-		<script type="text/javascript" src="../js/jquery.mobile-datebox.core.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.mobile-datebox.mode.flipbox.min.js"></script>
-		<script type="text/javascript" src="../js/jquery.mobile-datebox.i18n.en_US.utf8.js"></script>		
+		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>	
+		<script type="text/javascript" src="../js/pages/analisis_marcha.js"></script>		
 				
 		<script type="text/javascript">
-			app.initialize();
+			generic.initialize();
 		</script>
 	</head>
 	<body>
@@ -30,7 +29,7 @@
 			<div data-role="header" data-position="inline">
 				<h3>An&aacute;lisis observacional de la marcha - LAM</h3>
 				<a data-rel="back" data-icon="back">Volver</a>
-				<a href="index.html" data-icon="check">Guardar</a>
+				<a onclick="javascript:analisis_marcha.server()" data-icon="check">Guardar</a>
 			</div>			
 			
 			<!-- Cuerpo -->
@@ -39,8 +38,8 @@
 				
 				<div class="content2">
 					<div data-role="fieldcontain">  
-						<label for="descripcion">Descripci&oacute;n:</label>  						
-						<textarea name="descripcion" class="txt-speech" id="descripcion"></textarea>
+						<label for="analisisObserMarcha">Descripci&oacute;n:</label>  						
+						<textarea name="analisisObserMarcha" class="txt-speech" id="analisisObserMarcha"></textarea>
 					</div>
 					
 					<div data-role="fieldcontain" style="text-align:center">  
@@ -52,7 +51,7 @@
 			
 			<!-- Pie -->
 			<div data-role="footer" data-position="inline" data-theme="c">
-				<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>
+				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>
 			</div>				
 		</div>
 	</body>
