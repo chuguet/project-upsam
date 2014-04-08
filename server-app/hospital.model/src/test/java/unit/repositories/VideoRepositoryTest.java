@@ -58,13 +58,13 @@ public class VideoRepositoryTest extends UnitTest{
     }
     
     @Test
-    public void canFindAFaq() throws SQLException, DataBaseException {
+    public void canFindAVideo() throws SQLException, DataBaseException {
     	Paciente paciente = aPatient();
         when(hibernateTemplate.get(Paciente.class,178)).thenReturn(paciente);
         			
         Paciente expectedPatient = videoRepository.findOne(178);
         
-		assertThat("anyDescription", is(equalTo(expectedPatient.getApellidos())));
+		assertThat("any", is(equalTo(expectedPatient.getApellidos())));
     }
     
     @Test
