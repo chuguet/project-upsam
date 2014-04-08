@@ -1,5 +1,6 @@
 package com.upsam.hospital.model.beans;
 
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +30,11 @@ public class Usuario implements IModelHospital {
 	@Column(name = "email", unique = true, length = 200)
 	private String email;
 
+	/** The generate_token. */
+	@Basic
+	@Column(name = "generate_token")
+	private Date generate_token;
+
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +55,11 @@ public class Usuario implements IModelHospital {
 	@Basic
 	@Column(name = "rol_id", nullable = false)
 	private Rol rol;
+
+	/** The token. */
+	@Basic
+	@Column(name = "token", unique = true)
+	private String token;
 
 	/** The usuario. */
 	@Basic
@@ -71,6 +82,15 @@ public class Usuario implements IModelHospital {
 	 */
 	public String getEmail() {
 		return email;
+	}
+
+	/**
+	 * Gets the generate_token.
+	 * 
+	 * @return the generate_token
+	 */
+	public Date getGenerate_token() {
+		return generate_token;
 	}
 
 	/**
@@ -110,6 +130,15 @@ public class Usuario implements IModelHospital {
 	}
 
 	/**
+	 * Gets the token.
+	 * 
+	 * @return the token
+	 */
+	public String getToken() {
+		return token;
+	}
+
+	/**
 	 * Gets the usuario.
 	 * 
 	 * @return the usuario
@@ -136,6 +165,16 @@ public class Usuario implements IModelHospital {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	/**
+	 * Sets the generate_token.
+	 * 
+	 * @param generate_token
+	 *            the new generate_token
+	 */
+	public void setGenerate_token(Date generate_token) {
+		this.generate_token = generate_token;
 	}
 
 	/**
@@ -176,6 +215,16 @@ public class Usuario implements IModelHospital {
 	 */
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+
+	/**
+	 * Sets the token.
+	 * 
+	 * @param token
+	 *            the new token
+	 */
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	/**

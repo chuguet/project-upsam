@@ -1,10 +1,13 @@
 package com.upsam.hospital.controller.control;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import javax.inject.Inject;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.upsam.hospital.controller.dto.MailDTO;
+import com.upsam.hospital.controller.dto.ChangePasswordDTO;
+import com.upsam.hospital.controller.dto.ForgetDTO;
 import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.UsuarioDTO;
 import com.upsam.hospital.controller.dto.util.IUsuarioUtilDTO;
@@ -44,18 +48,64 @@ public class UsuarioController {
 	@Inject
 	private IMailUtil mailUtil;
 
+	@Secured("permitAll")
 	@RequestMapping(value = "/forget", method = RequestMethod.POST)
 	public @ResponseBody
-	MensajeDTO forgetPassword(@RequestBody MailDTO mail) {
+	MensajeDTO forgetPassword(@RequestBody ForgetDTO forgetDTO) {
+		MensajeDTO result = null;
 		try {
-			Usuario usuario = usuarioService.findUserByEmail(mail.getValue());
-			StringBuffer sb = new StringBuffer("Para cambiar su contraseña, acceda a la URL: http://localhost:8080/hospitalServer/usuario/newPassword/").append(usuario.getUsuario()).append("/").append(usuario.getPassword());
-			mailUtil.sendMail(new Mail(mail.getValue(), sb.toString(), "Recuperación de contraseña"));
+			Usuario usuario = usuarioService.findUserByEmail(forgetDTO.getValue());
+			if (usuario == null) {
+				usuario = usuarioService.selectByUser(forgetDTO.getValue());
+			}
+			if (usuario == null) {
+				result = new MensajeDTO("El usuario o el correo son incorrectos.", false);
+			}
+			else {
+				String token = UUID.randomUUID().toString().substring(0, 5);
+				Date generateToken = new Date();
+				usuario.setGenerate_token(generateToken);
+				usuario.setToken(token);
+				usuarioService.update(usuario);
+				StringBuffer sb = new StringBuffer("Este es su token de seguridad ").append(token).append("<br>Estará activo durante 5 minutos.");
+				mailUtil.sendMail(new Mail(usuario.getEmail(), sb.toString(), "Recuperación de contraseña"));
+				result = new MensajeDTO(new StringBuffer("Se le ha enviado un correo electr&oacute;nico a ").append(usuario.getEmail()).toString(), true);
+			}
+		}
+		catch (DataBaseException e) {
+			LOG.info(e.getMessage());
+			return new MensajeDTO("Se ha producido un error interno en el servidor.", false);
+		}
+		return result;
+	}
+
+	@Secured("permitAll")
+	@RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO changePassword(@RequestBody ChangePasswordDTO changePasswordDTO) {
+		MensajeDTO result = null;
+		try {
+			Usuario usuario = usuarioService.selectByToken(changePasswordDTO.getToken());
+			if (usuario == null) {
+				result = new MensajeDTO("El token ha cambiado. Introduzca el token del ultimo mail.", false);
+			}
+			else {
+				Date dateNow = new Date();
+				Date dateCreation = usuario.getGenerate_token();
+				if (dateNow.getTime() - dateCreation.getTime() < 300000) {
+					result = new MensajeDTO("Han pasado m&aacute;s de 5 minutos. Vuelva a realizar el proceso.", false);
+				}
+				else {
+					usuario.setPassword(changePasswordDTO.getPassword());
+					usuarioService.update(usuarioService.encriptUser(usuario));
+					result = new MensajeDTO("Su contrase&ntilde;a ha sido modificada correctamente.", true);
+				}
+			}
 		}
 		catch (DataBaseException e) {
 			LOG.info(e.getMessage());
 		}
-		return new MensajeDTO(new StringBuffer("Se le ha enviado un correo electr&oacute;nico a ").append(mail.getValue()).toString(), true);
+		return result;
 	}
 
 	/**

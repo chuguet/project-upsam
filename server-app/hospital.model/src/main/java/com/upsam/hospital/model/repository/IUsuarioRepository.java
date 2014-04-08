@@ -21,6 +21,17 @@ public interface IUsuarioRepository extends IRepositoryDAO<Usuario> {
 	Usuario findUserByEmail(String email) throws SQLException;
 
 	/**
+	 * Select by token.
+	 * 
+	 * @param token
+	 *            the token
+	 * @return the usuario
+	 * @throws SQLException
+	 *             the sQL exception
+	 */
+	Usuario selectByToken(String token) throws SQLException;
+
+	/**
 	 * Select by user.
 	 * 
 	 * @param user

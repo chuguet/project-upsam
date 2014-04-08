@@ -10,6 +10,15 @@ import com.upsam.hospital.model.exceptions.DataBaseException;
 public interface IUsuarioService extends IModelService<Usuario> {
 
 	/**
+	 * Encript user.
+	 * 
+	 * @param usuario
+	 *            the usuario
+	 * @return the usuario
+	 */
+	Usuario encriptUser(Usuario usuario);
+
+	/**
 	 * Find user by email.
 	 * 
 	 * @param email
@@ -19,6 +28,17 @@ public interface IUsuarioService extends IModelService<Usuario> {
 	 *             the data base exception
 	 */
 	Usuario findUserByEmail(String email) throws DataBaseException;
+
+	/**
+	 * Select by token.
+	 * 
+	 * @param token
+	 *            the token
+	 * @return the usuario
+	 * @throws DataBaseException
+	 *             the data base exception
+	 */
+	Usuario selectByToken(String token) throws DataBaseException;
 
 	/**
 	 * Select by user.

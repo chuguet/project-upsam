@@ -37,14 +37,14 @@ public class UsuarioService implements IUsuarioService {
 		}
 	}
 
-	/**
-	 * Encript user.
-	 * 
-	 * @param usuario
-	 *            the usuario
-	 * @return the usuario
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IUsuarioService#encriptUser(com.upsam
+	 * .hospital.model.beans.Usuario)
 	 */
-	private Usuario encriptUser(Usuario usuario) {
+	@Override
+	public Usuario encriptUser(Usuario usuario) {
 		Md5PasswordEncoder passwordEncoder = new Md5PasswordEncoder();
 		String pwd = passwordEncoder.encodePassword(usuario.getPassword(), null);
 		usuario.setPassword(pwd);
@@ -106,6 +106,22 @@ public class UsuarioService implements IUsuarioService {
 	public Integer save(Usuario usuario) throws DataBaseException {
 		try {
 			return usuarioRepository.save(encriptUser(usuario));
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IUsuarioService#selectByToken(java.lang
+	 * .String)
+	 */
+	@Override
+	public Usuario selectByToken(String token) throws DataBaseException {
+		try {
+			return usuarioRepository.selectByToken(token);
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);

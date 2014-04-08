@@ -4,7 +4,7 @@ package com.upsam.hospital.controller.dto;
 /**
  * The Class MailDTO.
  */
-public class MailDTO {
+public class ForgetDTO {
 
 	/** The value. */
 	private String value;

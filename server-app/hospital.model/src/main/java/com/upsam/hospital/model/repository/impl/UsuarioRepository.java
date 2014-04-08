@@ -18,6 +18,9 @@ public class UsuarioRepository implements IUsuarioRepository {
 	/** The Constant QUERY_EMAIL. */
 	private static final String QUERY_EMAIL = "from Usuario where email = ?";
 
+	/** The Constant QUERY_TOKEN. */
+	private static final String QUERY_TOKEN = "from Usuario where token = ?";
+
 	/** The Constant QUERY_USER. */
 	private static final String QUERY_USER = "from Usuario where usuario = ?";
 
@@ -82,6 +85,23 @@ public class UsuarioRepository implements IUsuarioRepository {
 	@Override
 	public Integer save(Usuario usuario) throws SQLException {
 		return (Integer) hibernateTemplate.save(usuario);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.repository.IUsuarioRepository#selectByToken(
+	 * java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public Usuario selectByToken(String token) throws SQLException {
+		Usuario result = null;
+		List<Usuario> usuarios = hibernateTemplate.find(QUERY_TOKEN, token);
+		if (usuarios != null && !usuarios.isEmpty()) {
+			result = usuarios.get(0);
+		}
+		return result;
 	}
 
 	/*
