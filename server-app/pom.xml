@@ -53,7 +53,18 @@
 		<module>hospital.model</module>
 		<module>hospital.controller</module>
 		<module>hospital.view</module>
+		<module>hospital.util</module>
 	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>javax.mail</groupId>
+				<artifactId>mail</artifactId>
+				<version>${mail.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<developers>
 		<developer>

@@ -1,25 +1,26 @@
 package com.upsam.hospital.model.config;
 
 import java.util.Properties;
-
 import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
+import com.upsam.hospital.util.config.SpringUtilConfig;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SpringModelConfiguration.
  */
 @Configuration
+@Import(SpringUtilConfig.class)
 @ComponentScan("com.upsam.hospital.model")
 @PropertySource("classpath:/application.properties")
 public class SpringModelConfiguration {
@@ -104,8 +105,7 @@ public class SpringModelConfiguration {
 	 */
 	@Bean
 	public HibernateTemplate getHibernateTemplate() {
-		HibernateTemplate hibernateTemplate = new HibernateTemplate(
-				getSessionFactory().getObject());
+		HibernateTemplate hibernateTemplate = new HibernateTemplate(getSessionFactory().getObject());
 		return hibernateTemplate;
 	}
 

@@ -19,6 +19,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>com.upsam</groupId>
+			<artifactId>hospital.util</artifactId>
+			<version>${project.version}</version>
+      	</dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>${spring.version}</version>

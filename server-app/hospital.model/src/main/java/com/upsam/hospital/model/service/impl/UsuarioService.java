@@ -83,6 +83,22 @@ class UsuarioService implements IUsuarioService {
 	/*
 	 * (non-Javadoc)
 	 * @see
+	 * com.upsam.hospital.model.service.IUsuarioService#findUserByEmail(java
+	 * .lang.String)
+	 */
+	@Override
+	public Usuario findUserByEmail(String email) throws DataBaseException {
+		try {
+			return usuarioRepository.findUserByEmail(email);
+		}
+		catch (SQLException e) {
+			throw new DataBaseException(e);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
 	 * com.upsam.apuestas.model.service.IModelService#save(com.upsam.apuestas
 	 * .model.bean.IModelTable)
 	 */

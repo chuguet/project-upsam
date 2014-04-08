@@ -1,13 +1,24 @@
 package com.upsam.hospital.model.repository;
 
 import java.sql.SQLException;
-
 import com.upsam.hospital.model.beans.Usuario;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface IUsuarioRepository.
  */
 public interface IUsuarioRepository extends IRepositoryDAO<Usuario> {
+
+	/**
+	 * Find user by email.
+	 * 
+	 * @param email
+	 *            the email
+	 * @return the usuario
+	 * @throws SQLException
+	 *             the sQL exception
+	 */
+	Usuario findUserByEmail(String email) throws SQLException;
 
 	/**
 	 * Select by user.

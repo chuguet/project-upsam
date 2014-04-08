@@ -10,6 +10,17 @@ import com.upsam.hospital.model.exceptions.DataBaseException;
 public interface IUsuarioService extends IModelService<Usuario> {
 
 	/**
+	 * Find user by email.
+	 * 
+	 * @param email
+	 *            the email
+	 * @return the usuario
+	 * @throws DataBaseException
+	 *             the data base exception
+	 */
+	Usuario findUserByEmail(String email) throws DataBaseException;
+
+	/**
 	 * Select by user.
 	 * 
 	 * @param user

@@ -15,6 +15,9 @@ import com.upsam.hospital.model.repository.IUsuarioRepository;
 @Repository
 class UsuarioRepository implements IUsuarioRepository {
 
+	/** The Constant QUERY_EMAIL. */
+	private static final String QUERY_EMAIL = "from Usuario where email = ?";
+
 	/** The Constant QUERY_USER. */
 	private static final String QUERY_USER = "from Usuario where usuario = ?";
 
@@ -51,6 +54,23 @@ class UsuarioRepository implements IUsuarioRepository {
 	@Override
 	public Usuario findOne(Integer pId) throws SQLException {
 		return hibernateTemplate.get(Usuario.class, pId);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.repository.IUsuarioRepository#findUserByEmail
+	 * (java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public Usuario findUserByEmail(String email) throws SQLException {
+		Usuario result = null;
+		List<Usuario> usuarios = hibernateTemplate.find(QUERY_EMAIL, email);
+		if (usuarios != null && !usuarios.isEmpty()) {
+			result = usuarios.get(0);
+		}
+		return result;
 	}
 
 	/*
