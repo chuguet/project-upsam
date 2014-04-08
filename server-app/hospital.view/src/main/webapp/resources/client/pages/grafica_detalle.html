@@ -26,7 +26,7 @@
 			
 			function cargarGrafica(){
 				var id = generic.getURLParameter("id");
-	            server.get('1/ficheroEMT/' + id, null, callbackCargarGrafica);
+	            server.get('paciente/1/ficheroEMT/' + id, null, callbackCargarGrafica);
 	            $("#angleType").change( function(){
 	            	var value = this.value;
 	            	mostrarGrafica("aR" + value, "aL" + value);

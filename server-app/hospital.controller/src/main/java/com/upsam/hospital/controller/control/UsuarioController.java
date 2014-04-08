@@ -69,7 +69,8 @@ public class UsuarioController {
 				usuarioService.update(usuario);
 				StringBuffer sb = new StringBuffer("Este es su token de seguridad ").append(token).append("<br>Estará activo durante 5 minutos.");
 				mailUtil.sendMail(new Mail(usuario.getEmail(), sb.toString(), "Recuperación de contraseña"));
-				result = new MensajeDTO(new StringBuffer("Se le ha enviado un correo electr&oacute;nico a ").append(usuario.getEmail()).toString(), true);
+				String message = new StringBuffer("Se le ha enviado un correo electr&oacute;nico a ").append(usuario.getEmail()).append(" con la clave de seguridad. Introdúzcala junto con la nueva contraseña que desea utilizar").toString();
+				result = new MensajeDTO(message, true);
 			}
 		}
 		catch (DataBaseException e) {

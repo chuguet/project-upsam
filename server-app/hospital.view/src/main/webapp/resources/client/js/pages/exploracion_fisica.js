@@ -15,6 +15,6 @@ var evaluacion_muscular_manual = {
 			evalMuscularManual : $("#evalMuscularManual").val()
 		};
 
-		server.post(pacienteDTO.id, pacienteDTO, null);
+		server.post("paciente/" + pacienteDTO.id, pacienteDTO, null);
 	}
 };

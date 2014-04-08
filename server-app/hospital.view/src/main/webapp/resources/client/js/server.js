@@ -1,5 +1,5 @@
 var server = {
-	"URI" : "http://192.168.1.130:8080/hospitalServer/paciente/",
+	"URI" : "http://192.168.1.130:8080/hospitalServer/",
 	"post" : function(action, params, callback) {
 		this.executeJSon('POST', action, params, callback);
 	},
@@ -58,7 +58,7 @@ var server = {
 					else {
 						cabeceraMensaje = 'Operacion incorrecta';
 					}
-					navigator.notification.alert(response.mensaje, null, cabeceraMensaje);
+					generic.alert(cabeceraMensaje, response.mensaje);
 					if (response.correcto) {
 						if (callback) {
 							var param = new Array();
@@ -78,7 +78,7 @@ var server = {
 					message = 'No tiene permisos para acceder a esta funcionalidad';
 					break;
 				}
-				navigator.notification.alert(message, null, 'Error de conexion');
+				generic.alert('Error de conexion', message);
 			},
 			complete : function() {
 			}

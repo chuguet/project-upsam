@@ -28,8 +28,7 @@
 		
 		    // Called if something bad happens.
 		    function captureVideoError() {
-		        var msg = "Se ha producido un error durante la grabaci�n de v�deo";
-		        navigator.notification.alert(msg, null, 'Grabaci�n fallida');
+		    	generic.alert("Grabacion fallida", "Se ha producido un error durante la grabacion de video");
 		    }
 		
 		    // A button will call this function
@@ -41,13 +40,11 @@
 			function uploadFileSuccess(result){
 	            console.log('Upload success: ' + result.responseCode);
 	            console.log(result.bytesSent + ' bytes sent');
-	            var msg = "El v�deo se ha grabado y se ha subido correctamente al servidor";
-		        navigator.notification.alert(msg, null, 'Grabaci�n correcta');
+	            generic.alert("Grabacion correcta", "El video se ha grabado y se ha subido correctamente al servidor");
 	        }
 	        
 	        function uploadFileError(error){
-	        	var msg = "Se ha producido un error durante la subida del v�deo al servidor";
-		        navigator.notification.alert(msg, null, 'Grabaci�n fallida');
+	        	generic.alert("Grabacion fallida", "Se ha producido un error durante la subida del v�deo al servidor");
 	        	console.log("An error has occurred: Code = " + error.code);
 	            console.log("upload error source " + error.source);
 	            console.log("upload error target " + error.target);

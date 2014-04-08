@@ -35,6 +35,6 @@ var tono_muscular_ashworth = {
 
 		alert('hago la llamada');
 
-		// server.post(pacienteDTO.id, pacienteDTO, null);
+		// server.post("paciente/" + pacienteDTO.id, pacienteDTO, null);
 	}
 };

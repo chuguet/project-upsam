@@ -21,7 +21,7 @@
 			generic.initialize(buscarGraficas);
 			
 			function buscarGraficas(){
-				server.get('1/ficherosEMT', null, mostrarListado);
+				server.get('paciente/1/ficherosEMT', null, mostrarListado);
 	        }
 	        
 	        function mostrarListado(parameters){

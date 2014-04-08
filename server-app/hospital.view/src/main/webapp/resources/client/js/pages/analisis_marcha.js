@@ -6,6 +6,6 @@ var analisis_marcha = {
 			analisisObserMarcha : $("#analisisObserMarcha").val()
 		};
 
-		server.post(pacienteDTO.id, pacienteDTO, null);
+		server.post("paciente/" + pacienteDTO.id, pacienteDTO, null);
 	}
 };
