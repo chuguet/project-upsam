@@ -7,6 +7,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -15,6 +17,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import unit.UnitTest;
 
+import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Usuario;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.repository.IUsuarioRepository;
@@ -63,6 +66,17 @@ public class UsuarioRepositoryTest extends UnitTest{
         Usuario userFound = usuarioRepository.findOne(178);
         
 		assertThat("any", is(equalTo(userFound.getApellidos())));
+    }
+    
+    @Test
+    public void canFindAllUsers() throws SQLException, DataBaseException {
+    	List<Usuario> users = new ArrayList<Usuario>();
+    	users.add(anUser());
+        when(hibernateTemplate.loadAll(Usuario.class)).thenReturn(users);
+        			
+        List<Usuario>expectedUsers = usuarioRepository.findAll();
+        
+		assertThat(users.size(), is(equalTo(expectedUsers.size())));
     }
     
     private Usuario anUser(){

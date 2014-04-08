@@ -7,6 +7,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -62,6 +64,17 @@ public class PacienteRepositoryTest extends UnitTest{
         Paciente patientFound = pacienteRepository.findOne(178);
 		
 		assertThat("any", is(equalTo(patientFound.getApellidos())));
+    }
+    
+    @Test
+    public void canFindAllPatients() throws SQLException, DataBaseException {
+    	List<Paciente> patients = new ArrayList<Paciente>();
+    	patients.add(aPatient());
+        when(hibernateTemplate.loadAll(Paciente.class)).thenReturn(patients);
+        			
+        List<Paciente>expectedPatients = pacienteRepository.findAll();
+        
+		assertThat(patients, is(equalTo(expectedPatients)));
     }
     
     private Paciente aPatient(){

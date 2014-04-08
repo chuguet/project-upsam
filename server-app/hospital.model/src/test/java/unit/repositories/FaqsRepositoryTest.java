@@ -7,10 +7,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -71,12 +69,13 @@ public class FaqsRepositoryTest extends UnitTest{
     
     @Test
     public void canFindAllFaqs() throws SQLException, DataBaseException {
-    	List<Faqs> faqs = null;
+    	List<Faqs> faqs = new ArrayList<Faqs>();
+    	faqs.add(aFaqs());
         when(hibernateTemplate.loadAll(Faqs.class)).thenReturn(faqs);
         			
         List<Faqs>expectedFaqs = faqsRepository.findAll();
         
-		assertThat(faqs, is(equalTo(expectedFaqs)));
+		assertThat(faqs.size(), is(equalTo(expectedFaqs.size())));
     }
     
     private Faqs aFaqs(){

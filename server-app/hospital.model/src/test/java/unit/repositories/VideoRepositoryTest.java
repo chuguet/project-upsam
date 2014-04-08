@@ -7,10 +7,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -71,7 +69,8 @@ public class VideoRepositoryTest extends UnitTest{
     
     @Test
     public void canFindAllVideos() throws SQLException, DataBaseException {
-    	List<Paciente> patients = null;
+    	List<Paciente> patients = new ArrayList<Paciente>();
+    	patients.add(aPatient());
         when(hibernateTemplate.loadAll(Paciente.class)).thenReturn(patients);
         			
         List<Paciente>expectedPatients = videoRepository.findAll();
