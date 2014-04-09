@@ -1,4 +1,4 @@
-package unit.repositories;
+package com.upsam.hospital.model.repository.impl;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
@@ -19,15 +19,13 @@ import unit.UnitTest;
 
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.IFicheroEMTRepository;
-import com.upsam.hospital.model.repository.impl.FicheroEMTRepository;
 
 public class FicheroEMTRepositoryTest extends UnitTest{
 
     @Mock
     private HibernateTemplate hibernateTemplate;
     @InjectMocks
-    private IFicheroEMTRepository ficheroEMTRepository = new FicheroEMTRepository();
+    private FicheroEMTRepository ficheroEMTRepository;
 
     @Test
     public void canSaveAnEMTFile() throws SQLException, DataBaseException {

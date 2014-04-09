@@ -1,6 +1,7 @@
-package unit.repositories;
+package com.upsam.hospital.model.repository.impl;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -17,18 +18,15 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import unit.UnitTest;
 
-import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Usuario;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.IUsuarioRepository;
-import com.upsam.hospital.model.repository.impl.UsuarioRepository;
 
 public class UsuarioRepositoryTest extends UnitTest{
 
     @Mock
     private HibernateTemplate hibernateTemplate;
     @InjectMocks
-    private IUsuarioRepository usuarioRepository = new UsuarioRepository();
+    private UsuarioRepository usuarioRepository;
 
     @Test
     public void canSaveAPatient() throws SQLException, DataBaseException {

@@ -1,4 +1,4 @@
-package unit.repositories;
+package com.upsam.hospital.model.repository.impl;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
@@ -19,14 +19,13 @@ import unit.UnitTest;
 
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.impl.PacienteRepository;
 
 public class PacienteRepositoryTest extends UnitTest{
 
     @Mock
     private HibernateTemplate hibernateTemplate;
     @InjectMocks
-    private PacienteRepository pacienteRepository = new PacienteRepository();
+    private PacienteRepository pacienteRepository;
 
     @Test
     public void canSaveAPatient() throws SQLException, DataBaseException {

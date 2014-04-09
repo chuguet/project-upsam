@@ -1,4 +1,4 @@
-package unit.services;
+package com.upsam.hospital.model.service.impl;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -15,15 +15,13 @@ import unit.UnitTest;
 import com.upsam.hospital.model.beans.Usuario;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.repository.IUsuarioRepository;
-import com.upsam.hospital.model.service.IUsuarioService;
-import com.upsam.hospital.model.service.impl.UsuarioService;
 
 public class UserServiceTest extends UnitTest{
 
     @Mock
     private IUsuarioRepository usuarioRepository;
     @InjectMocks
-    private IUsuarioService usuarioService = new UsuarioService();
+    private UsuarioService usuarioService;
      
     @Test
     public void canSaveAnUser() throws SQLException, DataBaseException {

@@ -1,4 +1,4 @@
-package unit.repositories;
+package com.upsam.hospital.model.repository.impl;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -16,15 +16,13 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import unit.UnitTest;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.IVideoRepository;
-import com.upsam.hospital.model.repository.impl.VideoRepository;
 
 public class VideoRepositoryTest extends UnitTest {
 
 	@Mock
 	private HibernateTemplate hibernateTemplate;
 	@InjectMocks
-	private IVideoRepository videoRepository = new VideoRepository();
+	private VideoRepository videoRepository;
 
 	@Test
 	public void canSaveAVideo() throws SQLException, DataBaseException {

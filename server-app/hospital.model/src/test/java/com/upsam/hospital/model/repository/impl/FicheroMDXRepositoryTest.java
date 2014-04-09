@@ -1,4 +1,4 @@
-package unit.repositories;
+package com.upsam.hospital.model.repository.impl;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
@@ -19,15 +19,13 @@ import unit.UnitTest;
 
 import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.IFicheroMDXRepository;
-import com.upsam.hospital.model.repository.impl.FicheroMDXRepository;
 
 public class FicheroMDXRepositoryTest extends UnitTest{
 
     @Mock
     private HibernateTemplate hibernateTemplate;
     @InjectMocks
-    private IFicheroMDXRepository ficheroMDXRepository = new FicheroMDXRepository();
+    private FicheroMDXRepository ficheroMDXRepository;
 
     @Test
     public void canSaveAMDXFile() throws SQLException, DataBaseException {

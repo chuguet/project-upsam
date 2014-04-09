@@ -1,4 +1,4 @@
-package unit.services;
+package com.upsam.hospital.model.service.impl;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -16,15 +16,13 @@ import java.util.List;
 import com.upsam.hospital.model.beans.Faqs;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.repository.IFaqsRepository;
-import com.upsam.hospital.model.service.IFaqsService;
-import com.upsam.hospital.model.service.impl.FaqsService;
 
 public class FaqsServiceTest extends UnitTest{
 
     @Mock
     private IFaqsRepository faqsRepository;
     @InjectMocks
-    private IFaqsService faqsService = new FaqsService();
+    private FaqsService faqsService;
      
     @Test
     public void canSaveAFaq() throws SQLException, DataBaseException {

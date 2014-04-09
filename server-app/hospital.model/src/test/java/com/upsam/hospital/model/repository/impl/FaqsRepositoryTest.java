@@ -1,4 +1,4 @@
-package unit.repositories;
+package com.upsam.hospital.model.repository.impl;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
@@ -10,16 +10,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
 import unit.UnitTest;
 
 import com.upsam.hospital.model.beans.Faqs;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.IFaqsRepository;
 import com.upsam.hospital.model.repository.impl.FaqsRepository;
 
 public class FaqsRepositoryTest extends UnitTest{
@@ -27,7 +28,12 @@ public class FaqsRepositoryTest extends UnitTest{
     @Mock
     private HibernateTemplate hibernateTemplate;
     @InjectMocks
-    private IFaqsRepository faqsRepository = new FaqsRepository();
+    private FaqsRepository faqsRepository;
+    
+    @Before
+    public void SetUp(){
+    	MockitoAnnotations.initMocks(hibernateTemplate);
+    }
 
     @Test
     public void canSaveAFaq() throws SQLException, DataBaseException {
