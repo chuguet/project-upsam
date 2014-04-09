@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * The Class AngleDTO.
  */
-public class AngleDTO extends AbstractDTO {
+public class AngleDTO {
 
 	/** The name. */
 	private String name;

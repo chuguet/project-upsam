@@ -116,7 +116,7 @@ public class PacienteController {
 	 *            the id
 	 * @return the fichero emtdto
 	 */
-	@RequestMapping(value = "{idPaciente}/ficheroEMT/{id}")
+	@RequestMapping(value = "/ficheroEMT/{id}")
 	public @ResponseBody
 	FicheroEMTDTO ficheroEMT(@PathVariable("id") Integer id) {
 		FicheroEMTDTO result = null;
