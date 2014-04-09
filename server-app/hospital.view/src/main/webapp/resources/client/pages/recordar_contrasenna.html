@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Recordar Contrase&ntilde;a - Laboratorio de An&acute;lisis de Movimientos</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
+		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
+		
+		<script type="text/javascript" src="../cordova.js"></script>
+		<script type="text/javascript" src="../index.js"></script>		
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
+		<script type="text/javascript" src="../js/server.js"></script>	
+		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
+		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>				
+		
+		<script type="text/javascript">
+			var recordarPassword = {
+				'initialize' : function(){
+					$("#containerPassword").hide();
+				},
+				'enviarUsuarioEmail' : function(){
+					if ($("#txtUsuario").val().length == 0){
+						generic.alert("Error de recordatorio", "Debe introducir su usuario o contraseña");
+						return;
+					}
+					var params = {value : $("#txtUsuario").val()};
+					server.post('usuario/forget', params, recordarPassword.enviarUsuarioEmailCallback);
+				},
+				'enviarUsuarioEmailCallback' : function(parameters) {
+					if (parameters.correcto){
+						$("#containerUsuarioEmail").hide();
+						$("#containerPassword").show();
+					}
+				},
+				'enviarNuevoPassword' : function(){
+					
+				},
+				'enviarNuevoPasswordCallback' : function(parameters){
+					
+				}
+			};
+		
+			generic.initialize(recordarPassword.initialize);
+			
+		</script>
+	</head>
+
+	<body>
+		<div data-role="page" id="page1">
+			<!-- Cabecera -->
+			<div data-role="header" >                    
+				<h3>Recordar Contrase&ntilde;a - LAM</h3>
+				<a data-rel="back" data-icon="back">Volver</a>
+			</div>
+			
+			<!-- contenido -->
+			<div data-role="content">				
+				<h1>Recordar Contrase&ntilde;a</h1>		
+				<div id="containerUsuarioEmail" class="content2">
+					<label for="txtUsuario">Introduzca su usuario/email</label>
+					<input type="text" id="txtUsuario" name="txtUsuario"/>	
+					<ul data-role="listview" data-inset="true" data-filter="false" data-theme="b">						
+						<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:recordarPassword.enviarUsuarioEmail();">Enviar usuario/email</a></li>
+					</ul>
+				</div>
+				<div id="containerPassword" class="content2">
+					<label for="txtToken">Llave de seguridad</label>
+					<input type="text" id="txtToken" name="txtToken"/>
+					<label for="txtToken">Contrase&ntilde;a nueva</label>
+					<input type="password" id="txtPassword" name="txtPassword"/>
+					<label for="txtToken">Repetir contrase&ntilde;a</label>
+					<input type="password" id="txtPasswordNueva" name="txtPasswordNueva"/>
+					<ul data-role="listview" data-inset="true" data-filter="false" data-theme="b">						
+						<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:recordarPassword.enviarNuevoPassword();">Enviar nueva contrase&ntilde;a</a></li>
+					</ul>					
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<div data-role="footer" data-position="inline" data-theme="c">
+				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>		
+			</div>							
+		</div>
+	</body>
+</html>

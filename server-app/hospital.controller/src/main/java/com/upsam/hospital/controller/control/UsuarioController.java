@@ -66,7 +66,8 @@ public class UsuarioController {
 				usuario.setGenerate_token(new Date());
 				usuario.setToken(token);
 				usuarioService.update(usuario);
-				result = new MensajeDTO(new StringBuffer("Se le ha enviado un correo electr&oacute;nico a ").append(usuario.getEmail()).toString(), true);
+				String message = new StringBuffer("Se le ha enviado un correo electr&oacute;nico a ").append(usuario.getEmail()).append(" con la clave de seguridad. Introdúzcala junto con la nueva contraseña que desea utilizar").toString();
+				result = new MensajeDTO(message, true);
 			}
 		}
 		catch (DataBaseException e) {

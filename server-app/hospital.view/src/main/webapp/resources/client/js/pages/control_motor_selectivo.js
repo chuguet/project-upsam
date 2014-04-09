@@ -15,6 +15,6 @@ var control_motor_selectivo = {
 			controlMotorSelectivo : $("#valoracionCtrlMotor").val()
 		};
 
-		server.post(pacienteDTO.id, pacienteDTO, null);
+		server.post("paciente/" + pacienteDTO.id, pacienteDTO, null);
 	}
 };
