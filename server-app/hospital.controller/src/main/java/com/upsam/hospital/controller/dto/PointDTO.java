@@ -4,27 +4,28 @@ package com.upsam.hospital.controller.dto;
 /**
  * The Class PointDTO.
  */
-public class PointDTO extends AbstractDTO {
+public class PointDTO {
 
-	/** The coord. */
-	private String coord;
+	/** The c. */
+	private String c;
 
 	/**
-	 * Gets the coord.
+	 * Gets the c.
 	 * 
-	 * @return the coord
+	 * @return the c
 	 */
-	public String getCoord() {
-		return coord;
+	public String getC() {
+		return c;
 	}
 
 	/**
-	 * Sets the coord.
+	 * Sets the c.
 	 * 
-	 * @param coord
-	 *            the new coord
+	 * @param c
+	 *            the new c
 	 */
-	public void setCoord(String coord) {
-		this.coord = coord;
+	public void setC(String c) {
+		this.c = c;
 	}
+
 }

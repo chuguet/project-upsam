@@ -61,16 +61,13 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 		result.setTipoMedida(ficheroEMT.getTipoMedida().getNameId());
 		result.setUnidadMedida(ficheroEMT.getUnidadMedida().getNameId());
 		TablaDatosDTO tablaDatosDTO = new TablaDatosDTO();
-		tablaDatosDTO.setId(ficheroEMT.getTablaDatos().getId());
 		result.setTablaDatos(tablaDatosDTO);
 		for (Angle angle : ficheroEMT.getTablaDatos().getAngles()) {
 			angleDTO = new AngleDTO();
-			angleDTO.setId(angle.getId());
 			angleDTO.setName(angle.getName());
 			for (Point point : angle.getPoints()) {
 				pointDTO = new PointDTO();
-				pointDTO.setId(point.getId());
-				pointDTO.setCoord(point.getCoord());
+				pointDTO.setC(point.getCoord());
 				angleDTO.addPointDTO(pointDTO);
 			}
 			tablaDatosDTO.addAngleDTO(angleDTO);

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * The Class TablaDatosDTO.
  */
-public class TablaDatosDTO extends AbstractDTO {
+public class TablaDatosDTO {
 
 	/** The angles. */
 	private List<AngleDTO> anglesDTO;
