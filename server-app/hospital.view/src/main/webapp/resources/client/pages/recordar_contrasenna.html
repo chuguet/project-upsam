@@ -16,36 +16,9 @@
 		<script type="text/javascript" src="../js/server.js"></script>	
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
 		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>				
-		
+		<script type="text/javascript" src='../js/pages/recordar_contrasenna.js'></script>	
 		<script type="text/javascript">
-			var recordarPassword = {
-				'initialize' : function(){
-					$("#containerPassword").hide();
-				},
-				'enviarUsuarioEmail' : function(){
-					if ($("#txtUsuario").val().length == 0){
-						generic.alert("Error de recordatorio", "Debe introducir su usuario o contraseña");
-						return;
-					}
-					var params = {value : $("#txtUsuario").val()};
-					server.post('usuario/forget', params, recordarPassword.enviarUsuarioEmailCallback);
-				},
-				'enviarUsuarioEmailCallback' : function(parameters) {
-					if (parameters.correcto){
-						$("#containerUsuarioEmail").hide();
-						$("#containerPassword").show();
-					}
-				},
-				'enviarNuevoPassword' : function(){
-					
-				},
-				'enviarNuevoPasswordCallback' : function(parameters){
-					
-				}
-			};
-		
 			generic.initialize(recordarPassword.initialize);
-			
 		</script>
 	</head>
 
@@ -70,9 +43,9 @@
 				<div id="containerPassword" class="content2">
 					<label for="txtToken">Llave de seguridad</label>
 					<input type="text" id="txtToken" name="txtToken"/>
-					<label for="txtToken">Contrase&ntilde;a nueva</label>
+					<label for="txtPassword">Contrase&ntilde;a nueva</label>
 					<input type="password" id="txtPassword" name="txtPassword"/>
-					<label for="txtToken">Repetir contrase&ntilde;a</label>
+					<label for="txtPasswordNueva">Repetir contrase&ntilde;a</label>
 					<input type="password" id="txtPasswordNueva" name="txtPasswordNueva"/>
 					<ul data-role="listview" data-inset="true" data-filter="false" data-theme="b">						
 						<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:recordarPassword.enviarNuevoPassword();">Enviar nueva contrase&ntilde;a</a></li>
