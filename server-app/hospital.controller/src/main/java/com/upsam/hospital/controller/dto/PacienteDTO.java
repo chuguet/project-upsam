@@ -38,6 +38,9 @@ public class PacienteDTO extends AbstractDTO {
 	/** The sexo. */
 	private String sexo;
 
+	/** The telefono. */
+	private String telefono;
+
 	/**
 	 * Gets the apellidos.
 	 * 
@@ -126,6 +129,15 @@ public class PacienteDTO extends AbstractDTO {
 	 */
 	public String getSexo() {
 		return sexo;
+	}
+
+	/**
+	 * Gets the telefono.
+	 * 
+	 * @return the telefono
+	 */
+	public String getTelefono() {
+		return telefono;
 	}
 
 	/**
@@ -226,6 +238,16 @@ public class PacienteDTO extends AbstractDTO {
 	 */
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
+	}
+
+	/**
+	 * Sets the telefono.
+	 * 
+	 * @param telefono
+	 *            the new telefono
+	 */
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 
 }

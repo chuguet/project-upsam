@@ -117,6 +117,9 @@ var usuario = {
 		if (apellidos == '') {
 			errores += '- Debe introducir los apellidos<br/>';
 		}
+		if($("input:radio[name='rol']").is(":checked")==false){
+			errores += '- Debe seleccionar un rol<br/>';
+		}
 		if (!validarEmail(email)){
 			errores += '- Debe introducir un correo electr&oacute;nico correcto<br/>';
 		}
