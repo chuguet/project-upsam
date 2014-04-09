@@ -13,7 +13,7 @@ import com.upsam.hospital.model.repository.IFicheroMDXRepository;
  * The Class FicheroMDXRepository.
  */
 @Repository
-public class FicheroMDXRepository implements IFicheroMDXRepository {
+class FicheroMDXRepository implements IFicheroMDXRepository {
 
 	/** The hibernate template. */
 	@Inject

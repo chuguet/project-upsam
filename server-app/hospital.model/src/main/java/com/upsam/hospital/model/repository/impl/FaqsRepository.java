@@ -10,7 +10,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import com.upsam.hospital.model.beans.Faqs;
 import com.upsam.hospital.model.repository.IFaqsRepository;
 
-public class FaqsRepository implements IFaqsRepository {
+class FaqsRepository implements IFaqsRepository {
 
 	@Inject
 	private HibernateTemplate hibernateTemplate;

@@ -13,7 +13,7 @@ import com.upsam.hospital.model.repository.IFicheroEMTRepository;
  * The Class FicheroEMTRepository.
  */
 @Repository
-public class FicheroEMTRepository implements IFicheroEMTRepository {
+class FicheroEMTRepository implements IFicheroEMTRepository {
 
 	/** The Constant QUERY_PACIENTE. */
 	private static final String QUERY_PACIENTE = "from FicheroEMT where id_paciente = ?";

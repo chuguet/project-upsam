@@ -13,7 +13,7 @@ import com.upsam.hospital.model.repository.IPacienteRepository;
  * The Class PacienteRepository.
  */
 @Repository
-public class PacienteRepository implements IPacienteRepository {
+class PacienteRepository implements IPacienteRepository {
 
 	/** The Constant QUERY_FINDBY_ID_NAME_SURNAME. */
 	private static final String QUERY_FINDBY_ID_NAME_SURNAME = "Select new Paciente(numeroIdentificacion,nombre,apellidos) from Paciente where (concat(NUMERO_IDENTIFICACION,' ',NOMBRE,' ',APELLIDOS) like concat('%',?,'%'))";

@@ -13,7 +13,7 @@ import com.upsam.hospital.model.repository.IVideoRepository;
  * The Class VideoRepository.
  */
 @Repository
-public class VideoRepository implements IVideoRepository {
+class VideoRepository implements IVideoRepository {
 
 	/** The hibernate template. */
 	@Inject
