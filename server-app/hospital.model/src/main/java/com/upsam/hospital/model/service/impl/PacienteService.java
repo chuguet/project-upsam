@@ -96,4 +96,14 @@ public class PacienteService implements IPacienteService {
 			throw new DataBaseException("Se ha producido un error al actualizar un paciente");
 		}
 	}
+
+	@Override
+	public List<Paciente> findByIdNameSurname(String idNameSurname) throws DataBaseException {
+		try {
+			return pacienteRepository.findByIdNameSurname(idNameSurname);
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException("Se ha producido un error al recuperar los pacientes");
+		}
+	}
 }

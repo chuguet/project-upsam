@@ -20,10 +20,12 @@ import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Angle;
+import com.upsam.hospital.model.beans.Escolarizacion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Point;
+import com.upsam.hospital.model.beans.Sexo;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
 
@@ -152,14 +154,14 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 		try {
 			paciente.setApellidos(pacienteDTO.getApellidos());
 			paciente.setCurso(pacienteDTO.getCurso());
-			paciente.setEscolarizacion(pacienteDTO.getEscolarizacion());
+			paciente.setEscolarizacion(Escolarizacion.getValue(pacienteDTO.getEscolarizacion()));
 			paciente.setExaminador(pacienteDTO.getExaminador());
-			paciente.setFechaEvaluacion(DATE_FORMATTER.parse(pacienteDTO.getFechaEvaluacion()));
+			paciente.setFechaUltimaEvaluacion(DATE_FORMATTER.parse(pacienteDTO.getFechaEvaluacion()));
 			paciente.setFechaNacimiento(DATE_FORMATTER.parse(pacienteDTO.getFechaNacimiento()));
 			paciente.setId(pacienteDTO.getId());
 			paciente.setNombre(pacienteDTO.getNombre());
 			paciente.setNumeroIdentificacion(pacienteDTO.getNumeroIdentificacion());
-			paciente.setSexo(pacienteDTO.getSexo());
+			paciente.setSexo(Sexo.getValue(pacienteDTO.getSexo()));
 		}
 		catch (ParseException e) {
 			throw new TransferObjectException(e);
@@ -178,14 +180,14 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 		PacienteDTO pacienteDTO = new PacienteDTO();
 		pacienteDTO.setApellidos(paciente.getApellidos());
 		pacienteDTO.setCurso(paciente.getCurso());
-		pacienteDTO.setEscolarizacion(paciente.getEscolarizacion());
+		pacienteDTO.setEscolarizacion(paciente.getEscolarizacion().getNameId());
 		pacienteDTO.setExaminador(paciente.getExaminador());
-		pacienteDTO.setFechaEvaluacion(DATE_FORMATTER.format(paciente.getFechaEvaluacion()));
+		pacienteDTO.setFechaEvaluacion(DATE_FORMATTER.format(paciente.getFechaUltimaEvaluacion()));
 		pacienteDTO.setFechaNacimiento(DATE_FORMATTER.format(paciente.getFechaNacimiento()));
 		pacienteDTO.setId(paciente.getId());
 		pacienteDTO.setNombre(paciente.getNombre());
 		pacienteDTO.setNumeroIdentificacion(paciente.getNumeroIdentificacion());
-		pacienteDTO.setSexo(paciente.getSexo());
+		pacienteDTO.setSexo(paciente.getSexo().getNameId());
 		return pacienteDTO;
 	}
 }

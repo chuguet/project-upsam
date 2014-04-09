@@ -3,6 +3,7 @@ package com.upsam.hospital.model.tests;
 import static org.junit.Assert.assertNotNull;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
 import org.junit.Test;
@@ -79,5 +80,11 @@ public class ServicePacienteTest extends AbstractTest {
 		}
 		System.out.println(paciente.getNumeroIdentificacion());
 
+	}
+
+	@Test
+	public void testPacienteMovil() throws DataBaseException {
+		List<Paciente> pacientes = pacienteService.findByIdNameSurname("123 Carlos Huguet");
+		System.out.println(pacientes.get(0).getNombre());
 	}
 }

@@ -1,87 +1,84 @@
 package unit.repositories;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.orm.hibernate3.HibernateTemplate;
-
 import unit.UnitTest;
-
-import com.upsam.hospital.model.beans.Paciente;
+import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.IPacienteRepository;
+import com.upsam.hospital.model.repository.IVideoRepository;
 import com.upsam.hospital.model.repository.impl.VideoRepository;
 
-public class VideoRepositoryTest extends UnitTest{
+public class VideoRepositoryTest extends UnitTest {
 
-    @Mock
-    private HibernateTemplate hibernateTemplate;
-    @InjectMocks
-    private IPacienteRepository videoRepository = new VideoRepository();
+	@Mock
+	private HibernateTemplate hibernateTemplate;
+	@InjectMocks
+	private IVideoRepository videoRepository = new VideoRepository();
 
-    @Test
-    public void canSaveAVideo() throws SQLException, DataBaseException {
-        Paciente paciente = aPatient();
-        			
-        videoRepository.save(paciente);
-		
+	@Test
+	public void canSaveAVideo() throws SQLException, DataBaseException {
+		Video paciente = aVideo();
+
+		videoRepository.save(paciente);
+
 		verify(hibernateTemplate, times(1)).save(paciente);
-    }
-    
-    @Test
-    public void canUpdateAVideo() throws SQLException, DataBaseException {
-    	Paciente paciente = aPatient();
-    	paciente.setApellidos("upsam");
-        			
-    	videoRepository.update(paciente);
-		
-		verify(hibernateTemplate, times(1)).update(paciente);
-    }
-    
-    @Test
-    public void canDeleteAVideo() throws SQLException, DataBaseException {
-    	Paciente paciente = aPatient();
-        			
-    	videoRepository.delete(paciente);
-		
-		verify(hibernateTemplate, times(1)).delete(paciente);
-    }
-    
-    @Test
-    public void canFindAVideo() throws SQLException, DataBaseException {
-    	Paciente paciente = aPatient();
-        when(hibernateTemplate.get(Paciente.class,178)).thenReturn(paciente);
-        			
-        Paciente expectedPatient = videoRepository.findOne(178);
-        
-		assertThat("any", is(equalTo(expectedPatient.getApellidos())));
-    }
-    
-    @Test
-    public void canFindAllVideos() throws SQLException, DataBaseException {
-    	List<Paciente> patients = new ArrayList<Paciente>();
-    	patients.add(aPatient());
-        when(hibernateTemplate.loadAll(Paciente.class)).thenReturn(patients);
-        			
-        List<Paciente>expectedPatients = videoRepository.findAll();
-        
-		assertThat(patients, is(equalTo(expectedPatients)));
-    }
-    
-    private Paciente aPatient(){
-    	Paciente p = new Paciente();
-		p.setId(178);
-		p.setApellidos("any");
-		return p;
-    }
+	}
+
+	@Test
+	public void canUpdateAVideo() throws SQLException, DataBaseException {
+		Video video = aVideo();
+		video.setDescripcion("upsam");
+
+		videoRepository.update(video);
+
+		verify(hibernateTemplate, times(1)).update(video);
+	}
+
+	@Test
+	public void canDeleteAVideo() throws SQLException, DataBaseException {
+		Video video = aVideo();
+
+		videoRepository.delete(video);
+
+		verify(hibernateTemplate, times(1)).delete(video);
+	}
+
+	@Test
+	public void canFindAVideo() throws SQLException, DataBaseException {
+		Video video = aVideo();
+		when(hibernateTemplate.get(Video.class, 178)).thenReturn(video);
+
+		Video expectedVideo = videoRepository.findOne(178);
+
+		assertThat("any", is(equalTo(expectedVideo.getDescripcion())));
+	}
+
+	@Test
+	public void canFindAllVideos() throws SQLException, DataBaseException {
+		List<Video> videos = new ArrayList<Video>();
+		videos.add(aVideo());
+		when(hibernateTemplate.loadAll(Video.class)).thenReturn(videos);
+
+		List<Video> expectedVideos = videoRepository.findAll();
+
+		assertThat(videos, is(equalTo(expectedVideos)));
+	}
+
+	private Video aVideo() {
+		Video v = new Video();
+		v.setId(178);
+		v.setDescripcion("any");
+		return v;
+	}
 }

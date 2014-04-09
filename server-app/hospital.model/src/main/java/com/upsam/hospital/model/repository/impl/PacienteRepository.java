@@ -2,12 +2,9 @@ package com.upsam.hospital.model.repository.impl;
 
 import java.sql.SQLException;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.repository.IPacienteRepository;
 
@@ -18,13 +15,15 @@ import com.upsam.hospital.model.repository.IPacienteRepository;
 @Repository
 public class PacienteRepository implements IPacienteRepository {
 
+	/** The Constant QUERY_FINDBY_ID_NAME_SURNAME. */
+	private static final String QUERY_FINDBY_ID_NAME_SURNAME = "Select new Paciente(numeroIdentificacion,nombre,apellidos) from Paciente where (concat(NUMERO_IDENTIFICACION,' ',NOMBRE,' ',APELLIDOS) like concat('%',?,'%'))";
+
 	/** The hibernate template. */
 	@Inject
 	private HibernateTemplate hibernateTemplate;
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * com.upsam.hospital.model.repository.IRepositoryDAO#delete(com.upsam.hospital
 	 * .model.beans.IModelHospital)
@@ -36,7 +35,6 @@ public class PacienteRepository implements IPacienteRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see com.upsam.hospital.model.repository.IRepositoryDAO#findAll()
 	 */
 	@Override
@@ -46,7 +44,6 @@ public class PacienteRepository implements IPacienteRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * com.upsam.hospital.model.repository.IRepositoryDAO#findOne(java.lang.
 	 * Integer)
@@ -58,7 +55,6 @@ public class PacienteRepository implements IPacienteRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * com.upsam.hospital.model.repository.IRepositoryDAO#save(com.upsam.hospital
 	 * .model.beans.IModelHospital)
@@ -70,7 +66,6 @@ public class PacienteRepository implements IPacienteRepository {
 
 	/*
 	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * com.upsam.hospital.model.repository.IRepositoryDAO#update(com.upsam.hospital
 	 * .model.beans.IModelHospital)
@@ -78,6 +73,18 @@ public class PacienteRepository implements IPacienteRepository {
 	@Override
 	public void update(Paciente paciente) throws SQLException {
 		hibernateTemplate.update(paciente);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.repository.IPacienteRepository#findByIdNameSurname
+	 * (java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Paciente> findByIdNameSurname(String idNameSurname) throws SQLException {
+		return hibernateTemplate.find(QUERY_FINDBY_ID_NAME_SURNAME, idNameSurname);
 	}
 
 }

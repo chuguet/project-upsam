@@ -40,34 +40,28 @@ public class Paciente implements IModelHospital {
 	/** The escolarizacion. */
 	@Basic
 	@Column(name = "ESCOLARIZACION")
-	private String escolarizacion;
+	private Escolarizacion escolarizacion;
 
 	/** The examinador. */
 	@Basic
 	@Column(name = "EXAMINADOR")
 	private String examinador;
 
+	/** The email. */
+	@Basic
+	@Column(name = "FECHA_NACIMIENTO")
+	private Date fechaNacimiento;
+
+	/** The fecha evaluacion. */
+	@Basic
+	@Column(name = "FECHA_ULTIMA_EVALUACION")
+	private Date fechaUltimaEvaluacion;
+
 	/** The fichero emt. */
 	@OneToMany(mappedBy = "paciente")
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<FicheroEMT> ficheroEMT;
-
-	/** The exploracion3 d. */
-	@OneToMany(mappedBy = "paciente")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Video> videos;
-
-	/** The fecha evaluacion. */
-	@Basic
-	@Column(name = "FECHA_EVALUACION")
-	private Date fechaEvaluacion;
-
-	/** The email. */
-	@Basic
-	@Column(name = "FECHA_NACIMIENTO")
-	private Date fechaNacimiento;
 
 	/** The fichero mdx. */
 	@OneToMany(mappedBy = "paciente")
@@ -94,7 +88,41 @@ public class Paciente implements IModelHospital {
 	/** The sexo. */
 	@Basic
 	@Column(name = "SEXO")
-	private String sexo;
+	private Sexo sexo;
+
+	/** The telefono. */
+	@Basic
+	@Column(name = "TELEFONO")
+	private String telefono;
+
+	/** The exploracion3 d. */
+	@OneToMany(mappedBy = "paciente")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Video> videos;
+
+	/**
+	 * Instantiates a new paciente.
+	 */
+	public Paciente() {
+
+	}
+
+	/**
+	 * Instantiates a new paciente.
+	 * 
+	 * @param pNumeroIdentificacion
+	 *            the numero identificacion
+	 * @param pNombre
+	 *            the nombre
+	 * @param pApellidos
+	 *            the apellidos
+	 */
+	public Paciente(String numeroIdentificacion, String nombre, String apellidos) {
+		this.numeroIdentificacion = numeroIdentificacion;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+	}
 
 	/**
 	 * Adds the fichero emt.
@@ -110,19 +138,6 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
-	 * Adds the video.
-	 * 
-	 * @param video
-	 *            the video
-	 */
-	public void addVideo(Video video) {
-		if (this.getVideos() == null) {
-			this.setVideos(new ArrayList<Video>());
-		}
-		this.getVideos().add(video);
-	}
-
-	/**
 	 * Adds the fichero mdx.
 	 * 
 	 * @param ficheroMDX
@@ -133,6 +148,19 @@ public class Paciente implements IModelHospital {
 			this.setFicheroMDX(new ArrayList<FicheroMDX>());
 		}
 		this.getFicheroMDX().add(ficheroMDX);
+	}
+
+	/**
+	 * Adds the video.
+	 * 
+	 * @param video
+	 *            the video
+	 */
+	public void addVideo(Video video) {
+		if (this.getVideos() == null) {
+			this.setVideos(new ArrayList<Video>());
+		}
+		this.getVideos().add(video);
 	}
 
 	/**
@@ -158,7 +186,7 @@ public class Paciente implements IModelHospital {
 	 * 
 	 * @return the escolarizacion
 	 */
-	public String getEscolarizacion() {
+	public Escolarizacion getEscolarizacion() {
 		return escolarizacion;
 	}
 
@@ -172,39 +200,30 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
-	 * Gets the fichero emt.
-	 * 
-	 * @return the fichero emt
-	 */
-	public List<FicheroEMT> getFicheroEMT() {
-		return ficheroEMT;
-	}
-
-	/**
-	 * Gets the videos.
-	 * 
-	 * @return the videos
-	 */
-	public List<Video> getVideos() {
-		return this.videos;
-	}
-
-	/**
-	 * Gets the fecha evaluacion.
-	 * 
-	 * @return the fecha evaluacion
-	 */
-	public Date getFechaEvaluacion() {
-		return fechaEvaluacion;
-	}
-
-	/**
 	 * Gets the fecha nacimiento.
 	 * 
 	 * @return the fecha nacimiento
 	 */
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
+	}
+
+	/**
+	 * Gets the fecha ultima evaluacion.
+	 * 
+	 * @return the fecha ultima evaluacion
+	 */
+	public Date getFechaUltimaEvaluacion() {
+		return fechaUltimaEvaluacion;
+	}
+
+	/**
+	 * Gets the fichero emt.
+	 * 
+	 * @return the fichero emt
+	 */
+	public List<FicheroEMT> getFicheroEMT() {
+		return ficheroEMT;
 	}
 
 	/**
@@ -248,8 +267,26 @@ public class Paciente implements IModelHospital {
 	 * 
 	 * @return the sexo
 	 */
-	public String getSexo() {
+	public Sexo getSexo() {
 		return sexo;
+	}
+
+	/**
+	 * Gets the telefono.
+	 * 
+	 * @return the telefono
+	 */
+	public String getTelefono() {
+		return telefono;
+	}
+
+	/**
+	 * Gets the videos.
+	 * 
+	 * @return the videos
+	 */
+	public List<Video> getVideos() {
+		return this.videos;
 	}
 
 	/**
@@ -278,7 +315,7 @@ public class Paciente implements IModelHospital {
 	 * @param escolarizacion
 	 *            the new escolarizacion
 	 */
-	public void setEscolarizacion(String escolarizacion) {
+	public void setEscolarizacion(Escolarizacion escolarizacion) {
 		this.escolarizacion = escolarizacion;
 	}
 
@@ -293,36 +330,6 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
-	 * Sets the fichero emt.
-	 * 
-	 * @param ficheroEMT
-	 *            the new fichero emt
-	 */
-	public void setFicheroEMT(List<FicheroEMT> ficheroEMT) {
-		this.ficheroEMT = ficheroEMT;
-	}
-
-	/**
-	 * Sets the videos.
-	 * 
-	 * @param videos
-	 *            the new videos
-	 */
-	public void setVideos(List<Video> videos) {
-		this.videos = videos;
-	}
-
-	/**
-	 * Sets the fecha evaluacion.
-	 * 
-	 * @param fechaEvaluacion
-	 *            the new fecha evaluacion
-	 */
-	public void setFechaEvaluacion(Date fechaEvaluacion) {
-		this.fechaEvaluacion = fechaEvaluacion;
-	}
-
-	/**
 	 * Sets the fecha nacimiento.
 	 * 
 	 * @param fechaNacimiento
@@ -330,6 +337,26 @@ public class Paciente implements IModelHospital {
 	 */
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	/**
+	 * Sets the fecha ultima evaluacion.
+	 * 
+	 * @param fechaUltimaEvaluacion
+	 *            the new fecha ultima evaluacion
+	 */
+	public void setFechaUltimaEvaluacion(Date fechaUltimaEvaluacion) {
+		this.fechaUltimaEvaluacion = fechaUltimaEvaluacion;
+	}
+
+	/**
+	 * Sets the fichero emt.
+	 * 
+	 * @param ficheroEMT
+	 *            the new fichero emt
+	 */
+	public void setFicheroEMT(List<FicheroEMT> ficheroEMT) {
+		this.ficheroEMT = ficheroEMT;
 	}
 
 	/**
@@ -378,8 +405,28 @@ public class Paciente implements IModelHospital {
 	 * @param sexo
 	 *            the new sexo
 	 */
-	public void setSexo(String sexo) {
+	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
+	}
+
+	/**
+	 * Sets the telefono.
+	 * 
+	 * @param telefono
+	 *            the new telefono
+	 */
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	/**
+	 * Sets the videos.
+	 * 
+	 * @param videos
+	 *            the new videos
+	 */
+	public void setVideos(List<Video> videos) {
+		this.videos = videos;
 	}
 
 }
