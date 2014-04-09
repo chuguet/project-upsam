@@ -7,9 +7,9 @@ package com.upsam.hospital.model.beans;
 public enum Escolarizacion {
 
 	/** The educacion especial. */
-	EDUCACION_ESPECIAL("Educaci&oacute;n especial"),
+	EDUCACION_ESPECIAL("Educacion especial"),
 	/** The integracion. */
-	INTEGRACION("Integraci&oacute;n"),
+	INTEGRACION("Integracion"),
 	/** The sin adaptaciones. */
 	SIN_ADAPTACIONES("Sin adaptaciones");
 

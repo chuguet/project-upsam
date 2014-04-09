@@ -92,6 +92,9 @@ var paciente = {
 	},
 
 	'formatForm' : function() {
+		$("#escolarizacion").buttonset();
+		$("#sexo").buttonset();
+		
 		$("#btnCancel").button().click(function() {
 			generic.getList('paciente');
 		});
@@ -212,11 +215,12 @@ var paciente = {
 		var nombre = $("input[id=nombre]").val();
 		var apellidos = $("input[id=apellidos]").val();
 		var curso = $("input[id=curso]").val();
-		var escolarizacion = $("input[id=escolarizacion]").val();
+		var escolarizacion = $("input:radio[name='escolarizacion']:checked").val();
 		var examinador = $("input[id=examinador]").val();
 		var fechaEvaluacion = $("input[id=fechaEvaluacion]").val();
 		var fechaNacimiento = $("input[id=fechaNacimiento]").val();
-		var sexo = $("input[id=sexo]").val();
+		var sexo = $("input:radio[name='sexo']:checked").val();
+		var telefono = $("input[id=telefono]").val();
 		var fichero = $("input[id=fichero]").val();
 
 		var errores = '';
@@ -226,17 +230,14 @@ var paciente = {
 		if (apellidos == '') {
 			errores += '- Debe introducir los apellidos<br/>';
 		}
-		if (sexo == '') {
-			errores += '- Debe introducir el sexo<br/>';
+		if ($("input[name='sexo']").is(":checked")==false) {
+			errores += '- Debe seleccionar el sexo<br/>';
 		}
-		if (fechaEvaluacion == '') {
-			errores += '- Debe introducir la fecha de evaluaci&oacute;n<br/>';
+		if ($("input[name='escolarizacion']").is(":checked")==false) {
+			errores += '- Debe seleccionar la escolarizaci&oacute;n<br/>';
 		}
 		if (fechaNacimiento == '') {
 			errores += '- Debe introducir la fecha de nacimiento<br/>';
-		}
-		if (escolarizacion == '') {
-			errores += '- Debe introducir la escolarizaci&oacute;n<br/>';
 		}
 		if (examinador == '') {
 			errores += '- Debe introducir un examinador<br/>';
@@ -246,6 +247,9 @@ var paciente = {
 		}
 		if (numeroIdentificacion == ''){
 			errores += '- Debe introducir el n&uacute;mero de identificaci&oacute;n<br/>';
+		}
+		if (telefono == ''){
+			errores += '- Debe introducir el n&uacute;mero de telef&oacute;no<br/>';
 		}
 		if (errores != '') {
 			generic.alert(errores, "Validaci&oacute;n");
@@ -263,6 +267,7 @@ var paciente = {
 				fechaEvaluacion : fechaEvaluacion,
 				fechaNacimiento : fechaNacimiento,
 				sexo : sexo,
+				telefono : telefono,
 				fichero : fichero
 			};
 			return data;

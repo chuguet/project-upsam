@@ -156,12 +156,15 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 			paciente.setCurso(pacienteDTO.getCurso());
 			paciente.setEscolarizacion(Escolarizacion.getValue(pacienteDTO.getEscolarizacion()));
 			paciente.setExaminador(pacienteDTO.getExaminador());
-			paciente.setFechaUltimaEvaluacion(DATE_FORMATTER.parse(pacienteDTO.getFechaEvaluacion()));
+			if (!pacienteDTO.getFechaEvaluacion().isEmpty()) {
+				paciente.setFechaUltimaEvaluacion(DATE_FORMATTER.parse(pacienteDTO.getFechaEvaluacion()));
+			}
 			paciente.setFechaNacimiento(DATE_FORMATTER.parse(pacienteDTO.getFechaNacimiento()));
 			paciente.setId(pacienteDTO.getId());
 			paciente.setNombre(pacienteDTO.getNombre());
 			paciente.setNumeroIdentificacion(pacienteDTO.getNumeroIdentificacion());
 			paciente.setSexo(Sexo.getValue(pacienteDTO.getSexo()));
+			paciente.setTelefono(pacienteDTO.getTelefono());
 		}
 		catch (ParseException e) {
 			throw new TransferObjectException(e);
@@ -182,12 +185,15 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 		pacienteDTO.setCurso(paciente.getCurso());
 		pacienteDTO.setEscolarizacion(paciente.getEscolarizacion().getNameId());
 		pacienteDTO.setExaminador(paciente.getExaminador());
-		pacienteDTO.setFechaEvaluacion(DATE_FORMATTER.format(paciente.getFechaUltimaEvaluacion()));
+		if (paciente.getFechaUltimaEvaluacion() != null) {
+			pacienteDTO.setFechaEvaluacion(DATE_FORMATTER.format(paciente.getFechaUltimaEvaluacion()));
+		}
 		pacienteDTO.setFechaNacimiento(DATE_FORMATTER.format(paciente.getFechaNacimiento()));
 		pacienteDTO.setId(paciente.getId());
 		pacienteDTO.setNombre(paciente.getNombre());
 		pacienteDTO.setNumeroIdentificacion(paciente.getNumeroIdentificacion());
 		pacienteDTO.setSexo(paciente.getSexo().getNameId());
+		pacienteDTO.setTelefono(paciente.getTelefono());
 		return pacienteDTO;
 	}
 }

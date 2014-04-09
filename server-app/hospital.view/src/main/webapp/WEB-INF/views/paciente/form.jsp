@@ -13,11 +13,22 @@
 		$('input[id=nombre]').val(p.nombre);
 		$('input[id=apellidos]').val(p.apellidos);
 		$('input[id=curso]').val(p.curso);
-		$('input[id=escolarizacion]').val(p.escolarizacion);
 		$('input[id=examinador]').val(p.examinador);
 		$('input[id=fechaEvaluacion]').val(p.fechaEvaluacion);
 		$('input[id=fechaNacimiento]').val(p.fechaNacimiento);
-		$('input[id=sexo]').val(p.sexo);
+		$('input[id=telefono]').val(p.telefono);
+		if(p.sexo=="Hombre"){
+			$('#hombre').prop('checked', true).button("refresh");
+		}else if (p.sexo=="Mujer"){
+			$('#mujer').prop('checked', true).button("refresh");
+		}
+		if(p.escolarizacion=="Educacion especial"){
+			$('#educacion_especial').prop('checked', true).button("refresh");
+		}else if (p.escolarizacion=="Integracion"){
+			$('#integracion').prop('checked', true).button("refresh");
+		}else if (p.escolarizacion=="Sin adaptaciones"){
+			$('#sin_adaptaciones').prop('checked', true).button("refresh");
+		}
 		paciente.prepareUploader(p.id);
 	};
 
@@ -41,23 +52,24 @@
 				<input id="apellidos" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
 			</p>
 			<p>
-				<label for="sexo">Sexo:</label>
-				<input id="sexo" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-			</p>
-			<p>
-				<label for="fechaEvaluacion">Fecha de evaluaci&oacute;n:</label>
-				<input id="fechaEvaluacion" type="textbox" maxlength="200" readonly class="text ui-widget-content ui-corner-all" />
-			</p>
-			<p>
 				<label for="fechaNacimiento">Fecha de nacimiento:</label>
 				<input id="fechaNacimiento" type="textbox" maxlength="200" readonly class="text ui-widget-content ui-corner-all" />
 			</p>
+			<p>
+				<label for="fechaEvaluacion">Fecha de &uacute;ltima evaluaci&oacute;n:</label>
+				<input id="fechaEvaluacion" type="textbox" maxlength="200" readonly class="text ui-widget-content ui-corner-all" />
+			</p>
+			<p>
+				<div id="sexo">
+					<label for="sexo">Sexo:</label>
+					<label for="hombre">Hombre</label>
+				    <input type="radio" id="hombre" name="sexo" value="Hombre"/>
+					<label for="mujer">Mujer</label>
+				    <input type="radio" id="mujer" name="sexo" value="Mujer"/>
+				</div>
+			</p>
 		</div>
 		<div class="displayTable">
-			<p>
-				<label for="escolarizacion">Escolarizaci&oacute;n:</label>
-				<input id="escolarizacion" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-			</p>
 			<p>
 				<label for="examinador">Examinador:</label>
 				<input id="examinador" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
@@ -69,6 +81,21 @@
 			<p>
 				<label for="numeroIdentificacion">N&uacute;mero de identificaci&oacute;n:</label>
 				<input id="numeroIdentificacion" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
+			</p>
+			<p>
+				<label for="telefono">N&uacute;mero de tel&eacute;fono:</label>
+				<input id="telefono" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
+			</p>
+			<p>
+				<div id="escolarizacion">
+					<label for="escolarizacion">Escolarizaci&oacute;n:</label>
+					<label for="educacion_especial">Educaci&oacute;n especial</label>
+				    <input type="radio" id="educacion_especial" name="escolarizacion" value="Educacion especial"/>
+					<label for="integracion">Esc. de integraci&oacute;n</label>
+				    <input type="radio" id="integracion" name="escolarizacion" value="Integracion"/>
+					<label for="sin_adaptaciones">Sin adaptaciones</label>
+				    <input type="radio" id="sin_adaptaciones" name="escolarizacion" value="Sin adaptaciones"/>
+				</div>
 			</p>
 		</div>
 		<c:choose><c:when test="${operacion == 'edit'}">
