@@ -26,7 +26,7 @@
 			
 			function cargarGrafica(){
 				var id = generic.getURLParameter("id");
-	            server.get('paciente/1/ficheroEMT/' + id, null, callbackCargarGrafica);
+	            server.get('pacientemovil/1/ficheroEMT/' + id, null, callbackCargarGrafica);
 	            $("#angleType").change( function(){
 	            	var value = this.value;
 	            	mostrarGrafica("aR" + value, "aL" + value);
@@ -66,7 +66,7 @@
 					if (anglesDTO[i].name == angleName){
 						var points = [];
 						for (var j = 0; j < anglesDTO[i].pointsDTO.length; j++){
-							var value = parseFloat(anglesDTO[i].pointsDTO[j].coord);
+							var value = parseFloat(anglesDTO[i].pointsDTO[j].c);
 							if (value > maxim) {
 								maxim = value;
 							}

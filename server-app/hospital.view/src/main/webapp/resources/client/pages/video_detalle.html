@@ -25,13 +25,13 @@
 			
 			function cargarVideo(){
 				var id = generic.getURLParameter("id");
-	            server.get('paciente/1/video/' + id, null, mostrarVideo);
+	            server.get('pacientemovil/1/video/' + id, null, mostrarVideo);
 			}
 			
 			function mostrarVideo(parameters){
 				var numero = generic.getURLParameter("numero");
 				
-				$("#reproductorVideo").append("<source src='" + server.URI + "paciente/1/videoReproduce/" + parameters.id + "' type='video/mp4' />");
+				$("#reproductorVideo").append("<source src='" + server.URI + "pacientemovil/1/videoreproduce/" + parameters.id + "' type='video/mp4' />");
 				$("#numeroVideo").html("Video  " + numero);
 				$("#nombreVideo").html("Archivo: " + parameters.nombre);
 				$("#duracionVideo").html("Duraci&oacute;n: " + parameters.duracion);
