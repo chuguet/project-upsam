@@ -15,10 +15,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-import unit.UnitTest;
-
 import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.exceptions.DataBaseException;
+import com.upsam.hospital.model.unit.UnitTest;
 
 public class FicheroMDXRepositoryTest extends UnitTest{
 

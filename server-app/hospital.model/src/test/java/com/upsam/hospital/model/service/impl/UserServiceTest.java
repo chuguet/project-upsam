@@ -10,11 +10,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.junit.Test;
 
-import unit.UnitTest;
-
 import com.upsam.hospital.model.beans.Usuario;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.repository.IUsuarioRepository;
+import com.upsam.hospital.model.unit.UnitTest;
 
 public class UserServiceTest extends UnitTest{
 

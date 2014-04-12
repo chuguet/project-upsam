@@ -6,16 +6,19 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.orm.hibernate3.HibernateTemplate;
-import unit.UnitTest;
+
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
+import com.upsam.hospital.model.unit.UnitTest;
 
 public class VideoRepositoryTest extends UnitTest {
 

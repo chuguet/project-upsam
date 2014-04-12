@@ -8,13 +8,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.junit.Test;
 
-import unit.UnitTest;
-
 import java.sql.SQLException;
 
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.repository.IPacienteRepository;
+import com.upsam.hospital.model.unit.UnitTest;
 
 public class PatientServiceTest extends UnitTest{
 

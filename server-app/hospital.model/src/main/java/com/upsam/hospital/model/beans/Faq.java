@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Faqs")
-public class Faqs implements IModelHospital {
+public class Faq implements IModelHospital {
 
 	private static final long serialVersionUID = 1L;
 

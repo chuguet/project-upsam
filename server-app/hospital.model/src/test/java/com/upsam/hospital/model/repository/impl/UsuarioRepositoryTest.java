@@ -16,10 +16,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 
-import unit.UnitTest;
-
 import com.upsam.hospital.model.beans.Usuario;
 import com.upsam.hospital.model.exceptions.DataBaseException;
+import com.upsam.hospital.model.unit.UnitTest;
 
 public class UsuarioRepositoryTest extends UnitTest{
 

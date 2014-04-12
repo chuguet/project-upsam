@@ -8,14 +8,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.junit.Test;
 
-import unit.UnitTest;
-
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.upsam.hospital.model.beans.Faqs;
+import com.upsam.hospital.model.beans.Faq;
+import com.upsam.hospital.model.enums.ParteDelCuerpo;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.repository.IFaqsRepository;
+import com.upsam.hospital.model.unit.UnitTest;
 
 public class FaqsServiceTest extends UnitTest{
 
@@ -26,26 +27,25 @@ public class FaqsServiceTest extends UnitTest{
      
     @Test
     public void canSaveAFaq() throws SQLException, DataBaseException {
-        Faqs faqs = aFaqs();
+        Faq faq = aFaqWith(178, ParteDelCuerpo.HOMBRO.name());
         			
-        faqsService.save(faqs);
+        faqsService.save(faq);
 		
-		verify(faqsRepository, times(1)).save(faqs);
+		verify(faqsRepository, times(1)).save(faq);
     }
     
     @Test
     public void canUpdateAFaq() throws SQLException, DataBaseException {
-    	Faqs faqs = aFaqs();
-    	faqs.setDescripcion("upsam");
+    	Faq faq = aFaqWith(178, ParteDelCuerpo.HOMBRO.name());
         			
-        faqsService.update(faqs);
+        faqsService.update(faq);
 		
-		verify(faqsRepository, times(1)).update(faqs);
+		verify(faqsRepository, times(1)).update(faq);
     }
     
     @Test
     public void canDeleteAFaq() throws SQLException, DataBaseException {
-    	Faqs faqs = aFaqs();
+    	Faq faqs = aFaqWith(178, ParteDelCuerpo.HOMBRO.name());
         			
     	faqsService.delete(faqs);
 		
@@ -54,27 +54,48 @@ public class FaqsServiceTest extends UnitTest{
     
     @Test
     public void canFindAFaq() throws SQLException, DataBaseException {
-    	Faqs faqs = aFaqs();
-        when(faqsRepository.findOne(178)).thenReturn(faqs);
+    	Faq faq = aFaqWith(178, ParteDelCuerpo.HOMBRO.name());
+    	when(faqsRepository.findOne(178)).thenReturn(faq);
         			
-        Faqs expectedFaqs = faqsService.findOne(178);
+        Faq expectedFaqs = faqsService.findOne(178);
 		
 		assertThat("anyDescription", is(equalTo(expectedFaqs.getDescripcion())));
     }
     
     @Test
-    public void canFindAllFaqs() throws SQLException, DataBaseException {
-    	List<Faqs> faqs = null;
-        when(faqsRepository.findAll()).thenReturn(faqs);
+    public void canFindAllFaqsBySection() throws SQLException, DataBaseException {
+    	List<Faq> faqs = createFaqsListWithSize(5);
+    	when(faqsRepository.findBySeccion(ParteDelCuerpo.HOMBRO.name())).thenReturn(faqs);
         			
-        List<Faqs>expectedFaqs = faqsService.findAll();
-        
-		assertThat(faqs, is(equalTo(expectedFaqs)));
+    	List<Faq> expectedFaqs = faqsService.findBySeccion(ParteDelCuerpo.HOMBRO.name());
+		
+    	assertThat(expectedFaqs, is(equalTo(faqs)));
     }
     
-    private Faqs aFaqs(){
-    	Faqs p = new Faqs();
-		p.setId(178);
+    @Test
+    public void canFindAllFaqs() throws SQLException, DataBaseException {
+    	List<Faq> faqs = createFaqsListWithSize(5);
+        when(faqsRepository.findAll()).thenReturn(faqs);
+        			
+        List<Faq> allFaqs = faqsService.findAll();
+        
+		assertThat(allFaqs, is(equalTo(faqs)));
+    }
+    
+    private List<Faq> createFaqsListWithSize(int size){
+    	List<Faq> faqs = new ArrayList<Faq>();
+    	
+    	for (int i = 0; i < size; i++) {
+    		faqs.add(aFaqWith(178, ParteDelCuerpo.HOMBRO.name()));
+		}
+    	
+    	return faqs;
+    }
+    
+    private Faq aFaqWith(int id, String section){
+    	Faq p = new Faq();
+		p.setId(id);
+		p.setSeccion(section);
 		p.setDescripcion("anyDescription");
 		return p;
     }
