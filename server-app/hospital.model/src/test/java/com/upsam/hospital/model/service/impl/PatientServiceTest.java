@@ -9,6 +9,8 @@ import org.mockito.Mock;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.exceptions.DataBaseException;
@@ -58,6 +60,17 @@ public class PatientServiceTest extends UnitTest{
         Paciente patientFound = pacienteService.findOne(178);
 		
 		assertThat("any", is(equalTo(patientFound.getApellidos())));
+    }
+    
+    @Test
+    public void canFindAllPatients() throws SQLException, DataBaseException {
+    	List<Paciente> pacientes = new ArrayList<Paciente>();
+    	pacientes.add(aPatient());
+        when(pacienteRepository.findAll()).thenReturn(pacientes);
+        			
+        List<Paciente>pacientesResult = pacienteService.findAll();
+        
+		assertThat(pacientes.size(), is(equalTo(pacientesResult.size())));
     }
     
     private Paciente aPatient(){

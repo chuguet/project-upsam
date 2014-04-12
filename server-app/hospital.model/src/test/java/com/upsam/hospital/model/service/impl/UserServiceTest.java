@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -58,6 +60,17 @@ public class UserServiceTest extends UnitTest{
         Usuario userFound = usuarioService.findOne(178);
         
 		assertThat("any", is(equalTo(userFound.getApellidos())));
+    }
+    
+    @Test
+    public void canFindAllUsers() throws SQLException, DataBaseException {
+    	List<Usuario> usuarios = new ArrayList<Usuario>();
+    	usuarios.add(anUser());
+        when(usuarioRepository.findAll()).thenReturn(usuarios);
+        			
+        List<Usuario>usuarioResult = usuarioService.findAll();
+        
+		assertThat(usuarios.size(), is(equalTo(usuarioResult.size())));
     }
     
     private Usuario anUser(){
