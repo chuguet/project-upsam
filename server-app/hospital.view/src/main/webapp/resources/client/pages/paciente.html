@@ -19,69 +19,72 @@
 		<script type="text/javascript" src="../js/pages/paciente.js"></script>
 		
 		<script type="text/javascript">
-			generic.initialize();
-			
-			var paciente = {
-				'initialize' : function(){}
-			}
+			generic.initialize(paciente.recuperar);
 		</script>
 	</head>
 
 	<body>
 		<div data-role="page" id="page1">
 			<!-- Cabecera -->
-			<div data-role="header" >                    
-				<h3>Paciente - LAM</h3>
+			<div data-role="header">                    
+				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
 				<a data-rel="back" data-icon="back">Volver</a>
-				<a onClick="javascript:postForm()" href="../home.html" data-icon="check">Guardar</a>
+				<a data-icon="check" onclick="javascript:evaluacion_muscular_manual.server()" >Guardar</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 class="subtitle">Datos de Paciente</h2>
+					<div id="username" class="username"></div>
+				</div>
 			</div>
 			
 			<!-- contenido -->
-			<div data-role="content">				
-				<h1>Datos de paciente</h1>		
-					
+			<div data-role="content">
 				<div class="content2">		
 					<div data-role="fieldcontain">
-						<label for="numID">N&deg; de identificaci&oacute;n:</label>	
-						<input type="text" id="numID" name="numID" class="txt-speech"/>						
+						<label for="txtNumIdentificacion">N&deg; de identificaci&oacute;n:</label>	
+						<input type="text" id="txtNumIdentificacion" name="txtNumIdentificacion" class="txt-speech"/>						
 					</div>
 					
 					<div data-role="fieldcontain">
-						<label for="nombre">Nombre</label>	
-						<input type="text" id="nombre" name="nombre" class="txt-speech"/>
+						<label for="txtNombre">Nombre</label>	
+						<input type="text" id="txtNombre" name="txtNombre" class="txt-speech"/>
 					</div>
 					
 					<div data-role="fieldcontain">
-						<label for="apellidos">Apellidos</label>	
-						<input type="text" id="apellidos" name="apellidos" class="txt-speech"/>
+						<label for="txtApellidos">Apellidos</label>	
+						<input type="text" id="txtApellidos" name="txtApellidos" class="txt-speech"/>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="txtTelefono">Tel&eacute;fono</label>	
+						<input type="text" id="txtTelefono" name="txtTelefono" class="txt-speech"/>
 					</div>
 						
 					<div data-role="fieldcontain">
-						<label for="fecNac">Fecha de nacimiento:</label>
-						<input id="fecNac" name="fecNac" class="txt-date" placeholder="dd/mm/yyyy" />
+						<label for="txtFechaNacimiento">Fecha de nacimiento:</label>
+						<input id="txtFechaNacimiento" name="txtFechaNacimiento" class="txt-date" placeholder="dd/mm/yyyy" />
 					</div>
 					
 					<div data-role="fieldcontain">
-						<label for="sexo">Sexo</label>
-						<select id="sexo" name="sexo" data-role="slider" style="width: 150px">
-							<option value="0">Hombre</option>
-							<option value="1">Mujer</option>
+						<label for="cmbSexo">Sexo</label>
+						<select id="cmbSexo" name="cmbSexo" data-role="slider" style="width: 170px">
+							<option value="HOMBRE">Hombre</option>
+							<option value="MUJER">Mujer</option>
 						</select>
 					</div>
 				
 					<div data-role="fieldcontain">
-						<label for="escolarizacion">Escolarizaci&oacute;n:</label>
-						<select id="escolarizacion" name="escolarizacion" data-native-menu="false">
+						<label for="cmbEscolarizacion">Escolarizaci&oacute;n:</label>
+						<select id="cmbEscolarizacion" name="cmbEscolarizacion" data-native-menu="false">
 							<option value="0"></option>
-							<option value="1">Educaci&oacute;n especial</option>
-							<option value="2">Integraci&oacute;n</option>
-							<option value="3">Sin adaptaciones</option>		                    
+							<option value="EDUCACION_ESPECIAL">Educaci&oacute;n especial</option>
+							<option value="INTEGRACION">Integraci&oacute;n</option>
+							<option value="SIN_ADAPTACIONES">Sin adaptaciones</option>		                    
 						</select>		            
 					</div>
 					
 					<div data-role="fieldcontain">
-						<label for="curso">Curso:</label>
-						<input type="text" id="curso" name="curso" class="txt-speech"/>		            
+						<label for="txtCurso">Curso:</label>
+						<input type="text" id="txtCurso" name="txtCurso" class="txt-speech"/>		            
 					</div>
 					
 					<h2>Exploraciones</h2>	

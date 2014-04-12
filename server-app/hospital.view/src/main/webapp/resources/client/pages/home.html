@@ -19,7 +19,7 @@
 		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>	
 		
 		<script type="text/javascript">
-			app.initialize();
+			generic.initialize();
 		</script>
 	</head>
 
@@ -27,13 +27,16 @@
 		<div data-role="page" id="page1">
 			<!-- Cabecera -->
 			<div data-role="header" >                    
-				<h3>Menu principal - LAM</h3>
-				<a data-rel="back" data-icon="back">Volver</a>
+				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 class="subtitle">Men&uacute; principal</h2>
+					<div id="username" class="username"></div>
+				</div>
 			</div>
 			
 			<!-- contenido -->
 			<div data-role="content">				
-				<h1>Menu principal</h1>		
+						
 					
 				<div class="content2">	
 					<ul data-role="listview" data-inset="true" data-filter="false" data-theme="b">						

@@ -118,10 +118,13 @@ public class Paciente implements IModelHospital {
 	 * @param pApellidos
 	 *            the apellidos
 	 */
-	public Paciente(String numeroIdentificacion, String nombre, String apellidos) {
+	public Paciente(Integer id, String numeroIdentificacion, String nombre, String apellidos, Date fechaNacimiento, Date fechaUltimaEvaluacion) {
+		this.id = id;
 		this.numeroIdentificacion = numeroIdentificacion;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
+		this.fechaNacimiento = fechaNacimiento;
+		this.fechaUltimaEvaluacion = fechaUltimaEvaluacion;
 	}
 
 	/**

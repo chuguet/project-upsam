@@ -5,7 +5,7 @@ package com.upsam.hospital.controller.dto;
  * The Class PacienteMovilDTO.
  */
 public class PacienteMovilDTO {
-
+	private Integer id;
 	/** The apellidos. */
 	private String apellidos;
 
@@ -14,6 +14,20 @@ public class PacienteMovilDTO {
 
 	/** The numero identificacion. */
 	private String numeroIdentificacion;
+
+	/** The numero identificacion. */
+	private String fechaNacimiento;
+
+	/** The numero identificacion. */
+	private String fechaUltimaEvaluacion;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	/**
 	 * Gets the apellidos.
@@ -70,5 +84,21 @@ public class PacienteMovilDTO {
 	 */
 	public void setNumeroIdentificacion(String numeroIdentificacion) {
 		this.numeroIdentificacion = numeroIdentificacion;
+	}
+
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getFechaUltimaEvaluacion() {
+		return fechaUltimaEvaluacion;
+	}
+
+	public void setFechaUltimaEvaluacion(String fechaUltimaEvaluacion) {
+		this.fechaUltimaEvaluacion = fechaUltimaEvaluacion;
 	}
 }

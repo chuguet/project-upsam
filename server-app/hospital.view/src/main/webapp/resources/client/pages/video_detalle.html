@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+	<head>
 		<title>Exploraci&oacute;n f&iacute;sica - Laboratorio de An&acute;lisis de Movimientos</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="format-detection" content="telephone=no" />
@@ -20,38 +20,25 @@
 		<script type="text/javascript" src="../js/video.js"></script>
 				
 		<script type="text/javascript">
-			generic.initialize(cargarVideo);
-			videojs.options.flash.swf = "video-js.swf";
-			
-			function cargarVideo(){
-				var id = generic.getURLParameter("id");
-	            server.get('pacientemovil/1/video/' + id, null, mostrarVideo);
-			}
-			
-			function mostrarVideo(parameters){
-				var numero = generic.getURLParameter("numero");
-				
-				$("#reproductorVideo").append("<source src='" + server.URI + "pacientemovil/1/videoreproduce/" + parameters.id + "' type='video/mp4' />");
-				$("#numeroVideo").html("Video  " + numero);
-				$("#nombreVideo").html("Archivo: " + parameters.nombre);
-				$("#duracionVideo").html("Duraci&oacute;n: " + parameters.duracion);
-			}
-			
+			generic.initialize(video.recuperar);
 		</script>
 	</head>
 	
 	<body>
 		<div data-role="page">
 			<!-- Cabecera -->
-			<div data-role="header" >                    
-			    <h3>Detalle v&iacute;deo - LAM</h3>
-			    <a data-rel="back" data-icon="back">Volver</a>
-			</div>	
+			<div data-role="header">
+				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
+				<a data-rel="back" data-icon="back">Volver</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 class="subtitle">Reproducci&oacute;n de V&iacute;deo</h2>
+					<div id="username" class="username"></div>
+				</div>
+			</div>
 			
 			<!-- Contenido -->
-			<div data-role="content"> 	
-				<h2>Detalle de V&iacute;deo</h2>
-				
+			<div data-role="content">
 				<div class="content2">
 					<span id="numeroVideo"></span><br>
 					<span class="videoFeatures" id="nombreVideo"></span><br>

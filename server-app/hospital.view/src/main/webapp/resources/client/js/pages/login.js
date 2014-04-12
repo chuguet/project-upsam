@@ -20,6 +20,7 @@ var login = {
 	            				generic.alert("Error de acceso", "Usuario y/o contraseña incorrectos");
 	            			}
 	            			else if (jqXHR.statusText == "OK") {
+	            				generic.setObject("usuario", eval('(' + jqXHR.responseText + ')'));
 	            				generic.changePage('home.html');
 	            			}
 	            			else{

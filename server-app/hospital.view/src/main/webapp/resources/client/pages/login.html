@@ -37,7 +37,7 @@
 				
 				<h2 style="color:#77CDF1">Acceso al sistema</h2>
 				<div style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:10px;background-color:rgb(240,240,240)">
-					<h5><font style="font-weight: normal">Introduzca los</font> datos de acceso:</h5>
+					<label>Introduzca los datos de acceso:</label>
 					
 					<div data-role="fieldcontain" >
 						<label for="txtUsuario">Usuario</label>
@@ -48,10 +48,9 @@
 						<input type="password" id="txtPassword" name="txtPassword" />						
 					</div>
 					
-					<ul data-role="listview" data-inset="true" data-filter="false" data-theme="b">						
-						<li><a data-transition="slidedown" rel="external" onclick="javascript:login.acceso();">Entrar</a></li>
-						<li><a data-transition="slidedown" rel="external" onclick="javascript:generic.changePage('recordar_contrasenna.html');">Recordar contrase&ntilde;a</a></li>             
-					</ul>
+					<a data-role="button" onclick="javascript:login.acceso();">Entrar</a>
+					<a data-role="button" rel="external" onclick="javascript:generic.changePage('recordar_contrasenna.html');">Recordar contrase&ntilde;a</a>             
+					
 				</div>
 			</div>
 

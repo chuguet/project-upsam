@@ -25,16 +25,19 @@
 	<body>
 		<div data-role="page">
 			<!-- Cabecera -->
-			<div data-role="header" >                    
-				<h3>Escala de movilidad funcional - LAM</h3>
+			<div data-role="header">                    
+				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
 				<a data-rel="back" data-icon="back">Volver</a>
-			   <a href="index.html" data-icon="check">Guardar</a>
-			</div>			
+				<a data-icon="check" onclick="javascript:evaluacion_muscular_manual.server()" >Guardar</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 class="subtitle">Escala de movilidad funcional</h2>
+					<div id="username" class="username"></div>
+				</div>
+			</div>	
 			
 			<!-- Contenido -->
-			<div data-role="content"> 	
-			
-				<h2>Escala de movilidad funcional</h2>
+			<div data-role="content">
 				
 				<div class="content2">
 					<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">

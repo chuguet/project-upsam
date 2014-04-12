@@ -25,20 +25,22 @@
 	<body>
 		<div data-role="page" id="page1">
 			<!-- Cabecera -->
-			<div data-role="header" >                    
-				<h3>Recordar Contrase&ntilde;a - LAM</h3>
+			<div data-role="header">
+				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
 				<a data-rel="back" data-icon="back">Volver</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 class="subtitle">Recordar Contrase&ntilde;a</h2>
+				</div>
 			</div>
 			
 			<!-- contenido -->
 			<div data-role="content">				
-				<h1>Recordar Contrase&ntilde;a</h1>		
+				<h1></h1>		
 				<div id="containerUsuarioEmail" class="content2">
 					<label for="txtUsuario">Introduzca su usuario/email</label>
 					<input type="text" id="txtUsuario" name="txtUsuario"/>	
-					<ul data-role="listview" data-inset="true" data-filter="false" data-theme="b">						
-						<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:recordarPassword.enviarUsuarioEmail();">Enviar usuario/email</a></li>
-					</ul>
+					<a data-role="button" href="#" onclick="javascript:recordarPassword.enviarUsuarioEmail();">Enviar usuario/email</a>
 				</div>
 				<div id="containerPassword" class="content2">
 					<label for="txtToken">Llave de seguridad</label>
@@ -47,9 +49,7 @@
 					<input type="password" id="txtPassword" name="txtPassword"/>
 					<label for="txtPasswordNueva">Repetir contrase&ntilde;a</label>
 					<input type="password" id="txtPasswordNueva" name="txtPasswordNueva"/>
-					<ul data-role="listview" data-inset="true" data-filter="false" data-theme="b">						
-						<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:recordarPassword.enviarNuevoPassword();">Enviar nueva contrase&ntilde;a</a></li>
-					</ul>					
+					<a data-role="button" href="#" onclick="javascript:recordarPassword.enviarNuevoPassword();">Enviar nueva contrase&ntilde;a</a>					
 				</div>
 			</div>
 
