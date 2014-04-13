@@ -183,7 +183,7 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 		PacienteDTO pacienteDTO = new PacienteDTO();
 		pacienteDTO.setApellidos(paciente.getApellidos());
 		pacienteDTO.setCurso(paciente.getCurso());
-		pacienteDTO.setEscolarizacion(paciente.getEscolarizacion().getNameId());
+		pacienteDTO.setEscolarizacion(paciente.getEscolarizacion().toString());
 		pacienteDTO.setExaminador(paciente.getExaminador());
 		if (paciente.getFechaUltimaEvaluacion() != null) {
 			pacienteDTO.setFechaEvaluacion(DATE_FORMATTER.format(paciente.getFechaUltimaEvaluacion()));
@@ -192,7 +192,7 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 		pacienteDTO.setId(paciente.getId());
 		pacienteDTO.setNombre(paciente.getNombre());
 		pacienteDTO.setNumeroIdentificacion(paciente.getNumeroIdentificacion());
-		pacienteDTO.setSexo(paciente.getSexo().getNameId());
+		pacienteDTO.setSexo(paciente.getSexo().toString());
 		pacienteDTO.setTelefono(paciente.getTelefono());
 		return pacienteDTO;
 	}

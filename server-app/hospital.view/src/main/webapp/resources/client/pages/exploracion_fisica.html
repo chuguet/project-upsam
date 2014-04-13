@@ -26,13 +26,20 @@
 	<body>
 		<div data-role="page" id="page1">
 			<!-- Cabecera -->
-			<div data-role="header" >                    
-				<h3>Exploraci&oacute;n F&iacute;sica - LAM</h3>
+			<div data-role="header">                    
+				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
 				<a data-rel="back" data-icon="back">Volver</a>
-				<a onClick="javascript:postForm()" href="../home.html" data-icon="check">Guardar</a>
+				<a data-icon="check" onclick="javascript:evaluacion_muscular_manual.server()" >Guardar</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 class="subtitle">Exploraci&oacute;n F&iacute;sica</h2>
+					<div id="username" class="username"></div>
+				</div>
 			</div>
-			<div data-role="header"  data-theme="c"> 	
-				<div data-role="content">
+			
+			<!-- contenido -->
+			<div data-role="content">	
+				<div data-role="content" style="border:solid 1px black;">
 					<div data-role="fieldcontain">
 						<label for="evalMuscularManual"><b>Actualizado a:</b></label>
 						<label for="evalMuscularManual">24-05-2014 15:25</label>    
@@ -49,24 +56,20 @@
 													
 					</div>
 				</div>	
-			</div>
-			
-			<!-- contenido -->
-			<div data-role="content">				
+								
 				
-				<h1>Exploraci&oacute;n f&iacute;sica</h1>			
-				
-				<h2>Antecedentes</h2>	
-				<div class="content2">					
+				<h3>Antecedentes</h3>
+				<div class="content2">
 					<ul data-role="listview" data-inset="true" data-filter="false">
 						<li><a data-transition="slidedown" rel="external" href="antecedentes_personales.html">Personales</a></li>
 						<li><a data-transition="slidedown" rel="external" href="antecedentes_relacionados_PCI.html">Relacionados con PCI</a></li>						            
 					</ul>
 				</div>
 				
-				<h2>V&iacute;deos sobre la exploraci&oacute;n</h2>			
 				
+				<h3>V&iacute;deos sobre la exploraci&oacute;n</h3>
 				<div class="content2">
+					
 					<!--Listado de videos -->						
 					<ul data-role="listview" data-inset="true">	            
      					<li>
@@ -88,7 +91,7 @@
      				</ul>
 				</div>
 								
-				<h2>Valoraciones</h2>		
+				<h3>Valoraciones</h3>		
 				<div class="content2">
 					<div data-role="fieldcontain">  
 						<label for="valoracionCtrlMotor">Control motor selectivo:</label>  
@@ -114,7 +117,7 @@
 					</div>						
 				</div>	
 				
-				<h2>Longitud de miembros inferiores</h2>				
+				<h3>Longitud de miembros inferiores</h3>				
 				<div class="content2">
 					<!-- Derecho -->
 					<div data-role="fieldcontain">  
@@ -123,13 +126,13 @@
 					</div>
 
 					<!-- Izquierdo -->
-					<div data-role="fieldcontain">  
+					<div data-role="fieldcontain">
 						<label for="lonMiembroInfIzdo">Izquierdo: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
 						<input type="text" class="txt-speech" name="lonMiembroInfIzdo" id="lonMiembroInfIzdo" value=""  />
 					</div>
 				</div>	
 				 
-				<h2>Escala de movilidad funcional</h2>
+				<h3>Escala de movilidad funcional</h3>
 				<div class="content2">					
 					<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
 					  <thead>
@@ -155,7 +158,7 @@
 					</table>		
 				</div>
 				
-				<h2>Tono muscular - Escala Ashworth</h2>		
+				<h3>Tono muscular - Escala Ashworth</h3>		
 				<div class="content2">					
 					<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
 						<thead>
@@ -170,45 +173,45 @@
 							<tr>
 							  <th>CADERA</th>
 							  <td>Flexi&oacute;n</td>
-							  <td><input type="text" class="txt-speech" id="caderaIzFlex" name="caderaIzFlex"/></td>
-							  <td><input type="text" class="txt-speech" id="caderaDerFlex" name="caderaDerFlex"/></td>          
+							  <td><input type="text" id="caderaIzFlex" name="caderaIzFlex" class="txt-speech" /></td>
+							  <td><input type="text" id="caderaDerFlex" name="caderaDerFlex" class="txt-speech" /></td>          
 							</tr>		
 							<tr>
 							  <th></th>
 							  <td>Inflexi&oacute;n</td>
-							  <td><input type="text" class="txt-speech" name="caderaIzInflex" id="caderaIzInflex"  ></td>
-							  <td><input type="text" class="txt-speech" name="caderaDerInflex" id="caderaDerInflex" ></td>         
+							  <td><input type="text" name="caderaIzInflex" id="caderaIzInflex" class="txt-speech" /></td>
+							  <td><input type="text" name="caderaDerInflex" id="caderaDerInflex"  class="txt-speech" /></td>         
 							</tr>
 							
 							<tr>
 							  <th>RODILLA</th>
 							  <td>Flexi&oacute;n</td>
-							  <td><input type="text" class="txt-speech" name="rodillaIzFlex" id="rodillaIzFlex"  ></td>
-							  <td><input type="text" class="txt-speech" name="rodillaDerFlex" id="rodillaDerFlex"  ></td>        
+							  <td><input type="text" name="rodillaIzFlex" id="rodillaIzFlex" class="txt-speech" /></td>
+							  <td><input type="text" name="rodillaDerFlex" id="rodillaDerFlex" class="txt-speech" /></td>        
 							</tr>		
 							<tr>
 								<th></th>
 								<td>Inflexi&oacute;n</td>
-								<td><input type="text" class="txt-speech" name="rodillaIzInflex" id="rodillaIzInflex" ></td>
-								<td><input type="text" class="txt-speech" name="rodillaDerInflex" id="rodillaDerInflex"   ></td>  
+								<td><input type="text" name="rodillaIzInflex" id="rodillaIzInflex" class="txt-speech" /></td>
+								<td><input type="text" name="rodillaDerInflex" id="rodillaDerInflex" class="txt-speech" /></td>  
 							</tr>        
 							<tr>
 								<th>TOBILLO</th>
 								<td>Flexi&oacute;n</td>
-								<td><input type="text" class="txt-speech" name="tobilloIzflex" id="tobilloIzflex" ></td>
-								<td><input type="text" class="txt-speech" name="tobilloDerflex" id="tobilloDerflex" ></td>     
+								<td><input type="text" name="tobilloIzflex" id="tobilloIzflex" class="txt-speech" /></td>
+								<td><input type="text" name="tobilloDerflex" id="tobilloDerflex" class="txt-speech" /></td>     
 							</tr>		
 							<tr>
 								<th></th>
 								<td>Inflexi&oacute;n</td>
-								<td><input type="text" class="txt-speech" name="tobilloIzInflex" id="tobilloIzInflex"></td>
-								<td><input type="text" class="txt-speech" name="tobilloDerInflex" id="tobilloDerInflex" ></td>     
+								<td><input type="text" name="tobilloIzInflex" id="tobilloIzInflex"class="txt-speech" /></td>
+								<td><input type="text" name="tobilloDerInflex" id="tobilloDerInflex" class="txt-speech" /></td>     
 							</tr>
 						  </tbody>
 					</table>	
 				</div>	
 				
-				<h2>An&aacute;lisis observacional de la marcha</h2>				
+				<h3>An&aacute;lisis observacional de la marcha</h3>				
 				<div class="content2">										
 					<h4>Common gait patterns: Spastic Diplegia</h4>	
 					<div data-role="fieldcontain" style="text-align:center">

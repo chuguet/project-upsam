@@ -26,14 +26,18 @@
 		<div data-role="page">
 			<!-- Cabecera -->
 			<div data-role="header" >                    
-				<h3>Control motor selectivo - LAM</h3>
+				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
 				<a data-rel="back" data-icon="back">Volver</a>
-			   <a data-icon="check" onclick="javascript:control_motor_selectivo.server()" >Guardar</a>
+				<a data-icon="check" onclick="javascript:control_motor_selectivo.server()" >Guardar</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 class="subtitle">Control motor selectivo</h2>
+					<div id="username" class="username"></div>
+				</div>
 			</div>
 			
 			<!-- Contenido -->
-			<div data-role="content">
-				<h2>Control motor selectivo</h2>			
+			<div data-role="content">			
 				
 				<div class="content2">
 					<!--Valoracion numerica -->			

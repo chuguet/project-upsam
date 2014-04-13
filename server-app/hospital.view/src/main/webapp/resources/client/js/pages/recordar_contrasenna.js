@@ -1,10 +1,11 @@
 var recordarPassword = {
 				'initialize' : function(){
+					generic.alert("llega");
 					$("#containerPassword").hide();
 				},
 				'enviarUsuarioEmail' : function(){
 					if ($("#txtUsuario").val().length == 0){
-						generic.alert("Error de recordatorio", "Debe introducir su usuario o contraseña");
+						generic.alert("Error de recordatorio", "Debe introducir su usuario o contrase&ntilde;a");
 						return;
 					}
 					var params = {value : $("#txtUsuario").val()};

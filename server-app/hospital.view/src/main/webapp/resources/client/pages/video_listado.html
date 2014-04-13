@@ -15,45 +15,32 @@
 		<script type="text/javascript" src='../js/server.js'></script>
 		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
 		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>		
-			
+		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
+		<script type="text/javascript" src='../js/pages/video.js'></script>	
 		<script type="text/javascript">
-			generic.initialize(buscarVideos);
-			
-			function buscarVideos(){
-				server.get('pacientemovil/1/video', null, mostrarListado);
-	        }
-	        
-	        function mostrarListado(parameters){
-	        	$("#videoList li").remove();
-	        	for (var i = 0; i < parameters.length; i++){
-	        		$("#videoList").append("<li><a rel='external' alt='Acceder al video' href='video_detalle.html?id=" + parameters[i].id + "&numero=" + (i + 1) + "' data-transition='fade'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
-	        		
-	        	}
-	        	$("#videoList").listview('refresh');
-	        }
-	        
-	        
-	        
+			generic.initialize(video.buscarListado);
 		</script>
 	</head>
 	<body>
 		<div data-role="page">
 			<!-- Cabecera -->
-			<div data-role="header" >                    
-				<h3>Listado de v&iacute;deos - LAM</h3>
+			<div data-role="header">
+				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
 				<a data-rel="back" data-icon="back">Volver</a>
-			    <a rel="external" href="video_nuevo.html" data-icon="plus">A&ntilde;adir video</a>
+				<a rel="external" href="video_nuevo.html" data-icon="plus">A&ntilde;adir video</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 class="subtitle">Listado de v&iacute;deos</h2>
+					<div id="username" class="username"></div>
+				</div>
 			</div>
+			
 			
 			<!-- Contenido -->
 			<div data-role="content">
-				<h2>Listado de v&iacute;deos asociados</h2>			
-				
 				<div class="content2">
-					<!--Listado de videos -->								
-					
-					<ul data-role="listview" data-inset="true" id="videoList"></ul>
+					<!--Listado de videos -->
+					<ul data-role="listview" data-inset="true" id="listaVideos"></ul>
 				</div>	
 			</div>
 			

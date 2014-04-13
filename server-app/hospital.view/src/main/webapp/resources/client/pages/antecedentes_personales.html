@@ -28,14 +28,18 @@
 		<div data-role="page">
 			<!-- Cabecera -->
 			<div data-role="header" >                    
-				<h3>Antecedentes personales - LAM</h3>
+				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
 				<a data-rel="back" data-icon="back">Volver</a>
-			   <a href="index.html" data-icon="check">Guardar</a>
+				<a onclick="javascript:analisis_marcha.server()" data-icon="check">Guardar</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 class="subtitle">Antecedentes personales</h2>
+					<div id="username" class="username"></div>
+				</div>
 			</div>
 			
 			<!-- Contenido -->
-			<div data-role="content">
-				<h2>Antecedentes personales</h2>				
+			<div data-role="content">			
 				
 				<div class="content2">
 					<!-- Antecedentes medicos-->				

@@ -26,15 +26,19 @@
 
 	<div data-role="page">
 		<!-- Cabecera -->
-		<div data-role="header" >                    
-		    <h3>Tono muscular - Escala Ashworth - LAM</h3>
-		    <a data-rel="back" data-icon="back">Volver</a>
-		   	<a onclick="javascript:tono_muscular_ashworth.server()" data-icon="check">Guardar</a>
-		</div>	
+		<div data-role="header">                    
+			<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
+			<a data-rel="back" data-icon="back">Volver</a>
+			<a data-icon="check" onclick="javascript:evaluacion_muscular_manual.server()" >Guardar</a>
+			
+			<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+				<h2 class="subtitle">Tono muscular - Escala Ashworth</h2>
+				<div id="username" class="username"></div>
+			</div>
+		</div>
 		
 		<!-- Contenido -->
-		<div data-role="content"> 	
-			<h2>Tono muscular - Escala Ashworth</h2>
+		<div data-role="content">
 			
 			<div class="content2">
 				<form method="post" action="">

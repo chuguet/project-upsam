@@ -244,3 +244,5 @@ h2 {
 .yellowLegend {border:solid 1px #666; background-color:#eaa228; height:15px; width:30px; display:block; float:left;}
 .textLegend {margin:0px 35px 0px 6px; }
 .legend {margin-top:5px;}
+.ui-bar h2.subtitle {color:black;font-size:1.4em;margin-left:5px;}
+.ui-bar div.username { float:right; margin-top:5px;}

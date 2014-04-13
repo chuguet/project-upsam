@@ -14,6 +14,26 @@ var generic = {
 	    	that.processSpeech();     
 	    	that.processDatebox();
 	    	
+	    	var divUsername = $("div#username");
+	    	var user = generic.getObject("usuario");
+	    	
+	    	if (divUsername.length > 0){
+	    		//No estamos en login.html
+	    		if (user != null){
+	    			divUsername.html(user.nombre + "&nbsp;" + user.apellidos);
+	    		}
+		    	else{
+		    		generic.changePage("login.html");
+		    	}
+	    	}
+	    	else{
+	    		//Estamos en login.html
+	    		if (user != null){
+	    			generic.changePage("home.html");
+	    		}
+	    	}
+	    	
+	    	
 	    	if (methodToExecute && methodToExecute != null){
 	    		methodToExecute.apply(this, null);
 	    	}
@@ -45,7 +65,7 @@ var generic = {
 				);
 				speech.start();
 			});
-			
+			$(this).parent().css("position", "relative");
 			$(this).parent().append(button);
 		});
 	},
@@ -78,7 +98,8 @@ var generic = {
 				count++;
 			}
 		}
-		$.mobile.changePage(uri, { dataUrl : uriWithParameters, data : parameters, reloadPage : true, changeHash : true });
+		document.location.href=uriWithParameters;
+		//$.mobile.changePage(uri, { dataUrl : uriWithParameters, data : parameters, reloadPage : true, changeHash : true });
 	},
 	/*
 	'getURLParameter' : function(sParam) {
@@ -94,6 +115,9 @@ var generic = {
 	*/
 	'getURLParameter' : function(name){
 	    var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
+	    if (results == null){
+	    	return null;
+	    }
 	    return results[1] || 0;
 	},
 	'loading' : function(){
@@ -108,6 +132,7 @@ var generic = {
 		$.mobile.loading( 'hide');
 	},
 	'alert' : function(title, message) {
+		console.log(message);
 		if (navigator && navigator.notification){
 			navigator.notification.alert(message, null, title);
 		}
@@ -126,6 +151,21 @@ var generic = {
 				$(this).remove();
 			});
 		}
-		
+	},
+	'setValue' : function(key, value){
+		localStorage.setItem(key, value);
+	},
+	'getValue' : function(key){
+		return localStorage[key];
+	},
+	'deleteValue' : function(key){
+		localStorage.removeItem(key);
+	},
+	'setObject' : function(key, value) {
+		localStorage.setItem(key, JSON.stringify(value));
+	},
+	'getObject' : function(key) {
+	    var value = localStorage.getItem(key);
+	    return value && JSON.parse(value);
 	}
 };

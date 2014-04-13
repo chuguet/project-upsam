@@ -27,10 +27,15 @@
 	<body>
 		<div data-role="page">
 			<!-- cabecera-->
-			<div data-role="header" >               
-				<a data-rel="back" data-icon="back">Volver</a>     
-				<h1>Gross Motor Function</h1>
-				<a href="index.html" data-icon="check">Guardar</a>
+			<div data-role="header">                    
+				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
+				<a data-rel="back" data-icon="back">Volver</a>
+				<a data-icon="check" onclick="javascript:evaluacion_muscular_manual.server()" >Guardar</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 class="subtitle">Gross Motor Function</h2>
+					<div id="username" class="username"></div>
+				</div>
 			</div>		
 			
 			<!-- Contenido -->
