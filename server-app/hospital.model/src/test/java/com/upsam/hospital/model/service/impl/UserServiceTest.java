@@ -63,6 +63,36 @@ public class UserServiceTest extends UnitTest{
     }
     
     @Test
+    public void canSelectByUser() throws SQLException, DataBaseException {
+    	Usuario usuario = anUser();
+        when(usuarioRepository.selectByUser("user")).thenReturn(usuario);
+        			
+        Usuario userFound = usuarioService.selectByUser("user");
+        
+		assertThat("any", is(equalTo(userFound.getApellidos())));
+    }
+    
+    @Test
+    public void canSelectByEmail() throws SQLException, DataBaseException {
+    	Usuario usuario = anUser();
+        when(usuarioRepository.findUserByEmail("email")).thenReturn(usuario);
+        			
+        Usuario userFound = usuarioService.findUserByEmail("email");
+        
+		assertThat("any", is(equalTo(userFound.getApellidos())));
+    }
+    
+    @Test
+    public void canSelectByToken() throws SQLException, DataBaseException {
+    	Usuario usuario = anUser();
+        when(usuarioRepository.selectByToken("token")).thenReturn(usuario);
+        			
+        Usuario userFound = usuarioService.selectByToken("token");
+        
+		assertThat("any", is(equalTo(userFound.getApellidos())));
+    }
+    
+    @Test
     public void canFindAllUsers() throws SQLException, DataBaseException {
     	List<Usuario> usuarios = new ArrayList<Usuario>();
     	usuarios.add(anUser());

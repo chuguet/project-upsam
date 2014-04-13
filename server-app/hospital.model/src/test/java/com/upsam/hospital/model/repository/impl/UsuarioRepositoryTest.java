@@ -56,6 +56,39 @@ public class UsuarioRepositoryTest extends UnitTest{
     }
     
     @Test
+    public void canSelectByUser() throws SQLException, DataBaseException {
+    	List<Usuario> usuarios = new ArrayList<>();
+    	usuarios.add(anUser());
+        when(hibernateTemplate.find("from Usuario where usuario = ?", "user")).thenReturn(usuarios);
+        			
+        Usuario userFound = usuarioRepository.selectByUser("user");
+        
+		assertThat("any", is(equalTo(userFound.getApellidos())));
+    }
+    
+    @Test
+    public void canSelectByToken() throws SQLException, DataBaseException {
+    	List<Usuario> usuarios = new ArrayList<>();
+    	usuarios.add(anUser());
+        when(hibernateTemplate.find("from Usuario where token = ?", "token")).thenReturn(usuarios);
+        			
+        Usuario userFound = usuarioRepository.selectByToken("token");
+        
+		assertThat("any", is(equalTo(userFound.getApellidos())));
+    }
+    
+    @Test
+    public void canFindAnUserByEmail() throws SQLException, DataBaseException {
+    	List<Usuario> usuarios = new ArrayList<>();
+    	usuarios.add(anUser());
+        when(hibernateTemplate.find("from Usuario where email = ?", "email")).thenReturn(usuarios);
+        			
+        Usuario userFound = usuarioRepository.findUserByEmail("email");
+        
+		assertThat("any", is(equalTo(userFound.getApellidos())));
+    }
+    
+    @Test
     public void canFindAnUser() throws SQLException, DataBaseException {
     	Usuario usuario = anUser();
         when(hibernateTemplate.get(Usuario.class,178)).thenReturn(usuario);

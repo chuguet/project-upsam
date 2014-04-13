@@ -50,7 +50,7 @@ class VideoService implements IVideoService {
 		pacienteService.update(paciente);
 	}
 
-	private String saveInFolder(byte[] content, Integer idPaciente) throws FileNotFoundException, IOException {
+	String saveInFolder(byte[] content, Integer idPaciente) throws FileNotFoundException, IOException {
 		String folderPath = getFolderPath(idPaciente);
 		validateFolderExist(folderPath);
 		String nombre = getCurrentTimestamp() + ".mp4";
@@ -77,7 +77,7 @@ class VideoService implements IVideoService {
 		return currentTimestamp.getTime() + "";
 	}
 
-	private String getDuration(String filePath) throws IOException {
+	String getDuration(String filePath) throws IOException {
 		IsoFile isoFile = new IsoFile(filePath);
 		double doubleSeconds = (double) isoFile.getMovieBox().getMovieHeaderBox().getDuration() / isoFile.getMovieBox().getMovieHeaderBox().getTimescale();
 		isoFile.close();
@@ -111,7 +111,7 @@ class VideoService implements IVideoService {
 				return video;
 			}
 		}
-		throw new NotFoundException("Se ha producido un error al recuperar un vídeo de un paciente");
+		throw new NotFoundException("Se ha producido un error al recuperar un vÃ­deo de un paciente");
 	}
 
 	@Override
