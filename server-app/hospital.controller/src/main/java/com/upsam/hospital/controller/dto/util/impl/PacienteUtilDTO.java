@@ -155,11 +155,9 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 			paciente.setApellidos(pacienteDTO.getApellidos());
 			paciente.setCurso(pacienteDTO.getCurso());
 			paciente.setEscolarizacion(Escolarizacion.getValue(pacienteDTO.getEscolarizacion()));
-			paciente.setExaminador(pacienteDTO.getExaminador());
-			if (!pacienteDTO.getFechaEvaluacion().isEmpty()) {
-				paciente.setFechaUltimaEvaluacion(DATE_FORMATTER.parse(pacienteDTO.getFechaEvaluacion()));
+			if (pacienteDTO.getFechaNacimiento() != null && pacienteDTO.getFechaNacimiento().length() == 10) {
+				paciente.setFechaNacimiento(DATE_FORMATTER.parse(pacienteDTO.getFechaNacimiento()));
 			}
-			paciente.setFechaNacimiento(DATE_FORMATTER.parse(pacienteDTO.getFechaNacimiento()));
 			paciente.setId(pacienteDTO.getId());
 			paciente.setNombre(pacienteDTO.getNombre());
 			paciente.setNumeroIdentificacion(pacienteDTO.getNumeroIdentificacion());
@@ -184,7 +182,6 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 		pacienteDTO.setApellidos(paciente.getApellidos());
 		pacienteDTO.setCurso(paciente.getCurso());
 		pacienteDTO.setEscolarizacion(paciente.getEscolarizacion().toString());
-		pacienteDTO.setExaminador(paciente.getExaminador());
 		if (paciente.getFechaUltimaEvaluacion() != null) {
 			pacienteDTO.setFechaEvaluacion(DATE_FORMATTER.format(paciente.getFechaUltimaEvaluacion()));
 		}

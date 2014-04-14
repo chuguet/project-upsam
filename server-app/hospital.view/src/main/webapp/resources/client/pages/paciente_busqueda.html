@@ -10,17 +10,7 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>
-		<script type="text/javascript" src="../js/pages/paciente.js"></script>
-		
-		<script type="text/javascript">
-			generic.initialize();
-		</script>
+		<script data-main="../js/pages/paciente" src="../js/require.min.js"></script>
 	</head>
 
 	<body>
@@ -32,7 +22,10 @@
 				
 				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
 					<h2 class="subtitle">B&uacute;squeda de Pacientes</h2>
-					<div id="username" class="username"></div>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#" onclick="javascript:generic.unlogin();" data-icon="power" data-role="button" data-iconpos="notext" data-mini="true">Salir</a>
+					</div>
 				</div>
 			</div>
 			

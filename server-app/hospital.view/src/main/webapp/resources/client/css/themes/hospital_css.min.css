@@ -246,3 +246,7 @@ h2 {
 .legend {margin-top:5px;}
 .ui-bar h2.subtitle {color:black;font-size:1.4em;margin-left:5px;}
 .ui-bar div.username { float:right; margin-top:5px;}
+.ui-bar div.username > div {display: inline-block;}
+.ui-bar div.username > a { display: inline-block; margin: -8px -3px 0px 10px;}
+.ui-select .ui-btn {padding:.4em; background-color:white;}
+body {display:none;}

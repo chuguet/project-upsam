@@ -16,7 +16,7 @@ import com.upsam.hospital.model.repository.IPacienteRepository;
 class PacienteRepository implements IPacienteRepository {
 
 	/** The Constant QUERY_FINDBY_ID_NAME_SURNAME. */
-	private static final String QUERY_FINDBY_ID_NAME_SURNAME = "Select new Paciente(id,numeroIdentificacion,nombre,apellidos,fechaUltimaEvaluacion,fechaNacimiento) from Paciente where (concat(NUMERO_IDENTIFICACION,' ',NOMBRE,' ',APELLIDOS) like concat('%',?,'%'))";
+	private static final String QUERY_FINDBY_ID_NAME_SURNAME = "Select new Paciente(id,numeroIdentificacion,nombre,apellidos,fechaNacimiento,fechaUltimaEvaluacion) from Paciente where (concat(NUMERO_IDENTIFICACION,' ',NOMBRE,' ',APELLIDOS) like concat('%',?,'%'))";
 
 	/** The hibernate template. */
 	@Inject

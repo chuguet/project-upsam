@@ -10,16 +10,7 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>	
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>				
-		<script type="text/javascript" src='../js/pages/recordar_contrasenna.js'></script>	
-		<script type="text/javascript">
-			generic.initialize(recordarPassword.initialize);
-		</script>
+		<script data-main="../js/pages/recordar_contrasenna" src="../js/require.min.js"></script>
 	</head>
 
 	<body>
@@ -42,7 +33,7 @@
 					<input type="text" id="txtUsuario" name="txtUsuario"/>	
 					<a data-role="button" href="#" onclick="javascript:recordarPassword.enviarUsuarioEmail();">Enviar usuario/email</a>
 				</div>
-				<div id="containerPassword" class="content2">
+				<div id="containerPassword" class="content2" style="display:none;">
 					<label for="txtToken">Llave de seguridad</label>
 					<input type="text" id="txtToken" name="txtToken"/>
 					<label for="txtPassword">Contrase&ntilde;a nueva</label>

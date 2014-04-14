@@ -4,43 +4,28 @@ var generic = {
 			app.initialize();
 		}
 		
-		var that = this;	
-		$(document).bind("pagebeforecreate",function(event){
-			generic.loading();
-		}); 
-
-		
-		$(document).bind("pageinit", function() {
-	    	that.processSpeech();     
-	    	that.processDatebox();
-	    	
-	    	var divUsername = $("div#username");
-	    	var user = generic.getObject("usuario");
-	    	
-	    	if (divUsername.length > 0){
-	    		//No estamos en login.html
-	    		if (user != null){
-	    			divUsername.html(user.nombre + "&nbsp;" + user.apellidos);
-	    		}
-		    	else{
-		    		generic.changePage("login.html");
-		    	}
-	    	}
+		var that = this;
+    	var divUsername = $("div#username");
+    	var user = generic.getObject("usuario");
+    	
+    	if (divUsername.length > 0){
+    		//No estamos en login.html
+    		if (user != null){
+    			divUsername.html(user.nombre + "&nbsp;" + user.apellidos);
+    		}
 	    	else{
-	    		//Estamos en login.html
-	    		if (user != null){
-	    			generic.changePage("home.html");
-	    		}
+	    		generic.changePage("login.html");
+	    		return;
 	    	}
-	    	
-	    	
-	    	if (methodToExecute && methodToExecute != null){
-	    		methodToExecute.apply(this, null);
-	    	}
-	    	else{
-	    		generic.noLoading();
-	    	}
-	    });
+    	}
+    	
+    	
+    	if (methodToExecute && methodToExecute != null){
+    		methodToExecute.apply(this, null);
+    	}
+    	$("body").show();
+    	that.processSpeech();     
+    	that.processDatebox();
 	},
 	
 	'processSpeech' : function() {
@@ -101,18 +86,7 @@ var generic = {
 		document.location.href=uriWithParameters;
 		//$.mobile.changePage(uri, { dataUrl : uriWithParameters, data : parameters, reloadPage : true, changeHash : true });
 	},
-	/*
-	'getURLParameter' : function(sParam) {
-	    var sPageURL = window.location.search.substring(1);
-	    var sURLVariables = sPageURL.split('&');
-	    for (var i = 0; i < sURLVariables.length; i++) {
-	        var sParameterName = sURLVariables[i].split('=');
-	        if (sParameterName[0] == sParam) {
-	            return sParameterName[1];
-	        }
-	    }
-	},
-	*/
+	
 	'getURLParameter' : function(name){
 	    var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
 	    if (results == null){
@@ -120,6 +94,7 @@ var generic = {
 	    }
 	    return results[1] || 0;
 	},
+	
 	'loading' : function(){
 		$.mobile.loading( 'show', {
 			text: 'Cargando',
@@ -128,20 +103,22 @@ var generic = {
 			textonly: false
 		});
 	},
+	
 	'noLoading': function(){
 		$.mobile.loading( 'hide');
 	},
-	'alert' : function(title, message) {
-		console.log(message);
+	
+	'alert' : function(title, message, resultCallback) {
 		if (navigator && navigator.notification){
-			navigator.notification.alert(message, null, title);
+			navigator.notification.alert(message, resultCallback, title);
 		}
 		else{
 			$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>" + message + "</h3></div>")
 			.css({ display: "block", 
-				opacity: 0.90, 
+				opacity: 1, 
 				position: "fixed",
 				padding: "7px",
+				"background-color" : "#ddd",
 				"text-align": "center",
 				width: "270px",
 				left: ($(window).width() - 284)/2,
@@ -149,6 +126,9 @@ var generic = {
 			.appendTo( $.mobile.pageContainer ).delay( 1500 )
 			.fadeOut( 600, function(){
 				$(this).remove();
+				if (resultCallback != null){
+					resultCallback();
+				}
 			});
 		}
 	},
@@ -167,5 +147,9 @@ var generic = {
 	'getObject' : function(key) {
 	    var value = localStorage.getItem(key);
 	    return value && JSON.parse(value);
+	},
+	'unlogin' : function(){
+		generic.deleteValue("usuario");
+		generic.changePage("login.html");
 	}
 };

@@ -17,9 +17,6 @@ public class PacienteDTO extends AbstractDTO {
 	/** The escolarizacion. */
 	private String escolarizacion;
 
-	/** The examinador. */
-	private String examinador;
-
 	/** The fecha evaluacion. */
 	private String fechaEvaluacion;
 
@@ -66,15 +63,6 @@ public class PacienteDTO extends AbstractDTO {
 	 */
 	public String getEscolarizacion() {
 		return escolarizacion;
-	}
-
-	/**
-	 * Gets the examinador.
-	 * 
-	 * @return the examinador
-	 */
-	public String getExaminador() {
-		return examinador;
 	}
 
 	/**
@@ -168,16 +156,6 @@ public class PacienteDTO extends AbstractDTO {
 	 */
 	public void setEscolarizacion(String escolarizacion) {
 		this.escolarizacion = escolarizacion;
-	}
-
-	/**
-	 * Sets the examinador.
-	 * 
-	 * @param examinador
-	 *            the new examinador
-	 */
-	public void setExaminador(String examinador) {
-		this.examinador = examinador;
 	}
 
 	/**

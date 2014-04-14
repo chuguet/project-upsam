@@ -14,8 +14,8 @@
 		<script type="text/javascript" src="../index.js"></script>		
 		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
 		<script type="text/javascript" src="../js/server.js"></script>	
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>
+		<script type="text/javascript" src='../js/jquery/jquery-1.9.1.min.js'></script>
+		<script type="text/javascript" src='../js/jquery/jquery.mobile-1.4.1.js'></script>
 		<script type="text/javascript" src="../js/pages/antecedentes_personales.js"></script>
 		
 		
@@ -33,8 +33,11 @@
 				<a onclick="javascript:analisis_marcha.server()" data-icon="check">Guardar</a>
 				
 				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
-					<h2 class="subtitle">Antecedentes personales</h2>
-					<div id="username" class="username"></div>
+					<h2 id="subtitle" class="subtitle">Antecedentes Personales</h2>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#" onclick="javascript:generic.unlogin();" data-icon="power" data-role="button" data-iconpos="notext" data-mini="true">Salir</a>
+					</div>
 				</div>
 			</div>
 			

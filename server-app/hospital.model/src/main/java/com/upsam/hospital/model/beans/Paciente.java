@@ -42,11 +42,6 @@ public class Paciente implements IModelHospital {
 	@Column(name = "ESCOLARIZACION")
 	private Escolarizacion escolarizacion;
 
-	/** The examinador. */
-	@Basic
-	@Column(name = "EXAMINADOR")
-	private String examinador;
-
 	/** The email. */
 	@Basic
 	@Column(name = "FECHA_NACIMIENTO")
@@ -194,15 +189,6 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
-	 * Gets the examinador.
-	 * 
-	 * @return the examinador
-	 */
-	public String getExaminador() {
-		return examinador;
-	}
-
-	/**
 	 * Gets the fecha nacimiento.
 	 * 
 	 * @return the fecha nacimiento
@@ -320,16 +306,6 @@ public class Paciente implements IModelHospital {
 	 */
 	public void setEscolarizacion(Escolarizacion escolarizacion) {
 		this.escolarizacion = escolarizacion;
-	}
-
-	/**
-	 * Sets the examinador.
-	 * 
-	 * @param examinador
-	 *            the new examinador
-	 */
-	public void setExaminador(String examinador) {
-		this.examinador = examinador;
 	}
 
 	/**

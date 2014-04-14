@@ -1,9 +1,9 @@
 var server = {
 	"URI" : "http://192.168.0.154:8080/hospitalServer/",
-	"post" : function(action, params, callback) {
-		this.executeJSon('POST', action, params, callback);
+	"post" : function(action, params, callbackSuccess, callbackError) {
+		this.executeJSon('POST', action, params, callbackSuccess, callbackError);
 	},
-	"get" : function(entity, item, callback) {
+	"get" : function(entity, item, callbackSuccess, callbackError) {
 		var action = entity;
 		if (item && item != null) {
 			if (typeof item == "object") {
@@ -21,9 +21,9 @@ var server = {
 				action += '/' + item;
 			}
 		}
-		this.executeJSon('GET', action, null, callback);
+		this.executeJSon('GET', action, null, callbackSuccess, callbackError);
 	},
-	"executeJSon" : function($method, action, data, callback) {
+	"executeJSon" : function($method, action, data, callbackSuccess, callbackError) {
 		
 		if (data != null) {
 			data = JSON.stringify(data);
@@ -42,12 +42,15 @@ var server = {
 			url : url,
 			data : data,
 			dataType : 'json',
-			success : function(response) {
+			success : function(response, textStatus, x, y) {
+				if (typeof response.length + "" == "undefined"){
+					server.verifyActiveSession(this.url);
+				}
 				if ($method == 'GET') {
-					if (callback) {
+					if (callbackSuccess) {
 						var param = new Array();
 						param.push(response);
-						callback.apply(this, param);
+						callbackSuccess.apply(this, param);
 					}
 				}
 				else {
@@ -58,7 +61,7 @@ var server = {
 					else {
 						cabeceraMensaje = 'Operacion incorrecta';
 					}
-					generic.alert(cabeceraMensaje, response.mensaje);
+					generic.alert(cabeceraMensaje, response.mensaje, null);
 					if (response.correcto) {
 						if (callback) {
 							var param = new Array();
@@ -78,10 +81,37 @@ var server = {
 					message = 'No tiene permisos para acceder a esta funcionalidad';
 					break;
 				}
-				generic.alert('Error de conexion', message);
+				generic.alert('Error de conexion', message, null);
+				generic.noLoading();
+				if (callbackError) {
+					var param = new Array();
+					param.push(e);
+					callbackError.apply(this, param);
+				}
 			},
-			complete : function() {
+			complete : function(e) {
+				console.log(this.url);
 			}
 		});
+	},
+	'verifyActiveSession' : function(url){
+		var iframe = $('<iframe />', {
+		    name: 'myFrame',
+		    id:   'myFrame',
+		    src: url,
+		    style: 'display:none;'
+		});
+		iframe.appendTo('body');
+
+	    
+	    iframe.load(function(){
+	    	var sessionLose = ($("#myFrame").contents().find("form#f").length == 1);
+	    	iframe.remove();
+	    	if (sessionLose){
+	    		generic.alert("Sesion Finalizada", "Su sesion ha finalizado. Vuelva a logarse", function(){generic.changePage("login.html");})
+	    		
+	    	}
+	    });
+		
 	}
 };
