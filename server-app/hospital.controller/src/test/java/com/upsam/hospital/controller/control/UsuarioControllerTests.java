@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.ServletContext;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,17 +27,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.upsam.hospital.controller.dto.ChangePasswordDTO;
-import com.upsam.hospital.controller.dto.PacienteDTO;
 import com.upsam.hospital.controller.dto.UsuarioDTO;
-import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.dto.util.IUsuarioUtilDTO;
 import com.upsam.hospital.controller.util.TestUtils;
-import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Usuario;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.service.IFicheroEMTService;
-import com.upsam.hospital.model.service.IFicheroMDXService;
-import com.upsam.hospital.model.service.IPacienteService;
 import com.upsam.hospital.model.service.IUsuarioService;
 import com.upsam.hospital.util.mail.service.IMailUtil;
 @RunWith(MockitoJUnitRunner.class)
