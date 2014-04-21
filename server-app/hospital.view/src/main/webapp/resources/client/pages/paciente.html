@@ -32,6 +32,7 @@
 			
 			<!-- contenido -->
 			<div data-role="content">
+				<input type="hidden" id="idPaciente" />
 				<div class="content2">		
 					<div data-role="fieldcontain">
 						<label for="txtNumIdentificacion">N&deg; de identificaci&oacute;n:</label>	
@@ -84,7 +85,7 @@
 				<div id="exploraciones">
 					<h3>Exploraciones</h3>	
 					<div class="content2">
-						<a href="exploracion_fisica.html" data-icon="plus" data-role="button" data-mini="true" data-inline="true">A&ntilde;adir Exploraci&oacute;n</a></label>
+						<a href="#" onclick="paciente.irAExploracion();" data-icon="plus" data-role="button" data-mini="true" data-inline="true">A&ntilde;adir Exploraci&oacute;n</a></label>
 						
 					
 						<ul data-role="listview" data-inset="true" id="listaExploraciones">

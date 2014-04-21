@@ -40,7 +40,7 @@ public class Paciente implements IModelHospital {
 	/** The escolarizacion. */
 	@Basic
 	@Column(name = "ESCOLARIZACION")
-	private Escolarizacion escolarizacion;
+	private String escolarizacion;
 
 	/** The email. */
 	@Basic
@@ -71,7 +71,7 @@ public class Paciente implements IModelHospital {
 	/** The sexo. */
 	@Basic
 	@Column(name = "SEXO")
-	private Sexo sexo;
+	private String sexo;
 
 	/** The telefono. */
 	@Basic
@@ -171,7 +171,7 @@ public class Paciente implements IModelHospital {
 	 * 
 	 * @return the escolarizacion
 	 */
-	public Escolarizacion getEscolarizacion() {
+	public String getEscolarizacion() {
 		return escolarizacion;
 	}
 
@@ -243,7 +243,7 @@ public class Paciente implements IModelHospital {
 	 * 
 	 * @return the sexo
 	 */
-	public Sexo getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
 
@@ -282,7 +282,7 @@ public class Paciente implements IModelHospital {
 	 * @param escolarizacion
 	 *            the new escolarizacion
 	 */
-	public void setEscolarizacion(Escolarizacion escolarizacion) {
+	public void setEscolarizacion(String escolarizacion) {
 		this.escolarizacion = escolarizacion;
 	}
 
@@ -362,7 +362,7 @@ public class Paciente implements IModelHospital {
 	 * @param sexo
 	 *            the new sexo
 	 */
-	public void setSexo(Sexo sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 

@@ -5,18 +5,20 @@ define(["../../cordova", "../index", "../jquery/jquery-1.9.1.min", "../jquery/jq
 
 var exploracionFisica = {
 	'recuperar' : function(){
-		var idExploracion = generic.getURLParameter("id");
+		var idPaciente = generic.getURLParameter("idPaciente");
+		var idExploracion = generic.getURLParameter("idExploracion");
+		$("#idPaciente").val(idPaciente);
 		if (idExploracion != null){
 			//Entramos en modo edicion
 			generic.loading();
 			$("#subtitle").html("Consulta de Exploraci&oacute;n");
-			server.get('paciente', idPaciente, paciente.recuperarCallback);
-			$("#exploraciones").show();
+			server.get('paciente/' + idPaciente + "/exploracion/", idExploracion, exploracion.recuperarCallback);
+			$("#videos").show();
 		}
 		else{
 			//Entramos en modo alta
 			$("#subtitle").html("Nueva Exploraci&oacute;n");
-			$("#exploraciones").hide();
+			$("#videos").hide();
 			generic.noLoading();
 		}
 	}

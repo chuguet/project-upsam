@@ -1,5 +1,5 @@
 var server = {
-	"URI" : "http://192.168.0.154:8080/hospitalServer/",
+	"URI" : "http://192.168.2.179:8080/hospitalServer/",
 	"post" : function(action, params, callbackSuccess, callbackError) {
 		this.executeJSon('POST', action, params, callbackSuccess, callbackError);
 	},
@@ -63,10 +63,10 @@ var server = {
 					}
 					generic.alert(cabeceraMensaje, response.mensaje, null);
 					if (response.correcto) {
-						if (callback) {
+						if (callbackSuccess) {
 							var param = new Array();
 							param.push(response);
-							callback.apply(this, param);
+							callbackSuccess.apply(this, param);
 						}
 					}
 				}

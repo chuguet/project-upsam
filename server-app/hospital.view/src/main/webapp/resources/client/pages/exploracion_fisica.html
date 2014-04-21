@@ -32,7 +32,9 @@
 			</div>
 			
 			<!-- contenido -->
-			<div data-role="content">	
+			<div data-role="content">
+				<input type="hidden" id="idPaciente" />
+				<input type="hidden" id="idExploracion" />
 				<div data-role="content" style="border:solid 1px black;">
 					<div data-role="fieldcontain">
 						<label for="evalMuscularManual"><b>Actualizado a:</b></label>
@@ -60,29 +62,30 @@
 					</ul>
 				</div>
 				
-				
-				<h3>V&iacute;deos sobre la exploraci&oacute;n</h3>
-				<div class="content2">
-					
-					<!--Listado de videos -->						
-					<ul data-role="listview" data-inset="true">	            
-     					<li>
-     						<a rel="external" href="video_detalle.html" data-transition="fade">
-     							Video 1<br><span class="videoFeatures">archivo_001.mp4 | 02:28 min</span>     						
-     						</a>
-     					</li>
-     					
-     					<li>
-     						<a rel="external" href="video_detalle.html" data-transition="fade">
-     							Video 2<br><span class="videoFeatures">archivo_002.mp4 | 00:09 min</span>     						
-     						</a>
-     					</li>
-     					<li>
-     						<a rel="external" href="video_detalle.html" data-transition="fade">
-     							Video 3<br><span class="videoFeatures">archivo_003.mp4 | 12:56 min</span>     						
-     						</a>
-     					</li>     					
-     				</ul>
+				<div id="videos">
+					<h3>V&iacute;deos sobre la exploraci&oacute;n</h3>
+					<div class="content2">
+						
+						<!--Listado de videos -->						
+						<ul data-role="listview" data-inset="true">	            
+	     					<li>
+	     						<a rel="external" href="video_detalle.html" data-transition="fade">
+	     							Video 1<br><span class="videoFeatures">archivo_001.mp4 | 02:28 min</span>     						
+	     						</a>
+	     					</li>
+	     					
+	     					<li>
+	     						<a rel="external" href="video_detalle.html" data-transition="fade">
+	     							Video 2<br><span class="videoFeatures">archivo_002.mp4 | 00:09 min</span>     						
+	     						</a>
+	     					</li>
+	     					<li>
+	     						<a rel="external" href="video_detalle.html" data-transition="fade">
+	     							Video 3<br><span class="videoFeatures">archivo_003.mp4 | 12:56 min</span>     						
+	     						</a>
+	     					</li>     					
+	     				</ul>
+					</div>
 				</div>
 								
 				<h3>Valoraciones</h3>		

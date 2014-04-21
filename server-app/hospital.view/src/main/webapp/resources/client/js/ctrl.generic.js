@@ -78,12 +78,12 @@ var generic = {
 			var count = 1;
 			for(var name in parameters) {
 				if (count > 1)
-					action += "&";
+					uriWithParameters += "&";
 				uriWithParameters += name + "=" + parameters[name];
 				count++;
 			}
 		}
-		document.location.href=uriWithParameters;
+		document.location.href = uriWithParameters;
 		//$.mobile.changePage(uri, { dataUrl : uriWithParameters, data : parameters, reloadPage : true, changeHash : true });
 	},
 	

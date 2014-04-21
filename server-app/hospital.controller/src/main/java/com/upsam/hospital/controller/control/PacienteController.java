@@ -230,7 +230,7 @@ public class PacienteController {
 		try {
 			Paciente paciente = pacienteUtilDTO.toBusiness(pacienteDTO);
 			pacienteService.save(paciente);
-			return new MensajeDTO("Paciente creado correctamente", true);
+			return new MensajeDTO("Paciente creado correctamente", true, paciente);
 		}
 		catch (DataBaseException e) {
 			return new MensajeDTO(new StringBuffer("Ya existe el paciente con el numero de identificacion ").append(pacienteDTO.getNumeroIdentificacion()).append(" en base de datos.").toString(), false);
