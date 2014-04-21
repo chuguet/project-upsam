@@ -15,6 +15,8 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import com.upsam.hospital.model.enums.Escolarizacion;
+import com.upsam.hospital.model.enums.Sexo;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -40,7 +42,7 @@ public class Paciente implements IModelHospital {
 	/** The escolarizacion. */
 	@Basic
 	@Column(name = "ESCOLARIZACION")
-	private String escolarizacion;
+	private Escolarizacion escolarizacion;
 
 	/** The email. */
 	@Basic
@@ -71,7 +73,7 @@ public class Paciente implements IModelHospital {
 	/** The sexo. */
 	@Basic
 	@Column(name = "SEXO")
-	private String sexo;
+	private Sexo sexo;
 
 	/** The telefono. */
 	@Basic
@@ -84,11 +86,11 @@ public class Paciente implements IModelHospital {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<FicheroEMT> ficheroEMT;
 
-	/** The fichero mdx. */
-	@OneToMany(mappedBy = "paciente")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<FicheroMDX> ficheroMDX;
+	// /** The fichero mdx. */
+	// @OneToMany(mappedBy = "paciente")
+	// @Cascade(value = CascadeType.SAVE_UPDATE)
+	// @LazyCollection(LazyCollectionOption.FALSE)
+	// private List<FicheroMDX> ficheroMDX;
 
 	/** The exploracion3d. */
 	@OneToMany(mappedBy = "paciente")
@@ -135,18 +137,18 @@ public class Paciente implements IModelHospital {
 		this.getFicheroEMT().add(ficheroEMT);
 	}
 
-	/**
-	 * Adds the fichero mdx.
-	 * 
-	 * @param ficheroMDX
-	 *            the fichero mdx
-	 */
-	public void addFicheroMDX(FicheroMDX ficheroMDX) {
-		if (this.getFicheroMDX() == null) {
-			this.setFicheroMDX(new ArrayList<FicheroMDX>());
-		}
-		this.getFicheroMDX().add(ficheroMDX);
-	}
+	// /**
+	// * Adds the fichero mdx.
+	// *
+	// * @param ficheroMDX
+	// * the fichero mdx
+	// */
+	// public void addFicheroMDX(FicheroMDX ficheroMDX) {
+	// if (this.getFicheroMDX() == null) {
+	// this.setFicheroMDX(new ArrayList<FicheroMDX>());
+	// }
+	// this.getFicheroMDX().add(ficheroMDX);
+	// }
 
 	/**
 	 * Gets the apellidos.
@@ -171,7 +173,7 @@ public class Paciente implements IModelHospital {
 	 * 
 	 * @return the escolarizacion
 	 */
-	public String getEscolarizacion() {
+	public Escolarizacion getEscolarizacion() {
 		return escolarizacion;
 	}
 
@@ -202,14 +204,14 @@ public class Paciente implements IModelHospital {
 		return ficheroEMT;
 	}
 
-	/**
-	 * Gets the fichero mdx.
-	 * 
-	 * @return the fichero mdx
-	 */
-	public List<FicheroMDX> getFicheroMDX() {
-		return ficheroMDX;
-	}
+	// /**
+	// * Gets the fichero mdx.
+	// *
+	// * @return the fichero mdx
+	// */
+	// public List<FicheroMDX> getFicheroMDX() {
+	// return ficheroMDX;
+	// }
 
 	/**
 	 * Gets the id.
@@ -243,7 +245,7 @@ public class Paciente implements IModelHospital {
 	 * 
 	 * @return the sexo
 	 */
-	public String getSexo() {
+	public Sexo getSexo() {
 		return sexo;
 	}
 
@@ -282,7 +284,7 @@ public class Paciente implements IModelHospital {
 	 * @param escolarizacion
 	 *            the new escolarizacion
 	 */
-	public void setEscolarizacion(String escolarizacion) {
+	public void setEscolarizacion(Escolarizacion escolarizacion) {
 		this.escolarizacion = escolarizacion;
 	}
 
@@ -316,15 +318,15 @@ public class Paciente implements IModelHospital {
 		this.ficheroEMT = ficheroEMT;
 	}
 
-	/**
-	 * Sets the fichero mdx.
-	 * 
-	 * @param ficheroMDX
-	 *            the new fichero mdx
-	 */
-	public void setFicheroMDX(List<FicheroMDX> ficheroMDX) {
-		this.ficheroMDX = ficheroMDX;
-	}
+	// /**
+	// * Sets the fichero mdx.
+	// *
+	// * @param ficheroMDX
+	// * the new fichero mdx
+	// */
+	// public void setFicheroMDX(List<FicheroMDX> ficheroMDX) {
+	// this.ficheroMDX = ficheroMDX;
+	// }
 
 	/**
 	 * Sets the id.
@@ -362,7 +364,7 @@ public class Paciente implements IModelHospital {
 	 * @param sexo
 	 *            the new sexo
 	 */
-	public void setSexo(String sexo) {
+	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
 

@@ -1,4 +1,4 @@
-package com.upsam.hospital.model.beans;
+package com.upsam.hospital.model.enums;
 
 // TODO: Auto-generated Javadoc
 /**

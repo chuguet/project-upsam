@@ -4,16 +4,16 @@ package com.upsam.hospital.controller.dto;
 /**
  * The Class PacienteMovilDTO.
  */
-public class PacienteMovilDTO {
-	private Integer id;
+public class PacienteMovilDTO extends AbstractDTO {
+
 	/** The apellidos. */
 	private String apellidos;
 
-	/** The nombre. */
-	private String nombre;
+	/** The curso. */
+	private String curso;
 
-	/** The numero identificacion. */
-	private String numeroIdentificacion;
+	/** The escolarizacion. */
+	private Integer escolarizacion;
 
 	/** The numero identificacion. */
 	private String fechaNacimiento;
@@ -21,13 +21,17 @@ public class PacienteMovilDTO {
 	/** The numero identificacion. */
 	private String fechaUltimaEvaluacion;
 
-	public Integer getId() {
-		return id;
-	}
+	/** The nombre. */
+	private String nombre;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	/** The numero identificacion. */
+	private String numeroIdentificacion;
+
+	/** The sexo. */
+	private Integer sexo;
+
+	/** The telefono. */
+	private String telefono;
 
 	/**
 	 * Gets the apellidos.
@@ -36,6 +40,32 @@ public class PacienteMovilDTO {
 	 */
 	public String getApellidos() {
 		return apellidos;
+	}
+
+	public String getCurso() {
+		return curso;
+	}
+
+	public Integer getEscolarizacion() {
+		return escolarizacion;
+	}
+
+	/**
+	 * Gets the fecha nacimiento.
+	 * 
+	 * @return the fecha nacimiento
+	 */
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	/**
+	 * Gets the fecha ultima evaluacion.
+	 * 
+	 * @return the fecha ultima evaluacion
+	 */
+	public String getFechaUltimaEvaluacion() {
+		return fechaUltimaEvaluacion;
 	}
 
 	/**
@@ -56,6 +86,14 @@ public class PacienteMovilDTO {
 		return numeroIdentificacion;
 	}
 
+	public Integer getSexo() {
+		return sexo;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
 	/**
 	 * Sets the apellidos.
 	 * 
@@ -64,6 +102,34 @@ public class PacienteMovilDTO {
 	 */
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
+	}
+
+	public void setCurso(String curso) {
+		this.curso = curso;
+	}
+
+	public void setEscolarizacion(Integer escolarizacion) {
+		this.escolarizacion = escolarizacion;
+	}
+
+	/**
+	 * Sets the fecha nacimiento.
+	 * 
+	 * @param fechaNacimiento
+	 *            the new fecha nacimiento
+	 */
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	/**
+	 * Sets the fecha ultima evaluacion.
+	 * 
+	 * @param fechaUltimaEvaluacion
+	 *            the new fecha ultima evaluacion
+	 */
+	public void setFechaUltimaEvaluacion(String fechaUltimaEvaluacion) {
+		this.fechaUltimaEvaluacion = fechaUltimaEvaluacion;
 	}
 
 	/**
@@ -86,19 +152,11 @@ public class PacienteMovilDTO {
 		this.numeroIdentificacion = numeroIdentificacion;
 	}
 
-	public String getFechaNacimiento() {
-		return fechaNacimiento;
+	public void setSexo(Integer sexo) {
+		this.sexo = sexo;
 	}
 
-	public void setFechaNacimiento(String fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
-	}
-
-	public String getFechaUltimaEvaluacion() {
-		return fechaUltimaEvaluacion;
-	}
-
-	public void setFechaUltimaEvaluacion(String fechaUltimaEvaluacion) {
-		this.fechaUltimaEvaluacion = fechaUltimaEvaluacion;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 }

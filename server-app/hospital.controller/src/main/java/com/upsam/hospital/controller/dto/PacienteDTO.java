@@ -16,7 +16,7 @@ public class PacienteDTO extends AbstractDTO {
 	private String curso;
 
 	/** The escolarizacion. */
-	private String escolarizacion;
+	private Integer escolarizacion;
 
 	/** The fecha evaluacion. */
 	private String fechaEvaluacion;
@@ -34,7 +34,7 @@ public class PacienteDTO extends AbstractDTO {
 	private String numeroIdentificacion;
 
 	/** The sexo. */
-	private String sexo;
+	private Integer sexo;
 
 	/** The telefono. */
 	private String telefono;
@@ -64,7 +64,7 @@ public class PacienteDTO extends AbstractDTO {
 	 * 
 	 * @return the escolarizacion
 	 */
-	public String getEscolarizacion() {
+	public Integer getEscolarizacion() {
 		return escolarizacion;
 	}
 
@@ -118,7 +118,7 @@ public class PacienteDTO extends AbstractDTO {
 	 * 
 	 * @return the sexo
 	 */
-	public String getSexo() {
+	public Integer getSexo() {
 		return sexo;
 	}
 
@@ -157,7 +157,7 @@ public class PacienteDTO extends AbstractDTO {
 	 * @param escolarizacion
 	 *            the new escolarizacion
 	 */
-	public void setEscolarizacion(String escolarizacion) {
+	public void setEscolarizacion(Integer escolarizacion) {
 		this.escolarizacion = escolarizacion;
 	}
 
@@ -217,7 +217,7 @@ public class PacienteDTO extends AbstractDTO {
 	 * @param sexo
 	 *            the new sexo
 	 */
-	public void setSexo(String sexo) {
+	public void setSexo(Integer sexo) {
 		this.sexo = sexo;
 	}
 

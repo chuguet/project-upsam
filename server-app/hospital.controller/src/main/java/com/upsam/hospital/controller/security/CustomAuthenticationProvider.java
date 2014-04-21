@@ -15,8 +15,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
-import com.upsam.hospital.model.beans.Rol;
 import com.upsam.hospital.model.beans.Usuario;
+import com.upsam.hospital.model.enums.Rol;
 import com.upsam.hospital.model.service.IUsuarioService;
 
 // TODO: Auto-generated Javadoc

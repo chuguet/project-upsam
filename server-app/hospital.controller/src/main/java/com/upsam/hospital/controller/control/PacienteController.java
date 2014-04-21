@@ -193,7 +193,7 @@ public class PacienteController {
 					ficheroMDX.setFecha(now.getTime());
 					ficheroMDX.setNombre(file.getOriginalFilename());
 					ficheroMDX.setPaciente(paciente);
-					paciente.addFicheroMDX(ficheroMDX);
+					// paciente.addFicheroMDX(ficheroMDX);
 					pacienteService.update(paciente);
 					result = new MensajeDTO("Archivo subido correctamente.", true);
 				}

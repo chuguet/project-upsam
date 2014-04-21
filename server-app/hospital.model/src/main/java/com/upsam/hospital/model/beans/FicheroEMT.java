@@ -13,6 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import com.upsam.hospital.model.enums.TipoMedida;
+import com.upsam.hospital.model.enums.UnidadMedida;
 
 // TODO: Auto-generated Javadoc
 /**

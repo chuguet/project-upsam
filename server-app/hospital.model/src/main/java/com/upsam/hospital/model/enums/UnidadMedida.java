@@ -1,15 +1,13 @@
-package com.upsam.hospital.model.beans;
+package com.upsam.hospital.model.enums;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Enum Sexo.
+ * The Enum UnidadMedida.
  */
-public enum Sexo {
+public enum UnidadMedida {
 
-	/** The hombre. */
-	HOMBRE("Hombre"),
-	/** The mujer. */
-	MUJER("Mujer");
+	/** The deg. */
+	DEG("deg");
 
 	/**
 	 * Gets the value.
@@ -18,11 +16,11 @@ public enum Sexo {
 	 *            the value
 	 * @return the value
 	 */
-	public static Sexo getValue(String value) {
-		Sexo result = null;
-		for (Sexo sexo : Sexo.values()) {
-			if (sexo.getNameId().equals(value)) {
-				result = sexo;
+	public static UnidadMedida getValue(String value) {
+		UnidadMedida result = null;
+		for (UnidadMedida unidadMedida : UnidadMedida.values()) {
+			if (unidadMedida.getNameId().equals(value)) {
+				result = unidadMedida;
 				break;
 			}
 		}
@@ -33,12 +31,12 @@ public enum Sexo {
 	private String nameId;
 
 	/**
-	 * Instantiates a new sexo.
+	 * Instantiates a new unidad medida.
 	 * 
 	 * @param pNameId
 	 *            the name id
 	 */
-	private Sexo(String pNameId) {
+	private UnidadMedida(String pNameId) {
 		this.nameId = pNameId;
 	}
 

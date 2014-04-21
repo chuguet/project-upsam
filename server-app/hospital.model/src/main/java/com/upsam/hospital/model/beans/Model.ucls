@@ -40,8 +40,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="5" language="java" name="com.upsam.hospital.model.beans.Rol" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Rol.java" binary="false" corner="BOTTOM_RIGHT">    
+  <enumeration id="5" language="java" name="com.upsam.hospital.model.enums.Rol" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/enums/Rol.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="83" y="104"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -49,8 +49,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <enumeration id="6" language="java" name="com.upsam.hospital.model.beans.UnidadMedida" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/UnidadMedida.java" binary="false" 
+  <enumeration id="6" language="java" name="com.upsam.hospital.model.enums.UnidadMedida" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/enums/UnidadMedida.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="81" y="302"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
@@ -59,8 +59,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </enumeration>  
-  <enumeration id="7" language="java" name="com.upsam.hospital.model.beans.TipoMedida" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/TipoMedida.java" binary="false" 
+  <enumeration id="7" language="java" name="com.upsam.hospital.model.enums.TipoMedida" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/enums/TipoMedida.java" binary="false" 
     corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="103" y="468"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 

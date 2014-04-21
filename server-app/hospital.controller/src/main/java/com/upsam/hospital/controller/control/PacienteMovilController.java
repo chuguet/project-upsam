@@ -12,6 +12,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,11 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.upsam.hospital.controller.dto.ExploracionDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
+import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.PacienteMovilDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteMovilUtilDTO;
-import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Exploracion;
@@ -37,29 +38,22 @@ import com.upsam.hospital.model.service.IFicheroEMTService;
 import com.upsam.hospital.model.service.IPacienteService;
 import com.upsam.hospital.model.service.IVideoService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PacienteMovilController.
+ */
 @Controller
 @RequestMapping("/pacientemovil")
 public class PacienteMovilController {
 
+	/** The Constant LOG. */
 	private final static Log LOG = LogFactory.getLog(PacienteMovilController.class);
-	@Inject
-	private IPacienteService pacienteService;
 
-	@Inject
-	private IPacienteMovilUtilDTO pacienteMovilUtilDTO;
-
-	@Inject
-	private IVideoService videoService;
-
+	/** The exploracion service. */
 	@Inject
 	private IExploracionService exploracionService;
 
-	@Inject
-	private IVideoUtilDTO videoUtilDTO;
-
-	@Inject
-	private IPacienteUtilDTO pacienteUtilDTO;
-
+	/** The exploracion util dto. */
 	@Inject
 	private IExploracionUtilDTO exploracionUtilDTO;
 
@@ -67,80 +61,39 @@ public class PacienteMovilController {
 	@Inject
 	private IFicheroEMTService ficheroEMTService;
 
-	@RequestMapping(method = RequestMethod.GET)
-	public @ResponseBody
-	List<PacienteMovilDTO> listAll(@RequestParam("param") String param) {
-		List<PacienteMovilDTO> pacientesMovilDTO = new ArrayList<PacienteMovilDTO>();
-		PacienteMovilDTO pacienteMovilDTO;
-		try {
-			List<Paciente> pacientes = pacienteService.findByIdNameSurname(param);
+	/** The paciente movil util dto. */
+	@Inject
+	private IPacienteMovilUtilDTO pacienteMovilUtilDTO;
 
-			for (Paciente paciente : pacientes) {
-				pacienteMovilDTO = pacienteMovilUtilDTO.toRestMovil(paciente);
-				pacientesMovilDTO.add(pacienteMovilDTO);
-			}
-		}
-		catch (DataBaseException e) {
-			LOG.error(e.getMessage());
-		}
-		return pacientesMovilDTO;
-	}
+	/** The paciente service. */
+	@Inject
+	private IPacienteService pacienteService;
 
-	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion/}")
-	public @ResponseBody
-	ExploracionDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
-		ExploracionDTO result = null;
+	/** The video service. */
+	@Inject
+	private IVideoService videoService;
 
-		try {
-			Exploracion exploracion = this.exploracionService.findOne(idExploracion);
-			result = this.exploracionUtilDTO.toRest(exploracion);
-		}
-		catch (DataBaseException e1) {
-			e1.printStackTrace();
-		}
-		catch (TransferObjectException e) {
-			LOG.error(e.getMessage());
-		}
+	/** The video util dto. */
+	@Inject
+	private IVideoUtilDTO videoUtilDTO;
 
-		return result;
-	}
-
-	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/video")
-	public @ResponseBody
-	List<VideoDTO> getAllVideosFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
-		List<VideoDTO> result = new ArrayList<VideoDTO>();
-		try {
-			Exploracion exploracion = exploracionService.findOne(idExploracion);
-			result.addAll(videoUtilDTO.getVideosList(exploracion.getVideos()));
-		}
-		catch (DataBaseException e) {
-			LOG.error(e.getMessage());
-		}
-		catch (TransferObjectException e) {
-			LOG.error(e.getMessage());
-		}
-		return result;
-	}
-
-	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion/}video/{id}")
-	public @ResponseBody
-	VideoDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id) {
-		VideoDTO result = null;
-		Video video;
-		try {
-			video = this.videoService.findOne(idPaciente, idExploracion, id);
-			result = this.videoUtilDTO.toRest(video);
-		}
-		catch (DataBaseException | NotFoundException e1) {
-			e1.printStackTrace();
-		}
-		catch (TransferObjectException e) {
-			LOG.error(e.getMessage());
-		}
-
-		return result;
-	}
-
+	/**
+	 * Descargar video.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @param id
+	 *            the id
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the model and view
+	 * @throws Exception
+	 *             the exception
+	 */
 	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/videoreproduce/{id}", method = RequestMethod.GET)
 	public ModelAndView descargarVideo(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		try {
@@ -200,5 +153,184 @@ public class PacienteMovilController {
 			LOG.error(e.getMessage());
 		}
 		return result;
+	}
+
+	/**
+	 * Gets the all videos from paciente.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @return the all videos from paciente
+	 */
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/video")
+	public @ResponseBody
+	List<VideoDTO> getAllVideosFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
+		List<VideoDTO> result = new ArrayList<VideoDTO>();
+		try {
+			Exploracion exploracion = exploracionService.findOne(idExploracion);
+			result.addAll(videoUtilDTO.getVideosList(exploracion.getVideos()));
+		}
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+		}
+		catch (TransferObjectException e) {
+			LOG.error(e.getMessage());
+		}
+		return result;
+	}
+
+	/**
+	 * Gets the video from paciente.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @return the video from paciente
+	 */
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion/}")
+	public @ResponseBody
+	ExploracionDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
+		ExploracionDTO result = null;
+
+		try {
+			Exploracion exploracion = this.exploracionService.findOne(idExploracion);
+			result = this.exploracionUtilDTO.toRest(exploracion);
+		}
+		catch (DataBaseException e1) {
+			e1.printStackTrace();
+		}
+		catch (TransferObjectException e) {
+			LOG.error(e.getMessage());
+		}
+
+		return result;
+	}
+
+	/**
+	 * Gets the video from paciente.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @param id
+	 *            the id
+	 * @return the video from paciente
+	 */
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion/}video/{id}")
+	public @ResponseBody
+	VideoDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id) {
+		VideoDTO result = null;
+		Video video;
+		try {
+			video = this.videoService.findOne(idPaciente, idExploracion, id);
+			result = this.videoUtilDTO.toRest(video);
+		}
+		catch (DataBaseException | NotFoundException e1) {
+			e1.printStackTrace();
+		}
+		catch (TransferObjectException e) {
+			LOG.error(e.getMessage());
+		}
+
+		return result;
+	}
+
+	/**
+	 * Insert.
+	 * 
+	 * @param pacienteMovilDTO
+	 *            the paciente movil dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO insert(@RequestBody PacienteMovilDTO pacienteMovilDTO) {
+		try {
+			Paciente paciente = pacienteMovilUtilDTO.toBusinessMovil(pacienteMovilDTO);
+			pacienteService.save(paciente);
+			return new MensajeDTO("Paciente creado correctamente", true, paciente);
+		}
+		catch (DataBaseException e) {
+			return new MensajeDTO(new StringBuffer("Ya existe el paciente con el numero de identificacion ").append(pacienteMovilDTO.getNumeroIdentificacion()).append(" en base de datos.").toString(), false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion del paciente", false);
+		}
+	}
+
+	/**
+	 * List all.
+	 * 
+	 * @param param
+	 *            the param
+	 * @return the list
+	 */
+	@RequestMapping(method = RequestMethod.GET)
+	public @ResponseBody
+	List<PacienteMovilDTO> listAll(@RequestParam("param") String param) {
+		List<PacienteMovilDTO> pacientesMovilDTO = new ArrayList<PacienteMovilDTO>();
+		PacienteMovilDTO pacienteMovilDTO;
+		try {
+			List<Paciente> pacientes = pacienteService.findByIdNameSurname(param);
+
+			for (Paciente paciente : pacientes) {
+				pacienteMovilDTO = pacienteMovilUtilDTO.toRestMovil(paciente);
+				pacientesMovilDTO.add(pacienteMovilDTO);
+			}
+		}
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+		}
+		return pacientesMovilDTO;
+	}
+
+	/**
+	 * Retrieve.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the paciente movil dto
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public @ResponseBody
+	PacienteMovilDTO retrieve(@PathVariable("id") Integer id) {
+		PacienteMovilDTO pacienteMovilDTO = new PacienteMovilDTO();
+		try {
+			Paciente paciente = pacienteService.findOne(id);
+			pacienteMovilDTO = pacienteMovilUtilDTO.toRestMovil(paciente);
+		}
+		catch (DataBaseException e) {
+			LOG.info(new StringBuffer("No existe el paciente con el numero de identificacion ").append(pacienteMovilDTO.getNumeroIdentificacion()).append(" en base de datos.").toString());
+		}
+		return pacienteMovilDTO;
+	}
+
+	/**
+	 * Update.
+	 * 
+	 * @param pacienteMovilDTO
+	 *            the paciente movil dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO update(@RequestBody PacienteMovilDTO pacienteMovilDTO) {
+		try {
+			Paciente paciente = pacienteMovilUtilDTO.toBusinessMovil(pacienteMovilDTO);
+			pacienteService.update(paciente);
+			return new MensajeDTO("Paciente modificado correctamente", true);
+		}
+		catch (DataBaseException e) {
+			return new MensajeDTO("Error al actualizar el paciente en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion del paciente", false);
+		}
 	}
 }

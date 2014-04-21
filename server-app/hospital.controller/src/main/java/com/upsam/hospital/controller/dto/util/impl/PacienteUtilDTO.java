@@ -13,6 +13,8 @@ import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.Paciente;
+import com.upsam.hospital.model.enums.Escolarizacion;
+import com.upsam.hospital.model.enums.Sexo;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,14 +41,14 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 		try {
 			paciente.setApellidos(pacienteDTO.getApellidos());
 			paciente.setCurso(pacienteDTO.getCurso());
-			paciente.setEscolarizacion(pacienteDTO.getEscolarizacion());
+			paciente.setEscolarizacion(Escolarizacion.values()[pacienteDTO.getEscolarizacion()]);
 			if (pacienteDTO.getFechaNacimiento() != null && pacienteDTO.getFechaNacimiento().length() == 10) {
 				paciente.setFechaNacimiento(DATE_FORMATTER.parse(pacienteDTO.getFechaNacimiento()));
 			}
 			paciente.setId(pacienteDTO.getId());
 			paciente.setNombre(pacienteDTO.getNombre());
 			paciente.setNumeroIdentificacion(pacienteDTO.getNumeroIdentificacion());
-			paciente.setSexo(pacienteDTO.getSexo());
+			paciente.setSexo(Sexo.values()[pacienteDTO.getSexo()]);
 			paciente.setTelefono(pacienteDTO.getTelefono());
 		}
 		catch (ParseException e) {
@@ -66,7 +68,7 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 		PacienteDTO pacienteDTO = new PacienteDTO();
 		pacienteDTO.setApellidos(paciente.getApellidos());
 		pacienteDTO.setCurso(paciente.getCurso());
-		pacienteDTO.setEscolarizacion(paciente.getEscolarizacion());
+		pacienteDTO.setEscolarizacion(paciente.getEscolarizacion().ordinal());
 		if (paciente.getFechaUltimaEvaluacion() != null) {
 			pacienteDTO.setFechaEvaluacion(DATE_FORMATTER.format(paciente.getFechaUltimaEvaluacion()));
 		}
@@ -76,7 +78,7 @@ public class PacienteUtilDTO implements IPacienteUtilDTO {
 		pacienteDTO.setId(paciente.getId());
 		pacienteDTO.setNombre(paciente.getNombre());
 		pacienteDTO.setNumeroIdentificacion(paciente.getNumeroIdentificacion());
-		pacienteDTO.setSexo(paciente.getSexo());
+		pacienteDTO.setSexo(paciente.getSexo().ordinal());
 		pacienteDTO.setTelefono(paciente.getTelefono());
 		if (paciente.getExploraciones() != null && paciente.getExploraciones().size() > 0) {
 			List<ExploracionDTO> exploracionesDTO = new ArrayList<ExploracionDTO>();

@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 import com.upsam.hospital.controller.dto.UsuarioDTO;
 import com.upsam.hospital.controller.dto.util.IUsuarioUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
-import com.upsam.hospital.model.beans.Rol;
 import com.upsam.hospital.model.beans.Usuario;
+import com.upsam.hospital.model.enums.Rol;
 
 // TODO: Auto-generated Javadoc
 /**
