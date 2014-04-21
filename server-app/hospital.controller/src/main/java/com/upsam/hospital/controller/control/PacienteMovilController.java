@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import com.upsam.hospital.controller.dto.ExploracionDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
 import com.upsam.hospital.controller.dto.PacienteMovilDTO;
@@ -83,6 +84,25 @@ public class PacienteMovilController {
 			LOG.error(e.getMessage());
 		}
 		return pacientesMovilDTO;
+	}
+
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion/}")
+	public @ResponseBody
+	ExploracionDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
+		ExploracionDTO result = null;
+
+		try {
+			Exploracion exploracion = this.exploracionService.findOne(idExploracion);
+			result = this.exploracionUtilDTO.toRest(exploracion);
+		}
+		catch (DataBaseException e1) {
+			e1.printStackTrace();
+		}
+		catch (TransferObjectException e) {
+			LOG.error(e.getMessage());
+		}
+
+		return result;
 	}
 
 	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/video")
