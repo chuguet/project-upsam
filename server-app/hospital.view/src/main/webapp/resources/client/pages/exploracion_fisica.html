@@ -10,13 +10,7 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>	
-		<script type="text/javascript" src='../js/jquery/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery/jquery.mobile-1.4.1.js'></script>	
-		<script type="text/javascript" src="../js/pages/exploracion_fisica.js"></script>
+		<script data-main="../js/pages/exploracion_fisica" src="../js/require.min.js"></script>
 		
 		<script type="text/javascript">
 			generic.initialize();
@@ -94,12 +88,27 @@
 				<h3>Valoraciones</h3>		
 				<div class="content2">
 					<div data-role="fieldcontain">  
-						<label for="valoracionCtrlMotor">Control motor selectivo:</label>  
-						<input type="range" name="valoracionCtrlMotor" id="valoracionCtrlMotor" value=""  min="0" max="3"/>				
+						<label for="cmbControlMotorSelectivo">Control motor selectivo:</label>  
+						<!-- <input type="range" name="valoracionCtrlMotor" id="valoracionCtrlMotor" value=""  min="0" max="3"/> -->				
+						<select id="cmbControlMotorSelectivo" name="cmbControlMotorSelectivo" data-native-menu="false">
+							<option value="0"></option>
+							<option value="1">1 Incapacidad de aislar el movimiento</option>
+							<option value="2">2 Logra aislar parcialmente el movimiento</option>
+							<option value="3">3 Logra aislar completamente el movimiento</option>		                    
+						</select>
 					</div>
 					<div data-role="fieldcontain">  
-						<label for="evalMuscularManual">Muscular manual:</label>  
-						<input type="text" class="txt-speech" name="evalMuscularManual" id="evalMuscularManual"/>
+						<label for="cmbevaluacionMuscularManual">Evaluaci&oacute;n Muscular Manual:</label>  
+						<select id="cmbevaluacionMuscularManual" name="cmbevaluacionMuscularManual" data-native-menu="false">
+							<option value="0">0 Par&aacute;lisis total</option>
+							<option value="1">1 Contracci&oacute;n visible o palpable</option>
+							<option value="2">2 Movimiento activo, rango de movimiento completo (RAM) con gravedad eliminada</option>
+							<option value="3">3 Movimiento activo, RAM completo contra gravedad</option>
+							<option value="4">4 Movimiento activo, RAM completo contra gravedad con resistencia moderada en una posici&oacute;n espec&iacute;fica del m&uacute;sculo</option>		 
+							<option value="5">5 (normal) Movimiento activo, completo RAM contra gravedad y con resistencia completa en una posici&oacute;n espec&iacute;fica del m&uacute;sculo esperable en una persona no discapacitada</option>		 
+							<option value="5*">5* (normal) movimiento activo, RAM completo contra gravedad y resistencia suficiente para ser considerado normal si los factores inhibidores identificados (es decir, dolor, desuso) no estuvieran presentes</option>		 
+							<option value="NT">NT No testable o no valorable (es decir, debido a la inmovilizaci&oacute;n, dolor tan severo que el paciente no pueda ser valorados, amputaci&oacute;n de la pierna, contractura >50% del rango articular)</option>                
+						</select>
 					</div>
 						
 								
@@ -208,7 +217,15 @@
 								<td><input type="text" name="tobilloDerInflex" id="tobilloDerInflex" class="txt-speech" /></td>     
 							</tr>
 						  </tbody>
-					</table>	
+					</table>
+					<ul>
+						<li>0 - Tono muscular normal.</li>
+						<li>1 - Discreto aumento del tono muscular que se manifiesta por un enganche o una resistencia m&iacute;nima al final del movimiento cuando el miembro afectado es movilizado en flexi&oacute;n o extensi&oacute;n.</li>
+						<li>1+ - Discreto aumento del tono muscular, que se manifiesta por un enganche discreto seguido de una resistencia m&iacute;nima durante al menos la mitad del resto del movimiento.</li>
+						<li>2 - Aumento m&aacute;s marcado del tono muscular a lo largo del movimiento, aunque permite una f&aacute;cil movilización del miembro afectado.</li>
+						<li>3 - Aumento considerable del tono dificultando la movilizaci&oacute;n pasiva.</li>
+						<li>4 - El miembro afectado est&aacute; fijado en extensi&iacute;n o en flexi&oacute;n.</li>
+					</ul>
 				</div>	
 				
 				<h3>An&aacute;lisis observacional de la marcha</h3>				

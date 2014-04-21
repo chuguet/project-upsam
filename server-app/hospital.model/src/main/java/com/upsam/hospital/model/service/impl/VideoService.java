@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import com.coremedia.iso.IsoFile;
+import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
@@ -36,17 +37,21 @@ class VideoService implements IVideoService {
 	private IPacienteService pacienteService;
 
 	@Override
-	public void save(byte[] content, Integer idPaciente) throws FileNotFoundException, IOException, DataBaseException {
-		String nombre = saveInFolder(content, idPaciente);
+	public void save(byte[] content, Integer idPaciente, Integer idExploracion) throws FileNotFoundException, IOException, DataBaseException {
+		String nombre = saveInFolder(content, idExploracion);
 		String lengthInSeconds = getDuration(getFolderPath(idPaciente) + nombre);
-		Paciente paciente = pacienteService.findOne(idPaciente);
+		Paciente paciente = pacienteService.findOne(idExploracion);
 
 		Video video = new Video();
 		video.setDuracion(lengthInSeconds);
 		video.setFecha(new Date());
-		video.setPaciente(paciente);
 		video.setNombre(nombre);
-		paciente.getVideos().add(video);
+		for (Exploracion exploracion : paciente.getExploraciones()) {
+			if (exploracion.getId().equals(idExploracion)) {
+				video.setExploracion(exploracion);
+				exploracion.getVideos().add(video);
+			}
+		}
 		pacienteService.update(paciente);
 	}
 
@@ -104,13 +109,18 @@ class VideoService implements IVideoService {
 	}
 
 	@Override
-	public Video findOne(Integer idPaciente, Integer id) throws DataBaseException, NotFoundException {
+	public Video findOne(Integer idPaciente, Integer idExploracion, Integer id) throws DataBaseException, NotFoundException {
 		Paciente paciente = pacienteService.findOne(idPaciente);
-		for (Video video : paciente.getVideos()) {
-			if (video.getId().equals(id)) {
-				return video;
+		for (Exploracion exploracion : paciente.getExploraciones()) {
+			if (exploracion.getId().equals(idExploracion)) {
+				for (Video video : exploracion.getVideos()) {
+					if (video.getId().equals(id)) {
+						return video;
+					}
+				}
 			}
 		}
+
 		throw new NotFoundException("Se ha producido un error al recuperar un vídeo de un paciente");
 	}
 

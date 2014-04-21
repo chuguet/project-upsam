@@ -52,18 +52,6 @@ public class Paciente implements IModelHospital {
 	@Column(name = "FECHA_ULTIMA_EVALUACION")
 	private Date fechaUltimaEvaluacion;
 
-	/** The fichero emt. */
-	@OneToMany(mappedBy = "paciente")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<FicheroEMT> ficheroEMT;
-
-	/** The fichero mdx. */
-	@OneToMany(mappedBy = "paciente")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<FicheroMDX> ficheroMDX;
-
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -90,11 +78,23 @@ public class Paciente implements IModelHospital {
 	@Column(name = "TELEFONO")
 	private String telefono;
 
-	/** The exploracion3 d. */
+	/** The fichero emt. */
 	@OneToMany(mappedBy = "paciente")
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Video> videos;
+	private List<FicheroEMT> ficheroEMT;
+
+	/** The fichero mdx. */
+	@OneToMany(mappedBy = "paciente")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<FicheroMDX> ficheroMDX;
+
+	/** The exploracion3d. */
+	@OneToMany(mappedBy = "paciente")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Exploracion> exploraciones;
 
 	/**
 	 * Instantiates a new paciente.
@@ -146,19 +146,6 @@ public class Paciente implements IModelHospital {
 			this.setFicheroMDX(new ArrayList<FicheroMDX>());
 		}
 		this.getFicheroMDX().add(ficheroMDX);
-	}
-
-	/**
-	 * Adds the video.
-	 * 
-	 * @param video
-	 *            the video
-	 */
-	public void addVideo(Video video) {
-		if (this.getVideos() == null) {
-			this.setVideos(new ArrayList<Video>());
-		}
-		this.getVideos().add(video);
 	}
 
 	/**
@@ -267,15 +254,6 @@ public class Paciente implements IModelHospital {
 	 */
 	public String getTelefono() {
 		return telefono;
-	}
-
-	/**
-	 * Gets the videos.
-	 * 
-	 * @return the videos
-	 */
-	public List<Video> getVideos() {
-		return this.videos;
 	}
 
 	/**
@@ -398,14 +376,11 @@ public class Paciente implements IModelHospital {
 		this.telefono = telefono;
 	}
 
-	/**
-	 * Sets the videos.
-	 * 
-	 * @param videos
-	 *            the new videos
-	 */
-	public void setVideos(List<Video> videos) {
-		this.videos = videos;
+	public List<Exploracion> getExploraciones() {
+		return exploraciones;
 	}
 
+	public void setExploraciones(List<Exploracion> exploraciones) {
+		this.exploraciones = exploraciones;
+	}
 }

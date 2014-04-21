@@ -12,10 +12,10 @@ import com.upsam.hospital.model.exceptions.DataBaseException;
  */
 public interface IVideoService {
 
-	void save(byte[] content, Integer idPaciente) throws FileNotFoundException, IOException, DataBaseException;
-
-	Video findOne(Integer idPaciente, Integer id) throws DataBaseException, NotFoundException;
+	void save(byte[] content, Integer idPaciente, Integer idExploracion) throws FileNotFoundException, IOException, DataBaseException;
 
 	void recuperarVideo(OutputStream outStream, String nombre, Integer idPaciente) throws FileNotFoundException;
+
+	Video findOne(Integer idPaciente, Integer idExploracion, Integer id) throws DataBaseException, NotFoundException;
 
 }

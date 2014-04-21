@@ -1,7 +1,9 @@
 package com.upsam.hospital.controller.dto.util.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import org.springframework.stereotype.Component;
 import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
@@ -47,5 +49,20 @@ public class VideoUtilDTO implements IVideoUtilDTO {
 		videoDTO.setDuracion(video.getDuracion());
 		videoDTO.setDescripcion(video.getDescripcion());
 		return videoDTO;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.controller.dto.util.IPacienteUtilDTO#getVideosList
+	 * (java.util.List)
+	 */
+	@Override
+	public List<VideoDTO> getVideosList(List<Video> videos) throws TransferObjectException {
+		List<VideoDTO> result = new ArrayList<VideoDTO>();
+		for (Video video : videos) {
+			result.add(this.toRest(video));
+		}
+		return result;
 	}
 }

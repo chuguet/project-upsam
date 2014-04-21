@@ -12,13 +12,14 @@ var paciente = {
 	'buscarListadoCallback' : function(listaItems){
 		$("#listaPacientes li").remove();
 		for (var i = 0; i < listaItems.length; i++){
-			var li = $("<li></li>");
-			var a = $("<a rel='external' alt='Acceder al paciente' href='#' data-transition='fade'>" + listaItems[i].nombre + "&nbsp;" + listaItems[i].apellidos + " [N&deg; ident:" + listaItems[i].numeroIdentificacion + "]<br/><span class='videoFeatures'>Fecha Nacimiento: " + listaItems[i].fechaNacimiento + "&nbsp;|&nbsp;Fecha &uacute;ltima evaluaci&oacute;n: " + listaItems[i].fechaUltimaEvaluacion + "</span></a>");
-			var params = { id : listaItems[i].id };
-			a.click(function() {
-				generic.changePage("paciente.html", params);
-			});
-			li.append(a);
+			var li = $("<li><a rel='external' alt='Acceder al paciente' href='paciente.html?id=" + listaItems[i].id + "' data-transition='fade'>" + listaItems[i].nombre + "&nbsp;" + listaItems[i].apellidos + " [N&deg; ident:" + listaItems[i].numeroIdentificacion + "]<br/><span class='videoFeatures'>Fecha Nacimiento: " + listaItems[i].fechaNacimiento + "&nbsp;|&nbsp;Fecha &uacute;ltima evaluaci&oacute;n: " + listaItems[i].fechaUltimaEvaluacion + "</span></a></li>");
+//			var li = $("<li></li>");
+//			var a = $("<a rel='external' alt='Acceder al paciente' href='paciente.html?id=" + listaItems[i].id + "' data-transition='fade'>" + listaItems[i].nombre + "&nbsp;" + listaItems[i].apellidos + " [N&deg; ident:" + listaItems[i].numeroIdentificacion + "]<br/><span class='videoFeatures'>Fecha Nacimiento: " + listaItems[i].fechaNacimiento + "&nbsp;|&nbsp;Fecha &uacute;ltima evaluaci&oacute;n: " + listaItems[i].fechaUltimaEvaluacion + "</span></a>");
+//			var params = { id : listaItems[i].id };
+//			a.click(function() {
+//				generic.changePage("paciente.html", params);
+//			});
+//			li.append(a);
 			$("#listaPacientes").append(li);
 		}
 		$("#listaPacientes").listview('refresh');
@@ -43,7 +44,6 @@ var paciente = {
 	},
 	
 	'recuperarCallback' : function(paciente){
-		generic.noLoading();
 		if (paciente != null){
 			$("#txtNumIdentificacion").val(paciente.numeroIdentificacion != null ? paciente.numeroIdentificacion : "");
 			$("#txtNombre").val(paciente.nombre != null ? paciente.nombre : "");
@@ -59,7 +59,17 @@ var paciente = {
 			
 			$("#txtCurso").val(paciente.curso != null ? paciente.curso : "");
 			
+			if (paciente.exploraciones != null && paciente.exploraciones.length > 0){
+				for (var i = 0; i < paciente.exploraciones.length; i++){
+					var exploracion = paciente.exploraciones[i];
+					var cont = i + 1;
+					$("#listaExploraciones").append("<li><a rel='external' href='exploracion_fisica.html?id=" + exploracion.id + "&num=" + cont + "' data-transition='fade'>Exploraci&oacute;n " + cont + "<br><span class='videoFeatures'>" + exploracion.fecha + "&nbsp;|&nbsp;" + exploracion.nombreUsuario + "</span></a></li>");
+				}
+				$("#listaExploraciones").listview('refresh');
+				$("#listaExploraciones").show();
+			}
 		}
+		generic.noLoading();
 	},
 	
 	'insertar' : function(){

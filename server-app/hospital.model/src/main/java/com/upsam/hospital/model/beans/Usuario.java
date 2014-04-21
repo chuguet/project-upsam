@@ -236,4 +236,12 @@ public class Usuario implements IModelHospital {
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
+
+	public String getNombreCompleto() {
+		String nombreCompleto = this.nombre;
+		if (apellidos != null && apellidos.length() > 0) {
+			nombreCompleto += " " + this.apellidos;
+		}
+		return nombreCompleto;
+	}
 }

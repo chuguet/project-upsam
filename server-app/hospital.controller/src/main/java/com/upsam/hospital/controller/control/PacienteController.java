@@ -24,6 +24,7 @@ import com.upsam.hospital.controller.dto.FicheroMDXDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXInfoDTO;
 import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.PacienteDTO;
+import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.FicheroEMT;
@@ -68,6 +69,9 @@ public class PacienteController {
 	@Inject
 	private IPacienteUtilDTO pacienteUtilDTO;
 
+	@Inject
+	private IExploracionUtilDTO exploracionUtilDTO;
+
 	/** The servlet context. */
 	@Inject
 	private ServletContext servletContext;
@@ -102,12 +106,12 @@ public class PacienteController {
 	@RequestMapping(value = "{idPaciente}/ficheroMDX/{id}")
 	public @ResponseBody
 	FicheroMDXDTO ficheroMDX(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("id") Integer id) {
-		FicheroMDXDTO result = null;
+		FicheroMDXDTO ficheroMDXDTO = null;
 		try {
 			FicheroMDX ficheroMDX = ficheroMDXService.findOne(id);
 			File file = new File(new StringBuffer(servletContext.getRealPath("/resources/files/PACIENTE_")).append(idPaciente).append("/").append(ficheroMDX.getFecha()).append("_").append(ficheroMDX.getNombre()).toString());
 			EmxDataFile emxDataFile = ficheroMDXService.fileReaderMDX(file);
-			result = pacienteUtilDTO.fileMDXToDTO(emxDataFile);
+			ficheroMDXDTO = exploracionUtilDTO.fileMDXToDTO(emxDataFile);
 		}
 		catch (DataBaseException e) {
 			LOG.error(e.getMessage());
@@ -118,7 +122,7 @@ public class PacienteController {
 		catch (IOException e) {
 			LOG.error(e.getMessage());
 		}
-		return result;
+		return ficheroMDXDTO;
 	}
 
 	/**
@@ -134,7 +138,7 @@ public class PacienteController {
 		List<FicheroMDXInfoDTO> result = new ArrayList<FicheroMDXInfoDTO>();
 		try {
 			Paciente paciente = pacienteService.findOne(id);
-			result.addAll(pacienteUtilDTO.getFicherosMDXInfoList(paciente.getFicheroMDX()));
+			// result.addAll(pacienteUtilDTO.getFicherosMDXInfoList(paciente.getFicheroMDX()));
 		}
 		catch (DataBaseException e) {
 			LOG.error(e.getMessage());

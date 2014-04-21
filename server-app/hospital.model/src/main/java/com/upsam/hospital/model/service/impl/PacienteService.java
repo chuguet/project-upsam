@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.repository.IPacienteRepository;
+import com.upsam.hospital.model.service.IExploracionService;
 import com.upsam.hospital.model.service.IPacienteService;
 
 // TODO: Auto-generated Javadoc
@@ -19,6 +20,8 @@ public class PacienteService implements IPacienteService {
 	/** The paciente repository. */
 	@Inject
 	private IPacienteRepository pacienteRepository;
+	@Inject
+	private IExploracionService exploracionService;
 
 	/*
 	 * (non-Javadoc)
@@ -58,7 +61,9 @@ public class PacienteService implements IPacienteService {
 	@Override
 	public Paciente findOne(Integer pId) throws DataBaseException {
 		try {
-			return pacienteRepository.findOne(pId);
+			Paciente paciente = pacienteRepository.findOne(pId);
+			paciente.setExploraciones(exploracionService.findReducedListByPatient(pId));
+			return paciente;
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);

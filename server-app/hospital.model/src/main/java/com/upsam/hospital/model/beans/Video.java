@@ -61,11 +61,11 @@ public class Video implements IModelHospital {
 	/** The paciente. */
 	@ManyToOne
 	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "ID_PACIENTE")
-	private Paciente paciente;
+	@JoinColumn(name = "ID_EXPLORACION")
+	private Exploracion exploracion;
 
 	@Basic
-	@Column(name = "DESCRIPCIN", length = 1000)
+	@Column(name = "DESCRIPCION", length = 1000)
 	private String descripcion;
 
 	/**
@@ -113,8 +113,8 @@ public class Video implements IModelHospital {
 	 * 
 	 * @return the paciente
 	 */
-	public Paciente getPaciente() {
-		return paciente;
+	public Exploracion getExploracion() {
+		return exploracion;
 	}
 
 	/**
@@ -143,8 +143,8 @@ public class Video implements IModelHospital {
 	 * @param paciente
 	 *            the new paciente
 	 */
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
+	public void setExploracion(Exploracion exploracion) {
+		this.exploracion = exploracion;
 	}
 
 	public String getDescripcion() {
@@ -154,5 +154,4 @@ public class Video implements IModelHospital {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
 }

@@ -21,14 +21,17 @@ import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
 import com.upsam.hospital.controller.dto.PacienteMovilDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
+import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteMovilUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
+import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
+import com.upsam.hospital.model.service.IExploracionService;
 import com.upsam.hospital.model.service.IFicheroEMTService;
 import com.upsam.hospital.model.service.IPacienteService;
 import com.upsam.hospital.model.service.IVideoService;
@@ -48,10 +51,16 @@ public class PacienteMovilController {
 	private IVideoService videoService;
 
 	@Inject
+	private IExploracionService exploracionService;
+
+	@Inject
 	private IVideoUtilDTO videoUtilDTO;
 
 	@Inject
 	private IPacienteUtilDTO pacienteUtilDTO;
+
+	@Inject
+	private IExploracionUtilDTO exploracionUtilDTO;
 
 	/** The fichero emt service. */
 	@Inject
@@ -76,13 +85,13 @@ public class PacienteMovilController {
 		return pacientesMovilDTO;
 	}
 
-	@RequestMapping(value = "{idPaciente}/video")
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/video")
 	public @ResponseBody
-	List<VideoDTO> getAllVideosFromPaciente(@PathVariable("idPaciente") Integer idPaciente) {
+	List<VideoDTO> getAllVideosFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
 		List<VideoDTO> result = new ArrayList<VideoDTO>();
 		try {
-			Paciente paciente = pacienteService.findOne(idPaciente);
-			result.addAll(pacienteUtilDTO.getVideosList(paciente.getVideos()));
+			Exploracion exploracion = exploracionService.findOne(idExploracion);
+			result.addAll(videoUtilDTO.getVideosList(exploracion.getVideos()));
 		}
 		catch (DataBaseException e) {
 			LOG.error(e.getMessage());
@@ -93,13 +102,13 @@ public class PacienteMovilController {
 		return result;
 	}
 
-	@RequestMapping(value = "{idPaciente}/video/{id}")
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion/}video/{id}")
 	public @ResponseBody
-	VideoDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("id") Integer id) {
+	VideoDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id) {
 		VideoDTO result = null;
 		Video video;
 		try {
-			video = this.videoService.findOne(idPaciente, id);
+			video = this.videoService.findOne(idPaciente, idExploracion, id);
 			result = this.videoUtilDTO.toRest(video);
 		}
 		catch (DataBaseException | NotFoundException e1) {
@@ -112,10 +121,10 @@ public class PacienteMovilController {
 		return result;
 	}
 
-	@RequestMapping(value = "{idPaciente}/videoreproduce/{id}", method = RequestMethod.GET)
-	public ModelAndView descargarVideo(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("id") Integer id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/videoreproduce/{id}", method = RequestMethod.GET)
+	public ModelAndView descargarVideo(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		try {
-			Video video = this.videoService.findOne(idPaciente, id);
+			Video video = this.videoService.findOne(idPaciente, idExploracion, id);
 			response.setContentType("video/mp4");
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + video.getNombre() + "\"");
 			ServletOutputStream outStream = response.getOutputStream();
@@ -144,7 +153,7 @@ public class PacienteMovilController {
 		FicheroEMTDTO result = null;
 		try {
 			FicheroEMT ficheroEMT = ficheroEMTService.findOne(id);
-			result = pacienteUtilDTO.fileEMTToDTO(ficheroEMT);
+			result = exploracionUtilDTO.fileEMTToDTO(ficheroEMT);
 		}
 		catch (DataBaseException e) {
 			LOG.error(e.getMessage());
@@ -165,7 +174,7 @@ public class PacienteMovilController {
 		List<FicheroEMTInfoDTO> result = new ArrayList<FicheroEMTInfoDTO>();
 		try {
 			List<FicheroEMT> ficherosEMT = ficheroEMTService.findByPaciente(id);
-			result.addAll(pacienteUtilDTO.getFicherosEMTInfoList(ficherosEMT));
+			result.addAll(exploracionUtilDTO.getFicherosEMTInfoList(ficherosEMT));
 		}
 		catch (DataBaseException e) {
 			LOG.error(e.getMessage());

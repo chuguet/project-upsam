@@ -1,5 +1,6 @@
 package com.upsam.hospital.controller.dto;
 
+import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 // TODO: Auto-generated Javadoc
@@ -37,6 +38,8 @@ public class PacienteDTO extends AbstractDTO {
 
 	/** The telefono. */
 	private String telefono;
+
+	private List<ExploracionDTO> exploraciones;
 
 	/**
 	 * Gets the apellidos.
@@ -226,6 +229,14 @@ public class PacienteDTO extends AbstractDTO {
 	 */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+
+	public List<ExploracionDTO> getExploraciones() {
+		return exploraciones;
+	}
+
+	public void setExploraciones(List<ExploracionDTO> exploraciones) {
+		this.exploraciones = exploraciones;
 	}
 
 }
