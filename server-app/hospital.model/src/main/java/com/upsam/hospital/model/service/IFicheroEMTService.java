@@ -3,7 +3,6 @@ package com.upsam.hospital.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 
@@ -24,7 +23,7 @@ public interface IFicheroEMTService extends IModelService<FicheroEMT> {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	FicheroEMT fileReaderEMT(File file, Exploracion exploracion) throws IOException;
+	FicheroEMT fileReaderEMT(File file, Integer idExploracion) throws IOException;
 
 	/**
 	 * Find by paciente.

@@ -129,6 +129,8 @@ public class Exploracion implements IModelHospital {
 	 *            the puntuacion50 metros
 	 * @param puntuacion5Metros
 	 *            the puntuacion5 metros
+	 * @param idUsuario
+	 *            the id usuario
 	 */
 	public Exploracion(AnalisisObservacionalMarcha analisisObservacionalMarcha, String controlMotorSelectivo, String evaluacionMuscular, Date fecha, Integer id, Double longitudMiembroDerecho, Double longitudMiembroIzquierdo, Double puntuacion500Metros, Double puntuacion50Metros, Double puntuacion5Metros, Integer idUsuario) {
 		super();
@@ -150,10 +152,25 @@ public class Exploracion implements IModelHospital {
 	 * 
 	 * @param id
 	 *            the id
+	 */
+	public Exploracion(Integer id) {
+		super();
+		this.id = id;
+	}
+
+	/**
+	 * Instantiates a new exploracion.
+	 * 
+	 * @param id
+	 *            the id
 	 * @param fecha
 	 *            the fecha
-	 * @param usuario
-	 *            the usuario
+	 * @param apellidos
+	 *            the apellidos
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param nombre
+	 *            the nombre
 	 */
 	public Exploracion(Integer id, Date fecha, String apellidos, Integer idPaciente, String nombre) {
 		this.id = id;

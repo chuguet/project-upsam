@@ -55,10 +55,10 @@ public class FicheroEMTService implements IFicheroEMTService {
 	 * .io.File, com.upsam.hospital.model.beans.Paciente)
 	 */
 	@Override
-	public FicheroEMT fileReaderEMT(File file, Exploracion exploracion) throws IOException {
+	public FicheroEMT fileReaderEMT(File file, Integer idExploracion) throws IOException {
 		List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
 		FicheroEMT result = new FicheroEMT();
-		result.setExploracion(exploracion);
+		result.setExploracion(new Exploracion(idExploracion));
 		Point point;
 		TablaDatos tablaDatos = new TablaDatos();
 		tablaDatos.setFicheroEMT(result);

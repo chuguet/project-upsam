@@ -27,13 +27,11 @@ import com.upsam.hospital.controller.dto.PacienteDTO;
 import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
-import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
-import com.upsam.hospital.model.service.IExploracionService;
 import com.upsam.hospital.model.service.IFicheroEMTService;
 import com.upsam.hospital.model.service.IFicheroMDXService;
 import com.upsam.hospital.model.service.IPacienteService;
@@ -66,9 +64,6 @@ public class PacienteController {
 	/** The usuario service. */
 	@Inject
 	private IPacienteService pacienteService;
-
-	@Inject
-	private IExploracionService exploracionService;
 
 	/** The paciente util dto. */
 	@Inject
@@ -166,7 +161,6 @@ public class PacienteController {
 		MensajeDTO result = null;
 		Date now = new Date();
 		Paciente paciente;
-		Exploracion exploracion;
 		try {
 			if (file.getSize() > 0) {
 				File folder = new File(servletContext.getRealPath(new StringBuffer("/resources/files").toString()));
@@ -182,11 +176,9 @@ public class PacienteController {
 				fos.write(file.getBytes());
 				fos.close();
 				if (uploadedFile.getName().toLowerCase().contains(EMT_FILE)) {
-					exploracion = exploracionService.findOne(idExploracion);
-					FicheroEMT ficheroEMT = ficheroEMTService.fileReaderEMT(uploadedFile, exploracion);
-					exploracion.addFicheroEMT(ficheroEMT);
+					FicheroEMT ficheroEMT = ficheroEMTService.fileReaderEMT(uploadedFile, idExploracion);
 					if (uploadedFile.delete()) {
-						exploracionService.update(exploracion);
+						ficheroEMTService.save(ficheroEMT);
 						result = new MensajeDTO("Archivo subido correctamente.", true);
 					}
 					else {
