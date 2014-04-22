@@ -15,6 +15,9 @@ import com.upsam.hospital.model.repository.IPacienteRepository;
 @Repository
 class PacienteRepository implements IPacienteRepository {
 
+	/** The Constant QUERY_FIND_ONE_UNIQUE. */
+	private static final String QUERY_FIND_ONE_UNIQUE = "Select new Paciente(apellidos,curso,escolarizacion,examinador,fechaNacimiento,fechaUltimaEvaluacion,id,nombre,numeroIdentificacion,sexo,telefono) from Paciente where (ID_PACIENTE = ?)";
+
 	/** The Constant QUERY_FINDBY_ID_NAME_SURNAME. */
 	private static final String QUERY_FINDBY_ID_NAME_SURNAME = "Select new Paciente(id,numeroIdentificacion,nombre,apellidos,fechaNacimiento,fechaUltimaEvaluacion) from Paciente where (concat(NUMERO_IDENTIFICACION,' ',NOMBRE,' ',APELLIDOS) like concat('%',?,'%'))";
 
@@ -45,12 +48,35 @@ class PacienteRepository implements IPacienteRepository {
 	/*
 	 * (non-Javadoc)
 	 * @see
+	 * com.upsam.hospital.model.repository.IPacienteRepository#findByIdNameSurname
+	 * (java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Paciente> findByIdNameSurname(String idNameSurname) throws SQLException {
+		return hibernateTemplate.find(QUERY_FINDBY_ID_NAME_SURNAME, idNameSurname);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
 	 * com.upsam.hospital.model.repository.IRepositoryDAO#findOne(java.lang.
 	 * Integer)
 	 */
 	@Override
 	public Paciente findOne(Integer pId) throws SQLException {
 		return hibernateTemplate.get(Paciente.class, pId);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.repository.IPacienteRepository#findOneUnique
+	 * (java.lang.Integer)
+	 */
+	@Override
+	public Paciente findOneUnique(Integer pId) throws SQLException {
+		return (Paciente) hibernateTemplate.find(QUERY_FIND_ONE_UNIQUE, pId).get(0);
 	}
 
 	/*
@@ -73,18 +99,6 @@ class PacienteRepository implements IPacienteRepository {
 	@Override
 	public void update(Paciente paciente) throws SQLException {
 		hibernateTemplate.update(paciente);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.repository.IPacienteRepository#findByIdNameSurname
-	 * (java.lang.String)
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Paciente> findByIdNameSurname(String idNameSurname) throws SQLException {
-		return hibernateTemplate.find(QUERY_FINDBY_ID_NAME_SURNAME, idNameSurname);
 	}
 
 }

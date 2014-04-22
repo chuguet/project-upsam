@@ -264,6 +264,33 @@ public class PacienteMovilController {
 	}
 
 	/**
+	 * Insert exploracion.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param exploracionDTO
+	 *            the exploracion dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO insertExploracion(@PathVariable("idPaciente") Integer idPaciente, @RequestBody ExploracionDTO exploracionDTO) {
+		try {
+			Exploracion exploracion = exploracionUtilDTO.toBusiness(exploracionDTO);
+			exploracion.setPaciente(new Paciente(idPaciente));
+			exploracionService.save(exploracion);
+			return new MensajeDTO("Exploracion insertada correctamente", true);
+		}
+		catch (DataBaseException e) {
+			return new MensajeDTO("Error al insertar la exploracion en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion de la exploracion", false);
+		}
+	}
+
+	/**
 	 * List all.
 	 * 
 	 * @param param
@@ -290,6 +317,34 @@ public class PacienteMovilController {
 	}
 
 	/**
+	 * Retrieve exploraciones.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @return the list
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion", method = RequestMethod.GET)
+	public @ResponseBody
+	List<ExploracionDTO> listAllExploraciones(@PathVariable("idPaciente") Integer idPaciente) {
+		List<ExploracionDTO> exploracionesDTO = new ArrayList<ExploracionDTO>();
+		ExploracionDTO exploracionDTO;
+		try {
+			List<Exploracion> exploraciones = exploracionService.findReducedListByPatient(idPaciente);
+			for (Exploracion exploracion : exploraciones) {
+				exploracionDTO = exploracionUtilDTO.toRest(exploracion);
+				exploracionesDTO.add(exploracionDTO);
+			}
+		}
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+		}
+		return exploracionesDTO;
+	}
+
+	/**
 	 * Retrieve.
 	 * 
 	 * @param id
@@ -301,13 +356,39 @@ public class PacienteMovilController {
 	PacienteMovilDTO retrieve(@PathVariable("id") Integer id) {
 		PacienteMovilDTO pacienteMovilDTO = new PacienteMovilDTO();
 		try {
-			Paciente paciente = pacienteService.findOne(id);
+			Paciente paciente = pacienteService.findOneUnique(id);
 			pacienteMovilDTO = pacienteMovilUtilDTO.toRest(paciente);
 		}
 		catch (DataBaseException e) {
 			LOG.info(new StringBuffer("No existe el paciente con el numero de identificacion ").append(pacienteMovilDTO.getNumeroIdentificacion()).append(" en base de datos.").toString());
 		}
 		return pacienteMovilDTO;
+	}
+
+	/**
+	 * Retrieve exploracion.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @return the exploracion dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}", method = RequestMethod.GET)
+	public @ResponseBody
+	ExploracionDTO retrieveExploracion(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
+		ExploracionDTO exploracionDTO = null;
+		try {
+			Exploracion exploracion = exploracionService.findOneUnique(idExploracion);
+			exploracionDTO = exploracionUtilDTO.toRest(exploracion);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+		}
+		return exploracionDTO;
 	}
 
 	/**
@@ -331,6 +412,35 @@ public class PacienteMovilController {
 		catch (TransferObjectException e) {
 			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error de conversion del paciente", false);
+		}
+	}
+
+	/**
+	 * Update exploracion.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @param exploracionDTO
+	 *            the exploracion dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO updateExploracion(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @RequestBody ExploracionDTO exploracionDTO) {
+		try {
+			Exploracion exploracion = exploracionUtilDTO.toBusiness(exploracionDTO);
+			exploracion.setPaciente(new Paciente(idPaciente));
+			exploracionService.update(exploracion);
+			return new MensajeDTO("Exploracion insertada correctamente", true);
+		}
+		catch (DataBaseException e) {
+			return new MensajeDTO("Error al insertar la exploracion en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion de la exploracion", false);
 		}
 	}
 }

@@ -45,7 +45,6 @@ public class FicheroEMT implements IModelHospital {
 
 	/** The paciente. */
 	@ManyToOne
-	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "ID_EXPLORACION")
 	private Exploracion exploracion;
 

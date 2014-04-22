@@ -20,4 +20,15 @@ public interface IPacienteService extends IModelService<Paciente> {
 	 *             the data base exception
 	 */
 	List<Paciente> findByIdNameSurname(String idNameSurname) throws DataBaseException;
+
+	/**
+	 * Find one unique.
+	 * 
+	 * @param pId
+	 *            the id
+	 * @return the paciente
+	 * @throws DataBaseException
+	 *             the data base exception
+	 */
+	Paciente findOneUnique(Integer pId) throws DataBaseException;
 }

@@ -20,4 +20,15 @@ public interface IPacienteRepository extends IRepositoryDAO<Paciente> {
 	 *             the sQL exception
 	 */
 	List<Paciente> findByIdNameSurname(String idNameSurname) throws SQLException;
+
+	/**
+	 * Find one unique.
+	 * 
+	 * @param pId
+	 *            the id
+	 * @return the paciente
+	 * @throws SQLException
+	 *             the sQL exception
+	 */
+	Paciente findOneUnique(Integer pId) throws SQLException;
 }

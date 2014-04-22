@@ -1,5 +1,6 @@
 package com.upsam.hospital.model.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -10,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import com.upsam.hospital.model.enums.Escolarizacion;
@@ -47,10 +46,9 @@ public class Paciente implements IModelHospital {
 	@Basic
 	@Column(name = "EXAMINADOR")
 	private String examinador;
-	
+
 	/** The exploracion3d. */
 	@OneToMany(mappedBy = "paciente")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Exploracion> exploraciones;
 
@@ -94,14 +92,19 @@ public class Paciente implements IModelHospital {
 	 * Instantiates a new paciente.
 	 */
 	public Paciente() {
-
+		super();
 	}
 
-	// /** The fichero mdx. */
-	// @OneToMany(mappedBy = "paciente")
-	// @Cascade(value = CascadeType.SAVE_UPDATE)
-	// @LazyCollection(LazyCollectionOption.FALSE)
-	// private List<FicheroMDX> ficheroMDX;
+	/**
+	 * Instantiates a new paciente.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	public Paciente(Integer id) {
+		super();
+		this.id = id;
+	}
 
 	/**
 	 * Instantiates a new paciente.
@@ -126,6 +129,65 @@ public class Paciente implements IModelHospital {
 		this.apellidos = apellidos;
 		this.fechaNacimiento = fechaNacimiento;
 		this.fechaUltimaEvaluacion = fechaUltimaEvaluacion;
+	}
+
+	// /** The fichero mdx. */
+	// @OneToMany(mappedBy = "paciente")
+	// @LazyCollection(LazyCollectionOption.FALSE)
+	// private List<FicheroMDX> ficheroMDX;
+
+	/**
+	 * Instantiates a new paciente.
+	 * 
+	 * @param apellidos
+	 *            the apellidos
+	 * @param curso
+	 *            the curso
+	 * @param escolarizacion
+	 *            the escolarizacion
+	 * @param examinador
+	 *            the examinador
+	 * @param fechaNacimiento
+	 *            the fecha nacimiento
+	 * @param fechaUltimaEvaluacion
+	 *            the fecha ultima evaluacion
+	 * @param id
+	 *            the id
+	 * @param nombre
+	 *            the nombre
+	 * @param numeroIdentificacion
+	 *            the numero identificacion
+	 * @param sexo
+	 *            the sexo
+	 * @param telefono
+	 *            the telefono
+	 */
+	public Paciente(String apellidos, String curso, Escolarizacion escolarizacion, String examinador, Date fechaNacimiento, Date fechaUltimaEvaluacion, Integer id, String nombre, String numeroIdentificacion, Sexo sexo, String telefono) {
+		super();
+		this.apellidos = apellidos;
+		this.curso = curso;
+		this.escolarizacion = escolarizacion;
+		this.examinador = examinador;
+		this.fechaNacimiento = fechaNacimiento;
+		this.fechaUltimaEvaluacion = fechaUltimaEvaluacion;
+		this.id = id;
+		this.nombre = nombre;
+		this.numeroIdentificacion = numeroIdentificacion;
+		this.sexo = sexo;
+		this.telefono = telefono;
+	}
+
+	/**
+	 * Adds the exploracion.
+	 * 
+	 * @param exploracion
+	 *            the exploracion
+	 */
+	public void addExploracion(Exploracion exploracion) {
+		if (this.getExploraciones() == null) {
+			this.setExploraciones(new ArrayList<Exploracion>());
+		}
+		this.getExploraciones().add(exploracion);
 	}
 
 	/**
@@ -157,7 +219,7 @@ public class Paciente implements IModelHospital {
 
 	/**
 	 * Gets the examinador.
-	 *
+	 * 
 	 * @return the examinador
 	 */
 	public String getExaminador() {
@@ -268,8 +330,9 @@ public class Paciente implements IModelHospital {
 
 	/**
 	 * Sets the examinador.
-	 *
-	 * @param examinador the new examinador
+	 * 
+	 * @param examinador
+	 *            the new examinador
 	 */
 	public void setExaminador(String examinador) {
 		this.examinador = examinador;

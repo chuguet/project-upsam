@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import com.upsam.hospital.model.enums.Rol;
@@ -39,7 +37,6 @@ public class Usuario implements IModelHospital {
 
 	/** The exploracion. */
 	@OneToMany(mappedBy = "usuario")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Exploracion> exploracion;
 
@@ -80,6 +77,41 @@ public class Usuario implements IModelHospital {
 	private String usuario;
 
 	/**
+	 * Instantiates a new usuario.
+	 */
+	public Usuario() {
+		super();
+	}
+
+	/**
+	 * Instantiates a new usuario.
+	 * 
+	 * @param id
+	 *            the id
+	 */
+	public Usuario(Integer id) {
+		super();
+		this.id = id;
+	}
+
+	/**
+	 * Instantiates a new usuario.
+	 * 
+	 * @param apellidos
+	 *            the apellidos
+	 * @param id
+	 *            the id
+	 * @param nombre
+	 *            the nombre
+	 */
+	public Usuario(String apellidos, Integer id, String nombre) {
+		super();
+		this.apellidos = apellidos;
+		this.id = id;
+		this.nombre = nombre;
+	}
+
+	/**
 	 * Gets the apellidos.
 	 * 
 	 * @return the apellidos
@@ -99,7 +131,7 @@ public class Usuario implements IModelHospital {
 
 	/**
 	 * Gets the exploracion.
-	 *
+	 * 
 	 * @return the exploracion
 	 */
 	public List<Exploracion> getExploracion() {
@@ -135,7 +167,7 @@ public class Usuario implements IModelHospital {
 
 	/**
 	 * Gets the nombre completo.
-	 *
+	 * 
 	 * @return the nombre completo
 	 */
 	public String getNombreCompleto() {
@@ -204,8 +236,9 @@ public class Usuario implements IModelHospital {
 
 	/**
 	 * Sets the exploracion.
-	 *
-	 * @param exploracion the new exploracion
+	 * 
+	 * @param exploracion
+	 *            the new exploracion
 	 */
 	public void setExploracion(List<Exploracion> exploracion) {
 		this.exploracion = exploracion;

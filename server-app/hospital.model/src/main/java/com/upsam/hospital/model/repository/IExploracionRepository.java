@@ -11,6 +11,17 @@ import com.upsam.hospital.model.beans.Exploracion;
 public interface IExploracionRepository extends IRepositoryDAO<Exploracion> {
 
 	/**
+	 * Find one unique.
+	 * 
+	 * @param pId
+	 *            the id
+	 * @return the exploracion
+	 * @throws SQLException
+	 *             the sQL exception
+	 */
+	Exploracion findOneUnique(Integer pId) throws SQLException;
+
+	/**
 	 * Find reduced list by patient.
 	 * 
 	 * @param pId
@@ -20,5 +31,4 @@ public interface IExploracionRepository extends IRepositoryDAO<Exploracion> {
 	 *             the SQL exception
 	 */
 	List<Exploracion> findReducedListByPatient(Integer pId) throws SQLException;
-
 }

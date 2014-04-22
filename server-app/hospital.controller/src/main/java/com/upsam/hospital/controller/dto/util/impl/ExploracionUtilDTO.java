@@ -24,6 +24,7 @@ import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.beans.Point;
+import com.upsam.hospital.model.beans.Usuario;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.enums.AnalisisObservacionalMarcha;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
@@ -134,19 +135,19 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 		try {
 			exploracion.setId(exploracionDTO.getId());
 			exploracion.setControlMotorSelectivo(exploracionDTO.getControlMotorSelectivo());
-			exploracion.setControlMotorSelectivo(exploracionDTO.getControlMotorSelectivo());
 			exploracion.setEvaluacionMuscular(exploracionDTO.getEvaluacionMuscular());
 			exploracion.setLongitudMiembroDerecho(exploracionDTO.getLongitudMiembroDerecho());
 			exploracion.setLongitudMiembroIzquierdo(exploracionDTO.getLongitudMiembroIzquierdo());
 			exploracion.setPuntuacion5Metros(exploracionDTO.getPuntuacion5Metros());
 			exploracion.setPuntuacion50Metros(exploracionDTO.getPuntuacion50Metros());
 			exploracion.setPuntuacion500Metros(exploracionDTO.getPuntuacion500Metros());
+			exploracion.setUsuario(new Usuario(exploracionDTO.getIdUsuario()));
 
 			AnalisisObservacionalMarcha analisisObservacionalMarcha = new Integer(-1).equals(exploracionDTO.getAnalisisObservacionalMarcha()) ? null : AnalisisObservacionalMarcha.values()[exploracionDTO.getAnalisisObservacionalMarcha()];
 			exploracion.setAnalisisObservacionalMarcha(analisisObservacionalMarcha);
 
 			if (exploracionDTO.getFecha() != null && exploracionDTO.getFecha().length() == 10) {
-				exploracion.setFecha(DATE_TIME_FORMATTER.parse(exploracionDTO.getFecha()));
+				exploracion.setFecha(DATE_FORMATTER.parse(exploracionDTO.getFecha()));
 			}
 			for (VideoDTO videoDTO : exploracionDTO.getVideos()) {
 				Video video = videoUtilDTO.toBusiness(videoDTO);
@@ -155,7 +156,7 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 
 		}
 		catch (ParseException e) {
-			throw new TransferObjectException(e);
+			throw new TransferObjectException(e.getMessage(), e);
 		}
 		return exploracion;
 	}
@@ -184,7 +185,7 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 		if (exploracion.getFecha() != null) {
 			exploracionDTO.setFecha(DATE_FORMATTER.format(exploracion.getFecha()));
 		}
-		if (exploracion.getVideos() != null && exploracion.getVideos().size() > 0) {
+		if (exploracion.getVideos() != null && !exploracion.getVideos().isEmpty()) {
 			for (Video video : exploracion.getVideos()) {
 				VideoDTO videoDTO = videoUtilDTO.toRest(video);
 				exploracionDTO.getVideos().add(videoDTO);

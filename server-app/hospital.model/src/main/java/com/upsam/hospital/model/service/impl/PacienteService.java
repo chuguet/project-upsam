@@ -84,6 +84,22 @@ public class PacienteService implements IPacienteService {
 	/*
 	 * (non-Javadoc)
 	 * @see
+	 * com.upsam.hospital.model.service.IPacienteService#findOneUnique(java.
+	 * lang.Integer)
+	 */
+	@Override
+	public Paciente findOneUnique(Integer pId) throws DataBaseException {
+		try {
+			return pacienteRepository.findOneUnique(pId);
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
 	 * com.upsam.hospital.model.service.IModelService#save(com.upsam.hospital
 	 * .model.beans.IModelHospital)
 	 */

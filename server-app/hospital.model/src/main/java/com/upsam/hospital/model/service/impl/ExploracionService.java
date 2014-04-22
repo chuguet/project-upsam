@@ -65,8 +65,27 @@ public class ExploracionService implements IExploracionService {
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see com.upsam.hospital.model.service.IExploracionService#findReducedListByPatient(java.lang.Integer)
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IExploracionService#findOneUniqueExploracion
+	 * (java.lang.Integer)
+	 */
+	@Override
+	public Exploracion findOneUnique(Integer pId) throws DataBaseException {
+		try {
+			return exploracionRepository.findOneUnique(pId);
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException("Se ha producido un error al recuperar la exploracione de un paciente");
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IExploracionService#findReducedListByPatient
+	 * (java.lang.Integer)
 	 */
 	@Override
 	public List<Exploracion> findReducedListByPatient(Integer pId) throws DataBaseException {

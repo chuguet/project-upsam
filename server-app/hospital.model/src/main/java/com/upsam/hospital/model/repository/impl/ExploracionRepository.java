@@ -15,8 +15,11 @@ import com.upsam.hospital.model.repository.IExploracionRepository;
 @Repository
 class ExploracionRepository implements IExploracionRepository {
 
+	/** The Constant QUERY_FIND_ONE_UNIQUE. */
+	private static final String QUERY_FIND_ONE_UNIQUE = "Select new Exploracion(analisisObservacionalMarcha,controlMotorSelectivo,evaluacionMuscular,fecha,id,longitudMiembroDerecho,longitudMiembroIzquierdo,puntuacion500Metros,puntuacion50Metros,puntuacion5Metros,usuario.id) from Exploracion where ID_EXPLORACION = ?";
+
 	/** The Constant QUERY_FINDBY_ID_PATIENT. */
-	private static final String QUERY_FINDBY_ID_PATIENT = "Select new Exploracion(id, fecha, usuario) from Exploracion where ID_PACIENTE = ?";
+	private static final String QUERY_FINDBY_ID_PATIENT = "Select new Exploracion(id,fecha,usuario.apellidos,usuario.id,usuario.nombre) from Exploracion where ID_PACIENTE = ?";
 
 	/** The hibernate template. */
 	@Inject
@@ -51,6 +54,17 @@ class ExploracionRepository implements IExploracionRepository {
 	@Override
 	public Exploracion findOne(Integer pId) throws SQLException {
 		return hibernateTemplate.get(Exploracion.class, pId);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.repository.IExploracionRepository#findOneUnique
+	 * (java.lang.Integer)
+	 */
+	@Override
+	public Exploracion findOneUnique(Integer pId) throws SQLException {
+		return (Exploracion) hibernateTemplate.find(QUERY_FIND_ONE_UNIQUE, pId).get(0);
 	}
 
 	/*

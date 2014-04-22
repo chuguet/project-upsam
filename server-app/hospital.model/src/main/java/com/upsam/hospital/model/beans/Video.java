@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -45,7 +43,6 @@ public class Video implements IModelHospital {
 
 	/** The paciente. */
 	@ManyToOne
-	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@JoinColumn(name = "ID_EXPLORACION")
 	private Exploracion exploracion;
 
