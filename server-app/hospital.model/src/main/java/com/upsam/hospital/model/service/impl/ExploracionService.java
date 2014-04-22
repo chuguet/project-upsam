@@ -9,9 +9,14 @@ import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.repository.IExploracionRepository;
 import com.upsam.hospital.model.service.IExploracionService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ExploracionService.
+ */
 @Service
 public class ExploracionService implements IExploracionService {
 
+	/** The exploracion repository. */
 	@Inject
 	private IExploracionRepository exploracionRepository;
 
@@ -60,6 +65,19 @@ public class ExploracionService implements IExploracionService {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.upsam.hospital.model.service.IExploracionService#findReducedListByPatient(java.lang.Integer)
+	 */
+	@Override
+	public List<Exploracion> findReducedListByPatient(Integer pId) throws DataBaseException {
+		try {
+			return exploracionRepository.findReducedListByPatient(pId);
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException("Se ha producido un error al recuperar las exploraciones de un paciente");
+		}
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -89,16 +107,6 @@ public class ExploracionService implements IExploracionService {
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException("Se ha producido un error al actualizar una exploración");
-		}
-	}
-
-	@Override
-	public List<Exploracion> findReducedListByPatient(Integer pId) throws DataBaseException {
-		try {
-			return exploracionRepository.findReducedListByPatient(pId);
-		}
-		catch (SQLException e1) {
-			throw new DataBaseException("Se ha producido un error al recuperar las exploraciones de un paciente");
 		}
 	}
 }

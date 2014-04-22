@@ -30,12 +30,19 @@ import com.upsam.hospital.model.service.IVideoService;
 @PropertySource("classpath:/application.properties")
 class VideoService implements IVideoService {
 
+	/** The videos location. */
 	@Value("${videos.location}")
 	private String videosLocation;
 
+	/** The paciente service. */
 	@Inject
 	private IPacienteService pacienteService;
 
+	/*
+	 * (non-Javadoc)
+	 * @see com.upsam.hospital.model.service.IVideoService#save(byte[],
+	 * java.lang.Integer, java.lang.Integer)
+	 */
 	@Override
 	public void save(byte[] content, Integer idPaciente, Integer idExploracion) throws FileNotFoundException, IOException, DataBaseException {
 		String nombre = saveInFolder(content, idExploracion);
@@ -55,6 +62,19 @@ class VideoService implements IVideoService {
 		pacienteService.update(paciente);
 	}
 
+	/**
+	 * Save in folder.
+	 * 
+	 * @param content
+	 *            the content
+	 * @param idPaciente
+	 *            the id paciente
+	 * @return the string
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	String saveInFolder(byte[] content, Integer idPaciente) throws FileNotFoundException, IOException {
 		String folderPath = getFolderPath(idPaciente);
 		validateFolderExist(folderPath);
@@ -64,10 +84,23 @@ class VideoService implements IVideoService {
 		return nombre;
 	}
 
+	/**
+	 * Gets the folder path.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @return the folder path
+	 */
 	public String getFolderPath(Integer idPaciente) {
 		return videosLocation.replace("xx", idPaciente.toString()).replace("/", File.separator);
 	}
 
+	/**
+	 * Validate folder exist.
+	 * 
+	 * @param folderPath
+	 *            the folder path
+	 */
 	private void validateFolderExist(String folderPath) {
 		File folder = new File(folderPath);
 		if (!folder.exists()) {
@@ -75,6 +108,11 @@ class VideoService implements IVideoService {
 		}
 	}
 
+	/**
+	 * Gets the current timestamp.
+	 * 
+	 * @return the current timestamp
+	 */
 	private String getCurrentTimestamp() {
 		Calendar calendar = Calendar.getInstance();
 		java.util.Date now = calendar.getTime();
@@ -82,6 +120,15 @@ class VideoService implements IVideoService {
 		return currentTimestamp.getTime() + "";
 	}
 
+	/**
+	 * Gets the duration.
+	 * 
+	 * @param filePath
+	 *            the file path
+	 * @return the duration
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	String getDuration(String filePath) throws IOException {
 		IsoFile isoFile = new IsoFile(filePath);
 		double doubleSeconds = (double) isoFile.getMovieBox().getMovieHeaderBox().getDuration() / isoFile.getMovieBox().getMovieHeaderBox().getTimescale();
@@ -89,6 +136,13 @@ class VideoService implements IVideoService {
 		return getDurationString(doubleSeconds);
 	}
 
+	/**
+	 * Gets the duration string.
+	 * 
+	 * @param doubleSeconds
+	 *            the double seconds
+	 * @return the duration string
+	 */
 	private String getDurationString(double doubleSeconds) {
 		String milliseconds = String.valueOf(doubleSeconds - Math.floor(doubleSeconds)).substring(2, 5);
 		int seconds = (int) doubleSeconds;
@@ -98,6 +152,13 @@ class VideoService implements IVideoService {
 		return twoDigitString(hours) + "h " + twoDigitString(minutes) + "m " + twoDigitString(seconds) + "s " + milliseconds + "ms";
 	}
 
+	/**
+	 * Two digit string.
+	 * 
+	 * @param number
+	 *            the number
+	 * @return the string
+	 */
 	private String twoDigitString(int number) {
 		if (number == 0) {
 			return "00";
@@ -108,6 +169,12 @@ class VideoService implements IVideoService {
 		return String.valueOf(number);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IVideoService#findOne(java.lang.Integer,
+	 * java.lang.Integer, java.lang.Integer)
+	 */
 	@Override
 	public Video findOne(Integer idPaciente, Integer idExploracion, Integer id) throws DataBaseException, NotFoundException {
 		Paciente paciente = pacienteService.findOne(idPaciente);
@@ -124,6 +191,12 @@ class VideoService implements IVideoService {
 		throw new NotFoundException("Se ha producido un error al recuperar un vídeo de un paciente");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IVideoService#recuperarVideo(java.io
+	 * .OutputStream, java.lang.String, java.lang.Integer)
+	 */
 	@Override
 	public void recuperarVideo(OutputStream outStream, String nombre, Integer idPaciente) throws FileNotFoundException {
 		String folderPath = getFolderPath(idPaciente);

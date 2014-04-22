@@ -17,16 +17,16 @@
 		$('input[id=fechaEvaluacion]').val(p.fechaEvaluacion);
 		$('input[id=fechaNacimiento]').val(p.fechaNacimiento);
 		$('input[id=telefono]').val(p.telefono);
-		if(p.sexo=="Hombre"){
+		if(p.sexo==0){
 			$('#hombre').prop('checked', true).button("refresh");
-		}else if (p.sexo=="Mujer"){
+		}else if (p.sexo==1){
 			$('#mujer').prop('checked', true).button("refresh");
 		}
-		if(p.escolarizacion=="Educacion especial"){
+		if(p.escolarizacion==0){
 			$('#educacion_especial').prop('checked', true).button("refresh");
-		}else if (p.escolarizacion=="Integracion"){
+		}else if (p.escolarizacion==1){
 			$('#integracion').prop('checked', true).button("refresh");
-		}else if (p.escolarizacion=="Sin adaptaciones"){
+		}else if (p.escolarizacion==2){
 			$('#sin_adaptaciones').prop('checked', true).button("refresh");
 		}
 		paciente.prepareUploader(p.id);
@@ -63,9 +63,9 @@
 				<div id="sexo">
 					<label for="sexo">Sexo:</label>
 					<label for="hombre">Hombre</label>
-				    <input type="radio" id="hombre" name="sexo" value="Hombre"/>
+				    <input type="radio" id="hombre" name="sexo" value="0"/>
 					<label for="mujer">Mujer</label>
-				    <input type="radio" id="mujer" name="sexo" value="Mujer"/>
+				    <input type="radio" id="mujer" name="sexo" value="1"/>
 				</div>
 			</p>
 		</div>
@@ -90,11 +90,11 @@
 				<div id="escolarizacion">
 					<label for="escolarizacion">Escolarizaci&oacute;n:</label>
 					<label for="educacion_especial">Educaci&oacute;n especial</label>
-				    <input type="radio" id="educacion_especial" name="escolarizacion" value="Educacion especial"/>
+				    <input type="radio" id="educacion_especial" name="escolarizacion" value="0"/>
 					<label for="integracion">Esc. de integraci&oacute;n</label>
-				    <input type="radio" id="integracion" name="escolarizacion" value="Integracion"/>
+				    <input type="radio" id="integracion" name="escolarizacion" value="1"/>
 					<label for="sin_adaptaciones">Sin adaptaciones</label>
-				    <input type="radio" id="sin_adaptaciones" name="escolarizacion" value="Sin adaptaciones"/>
+				    <input type="radio" id="sin_adaptaciones" name="escolarizacion" value="2"/>
 				</div>
 			</p>
 		</div>

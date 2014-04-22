@@ -1,13 +1,19 @@
 package com.upsam.hospital.model.beans;
 
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import com.upsam.hospital.model.enums.Rol;
 
 // TODO: Auto-generated Javadoc
@@ -23,48 +29,54 @@ public class Usuario implements IModelHospital {
 
 	/** The apellidos. */
 	@Basic
-	@Column(name = "apellidos", nullable = false, length = 200)
+	@Column(name = "APELLIDOS", nullable = false, length = 200)
 	private String apellidos;
 
 	/** The email. */
 	@Basic
-	@Column(name = "email", unique = true, length = 200)
+	@Column(name = "EMAIL", unique = true, length = 200)
 	private String email;
+
+	/** The exploracion. */
+	@OneToMany(mappedBy = "usuario")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Exploracion> exploracion;
 
 	/** The generate_token. */
 	@Basic
-	@Column(name = "generate_token")
+	@Column(name = "GENERATE_TOKEN")
 	private Date generate_token;
 
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "ID")
 	private Integer id;
 
 	/** The nombre. */
 	@Basic
-	@Column(name = "nombre", nullable = false, length = 100)
+	@Column(name = "NOMBRE", nullable = false, length = 100)
 	private String nombre;
 
 	/** The password. */
 	@Basic
-	@Column(name = "pwd", nullable = false, length = 200)
+	@Column(name = "PWD", nullable = false, length = 200)
 	private String password;
 
 	/** The rol. */
 	@Basic
-	@Column(name = "rol_id", nullable = false)
+	@Column(name = "ROL_ID", nullable = false)
 	private Rol rol;
 
 	/** The token. */
 	@Basic
-	@Column(name = "token", unique = true)
+	@Column(name = "TOKEN", unique = true)
 	private String token;
 
 	/** The usuario. */
 	@Basic
-	@Column(name = "usuario", unique = true, nullable = false, length = 20)
+	@Column(name = "USUARIO", unique = true, nullable = false, length = 20)
 	private String usuario;
 
 	/**
@@ -83,6 +95,15 @@ public class Usuario implements IModelHospital {
 	 */
 	public String getEmail() {
 		return email;
+	}
+
+	/**
+	 * Gets the exploracion.
+	 *
+	 * @return the exploracion
+	 */
+	public List<Exploracion> getExploracion() {
+		return exploracion;
 	}
 
 	/**
@@ -110,6 +131,19 @@ public class Usuario implements IModelHospital {
 	 */
 	public String getNombre() {
 		return nombre;
+	}
+
+	/**
+	 * Gets the nombre completo.
+	 *
+	 * @return the nombre completo
+	 */
+	public String getNombreCompleto() {
+		String nombreCompleto = this.nombre;
+		if (apellidos != null && apellidos.length() > 0) {
+			nombreCompleto += " " + this.apellidos;
+		}
+		return nombreCompleto;
 	}
 
 	/**
@@ -166,6 +200,15 @@ public class Usuario implements IModelHospital {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	/**
+	 * Sets the exploracion.
+	 *
+	 * @param exploracion the new exploracion
+	 */
+	public void setExploracion(List<Exploracion> exploracion) {
+		this.exploracion = exploracion;
 	}
 
 	/**
@@ -236,13 +279,5 @@ public class Usuario implements IModelHospital {
 	 */
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
-	}
-
-	public String getNombreCompleto() {
-		String nombreCompleto = this.nombre;
-		if (apellidos != null && apellidos.length() > 0) {
-			nombreCompleto += " " + this.apellidos;
-		}
-		return nombreCompleto;
 	}
 }

@@ -18,9 +18,15 @@ public class PacienteDTO extends AbstractDTO {
 	/** The escolarizacion. */
 	private Integer escolarizacion;
 
+	/** The examinador. */
+	private String examinador;
+
+	/** The exploraciones. */
+	private List<ExploracionDTO> exploraciones;
+
 	/** The fecha evaluacion. */
 	private String fechaEvaluacion;
-
+	
 	/** The fecha nacimiento. */
 	private String fechaNacimiento;
 
@@ -38,8 +44,6 @@ public class PacienteDTO extends AbstractDTO {
 
 	/** The telefono. */
 	private String telefono;
-
-	private List<ExploracionDTO> exploraciones;
 
 	/**
 	 * Gets the apellidos.
@@ -66,6 +70,24 @@ public class PacienteDTO extends AbstractDTO {
 	 */
 	public Integer getEscolarizacion() {
 		return escolarizacion;
+	}
+
+	/**
+	 * Gets the examinador.
+	 *
+	 * @return the examinador
+	 */
+	public String getExaminador() {
+		return examinador;
+	}
+
+	/**
+	 * Gets the exploraciones.
+	 *
+	 * @return the exploraciones
+	 */
+	public List<ExploracionDTO> getExploraciones() {
+		return exploraciones;
 	}
 
 	/**
@@ -162,6 +184,24 @@ public class PacienteDTO extends AbstractDTO {
 	}
 
 	/**
+	 * Sets the examinador.
+	 *
+	 * @param examinador the new examinador
+	 */
+	public void setExaminador(String examinador) {
+		this.examinador = examinador;
+	}
+
+	/**
+	 * Sets the exploraciones.
+	 *
+	 * @param exploraciones the new exploraciones
+	 */
+	public void setExploraciones(List<ExploracionDTO> exploraciones) {
+		this.exploraciones = exploraciones;
+	}
+
+	/**
 	 * Sets the fecha evaluacion.
 	 * 
 	 * @param fechaEvaluacion
@@ -229,14 +269,6 @@ public class PacienteDTO extends AbstractDTO {
 	 */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}
-
-	public List<ExploracionDTO> getExploraciones() {
-		return exploraciones;
-	}
-
-	public void setExploraciones(List<ExploracionDTO> exploraciones) {
-		this.exploraciones = exploraciones;
 	}
 
 }

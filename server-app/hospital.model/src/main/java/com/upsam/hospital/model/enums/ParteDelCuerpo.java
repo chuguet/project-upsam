@@ -1,15 +1,20 @@
 package com.upsam.hospital.model.enums;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum ParteDelCuerpo.
+ */
 public enum ParteDelCuerpo {
-	
-	CABEZA("CABEZA"),
-	HOMBRO("HOMBRO"), 
-	CADERA("CADERA"), 
-	RODILLA("RODILLA"), 
-	PIE("PIE");
-	
-    private String name;
 
-    ParteDelCuerpo(String name) { this.name = name; }
-	
+	/** The cabeza. */
+	CABEZA,
+	/** The hombro. */
+	HOMBRO,
+	/** The cadera. */
+	CADERA,
+	/** The rodilla. */
+	RODILLA,
+	/** The pie. */
+	PIE;
+
 }

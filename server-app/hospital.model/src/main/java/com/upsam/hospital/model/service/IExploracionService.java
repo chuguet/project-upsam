@@ -10,6 +10,15 @@ import com.upsam.hospital.model.exceptions.DataBaseException;
  */
 public interface IExploracionService extends IModelService<Exploracion> {
 
+	/**
+	 * Find reduced list by patient.
+	 * 
+	 * @param pId
+	 *            the id
+	 * @return the list
+	 * @throws DataBaseException
+	 *             the data base exception
+	 */
 	List<Exploracion> findReducedListByPatient(Integer pId) throws DataBaseException;
 
 }

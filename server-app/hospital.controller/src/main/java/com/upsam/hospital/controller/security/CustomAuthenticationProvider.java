@@ -67,7 +67,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			throw new BadCredentialsException("Acceso incorrecto");
 		}
 
-		String pwd = passwordEncoder.encodePassword("1", null);
 		// Compare passwords
 		// Make sure to encode the password first before comparing
 		if (passwordEncoder.isPasswordValid(usuario.getPassword(), (String) auth.getCredentials(), null) == false) {

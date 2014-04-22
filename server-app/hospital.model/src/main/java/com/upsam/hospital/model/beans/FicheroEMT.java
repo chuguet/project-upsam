@@ -46,8 +46,8 @@ public class FicheroEMT implements IModelHospital {
 	/** The paciente. */
 	@ManyToOne
 	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "ID_PACIENTE")
-	private Paciente paciente;
+	@JoinColumn(name = "ID_EXPLORACION")
+	private Exploracion exploracion;
 
 	/** The tabla datos. */
 	@OneToOne
@@ -93,12 +93,22 @@ public class FicheroEMT implements IModelHospital {
 	}
 
 	/**
-	 * Gets the paciente.
+	 * Gets the exploracion.
 	 * 
-	 * @return the paciente
+	 * @return the exploracion
 	 */
-	public Paciente getPaciente() {
-		return paciente;
+	public Exploracion getExploracion() {
+		return exploracion;
+	}
+
+	/**
+	 * Sets the exploracion.
+	 * 
+	 * @param exploracion
+	 *            the new exploracion
+	 */
+	public void setExploracion(Exploracion exploracion) {
+		this.exploracion = exploracion;
 	}
 
 	/**
@@ -156,16 +166,6 @@ public class FicheroEMT implements IModelHospital {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	/**
-	 * Sets the paciente.
-	 * 
-	 * @param paciente
-	 *            the new paciente
-	 */
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
 	}
 
 	/**

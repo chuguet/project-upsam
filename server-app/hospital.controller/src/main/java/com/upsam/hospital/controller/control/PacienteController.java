@@ -27,11 +27,13 @@ import com.upsam.hospital.controller.dto.PacienteDTO;
 import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
+import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
+import com.upsam.hospital.model.service.IExploracionService;
 import com.upsam.hospital.model.service.IFicheroEMTService;
 import com.upsam.hospital.model.service.IFicheroMDXService;
 import com.upsam.hospital.model.service.IPacienteService;
@@ -64,6 +66,9 @@ public class PacienteController {
 	/** The usuario service. */
 	@Inject
 	private IPacienteService pacienteService;
+
+	@Inject
+	private IExploracionService exploracionService;
 
 	/** The paciente util dto. */
 	@Inject
@@ -136,13 +141,13 @@ public class PacienteController {
 	public @ResponseBody
 	List<FicheroMDXInfoDTO> ficherosMDXInfo(@PathVariable("id") Integer id) {
 		List<FicheroMDXInfoDTO> result = new ArrayList<FicheroMDXInfoDTO>();
-		try {
-			Paciente paciente = pacienteService.findOne(id);
-			// result.addAll(pacienteUtilDTO.getFicherosMDXInfoList(paciente.getFicheroMDX()));
-		}
-		catch (DataBaseException e) {
-			LOG.error(e.getMessage());
-		}
+		// try {
+		// Paciente paciente = pacienteService.findOne(id);
+		// result.addAll(pacienteUtilDTO.getFicherosMDXInfoList(paciente.getFicheroMDX()));
+		// }
+		// catch (DataBaseException e) {
+		// LOG.error(e.getMessage());
+		// }
 		return result;
 	}
 
@@ -155,19 +160,20 @@ public class PacienteController {
 	 *            the id
 	 * @return the mensaje dto
 	 */
-	@RequestMapping(value = "/fileUpload/{id}", method = RequestMethod.POST, consumes = "multipart/form-data")
+	@RequestMapping(value = "paciente/{idPaciente}/exploracion/{idExploracion}/fileUpload", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public @ResponseBody
-	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("id") Integer id) {
+	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
 		MensajeDTO result = null;
 		Date now = new Date();
 		Paciente paciente;
+		Exploracion exploracion;
 		try {
 			if (file.getSize() > 0) {
 				File folder = new File(servletContext.getRealPath(new StringBuffer("/resources/files").toString()));
 				if (!folder.exists()) {
 					folder.mkdir();
 				}
-				folder = new File(servletContext.getRealPath(new StringBuffer("/resources/files/PACIENTE_").append(id).toString()));
+				folder = new File(servletContext.getRealPath(new StringBuffer("/resources/files/PACIENTE_").append(idPaciente).toString()));
 				if (!folder.exists()) {
 					folder.mkdir();
 				}
@@ -176,11 +182,11 @@ public class PacienteController {
 				fos.write(file.getBytes());
 				fos.close();
 				if (uploadedFile.getName().toLowerCase().contains(EMT_FILE)) {
-					paciente = pacienteService.findOne(id);
-					FicheroEMT ficheroEMT = ficheroEMTService.fileReaderEMT(uploadedFile, paciente);
-					paciente.addFicheroEMT(ficheroEMT);
+					exploracion = exploracionService.findOne(idExploracion);
+					FicheroEMT ficheroEMT = ficheroEMTService.fileReaderEMT(uploadedFile, exploracion);
+					exploracion.addFicheroEMT(ficheroEMT);
 					if (uploadedFile.delete()) {
-						pacienteService.update(paciente);
+						exploracionService.update(exploracion);
 						result = new MensajeDTO("Archivo subido correctamente.", true);
 					}
 					else {
@@ -188,7 +194,7 @@ public class PacienteController {
 					}
 				}
 				else if (uploadedFile.getName().toLowerCase().contains(MDX_FILE)) {
-					paciente = pacienteService.findOne(id);
+					paciente = pacienteService.findOne(idPaciente);
 					FicheroMDX ficheroMDX = new FicheroMDX();
 					ficheroMDX.setFecha(now.getTime());
 					ficheroMDX.setNombre(file.getOriginalFilename());

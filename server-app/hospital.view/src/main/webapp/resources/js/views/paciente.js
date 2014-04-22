@@ -5,7 +5,7 @@ var paciente = {
 			datatype : 'local',
 			data : [],
 			colNames : [
-					"Id", "Nombre", "Apellidos", "Num. Identificaci&oacute;n", "Sexo", "Fecha Nacimiento"
+					"Id", "Nombre", "Apellidos", "Num. Identificaci&oacute;n", "Telefono", "Fecha Nacimiento"
 			],
 			colModel : [
 					{
@@ -35,8 +35,8 @@ var paciente = {
 						sortable : true,
 						align : 'right'
 					}, {
-						name : 'sexo',
-						index : 'sexo',
+						name : 'telefono',
+						index : 'telefono',
 						width : 20,
 						sorttype : 'string',
 						sortable : true,
@@ -222,6 +222,7 @@ var paciente = {
 		var sexo = $("input:radio[name='sexo']:checked").val();
 		var telefono = $("input[id=telefono]").val();
 		var fichero = $("input[id=fichero]").val();
+		var exploraciones = null;
 
 		var errores = '';
 		if (nombre == '') {
@@ -268,7 +269,8 @@ var paciente = {
 				fechaNacimiento : fechaNacimiento,
 				sexo : sexo,
 				telefono : telefono,
-				fichero : fichero
+				fichero : fichero,
+				exploraciones : exploraciones
 			};
 			return data;
 		}

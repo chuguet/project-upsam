@@ -1,8 +1,8 @@
 package com.upsam.hospital.controller.dto.util.impl;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.upsam.hospital.controller.dto.VideoDTO;
@@ -17,20 +17,44 @@ import com.upsam.hospital.model.beans.Video;
 @Component
 public class VideoUtilDTO implements IVideoUtilDTO {
 
-	/** The Constant DATE_FORMATTER. */
-	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy");
-
 	/** The Constant DATE_TIME_FORMATTER. */
 	private static final SimpleDateFormat DATE_TIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.controller.dto.util.IPacienteUtilDTO#getVideosList
+	 * (java.util.List)
+	 */
 	@Override
-	public Video toBusiness(VideoDTO videoDTO) {
-		Video video = new Video();
-		video.setDescripcion(videoDTO.getDescripcion());
-		video.setDuracion(video.getDuracion());
-		video.setFecha(new Date(videoDTO.getFecha()));
-		video.setId(videoDTO.getId());
-		video.setNombre(videoDTO.getNombre());
+	public List<VideoDTO> getVideosList(List<Video> videos) throws TransferObjectException {
+		List<VideoDTO> result = new ArrayList<VideoDTO>();
+		for (Video video : videos) {
+			result.add(this.toRest(video));
+		}
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.controller.dto.util.IVideoUtilDTO#toBusiness(com.upsam
+	 * .hospital.controller.dto.VideoDTO)
+	 */
+	@Override
+	public Video toBusiness(VideoDTO videoDTO) throws TransferObjectException {
+		Video video = null;
+		try {
+			video = new Video();
+			video.setDescripcion(videoDTO.getDescripcion());
+			video.setDuracion(video.getDuracion());
+			video.setFecha(DATE_TIME_FORMATTER.parse(videoDTO.getFecha()));
+			video.setId(videoDTO.getId());
+			video.setNombre(videoDTO.getNombre());
+		}
+		catch (ParseException e) {
+			throw new TransferObjectException(e.getMessage(), e);
+		}
 		return video;
 	}
 
@@ -49,20 +73,5 @@ public class VideoUtilDTO implements IVideoUtilDTO {
 		videoDTO.setDuracion(video.getDuracion());
 		videoDTO.setDescripcion(video.getDescripcion());
 		return videoDTO;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.controller.dto.util.IPacienteUtilDTO#getVideosList
-	 * (java.util.List)
-	 */
-	@Override
-	public List<VideoDTO> getVideosList(List<Video> videos) throws TransferObjectException {
-		List<VideoDTO> result = new ArrayList<VideoDTO>();
-		for (Video video : videos) {
-			result.add(this.toRest(video));
-		}
-		return result;
 	}
 }

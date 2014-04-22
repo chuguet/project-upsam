@@ -15,6 +15,7 @@ import com.upsam.hospital.model.repository.IExploracionRepository;
 @Repository
 class ExploracionRepository implements IExploracionRepository {
 
+	/** The Constant QUERY_FINDBY_ID_PATIENT. */
 	private static final String QUERY_FINDBY_ID_PATIENT = "Select new Exploracion(id, fecha, usuario) from Exploracion where ID_PACIENTE = ?";
 
 	/** The hibernate template. */
@@ -54,6 +55,17 @@ class ExploracionRepository implements IExploracionRepository {
 
 	/*
 	 * (non-Javadoc)
+	 * @see com.upsam.hospital.model.repository.IExploracionRepository#
+	 * findReducedListByPatient(java.lang.Integer)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Exploracion> findReducedListByPatient(Integer idPatient) throws SQLException {
+		return hibernateTemplate.find(QUERY_FINDBY_ID_PATIENT, idPatient);
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see
 	 * com.upsam.hospital.model.repository.IRepositoryDAO#save(com.upsam.hospital
 	 * .model.beans.IModelHospital)
@@ -72,10 +84,5 @@ class ExploracionRepository implements IExploracionRepository {
 	@Override
 	public void update(Exploracion exploracion) throws SQLException {
 		hibernateTemplate.update(exploracion);
-	}
-
-	@Override
-	public List<Exploracion> findReducedListByPatient(Integer idPatient) throws SQLException {
-		return hibernateTemplate.find(QUERY_FINDBY_ID_PATIENT, idPatient);
 	}
 }

@@ -1,6 +1,5 @@
 package com.upsam.hospital.model.beans;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
@@ -44,6 +43,17 @@ public class Paciente implements IModelHospital {
 	@Column(name = "ESCOLARIZACION")
 	private Escolarizacion escolarizacion;
 
+	/** The examinador. */
+	@Basic
+	@Column(name = "EXAMINADOR")
+	private String examinador;
+	
+	/** The exploracion3d. */
+	@OneToMany(mappedBy = "paciente")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Exploracion> exploraciones;
+
 	/** The email. */
 	@Basic
 	@Column(name = "FECHA_NACIMIENTO")
@@ -80,24 +90,6 @@ public class Paciente implements IModelHospital {
 	@Column(name = "TELEFONO")
 	private String telefono;
 
-	/** The fichero emt. */
-	@OneToMany(mappedBy = "paciente")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<FicheroEMT> ficheroEMT;
-
-	// /** The fichero mdx. */
-	// @OneToMany(mappedBy = "paciente")
-	// @Cascade(value = CascadeType.SAVE_UPDATE)
-	// @LazyCollection(LazyCollectionOption.FALSE)
-	// private List<FicheroMDX> ficheroMDX;
-
-	/** The exploracion3d. */
-	@OneToMany(mappedBy = "paciente")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Exploracion> exploraciones;
-
 	/**
 	 * Instantiates a new paciente.
 	 */
@@ -105,15 +97,27 @@ public class Paciente implements IModelHospital {
 
 	}
 
+	// /** The fichero mdx. */
+	// @OneToMany(mappedBy = "paciente")
+	// @Cascade(value = CascadeType.SAVE_UPDATE)
+	// @LazyCollection(LazyCollectionOption.FALSE)
+	// private List<FicheroMDX> ficheroMDX;
+
 	/**
 	 * Instantiates a new paciente.
 	 * 
-	 * @param pNumeroIdentificacion
+	 * @param id
+	 *            the id
+	 * @param numeroIdentificacion
 	 *            the numero identificacion
-	 * @param pNombre
+	 * @param nombre
 	 *            the nombre
-	 * @param pApellidos
+	 * @param apellidos
 	 *            the apellidos
+	 * @param fechaNacimiento
+	 *            the fecha nacimiento
+	 * @param fechaUltimaEvaluacion
+	 *            the fecha ultima evaluacion
 	 */
 	public Paciente(Integer id, String numeroIdentificacion, String nombre, String apellidos, Date fechaNacimiento, Date fechaUltimaEvaluacion) {
 		this.id = id;
@@ -123,32 +127,6 @@ public class Paciente implements IModelHospital {
 		this.fechaNacimiento = fechaNacimiento;
 		this.fechaUltimaEvaluacion = fechaUltimaEvaluacion;
 	}
-
-	/**
-	 * Adds the fichero emt.
-	 * 
-	 * @param ficheroEMT
-	 *            the fichero emt
-	 */
-	public void addFicheroEMT(FicheroEMT ficheroEMT) {
-		if (this.getFicheroEMT() == null) {
-			this.setFicheroEMT(new ArrayList<FicheroEMT>());
-		}
-		this.getFicheroEMT().add(ficheroEMT);
-	}
-
-	// /**
-	// * Adds the fichero mdx.
-	// *
-	// * @param ficheroMDX
-	// * the fichero mdx
-	// */
-	// public void addFicheroMDX(FicheroMDX ficheroMDX) {
-	// if (this.getFicheroMDX() == null) {
-	// this.setFicheroMDX(new ArrayList<FicheroMDX>());
-	// }
-	// this.getFicheroMDX().add(ficheroMDX);
-	// }
 
 	/**
 	 * Gets the apellidos.
@@ -178,6 +156,24 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
+	 * Gets the examinador.
+	 *
+	 * @return the examinador
+	 */
+	public String getExaminador() {
+		return examinador;
+	}
+
+	/**
+	 * Gets the exploraciones.
+	 * 
+	 * @return the exploraciones
+	 */
+	public List<Exploracion> getExploraciones() {
+		return exploraciones;
+	}
+
+	/**
 	 * Gets the fecha nacimiento.
 	 * 
 	 * @return the fecha nacimiento
@@ -194,24 +190,6 @@ public class Paciente implements IModelHospital {
 	public Date getFechaUltimaEvaluacion() {
 		return fechaUltimaEvaluacion;
 	}
-
-	/**
-	 * Gets the fichero emt.
-	 * 
-	 * @return the fichero emt
-	 */
-	public List<FicheroEMT> getFicheroEMT() {
-		return ficheroEMT;
-	}
-
-	// /**
-	// * Gets the fichero mdx.
-	// *
-	// * @return the fichero mdx
-	// */
-	// public List<FicheroMDX> getFicheroMDX() {
-	// return ficheroMDX;
-	// }
 
 	/**
 	 * Gets the id.
@@ -289,6 +267,25 @@ public class Paciente implements IModelHospital {
 	}
 
 	/**
+	 * Sets the examinador.
+	 *
+	 * @param examinador the new examinador
+	 */
+	public void setExaminador(String examinador) {
+		this.examinador = examinador;
+	}
+
+	/**
+	 * Sets the exploraciones.
+	 * 
+	 * @param exploraciones
+	 *            the new exploraciones
+	 */
+	public void setExploraciones(List<Exploracion> exploraciones) {
+		this.exploraciones = exploraciones;
+	}
+
+	/**
 	 * Sets the fecha nacimiento.
 	 * 
 	 * @param fechaNacimiento
@@ -307,26 +304,6 @@ public class Paciente implements IModelHospital {
 	public void setFechaUltimaEvaluacion(Date fechaUltimaEvaluacion) {
 		this.fechaUltimaEvaluacion = fechaUltimaEvaluacion;
 	}
-
-	/**
-	 * Sets the fichero emt.
-	 * 
-	 * @param ficheroEMT
-	 *            the new fichero emt
-	 */
-	public void setFicheroEMT(List<FicheroEMT> ficheroEMT) {
-		this.ficheroEMT = ficheroEMT;
-	}
-
-	// /**
-	// * Sets the fichero mdx.
-	// *
-	// * @param ficheroMDX
-	// * the new fichero mdx
-	// */
-	// public void setFicheroMDX(List<FicheroMDX> ficheroMDX) {
-	// this.ficheroMDX = ficheroMDX;
-	// }
 
 	/**
 	 * Sets the id.
@@ -376,13 +353,5 @@ public class Paciente implements IModelHospital {
 	 */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}
-
-	public List<Exploracion> getExploraciones() {
-		return exploraciones;
-	}
-
-	public void setExploraciones(List<Exploracion> exploraciones) {
-		this.exploraciones = exploraciones;
 	}
 }

@@ -3,8 +3,8 @@ package com.upsam.hospital.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
-import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 
 // TODO: Auto-generated Javadoc
@@ -18,13 +18,13 @@ public interface IFicheroEMTService extends IModelService<FicheroEMT> {
 	 * 
 	 * @param file
 	 *            the file
-	 * @param paciente
-	 *            the paciente
+	 * @param exploracion
+	 *            the exploracion
 	 * @return the fichero emt
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	FicheroEMT fileReaderEMT(File file, Paciente paciente) throws IOException;
+	FicheroEMT fileReaderEMT(File file, Exploracion exploracion) throws IOException;
 
 	/**
 	 * Find by paciente.

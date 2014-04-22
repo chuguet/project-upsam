@@ -11,8 +11,8 @@ import javax.inject.Inject;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import com.upsam.hospital.model.beans.Angle;
+import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
-import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Point;
 import com.upsam.hospital.model.beans.TablaDatos;
 import com.upsam.hospital.model.enums.TipoMedida;
@@ -55,10 +55,10 @@ public class FicheroEMTService implements IFicheroEMTService {
 	 * .io.File, com.upsam.hospital.model.beans.Paciente)
 	 */
 	@Override
-	public FicheroEMT fileReaderEMT(File file, Paciente paciente) throws IOException {
+	public FicheroEMT fileReaderEMT(File file, Exploracion exploracion) throws IOException {
 		List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
 		FicheroEMT result = new FicheroEMT();
-		result.setPaciente(paciente);
+		result.setExploracion(exploracion);
 		Point point;
 		TablaDatos tablaDatos = new TablaDatos();
 		tablaDatos.setFicheroEMT(result);

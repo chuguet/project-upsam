@@ -33,19 +33,26 @@ public class Video implements IModelHospital {
 		return serialVersionUID;
 	}
 
+	/** The descripcion. */
+	@Basic
+	@Column(name = "DESCRIPCION", length = 1000)
+	private String descripcion;
+
 	/** The duracion. */
 	@Basic
 	@Column(name = "DURACION", length = 20)
 	private String duracion;
 
+	/** The paciente. */
+	@ManyToOne
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "ID_EXPLORACION")
+	private Exploracion exploracion;
+
 	/** The fecha. */
 	@Basic
 	@Column(name = "FECHA")
 	private Date fecha;
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
 
 	/** The id. */
 	@Id
@@ -58,15 +65,14 @@ public class Video implements IModelHospital {
 	@Column(name = "NOMBRE")
 	private String nombre;
 
-	/** The paciente. */
-	@ManyToOne
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "ID_EXPLORACION")
-	private Exploracion exploracion;
-
-	@Basic
-	@Column(name = "DESCRIPCION", length = 1000)
-	private String descripcion;
+	/**
+	 * Gets the descripcion.
+	 * 
+	 * @return the descripcion
+	 */
+	public String getDescripcion() {
+		return descripcion;
+	}
 
 	/**
 	 * Gets the duracion.
@@ -77,8 +83,13 @@ public class Video implements IModelHospital {
 		return duracion;
 	}
 
-	public void setDuracion(String duracion) {
-		this.duracion = duracion;
+	/**
+	 * Gets the paciente.
+	 * 
+	 * @return the paciente
+	 */
+	public Exploracion getExploracion() {
+		return exploracion;
 	}
 
 	/**
@@ -109,12 +120,43 @@ public class Video implements IModelHospital {
 	}
 
 	/**
-	 * Gets the paciente.
+	 * Sets the descripcion.
 	 * 
-	 * @return the paciente
+	 * @param descripcion
+	 *            the new descripcion
 	 */
-	public Exploracion getExploracion() {
-		return exploracion;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	/**
+	 * Sets the duracion.
+	 * 
+	 * @param duracion
+	 *            the new duracion
+	 */
+	public void setDuracion(String duracion) {
+		this.duracion = duracion;
+	}
+
+	/**
+	 * Sets the paciente.
+	 * 
+	 * @param exploracion
+	 *            the new exploracion
+	 */
+	public void setExploracion(Exploracion exploracion) {
+		this.exploracion = exploracion;
+	}
+
+	/**
+	 * Sets the fecha.
+	 * 
+	 * @param fecha
+	 *            the new fecha
+	 */
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	/**
@@ -135,23 +177,5 @@ public class Video implements IModelHospital {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	/**
-	 * Sets the paciente.
-	 * 
-	 * @param paciente
-	 *            the new paciente
-	 */
-	public void setExploracion(Exploracion exploracion) {
-		this.exploracion = exploracion;
-	}
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
 	}
 }
