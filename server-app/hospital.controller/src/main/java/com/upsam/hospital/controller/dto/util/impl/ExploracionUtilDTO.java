@@ -25,6 +25,7 @@ import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
 import com.upsam.hospital.model.beans.Point;
 import com.upsam.hospital.model.beans.Video;
+import com.upsam.hospital.model.enums.AnalisisObservacionalMarcha;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
 
 @Component
@@ -133,6 +134,17 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 		try {
 			exploracion.setId(exploracionDTO.getId());
 			exploracion.setControlMotorSelectivo(exploracionDTO.getControlMotorSelectivo());
+			exploracion.setControlMotorSelectivo(exploracionDTO.getControlMotorSelectivo());
+			exploracion.setEvaluacionMuscular(exploracionDTO.getEvaluacionMuscular());
+			exploracion.setLongitudMiembroDerecho(exploracionDTO.getLongitudMiembroDerecho());
+			exploracion.setLongitudMiembroIzquierdo(exploracionDTO.getLongitudMiembroIzquierdo());
+			exploracion.setPuntuacion5Metros(exploracionDTO.getPuntuacion5Metros());
+			exploracion.setPuntuacion50Metros(exploracionDTO.getPuntuacion50Metros());
+			exploracion.setPuntuacion500Metros(exploracionDTO.getPuntuacion500Metros());
+
+			AnalisisObservacionalMarcha analisisObservacionalMarcha = new Integer(-1).equals(exploracionDTO.getAnalisisObservacionalMarcha()) ? null : AnalisisObservacionalMarcha.values()[exploracionDTO.getAnalisisObservacionalMarcha()];
+			exploracion.setAnalisisObservacionalMarcha(analisisObservacionalMarcha);
+
 			if (exploracionDTO.getFecha() != null && exploracionDTO.getFecha().length() == 10) {
 				exploracion.setFecha(DATE_TIME_FORMATTER.parse(exploracionDTO.getFecha()));
 			}
@@ -140,6 +152,7 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 				Video video = videoUtilDTO.toBusiness(videoDTO);
 				exploracion.addVideo(video);
 			}
+
 		}
 		catch (ParseException e) {
 			throw new TransferObjectException(e);
@@ -158,7 +171,16 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 		ExploracionDTO exploracionDTO = new ExploracionDTO();
 		exploracionDTO.setId(exploracion.getId());
 		exploracionDTO.setControlMotorSelectivo(exploracion.getControlMotorSelectivo());
+		exploracionDTO.setEvaluacionMuscular(exploracion.getEvaluacionMuscular());
+		exploracionDTO.setLongitudMiembroDerecho(exploracion.getLongitudMiembroDerecho());
+		exploracionDTO.setLongitudMiembroIzquierdo(exploracion.getLongitudMiembroIzquierdo());
+		exploracionDTO.setPuntuacion5Metros(exploracion.getPuntuacion5Metros());
+		exploracionDTO.setPuntuacion50Metros(exploracion.getPuntuacion50Metros());
+		exploracionDTO.setPuntuacion500Metros(exploracion.getPuntuacion500Metros());
+		exploracionDTO.setIdUsuario(exploracion.getUsuario().getId());
 		exploracionDTO.setNombreUsuario(exploracion.getUsuario().getNombreCompleto());
+		exploracionDTO.setAnalisisObservacionalMarcha(exploracion.getAnalisisObservacionalMarcha() != null ? exploracion.getAnalisisObservacionalMarcha().ordinal() : null);
+
 		if (exploracion.getFecha() != null) {
 			exploracionDTO.setFecha(DATE_FORMATTER.format(exploracion.getFecha()));
 		}

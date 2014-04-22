@@ -17,7 +17,7 @@ public interface IPacienteMovilUtilDTO {
 	 *            the paciente
 	 * @return the paciente movil dto
 	 */
-	PacienteMovilDTO toRestMovil(Paciente paciente);
+	PacienteMovilDTO toRest(Paciente paciente);
 
 	/**
 	 * To business movil.
@@ -28,6 +28,6 @@ public interface IPacienteMovilUtilDTO {
 	 * @throws TransferObjectException
 	 *             the transfer object exception
 	 */
-	Paciente toBusinessMovil(PacienteMovilDTO pacienteMovilDTO) throws TransferObjectException;
+	Paciente toBusiness(PacienteMovilDTO pacienteMovilDTO) throws TransferObjectException;
 
 }

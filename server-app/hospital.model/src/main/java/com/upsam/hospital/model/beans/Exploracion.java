@@ -17,6 +17,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import com.upsam.hospital.model.enums.AnalisisObservacionalMarcha;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -26,36 +27,20 @@ import org.hibernate.annotations.LazyCollectionOption;
 @Table(name = "EXPLORACION")
 public class Exploracion implements IModelHospital {
 
-	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 6079197394341566835L;
 
-	/** The control motor selectivo. */
-	@Basic
-	@Column(name = "CONTROL_MOTOR_SELECTIVO")
-	private Integer controlMotorSelectivo;
-
-	/** The fecha. */
-	@Basic
-	@Column(name = "FECHA")
-	private Date fecha;
-
-	/** The fichero emt. */
-	@OneToMany(mappedBy = "exploracion")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<FicheroEMT> ficherosEMT;
-
-	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_EXPLORACION")
 	private Integer id;
 
-	/** The paciente. */
-	@ManyToOne
-	@Cascade(value = CascadeType.SAVE_UPDATE)
-	@JoinColumn(name = "ID_PACIENTE")
-	private Paciente paciente;
+	@Basic
+	@Column(name = "CONTROL_MOTOR_SELECTIVO")
+	private String controlMotorSelectivo;
+
+	@Basic
+	@Column(name = "EVALUACION_MUSCULAR")
+	private String evaluacionMuscular;
 
 	/** The usuario. */
 	@ManyToOne
@@ -63,11 +48,49 @@ public class Exploracion implements IModelHospital {
 	@JoinColumn(name = "ID_USUARIO")
 	private Usuario usuario;
 
-	/** The video. */
+	@Basic
+	@Column(name = "FECHA")
+	private Date fecha;
+
+	@Basic
+	@Column(name = "LONGITUD_MIEMBRO_DERECHO")
+	private Double longitudMiembroDerecho;
+
+	@Basic
+	@Column(name = "LONGITUD_MIEMBRO_IZQUIERDO")
+	private Double longitudMiembroIzquierdo;
+
+	@Basic
+	@Column(name = "PUNTUACION_5_METROS")
+	private Double puntuacion5Metros;
+
+	@Basic
+	@Column(name = "PUNTUACION_50_METROS")
+	private Double puntuacion50Metros;
+
+	@Basic
+	@Column(name = "PUNTUACION_500_METROS")
+	private Double puntuacion500Metros;
+
+	@ManyToOne
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@JoinColumn(name = "ID_PACIENTE")
+	private Paciente paciente;
+
+	@Basic
+	@Column(name = "ANALISIS_OBSERVACIONAL_MARCHA")
+	private AnalisisObservacionalMarcha AnalisisObservacionalMarcha;
+
 	@OneToMany(mappedBy = "exploracion")
 	@Cascade(value = CascadeType.SAVE_UPDATE)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Video> videos;
+
+	/** The fichero emt. */
+	@OneToMany(mappedBy = "exploracion")
+	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<FicheroEMT> ficherosEMT;
 
 	/**
 	 * Instantiates a new exploracion.
@@ -118,137 +141,116 @@ public class Exploracion implements IModelHospital {
 		this.getVideos().add(video);
 	}
 
-	/**
-	 * Gets the control motor selectivo.
-	 * 
-	 * @return the control motor selectivo
-	 */
-	public Integer getControlMotorSelectivo() {
-		return controlMotorSelectivo;
-	}
-
-	/**
-	 * Gets the fecha.
-	 * 
-	 * @return the fecha
-	 */
-	public Date getFecha() {
-		return fecha;
-	}
-
-	/**
-	 * Gets the ficheros emt.
-	 * 
-	 * @return the ficheros emt
-	 */
-	public List<FicheroEMT> getFicherosEMT() {
-		return ficherosEMT;
-	}
-
-	/**
-	 * Gets the id.
-	 * 
-	 * @return the id
-	 */
 	public Integer getId() {
 		return id;
 	}
 
-	/**
-	 * Gets the paciente.
-	 * 
-	 * @return the paciente
-	 */
-	public Paciente getPaciente() {
-		return paciente;
-	}
-
-	/**
-	 * Gets the usuario.
-	 * 
-	 * @return the usuario
-	 */
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	/**
-	 * Gets the videos.
-	 * 
-	 * @return the videos
-	 */
-	public List<Video> getVideos() {
-		return videos;
-	}
-
-	/**
-	 * Sets the control motor selectivo.
-	 * 
-	 * @param controlMotorSelectivo
-	 *            the new control motor selectivo
-	 */
-	public void setControlMotorSelectivo(Integer controlMotorSelectivo) {
-		this.controlMotorSelectivo = controlMotorSelectivo;
-	}
-
-	/**
-	 * Sets the fecha.
-	 * 
-	 * @param fecha
-	 *            the new fecha
-	 */
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-
-	/**
-	 * Sets the ficheros emt.
-	 * 
-	 * @param ficherosEMT
-	 *            the new ficheros emt
-	 */
-	public void setFicherosEMT(List<FicheroEMT> ficherosEMT) {
-		this.ficherosEMT = ficherosEMT;
-	}
-
-	/**
-	 * Sets the id.
-	 * 
-	 * @param id
-	 *            the new id
-	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**
-	 * Sets the paciente.
-	 * 
-	 * @param paciente
-	 *            the new paciente
-	 */
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
+	public String getControlMotorSelectivo() {
+		return controlMotorSelectivo;
 	}
 
-	/**
-	 * Sets the usuario.
-	 * 
-	 * @param usuario
-	 *            the new usuario
-	 */
+	public void setControlMotorSelectivo(String controlMotorSelectivo) {
+		this.controlMotorSelectivo = controlMotorSelectivo;
+	}
+
+	public String getEvaluacionMuscular() {
+		return evaluacionMuscular;
+	}
+
+	public void setEvaluacionMuscular(String evaluacionMuscular) {
+		this.evaluacionMuscular = evaluacionMuscular;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	/**
-	 * Sets the videos.
-	 * 
-	 * @param videos
-	 *            the new videos
-	 */
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public Double getLongitudMiembroDerecho() {
+		return longitudMiembroDerecho;
+	}
+
+	public void setLongitudMiembroDerecho(Double longitudMiembroDerecho) {
+		this.longitudMiembroDerecho = longitudMiembroDerecho;
+	}
+
+	public Double getLongitudMiembroIzquierdo() {
+		return longitudMiembroIzquierdo;
+	}
+
+	public void setLongitudMiembroIzquierdo(Double longitudMiembroIzquierdo) {
+		this.longitudMiembroIzquierdo = longitudMiembroIzquierdo;
+	}
+
+	public Double getPuntuacion5Metros() {
+		return puntuacion5Metros;
+	}
+
+	public void setPuntuacion5Metros(Double puntuacion5Metros) {
+		this.puntuacion5Metros = puntuacion5Metros;
+	}
+
+	public Double getPuntuacion50Metros() {
+		return puntuacion50Metros;
+	}
+
+	public void setPuntuacion50Metros(Double puntuacion50Metros) {
+		this.puntuacion50Metros = puntuacion50Metros;
+	}
+
+	public Double getPuntuacion500Metros() {
+		return puntuacion500Metros;
+	}
+
+	public void setPuntuacion500Metros(Double puntuacion500Metros) {
+		this.puntuacion500Metros = puntuacion500Metros;
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
+	public List<Video> getVideos() {
+		return videos;
+	}
+
 	public void setVideos(List<Video> videos) {
 		this.videos = videos;
+	}
+
+	public List<FicheroEMT> getFicherosEMT() {
+		return ficherosEMT;
+	}
+
+	public void setFicherosEMT(List<FicheroEMT> ficherosEMT) {
+		this.ficherosEMT = ficherosEMT;
+	}
+
+	public AnalisisObservacionalMarcha getAnalisisObservacionalMarcha() {
+		return AnalisisObservacionalMarcha;
+	}
+
+	public void setAnalisisObservacionalMarcha(AnalisisObservacionalMarcha analisisObservacionalMarcha) {
+		AnalisisObservacionalMarcha = analisisObservacionalMarcha;
 	}
 
 }

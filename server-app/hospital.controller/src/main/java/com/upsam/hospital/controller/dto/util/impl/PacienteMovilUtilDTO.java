@@ -16,7 +16,7 @@ public class PacienteMovilUtilDTO implements IPacienteMovilUtilDTO {
 	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy");
 
 	@Override
-	public PacienteMovilDTO toRestMovil(Paciente paciente) {
+	public PacienteMovilDTO toRest(Paciente paciente) {
 		PacienteMovilDTO pacienteMovilDTO = new PacienteMovilDTO();
 
 		String fechaEvaluacion = paciente.getFechaUltimaEvaluacion() != null ? DATE_FORMATTER.format(paciente.getFechaUltimaEvaluacion()) : null;
@@ -38,7 +38,7 @@ public class PacienteMovilUtilDTO implements IPacienteMovilUtilDTO {
 	}
 
 	@Override
-	public Paciente toBusinessMovil(PacienteMovilDTO pacienteMovilDTO) throws TransferObjectException {
+	public Paciente toBusiness(PacienteMovilDTO pacienteMovilDTO) throws TransferObjectException {
 		Paciente paciente = null;
 		try {
 			paciente = new Paciente();

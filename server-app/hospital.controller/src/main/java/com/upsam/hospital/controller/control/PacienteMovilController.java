@@ -250,7 +250,7 @@ public class PacienteMovilController {
 	public @ResponseBody
 	MensajeDTO insert(@RequestBody PacienteMovilDTO pacienteMovilDTO) {
 		try {
-			Paciente paciente = pacienteMovilUtilDTO.toBusinessMovil(pacienteMovilDTO);
+			Paciente paciente = pacienteMovilUtilDTO.toBusiness(pacienteMovilDTO);
 			pacienteService.save(paciente);
 			return new MensajeDTO("Paciente creado correctamente", true, paciente);
 		}
@@ -279,7 +279,7 @@ public class PacienteMovilController {
 			List<Paciente> pacientes = pacienteService.findByIdNameSurname(param);
 
 			for (Paciente paciente : pacientes) {
-				pacienteMovilDTO = pacienteMovilUtilDTO.toRestMovil(paciente);
+				pacienteMovilDTO = pacienteMovilUtilDTO.toRest(paciente);
 				pacientesMovilDTO.add(pacienteMovilDTO);
 			}
 		}
@@ -302,7 +302,7 @@ public class PacienteMovilController {
 		PacienteMovilDTO pacienteMovilDTO = new PacienteMovilDTO();
 		try {
 			Paciente paciente = pacienteService.findOne(id);
-			pacienteMovilDTO = pacienteMovilUtilDTO.toRestMovil(paciente);
+			pacienteMovilDTO = pacienteMovilUtilDTO.toRest(paciente);
 		}
 		catch (DataBaseException e) {
 			LOG.info(new StringBuffer("No existe el paciente con el numero de identificacion ").append(pacienteMovilDTO.getNumeroIdentificacion()).append(" en base de datos.").toString());
@@ -321,7 +321,7 @@ public class PacienteMovilController {
 	public @ResponseBody
 	MensajeDTO update(@RequestBody PacienteMovilDTO pacienteMovilDTO) {
 		try {
-			Paciente paciente = pacienteMovilUtilDTO.toBusinessMovil(pacienteMovilDTO);
+			Paciente paciente = pacienteMovilUtilDTO.toBusiness(pacienteMovilDTO);
 			pacienteService.update(paciente);
 			return new MensajeDTO("Paciente modificado correctamente", true);
 		}

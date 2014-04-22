@@ -11,10 +11,6 @@
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
 		<script data-main="../js/pages/exploracion_fisica" src="../js/require.min.js"></script>
-		
-		<script type="text/javascript">
-			generic.initialize();
-		</script>
 	</head>
 
 	<body>
@@ -133,41 +129,33 @@
 				<div class="content2">
 					<!-- Derecho -->
 					<div data-role="fieldcontain">  
-						<label for="lonMiembroInfDcho">Derecho: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
-						<input type="text" class="txt-speech" name="lonMiembroInfDcho" id="lonMiembroInfDcho" value=""  />
+						<label for="longitudMiembroDerecho">Derecho: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
+						<input type="range" name="longitudMiembroDerecho" id="longitudMiembroDerecho" min="0" max="100" value="0"/>
 					</div>
 
 					<!-- Izquierdo -->
 					<div data-role="fieldcontain">
-						<label for="lonMiembroInfIzdo">Izquierdo: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
-						<input type="text" class="txt-speech" name="lonMiembroInfIzdo" id="lonMiembroInfIzdo" value=""  />
+						<label for="longitudMiembroIzquierdo">Izquierdo: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
+						<input type="range" name="longitudMiembroIzquierdo" id="longitudMiembroIzquierdo" min="0" max="100" value="0"/>
 					</div>
 				</div>	
 				 
-				<h3>Escala de movilidad funcional</h3>
-				<div class="content2">					
-					<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
-					  <thead>
-							<tr>
-							  <th data-priority="1">Distancia al caminar</th>
-							  <th data-priority="persist">Puntuaci&oacute;n</th>
-							</tr>
-					  </thead>
-					  <tbody>
-							<tr>
-							  <th>5 metros</th>
-							  <td><input type="text" class="txt-speech" name="cincoMetros" id="cincoMetros"></td>
-							</tr>		
-							<tr>
-							  <th>50 metros</th>
-							  <td><input type="text" class="txt-speech" name="cincuentaMetros" id="cincuentaMetros"></td>
-							</tr>		
-							<tr>
-							  <th>500 metros</th>
-							  <td><input type="text" class="txt-speech" name="quinientosMetros" id="quinientosMetros"></td>
-							</tr>	
-						</tbody>
-					</table>		
+				<h3>Escala de movilidad funcional (distancia a caminar)</h3>
+				<div class="content2">	
+					<div data-role="fieldcontain">
+						<label for="cincoMetros">5 metros :</label>  
+						<input type="range" name="puntuacion5Metros" id="puntuacion5Metros" min="0" max="100" value="0"/>
+					</div>
+					
+					<div data-role="fieldcontain">
+						<label for="cincuentaMetros">50 metros :</label>  
+						<input type="range" name="puntuacion50Metros" id="puntuacion50Metros" min="0" max="100" value="0"/>
+					</div>
+					
+					<div data-role="fieldcontain">
+						<label for="cincuentaMetros">500 metros :</label>  
+						<input type="range" name="puntuacion500Metros" id="puntuacion500Metros" min="0" max="100" value="0"/>
+					</div>		
 				</div>
 				
 				<h3>Tono muscular - Escala Ashworth</h3>		
@@ -175,49 +163,157 @@
 					<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
 						<thead>
 							<tr>
-							  <th data-priority="1">Escala de Ashworth</th>
-							  <th data-priority="persist">&nbsp;</th>
-							  <th data-priority="2">Izquierda</th>
-							  <th data-priority="3">Derecha</th>          
+								<th data-priority="1">Escala de Ashworth</th>
+								<th data-priority="persist">&nbsp;</th>
+								<th data-priority="2">Izquierda</th>
+								<th data-priority="3">Derecha</th>          
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-							  <th>CADERA</th>
-							  <td>Flexi&oacute;n</td>
-							  <td><input type="text" id="caderaIzFlex" name="caderaIzFlex" class="txt-speech" /></td>
-							  <td><input type="text" id="caderaDerFlex" name="caderaDerFlex" class="txt-speech" /></td>          
-							</tr>		
-							<tr>
-							  <th></th>
-							  <td>Inflexi&oacute;n</td>
-							  <td><input type="text" name="caderaIzInflex" id="caderaIzInflex" class="txt-speech" /></td>
-							  <td><input type="text" name="caderaDerInflex" id="caderaDerInflex"  class="txt-speech" /></td>         
-							</tr>
-							
-							<tr>
-							  <th>RODILLA</th>
-							  <td>Flexi&oacute;n</td>
-							  <td><input type="text" name="rodillaIzFlex" id="rodillaIzFlex" class="txt-speech" /></td>
-							  <td><input type="text" name="rodillaDerFlex" id="rodillaDerFlex" class="txt-speech" /></td>        
+								<th>CADERA</th>
+								<td>Flexi&oacute;n</td>
+								<td>
+									<select id="caderaFlexionIzquierda" name="caderaFlexionIzquierda" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>
+							  	<td>
+							  		<select id="caderaFlexionDerecha" name="caderaFlexionDerecha" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>
 							</tr>		
 							<tr>
 								<th></th>
 								<td>Inflexi&oacute;n</td>
-								<td><input type="text" name="rodillaIzInflex" id="rodillaIzInflex" class="txt-speech" /></td>
-								<td><input type="text" name="rodillaDerInflex" id="rodillaDerInflex" class="txt-speech" /></td>  
+								<td>
+									<select id="caderaInflexionIzquierda" name="caderaInflexionIzquierda" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>
+							  	<td>
+							  		<select id="caderaInflexionDerecha" name="caderaInflexionDerecha" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>
+							</tr>
+							
+							<tr>
+							  	<th>RODILLA</th>
+							  	<td>Flexi&oacute;n</td>
+							  	<td>
+									<select id="rodillaFlexionIzquierda" name="rodillaFlexionIzquierda" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>
+							  	<td>
+							  		<select id="rodillaFlexionDerecha" name="rodillaFlexionDerecha" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>       
+							</tr>		
+							<tr>
+								<th></th>
+								<td>Inflexi&oacute;n</td>
+								<td>
+									<select id="rodillaInflexionIzquierda" name="rodillaInflexionIzquierda" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>
+							  	<td>
+							  		<select id="rodillaInflexionDerecha" name="rodillaInflexionDerecha" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>
 							</tr>        
 							<tr>
 								<th>TOBILLO</th>
 								<td>Flexi&oacute;n</td>
-								<td><input type="text" name="tobilloIzflex" id="tobilloIzflex" class="txt-speech" /></td>
-								<td><input type="text" name="tobilloDerflex" id="tobilloDerflex" class="txt-speech" /></td>     
+								<td>
+									<select id="tobilloFlexionIzquierda" name="tobilloFlexionIzquierda" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>
+							  	<td>
+							  		<select id="tobilloFlexionDerecha" name="tobilloFlexionDerecha" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>
 							</tr>		
 							<tr>
 								<th></th>
 								<td>Inflexi&oacute;n</td>
-								<td><input type="text" name="tobilloIzInflex" id="tobilloIzInflex"class="txt-speech" /></td>
-								<td><input type="text" name="tobilloDerInflex" id="tobilloDerInflex" class="txt-speech" /></td>     
+								<td>
+									<select id="tobilloInflexionIzquierda" name="tobilloInflexionIzquierda" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>
+							  	<td>
+							  		<select id="tobilloInflexionDerecha" name="tobilloInflexionDerecha" data-native-menu="false">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="1+">1+</option>
+										<option value="2">2</option>
+										<option value="3">3</option>		 
+										<option value="4">4</option>		 
+									</select>
+							  	</td>
 							</tr>
 						  </tbody>
 					</table>
@@ -235,12 +331,12 @@
 				<div class="content2">										
 					<h4>Common gait patterns: Spastic Diplegia</h4>	
 					<div data-role="fieldcontain" style="text-align:center">
-						<table width="90%">
+						<table data-role="table">
 							<tr>
-								<td><input type="radio" name="52" id="1" value="1" /><b>True equinus</b></td>
-								<td><input type="radio" name="52" id="1" value="1" /><b>Jump knee</b></td>
-								<td><input type="radio" name="52" id="1" value="1" /><b>Apparent equinus</b></td>
-								<td><input type="radio" name="52" id="1" value="1" /><b>Crouch gait</b></td>
+								<td><input type="radio" name="52" id="analisisObservacionalMarcha" value="0" /><b>True equinus</b></td>
+								<td><input type="radio" name="52" id="analisisObservacionalMarcha" value="1" /><b>Jump knee</b></td>
+								<td><input type="radio" name="52" id="analisisObservacionalMarcha" value="2" /><b>Apparent equinus</b></td>
+								<td><input type="radio" name="52" id="analisisObservacionalMarcha" value="3" /><b>Crouch gait</b></td>
 							</tr>
 							<tr>
 								<td><img src="../img/analisisMarcha1.png"/></td>
