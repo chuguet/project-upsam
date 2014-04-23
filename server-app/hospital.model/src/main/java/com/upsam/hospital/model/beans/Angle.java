@@ -31,7 +31,7 @@ public class Angle implements IModelHospital {
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_ROW")
+	@Column(name = "ID_ANGLE")
 	private Integer id;
 
 	/** The name. */
