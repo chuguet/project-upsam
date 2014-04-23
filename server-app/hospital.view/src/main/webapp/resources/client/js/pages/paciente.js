@@ -30,7 +30,8 @@ var paciente = {
 			// Entramos en modo edicion
 			generic.loading();
 			$("#subtitle").html("Consulta de Paciente");
-			server.get('pacientemovil', idPaciente, paciente.recuperarCallback);
+			server.get('pacientemovil/' + idPaciente, null , paciente.recuperarCallback);
+			server.get('pacientemovil/' + idPaciente + "/exploracion", null, paciente.recuperarExploracionesCallback);
 			$("#exploraciones").show();
 		}
 		else {
@@ -57,18 +58,21 @@ var paciente = {
 			}
 
 			$("#txtCurso").val(paciente.curso != null ? paciente.curso : "");
-
-			if (paciente.exploraciones != null && paciente.exploraciones.length > 0) {
-				for(var i = 0; i < paciente.exploraciones.length; i++) {
-					var exploracion = paciente.exploraciones[i];
-					var cont = i + 1;
-					$("#listaExploraciones").append("<li><a rel='external' href='#' onclick='javascript:paciente.irAExploracion(" + exploracion.id + ", " + cont + ");' data-transition='fade'>Exploraci&oacute;n " + cont + "<br><span class='videoFeatures'>" + exploracion.fecha + "&nbsp;|&nbsp;" + exploracion.nombreUsuario + "</span></a></li>");
-				}
-				$("#listaExploraciones").listview('refresh');
-				$("#listaExploraciones").show();
-			}
 		}
 		generic.noLoading();
+	},
+	
+	'recuperarExploracionesCallback' : function(exploraciones) {
+		console.log("recuperadas exploraciones de paciente");
+		if (exploraciones != null && exploraciones.length > 0) {
+			for(var i = 0; i < exploraciones.length; i++) {
+				var exploracion = exploraciones[i];
+				var cont = i + 1;
+				$("#listaExploraciones").append("<li><a rel='external' href='#' onclick='javascript:paciente.irAExploracion(" + exploracion.id + ", " + cont + ");' data-transition='fade'>Exploraci&oacute;n " + cont + "<br><span class='videoFeatures'>" + exploracion.fecha + "&nbsp;|&nbsp;" + exploracion.nombreUsuario + "</span></a></li>");
+			}
+			$("#listaExploraciones").listview('refresh');
+			$("#listaExploraciones").show();
+		}
 	},
 
 	'insertar' : function() {

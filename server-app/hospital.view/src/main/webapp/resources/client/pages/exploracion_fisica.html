@@ -33,19 +33,18 @@
 				<input type="hidden" id="idExploracion" />
 				<div data-role="content" style="border:solid 1px black;">
 					<div data-role="fieldcontain">
-						<label for="evalMuscularManual"><b>Actualizado a:</b></label>
-						<label for="evalMuscularManual">24-05-2014 15:25</label>    
+						<label><b>Actualizado a:</b></label>
+						<label id="lblFechaActualizacion"></label>    
 						
-						<label for="evalMuscularManual"><b>por:</b></label>
-						<label for="evalMuscularManual">Jos&eacute; Miguel Gonzalez</label>							
+						<label><b>por:</b></label>
+						<label id="lblNombreUsuario">Jos&eacute; Miguel Gonzalez</label>							
 					</div>
 					<div data-role="fieldcontain">
-						<label for="evalMuscularManual"><b>Fecha evaluaci&oacute;n:</b></label>
-						<label for="evalMuscularManual">22-05-2014 09:02</label>   
+						<label><b>Fecha de la exploraci&oacute;n:</b></label>
+						<label id="lblFechaExploracion"></label>   
 						
-						<label for="evalMuscularManual"><b>Paciente:</b></label>
-						<label for="evalMuscularManual">Daniel Sanchez del Valle</label>   
-													
+						<label><b>Paciente:</b></label>
+						<label id="lblNombrePaciente"></label>						
 					</div>
 				</div>	
 								
@@ -63,23 +62,8 @@
 					<div class="content2">
 						
 						<!--Listado de videos -->						
-						<ul data-role="listview" data-inset="true">	            
-	     					<li>
-	     						<a rel="external" href="video_detalle.html" data-transition="fade">
-	     							Video 1<br><span class="videoFeatures">archivo_001.mp4 | 02:28 min</span>     						
-	     						</a>
-	     					</li>
-	     					
-	     					<li>
-	     						<a rel="external" href="video_detalle.html" data-transition="fade">
-	     							Video 2<br><span class="videoFeatures">archivo_002.mp4 | 00:09 min</span>     						
-	     						</a>
-	     					</li>
-	     					<li>
-	     						<a rel="external" href="video_detalle.html" data-transition="fade">
-	     							Video 3<br><span class="videoFeatures">archivo_003.mp4 | 12:56 min</span>     						
-	     						</a>
-	     					</li>     					
+						<ul data-role="listview" data-inset="true" id="listaVideos">	            
+	     					     					
 	     				</ul>
 					</div>
 				</div>
@@ -90,10 +74,9 @@
 						<label for="cmbControlMotorSelectivo">Control motor selectivo:</label>  
 						<!-- <input type="range" name="valoracionCtrlMotor" id="valoracionCtrlMotor" value=""  min="0" max="3"/> -->				
 						<select id="cmbControlMotorSelectivo" name="cmbControlMotorSelectivo" data-native-menu="false">
-							<option value="0"></option>
-							<option value="1">1 Incapacidad de aislar el movimiento</option>
-							<option value="2">2 Logra aislar parcialmente el movimiento</option>
-							<option value="3">3 Logra aislar completamente el movimiento</option>		                    
+							<option value="0">1 Incapacidad de aislar el movimiento</option>
+							<option value="1">2 Logra aislar parcialmente el movimiento</option>
+							<option value="2">3 Logra aislar completamente el movimiento</option>		                    
 						</select>
 					</div>
 					<div data-role="fieldcontain">  
@@ -112,16 +95,10 @@
 						
 								
 					<div data-role="fieldcontain">
-						<table width="100%">
-							<tr>
-								<td width="80%">GROSS MOTOR FUNCTION CLASSIFICATION SYSTEM</td>
-								<td width="20%"><a href="gross_motor_function.html" data-icon="arrow-r" data-role="button" data-iconpos="notext">Detalle</a> </td>
-							</tr>
-							<tr>
-								<td>Articular / muscular</td>
-								<td><a href="val_articular_muscular.html" data-icon="arrow-r" data-role="button" data-iconpos="notext">Detalle</a></td>
-							</tr>
-						</table>						  									
+						<ul data-role="listview" data-inset="true" data-filter="false" data-theme="b">						
+							<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('gross_motor_function.html');">Gross Motor Function Classification System</a></li>
+							<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('paciente_busqueda.html');">Articular / muscular</a></li>                       
+						</ul>						  									
 					</div>						
 				</div>	
 				
@@ -330,8 +307,8 @@
 				<h3>An&aacute;lisis observacional de la marcha</h3>				
 				<div class="content2">										
 					<h4>Common gait patterns: Spastic Diplegia</h4>	
-					<div data-role="fieldcontain" style="text-align:center">
-						<table data-role="table">
+					<div class="content2">					
+						<!-- <table data-role="table" id="tabla2" data-mode="reflow" class="ui-responsive table-stroke">
 							<tr>
 								<td><input type="radio" name="52" id="analisisObservacionalMarcha" value="0" /><b>True equinus</b></td>
 								<td><input type="radio" name="52" id="analisisObservacionalMarcha" value="1" /><b>Jump knee</b></td>
@@ -350,9 +327,8 @@
 								<td>&=90º<br>(Gastroc)<br>Hamstrings/RF<br>Psoas<br>Solid AFO</td>
 								<td>&<90º<br>-<br>Hamstrings/RF<br>Psoas<br>Grafo</td>
 							</tr>
-							
-						</table>  						
-					</div>					
+						</table>
+					</div> -->
 				</div>	
 			</div>
 			

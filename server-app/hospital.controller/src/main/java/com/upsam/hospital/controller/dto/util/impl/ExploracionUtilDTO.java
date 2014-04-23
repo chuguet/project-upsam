@@ -142,6 +142,18 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 			exploracion.setPuntuacion50Metros(exploracionDTO.getPuntuacion50Metros());
 			exploracion.setPuntuacion500Metros(exploracionDTO.getPuntuacion500Metros());
 			exploracion.setUsuario(new Usuario(exploracionDTO.getIdUsuario()));
+			exploracion.setCaderaFlexionIzquierda(exploracionDTO.getCaderaFlexionIzquierda());
+			exploracion.setCaderaFlexionDerecha(exploracionDTO.getCaderaFlexionDerecha());
+			exploracion.setCaderaInflexionIzquierda(exploracionDTO.getCaderaInflexionIzquierda());
+			exploracion.setCaderaInflexionDerecha(exploracionDTO.getCaderaInflexionDerecha());
+			exploracion.setRodillaFlexionIzquierda(exploracionDTO.getRodillaFlexionIzquierda());
+			exploracion.setRodillaFlexionDerecha(exploracionDTO.getRodillaFlexionDerecha());
+			exploracion.setRodillaInflexionIzquierda(exploracionDTO.getRodillaInflexionIzquierda());
+			exploracion.setRodillaInflexionDerecha(exploracionDTO.getRodillaInflexionDerecha());
+			exploracion.setTobilloFlexionIzquierda(exploracionDTO.getTobilloFlexionIzquierda());
+			exploracion.setTobilloFlexionDerecha(exploracionDTO.getTobilloFlexionDerecha());
+			exploracion.setTobilloInflexionIzquierda(exploracionDTO.getTobilloInflexionIzquierda());
+			exploracion.setTobilloInflexionDerecha(exploracionDTO.getTobilloInflexionDerecha());
 
 			AnalisisObservacionalMarcha analisisObservacionalMarcha = new Integer(-1).equals(exploracionDTO.getAnalisisObservacionalMarcha()) ? null : AnalisisObservacionalMarcha.values()[exploracionDTO.getAnalisisObservacionalMarcha()];
 			exploracion.setAnalisisObservacionalMarcha(analisisObservacionalMarcha);
@@ -180,6 +192,19 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 		exploracionDTO.setPuntuacion500Metros(exploracion.getPuntuacion500Metros());
 		exploracionDTO.setIdUsuario(exploracion.getUsuario().getId());
 		exploracionDTO.setNombreUsuario(exploracion.getUsuario().getNombreCompleto());
+		exploracionDTO.setCaderaFlexionIzquierda(exploracion.getCaderaFlexionIzquierda());
+		exploracionDTO.setCaderaFlexionDerecha(exploracion.getCaderaFlexionDerecha());
+		exploracionDTO.setCaderaInflexionIzquierda(exploracion.getCaderaInflexionIzquierda());
+		exploracionDTO.setCaderaInflexionDerecha(exploracion.getCaderaInflexionDerecha());
+		exploracionDTO.setRodillaFlexionIzquierda(exploracion.getRodillaFlexionIzquierda());
+		exploracionDTO.setRodillaFlexionDerecha(exploracion.getRodillaFlexionDerecha());
+		exploracionDTO.setRodillaInflexionIzquierda(exploracion.getRodillaInflexionIzquierda());
+		exploracionDTO.setRodillaInflexionDerecha(exploracion.getRodillaInflexionDerecha());
+		exploracionDTO.setTobilloFlexionIzquierda(exploracion.getTobilloFlexionIzquierda());
+		exploracionDTO.setTobilloFlexionDerecha(exploracion.getTobilloFlexionDerecha());
+		exploracionDTO.setTobilloInflexionIzquierda(exploracion.getTobilloInflexionIzquierda());
+		exploracionDTO.setTobilloInflexionDerecha(exploracion.getTobilloInflexionDerecha());
+
 		exploracionDTO.setAnalisisObservacionalMarcha(exploracion.getAnalisisObservacionalMarcha() != null ? exploracion.getAnalisisObservacionalMarcha().ordinal() : null);
 
 		if (exploracion.getFecha() != null) {

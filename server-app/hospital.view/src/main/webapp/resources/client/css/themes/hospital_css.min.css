@@ -250,3 +250,4 @@ h2 {
 .ui-bar div.username > a { display: inline-block; margin: -8px -3px 0px 10px;}
 .ui-select .ui-btn {padding:.4em; background-color:white;}
 body {display:none;}
+table#movie-table div.ui-select {width:130px;}

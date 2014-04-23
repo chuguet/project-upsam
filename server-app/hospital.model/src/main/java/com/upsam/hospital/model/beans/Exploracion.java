@@ -89,6 +89,43 @@ public class Exploracion implements IModelHospital {
 	@Column(name = "PUNTUACION_5_METROS")
 	private Double puntuacion5Metros;
 
+	@Basic
+	@Column(name = "CADERA_FLEXION_IZQUIERDA")
+	private String caderaFlexionIzquierda;
+	@Basic
+	@Column(name = "CADERA_FLEXION_DERECHA")
+	private String caderaFlexionDerecha;
+	@Basic
+	@Column(name = "CADERA_INFLEXION_IZQUIERDA")
+	private String caderaInflexionIzquierda;
+	@Basic
+	@Column(name = "CADERA_INFLEXION_DERECHA")
+	private String caderaInflexionDerecha;
+	@Basic
+	@Column(name = "RODILLA_FLEXION_IZQUIERDA")
+	private String rodillaFlexionIzquierda;
+	@Basic
+	@Column(name = "RODILLA_FLEXION_DERECHA")
+	private String rodillaFlexionDerecha;
+	@Basic
+	@Column(name = "RODILLA_INFLEXION_IZQUIERDA")
+	private String rodillaInflexionIzquierda;
+	@Basic
+	@Column(name = "RODILLA_INFLEXION_DERECHA")
+	private String rodillaInflexionDerecha;
+	@Basic
+	@Column(name = "TOBILLO_FLEXION_IZQUIERDA")
+	private String tobilloFlexionIzquierda;
+	@Basic
+	@Column(name = "TOBILLO_FLEXION_DERECHA")
+	private String tobilloFlexionDerecha;
+	@Basic
+	@Column(name = "TOBILLO_INFLEXION_IZQUIERDA")
+	private String tobilloInflexionIzquierda;
+	@Basic
+	@Column(name = "TOBILLO_INFLEXION_DERECHA")
+	private String tobilloInflexionDerecha;
+
 	/** The usuario. */
 	@ManyToOne
 	@JoinColumn(name = "ID_USUARIO")
@@ -468,6 +505,102 @@ public class Exploracion implements IModelHospital {
 	 */
 	public void setVideos(List<Video> videos) {
 		this.videos = videos;
+	}
+
+	public String getCaderaFlexionIzquierda() {
+		return caderaFlexionIzquierda;
+	}
+
+	public void setCaderaFlexionIzquierda(String caderaFlexionIzquierda) {
+		this.caderaFlexionIzquierda = caderaFlexionIzquierda;
+	}
+
+	public String getCaderaFlexionDerecha() {
+		return caderaFlexionDerecha;
+	}
+
+	public void setCaderaFlexionDerecha(String caderaFlexionDerecha) {
+		this.caderaFlexionDerecha = caderaFlexionDerecha;
+	}
+
+	public String getCaderaInflexionIzquierda() {
+		return caderaInflexionIzquierda;
+	}
+
+	public void setCaderaInflexionIzquierda(String caderaInflexionIzquierda) {
+		this.caderaInflexionIzquierda = caderaInflexionIzquierda;
+	}
+
+	public String getCaderaInflexionDerecha() {
+		return caderaInflexionDerecha;
+	}
+
+	public void setCaderaInflexionDerecha(String caderaInflexionDerecha) {
+		this.caderaInflexionDerecha = caderaInflexionDerecha;
+	}
+
+	public String getRodillaFlexionIzquierda() {
+		return rodillaFlexionIzquierda;
+	}
+
+	public void setRodillaFlexionIzquierda(String rodillaFlexionIzquierda) {
+		this.rodillaFlexionIzquierda = rodillaFlexionIzquierda;
+	}
+
+	public String getRodillaFlexionDerecha() {
+		return rodillaFlexionDerecha;
+	}
+
+	public void setRodillaFlexionDerecha(String rodillaFlexionDerecha) {
+		this.rodillaFlexionDerecha = rodillaFlexionDerecha;
+	}
+
+	public String getRodillaInflexionIzquierda() {
+		return rodillaInflexionIzquierda;
+	}
+
+	public void setRodillaInflexionIzquierda(String rodillaInflexionIzquierda) {
+		this.rodillaInflexionIzquierda = rodillaInflexionIzquierda;
+	}
+
+	public String getRodillaInflexionDerecha() {
+		return rodillaInflexionDerecha;
+	}
+
+	public void setRodillaInflexionDerecha(String rodillaInflexionDerecha) {
+		this.rodillaInflexionDerecha = rodillaInflexionDerecha;
+	}
+
+	public String getTobilloFlexionIzquierda() {
+		return tobilloFlexionIzquierda;
+	}
+
+	public void setTobilloFlexionIzquierda(String tobilloFlexionIzquierda) {
+		this.tobilloFlexionIzquierda = tobilloFlexionIzquierda;
+	}
+
+	public String getTobilloFlexionDerecha() {
+		return tobilloFlexionDerecha;
+	}
+
+	public void setTobilloFlexionDerecha(String tobilloFlexionDerecha) {
+		this.tobilloFlexionDerecha = tobilloFlexionDerecha;
+	}
+
+	public String getTobilloInflexionIzquierda() {
+		return tobilloInflexionIzquierda;
+	}
+
+	public void setTobilloInflexionIzquierda(String tobilloInflexionIzquierda) {
+		this.tobilloInflexionIzquierda = tobilloInflexionIzquierda;
+	}
+
+	public String getTobilloInflexionDerecha() {
+		return tobilloInflexionDerecha;
+	}
+
+	public void setTobilloInflexionDerecha(String tobilloInflexionDerecha) {
+		this.tobilloInflexionDerecha = tobilloInflexionDerecha;
 	}
 
 }
