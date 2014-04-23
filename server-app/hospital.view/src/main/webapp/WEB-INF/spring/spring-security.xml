@@ -18,7 +18,7 @@
 		<intercept-url pattern="/usuario/forget" access="permitAll" />
 		<intercept-url pattern="/usuario/**" access="hasAnyRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/paciente/**" access="hasAnyRole('ROLE_USER')" />
-		<intercept-url pattern="/pacienteMovil/**" access="hasAnyRole('ROLE_USER')" />
+		<intercept-url pattern="/pacientemovil/**" access="hasAnyRole('ROLE_USER')" />
 		<intercept-url pattern="/logout" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 
 
