@@ -11,7 +11,7 @@ import com.upsam.hospital.model.beans.FicheroEMT;
 public interface IFicheroEMTRepository extends IRepositoryDAO<FicheroEMT> {
 
 	/**
-	 * Find by paciente.
+	 * Find by exploracion.
 	 * 
 	 * @param pId
 	 *            the id
@@ -19,5 +19,16 @@ public interface IFicheroEMTRepository extends IRepositoryDAO<FicheroEMT> {
 	 * @throws SQLException
 	 *             the sQL exception
 	 */
-	List<FicheroEMT> findByPaciente(Integer pId) throws SQLException;
+	List<FicheroEMT> findByExploracion(Integer pId) throws SQLException;
+
+	/**
+	 * Find one unique.
+	 * 
+	 * @param pId
+	 *            the id
+	 * @return the fichero emt
+	 * @throws SQLException
+	 *             the SQL exception
+	 */
+	FicheroEMT findOneUnique(Integer pId) throws SQLException;
 }

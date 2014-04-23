@@ -120,12 +120,12 @@ public class PacienteMovilController {
 	 *            the id
 	 * @return the fichero emtdto
 	 */
-	@RequestMapping(value = "{idPaciente}/ficheroEMT/{id}")
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/ficheroEMT/{id}")
 	public @ResponseBody
 	FicheroEMTDTO ficheroEMT(@PathVariable("id") Integer id) {
 		FicheroEMTDTO result = null;
 		try {
-			FicheroEMT ficheroEMT = ficheroEMTService.findOne(id);
+			FicheroEMT ficheroEMT = ficheroEMTService.findOneUnique(id);
 			result = exploracionUtilDTO.fileEMTToDTO(ficheroEMT);
 		}
 		catch (DataBaseException e) {
@@ -141,12 +141,12 @@ public class PacienteMovilController {
 	 *            the id
 	 * @return the list
 	 */
-	@RequestMapping(value = "{id}/ficherosEMT")
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/ficherosEMT")
 	public @ResponseBody
-	List<FicheroEMTInfoDTO> ficherosEMTInfo(@PathVariable("id") Integer id) {
+	List<FicheroEMTInfoDTO> ficherosEMTInfo(@PathVariable("idExploracion") Integer idExploracion) {
 		List<FicheroEMTInfoDTO> result = new ArrayList<FicheroEMTInfoDTO>();
 		try {
-			List<FicheroEMT> ficherosEMT = ficheroEMTService.findByPaciente(id);
+			List<FicheroEMT> ficherosEMT = ficheroEMTService.findByExploracion(idExploracion);
 			result.addAll(exploracionUtilDTO.getFicherosEMTInfoList(ficherosEMT));
 		}
 		catch (DataBaseException e) {

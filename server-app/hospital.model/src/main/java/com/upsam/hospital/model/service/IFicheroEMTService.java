@@ -14,19 +14,16 @@ public interface IFicheroEMTService extends IModelService<FicheroEMT> {
 
 	/**
 	 * File reader emt.
-	 * 
-	 * @param file
-	 *            the file
-	 * @param exploracion
-	 *            the exploracion
+	 *
+	 * @param file            the file
+	 * @param idExploracion the id exploracion
 	 * @return the fichero emt
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @throws IOException             Signals that an I/O exception has occurred.
 	 */
 	FicheroEMT fileReaderEMT(File file, Integer idExploracion) throws IOException;
 
 	/**
-	 * Find by paciente.
+	 * Find by exploracion.
 	 * 
 	 * @param pId
 	 *            the id
@@ -34,5 +31,14 @@ public interface IFicheroEMTService extends IModelService<FicheroEMT> {
 	 * @throws DataBaseException
 	 *             the data base exception
 	 */
-	List<FicheroEMT> findByPaciente(Integer pId) throws DataBaseException;
+	List<FicheroEMT> findByExploracion(Integer pId) throws DataBaseException;
+	
+	/**
+	 * Find one unique.
+	 *
+	 * @param pId the id
+	 * @return the fichero emt
+	 * @throws DataBaseException the data base exception
+	 */
+	FicheroEMT findOneUnique(Integer pId) throws DataBaseException;
 }

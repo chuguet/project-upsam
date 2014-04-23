@@ -32,6 +32,11 @@ public class FicheroEMT implements IModelHospital {
 	@Column(name = "CICLOS")
 	private Integer ciclos;
 
+	/** The paciente. */
+	@ManyToOne
+	@JoinColumn(name = "ID_EXPLORACION")
+	private Exploracion exploracion;
+
 	/** The fecha. */
 	@Basic
 	@Column(name = "FECHA")
@@ -42,11 +47,6 @@ public class FicheroEMT implements IModelHospital {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_FICHERO_EMT")
 	private Integer id;
-
-	/** The paciente. */
-	@ManyToOne
-	@JoinColumn(name = "ID_EXPLORACION")
-	private Exploracion exploracion;
 
 	/** The tabla datos. */
 	@OneToOne
@@ -65,12 +65,62 @@ public class FicheroEMT implements IModelHospital {
 	private UnidadMedida unidadMedida;
 
 	/**
+	 * Instantiates a new fichero emt.
+	 */
+	public FicheroEMT() {
+		super();
+	}
+
+	/**
+	 * Instantiates a new fichero emt.
+	 * 
+	 * @param fecha
+	 *            the fecha
+	 * @param id
+	 *            the id
+	 */
+	public FicheroEMT(Date fecha, Integer id) {
+		super();
+		this.fecha = fecha;
+		this.id = id;
+	}
+
+	/**
+	 * Instantiates a new fichero emt.
+	 *
+	 * @param ciclos the ciclos
+	 * @param fecha the fecha
+	 * @param id the id
+	 * @param tablaDatos the tabla datos
+	 * @param tipoMedida the tipo medida
+	 * @param unidadMedida the unidad medida
+	 */
+	public FicheroEMT(Integer ciclos, Date fecha, Integer id, TablaDatos tablaDatos, TipoMedida tipoMedida, UnidadMedida unidadMedida) {
+		super();
+		this.ciclos = ciclos;
+		this.fecha = fecha;
+		this.id = id;
+		this.tablaDatos = tablaDatos;
+		this.tipoMedida = tipoMedida;
+		this.unidadMedida = unidadMedida;
+	}
+
+	/**
 	 * Gets the ciclos.
 	 * 
 	 * @return the ciclos
 	 */
 	public Integer getCiclos() {
 		return ciclos;
+	}
+
+	/**
+	 * Gets the exploracion.
+	 * 
+	 * @return the exploracion
+	 */
+	public Exploracion getExploracion() {
+		return exploracion;
 	}
 
 	/**
@@ -89,25 +139,6 @@ public class FicheroEMT implements IModelHospital {
 	 */
 	public Integer getId() {
 		return id;
-	}
-
-	/**
-	 * Gets the exploracion.
-	 * 
-	 * @return the exploracion
-	 */
-	public Exploracion getExploracion() {
-		return exploracion;
-	}
-
-	/**
-	 * Sets the exploracion.
-	 * 
-	 * @param exploracion
-	 *            the new exploracion
-	 */
-	public void setExploracion(Exploracion exploracion) {
-		this.exploracion = exploracion;
 	}
 
 	/**
@@ -145,6 +176,16 @@ public class FicheroEMT implements IModelHospital {
 	 */
 	public void setCiclos(Integer ciclos) {
 		this.ciclos = ciclos;
+	}
+
+	/**
+	 * Sets the exploracion.
+	 * 
+	 * @param exploracion
+	 *            the new exploracion
+	 */
+	public void setExploracion(Exploracion exploracion) {
+		this.exploracion = exploracion;
 	}
 
 	/**

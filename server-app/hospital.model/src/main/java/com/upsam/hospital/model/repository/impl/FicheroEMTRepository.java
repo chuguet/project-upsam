@@ -15,8 +15,11 @@ import com.upsam.hospital.model.repository.IFicheroEMTRepository;
 @Repository
 class FicheroEMTRepository implements IFicheroEMTRepository {
 
-	/** The Constant QUERY_PACIENTE. */
-	private static final String QUERY_PACIENTE = "from FicheroEMT where id_paciente = ?";
+	/** The Constant QUERY_BY_EXPLORACION. */
+	private static final String QUERY_BY_EXPLORACION = "Select new FicheroEMT(fecha,id) from FicheroEMT where (ID_EXPLORACION = ?)";
+	
+	/** The Constant QUERY_FIND_ONE_UNIQUE. */
+	private static final String QUERY_FIND_ONE_UNIQUE = "Select new FicheroEMT(ficheroEMT.ciclos,ficheroEMT.fecha,ficheroEMT.id,ficheroEMT.tablaDatos,ficheroEMT.tipoMedida,ficheroEMT.unidadMedida) from FicheroEMT as ficheroEMT where (ficheroEMT.id = ?)";
 
 	/** The hibernate template. */
 	@Inject
@@ -45,15 +48,15 @@ class FicheroEMTRepository implements IFicheroEMTRepository {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.upsam.hospital.model.repository.IFicheroEMTRepository#findByPaciente
+	 * com.upsam.hospital.model.repository.IFicheroEMTRepository#findByExploracion
 	 * (java.lang.Integer)
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<FicheroEMT> findByPaciente(Integer pId) throws SQLException {
-		return hibernateTemplate.find(QUERY_PACIENTE, pId);
+	public List<FicheroEMT> findByExploracion(Integer pId) throws SQLException {
+		return hibernateTemplate.find(QUERY_BY_EXPLORACION, pId);
 	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * @see
@@ -63,6 +66,14 @@ class FicheroEMTRepository implements IFicheroEMTRepository {
 	@Override
 	public FicheroEMT findOne(Integer pId) throws SQLException {
 		return hibernateTemplate.get(FicheroEMT.class, pId);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.upsam.hospital.model.repository.IFicheroEMTRepository#findOneUnique(java.lang.Integer)
+	 */
+	@Override
+	public FicheroEMT findOneUnique(Integer pId) throws SQLException {
+		return (FicheroEMT) hibernateTemplate.find(QUERY_FIND_ONE_UNIQUE, pId).get(0);
 	}
 
 	/*

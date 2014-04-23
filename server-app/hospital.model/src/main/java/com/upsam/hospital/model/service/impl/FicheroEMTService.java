@@ -122,13 +122,13 @@ public class FicheroEMTService implements IFicheroEMTService {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.upsam.hospital.model.service.IFicheroEMTService#findByPaciente(java
-	 * .lang.Integer)
+	 * com.upsam.hospital.model.service.IFicheroEMTService#findByExploracion
+	 * (java .lang.Integer)
 	 */
 	@Override
-	public List<FicheroEMT> findByPaciente(Integer pId) throws DataBaseException {
+	public List<FicheroEMT> findByExploracion(Integer pId) throws DataBaseException {
 		try {
-			return ficheroEMTRepository.findByPaciente(pId);
+			return ficheroEMTRepository.findByExploracion(pId);
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);
@@ -144,6 +144,22 @@ public class FicheroEMTService implements IFicheroEMTService {
 	public FicheroEMT findOne(Integer pId) throws DataBaseException {
 		try {
 			return ficheroEMTRepository.findOne(pId);
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IFicheroEMTService#findOneUnique(java
+	 * .lang.Integer)
+	 */
+	@Override
+	public FicheroEMT findOneUnique(Integer pId) throws DataBaseException {
+		try {
+			return ficheroEMTRepository.findOneUnique(pId);
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);
