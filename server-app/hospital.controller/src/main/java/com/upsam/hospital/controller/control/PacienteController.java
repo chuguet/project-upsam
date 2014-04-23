@@ -155,7 +155,7 @@ public class PacienteController {
 	 *            the id
 	 * @return the mensaje dto
 	 */
-	@RequestMapping(value = "paciente/{idPaciente}/exploracion/{idExploracion}/fileUpload", method = RequestMethod.POST, consumes = "multipart/form-data")
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/fileUpload", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public @ResponseBody
 	MensajeDTO fileUpload(@RequestParam("file") MultipartFile file, @PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
 		MensajeDTO result = null;

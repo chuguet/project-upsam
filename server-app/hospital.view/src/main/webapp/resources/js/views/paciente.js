@@ -135,12 +135,58 @@ var paciente = {
         };
 		$("#fechaEvaluacion").datepicker(datePickerParams);
 		$("#fechaNacimiento").datepicker(datePickerParams);
+		$("#lista").jqGrid({
+			datatype : 'local',
+			data : [],
+			colNames : [
+					"Id", "Nombre usuario", "Fecha"
+			],
+			colModel : [
+					{
+						name : 'id',
+						index : 'id',
+						width : 0,
+						hidden : true
+					}, {
+						name : 'nombreUsuario',
+						index : 'nombreUsuario',
+						width : 40,
+						sorttype : 'string',
+						sortable : true,
+						align : 'left'
+					}, {
+						name : 'fecha',
+						index : 'fecha',
+						width : 30,
+						sorttype : 'string',
+						sortable : true,
+						align : 'right'
+					}
+			],
+			rowNum : 6,
+			rowList : [
+					3,6
+			],
+			pager : '#paginadorLista',
+			sortname : 'nombreUsuario',
+			caption : "Exploraciones",
+			sortorder : 'asc',
+			viewrecords : true,
+			rownumbers : false,
+			onSelectRow : function(rowid, status) {
+				$("#uploader").show();
+			},
+			scroll : false
+		});
+		$(window).bind('resize', function() {
+			$('#lista').setGridWidth($('.ui-jqgrid').parent().innerWidth() - 30);
+		}).trigger('resize');
 	},
 	'prepareUploader' : function(idPaciente){
 		$("#uploader").pluploadQueue({
 	        // General settings
 	        runtimes : 'html4',
-	        url : "../paciente/fileUpload/" + idPaciente,
+	        url : "../paciente",
 	 
 	        // Maximum file size
 	        max_file_size : '2mb',
@@ -199,6 +245,14 @@ var paciente = {
 		 uploader.bind('QueueChanged', function(up, files) {
 		     total_upload_files = uploader.files.length;
 		 });
+		 
+		 uploader.bind('BeforeUpload', function(uploader, file) {
+				var myGrid = $('#lista');
+				var selectedRowId = myGrid.jqGrid ('getGridParam', 'selrow');
+				var cellValue = myGrid.jqGrid ('getCell', selectedRowId, 'id');
+			    uploader.settings.url = "../paciente/" + $("#id").val() + "/exploracion/" + cellValue + "/fileUpload";
+			});
+		 $("#uploader").hide();
 	},
 	'submitForm' : function() {
 		var data = paciente.getParams();

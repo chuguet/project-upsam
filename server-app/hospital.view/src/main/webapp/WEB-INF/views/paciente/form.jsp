@@ -29,6 +29,9 @@
 		}else if (p.escolarizacion==2){
 			$('#sin_adaptaciones').prop('checked', true).button("refresh");
 		}
+		$("#lista").setGridParam({
+			data : p.exploraciones
+		}).trigger("reloadGrid");
 		paciente.prepareUploader(p.id);
 	};
 
@@ -98,11 +101,15 @@
 				</div>
 			</p>
 		</div>
-		<c:choose><c:when test="${operacion == 'edit'}">
-			<div id="uploader">
-			    <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-			</div>
-		</c:when></c:choose>
+		<c:choose>
+			<c:when test="${operacion == 'edit'}">
+				<table id="lista"></table>
+				<div id="paginadorLista"></div>
+				<div id="uploader">
+				    <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+				</div>
+			</c:when>
+		</c:choose>
 		<div class="botonera">
 			<c:choose>
 				<c:when test="${operacion == 'new'}">
