@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -213,23 +214,5 @@ public class PacienteControllerTest {
     public void whenPacienteToInserIsEmptyThenUnsupportedMediaTypeIsAnswered() throws Exception{
         mockMvc.perform(MockMvcRequestBuilders.post("/paciente/").content(TestUtils.convertObjectToJsonBytes("")))
                                 .andExpect(MockMvcResultMatchers.status().isUnsupportedMediaType());
-    }
-    
-    @Test
-    public void canFindFicherosMDXInfo() throws Exception{
-    	Paciente paciente = new Paciente();
-    	paciente.setNombre("anyName");
-    	paciente.setNumeroIdentificacion("12");
-    	List<FicheroMDXInfoDTO> ficheroMDXInfoDTOList = new ArrayList<FicheroMDXInfoDTO>();
-    	FicheroMDXInfoDTO ficheroMDXInfoDTO = new FicheroMDXInfoDTO();
-    	ficheroMDXInfoDTO.setNombre("doc_upsam");
-    	ficheroMDXInfoDTOList.add(ficheroMDXInfoDTO);
-    	when(pacienteService.findOne(1)).thenReturn(paciente);
-    	when(pacienteUtilDTO.getFicherosMDXInfoList(paciente.getFicheroMDX())).thenReturn(ficheroMDXInfoDTOList);
-    	
-        mockMvc.perform((get("/paciente/1/ficherosMDX")))
-                                .andExpect(MockMvcResultMatchers.status().isOk())
-                                .andExpect(content().contentType("application/json;charset=UTF-8"))
-								.andExpect(jsonPath("$[0].nombre").value("doc_upsam"));
     }
 }
