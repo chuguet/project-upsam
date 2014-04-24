@@ -33,6 +33,26 @@ public class Exploracion implements IModelHospital {
 	@Column(name = "ANALISIS_OBSERVACIONAL_MARCHA")
 	private AnalisisObservacionalMarcha analisisObservacionalMarcha;
 
+	/** The cadera flexion derecha. */
+	@Basic
+	@Column(name = "CADERA_FLEXION_DERECHA")
+	private String caderaFlexionDerecha;
+
+	/** The cadera flexion izquierda. */
+	@Basic
+	@Column(name = "CADERA_FLEXION_IZQUIERDA")
+	private String caderaFlexionIzquierda;
+
+	/** The cadera inflexion derecha. */
+	@Basic
+	@Column(name = "CADERA_INFLEXION_DERECHA")
+	private String caderaInflexionDerecha;
+
+	/** The cadera inflexion izquierda. */
+	@Basic
+	@Column(name = "CADERA_INFLEXION_IZQUIERDA")
+	private String caderaInflexionIzquierda;
+
 	/** The control motor selectivo. */
 	@Basic
 	@Column(name = "CONTROL_MOTOR_SELECTIVO")
@@ -89,42 +109,45 @@ public class Exploracion implements IModelHospital {
 	@Column(name = "PUNTUACION_5_METROS")
 	private Double puntuacion5Metros;
 
-	@Basic
-	@Column(name = "CADERA_FLEXION_IZQUIERDA")
-	private String caderaFlexionIzquierda;
-	@Basic
-	@Column(name = "CADERA_FLEXION_DERECHA")
-	private String caderaFlexionDerecha;
-	@Basic
-	@Column(name = "CADERA_INFLEXION_IZQUIERDA")
-	private String caderaInflexionIzquierda;
-	@Basic
-	@Column(name = "CADERA_INFLEXION_DERECHA")
-	private String caderaInflexionDerecha;
-	@Basic
-	@Column(name = "RODILLA_FLEXION_IZQUIERDA")
-	private String rodillaFlexionIzquierda;
+	/** The rodilla flexion derecha. */
 	@Basic
 	@Column(name = "RODILLA_FLEXION_DERECHA")
 	private String rodillaFlexionDerecha;
+
+	/** The rodilla flexion izquierda. */
 	@Basic
-	@Column(name = "RODILLA_INFLEXION_IZQUIERDA")
-	private String rodillaInflexionIzquierda;
+	@Column(name = "RODILLA_FLEXION_IZQUIERDA")
+	private String rodillaFlexionIzquierda;
+
+	/** The rodilla inflexion derecha. */
 	@Basic
 	@Column(name = "RODILLA_INFLEXION_DERECHA")
 	private String rodillaInflexionDerecha;
+
+	/** The rodilla inflexion izquierda. */
 	@Basic
-	@Column(name = "TOBILLO_FLEXION_IZQUIERDA")
-	private String tobilloFlexionIzquierda;
+	@Column(name = "RODILLA_INFLEXION_IZQUIERDA")
+	private String rodillaInflexionIzquierda;
+
+	/** The tobillo flexion derecha. */
 	@Basic
 	@Column(name = "TOBILLO_FLEXION_DERECHA")
 	private String tobilloFlexionDerecha;
+
+	/** The tobillo flexion izquierda. */
 	@Basic
-	@Column(name = "TOBILLO_INFLEXION_IZQUIERDA")
-	private String tobilloInflexionIzquierda;
+	@Column(name = "TOBILLO_FLEXION_IZQUIERDA")
+	private String tobilloFlexionIzquierda;
+
+	/** The tobillo inflexion derecha. */
 	@Basic
 	@Column(name = "TOBILLO_INFLEXION_DERECHA")
 	private String tobilloInflexionDerecha;
+
+	/** The tobillo inflexion izquierda. */
+	@Basic
+	@Column(name = "TOBILLO_INFLEXION_IZQUIERDA")
+	private String tobilloInflexionIzquierda;
 
 	/** The usuario. */
 	@ManyToOne
@@ -251,6 +274,42 @@ public class Exploracion implements IModelHospital {
 	}
 
 	/**
+	 * Gets the cadera flexion derecha.
+	 * 
+	 * @return the cadera flexion derecha
+	 */
+	public String getCaderaFlexionDerecha() {
+		return caderaFlexionDerecha;
+	}
+
+	/**
+	 * Gets the cadera flexion izquierda.
+	 * 
+	 * @return the cadera flexion izquierda
+	 */
+	public String getCaderaFlexionIzquierda() {
+		return caderaFlexionIzquierda;
+	}
+
+	/**
+	 * Gets the cadera inflexion derecha.
+	 * 
+	 * @return the cadera inflexion derecha
+	 */
+	public String getCaderaInflexionDerecha() {
+		return caderaInflexionDerecha;
+	}
+
+	/**
+	 * Gets the cadera inflexion izquierda.
+	 * 
+	 * @return the cadera inflexion izquierda
+	 */
+	public String getCaderaInflexionIzquierda() {
+		return caderaInflexionIzquierda;
+	}
+
+	/**
 	 * Gets the control motor selectivo.
 	 * 
 	 * @return the control motor selectivo
@@ -350,6 +409,78 @@ public class Exploracion implements IModelHospital {
 	}
 
 	/**
+	 * Gets the rodilla flexion derecha.
+	 * 
+	 * @return the rodilla flexion derecha
+	 */
+	public String getRodillaFlexionDerecha() {
+		return rodillaFlexionDerecha;
+	}
+
+	/**
+	 * Gets the rodilla flexion izquierda.
+	 * 
+	 * @return the rodilla flexion izquierda
+	 */
+	public String getRodillaFlexionIzquierda() {
+		return rodillaFlexionIzquierda;
+	}
+
+	/**
+	 * Gets the rodilla inflexion derecha.
+	 * 
+	 * @return the rodilla inflexion derecha
+	 */
+	public String getRodillaInflexionDerecha() {
+		return rodillaInflexionDerecha;
+	}
+
+	/**
+	 * Gets the rodilla inflexion izquierda.
+	 * 
+	 * @return the rodilla inflexion izquierda
+	 */
+	public String getRodillaInflexionIzquierda() {
+		return rodillaInflexionIzquierda;
+	}
+
+	/**
+	 * Gets the tobillo flexion derecha.
+	 * 
+	 * @return the tobillo flexion derecha
+	 */
+	public String getTobilloFlexionDerecha() {
+		return tobilloFlexionDerecha;
+	}
+
+	/**
+	 * Gets the tobillo flexion izquierda.
+	 * 
+	 * @return the tobillo flexion izquierda
+	 */
+	public String getTobilloFlexionIzquierda() {
+		return tobilloFlexionIzquierda;
+	}
+
+	/**
+	 * Gets the tobillo inflexion derecha.
+	 * 
+	 * @return the tobillo inflexion derecha
+	 */
+	public String getTobilloInflexionDerecha() {
+		return tobilloInflexionDerecha;
+	}
+
+	/**
+	 * Gets the tobillo inflexion izquierda.
+	 * 
+	 * @return the tobillo inflexion izquierda
+	 */
+	public String getTobilloInflexionIzquierda() {
+		return tobilloInflexionIzquierda;
+	}
+
+	/**
 	 * Gets the usuario.
 	 * 
 	 * @return the usuario
@@ -375,6 +506,46 @@ public class Exploracion implements IModelHospital {
 	 */
 	public void setAnalisisObservacionalMarcha(AnalisisObservacionalMarcha analisisObservacionalMarcha) {
 		this.analisisObservacionalMarcha = analisisObservacionalMarcha;
+	}
+
+	/**
+	 * Sets the cadera flexion derecha.
+	 * 
+	 * @param caderaFlexionDerecha
+	 *            the new cadera flexion derecha
+	 */
+	public void setCaderaFlexionDerecha(String caderaFlexionDerecha) {
+		this.caderaFlexionDerecha = caderaFlexionDerecha;
+	}
+
+	/**
+	 * Sets the cadera flexion izquierda.
+	 * 
+	 * @param caderaFlexionIzquierda
+	 *            the new cadera flexion izquierda
+	 */
+	public void setCaderaFlexionIzquierda(String caderaFlexionIzquierda) {
+		this.caderaFlexionIzquierda = caderaFlexionIzquierda;
+	}
+
+	/**
+	 * Sets the cadera inflexion derecha.
+	 * 
+	 * @param caderaInflexionDerecha
+	 *            the new cadera inflexion derecha
+	 */
+	public void setCaderaInflexionDerecha(String caderaInflexionDerecha) {
+		this.caderaInflexionDerecha = caderaInflexionDerecha;
+	}
+
+	/**
+	 * Sets the cadera inflexion izquierda.
+	 * 
+	 * @param caderaInflexionIzquierda
+	 *            the new cadera inflexion izquierda
+	 */
+	public void setCaderaInflexionIzquierda(String caderaInflexionIzquierda) {
+		this.caderaInflexionIzquierda = caderaInflexionIzquierda;
 	}
 
 	/**
@@ -488,6 +659,86 @@ public class Exploracion implements IModelHospital {
 	}
 
 	/**
+	 * Sets the rodilla flexion derecha.
+	 * 
+	 * @param rodillaFlexionDerecha
+	 *            the new rodilla flexion derecha
+	 */
+	public void setRodillaFlexionDerecha(String rodillaFlexionDerecha) {
+		this.rodillaFlexionDerecha = rodillaFlexionDerecha;
+	}
+
+	/**
+	 * Sets the rodilla flexion izquierda.
+	 * 
+	 * @param rodillaFlexionIzquierda
+	 *            the new rodilla flexion izquierda
+	 */
+	public void setRodillaFlexionIzquierda(String rodillaFlexionIzquierda) {
+		this.rodillaFlexionIzquierda = rodillaFlexionIzquierda;
+	}
+
+	/**
+	 * Sets the rodilla inflexion derecha.
+	 * 
+	 * @param rodillaInflexionDerecha
+	 *            the new rodilla inflexion derecha
+	 */
+	public void setRodillaInflexionDerecha(String rodillaInflexionDerecha) {
+		this.rodillaInflexionDerecha = rodillaInflexionDerecha;
+	}
+
+	/**
+	 * Sets the rodilla inflexion izquierda.
+	 * 
+	 * @param rodillaInflexionIzquierda
+	 *            the new rodilla inflexion izquierda
+	 */
+	public void setRodillaInflexionIzquierda(String rodillaInflexionIzquierda) {
+		this.rodillaInflexionIzquierda = rodillaInflexionIzquierda;
+	}
+
+	/**
+	 * Sets the tobillo flexion derecha.
+	 * 
+	 * @param tobilloFlexionDerecha
+	 *            the new tobillo flexion derecha
+	 */
+	public void setTobilloFlexionDerecha(String tobilloFlexionDerecha) {
+		this.tobilloFlexionDerecha = tobilloFlexionDerecha;
+	}
+
+	/**
+	 * Sets the tobillo flexion izquierda.
+	 * 
+	 * @param tobilloFlexionIzquierda
+	 *            the new tobillo flexion izquierda
+	 */
+	public void setTobilloFlexionIzquierda(String tobilloFlexionIzquierda) {
+		this.tobilloFlexionIzquierda = tobilloFlexionIzquierda;
+	}
+
+	/**
+	 * Sets the tobillo inflexion derecha.
+	 * 
+	 * @param tobilloInflexionDerecha
+	 *            the new tobillo inflexion derecha
+	 */
+	public void setTobilloInflexionDerecha(String tobilloInflexionDerecha) {
+		this.tobilloInflexionDerecha = tobilloInflexionDerecha;
+	}
+
+	/**
+	 * Sets the tobillo inflexion izquierda.
+	 * 
+	 * @param tobilloInflexionIzquierda
+	 *            the new tobillo inflexion izquierda
+	 */
+	public void setTobilloInflexionIzquierda(String tobilloInflexionIzquierda) {
+		this.tobilloInflexionIzquierda = tobilloInflexionIzquierda;
+	}
+
+	/**
 	 * Sets the usuario.
 	 * 
 	 * @param usuario
@@ -505,102 +756,6 @@ public class Exploracion implements IModelHospital {
 	 */
 	public void setVideos(List<Video> videos) {
 		this.videos = videos;
-	}
-
-	public String getCaderaFlexionIzquierda() {
-		return caderaFlexionIzquierda;
-	}
-
-	public void setCaderaFlexionIzquierda(String caderaFlexionIzquierda) {
-		this.caderaFlexionIzquierda = caderaFlexionIzquierda;
-	}
-
-	public String getCaderaFlexionDerecha() {
-		return caderaFlexionDerecha;
-	}
-
-	public void setCaderaFlexionDerecha(String caderaFlexionDerecha) {
-		this.caderaFlexionDerecha = caderaFlexionDerecha;
-	}
-
-	public String getCaderaInflexionIzquierda() {
-		return caderaInflexionIzquierda;
-	}
-
-	public void setCaderaInflexionIzquierda(String caderaInflexionIzquierda) {
-		this.caderaInflexionIzquierda = caderaInflexionIzquierda;
-	}
-
-	public String getCaderaInflexionDerecha() {
-		return caderaInflexionDerecha;
-	}
-
-	public void setCaderaInflexionDerecha(String caderaInflexionDerecha) {
-		this.caderaInflexionDerecha = caderaInflexionDerecha;
-	}
-
-	public String getRodillaFlexionIzquierda() {
-		return rodillaFlexionIzquierda;
-	}
-
-	public void setRodillaFlexionIzquierda(String rodillaFlexionIzquierda) {
-		this.rodillaFlexionIzquierda = rodillaFlexionIzquierda;
-	}
-
-	public String getRodillaFlexionDerecha() {
-		return rodillaFlexionDerecha;
-	}
-
-	public void setRodillaFlexionDerecha(String rodillaFlexionDerecha) {
-		this.rodillaFlexionDerecha = rodillaFlexionDerecha;
-	}
-
-	public String getRodillaInflexionIzquierda() {
-		return rodillaInflexionIzquierda;
-	}
-
-	public void setRodillaInflexionIzquierda(String rodillaInflexionIzquierda) {
-		this.rodillaInflexionIzquierda = rodillaInflexionIzquierda;
-	}
-
-	public String getRodillaInflexionDerecha() {
-		return rodillaInflexionDerecha;
-	}
-
-	public void setRodillaInflexionDerecha(String rodillaInflexionDerecha) {
-		this.rodillaInflexionDerecha = rodillaInflexionDerecha;
-	}
-
-	public String getTobilloFlexionIzquierda() {
-		return tobilloFlexionIzquierda;
-	}
-
-	public void setTobilloFlexionIzquierda(String tobilloFlexionIzquierda) {
-		this.tobilloFlexionIzquierda = tobilloFlexionIzquierda;
-	}
-
-	public String getTobilloFlexionDerecha() {
-		return tobilloFlexionDerecha;
-	}
-
-	public void setTobilloFlexionDerecha(String tobilloFlexionDerecha) {
-		this.tobilloFlexionDerecha = tobilloFlexionDerecha;
-	}
-
-	public String getTobilloInflexionIzquierda() {
-		return tobilloInflexionIzquierda;
-	}
-
-	public void setTobilloInflexionIzquierda(String tobilloInflexionIzquierda) {
-		this.tobilloInflexionIzquierda = tobilloInflexionIzquierda;
-	}
-
-	public String getTobilloInflexionDerecha() {
-		return tobilloInflexionDerecha;
-	}
-
-	public void setTobilloInflexionDerecha(String tobilloInflexionDerecha) {
-		this.tobilloInflexionDerecha = tobilloInflexionDerecha;
 	}
 
 }

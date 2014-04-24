@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import com.upsam.hospital.controller.dto.AntecedentesPersonalesDTO;
 import com.upsam.hospital.controller.dto.ExploracionDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
@@ -28,11 +29,13 @@ import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteMovilUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
+import com.upsam.hospital.model.beans.AntecedentesPersonales;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
+import com.upsam.hospital.model.service.IAntecedentesPersonalesService;
 import com.upsam.hospital.model.service.IExploracionService;
 import com.upsam.hospital.model.service.IFicheroEMTService;
 import com.upsam.hospital.model.service.IPacienteService;
@@ -48,6 +51,10 @@ public class PacienteMovilController {
 
 	/** The Constant LOG. */
 	private final static Log LOG = LogFactory.getLog(PacienteMovilController.class);
+
+	/** The antecedentes personales service. */
+	@Inject
+	private IAntecedentesPersonalesService antecedentesPersonalesService;
 
 	/** The exploracion service. */
 	@Inject
@@ -137,8 +144,8 @@ public class PacienteMovilController {
 	/**
 	 * Ficheros emt info.
 	 * 
-	 * @param id
-	 *            the id
+	 * @param idExploracion
+	 *            the id exploracion
 	 * @return the list
 	 */
 	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/ficherosEMT")
@@ -264,6 +271,32 @@ public class PacienteMovilController {
 	}
 
 	/**
+	 * Insert antecedentes personales.
+	 * 
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @param antecedentesPersonalesDTO
+	 *            the antecedentes personales dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesPersonales", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO insertAntecedentesPersonales(@PathVariable("idExploracion") Integer idExploracion, @RequestBody AntecedentesPersonalesDTO antecedentesPersonalesDTO) {
+		try {
+			AntecedentesPersonales antecedentesPersonales = exploracionUtilDTO.toBusiness(antecedentesPersonalesDTO);
+			antecedentesPersonalesService.save(antecedentesPersonales);
+			return new MensajeDTO("Antecedentes personales insertados correctamente", true);
+		}
+		catch (DataBaseException e) {
+			return new MensajeDTO("Error al insertar los antecedentes personales en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion de los antecedentes personales", false);
+		}
+	}
+
+	/**
 	 * Insert exploracion.
 	 * 
 	 * @param idPaciente
@@ -366,6 +399,30 @@ public class PacienteMovilController {
 	}
 
 	/**
+	 * Retrieve antecedentes personales.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the antecedentes personales dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesPersonales", method = RequestMethod.GET)
+	public @ResponseBody
+	AntecedentesPersonalesDTO retrieveAntecedentesPersonales(@PathVariable("idExploracion") Integer idExploracion) {
+		AntecedentesPersonalesDTO antecedentesPersonalesDTO = null;
+		try {
+			AntecedentesPersonales antecedentesPersonales = antecedentesPersonalesService.findByExploracion(idExploracion);
+			antecedentesPersonalesDTO = exploracionUtilDTO.toRest(antecedentesPersonales);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+		}
+		return antecedentesPersonalesDTO;
+	}
+
+	/**
 	 * Retrieve exploracion.
 	 * 
 	 * @param idPaciente
@@ -412,6 +469,32 @@ public class PacienteMovilController {
 		catch (TransferObjectException e) {
 			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error de conversion del paciente", false);
+		}
+	}
+
+	/**
+	 * Update antecedentes personales.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param antecedentesPersonalesDTO
+	 *            the antecedentes personales dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesPersonales/{id}", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO updateAntecedentesPersonales(@PathVariable("id") Integer id, @RequestBody AntecedentesPersonalesDTO antecedentesPersonalesDTO) {
+		try {
+			AntecedentesPersonales antecedentesPersonales = exploracionUtilDTO.toBusiness(antecedentesPersonalesDTO);
+			antecedentesPersonalesService.update(antecedentesPersonales);
+			return new MensajeDTO("Antecedentes personales actualizados correctamente", true);
+		}
+		catch (DataBaseException e) {
+			return new MensajeDTO("Error al actualizar los antecedentes personales en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion de los antecedentes personales", false);
 		}
 	}
 
