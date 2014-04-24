@@ -65,14 +65,24 @@ public class FicheroEMTServiceTest extends UnitTest{
     }
     
     @Test
-    public void canFindByPatient() throws SQLException, DataBaseException {
+    public void canFindByExploracion() throws SQLException, DataBaseException {
     	List<FicheroEMT> files = new ArrayList<FicheroEMT>();
     	files.add(ficheroEMT());
-        when(ficheroEMTRepository.findByPaciente(1)).thenReturn(files);
+        when(ficheroEMTRepository.findByExploracion(1)).thenReturn(files);
         			
-        List<FicheroEMT> expectedFiles = ficheroEMTService.findByPaciente(1);
+        List<FicheroEMT> expectedFiles = ficheroEMTService.findByExploracion(1);
         
 		assertThat(files.size(), is(equalTo(expectedFiles.size())));
+    }
+    
+    @Test
+    public void canFindByfindOneUnique() throws SQLException, DataBaseException {
+    	FicheroEMT ficheroEMT = ficheroEMT();
+        when(ficheroEMTRepository.findOneUnique(1)).thenReturn(ficheroEMT);
+        			
+        FicheroEMT ficheroEMTResult = ficheroEMTService.findOneUnique(1);
+        
+		assertThat(ficheroEMT, is(equalTo(ficheroEMTResult)));
     }
     
     @Test
