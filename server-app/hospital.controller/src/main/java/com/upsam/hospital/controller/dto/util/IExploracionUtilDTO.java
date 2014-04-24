@@ -2,6 +2,7 @@ package com.upsam.hospital.controller.dto.util;
 
 import java.util.List;
 import com.upsam.hospital.controller.dto.AntecedentesPersonalesDTO;
+import com.upsam.hospital.controller.dto.AntecedentesPersonalesPCIDTO;
 import com.upsam.hospital.controller.dto.ExploracionDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
@@ -9,6 +10,7 @@ import com.upsam.hospital.controller.dto.FicheroMDXDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXInfoDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.AntecedentesPersonales;
+import com.upsam.hospital.model.beans.AntecedentesPersonalesPCI;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
@@ -70,6 +72,17 @@ public interface IExploracionUtilDTO {
 	/**
 	 * To business.
 	 * 
+	 * @param antecedentesPersonalesPCIDTO
+	 *            the antecedentes personales pcidto
+	 * @return the antecedentes personales pci
+	 * @throws TransferObjectException
+	 *             the transfer object exception
+	 */
+	AntecedentesPersonalesPCI toBusiness(AntecedentesPersonalesPCIDTO antecedentesPersonalesPCIDTO) throws TransferObjectException;
+
+	/**
+	 * To business.
+	 * 
 	 * @param exploracionDTO
 	 *            the exploracion dto
 	 * @return the exploracion
@@ -88,6 +101,17 @@ public interface IExploracionUtilDTO {
 	 *             the transfer object exception
 	 */
 	AntecedentesPersonalesDTO toRest(AntecedentesPersonales antecedentesPersonales) throws TransferObjectException;
+
+	/**
+	 * To rest.
+	 * 
+	 * @param antecedentesPersonalesPCI
+	 *            the antecedentes personales pci
+	 * @return the antecedentes personales pcidto
+	 * @throws TransferObjectException
+	 *             the transfer object exception
+	 */
+	AntecedentesPersonalesPCIDTO toRest(AntecedentesPersonalesPCI antecedentesPersonalesPCI) throws TransferObjectException;
 
 	/**
 	 * To rest.
