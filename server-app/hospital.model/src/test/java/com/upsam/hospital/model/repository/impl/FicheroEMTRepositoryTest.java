@@ -65,12 +65,23 @@ public class FicheroEMTRepositoryTest extends UnitTest{
     }
     
     @Test
-    public void canFindByPatient() throws SQLException, DataBaseException {
+    public void canFindByExploracion() throws SQLException, DataBaseException {
     	List<FicheroEMT> files = new ArrayList<FicheroEMT>();
     	files.add(ficheroEMT());
-        when(hibernateTemplate.find("from FicheroEMT where id_paciente = ?",1)).thenReturn(files);
+        when(hibernateTemplate.find("Select new FicheroEMT(fecha,id) from FicheroEMT where (ID_EXPLORACION = ?)",1)).thenReturn(files);
         			
-        List<FicheroEMT> expectedFiles = ficheroEMTRepository.findByPaciente(1);
+        List<FicheroEMT> expectedFiles = ficheroEMTRepository.findByExploracion(1);
+        
+		assertThat(files.size(), is(equalTo(expectedFiles.size())));
+    }
+    
+    @Test
+    public void canFindOneUnique() throws SQLException, DataBaseException {
+    	List<FicheroEMT> files = new ArrayList<FicheroEMT>();
+    	files.add(ficheroEMT());
+        when(hibernateTemplate.find("Select new FicheroEMT(ficheroEMT.ciclos,ficheroEMT.fecha,ficheroEMT.id,ficheroEMT.tablaDatos,ficheroEMT.tipoMedida,ficheroEMT.unidadMedida) from FicheroEMT as ficheroEMT where (ficheroEMT.id = ?)"));
+        			
+        List<FicheroEMT> expectedFiles = ficheroEMTRepository.findByExploracion(1);
         
 		assertThat(files.size(), is(equalTo(expectedFiles.size())));
     }
