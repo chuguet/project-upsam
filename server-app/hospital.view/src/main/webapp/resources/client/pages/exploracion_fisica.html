@@ -29,7 +29,20 @@
 		        
 		        <div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
 					<h2 class="subtitle">Exploraci&oacute;n F&iacute;sica</h2>
-					<div id="username" class="username"></div>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Logout</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
+								<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
+								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+							</div>
+						</div>
+					</div>
 				</div>
      		</div>
 			
@@ -127,19 +140,60 @@
 				<h3>Escala de movilidad funcional (distancia a caminar)</h3>
 				<div class="content2">	
 					<div data-role="fieldcontain">
-						<label for="cincoMetros">5 metros :</label>  
-						<input type="range" name="puntuacion5Metros" id="puntuacion5Metros" min="0" max="100" value="0"/>
+						<label for="puntuacion5Metros">5 metros :</label>  
+						<select id="puntuacion5Metros" name="puntuacion5Metros" data-native-menu="false">
+							<option value=""></option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>		 
+							<option value="6">6</option>
+							<option value="7">G</option>
+							<option value="8">N.N</option>		 
+						</select>
 					</div>
 					
 					<div data-role="fieldcontain">
-						<label for="cincuentaMetros">50 metros :</label>  
-						<input type="range" name="puntuacion50Metros" id="puntuacion50Metros" min="0" max="100" value="0"/>
+						<label for="puntuacion50Metros">50 metros :</label>  
+						<select id="puntuacion50Metros" name="puntuacion50Metros" data-native-menu="false">
+							<option value=""></option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>		 
+							<option value="6">6</option>
+							<option value="7">G</option>
+							<option value="8">N.N</option>		 
+						</select>
 					</div>
 					
 					<div data-role="fieldcontain">
-						<label for="cincuentaMetros">500 metros :</label>  
-						<input type="range" name="puntuacion500Metros" id="puntuacion500Metros" min="0" max="100" value="0"/>
-					</div>		
+						<label for="puntuacion500Metros">500 metros :</label>
+						<select id="puntuacion500Metros" name="puntuacion500Metros" data-native-menu="false">
+							<option value=""></option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>		 
+							<option value="6">6</option>
+							<option value="7">G</option>
+							<option value="8">N.N</option>		 
+						</select>
+					</div>	
+					
+					<ul>
+						<li>1 - Usa silla de ruedas, silla de paseo o cochecito: puede ponerse de pie para transferencias y puede dar algunos pasos aguantado por otra persona o usando un andador.</li>
+						<li>2 - Usa un andador u otra estructura de ayuda para la marcha: sin ayuda de otra persona.</li>
+						<li>3 - Usa dos muletas: sin ayuda de otra persona.</li>
+						<li>4 - Usa una muleta o dos bastones: sin ayuda de otra persona.</li>
+						<li>5 - Independiente en superficies llanas: no utiliza ayudas de marcha o necesita ayuda de otra persona. Si utiliza muebles, paredes, vallas o los bordes delanteros de las tiendas para sujetarse, haga el favor de escoger 4 como descripci&oacute;n adecuada.</li>
+						<li>6 - Independiente en todas las superficies: no utiliza ninguna ayuda de marcha o necesita ninguna ayuda de otra persona mientras camina, corre, asciende o sube escaleras.</li>
+						<li>G - Gatea: el ni&ntilde;o gatea para moverse en casa (5m).</li>
+						<li>N.N - No aplicable. Por ejemplo, el ni&ntilde;o no completa esa distancia (500 m).</li>
+					</ul>
 				</div>
 				
 				<h3>Tono muscular - Escala Ashworth</h3>		

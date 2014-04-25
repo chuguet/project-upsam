@@ -71,19 +71,16 @@ var exploracionFisica = {
 				$("#longitudMiembroIzquierdo").slider( "refresh" );
 			}
 			
-			if (exploracion.longitudMiembroIzquierdo != null){
-				$("#puntuacion5Metros").val(exploracion.puntuacion5Metros);
-				$("#puntuacion5Metros").slider( "refresh" );
+			if (exploracion.puntuacion5Metros != null){
+				$("#puntuacion5Metros option[value=" + exploracion.puntuacion5Metros + "]").attr("selected", true).change();
 			}
 			
-			if (exploracion.longitudMiembroIzquierdo != null){
-				$("#puntuacion50Metros").val(exploracion.puntuacion50Metros);
-				$("#puntuacion50Metros").slider( "refresh" );
+			if (exploracion.puntuacion50Metros != null){
+				$("#puntuacion50Metros option[value=" + exploracion.puntuacion50Metros + "]").attr("selected", true).change();
 			}
 			
-			if (exploracion.longitudMiembroIzquierdo != null){
-				$("#puntuacion500Metros").val(exploracion.puntuacion500Metros);
-				$("#puntuacion500Metros").slider( "refresh" );
+			if (exploracion.puntuacion500Metros != null){
+				$("#puntuacion500Metros option[value=" + exploracion.puntuacion500Metros + "]").attr("selected", true).change();
 			}
 			
 			if (exploracion.caderaFlexionIzquierda != null){
