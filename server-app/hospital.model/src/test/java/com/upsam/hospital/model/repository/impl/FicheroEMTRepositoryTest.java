@@ -21,6 +21,8 @@ import com.upsam.hospital.model.unit.UnitTest;
 
 public class FicheroEMTRepositoryTest extends UnitTest{
 
+	private final int FICHERO_EMT_ID = 12;
+	private final int EXPLORACION_ID = 17;
     @Mock
     private HibernateTemplate hibernateTemplate;
     @InjectMocks
@@ -38,7 +40,6 @@ public class FicheroEMTRepositoryTest extends UnitTest{
     @Test
     public void canUpdateAnEMTFile() throws SQLException, DataBaseException {
     	FicheroEMT ficheroEMT = ficheroEMT();
-    	ficheroEMT.setId(2);
         			
     	ficheroEMTRepository.update(ficheroEMT);
 		
@@ -56,50 +57,53 @@ public class FicheroEMTRepositoryTest extends UnitTest{
     
     @Test
     public void canFindAnEMTFile() throws SQLException, DataBaseException {
-    	FicheroEMT ficheroEMT = ficheroEMT();
-        when(hibernateTemplate.get(FicheroEMT.class,1)).thenReturn(ficheroEMT);
+        when(hibernateTemplate.get(FicheroEMT.class,FICHERO_EMT_ID)).thenReturn(ficheroEMT());
         			
-        FicheroEMT expectedficheroEMT = ficheroEMTRepository.findOne(1);
+        FicheroEMT ficheroEMTFound = ficheroEMTRepository.findOne(FICHERO_EMT_ID);
         
-		assertThat(1, is(equalTo(expectedficheroEMT.getId())));
+		assertThat(FICHERO_EMT_ID, is(equalTo(ficheroEMTFound.getId())));
     }
     
     @Test
     public void canFindByExploracion() throws SQLException, DataBaseException {
-    	List<FicheroEMT> files = new ArrayList<FicheroEMT>();
-    	files.add(ficheroEMT());
-        when(hibernateTemplate.find("Select new FicheroEMT(fecha,id) from FicheroEMT where (ID_EXPLORACION = ?)",1)).thenReturn(files);
+    	List<FicheroEMT> files = aListOfFicheroEMT();
+        when(hibernateTemplate.find("Select new FicheroEMT(fecha,id) from FicheroEMT where (ID_EXPLORACION = ?)", EXPLORACION_ID))
+        					  .thenReturn(files);
         			
-        List<FicheroEMT> expectedFiles = ficheroEMTRepository.findByExploracion(1);
+        List<FicheroEMT> result = ficheroEMTRepository.findByExploracion(EXPLORACION_ID);
         
-		assertThat(files.size(), is(equalTo(expectedFiles.size())));
+		assertThat(files, is(equalTo(result)));
     }
     
     @Test
     public void canFindOneUnique() throws SQLException, DataBaseException {
-    	List<FicheroEMT> files = new ArrayList<FicheroEMT>();
-    	files.add(ficheroEMT());
-        when(hibernateTemplate.find("Select new FicheroEMT(ficheroEMT.ciclos,ficheroEMT.fecha,ficheroEMT.id,ficheroEMT.tablaDatos,ficheroEMT.tipoMedida,ficheroEMT.unidadMedida) from FicheroEMT as ficheroEMT where (ficheroEMT.id = ?)"));
+        when(hibernateTemplate.find("Select new FicheroEMT(ficheroEMT.ciclos,ficheroEMT.fecha,ficheroEMT.id,ficheroEMT.tablaDatos,ficheroEMT.tipoMedida,ficheroEMT.unidadMedida) from FicheroEMT as ficheroEMT where (ficheroEMT.id = ?)",FICHERO_EMT_ID))
+        					  .thenReturn(aListOfFicheroEMT());
         			
-        List<FicheroEMT> expectedFiles = ficheroEMTRepository.findByExploracion(1);
+        FicheroEMT result = ficheroEMTRepository.findOneUnique(FICHERO_EMT_ID);
         
-		assertThat(files.size(), is(equalTo(expectedFiles.size())));
+		assertThat(FICHERO_EMT_ID, is(equalTo(result.getId())));
     }
     
     @Test
     public void canFindAllEMTFiles() throws SQLException, DataBaseException {
-    	List<FicheroEMT> files = new ArrayList<FicheroEMT>();
-    	files.add(ficheroEMT());
+    	List<FicheroEMT> files =  aListOfFicheroEMT();
         when(hibernateTemplate.loadAll(FicheroEMT.class)).thenReturn(files);
         			
-        List<FicheroEMT>expectedFiles = ficheroEMTRepository.findAll();
+        List<FicheroEMT> result = ficheroEMTRepository.findAll();
         
-		assertThat(files.size(), is(equalTo(expectedFiles.size())));
+		assertThat(files, is(equalTo(result)));
+    }
+    
+    private List<FicheroEMT> aListOfFicheroEMT(){
+    	List<FicheroEMT> files = new ArrayList<FicheroEMT>();
+    	files.add(ficheroEMT());
+    	return files;
     }
     
     private FicheroEMT ficheroEMT(){
     	FicheroEMT ficheroEMT = new FicheroEMT();
-		ficheroEMT.setId(1);
+		ficheroEMT.setId(FICHERO_EMT_ID);
     	
 		return ficheroEMT;
     }
