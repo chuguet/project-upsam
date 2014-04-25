@@ -158,9 +158,12 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 			AnalisisObservacionalMarcha analisisObservacionalMarcha = new Integer(-1).equals(exploracionDTO.getAnalisisObservacionalMarcha()) ? null : AnalisisObservacionalMarcha.values()[exploracionDTO.getAnalisisObservacionalMarcha()];
 			exploracion.setAnalisisObservacionalMarcha(analisisObservacionalMarcha);
 
-			if (exploracionDTO.getFecha() != null && exploracionDTO.getFecha().length() == 10) {
-				exploracion.setFecha(DATE_FORMATTER.parse(exploracionDTO.getFecha()));
+			if (exploracionDTO.getFecha() != null && exploracionDTO.getFecha().length() > 0) {
+				exploracion.setFecha(DATE_TIME_FORMATTER.parse(exploracionDTO.getFecha()));
 			}
+
+			exploracion.setFechaActualizacion(new Date());
+
 			for (VideoDTO videoDTO : exploracionDTO.getVideos()) {
 				Video video = videoUtilDTO.toBusiness(videoDTO);
 				exploracion.addVideo(video);
@@ -208,8 +211,16 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 		exploracionDTO.setAnalisisObservacionalMarcha(exploracion.getAnalisisObservacionalMarcha() != null ? exploracion.getAnalisisObservacionalMarcha().ordinal() : null);
 
 		if (exploracion.getFecha() != null) {
-			exploracionDTO.setFecha(DATE_FORMATTER.format(exploracion.getFecha()));
+			exploracionDTO.setFecha(DATE_TIME_FORMATTER.format(exploracion.getFecha()));
 		}
+
+		if (exploracion.getFechaActualizacion() != null) {
+			exploracionDTO.setFechaActualizacion(DATE_TIME_FORMATTER.format(exploracion.getFechaActualizacion()));
+		}
+		else {
+			exploracionDTO.setFechaActualizacion("No actualizado");
+		}
+
 		if (exploracion.getVideos() != null && !exploracion.getVideos().isEmpty()) {
 			for (Video video : exploracion.getVideos()) {
 				VideoDTO videoDTO = videoUtilDTO.toRest(video);

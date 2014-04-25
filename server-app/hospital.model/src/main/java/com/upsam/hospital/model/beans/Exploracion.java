@@ -48,6 +48,10 @@ public class Exploracion implements IModelHospital {
 	@Column(name = "FECHA")
 	private Date fecha;
 
+	@Basic
+	@Column(name = "FECHA_ACTUALIZACION")
+	private Date fechaActualizacion;
+
 	/** The fichero emt. */
 	@OneToMany(mappedBy = "exploracion")
 	@LazyCollection(LazyCollectionOption.FALSE)
@@ -62,12 +66,12 @@ public class Exploracion implements IModelHospital {
 	/** The longitud miembro derecho. */
 	@Basic
 	@Column(name = "LONGITUD_MIEMBRO_DERECHO")
-	private Double longitudMiembroDerecho;
+	private Integer longitudMiembroDerecho;
 
 	/** The longitud miembro izquierdo. */
 	@Basic
 	@Column(name = "LONGITUD_MIEMBRO_IZQUIERDO")
-	private Double longitudMiembroIzquierdo;
+	private Integer longitudMiembroIzquierdo;
 
 	/** The paciente. */
 	@ManyToOne
@@ -77,17 +81,17 @@ public class Exploracion implements IModelHospital {
 	/** The puntuacion500 metros. */
 	@Basic
 	@Column(name = "PUNTUACION_500_METROS")
-	private Double puntuacion500Metros;
+	private Integer puntuacion500Metros;
 
 	/** The puntuacion50 metros. */
 	@Basic
 	@Column(name = "PUNTUACION_50_METROS")
-	private Double puntuacion50Metros;
+	private Integer puntuacion50Metros;
 
 	/** The puntuacion5 metros. */
 	@Basic
 	@Column(name = "PUNTUACION_5_METROS")
-	private Double puntuacion5Metros;
+	private Integer puntuacion5Metros;
 
 	@Basic
 	@Column(name = "CADERA_FLEXION_IZQUIERDA")
@@ -169,12 +173,13 @@ public class Exploracion implements IModelHospital {
 	 * @param idUsuario
 	 *            the id usuario
 	 */
-	public Exploracion(AnalisisObservacionalMarcha analisisObservacionalMarcha, String controlMotorSelectivo, String evaluacionMuscular, Date fecha, Integer id, Double longitudMiembroDerecho, Double longitudMiembroIzquierdo, Double puntuacion500Metros, Double puntuacion50Metros, Double puntuacion5Metros, Integer idUsuario) {
+	public Exploracion(AnalisisObservacionalMarcha analisisObservacionalMarcha, String controlMotorSelectivo, String evaluacionMuscular, Date fecha, Date fechaActualizacion, Integer id, Integer longitudMiembroDerecho, Integer longitudMiembroIzquierdo, Integer puntuacion500Metros, Integer puntuacion50Metros, Integer puntuacion5Metros, Integer idUsuario, String caderaFlexionIzquierda, String caderaFlexionDerecha, String caderaInflexionIzquierda, String caderaInflexionDerecha, String rodillaFlexionIzquierda, String rodillaFlexionDerecha, String rodillaInflexionIzquierda, String rodillaInflexionDerecha, String tobilloFlexionIzquierda, String tobilloFlexionDerecha, String tobilloInflexionIzquierda, String tobilloInflexionDerecha) {
 		super();
 		this.analisisObservacionalMarcha = analisisObservacionalMarcha;
 		this.controlMotorSelectivo = controlMotorSelectivo;
 		this.evaluacionMuscular = evaluacionMuscular;
 		this.fecha = fecha;
+		this.fechaActualizacion = fechaActualizacion;
 		this.id = id;
 		this.longitudMiembroDerecho = longitudMiembroDerecho;
 		this.longitudMiembroIzquierdo = longitudMiembroIzquierdo;
@@ -182,6 +187,18 @@ public class Exploracion implements IModelHospital {
 		this.puntuacion50Metros = puntuacion50Metros;
 		this.puntuacion5Metros = puntuacion5Metros;
 		this.usuario = new Usuario(idUsuario);
+		this.caderaFlexionIzquierda = caderaFlexionIzquierda;
+		this.caderaFlexionDerecha = caderaFlexionDerecha;
+		this.caderaInflexionIzquierda = caderaInflexionIzquierda;
+		this.caderaInflexionDerecha = caderaInflexionDerecha;
+		this.rodillaFlexionIzquierda = rodillaFlexionIzquierda;
+		this.rodillaFlexionDerecha = rodillaFlexionDerecha;
+		this.rodillaInflexionIzquierda = rodillaInflexionIzquierda;
+		this.rodillaInflexionDerecha = rodillaInflexionDerecha;
+		this.tobilloFlexionIzquierda = tobilloFlexionIzquierda;
+		this.tobilloFlexionDerecha = tobilloFlexionDerecha;
+		this.tobilloInflexionIzquierda = tobilloInflexionIzquierda;
+		this.tobilloInflexionDerecha = tobilloInflexionDerecha;
 	}
 
 	/**
@@ -300,7 +317,7 @@ public class Exploracion implements IModelHospital {
 	 * 
 	 * @return the longitud miembro derecho
 	 */
-	public Double getLongitudMiembroDerecho() {
+	public Integer getLongitudMiembroDerecho() {
 		return longitudMiembroDerecho;
 	}
 
@@ -309,7 +326,7 @@ public class Exploracion implements IModelHospital {
 	 * 
 	 * @return the longitud miembro izquierdo
 	 */
-	public Double getLongitudMiembroIzquierdo() {
+	public Integer getLongitudMiembroIzquierdo() {
 		return longitudMiembroIzquierdo;
 	}
 
@@ -327,7 +344,7 @@ public class Exploracion implements IModelHospital {
 	 * 
 	 * @return the puntuacion500 metros
 	 */
-	public Double getPuntuacion500Metros() {
+	public Integer getPuntuacion500Metros() {
 		return puntuacion500Metros;
 	}
 
@@ -336,7 +353,7 @@ public class Exploracion implements IModelHospital {
 	 * 
 	 * @return the puntuacion50 metros
 	 */
-	public Double getPuntuacion50Metros() {
+	public Integer getPuntuacion50Metros() {
 		return puntuacion50Metros;
 	}
 
@@ -345,7 +362,7 @@ public class Exploracion implements IModelHospital {
 	 * 
 	 * @return the puntuacion5 metros
 	 */
-	public Double getPuntuacion5Metros() {
+	public Integer getPuntuacion5Metros() {
 		return puntuacion5Metros;
 	}
 
@@ -433,7 +450,7 @@ public class Exploracion implements IModelHospital {
 	 * @param longitudMiembroDerecho
 	 *            the new longitud miembro derecho
 	 */
-	public void setLongitudMiembroDerecho(Double longitudMiembroDerecho) {
+	public void setLongitudMiembroDerecho(Integer longitudMiembroDerecho) {
 		this.longitudMiembroDerecho = longitudMiembroDerecho;
 	}
 
@@ -443,7 +460,7 @@ public class Exploracion implements IModelHospital {
 	 * @param longitudMiembroIzquierdo
 	 *            the new longitud miembro izquierdo
 	 */
-	public void setLongitudMiembroIzquierdo(Double longitudMiembroIzquierdo) {
+	public void setLongitudMiembroIzquierdo(Integer longitudMiembroIzquierdo) {
 		this.longitudMiembroIzquierdo = longitudMiembroIzquierdo;
 	}
 
@@ -463,7 +480,7 @@ public class Exploracion implements IModelHospital {
 	 * @param puntuacion500Metros
 	 *            the new puntuacion500 metros
 	 */
-	public void setPuntuacion500Metros(Double puntuacion500Metros) {
+	public void setPuntuacion500Metros(Integer puntuacion500Metros) {
 		this.puntuacion500Metros = puntuacion500Metros;
 	}
 
@@ -473,7 +490,7 @@ public class Exploracion implements IModelHospital {
 	 * @param puntuacion50Metros
 	 *            the new puntuacion50 metros
 	 */
-	public void setPuntuacion50Metros(Double puntuacion50Metros) {
+	public void setPuntuacion50Metros(Integer puntuacion50Metros) {
 		this.puntuacion50Metros = puntuacion50Metros;
 	}
 
@@ -483,7 +500,7 @@ public class Exploracion implements IModelHospital {
 	 * @param puntuacion5Metros
 	 *            the new puntuacion5 metros
 	 */
-	public void setPuntuacion5Metros(Double puntuacion5Metros) {
+	public void setPuntuacion5Metros(Integer puntuacion5Metros) {
 		this.puntuacion5Metros = puntuacion5Metros;
 	}
 
@@ -601,6 +618,14 @@ public class Exploracion implements IModelHospital {
 
 	public void setTobilloInflexionDerecha(String tobilloInflexionDerecha) {
 		this.tobilloInflexionDerecha = tobilloInflexionDerecha;
+	}
+
+	public Date getFechaActualizacion() {
+		return fechaActualizacion;
+	}
+
+	public void setFechaActualizacion(Date fechaActualizacion) {
+		this.fechaActualizacion = fechaActualizacion;
 	}
 
 }

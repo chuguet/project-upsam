@@ -16,7 +16,7 @@ import com.upsam.hospital.model.repository.IExploracionRepository;
 class ExploracionRepository implements IExploracionRepository {
 
 	/** The Constant QUERY_FIND_ONE_UNIQUE. */
-	private static final String QUERY_FIND_ONE_UNIQUE = "Select new Exploracion(analisisObservacionalMarcha,controlMotorSelectivo,evaluacionMuscular,fecha,id,longitudMiembroDerecho,longitudMiembroIzquierdo,puntuacion500Metros,puntuacion50Metros,puntuacion5Metros,usuario.id) from Exploracion where ID_EXPLORACION = ?";
+	private static final String QUERY_FIND_ONE_UNIQUE = "Select new Exploracion(analisisObservacionalMarcha,controlMotorSelectivo,evaluacionMuscular,fecha,fechaActualizacion, id,longitudMiembroDerecho,longitudMiembroIzquierdo,puntuacion500Metros,puntuacion50Metros,puntuacion5Metros,usuario.id, caderaFlexionIzquierda,caderaFlexionDerecha,caderaInflexionIzquierda,caderaInflexionDerecha,rodillaFlexionIzquierda,rodillaFlexionDerecha,rodillaInflexionIzquierda,rodillaInflexionDerecha,tobilloFlexionIzquierda,tobilloFlexionDerecha,tobilloInflexionIzquierda,tobilloInflexionDerecha) from Exploracion where ID_EXPLORACION = ?";
 
 	/** The Constant QUERY_FINDBY_ID_PATIENT. */
 	private static final String QUERY_FINDBY_ID_PATIENT = "Select new Exploracion(id,fecha,usuario.apellidos,usuario.id,usuario.nombre) from Exploracion where ID_PACIENTE = ?";

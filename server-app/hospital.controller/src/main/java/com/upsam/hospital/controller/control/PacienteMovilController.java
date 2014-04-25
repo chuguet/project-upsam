@@ -279,10 +279,11 @@ public class PacienteMovilController {
 			Exploracion exploracion = exploracionUtilDTO.toBusiness(exploracionDTO);
 			exploracion.setPaciente(new Paciente(idPaciente));
 			exploracionService.save(exploracion);
-			return new MensajeDTO("Exploracion insertada correctamente", true);
+			ExploracionDTO nuevaExploracion = exploracionUtilDTO.toRest(exploracion);
+			return new MensajeDTO("Exploracion guardada correctamente", true, nuevaExploracion);
 		}
 		catch (DataBaseException e) {
-			return new MensajeDTO("Error al insertar la exploracion en base de datos.", false);
+			return new MensajeDTO("Error al guardar la exploracion.", false);
 		}
 		catch (TransferObjectException e) {
 			LOG.debug(e.getMessage());
@@ -433,7 +434,8 @@ public class PacienteMovilController {
 			Exploracion exploracion = exploracionUtilDTO.toBusiness(exploracionDTO);
 			exploracion.setPaciente(new Paciente(idPaciente));
 			exploracionService.update(exploracion);
-			return new MensajeDTO("Exploracion insertada correctamente", true);
+			ExploracionDTO nuevaExploracion = exploracionUtilDTO.toRest(exploracion);
+			return new MensajeDTO("Exploracion actualizada correctamente", true, nuevaExploracion);
 		}
 		catch (DataBaseException e) {
 			return new MensajeDTO("Error al insertar la exploracion en base de datos.", false);

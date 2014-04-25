@@ -16,16 +16,23 @@
 	<body>
 		<div data-role="page" id="page1">
 			<!-- Cabecera -->
-			<div data-role="header">                    
-				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
-				<a data-rel="back" data-icon="back">Volver</a>
-				<a data-icon="check" onclick="javascript:evaluacion_muscular_manual.server()" >Guardar</a>
-				
-				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+			<div data-role="header">
+		        <div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>
+		        <h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
+		        <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+		            <a href="#" data-icon="delete" data-role="button" onclick="javascript:evaluacion_muscular_manual.server()" >Cancelar</a>
+		            <a href="#" data-icon="check" data-role="button" onclick="javascript:exploracionFisica.insertar()" >Guardar</a>
+		        </div>
+		        
+		        <div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
 					<h2 class="subtitle">Exploraci&oacute;n F&iacute;sica</h2>
 					<div id="username" class="username"></div>
 				</div>
-			</div>
+     		</div>
+			
 			
 			<!-- contenido -->
 			<div data-role="content">
@@ -37,7 +44,7 @@
 						<label id="lblFechaActualizacion"></label>    
 						
 						<label><b>por:</b></label>
-						<label id="lblNombreUsuario">Jos&eacute; Miguel Gonzalez</label>							
+						<label id="lblNombreUsuario"></label>							
 					</div>
 					<div data-role="fieldcontain">
 						<label><b>Fecha de la exploraci&oacute;n:</b></label>
@@ -52,36 +59,36 @@
 				<h3>Antecedentes</h3>
 				<div class="content2">
 					<ul data-role="listview" data-inset="true" data-filter="false">
-						<li><a data-transition="slidedown" rel="external" href="antecedentes_personales.html">Personales</a></li>
-						<li><a data-transition="slidedown" rel="external" href="antecedentes_relacionados_PCI.html">Relacionados con PCI</a></li>						            
+						<li><a data-transition="slidedown" rel="external" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('antecedentes_personales.html');" href="#">Personales</a></li>
+						<li><a data-transition="slidedown" rel="external" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('antecedentes_relacionados_PCI.html');" href="#">Relacionados con PCI</a></li>						            
 					</ul>
 				</div>
 				
 				<div id="videos">
 					<h3>V&iacute;deos sobre la exploraci&oacute;n</h3>
 					<div class="content2">
+						<a href="#" onclick="exploracionFisica.irAPaginaAuxiliarDeExploracion('video_nuevo.html');" data-icon="plus" data-role="button" data-mini="true" data-inline="true">A&ntilde;adir V&iacute;deo</a></label>
 						
 						<!--Listado de videos -->						
-						<ul data-role="listview" data-inset="true" id="listaVideos">	            
-	     					     					
-	     				</ul>
+						<ul data-role="listview" data-inset="true" id="listaVideos"></ul>
 					</div>
 				</div>
 								
 				<h3>Valoraciones</h3>		
 				<div class="content2">
 					<div data-role="fieldcontain">  
-						<label for="cmbControlMotorSelectivo">Control motor selectivo:</label>  
-						<!-- <input type="range" name="valoracionCtrlMotor" id="valoracionCtrlMotor" value=""  min="0" max="3"/> -->				
-						<select id="cmbControlMotorSelectivo" name="cmbControlMotorSelectivo" data-native-menu="false">
+						<label for="controlMotorSelectivo">Control motor selectivo:</label>  			
+						<select id="controlMotorSelectivo" data-native-menu="false">
+							<option value=""></option>
 							<option value="0">1 Incapacidad de aislar el movimiento</option>
 							<option value="1">2 Logra aislar parcialmente el movimiento</option>
 							<option value="2">3 Logra aislar completamente el movimiento</option>		                    
 						</select>
 					</div>
 					<div data-role="fieldcontain">  
-						<label for="cmbevaluacionMuscularManual">Evaluaci&oacute;n Muscular Manual:</label>  
-						<select id="cmbevaluacionMuscularManual" name="cmbevaluacionMuscularManual" data-native-menu="false">
+						<label for="evaluacionMuscular">Evaluaci&oacute;n Muscular Manual:</label>  
+						<select id="evaluacionMuscular" data-native-menu="false">
+							<option value=""></option>
 							<option value="0">0 Par&aacute;lisis total</option>
 							<option value="1">1 Contracci&oacute;n visible o palpable</option>
 							<option value="2">2 Movimiento activo, rango de movimiento completo (RAM) con gravedad eliminada</option>
@@ -95,7 +102,7 @@
 						
 								
 					<div data-role="fieldcontain">
-						<ul data-role="listview" data-inset="true" data-filter="false" data-theme="b">						
+						<ul data-role="listview" data-inset="true" data-filter="false">						
 							<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('gross_motor_function.html');">Gross Motor Function Classification System</a></li>
 							<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('paciente_busqueda.html');">Articular / muscular</a></li>                       
 						</ul>						  									
@@ -152,6 +159,7 @@
 								<td>Flexi&oacute;n</td>
 								<td>
 									<select id="caderaFlexionIzquierda" name="caderaFlexionIzquierda" data-native-menu="false">
+										<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -162,6 +170,7 @@
 							  	</td>
 							  	<td>
 							  		<select id="caderaFlexionDerecha" name="caderaFlexionDerecha" data-native-menu="false">
+							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -176,6 +185,7 @@
 								<td>Inflexi&oacute;n</td>
 								<td>
 									<select id="caderaInflexionIzquierda" name="caderaInflexionIzquierda" data-native-menu="false">
+							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -186,6 +196,7 @@
 							  	</td>
 							  	<td>
 							  		<select id="caderaInflexionDerecha" name="caderaInflexionDerecha" data-native-menu="false">
+							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -201,6 +212,7 @@
 							  	<td>Flexi&oacute;n</td>
 							  	<td>
 									<select id="rodillaFlexionIzquierda" name="rodillaFlexionIzquierda" data-native-menu="false">
+							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -211,6 +223,7 @@
 							  	</td>
 							  	<td>
 							  		<select id="rodillaFlexionDerecha" name="rodillaFlexionDerecha" data-native-menu="false">
+							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -225,6 +238,7 @@
 								<td>Inflexi&oacute;n</td>
 								<td>
 									<select id="rodillaInflexionIzquierda" name="rodillaInflexionIzquierda" data-native-menu="false">
+							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -235,6 +249,7 @@
 							  	</td>
 							  	<td>
 							  		<select id="rodillaInflexionDerecha" name="rodillaInflexionDerecha" data-native-menu="false">
+							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -249,6 +264,7 @@
 								<td>Flexi&oacute;n</td>
 								<td>
 									<select id="tobilloFlexionIzquierda" name="tobilloFlexionIzquierda" data-native-menu="false">
+							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -259,6 +275,7 @@
 							  	</td>
 							  	<td>
 							  		<select id="tobilloFlexionDerecha" name="tobilloFlexionDerecha" data-native-menu="false">
+							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -273,6 +290,7 @@
 								<td>Inflexi&oacute;n</td>
 								<td>
 									<select id="tobilloInflexionIzquierda" name="tobilloInflexionIzquierda" data-native-menu="false">
+							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -283,6 +301,7 @@
 							  	</td>
 							  	<td>
 							  		<select id="tobilloInflexionDerecha" name="tobilloInflexionDerecha" data-native-menu="false">
+							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
 										<option value="1+">1+</option>
@@ -308,13 +327,16 @@
 				<div class="content2">										
 					<h4>Common gait patterns: Spastic Diplegia</h4>	
 					<div class="content2">					
-						<!-- <table data-role="table" id="tabla2" data-mode="reflow" class="ui-responsive table-stroke">
+						<table data-role="table" id="tabla2" data-mode="reflow" class="ui-responsive table-stroke">
+							<thead>
 							<tr>
-								<td><input type="radio" name="52" id="analisisObservacionalMarcha" value="0" /><b>True equinus</b></td>
-								<td><input type="radio" name="52" id="analisisObservacionalMarcha" value="1" /><b>Jump knee</b></td>
-								<td><input type="radio" name="52" id="analisisObservacionalMarcha" value="2" /><b>Apparent equinus</b></td>
-								<td><input type="radio" name="52" id="analisisObservacionalMarcha" value="3" /><b>Crouch gait</b></td>
+								<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha1" value="0" /><b>True equinus</b></td>
+								<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha2" value="1" /><b>Jump knee</b></td>
+								<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha3" value="2" /><b>Apparent equinus</b></td>
+								<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha4" value="3" /><b>Crouch gait</b></td>
 							</tr>
+							</thead>
+							<tbody>
 							<tr>
 								<td><img src="../img/analisisMarcha1.png"/></td>
 								<td><img src="../img/analisisMarcha2.png"/></td>
@@ -322,13 +344,14 @@
 								<td><img src="../img/analisisMarcha4.png"/></td>
 							</tr>
 							<tr>
-								<td>&>90º<br>Gastroc<br>-<br>-<br>Hinged AFO</td>
-								<td>&>90º<br>Gastroc<br>Hamstrings/RF<br>(Psoas)<br>Hinged AFO</td>
-								<td>&=90º<br>(Gastroc)<br>Hamstrings/RF<br>Psoas<br>Solid AFO</td>
-								<td>&<90º<br>-<br>Hamstrings/RF<br>Psoas<br>Grafo</td>
+								<td>&gt;&nbsp;90º<br/>Gastroc<br/>-<br/>-<br/>Hinged AFO</td>
+								<td>&gt;&nbsp;90º<br/>Gastroc<br/>Hamstrings/RF<br/>(Psoas)<br/>Hinged AFO</td>
+								<td>=&nbsp;90º<br/>(Gastroc)<br/>Hamstrings/RF<br/>Psoas<br/>Solid AFO</td>
+								<td>&lt;&nbsp;90º<br/>-<br/>Hamstrings/RF<br/>Psoas<br/>Grafo</td>
 							</tr>
+							</tbody>
 						</table>
-					</div> -->
+					</div>
 				</div>	
 			</div>
 			
@@ -338,4 +361,8 @@
 			</div>							
 		</div>
 	</body>
+	<style>
+		table#tabla2 {display: table;}
+		table#tabla2 div.ui-radio {width: 29px;height: 22px;float: left;margin: 0em 0.5em 0em 0em;}
+	</style>
 </html>

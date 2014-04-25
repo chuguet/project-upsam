@@ -73,6 +73,9 @@ var paciente = {
 			$("#listaExploraciones").listview('refresh');
 			$("#listaExploraciones").show();
 		}
+		else{
+			$("#listaExploraciones").hide();
+		}
 	},
 
 	'insertar' : function() {

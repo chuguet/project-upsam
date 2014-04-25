@@ -10,11 +10,12 @@ public class ExploracionDTO extends AbstractDTO {
 	private String nombreUsuario;
 	private Integer idUsuario;
 	private String fecha;
-	private Double longitudMiembroDerecho;
-	private Double longitudMiembroIzquierdo;
-	private Double puntuacion5Metros;
-	private Double puntuacion50Metros;
-	private Double puntuacion500Metros;
+	private String fechaActualizacion;
+	private Integer longitudMiembroDerecho;
+	private Integer longitudMiembroIzquierdo;
+	private Integer puntuacion5Metros;
+	private Integer puntuacion50Metros;
+	private Integer puntuacion500Metros;
 	private Integer analisisObservacionalMarcha;
 	private String caderaFlexionIzquierda;
 	private String caderaFlexionDerecha;
@@ -71,43 +72,43 @@ public class ExploracionDTO extends AbstractDTO {
 		this.fecha = fecha;
 	}
 
-	public Double getLongitudMiembroDerecho() {
+	public Integer getLongitudMiembroDerecho() {
 		return longitudMiembroDerecho;
 	}
 
-	public void setLongitudMiembroDerecho(Double longitudMiembroDerecho) {
+	public void setLongitudMiembroDerecho(Integer longitudMiembroDerecho) {
 		this.longitudMiembroDerecho = longitudMiembroDerecho;
 	}
 
-	public Double getLongitudMiembroIzquierdo() {
+	public Integer getLongitudMiembroIzquierdo() {
 		return longitudMiembroIzquierdo;
 	}
 
-	public void setLongitudMiembroIzquierdo(Double longitudMiembroIzquierdo) {
+	public void setLongitudMiembroIzquierdo(Integer longitudMiembroIzquierdo) {
 		this.longitudMiembroIzquierdo = longitudMiembroIzquierdo;
 	}
 
-	public Double getPuntuacion5Metros() {
+	public Integer getPuntuacion5Metros() {
 		return puntuacion5Metros;
 	}
 
-	public void setPuntuacion5Metros(Double puntuacion5Metros) {
+	public void setPuntuacion5Metros(Integer puntuacion5Metros) {
 		this.puntuacion5Metros = puntuacion5Metros;
 	}
 
-	public Double getPuntuacion50Metros() {
+	public Integer getPuntuacion50Metros() {
 		return puntuacion50Metros;
 	}
 
-	public void setPuntuacion50Metros(Double puntuacion50Metros) {
+	public void setPuntuacion50Metros(Integer puntuacion50Metros) {
 		this.puntuacion50Metros = puntuacion50Metros;
 	}
 
-	public Double getPuntuacion500Metros() {
+	public Integer getPuntuacion500Metros() {
 		return puntuacion500Metros;
 	}
 
-	public void setPuntuacion500Metros(Double puntuacion500Metros) {
+	public void setPuntuacion500Metros(Integer puntuacion500Metros) {
 		this.puntuacion500Metros = puntuacion500Metros;
 	}
 
@@ -221,5 +222,13 @@ public class ExploracionDTO extends AbstractDTO {
 
 	public void setTobilloInflexionDerecha(String tobilloInflexionDerecha) {
 		this.tobilloInflexionDerecha = tobilloInflexionDerecha;
+	}
+
+	public String getFechaActualizacion() {
+		return fechaActualizacion;
+	}
+
+	public void setFechaActualizacion(String fechaActualizacion) {
+		this.fechaActualizacion = fechaActualizacion;
 	}
 }

@@ -1,5 +1,6 @@
 var server = {
-	"URI" : "http://192.168.2.179:8080/hospitalServer/",
+	//"URI" : "http://192.168.2.179:8080/hospitalServer/",
+	"URI" : "http://192.168.0.154:8080/hospitalServer/",
 	"post" : function(action, params, callbackSuccess, callbackError) {
 		this.executeJSon('POST', action, params, callbackSuccess, callbackError);
 	},
@@ -43,9 +44,8 @@ var server = {
 			data : data,
 			dataType : 'json',
 			success : function(response, textStatus, x, y) {
-				if (typeof response.length + "" == "undefined"){
-					server.verifyActiveSession(this.url);
-				}
+				server.verifyActiveSession(response, this.url);
+				
 				if ($method == 'GET') {
 					if (callbackSuccess) {
 						var param = new Array();
@@ -94,24 +94,35 @@ var server = {
 			}
 		});
 	},
-	'verifyActiveSession' : function(url){
-		var iframe = $('<iframe />', {
-		    name: 'myFrame',
-		    id:   'myFrame',
-		    src: url,
-		    style: 'display:none;'
-		});
-		iframe.appendTo('body');
-
-	    
-	    iframe.load(function(){
-	    	var sessionLose = ($("#myFrame").contents().find("form#f").length == 1);
-	    	iframe.remove();
-	    	if (sessionLose){
-	    		generic.alert("Sesion Finalizada", "Su sesion ha finalizado. Vuelva a logarse", function(){generic.changePage("login.html");})
-	    		
-	    	}
-	    });
-		
-	}
+	
+	'verifyActiveSession' : function(response, url){
+		if (server.isEmptyObject(response)){
+			var iframe = $('<iframe />', {
+			    name: 'myFrame',
+			    id:   'myFrame',
+			    src: url,
+			    style: 'display:none;'
+			});
+			iframe.appendTo('body');
+	
+		    
+		    iframe.load(function(){
+		    	var sessionLose = ($("#myFrame").contents().find("form#f").length == 1);
+		    	iframe.remove();
+		    	if (sessionLose){
+		    		generic.alert("Sesion Finalizada", "Su sesion ha finalizado. Vuelva a logarse", function(){generic.changePage("login.html");})
+		    		
+		    	}
+		    });
+		}
+	},
+	
+	'isEmptyObject' : function (obj) {
+		  for(var prop in obj) {
+		    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+		      return false;
+		    }
+		  }
+		  return true;
+		}
 };

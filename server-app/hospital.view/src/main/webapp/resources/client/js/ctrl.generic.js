@@ -151,5 +151,18 @@ var generic = {
 	'unlogin' : function(){
 		generic.deleteValue("usuario");
 		generic.changePage("login.html");
+	},
+	'getActualDate' : function(){
+		var today = new Date();
+		var dd = today.getDate() <10 ? '0' + today.getDate() : today.getDate();
+		var mm = today.getMonth() + 1 < 10 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1;
+		var yyyy = today.getFullYear();
+		var curHour = today.getHours();
+        var curMinute = today.getMinutes() < 10 ? "0" + today.getMinutes() : today.getMinutes();
+        var curSeconds = today.getSeconds() < 10 ? "0" + today.getSeconds() : today.getSeconds();
+	
+		today = dd + '/' + mm + '/' + yyyy + " " + curHour + ":" + curMinute + ":" + curSeconds;
+		return today;
 	}
+	
 };
