@@ -37,6 +37,7 @@ public class VideoServiceTest extends UnitTest {
 	private String videosLocation;
 	private static final int PACIENTE_ID = 112;
 	private static final int VIDEO_ID = 178;
+	private static final int ID_EXPLORACION = 130;
 
 	@Mock
 	private IVideoRepository videoRepository;
@@ -55,7 +56,7 @@ public class VideoServiceTest extends UnitTest {
 		doReturn("any").when(videoService).getFolderPath(anyInt());
 		stub(pacienteService.findOne(PACIENTE_ID)).toReturn(paciente);
 
-		videoService.save(byteArray, PACIENTE_ID);
+		videoService.save(byteArray, PACIENTE_ID,ID_EXPLORACION);
 
 		verify(pacienteService, times(1)).update(paciente);
 	}
@@ -64,7 +65,7 @@ public class VideoServiceTest extends UnitTest {
 	public void canFindAVideo() throws SQLException, DataBaseException, NotFoundException {
 		when(pacienteService.findOne(PACIENTE_ID)).thenReturn(aPatient());
 
-		Video video = videoService.findOne(PACIENTE_ID, VIDEO_ID);
+		Video video = videoService.findOne(PACIENTE_ID, ID_EXPLORACION,VIDEO_ID);
 
 		assertThat("any", is(equalTo(video.getDescripcion())));
 	}
@@ -73,7 +74,7 @@ public class VideoServiceTest extends UnitTest {
 	public void whenNoVideoThrowsNotFoundException_findOne() throws SQLException, DataBaseException, NotFoundException {
 		stub(pacienteService.findOne(PACIENTE_ID)).toReturn(aPatient());
 
-		videoService.findOne(PACIENTE_ID, 1);
+		videoService.findOne(PACIENTE_ID, ID_EXPLORACION, 1);
 	}
 
 	@Test
@@ -94,11 +95,13 @@ public class VideoServiceTest extends UnitTest {
 
 	private Paciente aPatient() {
 		Paciente p = new Paciente();
+		Exploracion exploracion = new Exploracion();
 		List<Exploracion> exploraciones = new ArrayList<Exploracion>();
-		videos.add(aVideo());
+		exploraciones.add(exploracion);
+		exploraciones.get(1).addVideo(aVideo());
 		p.setId(PACIENTE_ID);
 		p.setApellidos("any");
-		p.setVideos(videos);
+		p.setExploraciones(exploraciones);
 		return p;
 	}
 }
