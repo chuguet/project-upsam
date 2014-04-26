@@ -1,0 +1,6 @@
+09/04/2014 - Gestión de exploraciones múltiples por paciente, no solo una exploración como se hacía hasta ahora
+09/04/2014 - La grabación de vídeos va asociada a exploraciones, no a paciente
+09/04/2014 - La subida de ficheros emt para las gráficas va asociada a exploraciones, no a paciente. Por lo tanto hay que cambiar la parte de gestión web para enlazar los ficheros subidos a una determinada exploración y cambiar la aplicación móvil para controlar las gráficas asociándolas a exploraciones, no solo a pacientes
+13/04/2014 - Cambiar la carga de librerías javascript utilizando requirejs para un mayor control de las librerías utilizadas en cada página.
+25/04/2014 - Introducir en el botón de unlogin de la aplicación móvil un popup de confirmación, para evitar que por error te saque de la aplicación.
+27/04/2014 - Refactorizar controlador movil de servidor para reestructurar por componentes y que el código quede más organizado por funcionalidad.
