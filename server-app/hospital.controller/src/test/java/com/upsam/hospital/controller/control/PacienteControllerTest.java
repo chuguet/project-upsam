@@ -20,7 +20,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.upsam.hospital.controller.dto.FicheroMDXInfoDTO;
 import com.upsam.hospital.controller.dto.PacienteDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteUtilDTO;
 import com.upsam.hospital.controller.util.TestUtils;

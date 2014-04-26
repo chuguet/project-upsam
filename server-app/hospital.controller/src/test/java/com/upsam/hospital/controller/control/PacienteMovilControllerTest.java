@@ -14,18 +14,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import com.upsam.hospital.controller.dto.ExploracionDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
-import com.upsam.hospital.controller.dto.PacienteMovilDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteMovilUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
-import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.service.IExploracionService;
 import com.upsam.hospital.model.service.IFicheroEMTService;
@@ -157,12 +153,6 @@ public class PacienteMovilControllerTest {
 		FicheroEMTInfoDTO ficheroEMTInfoDTO = new FicheroEMTInfoDTO();
     	ficheroEMTInfoDTO.setId(FICHERO_EMT_INFO_ID);
 		return ficheroEMTInfoDTO;
-	}
-    
-    private ExploracionDTO anExploracionDTO() {
-		ExploracionDTO exploracionDTO = new ExploracionDTO();
-    	exploracionDTO.setId(EXPLORACION_ID);
-		return exploracionDTO;
 	}
     
     private FicheroEMT aFicheroEMT() {
