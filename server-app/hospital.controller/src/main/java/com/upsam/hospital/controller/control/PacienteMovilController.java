@@ -26,6 +26,7 @@ import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
 import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.PacienteMovilDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
+import com.upsam.hospital.controller.dto.util.IAntecedentesPersonalesUtilDTO;
 import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteMovilUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
@@ -90,6 +91,9 @@ public class PacienteMovilController {
 	/** The video util dto. */
 	@Inject
 	private IVideoUtilDTO videoUtilDTO;
+
+	@Inject
+	private IAntecedentesPersonalesUtilDTO antecedentesPersonalesUtilDTO;
 
 	/**
 	 * Descargar video.
@@ -290,7 +294,7 @@ public class PacienteMovilController {
 	public @ResponseBody
 	MensajeDTO insertAntecedentesPersonales(@PathVariable("idExploracion") Integer idExploracion, @RequestBody AntecedentesPersonalesDTO antecedentesPersonalesDTO) {
 		try {
-			AntecedentesPersonales antecedentesPersonales = exploracionUtilDTO.toBusiness(antecedentesPersonalesDTO);
+			AntecedentesPersonales antecedentesPersonales = antecedentesPersonalesUtilDTO.toBusiness(antecedentesPersonalesDTO);
 			antecedentesPersonalesService.save(antecedentesPersonales);
 			return new MensajeDTO("Antecedentes personales insertados correctamente", true);
 		}
@@ -312,20 +316,20 @@ public class PacienteMovilController {
 	 *            the antecedentes personales pcidto
 	 * @return the mensaje dto
 	 */
-	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesPersonalesPCI", method = RequestMethod.POST)
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesRelacionadosPCI", method = RequestMethod.POST)
 	public @ResponseBody
 	MensajeDTO insertAntecedentesPersonalesPCI(@PathVariable("idExploracion") Integer idExploracion, @RequestBody AntecedentesPersonalesPCIDTO antecedentesPersonalesPCIDTO) {
 		try {
 			AntecedentesPersonalesPCI antecedentesPersonalesPCI = exploracionUtilDTO.toBusiness(antecedentesPersonalesPCIDTO);
 			antecedentesPersonalesPCIService.save(antecedentesPersonalesPCI);
-			return new MensajeDTO("Antecedentes personales PCI insertados correctamente", true);
+			return new MensajeDTO("Los antecedentes relacionados con PCI se han guardado correctamente", true);
 		}
 		catch (DataBaseException e) {
-			return new MensajeDTO("Error al insertar los antecedentes personales PCI en base de datos.", false);
+			return new MensajeDTO("Error al insertar los antecedentes relacionados con PCI en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
 			LOG.debug(e.getMessage());
-			return new MensajeDTO("Error de conversion de los antecedentes personales PCI", false);
+			return new MensajeDTO("Error de conversion de los antecedentes relacionados con PCI", false);
 		}
 	}
 
@@ -445,7 +449,12 @@ public class PacienteMovilController {
 		AntecedentesPersonalesDTO antecedentesPersonalesDTO = null;
 		try {
 			AntecedentesPersonales antecedentesPersonales = antecedentesPersonalesService.findByExploracion(idExploracion);
-			antecedentesPersonalesDTO = exploracionUtilDTO.toRest(antecedentesPersonales);
+			if (antecedentesPersonales != null) {
+				antecedentesPersonalesDTO = antecedentesPersonalesUtilDTO.toRest(antecedentesPersonales);
+			}
+			else {
+				antecedentesPersonalesDTO = new AntecedentesPersonalesDTO();
+			}
 		}
 		catch (DataBaseException e) {
 			LOG.debug(e.getMessage());
@@ -543,7 +552,7 @@ public class PacienteMovilController {
 	public @ResponseBody
 	MensajeDTO updateAntecedentesPersonales(@PathVariable("id") Integer id, @RequestBody AntecedentesPersonalesDTO antecedentesPersonalesDTO) {
 		try {
-			AntecedentesPersonales antecedentesPersonales = exploracionUtilDTO.toBusiness(antecedentesPersonalesDTO);
+			AntecedentesPersonales antecedentesPersonales = antecedentesPersonalesUtilDTO.toBusiness(antecedentesPersonalesDTO);
 			antecedentesPersonalesService.update(antecedentesPersonales);
 			return new MensajeDTO("Antecedentes personales actualizados correctamente", true);
 		}

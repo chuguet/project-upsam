@@ -10,17 +10,7 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>
-		<script type="text/javascript" src='../js/jquery/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery/jquery.mobile-1.4.1.js'></script>
-		<script type="text/javascript" src="../js/pages/antecedentes_relacionados_PCI.js"></script>
-		
-		<script type="text/javascript">
-			generic.initialize();		
-		</script>
+		<script data-main="../js/pages/antecedentes_relacionados_PCI" src="../js/require.min.js"></script>
 	</head>
 
 	<body>
@@ -29,7 +19,7 @@
 			<div data-role="header" >                    
 				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
 				<a data-rel="back" data-icon="back">Volver</a>
-				<a onclick="javascript:analisis_marcha.server()" data-icon="check">Guardar</a>
+				<a onclick="javascript:analisis_marcha.server()" data-icon="check" id="Guardar">Guardar</a>
 				
 				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
 					<h2 id="subtitle" class="subtitle">Antecedentes relacionados con PCI</h2>
@@ -52,7 +42,9 @@
 			
 			<!-- Contenido -->
 			<div data-role="content">
-				
+				<input type="hidden" id="idPaciente" />
+				<input type="hidden" id="idExploracion" />
+				<input type="hidden" id="idAntecedentes" />
 				<div class="content2">
 					<!--PCI tipo -->
 					<div data-role="fieldcontain">
@@ -74,17 +66,22 @@
 						   <label for="otra">Otra</label>				   
 						</fieldset>
 					</div>
-				
+					
+					<div data-role="fieldcontain" id="divEspecificar">  
+						<label for="especificar">Especificar:</label>
+						<textarea class="txt-speech" name="especificar" id="especificar"></textarea>
+					</div>
+					
 					<!-- Etiologia -->
 					<div data-role="fieldcontain">  
-						<label for="etiologia">Etiolog&iacute;a:</label>  
-						<input type="text" class="txt-speech" name="etiologia" id="etiologia" value=""  />				
+						<label for="etiologia">Etiolog&iacute;a:</label>
+						<textarea class="txt-speech" name="etiologia" id="etiologia"></textarea>
 					</div>
 	
 					<!-- Localizacion de lesion -->
 					<div data-role="fieldcontain">  
-						<label for="localizacion">Localizaci&oacute;n:</label>  
-						<input type="text" class="txt-speech" name="localizacion" id="localizacion" value=""  />				
+						<label for="localizacion">Localizaci&oacute;n:</label>
+						<textarea class="txt-speech" name="localizacion" id="localizacion"></textarea>
 					</div>							
 				
 					<!--GMFCS -->
@@ -92,38 +89,38 @@
 						<fieldset data-role="controlgroup">
 						   <legend>GMFCS</legend>
 						   <input type="checkbox" name="grado1" id="grado1" class="custom" />
-						   <label for="grado1">Grado I</label>
+						   <label for="grado1">Grado I<img src="../img/GMFCS_grado1.png" style="padding-left:20px"/></label>
 	
 						   <input type="checkbox" name="grado2" id="grado2" class="custom" />
-						   <label for="grado2">Grado II</label>
+						   <label for="grado2">Grado II<img src="../img/GMFCS_grado2.png" style="padding-left:20px"/></label>
 	
 						   <input type="checkbox" name="grado3" id="grado3" class="custom" />
-						   <label for="grado3">Grado III</label>
+						   <label for="grado3">Grado III<img src="../img/GMFCS_grado3.png" style="padding-left:20px"/></label>
 						   
 						   <input type="checkbox" name="grado4" id="grado4" class="custom" />
-						   <label for="grado4">Grado IV</label>				   				   
+						   <label for="grado4">Grado IV<img src="../img/GMFCS_grado4.png" style="padding-left:20px"/></label>				   				   
 						   
 						   <input type="checkbox" name="grado5" id="grado5" class="custom" />
-						   <label for="grado5">Grado V</label>				   				   
+						   <label for="grado5">Grado V<img src="../img/GMFCS_grado5.png" style="padding-left:20px"/></label>				   				   
 						</fieldset>
 					</div>
 				
 					<!--Pruebas complementarias -->
 					<div data-role="fieldcontain">  
-						<label for="pruebascompl">Pruebas complementarias (RMN, TAC, EEG, RX):</label>  
-						<input type="text" class="txt-speech" name="pruebascompl" id="pruebascompl" value=""  />				
+						<label for="pruebasComplementarias">Pruebas complementarias (RMN, TAC, EEG, RX):</label>
+						<textarea class="txt-speech" name="pruebasComplementarias" id="pruebasComplementarias"></textarea>
 					</div>
 					
 					<!--Equipamiento -->
 					<div data-role="fieldcontain">  
-						<label for="equip">Equipamiento:</label>  
-						<input type="text" class="txt-speech" name="equip" id="equip" value=""  />				
+						<label for="equipamiento">Equipamiento:</label>  
+						<textarea class="txt-speech" name="equipamiento" id="equipamiento"></textarea>
 					</div>			
 				
 					<!--Ayudas marcha -->
 					<div data-role="fieldcontain">  
 						<label for="ayudasMarcha">Ayudas para la marcha:</label>  
-						<select onchange="javascript:onchangeAyuda();" name="ayudasMarcha" id="ayudasMarcha" data-native-menu="false">    
+						<select onchange="javascript:antecedentesRelacionadosPCI.onChangeAyuda();" name="ayudasMarcha" id="ayudasMarcha" data-native-menu="false">    
 							<option value=""></option>    
 							<option value="0">Andador</option>    
 							<option value="1">Muleta</option>  
@@ -134,8 +131,8 @@
 					
 					<!--Otras ayudas -->			
 					<div data-role="fieldcontain" id="divOtraAyuda" style="display:none">  
-						<label for="otraAyuda">Otra ayuda:</label>  
-						<input type="text" class="txt-speech" name="otraAyuda" id="otraAyuda" value=""  />				
+						<label for="otras">Otras ayudas:</label>
+						<textarea class="txt-speech" name="otras" id="otras"></textarea>			
 					</div>
 					
 					<!--Interiores -->			
@@ -159,7 +156,7 @@
 					<!--Ortesis diurna -->
 					<div data-role="fieldcontain">  
 						<label for="ortesis">Ortesis diurna:</label>  
-						<select onchange="javascript:onchangeOrtesis();" name="ortesis" id="ortesis" data-native-menu="false">    
+						<select onchange="javascript:antecedentesRelacionadosPCI.onChangeOrtesis();" name="ortesis" id="ortesis" data-native-menu="false">    
 							<option value=""></option>    
 							<option value="0">AFO</option>    
 							<option value="1">GRAFO</option>  
@@ -177,7 +174,7 @@
 					<!--Ortesis  nocturna -->			
 					<div data-role="fieldcontain">  
 						<label for="ortesisNoc">Ortesis nocturna:</label>  
-						<input type="text" class="txt-speech" name="ortesisNoc" id="ortesisNoc" value=""  />				
+						<textarea class="txt-speech" name="ortesisNoc" id="ortesisNoc"></textarea>
 					</div>
 					
 					<!--Tratamiento actual -->			
@@ -198,7 +195,7 @@
 						<label for="terapiaHab">Fisioterapia:</label>  
 						<div  data-role="fieldcontain">  
 							<label for="numSesFisio">&nbsp;&nbsp;&nbsp;N&uacute;mero de sesiones/semana:</label>  
-							<input type="range" class="txt-speech" name="numSesFisio" id="numSesFisio" value="0" min="0" max="50" size="10" />	
+							<input type="range" name="numSesFisio" id="numSesFisio" value="0" min="0" max="50" size="10" />	
 						</div>
 						<div  data-role="fieldcontain">  
 							<label for="numSesFisioDur">&nbsp;&nbsp;&nbsp;Duraci&oacute;n:</label>  

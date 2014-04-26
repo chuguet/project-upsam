@@ -128,6 +128,9 @@ var paciente = {
 		if (pacienteMovilDTO.apellidos == "") {
 			errores += " - Debe introducir los apellidos<br/>";
 		}
+		if (pacienteMovilDTO.fechaNacimiento != null && !generic.validateDate(pacienteMovilDTO.fechaNacimiento)){
+			errores += " - La fecha de nacimiento no tiene un formato valido (dd/mm/aaaa)";
+		}
 		if (errores != "") {
 			errores = "Se han producido los siguientes errores:<br/>" + errores;
 			generic.alert("Error gestión de pacientes", errores, null);

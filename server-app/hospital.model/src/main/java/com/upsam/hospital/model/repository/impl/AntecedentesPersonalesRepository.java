@@ -16,7 +16,7 @@ import com.upsam.hospital.model.repository.IAntecedentesPersonalesRepository;
 class AntecedentesPersonalesRepository implements IAntecedentesPersonalesRepository {
 
 	/** The Constant QUERY_FIND_BY_EXPLORACION. */
-	private static final String QUERY_FIND_BY_EXPLORACION = "Select new AntecedentesPersonales(alergiasMedicamentosasConocidas,antecedentesMedicos,audicion,caidasUltimoAnno,epilepsia,fechaPenultimaSesion,fechaUltimaCaida,fechaUltimaSesion,id,lenguajeCognicion,localizacionTratamiento,numeroAproximado,tratamientoActual,vision) from AntecedentesPersonales where (ID_EXPLORACION = ?)";
+	private static final String QUERY_FIND_BY_EXPLORACION = "Select new AntecedentesPersonales(id, epilepsia, tipoEpilepsia, fechaUltimaCrisis, fechaUltimaConvulsion, numeroCrisis, caidas, numeroCaidas, fechaUltimaCaida, audicion, vision, lenguajeCognicion, comprension, entiendeOrdenesSimples, entiendeOrdenesComplejas, expresarNecesidadDolor, numeroInyecciones, fechaUltimaSesion, fechaPenultimaSesion, localizacionTratamiento, alergias, tratamiento) from AntecedentesPersonales where (ID_EXPLORACION = ?)";
 
 	/** The hibernate template. */
 	@Inject
@@ -50,7 +50,13 @@ class AntecedentesPersonalesRepository implements IAntecedentesPersonalesReposit
 	 */
 	@Override
 	public AntecedentesPersonales findByExploracion(Integer pId) throws SQLException {
-		return (AntecedentesPersonales) hibernateTemplate.find(QUERY_FIND_BY_EXPLORACION, pId).get(0);
+		List results = hibernateTemplate.find(QUERY_FIND_BY_EXPLORACION, pId);
+		if (results.size() > 0) {
+			return (AntecedentesPersonales) results.get(0);
+		}
+		else {
+			return null;
+		}
 	}
 
 	/*

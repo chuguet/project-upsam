@@ -29,6 +29,7 @@ public class ExploracionDTO extends AbstractDTO {
 	private String tobilloFlexionDerecha;
 	private String tobilloInflexionIzquierda;
 	private String tobilloInflexionDerecha;
+	private Integer idAntecedentesPersonales;
 
 	private List<VideoDTO> videos = new ArrayList<VideoDTO>();
 
@@ -230,5 +231,13 @@ public class ExploracionDTO extends AbstractDTO {
 
 	public void setFechaActualizacion(String fechaActualizacion) {
 		this.fechaActualizacion = fechaActualizacion;
+	}
+
+	public Integer getIdAntecedentesPersonales() {
+		return idAntecedentesPersonales;
+	}
+
+	public void setIdAntecedentesPersonales(Integer idAntecedentesPersonales) {
+		this.idAntecedentesPersonales = idAntecedentesPersonales;
 	}
 }

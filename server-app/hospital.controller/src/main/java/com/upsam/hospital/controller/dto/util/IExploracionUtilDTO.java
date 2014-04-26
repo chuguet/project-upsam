@@ -1,7 +1,6 @@
 package com.upsam.hospital.controller.dto.util;
 
 import java.util.List;
-import com.upsam.hospital.controller.dto.AntecedentesPersonalesDTO;
 import com.upsam.hospital.controller.dto.AntecedentesPersonalesPCIDTO;
 import com.upsam.hospital.controller.dto.ExploracionDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
@@ -9,7 +8,6 @@ import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXInfoDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
-import com.upsam.hospital.model.beans.AntecedentesPersonales;
 import com.upsam.hospital.model.beans.AntecedentesPersonalesPCI;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
@@ -61,17 +59,6 @@ public interface IExploracionUtilDTO {
 	/**
 	 * To business.
 	 * 
-	 * @param antecedentesPersonalesDTO
-	 *            the antecedentes personales dto
-	 * @return the antecedentes personales
-	 * @throws TransferObjectException
-	 *             the transfer object exception
-	 */
-	AntecedentesPersonales toBusiness(AntecedentesPersonalesDTO antecedentesPersonalesDTO) throws TransferObjectException;
-
-	/**
-	 * To business.
-	 * 
 	 * @param antecedentesPersonalesPCIDTO
 	 *            the antecedentes personales pcidto
 	 * @return the antecedentes personales pci
@@ -90,17 +77,6 @@ public interface IExploracionUtilDTO {
 	 *             the transfer object exception
 	 */
 	Exploracion toBusiness(ExploracionDTO exploracionDTO) throws TransferObjectException;
-
-	/**
-	 * To rest.
-	 * 
-	 * @param antecedentesPersonales
-	 *            the antecedentes personales
-	 * @return the antecedentes personales dto
-	 * @throws TransferObjectException
-	 *             the transfer object exception
-	 */
-	AntecedentesPersonalesDTO toRest(AntecedentesPersonales antecedentesPersonales) throws TransferObjectException;
 
 	/**
 	 * To rest.
