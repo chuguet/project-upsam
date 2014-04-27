@@ -160,7 +160,7 @@ public class AntecedentesPersonalesPCI implements IModelHospital {
 	/** The pruebas comlementarias. */
 	@Basic
 	@Column(name = "PRUEBAS_COMPLEMENTARIAS")
-	private String pruebasComlementarias;
+	private String pruebasComplementarias;
 
 	/** The terapica ocupaciones duracion. */
 	@Basic
@@ -262,7 +262,7 @@ public class AntecedentesPersonalesPCI implements IModelHospital {
 	 * @param triplejiaEspatica
 	 *            the triplejia espatica
 	 */
-	public AntecedentesPersonalesPCI(AyudasMarcha ayudasMarcha, Boolean cuadriplejiaEspatica, String deportes, Boolean diplejiaEspatica, String dispositivoMasUsado, String equipamiento, String etiologia, String exteriores, String fisioterapiaDuracion, Integer fisioterapiaSesiones, Boolean gradoI, Boolean gradoII, Boolean gradoIII, Boolean gradoIV, Boolean gradoV, String hidroterapia, Integer id, String interiores, String lgDuracion, Integer lgSesiones, String localizacion, OrtesisDiurna ortesisDiurna, String ortesisNocturna, Boolean otra, String otras, Boolean pciMixta, String pruebasComlementarias, String terapiaOcupacionalDuracion, Integer terapiaOcupacionalSesiones, String terapiasHabituales, String tratamientoActual, Boolean triplejiaEspatica) {
+	public AntecedentesPersonalesPCI(AyudasMarcha ayudasMarcha, Boolean cuadriplejiaEspatica, String deportes, Boolean diplejiaEspatica, String dispositivoMasUsado, String equipamiento, String etiologia, String exteriores, String fisioterapiaDuracion, Integer fisioterapiaSesiones, Boolean gradoI, Boolean gradoII, Boolean gradoIII, Boolean gradoIV, Boolean gradoV, String hidroterapia, Integer id, String interiores, String lgDuracion, Integer lgSesiones, String localizacion, OrtesisDiurna ortesisDiurna, String ortesisNocturna, Boolean otra, String otras, Boolean pciMixta, String pruebasComplementarias, String terapiaOcupacionalDuracion, Integer terapiaOcupacionalSesiones, String terapiasHabituales, String tratamientoActual, Boolean triplejiaEspatica) {
 		super();
 		this.ayudasMarcha = ayudasMarcha;
 		this.cuadriplejiaEspatica = cuadriplejiaEspatica;
@@ -290,7 +290,7 @@ public class AntecedentesPersonalesPCI implements IModelHospital {
 		this.otra = otra;
 		this.otras = otras;
 		this.pciMixta = pciMixta;
-		this.pruebasComlementarias = pruebasComlementarias;
+		this.pruebasComplementarias = pruebasComplementarias;
 		this.terapiaOcupacionalDuracion = terapiaOcupacionalDuracion;
 		this.terapiaOcupacionalSesiones = terapiaOcupacionalSesiones;
 		this.terapiasHabituales = terapiasHabituales;
@@ -546,8 +546,8 @@ public class AntecedentesPersonalesPCI implements IModelHospital {
 	 * 
 	 * @return the pruebas comlementarias
 	 */
-	public String getPruebasComlementarias() {
-		return pruebasComlementarias;
+	public String getPruebasComplementarias() {
+		return pruebasComplementarias;
 	}
 
 	/**
@@ -871,8 +871,8 @@ public class AntecedentesPersonalesPCI implements IModelHospital {
 	 * @param pruebasComlementarias
 	 *            the new pruebas comlementarias
 	 */
-	public void setPruebasComlementarias(String pruebasComlementarias) {
-		this.pruebasComlementarias = pruebasComlementarias;
+	public void setPruebasComplementarias(String pruebasComlementarias) {
+		this.pruebasComplementarias = pruebasComlementarias;
 	}
 
 	/**

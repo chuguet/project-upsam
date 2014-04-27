@@ -782,5 +782,4 @@ public class Exploracion implements IModelHospital {
 	public void setFechaActualizacion(Date fechaActualizacion) {
 		this.fechaActualizacion = fechaActualizacion;
 	}
-
 }

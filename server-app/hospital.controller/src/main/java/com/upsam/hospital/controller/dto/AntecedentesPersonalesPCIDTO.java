@@ -85,7 +85,7 @@ public class AntecedentesPersonalesPCIDTO extends AbstractDTO {
 	private Boolean pciMixta;
 
 	/** The pruebas comlementarias. */
-	private String pruebasComlementarias;
+	private String pruebasComplementarias;
 
 	/** The terapica ocupaciones duracion. */
 	private String terapiaOcupacionalDuracion;
@@ -341,8 +341,8 @@ public class AntecedentesPersonalesPCIDTO extends AbstractDTO {
 	 * 
 	 * @return the pruebas comlementarias
 	 */
-	public String getPruebasComlementarias() {
-		return pruebasComlementarias;
+	public String getPruebasComplementarias() {
+		return pruebasComplementarias;
 	}
 
 	/**
@@ -656,8 +656,8 @@ public class AntecedentesPersonalesPCIDTO extends AbstractDTO {
 	 * @param pruebasComlementarias
 	 *            the new pruebas comlementarias
 	 */
-	public void setPruebasComlementarias(String pruebasComlementarias) {
-		this.pruebasComlementarias = pruebasComlementarias;
+	public void setPruebasComlementarias(String pruebasComplementarias) {
+		this.pruebasComplementarias = pruebasComplementarias;
 	}
 
 	/**

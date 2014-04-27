@@ -8,7 +8,6 @@ import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 import com.upsam.hospital.controller.dto.AngleDTO;
-import com.upsam.hospital.controller.dto.AntecedentesPersonalesDTO;
 import com.upsam.hospital.controller.dto.AntecedentesPersonalesPCIDTO;
 import com.upsam.hospital.controller.dto.ExploracionDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
@@ -22,7 +21,6 @@ import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Angle;
-import com.upsam.hospital.model.beans.AntecedentesPersonales;
 import com.upsam.hospital.model.beans.AntecedentesPersonalesPCI;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
@@ -137,45 +135,6 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 	 * (non-Javadoc)
 	 * @see
 	 * com.upsam.hospital.controller.dto.util.IExploracionUtilDTO#toBusiness
-	 * (com.upsam.hospital.controller.dto.AntecedentesPersonalesDTO)
-	 */
-	@Override
-	public AntecedentesPersonales toBusiness(AntecedentesPersonalesDTO antecedentesPersonalesDTO) throws TransferObjectException {
-		AntecedentesPersonales antecedentesPersonales = null;
-		try {
-			antecedentesPersonales = new AntecedentesPersonales();
-			antecedentesPersonales.setAlergiasMedicamentosasConocidas(antecedentesPersonalesDTO.getAlergiasMedicamentosasConocidas());
-			antecedentesPersonales.setAntecedentesMedicos(antecedentesPersonalesDTO.getAntecedentesMedicos());
-			antecedentesPersonales.setAudicion(antecedentesPersonalesDTO.getAudicion());
-			antecedentesPersonales.setCaidasUltimoAnno(antecedentesPersonalesDTO.getCaidasUltimoAnno());
-			antecedentesPersonales.setEpilepsia(antecedentesPersonalesDTO.getEpilepsia());
-			antecedentesPersonales.setExploracion(new Exploracion(antecedentesPersonalesDTO.getIdExploracion()));
-			if (antecedentesPersonalesDTO.getFechaPenultimaSesion() != null && !antecedentesPersonalesDTO.getFechaPenultimaSesion().isEmpty()) {
-				antecedentesPersonales.setFechaPenultimaSesion(DATE_FORMATTER.parse(antecedentesPersonalesDTO.getFechaPenultimaSesion()));
-			}
-			if (antecedentesPersonalesDTO.getFechaPenultimaSesion() != null && !antecedentesPersonalesDTO.getFechaUltimaCaida().isEmpty()) {
-				antecedentesPersonales.setFechaUltimaCaida(DATE_FORMATTER.parse(antecedentesPersonalesDTO.getFechaUltimaCaida()));
-			}
-			if (antecedentesPersonalesDTO.getFechaPenultimaSesion() != null && !antecedentesPersonalesDTO.getFechaUltimaSesion().isEmpty()) {
-				antecedentesPersonales.setFechaUltimaSesion(DATE_FORMATTER.parse(antecedentesPersonalesDTO.getFechaUltimaSesion()));
-			}
-			antecedentesPersonales.setId(antecedentesPersonalesDTO.getId());
-			antecedentesPersonales.setLenguajeCognicion(antecedentesPersonalesDTO.getLenguajeCognicion());
-			antecedentesPersonales.setLocalizacionTratamiento(antecedentesPersonalesDTO.getLocalizacionTratamiento());
-			antecedentesPersonales.setNumeroAproximado(antecedentesPersonalesDTO.getNumeroAproximado());
-			antecedentesPersonales.setTratamientoActual(antecedentesPersonalesDTO.getTratamientoActual());
-			antecedentesPersonales.setVision(antecedentesPersonalesDTO.getVision());
-		}
-		catch (ParseException e) {
-			throw new TransferObjectException(e.getMessage(), e);
-		}
-		return antecedentesPersonales;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.controller.dto.util.IExploracionUtilDTO#toBusiness
 	 * (com.upsam.hospital.controller.dto.AntecedentesPersonalesPCIDTO)
 	 */
 	@Override
@@ -212,7 +171,7 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 		antecedentesPersonalesPCI.setOtra(antecedentesPersonalesPCIDTO.getOtra());
 		antecedentesPersonalesPCI.setOtras(antecedentesPersonalesPCIDTO.getOtras());
 		antecedentesPersonalesPCI.setPciMixta(antecedentesPersonalesPCIDTO.getPciMixta());
-		antecedentesPersonalesPCI.setPruebasComlementarias(antecedentesPersonalesPCIDTO.getPruebasComlementarias());
+		antecedentesPersonalesPCI.setPruebasComplementarias(antecedentesPersonalesPCIDTO.getPruebasComplementarias());
 		antecedentesPersonalesPCI.setTerapiaOcupacionalSesiones(antecedentesPersonalesPCIDTO.getTerapiaOcupacionalSesiones());
 		antecedentesPersonalesPCI.setTerapiasHabituales(antecedentesPersonalesPCIDTO.getTerapiasHabituales());
 		antecedentesPersonalesPCI.setTerapiaOcupacionalDuracion(antecedentesPersonalesPCIDTO.getTerapiaOcupacionalDuracion());
@@ -272,32 +231,6 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 			throw new TransferObjectException(e.getMessage(), e);
 		}
 		return exploracion;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.controller.dto.util.IExploracionUtilDTO#toRest(com
-	 * .upsam.hospital.model.beans.AntecedentesPersonales)
-	 */
-	@Override
-	public AntecedentesPersonalesDTO toRest(AntecedentesPersonales antecedentesPersonales) throws TransferObjectException {
-		AntecedentesPersonalesDTO antecedentesPersonalesDTO = new AntecedentesPersonalesDTO();
-		antecedentesPersonalesDTO.setAlergiasMedicamentosasConocidas(antecedentesPersonales.getAlergiasMedicamentosasConocidas());
-		antecedentesPersonalesDTO.setAntecedentesMedicos(antecedentesPersonales.getAntecedentesMedicos());
-		antecedentesPersonalesDTO.setAudicion(antecedentesPersonales.getAudicion());
-		antecedentesPersonalesDTO.setCaidasUltimoAnno(antecedentesPersonales.getCaidasUltimoAnno());
-		antecedentesPersonalesDTO.setEpilepsia(antecedentesPersonales.getEpilepsia());
-		antecedentesPersonalesDTO.setFechaPenultimaSesion(DATE_FORMATTER.format(antecedentesPersonales.getFechaPenultimaSesion()));
-		antecedentesPersonalesDTO.setFechaUltimaCaida(DATE_FORMATTER.format(antecedentesPersonales.getFechaUltimaCaida()));
-		antecedentesPersonalesDTO.setFechaUltimaSesion(DATE_FORMATTER.format(antecedentesPersonales.getFechaUltimaSesion()));
-		antecedentesPersonalesDTO.setId(antecedentesPersonales.getId());
-		antecedentesPersonalesDTO.setLenguajeCognicion(antecedentesPersonales.getLenguajeCognicion());
-		antecedentesPersonalesDTO.setLocalizacionTratamiento(antecedentesPersonales.getLocalizacionTratamiento());
-		antecedentesPersonalesDTO.setNumeroAproximado(antecedentesPersonales.getNumeroAproximado());
-		antecedentesPersonalesDTO.setTratamientoActual(antecedentesPersonales.getTratamientoActual());
-		antecedentesPersonalesDTO.setVision(antecedentesPersonales.getVision());
-		return antecedentesPersonalesDTO;
 	}
 
 	/*

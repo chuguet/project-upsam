@@ -163,6 +163,20 @@ var generic = {
 	
 		today = dd + '/' + mm + '/' + yyyy + " " + curHour + ":" + curMinute + ":" + curSeconds;
 		return today;
+	},
+	'validateDate' : function(date){
+	    var data = date.split("/");
+	    // using ISO 8601 Date String
+	    if (data.length == 3) {
+		    if (Date.parse(data[2] + "-" + data[1] + "-" + data[0]) === NaN) {
+		        return false;
+		    }
+	    }
+	    else{
+	    	return false;
+	    }
+
+	    return true;
 	}
 	
 };

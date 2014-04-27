@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
-		<script data-main="../js/pages/antecedentes_personales" src="../js/require.min.js"></script>		
+		<script data-main="../js/pages/antecedentes_personales" src="../js/require.min.js"></script>
 	</head>
 
 	<body>
@@ -23,7 +23,7 @@
 		        <h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
 		        <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
 		            <a href="#" data-icon="delete" data-role="button" onclick="javascript:evaluacion_muscular_manual.server()" >Cancelar</a>
-		            <a href="#" data-icon="check" data-role="button" onclick="javascript:antecedentesPersonales.insertar()" >Guardar</a>
+		            <a href="#" data-icon="check" data-role="button" onclick="javascript:antecedentesPersonales.insertar()" id="btnGuardar">Guardar</a>
 		        </div>
 		        
 		        <div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
@@ -47,7 +47,9 @@
 			
 			<!-- Contenido -->
 			<div data-role="content">			
-				
+				<input type="hidden" id="idPaciente" />
+				<input type="hidden" id="idExploracion" />
+				<input type="hidden" id="idAntecedentes" />
 				<h3>Antecedentes m&eacute;dicos</h3>  
 				<div class="content2">
 					<div data-role="fieldcontain">  
@@ -67,20 +69,20 @@
 					
 						<!-- Fecha ultima crisis: si epilepsia = SI -->			
 						<div data-role="fieldcontain">  				
-							<label for="fecCrisis">Fecha &uacute;ltima crisis</label>
-							<input id="fecCrisis" name="fecCrisis" class="txt-date" placeholder="dd/mm/yyyy" />
+							<label for="fechaUltimaCrisis">Fecha &uacute;ltima crisis</label>
+							<input id="fechaUltimaCrisis" name="fechaUltimaCrisis" class="txt-date" placeholder="dd/mm/yyyy" />
 						</div>
 					
 						<!-- Fecha convulsi&oacute;n: si epilepsia = SI -->			
 						<div data-role="fieldcontain">  				
-							<label for="fecConvulsion">Fecha &uacute;ltima convulsi&oacute;n</label>
-							<input id="fecConvulsion" name="fecConvulsion" class="txt-date" placeholder="dd/mm/yyyy" />				
+							<label for="fechaUltimaConvulsion">Fecha &uacute;ltima convulsi&oacute;n</label>
+							<input id="fechaUltimaConvulsion" name="fechaUltimaConvulsion" class="txt-date" placeholder="dd/mm/yyyy" />				
 						</div>
 					
 						<!-- Numero de crisis -->			
 						<div data-role="fieldcontain">  				
-							<label for="numCrisis">N&uacute;mero de crisis</label>				
-							<input type="range" name="numCrisis" id="numCrisis" value="0" min="0" max="100" />
+							<label for="numeroCrisis">N&uacute;mero de crisis</label>				
+							<input type="range" name="numeroCrisis" id="numeroCrisis" value="0" min="0" max="100" />
 						</div>
 					</div>	
 					
@@ -95,14 +97,14 @@
 					<div id="divCaidas" style="display:none">
 						<!-- Historial de caidas ultimo anno -->			
 						<div data-role="fieldcontain">  				
-							<label for="numCaidas">Número de ca&iacute;das en el &uacute;ltimo a&ntilde;o</label>				
-							<input type="range" name="numCaidas" id="numCaidas" value="0" min="0" max="100" />
+							<label for="numeroCaidas">Número de ca&iacute;das en el &uacute;ltimo a&ntilde;o</label>				
+							<input type="range" name="numeroCaidas" id="numeroCaidas" value="0" min="0" max="100" />
 						</div>
 						
 						<!-- Fecha de &uacute;ltima caida -->			
 						<div data-role="fieldcontain">  				
-							<label for="fecCaida">Fecha de la &uacute;ltima ca&iacute;da</label>
-							<input name="fecCaida" id="fecCaida" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />				
+							<label for="fechaUltimaCaida">Fecha de la &uacute;ltima ca&iacute;da</label>
+							<input id="fechaUltimaCaida" name="fechaUltimaCaida" class="txt-date" placeholder="dd/mm/yyyy" />	
 						</div>
 					</div>
 	
@@ -120,14 +122,14 @@
 					
 					<!-- Lenguaje y cognici&oacute;n alteraciones -->			
 					<div data-role="fieldcontain">  				
-						<label for="lenguaje">Lenguaje y cognici&oacute;n - alteraciones</label>
-						<select onchange="javascript:onchangeLenguaje();" name="lenguaje" id="lenguaje" data-role="slider">    
+						<label for="lenguajeCognicion">Lenguaje y cognici&oacute;n - alteraciones</label>
+						<select onchange="javascript:antecedentesPersonales.onChangeLenguaje();" name="lenguajeCognicion" id="lenguajeCognicion" data-role="slider">    
 							<option value="0">No</option>    
 							<option value="1">Si</option>  
 						</select>
 					</div>
 					
-					<div id="divLenguaje" style="display:none">
+					<div id="divLenguajeCognicion" style="display:none">
 						<!-- Compresion -->			
 						<div data-role="fieldcontain">
 							<fieldset data-role="controlgroup" data-type="horizontal">
@@ -142,15 +144,15 @@
 	
 						<!--Entiende y sigue ordenes -->
 						<div data-role="fieldcontain">  
-							<label for="entiendeOrdSimple">Entiende y sigue ordenes simples</label>  
-							<select name="entiendeOrdSimple" id="entiendeOrdSimple" data-role="slider">    
+							<label for="entiendeOrdenesSimples">Entiende y sigue ordenes simples</label>  
+							<select name="entiendeOrdenesSimples" id="entiendeOrdenesSimples" data-role="slider">    
 								<option value="0">No</option>    
 								<option value="1">Si</option>  
 							</select>
 						</div>
 						<div data-role="fieldcontain">  
-							<label for="entiendeOrdComplejas">Entiende y sigue ordenes complejas</label>  
-							<select id="entiendeOrdComplejas" name="entiendeOrdComplejas" data-role="slider">    
+							<label for="entiendeOrdenesComplejas">Entiende y sigue ordenes complejas</label>  
+							<select id="entiendeOrdenesComplejas" name="entiendeOrdenesComplejas" data-role="slider">    
 								<option value="0">No</option>    
 								<option value="1">Si</option>  
 							</select>
@@ -158,8 +160,8 @@
 					
 						<!-- Necesidades y dolor -->			
 						<div data-role="fieldcontain">  				
-							<label for="neceDolor">Capaz de expresar necesidades y dolor</label>
-							<select name="neceDolor" id="neceDolor" data-role="slider">    
+							<label for="expresarNecesidadDolor">Capaz de expresar necesidades y dolor</label>
+							<select name="expresarNecesidadDolor" id="expresarNecesidadDolor" data-role="slider">    
 								<option value="0">No</option>    
 								<option value="1">Si</option>  
 							</select>
@@ -177,24 +179,32 @@
 					<h3>ANTECEDENTES INYECCIONES CON TOXINA BOTUL&Iacute;NICA/FENOL</h3>
 					<!-- Número aproximado -->			
 					<div data-role="fieldcontain">  				
-						<label for="numCaidas">Número aproximado</label>				
-						<input type="range" name="numCaidas" id="numCaidas" value="0" min="0" max="4" />
+						<label for="numeroInyecciones">Número aproximado</label>				
+						<input type="range" name="numeroInyecciones" id="numeroInyecciones" value="0" min="0" max="4" />
 					</div>
 	
 					<!-- Fecha de dos ultimas sesiones -->			
 					<div data-role="fieldcontain">  				
-						<label for="fecUltSes">Fecha &uacute;ltima sesi&oacute;n</label>				
-						<input name="fecUltSes" id="fecUltSes" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />					
+						<label for="fechaUltimaSesion">Fecha &uacute;ltima sesi&oacute;n</label>			
+						<input id="fechaUltimaSesion" name="fechaUltimaSesion" class="txt-date" placeholder="dd/mm/yyyy" />
 					</div>
 					<div data-role="fieldcontain">  				
-						<label for="fecPenSes">Fecha penultima sesi&oacute;n</label>				
-						<input name="fecPenSes" id="fecPenSes" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />					
+						<label for="fechaPenultimaSesion">Fecha pen&uacute;ltima sesi&oacute;n</label>
+						<input id="fechaPenultimaSesion" name="fechaPenultimaSesion" class="txt-date" placeholder="dd/mm/yyyy" />					
 					</div>
 					
 					<!-- Localizaci&oacute;n del tratamiento -->			
 					<div data-role="fieldcontain">  				
-						<label for="localTratamiento">Localizaci&oacute;n del tratamiento</label>				
-						<textarea name="localTratamiento" class="txt-speech" id="localTratamiento"></textarea>
+						<label for="localizacionTratamiento">Localizaci&oacute;n del tratamiento</label>				
+						<select name="localizacionTratamiento" id="localizacionTratamiento" data-native-menu="false">    
+							<option value="1">Músculo 1</option>
+							<option value="2">Músculo 2</option>
+							<option value="3">Músculo 3</option>
+							<option value="4">Músculo 4</option>
+							<option value="5">Músculo 5</option>
+							<option value="6">Músculo 6</option>
+							<option value="7">Músculo 7</option>
+						</select>
 					</div>
 					
 					<h3>OTROS</h3>			
