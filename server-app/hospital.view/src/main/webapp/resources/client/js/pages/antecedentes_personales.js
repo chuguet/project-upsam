@@ -147,9 +147,9 @@ var antecedentesPersonales = {
 		},
 
 		'insertarCallback' : function(params) {
-			$("#subtitle").html("Consulta de Exploraci&oacute;n");
-			$("#idExploracion").val(params.parameter.id);
-			$("#lblFechaActualizacion").html(params.parameter.fechaActualizacion);
+			$("#subtitle").html("Consulta de antecedentes personales");
+			$("#btnGuardar").text("Modificar");
+			$("#idAntecedentes").val(params.parameter.id);
 			generic.noLoading();
 		},
 		
@@ -203,5 +203,5 @@ var antecedentesPersonales = {
 				return null;
 			}
 			return antecedentesPersonalesDTO;
-		},
+		}
 };

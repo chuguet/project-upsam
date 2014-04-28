@@ -8,7 +8,6 @@ import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 import com.upsam.hospital.controller.dto.AngleDTO;
-import com.upsam.hospital.controller.dto.AntecedentesPersonalesPCIDTO;
 import com.upsam.hospital.controller.dto.ExploracionDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
@@ -21,7 +20,6 @@ import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Angle;
-import com.upsam.hospital.model.beans.AntecedentesPersonalesPCI;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
@@ -29,8 +27,6 @@ import com.upsam.hospital.model.beans.Point;
 import com.upsam.hospital.model.beans.Usuario;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.enums.AnalisisObservacionalMarcha;
-import com.upsam.hospital.model.enums.AyudasMarcha;
-import com.upsam.hospital.model.enums.OrtesisDiurna;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
 
 // TODO: Auto-generated Javadoc
@@ -134,55 +130,6 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.upsam.hospital.controller.dto.util.IExploracionUtilDTO#toBusiness
-	 * (com.upsam.hospital.controller.dto.AntecedentesPersonalesPCIDTO)
-	 */
-	@Override
-	public AntecedentesPersonalesPCI toBusiness(AntecedentesPersonalesPCIDTO antecedentesPersonalesPCIDTO) throws TransferObjectException {
-		AntecedentesPersonalesPCI antecedentesPersonalesPCI = new AntecedentesPersonalesPCI();
-		if (antecedentesPersonalesPCIDTO.getAyudasMarcha() != null) {
-			antecedentesPersonalesPCI.setAyudasMarcha(AyudasMarcha.values()[antecedentesPersonalesPCIDTO.getAyudasMarcha()]);
-		}
-		antecedentesPersonalesPCI.setCuadriplejiaEspatica(antecedentesPersonalesPCIDTO.getCuadriplejiaEspatica());
-		antecedentesPersonalesPCI.setDeportes(antecedentesPersonalesPCIDTO.getDeportes());
-		antecedentesPersonalesPCI.setDiplejiaEspatica(antecedentesPersonalesPCIDTO.getDiplejiaEspatica());
-		antecedentesPersonalesPCI.setDispositivoMasUsado(antecedentesPersonalesPCIDTO.getDispositivoMasUsado());
-		antecedentesPersonalesPCI.setEquipamiento(antecedentesPersonalesPCIDTO.getEquipamiento());
-		antecedentesPersonalesPCI.setEtiologia(antecedentesPersonalesPCIDTO.getEtiologia());
-		antecedentesPersonalesPCI.setExploracion(new Exploracion(antecedentesPersonalesPCIDTO.getIdExploracion()));
-		antecedentesPersonalesPCI.setExteriores(antecedentesPersonalesPCIDTO.getExteriores());
-		antecedentesPersonalesPCI.setFisioterapiaDuracion(antecedentesPersonalesPCIDTO.getFisioterapiaDuracion());
-		antecedentesPersonalesPCI.setFisioterapiaSesiones(antecedentesPersonalesPCIDTO.getFisioterapiaSesiones());
-		antecedentesPersonalesPCI.setGradoI(antecedentesPersonalesPCIDTO.getGradoI());
-		antecedentesPersonalesPCI.setGradoII(antecedentesPersonalesPCIDTO.getGradoII());
-		antecedentesPersonalesPCI.setGradoIII(antecedentesPersonalesPCIDTO.getGradoIII());
-		antecedentesPersonalesPCI.setGradoIV(antecedentesPersonalesPCIDTO.getGradoIV());
-		antecedentesPersonalesPCI.setGradoV(antecedentesPersonalesPCIDTO.getGradoV());
-		antecedentesPersonalesPCI.setHidroterapia(antecedentesPersonalesPCIDTO.getHidroterapia());
-		antecedentesPersonalesPCI.setId(antecedentesPersonalesPCIDTO.getId());
-		antecedentesPersonalesPCI.setInteriores(antecedentesPersonalesPCIDTO.getInteriores());
-		antecedentesPersonalesPCI.setLgDuracion(antecedentesPersonalesPCIDTO.getLgDuracion());
-		antecedentesPersonalesPCI.setLgSesiones(antecedentesPersonalesPCIDTO.getLgSesiones());
-		antecedentesPersonalesPCI.setLocalizacion(antecedentesPersonalesPCIDTO.getLocalizacion());
-		if (antecedentesPersonalesPCIDTO.getOrtesisDiurna() != null) {
-			antecedentesPersonalesPCI.setOrtesisDiurna(OrtesisDiurna.values()[antecedentesPersonalesPCIDTO.getOrtesisDiurna()]);
-		}
-		antecedentesPersonalesPCI.setOrtesisNocturna(antecedentesPersonalesPCIDTO.getOrtesisNocturna());
-		antecedentesPersonalesPCI.setOtra(antecedentesPersonalesPCIDTO.getOtra());
-		antecedentesPersonalesPCI.setOtras(antecedentesPersonalesPCIDTO.getOtras());
-		antecedentesPersonalesPCI.setPciMixta(antecedentesPersonalesPCIDTO.getPciMixta());
-		antecedentesPersonalesPCI.setPruebasComplementarias(antecedentesPersonalesPCIDTO.getPruebasComplementarias());
-		antecedentesPersonalesPCI.setTerapiaOcupacionalSesiones(antecedentesPersonalesPCIDTO.getTerapiaOcupacionalSesiones());
-		antecedentesPersonalesPCI.setTerapiasHabituales(antecedentesPersonalesPCIDTO.getTerapiasHabituales());
-		antecedentesPersonalesPCI.setTerapiaOcupacionalDuracion(antecedentesPersonalesPCIDTO.getTerapiaOcupacionalDuracion());
-		antecedentesPersonalesPCI.setTratamientoActual(antecedentesPersonalesPCIDTO.getTratamientoActual());
-		antecedentesPersonalesPCI.setTriplejiaEspatica(antecedentesPersonalesPCIDTO.getTriplejiaEspatica());
-		return antecedentesPersonalesPCI;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
 	 * com.upsam.hospital.controller.dto.util.IPacienteUtilDTO#toBusiness(com
 	 * .upsam.hospital.controller.dto.PacienteDTO)
 	 */
@@ -231,54 +178,6 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 			throw new TransferObjectException(e.getMessage(), e);
 		}
 		return exploracion;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.controller.dto.util.IExploracionUtilDTO#toRest(com
-	 * .upsam.hospital.model.beans.AntecedentesPersonalesPCI)
-	 */
-	@Override
-	public AntecedentesPersonalesPCIDTO toRest(AntecedentesPersonalesPCI antecedentesPersonalesPCI) throws TransferObjectException {
-		AntecedentesPersonalesPCIDTO antecedentesPersonalesPCIDTO = new AntecedentesPersonalesPCIDTO();
-		if (antecedentesPersonalesPCI.getAyudasMarcha() != null) {
-			antecedentesPersonalesPCIDTO.setAyudasMarcha(antecedentesPersonalesPCI.getAyudasMarcha().ordinal());
-		}
-		antecedentesPersonalesPCIDTO.setCuadriplejiaEspatica(antecedentesPersonalesPCI.getCuadriplejiaEspatica());
-		antecedentesPersonalesPCIDTO.setDeportes(antecedentesPersonalesPCI.getDeportes());
-		antecedentesPersonalesPCIDTO.setDiplejiaEspatica(antecedentesPersonalesPCI.getDiplejiaEspatica());
-		antecedentesPersonalesPCIDTO.setDispositivoMasUsado(antecedentesPersonalesPCI.getDispositivoMasUsado());
-		antecedentesPersonalesPCIDTO.setEquipamiento(antecedentesPersonalesPCI.getEquipamiento());
-		antecedentesPersonalesPCIDTO.setEtiologia(antecedentesPersonalesPCI.getEtiologia());
-		antecedentesPersonalesPCIDTO.setExteriores(antecedentesPersonalesPCI.getExteriores());
-		antecedentesPersonalesPCIDTO.setFisioterapiaDuracion(antecedentesPersonalesPCI.getFisioterapiaDuracion());
-		antecedentesPersonalesPCIDTO.setFisioterapiaSesiones(antecedentesPersonalesPCI.getFisioterapiaSesiones());
-		antecedentesPersonalesPCIDTO.setGradoI(antecedentesPersonalesPCI.getGradoI());
-		antecedentesPersonalesPCIDTO.setGradoII(antecedentesPersonalesPCI.getGradoII());
-		antecedentesPersonalesPCIDTO.setGradoIII(antecedentesPersonalesPCI.getGradoIII());
-		antecedentesPersonalesPCIDTO.setGradoIV(antecedentesPersonalesPCI.getGradoIV());
-		antecedentesPersonalesPCIDTO.setGradoV(antecedentesPersonalesPCI.getGradoV());
-		antecedentesPersonalesPCIDTO.setHidroterapia(antecedentesPersonalesPCI.getHidroterapia());
-		antecedentesPersonalesPCIDTO.setId(antecedentesPersonalesPCI.getId());
-		antecedentesPersonalesPCIDTO.setInteriores(antecedentesPersonalesPCI.getInteriores());
-		antecedentesPersonalesPCIDTO.setLgDuracion(antecedentesPersonalesPCI.getLgDuracion());
-		antecedentesPersonalesPCIDTO.setLgSesiones(antecedentesPersonalesPCI.getLgSesiones());
-		antecedentesPersonalesPCIDTO.setLocalizacion(antecedentesPersonalesPCI.getLocalizacion());
-		if (antecedentesPersonalesPCI.getOrtesisDiurna() != null) {
-			antecedentesPersonalesPCIDTO.setOrtesisDiurna(antecedentesPersonalesPCI.getOrtesisDiurna().ordinal());
-		}
-		antecedentesPersonalesPCIDTO.setOrtesisNocturna(antecedentesPersonalesPCI.getOrtesisNocturna());
-		antecedentesPersonalesPCIDTO.setOtra(antecedentesPersonalesPCI.getOtra());
-		antecedentesPersonalesPCIDTO.setOtras(antecedentesPersonalesPCI.getOtras());
-		antecedentesPersonalesPCIDTO.setPciMixta(antecedentesPersonalesPCI.getPciMixta());
-		antecedentesPersonalesPCIDTO.setPruebasComlementarias(antecedentesPersonalesPCI.getPruebasComlementarias());
-		antecedentesPersonalesPCIDTO.setTerapiaOcupacionalSesiones(antecedentesPersonalesPCI.getTerapiaOcupacionalSesiones());
-		antecedentesPersonalesPCIDTO.setTerapiasHabituales(antecedentesPersonalesPCI.getTerapiasHabituales());
-		antecedentesPersonalesPCIDTO.setTerapiaOcupacionalDuracion(antecedentesPersonalesPCI.getTerapiaOcupacionalDuracion());
-		antecedentesPersonalesPCIDTO.setTratamientoActual(antecedentesPersonalesPCI.getTratamientoActual());
-		antecedentesPersonalesPCIDTO.setTriplejiaEspatica(antecedentesPersonalesPCI.getTriplejiaEspatica());
-		return antecedentesPersonalesPCIDTO;
 	}
 
 	/*

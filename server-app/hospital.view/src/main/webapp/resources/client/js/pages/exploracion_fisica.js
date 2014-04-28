@@ -167,6 +167,7 @@ var exploracionFisica = {
 
 	'insertarCallback' : function(params) {
 		$("#subtitle").html("Consulta de Exploraci&oacute;n");
+		$("#btnGuardar").text("Modificar");
 		$("#idExploracion").val(params.parameter.id);
 		$("#lblFechaActualizacion").html(params.parameter.fechaActualizacion);
 		generic.noLoading();

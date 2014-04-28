@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.upsam.hospital.controller.dto.AntecedentesPersonalesDTO;
-import com.upsam.hospital.controller.dto.AntecedentesPersonalesPCIDTO;
+import com.upsam.hospital.controller.dto.AntecedentesRelacionadosPCIDTO;
 import com.upsam.hospital.controller.dto.ExploracionDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
@@ -27,19 +27,20 @@ import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.PacienteMovilDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.dto.util.IAntecedentesPersonalesUtilDTO;
+import com.upsam.hospital.controller.dto.util.IAntecedentesRelacionadosPCIUtilDTO;
 import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteMovilUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.AntecedentesPersonales;
-import com.upsam.hospital.model.beans.AntecedentesPersonalesPCI;
+import com.upsam.hospital.model.beans.AntecedentesRelacionadosPCI;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.service.IAntecedentesPersonalesPCIService;
 import com.upsam.hospital.model.service.IAntecedentesPersonalesService;
+import com.upsam.hospital.model.service.IAntecedentesRelacionadosPCIService;
 import com.upsam.hospital.model.service.IExploracionService;
 import com.upsam.hospital.model.service.IFicheroEMTService;
 import com.upsam.hospital.model.service.IPacienteService;
@@ -58,7 +59,7 @@ public class PacienteMovilController {
 
 	/** The antecedentes personales pci service. */
 	@Inject
-	private IAntecedentesPersonalesPCIService antecedentesPersonalesPCIService;
+	private IAntecedentesRelacionadosPCIService antecedentesRelacionadosPCIService;
 
 	/** The antecedentes personales service. */
 	@Inject
@@ -94,6 +95,9 @@ public class PacienteMovilController {
 
 	@Inject
 	private IAntecedentesPersonalesUtilDTO antecedentesPersonalesUtilDTO;
+
+	@Inject
+	private IAntecedentesRelacionadosPCIUtilDTO antecedentesRelacionadosPCIUtilDTO;
 
 	/**
 	 * Descargar video.
@@ -292,11 +296,12 @@ public class PacienteMovilController {
 	 */
 	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesPersonales", method = RequestMethod.POST)
 	public @ResponseBody
-	MensajeDTO insertAntecedentesPersonales(@PathVariable("idExploracion") Integer idExploracion, @RequestBody AntecedentesPersonalesDTO antecedentesPersonalesDTO) {
+	MensajeDTO insertAntecedentesPersonales(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @RequestBody AntecedentesPersonalesDTO antecedentesPersonalesDTO) {
 		try {
 			AntecedentesPersonales antecedentesPersonales = antecedentesPersonalesUtilDTO.toBusiness(antecedentesPersonalesDTO);
 			antecedentesPersonalesService.save(antecedentesPersonales);
-			return new MensajeDTO("Antecedentes personales insertados correctamente", true);
+			AntecedentesPersonalesDTO nuevosAntecedentesDTO = antecedentesPersonalesUtilDTO.toRest(antecedentesPersonales);
+			return new MensajeDTO("Antecedentes personales insertados correctamente", true, nuevosAntecedentesDTO);
 		}
 		catch (DataBaseException e) {
 			return new MensajeDTO("Error al insertar los antecedentes personales en base de datos.", false);
@@ -307,22 +312,14 @@ public class PacienteMovilController {
 		}
 	}
 
-	/**
-	 * Insert antecedentes personales pci.
-	 * 
-	 * @param idExploracion
-	 *            the id exploracion
-	 * @param antecedentesPersonalesPCIDTO
-	 *            the antecedentes personales pcidto
-	 * @return the mensaje dto
-	 */
 	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesRelacionadosPCI", method = RequestMethod.POST)
 	public @ResponseBody
-	MensajeDTO insertAntecedentesPersonalesPCI(@PathVariable("idExploracion") Integer idExploracion, @RequestBody AntecedentesPersonalesPCIDTO antecedentesPersonalesPCIDTO) {
+	MensajeDTO insertAntecedentesRelacionadosPCI(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @RequestBody AntecedentesRelacionadosPCIDTO antecedentesRelacionadosPCIDTO) {
 		try {
-			AntecedentesPersonalesPCI antecedentesPersonalesPCI = exploracionUtilDTO.toBusiness(antecedentesPersonalesPCIDTO);
-			antecedentesPersonalesPCIService.save(antecedentesPersonalesPCI);
-			return new MensajeDTO("Los antecedentes relacionados con PCI se han guardado correctamente", true);
+			AntecedentesRelacionadosPCI antecedentesRelacionadosPCI = antecedentesRelacionadosPCIUtilDTO.toBusiness(antecedentesRelacionadosPCIDTO);
+			antecedentesRelacionadosPCIService.save(antecedentesRelacionadosPCI);
+			AntecedentesRelacionadosPCIDTO nuevosAntecedentesDTO = antecedentesRelacionadosPCIUtilDTO.toRest(antecedentesRelacionadosPCI);
+			return new MensajeDTO("Los antecedentes relacionados con PCI se han guardado correctamente", true, nuevosAntecedentesDTO);
 		}
 		catch (DataBaseException e) {
 			return new MensajeDTO("Error al insertar los antecedentes relacionados con PCI en base de datos.", false);
@@ -472,13 +469,18 @@ public class PacienteMovilController {
 	 *            the id exploracion
 	 * @return the antecedentes personales pcidto
 	 */
-	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesPersonalesPCI", method = RequestMethod.GET)
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesRelacionadosPCI", method = RequestMethod.GET)
 	public @ResponseBody
-	AntecedentesPersonalesPCIDTO retrieveAntecedentesPersonalesPCI(@PathVariable("idExploracion") Integer idExploracion) {
-		AntecedentesPersonalesPCIDTO antecedentesPersonalesPCIDTO = null;
+	AntecedentesRelacionadosPCIDTO retrieveAntecedentesRelacionadosPCI(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
+		AntecedentesRelacionadosPCIDTO antecedentesRelacionadosPCIDTO = null;
 		try {
-			AntecedentesPersonalesPCI antecedentesPersonalesPCI = antecedentesPersonalesPCIService.findByExploracion(idExploracion);
-			antecedentesPersonalesPCIDTO = exploracionUtilDTO.toRest(antecedentesPersonalesPCI);
+			AntecedentesRelacionadosPCI antecedentesRelacionadosPCI = antecedentesRelacionadosPCIService.findByExploracion(idExploracion);
+			if (antecedentesRelacionadosPCI != null) {
+				antecedentesRelacionadosPCIDTO = antecedentesRelacionadosPCIUtilDTO.toRest(antecedentesRelacionadosPCI);
+			}
+			else {
+				antecedentesRelacionadosPCIDTO = new AntecedentesRelacionadosPCIDTO();
+			}
 		}
 		catch (DataBaseException e) {
 			LOG.debug(e.getMessage());
@@ -486,7 +488,7 @@ public class PacienteMovilController {
 		catch (TransferObjectException e) {
 			LOG.debug(e.getMessage());
 		}
-		return antecedentesPersonalesPCIDTO;
+		return antecedentesRelacionadosPCIDTO;
 	}
 
 	/**
@@ -565,21 +567,12 @@ public class PacienteMovilController {
 		}
 	}
 
-	/**
-	 * Update antecedentes personales pci.
-	 * 
-	 * @param id
-	 *            the id
-	 * @param antecedentesPersonalesPCIDTO
-	 *            the antecedentes personales pcidto
-	 * @return the mensaje dto
-	 */
-	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesPersonalesPCI/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesRelacionadosPCI/{id}", method = RequestMethod.POST)
 	public @ResponseBody
-	MensajeDTO updateAntecedentesPersonalesPCI(@PathVariable("id") Integer id, @RequestBody AntecedentesPersonalesPCIDTO antecedentesPersonalesPCIDTO) {
+	MensajeDTO updateAntecedentesRelacionadosPCI(@PathVariable("id") Integer id, @RequestBody AntecedentesRelacionadosPCIDTO antecedentesRelacionadosPCIDTO) {
 		try {
-			AntecedentesPersonalesPCI antecedentesPersonalesPCI = exploracionUtilDTO.toBusiness(antecedentesPersonalesPCIDTO);
-			antecedentesPersonalesPCIService.update(antecedentesPersonalesPCI);
+			AntecedentesRelacionadosPCI antecedentesRelacionadosPCI = antecedentesRelacionadosPCIUtilDTO.toBusiness(antecedentesRelacionadosPCIDTO);
+			antecedentesRelacionadosPCIService.update(antecedentesRelacionadosPCI);
 			return new MensajeDTO("Antecedentes personales PCI actualizados correctamente", true);
 		}
 		catch (DataBaseException e) {
