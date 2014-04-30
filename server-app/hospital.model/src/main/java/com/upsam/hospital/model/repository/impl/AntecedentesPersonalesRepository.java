@@ -48,6 +48,7 @@ class AntecedentesPersonalesRepository implements IAntecedentesPersonalesReposit
 	 * com.upsam.hospital.model.repository.IAntecedentesPersonalesRepository
 	 * #findByExploracion(java.lang.Integer)
 	 */
+	@SuppressWarnings("rawtypes")
 	@Override
 	public AntecedentesPersonales findByExploracion(Integer pId) throws SQLException {
 		List results = hibernateTemplate.find(QUERY_FIND_BY_EXPLORACION, pId);

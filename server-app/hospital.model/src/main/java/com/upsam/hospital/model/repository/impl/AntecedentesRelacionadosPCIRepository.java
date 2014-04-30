@@ -50,6 +50,7 @@ class AntecedentesRelacionadosPCIRepository implements IAntecedentesRelacionados
 	 * com.upsam.hospital.model.repository.IAntecedentesPersonalesPCIRepository
 	 * #findByExploracion(java.lang.Integer)
 	 */
+	@SuppressWarnings("rawtypes")
 	@Override
 	public AntecedentesRelacionadosPCI findByExploracion(Integer pId) throws SQLException {
 		List results = hibernateTemplate.find(QUERY_FIND_BY_EXPLORACION, pId);
