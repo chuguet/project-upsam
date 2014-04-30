@@ -2,6 +2,7 @@ package com.upsam.hospital.model.service.impl;
 
 import java.sql.SQLException;
 import java.util.List;
+import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import com.upsam.hospital.model.beans.Faq;
 import com.upsam.hospital.model.exceptions.DataBaseException;
@@ -16,39 +17,8 @@ import com.upsam.hospital.model.service.IFaqsService;
 public class FaqsService implements IFaqsService {
 
 	/** The faqs repository. */
+	@Inject
 	private IFaqsRepository faqsRepository;
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.service.IModelService#save(com.upsam.hospital
-	 * .model.beans.IModelHospital)
-	 */
-	@Override
-	public Integer save(Faq faqs) throws DataBaseException {
-		try {
-			return faqsRepository.save(faqs);
-		}
-		catch (SQLException ex) {
-			throw new DataBaseException(ex);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.service.IModelService#update(com.upsam.hospital
-	 * .model.beans.IModelHospital)
-	 */
-	@Override
-	public void update(Faq t) throws DataBaseException {
-		try {
-			faqsRepository.update(t);
-		}
-		catch (SQLException e1) {
-			throw new DataBaseException(e1);
-		}
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -57,27 +27,12 @@ public class FaqsService implements IFaqsService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void delete(Faq t) throws DataBaseException {
+	public void delete(Faq faq) throws DataBaseException {
 		try {
-			faqsRepository.delete(t);
+			faqsRepository.delete(faq);
 		}
-		catch (SQLException e1) {
-			throw new DataBaseException(e1);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.service.IModelService#findOne(java.lang.Integer)
-	 */
-	@Override
-	public Faq findOne(Integer pId) throws DataBaseException {
-		try {
-			return faqsRepository.findOne(pId);
-		}
-		catch (SQLException e1) {
-			throw new DataBaseException(e1);
+		catch (SQLException e) {
+			throw new DataBaseException(e);
 		}
 	}
 
@@ -104,12 +59,60 @@ public class FaqsService implements IFaqsService {
 	 * @throws DataBaseException
 	 *             the data base exception
 	 */
+	@Override
 	public List<Faq> findBySeccion(String seccion) throws DataBaseException {
 		try {
 			return faqsRepository.findBySeccion(seccion);
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IModelService#findOne(java.lang.Integer)
+	 */
+	@Override
+	public Faq findOne(Integer pId) throws DataBaseException {
+		try {
+			return faqsRepository.findOne(pId);
+		}
+		catch (SQLException e) {
+			throw new DataBaseException(e);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IModelService#save(com.upsam.hospital
+	 * .model.beans.IModelHospital)
+	 */
+	@Override
+	public Integer save(Faq faq) throws DataBaseException {
+		try {
+			return faqsRepository.save(faq);
+		}
+		catch (SQLException ex) {
+			throw new DataBaseException(ex);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IModelService#update(com.upsam.hospital
+	 * .model.beans.IModelHospital)
+	 */
+	@Override
+	public void update(Faq faq) throws DataBaseException {
+		try {
+			faqsRepository.update(faq);
+		}
+		catch (SQLException e) {
+			throw new DataBaseException(e);
 		}
 	}
 }
