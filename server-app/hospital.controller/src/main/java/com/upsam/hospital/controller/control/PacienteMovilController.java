@@ -242,7 +242,7 @@ public class PacienteMovilController {
 	 *            the id
 	 * @return the video from paciente
 	 */
-	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion/}video/{id}")
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/video/{id}")
 	public @ResponseBody
 	VideoDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id) {
 		VideoDTO result = null;
