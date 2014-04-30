@@ -17,6 +17,7 @@ var exploracionFisica = {
 			$("#subtitle").html("Consulta de Exploraci&oacute;n");
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion, null, exploracionFisica.recuperarExploracionCallback);
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/video", null, exploracionFisica.recuperarListadoVideosCallback);
+			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/ficherosEMT", null, exploracionFisica.recuperarListadoGraficasCallback);
 			$("#listaVideos").show();
 		}
 		else{
@@ -159,7 +160,18 @@ var exploracionFisica = {
     	}
     	$("#listaVideos").listview('refresh');
     },
-	
+
+    'recuperarListadoGraficasCallback' : function(parameters){
+    	var idPaciente = $("#idPaciente").val();
+    	var idExploracion = $("#idExploracion").val();
+    	$("#listaGraficas li").remove();
+    	for (var i = 0; i < parameters.length; i++){
+    		$("#listaGraficas").append("<li><a rel='external' alt='Acceder a la gr&aacute;fica' href='grafica_detalle.html?idPaciente=" + idPaciente + "&idExploracion=" + idExploracion + "&idGrafica=" + parameters[i].id + "&num=" + (i + 1) + "' data-transition='fade'>Gr&aacute;fica " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].fecha + "</span></a></li>");
+    		
+    	}
+    	$("#listaGraficas").listview('refresh');
+    },
+
 	'insertar' : function() {
 		var exploracionMovilDTO = exploracionFisica.recogerCamposDePantalla();
 		var idPaciente = $("#idPaciente").val();
