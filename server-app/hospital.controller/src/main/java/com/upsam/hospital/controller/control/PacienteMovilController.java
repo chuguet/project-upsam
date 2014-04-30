@@ -26,12 +26,14 @@ import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
 import com.upsam.hospital.controller.dto.GrossMotorFunctionDTO;
 import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.PacienteMovilDTO;
+import com.upsam.hospital.controller.dto.ValoracionArticularMuscularDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.dto.util.IAntecedentesPersonalesUtilDTO;
 import com.upsam.hospital.controller.dto.util.IAntecedentesRelacionadosPCIUtilDTO;
 import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IGrossMotorFunctionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteMovilUtilDTO;
+import com.upsam.hospital.controller.dto.util.IValoracionArticularMuscularUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.AntecedentesPersonales;
@@ -40,6 +42,7 @@ import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.GrossMotorFunction;
 import com.upsam.hospital.model.beans.Paciente;
+import com.upsam.hospital.model.beans.ValoracionArticularMuscular;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.service.IAntecedentesPersonalesService;
@@ -48,6 +51,7 @@ import com.upsam.hospital.model.service.IExploracionService;
 import com.upsam.hospital.model.service.IFicheroEMTService;
 import com.upsam.hospital.model.service.IGrossMotorFunctionService;
 import com.upsam.hospital.model.service.IPacienteService;
+import com.upsam.hospital.model.service.IValoracionArticularMuscularService;
 import com.upsam.hospital.model.service.IVideoService;
 
 // TODO: Auto-generated Javadoc
@@ -104,6 +108,14 @@ public class PacienteMovilController {
 	/** The paciente service. */
 	@Inject
 	private IPacienteService pacienteService;
+
+	/** The valoracion articular muscular service. */
+	@Inject
+	private IValoracionArticularMuscularService valoracionArticularMuscularService;
+
+	/** The valoracion articular muscular util dto. */
+	@Inject
+	private IValoracionArticularMuscularUtilDTO valoracionArticularMuscularUtilDTO;
 
 	/** The video service. */
 	@Inject
@@ -421,6 +433,36 @@ public class PacienteMovilController {
 	}
 
 	/**
+	 * Insert valoracion articular muscular.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @param valoracionArticularMuscularDTO
+	 *            the valoracion articular muscular dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/valoracionArticularMuscular", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO insertValoracionArticularMuscular(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @RequestBody ValoracionArticularMuscularDTO valoracionArticularMuscularDTO) {
+		try {
+			ValoracionArticularMuscular valoracionArticularMuscular = valoracionArticularMuscularUtilDTO.toBusiness(valoracionArticularMuscularDTO);
+			valoracionArticularMuscularService.save(valoracionArticularMuscular);
+			ValoracionArticularMuscularDTO nuevaValoracionArticularMuscularDTO = valoracionArticularMuscularUtilDTO.toRest(valoracionArticularMuscular);
+			return new MensajeDTO("La valoracion articular muscular se ha guardado correctamente", true, nuevaValoracionArticularMuscularDTO);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error al insertar la valoracion articular muscular en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion en la valoracion articular muscular", false);
+		}
+	}
+
+	/**
 	 * List all.
 	 * 
 	 * @param param
@@ -611,6 +653,37 @@ public class PacienteMovilController {
 	}
 
 	/**
+	 * Retrieve valoracion articular muscular.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @return the valoracion articular muscular dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/valoracionArticularMuscular", method = RequestMethod.GET)
+	public @ResponseBody
+	ValoracionArticularMuscularDTO retrieveValoracionArticularMuscular(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
+		ValoracionArticularMuscularDTO valoracionArticularMuscularDTO = null;
+		try {
+			ValoracionArticularMuscular valoracionArticularMuscular = valoracionArticularMuscularService.findByExploracion(idExploracion);
+			if (valoracionArticularMuscular != null) {
+				valoracionArticularMuscularDTO = valoracionArticularMuscularUtilDTO.toRest(valoracionArticularMuscular);
+			}
+			else {
+				valoracionArticularMuscularDTO = new ValoracionArticularMuscularDTO();
+			}
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+		}
+		return valoracionArticularMuscularDTO;
+	}
+
+	/**
 	 * Update.
 	 * 
 	 * @param pacienteMovilDTO
@@ -744,6 +817,33 @@ public class PacienteMovilController {
 		catch (TransferObjectException e) {
 			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error de conversion de gross motor function", false);
+		}
+	}
+
+	/**
+	 * Update valoracion articular muscular.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param valoracionArticularMuscularDTO
+	 *            the valoracion articular muscular dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/valoracionArticularMuscular/{id}", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO updateValoracionArticularMuscular(@PathVariable("id") Integer id, @RequestBody ValoracionArticularMuscularDTO valoracionArticularMuscularDTO) {
+		try {
+			ValoracionArticularMuscular valoracionArticularMuscular = valoracionArticularMuscularUtilDTO.toBusiness(valoracionArticularMuscularDTO);
+			valoracionArticularMuscularService.update(valoracionArticularMuscular);
+			return new MensajeDTO("Valoracion articular muscular actualizada correctamente", true);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error al actualizar la valoracion articular muscular en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion de la Valoracion articular muscular", false);
 		}
 	}
 }
