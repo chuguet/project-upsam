@@ -130,6 +130,7 @@ public class PacienteMovilController {
 			response.flushBuffer();
 		}
 		catch (IOException ex) {
+			LOG.debug(ex.getMessage());
 			throw ex;
 		}
 		return null;
@@ -221,8 +222,8 @@ public class PacienteMovilController {
 			Exploracion exploracion = this.exploracionService.findOne(idExploracion);
 			result = this.exploracionUtilDTO.toRest(exploracion);
 		}
-		catch (DataBaseException e1) {
-			e1.printStackTrace();
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
 		}
 		catch (TransferObjectException e) {
 			LOG.error(e.getMessage());
@@ -251,8 +252,8 @@ public class PacienteMovilController {
 			video = this.videoService.findOne(idPaciente, idExploracion, id);
 			result = this.videoUtilDTO.toRest(video);
 		}
-		catch (DataBaseException | NotFoundException e1) {
-			e1.printStackTrace();
+		catch (DataBaseException | NotFoundException e) {
+			LOG.error(e.getMessage());
 		}
 		catch (TransferObjectException e) {
 			LOG.error(e.getMessage());
@@ -277,6 +278,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Paciente creado correctamente", true, paciente);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO(new StringBuffer("Ya existe el paciente con el numero de identificacion ").append(pacienteMovilDTO.getNumeroIdentificacion()).append(" en base de datos.").toString(), false);
 		}
 		catch (TransferObjectException e) {
@@ -304,6 +306,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Antecedentes personales insertados correctamente", true, nuevosAntecedentesDTO);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al insertar los antecedentes personales en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
@@ -322,6 +325,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Los antecedentes relacionados con PCI se han guardado correctamente", true, nuevosAntecedentesDTO);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al insertar los antecedentes relacionados con PCI en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
@@ -350,6 +354,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Exploracion guardada correctamente", true, nuevaExploracion);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al guardar la exploracion.", false);
 		}
 		catch (TransferObjectException e) {
@@ -533,6 +538,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Paciente modificado correctamente", true);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al actualizar el paciente en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
@@ -559,6 +565,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Antecedentes personales actualizados correctamente", true);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al actualizar los antecedentes personales en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
@@ -576,6 +583,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Antecedentes personales PCI actualizados correctamente", true);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al actualizar los antecedentes personales PCI en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
@@ -606,6 +614,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Exploracion actualizada correctamente", true, nuevaExploracion);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al insertar la exploracion en base de datos.", false);
 		}
 		catch (TransferObjectException e) {

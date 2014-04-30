@@ -1,6 +1,5 @@
 package com.upsam.hospital.controller.dto.util.impl;
 
-import java.text.SimpleDateFormat;
 import org.springframework.stereotype.Component;
 import com.upsam.hospital.controller.dto.AntecedentesRelacionadosPCIDTO;
 import com.upsam.hospital.controller.dto.util.IAntecedentesRelacionadosPCIUtilDTO;
@@ -16,9 +15,6 @@ import com.upsam.hospital.model.enums.OrtesisDiurna;
  */
 @Component
 public class AntecedentesRelacionadosPCIUtilDTO implements IAntecedentesRelacionadosPCIUtilDTO {
-
-	/** The Constant DATE_FORMATTER. */
-	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy");
 
 	/*
 	 * (non-Javadoc)
