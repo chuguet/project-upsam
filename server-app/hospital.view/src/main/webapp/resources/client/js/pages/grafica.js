@@ -1,5 +1,5 @@
 define([
-		"../../cordova", "../index", "../jquery/jquery-1.9.1.min", "../jquery/jquery.mobile-1.4.1", "../ctrl.generic", "../server", "../jquery/jqplot.pointLabels.min", "../jquery/jquery.jqplot"
+		"../../cordova", "../index", "../jquery/jquery-1.9.1.min", "../jquery/jquery.mobile-1.4.1", "../ctrl.generic", "../server", "../jquery/jqplot.pointLabels", "../jquery/jquery.jqplot"
 ], function($) {
 	generic.initialize();
 	grafica.recuperar();

@@ -11,17 +11,17 @@
 		<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		<link rel="stylesheet" type="text/css" type="text/css" href="../css/jquery.jqplot.min.css" />
 		
-		<!-- <script type="text/javascript" src='../js/jquery/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery/jquery.mobile-1.4.1.js'></script>-->
-		
 		<script data-main="../js/pages/grafica" src="../js/require.min.js"></script>
 	</head>
 	<body>
 
 		<div data-role="page">
 			<div data-role="header">                    
-				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
-				<a data-rel="back" data-icon="back">Volver</a>
+				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>
+		        <h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
 				
 				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
 					<h2 class="subtitle">Gr&aacute;fica de fichero EMT</h2>
