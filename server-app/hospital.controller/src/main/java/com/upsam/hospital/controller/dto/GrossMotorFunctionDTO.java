@@ -16,115 +16,115 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	private Integer idExploracion;
 
 	/** The var1. */
-	private Boolean var1;
+	private Integer var1;
 
 	/** The var10. */
-	private Boolean var10;
+	private Integer var10;
 
 	/** The var11. */
-	private Boolean var11;
+	private Integer var11;
 
 	/** The var12. */
-	private Boolean var12;
+	private Integer var12;
 
 	/** The var13. */
-	private Boolean var13;
+	private Integer var13;
 
 	/** The var14. */
-	private Boolean var14;
+	private Integer var14;
 
 	/** The var15. */
-	private Boolean var15;
+	private Integer var15;
 
 	/** The var16. */
-	private Boolean var16;
+	private Integer var16;
 
 	/** The var17. */
-	private Boolean var17;
+	private Integer var17;
 
 	/** The var18. */
-	private Boolean var18;
+	private Integer var18;
 
 	/** The var19. */
-	private Boolean var19;
+	private Integer var19;
 
 	/** The var2. */
-	private Boolean var2;
+	private Integer var2;
 
 	/** The var20. */
-	private Boolean var20;
+	private Integer var20;
 
 	/** The var21. */
-	private Boolean var21;
+	private Integer var21;
 
 	/** The var22. */
-	private Boolean var22;
+	private Integer var22;
 
 	/** The var23. */
-	private Boolean var23;
+	private Integer var23;
 
 	/** The var24. */
-	private Boolean var24;
+	private Integer var24;
 
 	/** The var25. */
-	private Boolean var25;
+	private Integer var25;
 
 	/** The var26. */
-	private Boolean var26;
+	private Integer var26;
 
 	/** The var27. */
-	private Boolean var27;
+	private Integer var27;
 
 	/** The var28. */
-	private Boolean var28;
+	private Integer var28;
 
 	/** The var29. */
-	private Boolean var29;
+	private Integer var29;
 
 	/** The var3. */
-	private Boolean var3;
+	private Integer var3;
 
 	/** The var30. */
-	private Boolean var30;
+	private Integer var30;
 
 	/** The var31. */
-	private Boolean var31;
+	private Integer var31;
 
 	/** The var32. */
-	private Boolean var32;
+	private Integer var32;
 
 	/** The var33. */
-	private Boolean var33;
+	private Integer var33;
 
 	/** The var34. */
-	private Boolean var34;
+	private Integer var34;
 
 	/** The var35. */
-	private Boolean var35;
+	private Integer var35;
 
 	/** The var36. */
-	private Boolean var36;
+	private Integer var36;
 
 	/** The var37. */
-	private Boolean var37;
+	private Integer var37;
 
 	/** The var4. */
-	private Boolean var4;
+	private Integer var4;
 
 	/** The var5. */
-	private Boolean var5;
+	private Integer var5;
 
 	/** The var6. */
-	private Boolean var6;
+	private Integer var6;
 
 	/** The var7. */
-	private Boolean var7;
+	private Integer var7;
 
 	/** The var8. */
-	private Boolean var8;
+	private Integer var8;
 
 	/** The var9. */
-	private Boolean var9;
+	private Integer var9;
 
 	/**
 	 * Gets the comentarios.
@@ -158,7 +158,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var1
 	 */
-	public Boolean getVar1() {
+	public Integer getVar1() {
 		return var1;
 	}
 
@@ -167,7 +167,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var10
 	 */
-	public Boolean getVar10() {
+	public Integer getVar10() {
 		return var10;
 	}
 
@@ -176,7 +176,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var11
 	 */
-	public Boolean getVar11() {
+	public Integer getVar11() {
 		return var11;
 	}
 
@@ -185,7 +185,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var12
 	 */
-	public Boolean getVar12() {
+	public Integer getVar12() {
 		return var12;
 	}
 
@@ -194,7 +194,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var13
 	 */
-	public Boolean getVar13() {
+	public Integer getVar13() {
 		return var13;
 	}
 
@@ -203,7 +203,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var14
 	 */
-	public Boolean getVar14() {
+	public Integer getVar14() {
 		return var14;
 	}
 
@@ -212,7 +212,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var15
 	 */
-	public Boolean getVar15() {
+	public Integer getVar15() {
 		return var15;
 	}
 
@@ -221,7 +221,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var16
 	 */
-	public Boolean getVar16() {
+	public Integer getVar16() {
 		return var16;
 	}
 
@@ -230,7 +230,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var17
 	 */
-	public Boolean getVar17() {
+	public Integer getVar17() {
 		return var17;
 	}
 
@@ -239,7 +239,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var18
 	 */
-	public Boolean getVar18() {
+	public Integer getVar18() {
 		return var18;
 	}
 
@@ -248,7 +248,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var19
 	 */
-	public Boolean getVar19() {
+	public Integer getVar19() {
 		return var19;
 	}
 
@@ -257,7 +257,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var2
 	 */
-	public Boolean getVar2() {
+	public Integer getVar2() {
 		return var2;
 	}
 
@@ -266,7 +266,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var20
 	 */
-	public Boolean getVar20() {
+	public Integer getVar20() {
 		return var20;
 	}
 
@@ -275,7 +275,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var21
 	 */
-	public Boolean getVar21() {
+	public Integer getVar21() {
 		return var21;
 	}
 
@@ -284,7 +284,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var22
 	 */
-	public Boolean getVar22() {
+	public Integer getVar22() {
 		return var22;
 	}
 
@@ -293,7 +293,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var23
 	 */
-	public Boolean getVar23() {
+	public Integer getVar23() {
 		return var23;
 	}
 
@@ -302,7 +302,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var24
 	 */
-	public Boolean getVar24() {
+	public Integer getVar24() {
 		return var24;
 	}
 
@@ -311,7 +311,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var25
 	 */
-	public Boolean getVar25() {
+	public Integer getVar25() {
 		return var25;
 	}
 
@@ -320,7 +320,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var26
 	 */
-	public Boolean getVar26() {
+	public Integer getVar26() {
 		return var26;
 	}
 
@@ -329,7 +329,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var27
 	 */
-	public Boolean getVar27() {
+	public Integer getVar27() {
 		return var27;
 	}
 
@@ -338,7 +338,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var28
 	 */
-	public Boolean getVar28() {
+	public Integer getVar28() {
 		return var28;
 	}
 
@@ -347,7 +347,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var29
 	 */
-	public Boolean getVar29() {
+	public Integer getVar29() {
 		return var29;
 	}
 
@@ -356,7 +356,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var3
 	 */
-	public Boolean getVar3() {
+	public Integer getVar3() {
 		return var3;
 	}
 
@@ -365,7 +365,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var30
 	 */
-	public Boolean getVar30() {
+	public Integer getVar30() {
 		return var30;
 	}
 
@@ -374,7 +374,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var31
 	 */
-	public Boolean getVar31() {
+	public Integer getVar31() {
 		return var31;
 	}
 
@@ -383,7 +383,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var32
 	 */
-	public Boolean getVar32() {
+	public Integer getVar32() {
 		return var32;
 	}
 
@@ -392,7 +392,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var33
 	 */
-	public Boolean getVar33() {
+	public Integer getVar33() {
 		return var33;
 	}
 
@@ -401,7 +401,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var34
 	 */
-	public Boolean getVar34() {
+	public Integer getVar34() {
 		return var34;
 	}
 
@@ -410,7 +410,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var35
 	 */
-	public Boolean getVar35() {
+	public Integer getVar35() {
 		return var35;
 	}
 
@@ -419,7 +419,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var36
 	 */
-	public Boolean getVar36() {
+	public Integer getVar36() {
 		return var36;
 	}
 
@@ -428,7 +428,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var37
 	 */
-	public Boolean getVar37() {
+	public Integer getVar37() {
 		return var37;
 	}
 
@@ -437,7 +437,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var4
 	 */
-	public Boolean getVar4() {
+	public Integer getVar4() {
 		return var4;
 	}
 
@@ -446,7 +446,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var5
 	 */
-	public Boolean getVar5() {
+	public Integer getVar5() {
 		return var5;
 	}
 
@@ -455,7 +455,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var6
 	 */
-	public Boolean getVar6() {
+	public Integer getVar6() {
 		return var6;
 	}
 
@@ -464,7 +464,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var7
 	 */
-	public Boolean getVar7() {
+	public Integer getVar7() {
 		return var7;
 	}
 
@@ -473,7 +473,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var8
 	 */
-	public Boolean getVar8() {
+	public Integer getVar8() {
 		return var8;
 	}
 
@@ -482,7 +482,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * 
 	 * @return the var9
 	 */
-	public Boolean getVar9() {
+	public Integer getVar9() {
 		return var9;
 	}
 
@@ -522,7 +522,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var1
 	 *            the new var1
 	 */
-	public void setVar1(Boolean var1) {
+	public void setVar1(Integer var1) {
 		this.var1 = var1;
 	}
 
@@ -532,7 +532,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var10
 	 *            the new var10
 	 */
-	public void setVar10(Boolean var10) {
+	public void setVar10(Integer var10) {
 		this.var10 = var10;
 	}
 
@@ -542,7 +542,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var11
 	 *            the new var11
 	 */
-	public void setVar11(Boolean var11) {
+	public void setVar11(Integer var11) {
 		this.var11 = var11;
 	}
 
@@ -552,7 +552,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var12
 	 *            the new var12
 	 */
-	public void setVar12(Boolean var12) {
+	public void setVar12(Integer var12) {
 		this.var12 = var12;
 	}
 
@@ -562,7 +562,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var13
 	 *            the new var13
 	 */
-	public void setVar13(Boolean var13) {
+	public void setVar13(Integer var13) {
 		this.var13 = var13;
 	}
 
@@ -572,7 +572,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var14
 	 *            the new var14
 	 */
-	public void setVar14(Boolean var14) {
+	public void setVar14(Integer var14) {
 		this.var14 = var14;
 	}
 
@@ -582,7 +582,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var15
 	 *            the new var15
 	 */
-	public void setVar15(Boolean var15) {
+	public void setVar15(Integer var15) {
 		this.var15 = var15;
 	}
 
@@ -592,7 +592,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var16
 	 *            the new var16
 	 */
-	public void setVar16(Boolean var16) {
+	public void setVar16(Integer var16) {
 		this.var16 = var16;
 	}
 
@@ -602,7 +602,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var17
 	 *            the new var17
 	 */
-	public void setVar17(Boolean var17) {
+	public void setVar17(Integer var17) {
 		this.var17 = var17;
 	}
 
@@ -612,7 +612,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var18
 	 *            the new var18
 	 */
-	public void setVar18(Boolean var18) {
+	public void setVar18(Integer var18) {
 		this.var18 = var18;
 	}
 
@@ -622,7 +622,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var19
 	 *            the new var19
 	 */
-	public void setVar19(Boolean var19) {
+	public void setVar19(Integer var19) {
 		this.var19 = var19;
 	}
 
@@ -632,7 +632,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var2
 	 *            the new var2
 	 */
-	public void setVar2(Boolean var2) {
+	public void setVar2(Integer var2) {
 		this.var2 = var2;
 	}
 
@@ -642,7 +642,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var20
 	 *            the new var20
 	 */
-	public void setVar20(Boolean var20) {
+	public void setVar20(Integer var20) {
 		this.var20 = var20;
 	}
 
@@ -652,7 +652,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var21
 	 *            the new var21
 	 */
-	public void setVar21(Boolean var21) {
+	public void setVar21(Integer var21) {
 		this.var21 = var21;
 	}
 
@@ -662,7 +662,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var22
 	 *            the new var22
 	 */
-	public void setVar22(Boolean var22) {
+	public void setVar22(Integer var22) {
 		this.var22 = var22;
 	}
 
@@ -672,7 +672,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var23
 	 *            the new var23
 	 */
-	public void setVar23(Boolean var23) {
+	public void setVar23(Integer var23) {
 		this.var23 = var23;
 	}
 
@@ -682,7 +682,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var24
 	 *            the new var24
 	 */
-	public void setVar24(Boolean var24) {
+	public void setVar24(Integer var24) {
 		this.var24 = var24;
 	}
 
@@ -692,7 +692,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var25
 	 *            the new var25
 	 */
-	public void setVar25(Boolean var25) {
+	public void setVar25(Integer var25) {
 		this.var25 = var25;
 	}
 
@@ -702,7 +702,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var26
 	 *            the new var26
 	 */
-	public void setVar26(Boolean var26) {
+	public void setVar26(Integer var26) {
 		this.var26 = var26;
 	}
 
@@ -712,7 +712,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var27
 	 *            the new var27
 	 */
-	public void setVar27(Boolean var27) {
+	public void setVar27(Integer var27) {
 		this.var27 = var27;
 	}
 
@@ -722,7 +722,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var28
 	 *            the new var28
 	 */
-	public void setVar28(Boolean var28) {
+	public void setVar28(Integer var28) {
 		this.var28 = var28;
 	}
 
@@ -732,7 +732,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var29
 	 *            the new var29
 	 */
-	public void setVar29(Boolean var29) {
+	public void setVar29(Integer var29) {
 		this.var29 = var29;
 	}
 
@@ -742,7 +742,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var3
 	 *            the new var3
 	 */
-	public void setVar3(Boolean var3) {
+	public void setVar3(Integer var3) {
 		this.var3 = var3;
 	}
 
@@ -752,7 +752,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var30
 	 *            the new var30
 	 */
-	public void setVar30(Boolean var30) {
+	public void setVar30(Integer var30) {
 		this.var30 = var30;
 	}
 
@@ -762,7 +762,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var31
 	 *            the new var31
 	 */
-	public void setVar31(Boolean var31) {
+	public void setVar31(Integer var31) {
 		this.var31 = var31;
 	}
 
@@ -772,7 +772,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var32
 	 *            the new var32
 	 */
-	public void setVar32(Boolean var32) {
+	public void setVar32(Integer var32) {
 		this.var32 = var32;
 	}
 
@@ -782,7 +782,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var33
 	 *            the new var33
 	 */
-	public void setVar33(Boolean var33) {
+	public void setVar33(Integer var33) {
 		this.var33 = var33;
 	}
 
@@ -792,7 +792,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var34
 	 *            the new var34
 	 */
-	public void setVar34(Boolean var34) {
+	public void setVar34(Integer var34) {
 		this.var34 = var34;
 	}
 
@@ -802,7 +802,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var35
 	 *            the new var35
 	 */
-	public void setVar35(Boolean var35) {
+	public void setVar35(Integer var35) {
 		this.var35 = var35;
 	}
 
@@ -812,7 +812,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var36
 	 *            the new var36
 	 */
-	public void setVar36(Boolean var36) {
+	public void setVar36(Integer var36) {
 		this.var36 = var36;
 	}
 
@@ -822,7 +822,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var37
 	 *            the new var37
 	 */
-	public void setVar37(Boolean var37) {
+	public void setVar37(Integer var37) {
 		this.var37 = var37;
 	}
 
@@ -832,7 +832,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var4
 	 *            the new var4
 	 */
-	public void setVar4(Boolean var4) {
+	public void setVar4(Integer var4) {
 		this.var4 = var4;
 	}
 
@@ -842,7 +842,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var5
 	 *            the new var5
 	 */
-	public void setVar5(Boolean var5) {
+	public void setVar5(Integer var5) {
 		this.var5 = var5;
 	}
 
@@ -852,7 +852,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var6
 	 *            the new var6
 	 */
-	public void setVar6(Boolean var6) {
+	public void setVar6(Integer var6) {
 		this.var6 = var6;
 	}
 
@@ -862,7 +862,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var7
 	 *            the new var7
 	 */
-	public void setVar7(Boolean var7) {
+	public void setVar7(Integer var7) {
 		this.var7 = var7;
 	}
 
@@ -872,7 +872,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var8
 	 *            the new var8
 	 */
-	public void setVar8(Boolean var8) {
+	public void setVar8(Integer var8) {
 		this.var8 = var8;
 	}
 
@@ -882,7 +882,7 @@ public class GrossMotorFunctionDTO extends AbstractDTO {
 	 * @param var9
 	 *            the new var9
 	 */
-	public void setVar9(Boolean var9) {
+	public void setVar9(Integer var9) {
 		this.var9 = var9;
 	}
 }

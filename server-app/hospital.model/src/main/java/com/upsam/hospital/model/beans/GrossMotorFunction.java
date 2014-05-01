@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import com.upsam.hospital.model.enums.Evaluacion;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -45,187 +46,187 @@ public class GrossMotorFunction implements IModelHospital {
 	/** The var1. */
 	@Basic
 	@Column(name = "VAR_1")
-	private Boolean var1;
+	private Evaluacion var1;
 
 	/** The var10. */
 	@Basic
 	@Column(name = "VAR_10")
-	private Boolean var10;
+	private Evaluacion var10;
 
 	/** The var11. */
 	@Basic
 	@Column(name = "VAR_11")
-	private Boolean var11;
+	private Evaluacion var11;
 
 	/** The var12. */
 	@Basic
 	@Column(name = "VAR_12")
-	private Boolean var12;
+	private Evaluacion var12;
 
 	/** The var13. */
 	@Basic
 	@Column(name = "VAR_13")
-	private Boolean var13;
+	private Evaluacion var13;
 
 	/** The var14. */
 	@Basic
 	@Column(name = "VAR_14")
-	private Boolean var14;
+	private Evaluacion var14;
 
 	/** The var15. */
 	@Basic
 	@Column(name = "VAR_15")
-	private Boolean var15;
+	private Evaluacion var15;
 
 	/** The var16. */
 	@Basic
 	@Column(name = "VAR_16")
-	private Boolean var16;
+	private Evaluacion var16;
 
 	/** The var17. */
 	@Basic
 	@Column(name = "VAR_17")
-	private Boolean var17;
+	private Evaluacion var17;
 
 	/** The var18. */
 	@Basic
 	@Column(name = "VAR_18")
-	private Boolean var18;
+	private Evaluacion var18;
 
 	/** The var19. */
 	@Basic
 	@Column(name = "VAR_19")
-	private Boolean var19;
+	private Evaluacion var19;
 
 	/** The var2. */
 	@Basic
 	@Column(name = "VAR_2")
-	private Boolean var2;
+	private Evaluacion var2;
 
 	/** The var20. */
 	@Basic
 	@Column(name = "VAR_20")
-	private Boolean var20;
+	private Evaluacion var20;
 
 	/** The var21. */
 	@Basic
 	@Column(name = "VAR_21")
-	private Boolean var21;
+	private Evaluacion var21;
 
 	/** The var22. */
 	@Basic
 	@Column(name = "VAR_22")
-	private Boolean var22;
+	private Evaluacion var22;
 
 	/** The var23. */
 	@Basic
 	@Column(name = "VAR_23")
-	private Boolean var23;
+	private Evaluacion var23;
 
 	/** The var24. */
 	@Basic
 	@Column(name = "VAR_24")
-	private Boolean var24;
+	private Evaluacion var24;
 
 	/** The var25. */
 	@Basic
 	@Column(name = "VAR_25")
-	private Boolean var25;
+	private Evaluacion var25;
 
 	/** The var26. */
 	@Basic
 	@Column(name = "VAR_26")
-	private Boolean var26;
+	private Evaluacion var26;
 
 	/** The var27. */
 	@Basic
 	@Column(name = "VAR_27")
-	private Boolean var27;
+	private Evaluacion var27;
 
 	/** The var28. */
 	@Basic
 	@Column(name = "VAR_28")
-	private Boolean var28;
+	private Evaluacion var28;
 
 	/** The var29. */
 	@Basic
 	@Column(name = "VAR_29")
-	private Boolean var29;
+	private Evaluacion var29;
 
 	/** The var3. */
 	@Basic
 	@Column(name = "VAR_3")
-	private Boolean var3;
+	private Evaluacion var3;
 
 	/** The var30. */
 	@Basic
 	@Column(name = "VAR_30")
-	private Boolean var30;
+	private Evaluacion var30;
 
 	/** The var31. */
 	@Basic
 	@Column(name = "VAR_31")
-	private Boolean var31;
+	private Evaluacion var31;
 
 	/** The var32. */
 	@Basic
 	@Column(name = "VAR_32")
-	private Boolean var32;
+	private Evaluacion var32;
 
 	/** The var33. */
 	@Basic
 	@Column(name = "VAR_33")
-	private Boolean var33;
+	private Evaluacion var33;
 
 	/** The var34. */
 	@Basic
 	@Column(name = "VAR_34")
-	private Boolean var34;
+	private Evaluacion var34;
 
 	/** The var35. */
 	@Basic
 	@Column(name = "VAR_35")
-	private Boolean var35;
+	private Evaluacion var35;
 
 	/** The var36. */
 	@Basic
 	@Column(name = "VAR_36")
-	private Boolean var36;
+	private Evaluacion var36;
 
 	/** The var37. */
 	@Basic
 	@Column(name = "VAR_37")
-	private Boolean var37;
+	private Evaluacion var37;
 
 	/** The var4. */
 	@Basic
 	@Column(name = "VAR_4")
-	private Boolean var4;
+	private Evaluacion var4;
 
 	/** The var5. */
 	@Basic
 	@Column(name = "VAR_5")
-	private Boolean var5;
+	private Evaluacion var5;
 
 	/** The var6. */
 	@Basic
 	@Column(name = "VAR_6")
-	private Boolean var6;
+	private Evaluacion var6;
 
 	/** The var7. */
 	@Basic
 	@Column(name = "VAR_7")
-	private Boolean var7;
+	private Evaluacion var7;
 
 	/** The var8. */
 	@Basic
 	@Column(name = "VAR_8")
-	private Boolean var8;
+	private Evaluacion var8;
 
 	/** The var9. */
 	@Basic
 	@Column(name = "VAR_9")
-	private Boolean var9;
+	private Evaluacion var9;
 
 	/**
 	 * Instantiates a new gross motor function.
@@ -318,7 +319,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var9
 	 *            the var9
 	 */
-	public GrossMotorFunction(String comentarios, Boolean evaluacionIndicativa, Integer id, Boolean var1, Boolean var10, Boolean var11, Boolean var12, Boolean var13, Boolean var14, Boolean var15, Boolean var16, Boolean var17, Boolean var18, Boolean var19, Boolean var2, Boolean var20, Boolean var21, Boolean var22, Boolean var23, Boolean var24, Boolean var25, Boolean var26, Boolean var27, Boolean var28, Boolean var29, Boolean var3, Boolean var30, Boolean var31, Boolean var32, Boolean var33, Boolean var34, Boolean var35, Boolean var36, Boolean var37, Boolean var4, Boolean var5, Boolean var6, Boolean var7, Boolean var8, Boolean var9) {
+	public GrossMotorFunction(String comentarios, Boolean evaluacionIndicativa, Integer id, Evaluacion var1, Evaluacion var10, Evaluacion var11, Evaluacion var12, Evaluacion var13, Evaluacion var14, Evaluacion var15, Evaluacion var16, Evaluacion var17, Evaluacion var18, Evaluacion var19, Evaluacion var2, Evaluacion var20, Evaluacion var21, Evaluacion var22, Evaluacion var23, Evaluacion var24, Evaluacion var25, Evaluacion var26, Evaluacion var27, Evaluacion var28, Evaluacion var29, Evaluacion var3, Evaluacion var30, Evaluacion var31, Evaluacion var32, Evaluacion var33, Evaluacion var34, Evaluacion var35, Evaluacion var36, Evaluacion var37, Evaluacion var4, Evaluacion var5, Evaluacion var6, Evaluacion var7, Evaluacion var8, Evaluacion var9) {
 		super();
 		this.comentarios = comentarios;
 		this.evaluacionIndicativa = evaluacionIndicativa;
@@ -403,7 +404,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var1
 	 */
-	public Boolean getVar1() {
+	public Evaluacion getVar1() {
 		return var1;
 	}
 
@@ -412,7 +413,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var10
 	 */
-	public Boolean getVar10() {
+	public Evaluacion getVar10() {
 		return var10;
 	}
 
@@ -421,7 +422,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var11
 	 */
-	public Boolean getVar11() {
+	public Evaluacion getVar11() {
 		return var11;
 	}
 
@@ -430,7 +431,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var12
 	 */
-	public Boolean getVar12() {
+	public Evaluacion getVar12() {
 		return var12;
 	}
 
@@ -439,7 +440,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var13
 	 */
-	public Boolean getVar13() {
+	public Evaluacion getVar13() {
 		return var13;
 	}
 
@@ -448,7 +449,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var14
 	 */
-	public Boolean getVar14() {
+	public Evaluacion getVar14() {
 		return var14;
 	}
 
@@ -457,7 +458,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var15
 	 */
-	public Boolean getVar15() {
+	public Evaluacion getVar15() {
 		return var15;
 	}
 
@@ -466,7 +467,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var16
 	 */
-	public Boolean getVar16() {
+	public Evaluacion getVar16() {
 		return var16;
 	}
 
@@ -475,7 +476,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var17
 	 */
-	public Boolean getVar17() {
+	public Evaluacion getVar17() {
 		return var17;
 	}
 
@@ -484,7 +485,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var18
 	 */
-	public Boolean getVar18() {
+	public Evaluacion getVar18() {
 		return var18;
 	}
 
@@ -493,7 +494,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var19
 	 */
-	public Boolean getVar19() {
+	public Evaluacion getVar19() {
 		return var19;
 	}
 
@@ -502,7 +503,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var2
 	 */
-	public Boolean getVar2() {
+	public Evaluacion getVar2() {
 		return var2;
 	}
 
@@ -511,7 +512,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var20
 	 */
-	public Boolean getVar20() {
+	public Evaluacion getVar20() {
 		return var20;
 	}
 
@@ -520,7 +521,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var21
 	 */
-	public Boolean getVar21() {
+	public Evaluacion getVar21() {
 		return var21;
 	}
 
@@ -529,7 +530,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var22
 	 */
-	public Boolean getVar22() {
+	public Evaluacion getVar22() {
 		return var22;
 	}
 
@@ -538,7 +539,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var23
 	 */
-	public Boolean getVar23() {
+	public Evaluacion getVar23() {
 		return var23;
 	}
 
@@ -547,7 +548,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var24
 	 */
-	public Boolean getVar24() {
+	public Evaluacion getVar24() {
 		return var24;
 	}
 
@@ -556,7 +557,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var25
 	 */
-	public Boolean getVar25() {
+	public Evaluacion getVar25() {
 		return var25;
 	}
 
@@ -565,7 +566,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var26
 	 */
-	public Boolean getVar26() {
+	public Evaluacion getVar26() {
 		return var26;
 	}
 
@@ -574,7 +575,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var27
 	 */
-	public Boolean getVar27() {
+	public Evaluacion getVar27() {
 		return var27;
 	}
 
@@ -583,7 +584,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var28
 	 */
-	public Boolean getVar28() {
+	public Evaluacion getVar28() {
 		return var28;
 	}
 
@@ -592,7 +593,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var29
 	 */
-	public Boolean getVar29() {
+	public Evaluacion getVar29() {
 		return var29;
 	}
 
@@ -601,7 +602,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var3
 	 */
-	public Boolean getVar3() {
+	public Evaluacion getVar3() {
 		return var3;
 	}
 
@@ -610,7 +611,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var30
 	 */
-	public Boolean getVar30() {
+	public Evaluacion getVar30() {
 		return var30;
 	}
 
@@ -619,7 +620,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var31
 	 */
-	public Boolean getVar31() {
+	public Evaluacion getVar31() {
 		return var31;
 	}
 
@@ -628,7 +629,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var32
 	 */
-	public Boolean getVar32() {
+	public Evaluacion getVar32() {
 		return var32;
 	}
 
@@ -637,7 +638,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var33
 	 */
-	public Boolean getVar33() {
+	public Evaluacion getVar33() {
 		return var33;
 	}
 
@@ -646,7 +647,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var34
 	 */
-	public Boolean getVar34() {
+	public Evaluacion getVar34() {
 		return var34;
 	}
 
@@ -655,7 +656,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var35
 	 */
-	public Boolean getVar35() {
+	public Evaluacion getVar35() {
 		return var35;
 	}
 
@@ -664,7 +665,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var36
 	 */
-	public Boolean getVar36() {
+	public Evaluacion getVar36() {
 		return var36;
 	}
 
@@ -673,7 +674,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var37
 	 */
-	public Boolean getVar37() {
+	public Evaluacion getVar37() {
 		return var37;
 	}
 
@@ -682,7 +683,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var4
 	 */
-	public Boolean getVar4() {
+	public Evaluacion getVar4() {
 		return var4;
 	}
 
@@ -691,7 +692,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var5
 	 */
-	public Boolean getVar5() {
+	public Evaluacion getVar5() {
 		return var5;
 	}
 
@@ -700,7 +701,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var6
 	 */
-	public Boolean getVar6() {
+	public Evaluacion getVar6() {
 		return var6;
 	}
 
@@ -709,7 +710,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var7
 	 */
-	public Boolean getVar7() {
+	public Evaluacion getVar7() {
 		return var7;
 	}
 
@@ -718,7 +719,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var8
 	 */
-	public Boolean getVar8() {
+	public Evaluacion getVar8() {
 		return var8;
 	}
 
@@ -727,7 +728,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * 
 	 * @return the var9
 	 */
-	public Boolean getVar9() {
+	public Evaluacion getVar9() {
 		return var9;
 	}
 
@@ -777,7 +778,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var1
 	 *            the new var1
 	 */
-	public void setVar1(Boolean var1) {
+	public void setVar1(Evaluacion var1) {
 		this.var1 = var1;
 	}
 
@@ -787,7 +788,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var10
 	 *            the new var10
 	 */
-	public void setVar10(Boolean var10) {
+	public void setVar10(Evaluacion var10) {
 		this.var10 = var10;
 	}
 
@@ -797,7 +798,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var11
 	 *            the new var11
 	 */
-	public void setVar11(Boolean var11) {
+	public void setVar11(Evaluacion var11) {
 		this.var11 = var11;
 	}
 
@@ -807,7 +808,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var12
 	 *            the new var12
 	 */
-	public void setVar12(Boolean var12) {
+	public void setVar12(Evaluacion var12) {
 		this.var12 = var12;
 	}
 
@@ -817,7 +818,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var13
 	 *            the new var13
 	 */
-	public void setVar13(Boolean var13) {
+	public void setVar13(Evaluacion var13) {
 		this.var13 = var13;
 	}
 
@@ -827,7 +828,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var14
 	 *            the new var14
 	 */
-	public void setVar14(Boolean var14) {
+	public void setVar14(Evaluacion var14) {
 		this.var14 = var14;
 	}
 
@@ -837,7 +838,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var15
 	 *            the new var15
 	 */
-	public void setVar15(Boolean var15) {
+	public void setVar15(Evaluacion var15) {
 		this.var15 = var15;
 	}
 
@@ -847,7 +848,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var16
 	 *            the new var16
 	 */
-	public void setVar16(Boolean var16) {
+	public void setVar16(Evaluacion var16) {
 		this.var16 = var16;
 	}
 
@@ -857,7 +858,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var17
 	 *            the new var17
 	 */
-	public void setVar17(Boolean var17) {
+	public void setVar17(Evaluacion var17) {
 		this.var17 = var17;
 	}
 
@@ -867,7 +868,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var18
 	 *            the new var18
 	 */
-	public void setVar18(Boolean var18) {
+	public void setVar18(Evaluacion var18) {
 		this.var18 = var18;
 	}
 
@@ -877,7 +878,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var19
 	 *            the new var19
 	 */
-	public void setVar19(Boolean var19) {
+	public void setVar19(Evaluacion var19) {
 		this.var19 = var19;
 	}
 
@@ -887,7 +888,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var2
 	 *            the new var2
 	 */
-	public void setVar2(Boolean var2) {
+	public void setVar2(Evaluacion var2) {
 		this.var2 = var2;
 	}
 
@@ -897,7 +898,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var20
 	 *            the new var20
 	 */
-	public void setVar20(Boolean var20) {
+	public void setVar20(Evaluacion var20) {
 		this.var20 = var20;
 	}
 
@@ -907,7 +908,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var21
 	 *            the new var21
 	 */
-	public void setVar21(Boolean var21) {
+	public void setVar21(Evaluacion var21) {
 		this.var21 = var21;
 	}
 
@@ -917,7 +918,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var22
 	 *            the new var22
 	 */
-	public void setVar22(Boolean var22) {
+	public void setVar22(Evaluacion var22) {
 		this.var22 = var22;
 	}
 
@@ -927,7 +928,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var23
 	 *            the new var23
 	 */
-	public void setVar23(Boolean var23) {
+	public void setVar23(Evaluacion var23) {
 		this.var23 = var23;
 	}
 
@@ -937,7 +938,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var24
 	 *            the new var24
 	 */
-	public void setVar24(Boolean var24) {
+	public void setVar24(Evaluacion var24) {
 		this.var24 = var24;
 	}
 
@@ -947,7 +948,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var25
 	 *            the new var25
 	 */
-	public void setVar25(Boolean var25) {
+	public void setVar25(Evaluacion var25) {
 		this.var25 = var25;
 	}
 
@@ -957,7 +958,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var26
 	 *            the new var26
 	 */
-	public void setVar26(Boolean var26) {
+	public void setVar26(Evaluacion var26) {
 		this.var26 = var26;
 	}
 
@@ -967,7 +968,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var27
 	 *            the new var27
 	 */
-	public void setVar27(Boolean var27) {
+	public void setVar27(Evaluacion var27) {
 		this.var27 = var27;
 	}
 
@@ -977,7 +978,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var28
 	 *            the new var28
 	 */
-	public void setVar28(Boolean var28) {
+	public void setVar28(Evaluacion var28) {
 		this.var28 = var28;
 	}
 
@@ -987,7 +988,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var29
 	 *            the new var29
 	 */
-	public void setVar29(Boolean var29) {
+	public void setVar29(Evaluacion var29) {
 		this.var29 = var29;
 	}
 
@@ -997,7 +998,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var3
 	 *            the new var3
 	 */
-	public void setVar3(Boolean var3) {
+	public void setVar3(Evaluacion var3) {
 		this.var3 = var3;
 	}
 
@@ -1007,7 +1008,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var30
 	 *            the new var30
 	 */
-	public void setVar30(Boolean var30) {
+	public void setVar30(Evaluacion var30) {
 		this.var30 = var30;
 	}
 
@@ -1017,7 +1018,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var31
 	 *            the new var31
 	 */
-	public void setVar31(Boolean var31) {
+	public void setVar31(Evaluacion var31) {
 		this.var31 = var31;
 	}
 
@@ -1027,7 +1028,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var32
 	 *            the new var32
 	 */
-	public void setVar32(Boolean var32) {
+	public void setVar32(Evaluacion var32) {
 		this.var32 = var32;
 	}
 
@@ -1037,7 +1038,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var33
 	 *            the new var33
 	 */
-	public void setVar33(Boolean var33) {
+	public void setVar33(Evaluacion var33) {
 		this.var33 = var33;
 	}
 
@@ -1047,7 +1048,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var34
 	 *            the new var34
 	 */
-	public void setVar34(Boolean var34) {
+	public void setVar34(Evaluacion var34) {
 		this.var34 = var34;
 	}
 
@@ -1057,7 +1058,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var35
 	 *            the new var35
 	 */
-	public void setVar35(Boolean var35) {
+	public void setVar35(Evaluacion var35) {
 		this.var35 = var35;
 	}
 
@@ -1067,7 +1068,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var36
 	 *            the new var36
 	 */
-	public void setVar36(Boolean var36) {
+	public void setVar36(Evaluacion var36) {
 		this.var36 = var36;
 	}
 
@@ -1077,7 +1078,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var37
 	 *            the new var37
 	 */
-	public void setVar37(Boolean var37) {
+	public void setVar37(Evaluacion var37) {
 		this.var37 = var37;
 	}
 
@@ -1087,7 +1088,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var4
 	 *            the new var4
 	 */
-	public void setVar4(Boolean var4) {
+	public void setVar4(Evaluacion var4) {
 		this.var4 = var4;
 	}
 
@@ -1097,7 +1098,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var5
 	 *            the new var5
 	 */
-	public void setVar5(Boolean var5) {
+	public void setVar5(Evaluacion var5) {
 		this.var5 = var5;
 	}
 
@@ -1107,7 +1108,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var6
 	 *            the new var6
 	 */
-	public void setVar6(Boolean var6) {
+	public void setVar6(Evaluacion var6) {
 		this.var6 = var6;
 	}
 
@@ -1117,7 +1118,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var7
 	 *            the new var7
 	 */
-	public void setVar7(Boolean var7) {
+	public void setVar7(Evaluacion var7) {
 		this.var7 = var7;
 	}
 
@@ -1127,7 +1128,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var8
 	 *            the new var8
 	 */
-	public void setVar8(Boolean var8) {
+	public void setVar8(Evaluacion var8) {
 		this.var8 = var8;
 	}
 
@@ -1137,7 +1138,7 @@ public class GrossMotorFunction implements IModelHospital {
 	 * @param var9
 	 *            the new var9
 	 */
-	public void setVar9(Boolean var9) {
+	public void setVar9(Evaluacion var9) {
 		this.var9 = var9;
 	}
 
