@@ -11,18 +11,7 @@
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		<link type="text/css" rel="stylesheet" href="../css/video-js.min.css" /> 
 		
-		<script type="text/javascript" src="../cordova.js"></script> 
-		<script type="text/javascript" src="../index.js"></script>
-		<script type="text/javascript" src='../js/server.js'></script>
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src='../js/jquery/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery/jquery.mobile-1.4.1.min.js'></script>
-		<script type="text/javascript" src="../js/jquery/jquery.video-4.3.0.js"></script>		
-		<script type="text/javascript" src="../js/pages/video.js"></script>
-				
-		<script type="text/javascript">
-			generic.initialize(video.recuperar);
-		</script>
+		<script data-main="../js/pages/video" src="../js/require.min.js"></script>
 	</head>
 	
 	<body>
@@ -54,6 +43,9 @@
 			<!-- Contenido -->
 			<div data-role="content">
 				<div class="content2">
+					<input type="hidden" id="idPaciente" />
+					<input type="hidden" id="idExploracion" />
+					<input type="hidden" id="idVideo" />
 					<span id="numeroVideo"></span><br>
 					<span class="videoFeatures" id="nombreVideo"></span><br>
 					<span class="videoFeatures" id="duracionVideo"></span><br>

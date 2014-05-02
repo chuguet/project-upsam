@@ -16,13 +16,13 @@ import com.upsam.hospital.model.repository.IUsuarioRepository;
 class UsuarioRepository implements IUsuarioRepository {
 
 	/** The Constant QUERY_EMAIL. */
-	private static final String QUERY_EMAIL = "from Usuario where email = ?";
+	private static final String QUERY_EMAIL = "from Usuario where EMAIL = ?";
 
 	/** The Constant QUERY_TOKEN. */
-	private static final String QUERY_TOKEN = "from Usuario where token = ?";
+	private static final String QUERY_TOKEN = "from Usuario where TOKEN = ?";
 
 	/** The Constant QUERY_USER. */
-	private static final String QUERY_USER = "from Usuario where usuario = ?";
+	private static final String QUERY_USER = "from Usuario where USUARIO = ?";
 
 	/** The hibernate template. */
 	@Inject

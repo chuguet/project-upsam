@@ -36,9 +36,6 @@ import com.upsam.hospital.model.jaxb.EmxDataFile;
 @Component
 public class ExploracionUtilDTO implements IExploracionUtilDTO {
 
-	/** The Constant DATE_FORMATTER. */
-	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy");
-
 	/** The Constant DATE_TIME_FORMATTER. */
 	private static final SimpleDateFormat DATE_TIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 

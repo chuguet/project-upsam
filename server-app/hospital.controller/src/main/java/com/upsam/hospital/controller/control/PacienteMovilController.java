@@ -23,27 +23,35 @@ import com.upsam.hospital.controller.dto.AntecedentesRelacionadosPCIDTO;
 import com.upsam.hospital.controller.dto.ExploracionDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
+import com.upsam.hospital.controller.dto.GrossMotorFunctionDTO;
 import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.PacienteMovilDTO;
+import com.upsam.hospital.controller.dto.ValoracionArticularMuscularDTO;
 import com.upsam.hospital.controller.dto.VideoDTO;
 import com.upsam.hospital.controller.dto.util.IAntecedentesPersonalesUtilDTO;
 import com.upsam.hospital.controller.dto.util.IAntecedentesRelacionadosPCIUtilDTO;
 import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
+import com.upsam.hospital.controller.dto.util.IGrossMotorFunctionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPacienteMovilUtilDTO;
+import com.upsam.hospital.controller.dto.util.IValoracionArticularMuscularUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.AntecedentesPersonales;
 import com.upsam.hospital.model.beans.AntecedentesRelacionadosPCI;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
+import com.upsam.hospital.model.beans.GrossMotorFunction;
 import com.upsam.hospital.model.beans.Paciente;
+import com.upsam.hospital.model.beans.ValoracionArticularMuscular;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.service.IAntecedentesPersonalesService;
 import com.upsam.hospital.model.service.IAntecedentesRelacionadosPCIService;
 import com.upsam.hospital.model.service.IExploracionService;
 import com.upsam.hospital.model.service.IFicheroEMTService;
+import com.upsam.hospital.model.service.IGrossMotorFunctionService;
 import com.upsam.hospital.model.service.IPacienteService;
+import com.upsam.hospital.model.service.IValoracionArticularMuscularService;
 import com.upsam.hospital.model.service.IVideoService;
 
 // TODO: Auto-generated Javadoc
@@ -57,13 +65,21 @@ public class PacienteMovilController {
 	/** The Constant LOG. */
 	private final static Log LOG = LogFactory.getLog(PacienteMovilController.class);
 
+	/** The antecedentes personales service. */
+	@Inject
+	private IAntecedentesPersonalesService antecedentesPersonalesService;
+
+	/** The antecedentes personales util dto. */
+	@Inject
+	private IAntecedentesPersonalesUtilDTO antecedentesPersonalesUtilDTO;
+
 	/** The antecedentes personales pci service. */
 	@Inject
 	private IAntecedentesRelacionadosPCIService antecedentesRelacionadosPCIService;
 
-	/** The antecedentes personales service. */
+	/** The antecedentes relacionados pci util dto. */
 	@Inject
-	private IAntecedentesPersonalesService antecedentesPersonalesService;
+	private IAntecedentesRelacionadosPCIUtilDTO antecedentesRelacionadosPCIUtilDTO;
 
 	/** The exploracion service. */
 	@Inject
@@ -77,6 +93,14 @@ public class PacienteMovilController {
 	@Inject
 	private IFicheroEMTService ficheroEMTService;
 
+	/** The gross motor function service. */
+	@Inject
+	private IGrossMotorFunctionService grossMotorFunctionService;
+
+	/** The gross motor function util dto. */
+	@Inject
+	private IGrossMotorFunctionUtilDTO grossMotorFunctionUtilDTO;
+
 	/** The paciente movil util dto. */
 	@Inject
 	private IPacienteMovilUtilDTO pacienteMovilUtilDTO;
@@ -85,6 +109,14 @@ public class PacienteMovilController {
 	@Inject
 	private IPacienteService pacienteService;
 
+	/** The valoracion articular muscular service. */
+	@Inject
+	private IValoracionArticularMuscularService valoracionArticularMuscularService;
+
+	/** The valoracion articular muscular util dto. */
+	@Inject
+	private IValoracionArticularMuscularUtilDTO valoracionArticularMuscularUtilDTO;
+
 	/** The video service. */
 	@Inject
 	private IVideoService videoService;
@@ -92,12 +124,6 @@ public class PacienteMovilController {
 	/** The video util dto. */
 	@Inject
 	private IVideoUtilDTO videoUtilDTO;
-
-	@Inject
-	private IAntecedentesPersonalesUtilDTO antecedentesPersonalesUtilDTO;
-
-	@Inject
-	private IAntecedentesRelacionadosPCIUtilDTO antecedentesRelacionadosPCIUtilDTO;
 
 	/**
 	 * Descargar video.
@@ -130,6 +156,7 @@ public class PacienteMovilController {
 			response.flushBuffer();
 		}
 		catch (IOException ex) {
+			LOG.debug(ex.getMessage());
 			throw ex;
 		}
 		return null;
@@ -221,8 +248,8 @@ public class PacienteMovilController {
 			Exploracion exploracion = this.exploracionService.findOne(idExploracion);
 			result = this.exploracionUtilDTO.toRest(exploracion);
 		}
-		catch (DataBaseException e1) {
-			e1.printStackTrace();
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
 		}
 		catch (TransferObjectException e) {
 			LOG.error(e.getMessage());
@@ -242,7 +269,7 @@ public class PacienteMovilController {
 	 *            the id
 	 * @return the video from paciente
 	 */
-	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion/}video/{id}")
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/video/{id}")
 	public @ResponseBody
 	VideoDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id) {
 		VideoDTO result = null;
@@ -251,8 +278,8 @@ public class PacienteMovilController {
 			video = this.videoService.findOne(idPaciente, idExploracion, id);
 			result = this.videoUtilDTO.toRest(video);
 		}
-		catch (DataBaseException | NotFoundException e1) {
-			e1.printStackTrace();
+		catch (DataBaseException | NotFoundException e) {
+			LOG.error(e.getMessage());
 		}
 		catch (TransferObjectException e) {
 			LOG.error(e.getMessage());
@@ -277,6 +304,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Paciente creado correctamente", true, paciente);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO(new StringBuffer("Ya existe el paciente con el numero de identificacion ").append(pacienteMovilDTO.getNumeroIdentificacion()).append(" en base de datos.").toString(), false);
 		}
 		catch (TransferObjectException e) {
@@ -288,6 +316,8 @@ public class PacienteMovilController {
 	/**
 	 * Insert antecedentes personales.
 	 * 
+	 * @param idPaciente
+	 *            the id paciente
 	 * @param idExploracion
 	 *            the id exploracion
 	 * @param antecedentesPersonalesDTO
@@ -304,6 +334,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Antecedentes personales insertados correctamente", true, nuevosAntecedentesDTO);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al insertar los antecedentes personales en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
@@ -312,6 +343,17 @@ public class PacienteMovilController {
 		}
 	}
 
+	/**
+	 * Insert antecedentes relacionados pci.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @param antecedentesRelacionadosPCIDTO
+	 *            the antecedentes relacionados pcidto
+	 * @return the mensaje dto
+	 */
 	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesRelacionadosPCI", method = RequestMethod.POST)
 	public @ResponseBody
 	MensajeDTO insertAntecedentesRelacionadosPCI(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @RequestBody AntecedentesRelacionadosPCIDTO antecedentesRelacionadosPCIDTO) {
@@ -322,6 +364,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Los antecedentes relacionados con PCI se han guardado correctamente", true, nuevosAntecedentesDTO);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al insertar los antecedentes relacionados con PCI en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
@@ -350,11 +393,72 @@ public class PacienteMovilController {
 			return new MensajeDTO("Exploracion guardada correctamente", true, nuevaExploracion);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al guardar la exploracion.", false);
 		}
 		catch (TransferObjectException e) {
 			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error de conversion de la exploracion", false);
+		}
+	}
+
+	/**
+	 * Insert gross motor function.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @param grossMotorFunctionDTO
+	 *            the gross motor function dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/grossMotorFunction", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO insertGrossMotorFunction(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @RequestBody GrossMotorFunctionDTO grossMotorFunctionDTO) {
+		try {
+			GrossMotorFunction grossMotorFunction = grossMotorFunctionUtilDTO.toBusiness(grossMotorFunctionDTO);
+			grossMotorFunctionService.save(grossMotorFunction);
+			GrossMotorFunctionDTO nuevoGrossMotorFunctionDTO = grossMotorFunctionUtilDTO.toRest(grossMotorFunction);
+			return new MensajeDTO("Gross motor function insertado correctamente", true, nuevoGrossMotorFunctionDTO);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error al insertar gross motor function en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion de gross motor function", false);
+		}
+	}
+
+	/**
+	 * Insert valoracion articular muscular.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @param valoracionArticularMuscularDTO
+	 *            the valoracion articular muscular dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/valoracionArticularMuscular", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO insertValoracionArticularMuscular(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @RequestBody ValoracionArticularMuscularDTO valoracionArticularMuscularDTO) {
+		try {
+			ValoracionArticularMuscular valoracionArticularMuscular = valoracionArticularMuscularUtilDTO.toBusiness(valoracionArticularMuscularDTO);
+			valoracionArticularMuscularService.save(valoracionArticularMuscular);
+			ValoracionArticularMuscularDTO nuevaValoracionArticularMuscularDTO = valoracionArticularMuscularUtilDTO.toRest(valoracionArticularMuscular);
+			return new MensajeDTO("La valoracion articular muscular se ha guardado correctamente", true, nuevaValoracionArticularMuscularDTO);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error al insertar la valoracion articular muscular en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion en la valoracion articular muscular", false);
 		}
 	}
 
@@ -465,6 +569,8 @@ public class PacienteMovilController {
 	/**
 	 * Retrieve antecedentes personales pci.
 	 * 
+	 * @param idPaciente
+	 *            the id paciente
 	 * @param idExploracion
 	 *            the id exploracion
 	 * @return the antecedentes personales pcidto
@@ -518,6 +624,66 @@ public class PacienteMovilController {
 	}
 
 	/**
+	 * Retrieve gross motor function.
+	 * 
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @return the gross motor function dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/grossMotorFunction", method = RequestMethod.GET)
+	public @ResponseBody
+	GrossMotorFunctionDTO retrieveGrossMotorFunction(@PathVariable("idExploracion") Integer idExploracion) {
+		GrossMotorFunctionDTO grossMotorFunctionDTO = null;
+		try {
+			GrossMotorFunction grossMotorFunction = grossMotorFunctionService.findByExploracion(idExploracion);
+			if (grossMotorFunction != null) {
+				grossMotorFunctionDTO = grossMotorFunctionUtilDTO.toRest(grossMotorFunction);
+			}
+			else {
+				grossMotorFunctionDTO = new GrossMotorFunctionDTO();
+			}
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+		}
+		return grossMotorFunctionDTO;
+	}
+
+	/**
+	 * Retrieve valoracion articular muscular.
+	 * 
+	 * @param idPaciente
+	 *            the id paciente
+	 * @param idExploracion
+	 *            the id exploracion
+	 * @return the valoracion articular muscular dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/valoracionArticularMuscular", method = RequestMethod.GET)
+	public @ResponseBody
+	ValoracionArticularMuscularDTO retrieveValoracionArticularMuscular(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
+		ValoracionArticularMuscularDTO valoracionArticularMuscularDTO = null;
+		try {
+			ValoracionArticularMuscular valoracionArticularMuscular = valoracionArticularMuscularService.findByExploracion(idExploracion);
+			if (valoracionArticularMuscular != null) {
+				valoracionArticularMuscularDTO = valoracionArticularMuscularUtilDTO.toRest(valoracionArticularMuscular);
+			}
+			else {
+				valoracionArticularMuscularDTO = new ValoracionArticularMuscularDTO();
+			}
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+		}
+		return valoracionArticularMuscularDTO;
+	}
+
+	/**
 	 * Update.
 	 * 
 	 * @param pacienteMovilDTO
@@ -533,6 +699,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Paciente modificado correctamente", true);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al actualizar el paciente en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
@@ -559,6 +726,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Antecedentes personales actualizados correctamente", true);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al actualizar los antecedentes personales en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
@@ -567,6 +735,15 @@ public class PacienteMovilController {
 		}
 	}
 
+	/**
+	 * Update antecedentes relacionados pci.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param antecedentesRelacionadosPCIDTO
+	 *            the antecedentes relacionados pcidto
+	 * @return the mensaje dto
+	 */
 	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/antecedentesRelacionadosPCI/{id}", method = RequestMethod.POST)
 	public @ResponseBody
 	MensajeDTO updateAntecedentesRelacionadosPCI(@PathVariable("id") Integer id, @RequestBody AntecedentesRelacionadosPCIDTO antecedentesRelacionadosPCIDTO) {
@@ -576,6 +753,7 @@ public class PacienteMovilController {
 			return new MensajeDTO("Antecedentes personales PCI actualizados correctamente", true);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al actualizar los antecedentes personales PCI en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
@@ -606,11 +784,66 @@ public class PacienteMovilController {
 			return new MensajeDTO("Exploracion actualizada correctamente", true, nuevaExploracion);
 		}
 		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error al insertar la exploracion en base de datos.", false);
 		}
 		catch (TransferObjectException e) {
 			LOG.debug(e.getMessage());
 			return new MensajeDTO("Error de conversion de la exploracion", false);
+		}
+	}
+
+	/**
+	 * Update gross motor function.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param grossMotorFunctionDTO
+	 *            the gross motor function dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/grossMotorFunction/{id}", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO updateGrossMotorFunction(@PathVariable("id") Integer id, @RequestBody GrossMotorFunctionDTO grossMotorFunctionDTO) {
+		try {
+			GrossMotorFunction grossMotorFunction = grossMotorFunctionUtilDTO.toBusiness(grossMotorFunctionDTO);
+			grossMotorFunctionService.update(grossMotorFunction);
+			return new MensajeDTO("Gross motor function actualizado correctamente", true);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error al actualizar gross motor function en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion de gross motor function", false);
+		}
+	}
+
+	/**
+	 * Update valoracion articular muscular.
+	 * 
+	 * @param id
+	 *            the id
+	 * @param valoracionArticularMuscularDTO
+	 *            the valoracion articular muscular dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "/{idPaciente}/exploracion/{idExploracion}/valoracionArticularMuscular/{id}", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO updateValoracionArticularMuscular(@PathVariable("id") Integer id, @RequestBody ValoracionArticularMuscularDTO valoracionArticularMuscularDTO) {
+		try {
+			ValoracionArticularMuscular valoracionArticularMuscular = valoracionArticularMuscularUtilDTO.toBusiness(valoracionArticularMuscularDTO);
+			valoracionArticularMuscularService.update(valoracionArticularMuscular);
+			return new MensajeDTO("Valoracion articular muscular actualizada correctamente", true);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error al actualizar la valoracion articular muscular en base de datos.", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			return new MensajeDTO("Error de conversion de la Valoracion articular muscular", false);
 		}
 	}
 }
