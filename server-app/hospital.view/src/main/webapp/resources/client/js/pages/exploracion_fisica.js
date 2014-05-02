@@ -22,7 +22,6 @@ var exploracionFisica = {
 		}
 		else{
 			//Entramos en modo alta
-			$("#subtitle").html("Nueva Exploraci&oacute;n");
 			$("#lblFechaExploracion").html(generic.getActualDate());
 			$("#listaVideos").hide();
 			generic.noLoading();

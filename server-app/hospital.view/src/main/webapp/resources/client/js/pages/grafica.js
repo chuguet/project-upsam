@@ -1,5 +1,31 @@
+/*
+requirejs.config({
+   paths: {
+	   'cordova' : '../../cordova', 
+	   'index' : '../index', 
+	   'jquery' : '../jquery/jquery-1.9.1.min', 
+	   'jmobile' : '../jquery/jquery.mobile-1.4.1', 
+	   'generic' : '../ctrl.generic', 
+	   'server' : '../server', 
+	   'jqplot' : '../jquery/jquery.jqplot', 
+	   'pointLabels' : '../jquery/jqplot.pointLabels'
+    }, 
+
+    // Use shim for plugins that does not support ADM
+    shim: {
+        'generic': ['jquery'],
+        'jmobile': ['jquery'],
+        'server': ['jquery'],
+        'jqplot': ['jquery'],
+        'pointLabels': ['jquery', 'jqplot']
+    },
+    enforceDefine: true
+});
+*/
+
+
 define([
-		"../../cordova", "../index", "../jquery/jquery-1.9.1.min", "../jquery/jquery.mobile-1.4.1", "../ctrl.generic", "../server", "../jquery/jqplot.pointLabels", "../jquery/jquery.jqplot"
+		"../../cordova", "../index", "../jquery/jquery-1.9.1.min", "../jquery/jquery.mobile-1.4.1", "../ctrl.generic", "../server", "../jquery/jquery.jqplot" 
 ], function($) {
 	generic.initialize();
 	grafica.recuperar();
@@ -18,7 +44,7 @@ var grafica = {
             });
 		},
 		
-		'recuperarCallback' : function(parameters){
+		'recuperarCallback' : function(parameters){ 
 			var numero = generic.getURLParameter("num");
 			$("#numeroGrafica").html("Gr&aacute;fica  " + numero);
 			grafica.anglesDTO = parameters.tablaDatos.anglesDTO;
@@ -34,6 +60,7 @@ var grafica = {
 			 	var size = line1.length * 50;
 			 	$("#chart1").children().remove();
 			  	$("#chart1").width(size);
+			  	$.jqplot.config.enablePlugins = true;
 			  	var plot1 = $.jqplot('chart1', [line1, line2], {
 					seriesDefaults: { 
 						showMarker:false,
