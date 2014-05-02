@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="com.upsam.hospital.model.beans.Paciente" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Paciente.java" binary="false" 
+  <class id="1" language="java" name="com.upsam.hospital.model.beans.Exploracion" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Exploracion.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="769" y="-182"/>    
+    <position height="1575" width="963" x="957" y="2430"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -14,204 +14,325 @@
   <class id="2" language="java" name="com.upsam.hospital.model.beans.Usuario" project="hospital.model" 
     file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Usuario.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="97" y="-282"/>    
+    <position height="675" width="213" x="299" y="-2029"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="com.upsam.hospital.model.beans.TablaDatos" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/TablaDatos.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="769" y="342"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="com.upsam.hospital.model.beans.Point" project="hospital.model" 
+  <class id="3" language="java" name="com.upsam.hospital.model.beans.Point" project="hospital.model" 
     file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Point.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1040" y="29"/>    
+    <position height="243" width="150" x="683" y="2430"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <enumeration id="5" language="java" name="com.upsam.hospital.model.enums.Rol" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/enums/Rol.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="83" y="104"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </enumeration>  
-  <enumeration id="6" language="java" name="com.upsam.hospital.model.enums.UnidadMedida" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/enums/UnidadMedida.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="81" y="302"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </enumeration>  
-  <enumeration id="7" language="java" name="com.upsam.hospital.model.enums.TipoMedida" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/enums/TipoMedida.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="103" y="468"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
-      visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </enumeration>  
-  <interface id="8" language="java" name="com.upsam.hospital.model.beans.IModelHospital" project="hospital.model" 
+  <interface id="4" language="java" name="com.upsam.hospital.model.beans.IModelHospital" project="hospital.model" 
     file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/IModelHospital.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1067" y="-487"/>    
+    <position height="63" width="150" x="1941" y="4045"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="9" language="java" name="com.upsam.hospital.model.beans.FicheroEMT" project="hospital.model" 
+  <class id="5" language="java" name="com.upsam.hospital.model.beans.Video" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Video.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="423" width="184" x="957" y="-2029"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.upsam.hospital.model.beans.Angle" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Angle.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="297" width="178" x="81" y="-2029"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.upsam.hospital.model.beans.FicheroEMT" project="hospital.model" 
     file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/FicheroEMT.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="386" y="330"/>    
+    <position height="477" width="365" x="552" y="-2029"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="com.upsam.hospital.model.beans.Angle" project="hospital.model" 
-    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Angle.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1124" y="407"/>    
+  <class id="8" language="java" name="com.upsam.hospital.model.beans.TablaDatos" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/TablaDatos.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="243" width="184" x="552" y="-2312"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="11">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="12" name="rol"/>      
-      <multiplicity id="13" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <class id="9" language="java" name="com.upsam.hospital.model.beans.AntecedentesRelacionadosPCI" 
+    project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/AntecedentesRelacionadosPCI.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="2043" width="1474" x="4325" y="-2029"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="com.upsam.hospital.model.beans.GrossMotorFunction" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/GrossMotorFunction.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="2313" width="2272" x="6770" y="-2029"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.upsam.hospital.model.beans.AntecedentesPersonales" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/AntecedentesPersonales.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="1359" width="891" x="5839" y="-2029"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="com.upsam.hospital.model.beans.ValoracionArticularMuscular" 
+    project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/ValoracionArticularMuscular.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="4419" width="2620" x="1665" y="-2029"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="com.upsam.hospital.model.beans.Paciente" project="hospital.model" 
+    file="/hospital.model/src/main/java/com/upsam/hospital/model/beans/Paciente.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="801" width="444" x="1181" y="-2029"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
   <association id="14">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="15" name="tipoMedida"/>      
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="15" name="exploracion"/>      
       <multiplicity id="16" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="17">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="18" name="exploracion3D"/>      
-      <multiplicity id="19" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="20">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="21" name="tablaDatos"/>      
-      <multiplicity id="22" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="23">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <association id="24">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="25" name="fields"/>      
-      <multiplicity id="26" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="27">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <realization id="28">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="8"/>  
-  </realization>  
-  <association id="29">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="30" name="unidadMedida"/>      
-      <multiplicity id="31" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="32">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="33" name="rows"/>      
-      <multiplicity id="34" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="35">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="36" name="exploracion3D"/>      
-      <multiplicity id="37" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="38">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="39" name="paciente"/>      
-      <multiplicity id="40" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="41">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="42" name="row"/>      
-      <multiplicity id="43" minimum="0" maximum="1"/>    
+  <realization id="17">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="18">    
+    <bendpoint x="905" y="2430"/>    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="19">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="20" name="tablaDatos"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="44">    
+  <association id="22">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="23" name="ficheroEMT"/>      
+      <multiplicity id="24" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="25">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="26" name="usuario"/>      
+      <multiplicity id="27" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="28">    
+    <bendpoint x="863" y="2430"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="29">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="30" name="videos"/>      
+      <multiplicity id="31" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="32">    
+    <bendpoint x="884" y="2430"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="33">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="45" name="tablaDatos"/>      
-      <multiplicity id="46" minimum="0" maximum="1"/>    
+      <attribute id="34" name="exploracion"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="36">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="37">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="38" name="exploracion"/>      
+      <multiplicity id="39" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="40">    
+    <bendpoint x="1971" y="2430"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="41">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="42" name="exploracion"/>      
+      <multiplicity id="43" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="44">    
+    <bendpoint x="9072" y="-2029"/>    
+    <bendpoint x="9072" y="2430"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="45">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="46" name="tablaDatos"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="48">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="49" name="points"/>      
+      <multiplicity id="50" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="47">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="8"/>  
+  <realization id="51">    
+    <bendpoint x="1950" y="2430"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="4"/>  
   </realization>  
-  <realization id="48">    
-    <bendpoint x="1174" y="-84"/>    
+  <realization id="52">    
+    <bendpoint x="4364" y="2430"/>    
     <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="8"/>  
+    <end type="TARGET" refId="4"/>  
   </realization>  
-  <realization id="49">    
-    <bendpoint x="713" y="-84"/>    
+  <realization id="53">    
+    <bendpoint x="3899" y="2430"/>    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="54">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="55" name="angle"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="58" name="paciente"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="61" name="exploracion"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="63">    
+    <bendpoint x="3142" y="2430"/>    
     <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="8"/>  
+    <end type="TARGET" refId="4"/>  
   </realization>  
+  <association id="64">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="65" name="ficherosEMT"/>      
+      <multiplicity id="66" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="68" name="exploraciones"/>      
+      <multiplicity id="69" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="70">    
+    <bendpoint x="926" y="2430"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <association id="71">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="72" name="exploracion"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="75" name="exploracion"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="78" name="angles"/>      
+      <multiplicity id="79" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
