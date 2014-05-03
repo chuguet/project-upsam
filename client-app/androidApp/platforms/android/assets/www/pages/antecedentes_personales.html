@@ -10,44 +10,50 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>	
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>
-		<script type="text/javascript" src="../js/pages/antecedentes_personales.js"></script>
-		
-		
-		<script type="text/javascript">
-			generic.initialize();
-		</script>		
+		<script data-main="../js/pages/antecedentes_personales" src="../js/require.min.js"></script>
 	</head>
 
 	<body>
 		<div data-role="page">
-			<!-- Cabecera -->
-			<div data-role="header" >                    
-				<h3>Antecedentes personales - LAM</h3>
-				<a data-rel="back" data-icon="back">Volver</a>
-			   <a href="index.html" data-icon="check">Guardar</a>
-			</div>
+			<div data-role="header">
+		        <div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>
+		        <h1>LAM</h1>
+		        <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+		        	<a href="#" data-icon="check" data-role="button" onclick="javascript:antecedentesPersonales.insertar()" id="btnGuardar">Guardar</a>
+		        </div>
+		        
+		        <div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 id="subtitle" class="subtitle">Nuevos Antecedentes Personales</h2>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Logout</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
+								<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
+								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+							</div>
+						</div>
+					</div>
+				</div>
+     		</div>
 			
 			<!-- Contenido -->
-			<div data-role="content">
-				<h2>Antecedentes personales</h2>				
-				
+			<div data-role="content">			
+				<input type="hidden" id="idPaciente" />
+				<input type="hidden" id="idExploracion" />
+				<input type="hidden" id="idAntecedentes" />
+				<h3>Antecedentes m&eacute;dicos</h3>  
 				<div class="content2">
-					<!-- Antecedentes medicos-->				
-					<div data-role="fieldcontain">  
-						<label for="antMedicos">Antecedentes m&eacute;dicos</label>  
-						<input type="text" class="txt-speech" name="antMedicos" id="antMedicos" value=""  />
-					</div>				
-					
-					<!--Epilepsia -->
 					<div data-role="fieldcontain">  
 						<label for="epilepsia">Epilepsia:</label>  
-						<select onchange="javascript:onchangeEpilepsia();" name="epilepsia" id="epilepsia" data-role="slider">    
+						<select onchange="javascript:antecedentesPersonales.onChangeEpilepsia();" name="epilepsia" id="epilepsia" data-role="slider">    
 							<option value="0">No</option>    
 							<option value="1">Si</option>  
 						</select>
@@ -57,38 +63,48 @@
 						<!-- Tipo epilepsia: si epilepsia = SI -->
 						<div data-role="fieldcontain">  
 							<label for="tipoEpilepsia">Tipo epilepsia:</label>  
-							<input type="text" class="txt-speech" name="tipoEpilepsia" id="tipoEpilepsia" value=""  />
+							<input type="text" class="txt-speech" name="tipoEpilepsia" id="tipoEpilepsia" />
 						</div>
 					
 						<!-- Fecha ultima crisis: si epilepsia = SI -->			
 						<div data-role="fieldcontain">  				
-							<label for="fecCrisis">Fecha &uacute;ltima crisis</label>
-							<input name="fecCrisis" id="fecCrisis" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />				
+							<label for="fechaUltimaCrisis">Fecha &uacute;ltima crisis</label>
+							<input id="fechaUltimaCrisis" name="fechaUltimaCrisis" class="txt-date" placeholder="dd/mm/yyyy" />
 						</div>
 					
 						<!-- Fecha convulsi&oacute;n: si epilepsia = SI -->			
 						<div data-role="fieldcontain">  				
-							<label for="fecConvulsion">Fecha &uacute;ltima convulsi&oacute;n</label>
-							<input name="fecConvulsion" id="fecConvulsion" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />				
+							<label for="fechaUltimaConvulsion">Fecha &uacute;ltima convulsi&oacute;n</label>
+							<input id="fechaUltimaConvulsion" name="fechaUltimaConvulsion" class="txt-date" placeholder="dd/mm/yyyy" />				
 						</div>
 					
 						<!-- Numero de crisis -->			
 						<div data-role="fieldcontain">  				
-							<label for="numCrisis">N&uacute;mero de crisis</label>				
-							<input type="range" name="numCrisis" id="numCrisis" value="0" min="0" max="100" />
+							<label for="numeroCrisis">N&uacute;mero de crisis</label>				
+							<input type="range" name="numeroCrisis" id="numeroCrisis" value="0" min="0" max="100" />
 						</div>
 					</div>	
 					
-					<!-- Historial de caidas ultimo a�o -->			
-					<div data-role="fieldcontain">  				
-						<label for="numCaidas">Número de ca&iacute;das en el &uacute;ltimo año</label>				
-						<input type="range" name="numCaidas" id="numCaidas" value="0" min="0" max="100" />
+					<div data-role="fieldcontain">  
+						<label for="caidas">Ca&iacute;das en el &uacute;ltimo a&ntilde;o (> frec de lo normal para un ni&ntilde;o de su edad):</label>  
+						<select onchange="javascript:antecedentesPersonales.onChangeHistorialCaidas();" name="caidas" id="caidas" data-role="slider">    
+							<option value="0">No</option>    
+							<option value="1">Si</option>  
+						</select>
 					</div>
 					
-					<!-- Fecha de &uacute;ltima caida -->			
-					<div data-role="fieldcontain">  				
-						<label for="fecCaida">Fecha de la &uacute;ltima ca&iacute;da</label>
-						<input name="fecCaida" id="fecCaida" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />				
+					<div id="divCaidas" style="display:none">
+						<!-- Historial de caidas ultimo anno -->			
+						<div data-role="fieldcontain">  				
+							<label for="numeroCaidas">Número de ca&iacute;das en el &uacute;ltimo a&ntilde;o</label>				
+							<input type="range" name="numeroCaidas" id="numeroCaidas" value="0" min="0" max="100" />
+						</div>
+						
+						<!-- Fecha de &uacute;ltima caida -->			
+						<div data-role="fieldcontain">  				
+							<label for="fechaUltimaCaida">Fecha de la &uacute;ltima ca&iacute;da</label>
+							<input id="fechaUltimaCaida" name="fechaUltimaCaida" class="txt-date" placeholder="dd/mm/yyyy" />	
+						</div>
 					</div>
 	
 					<!-- Audici&oacute;n -->			
@@ -105,18 +121,18 @@
 					
 					<!-- Lenguaje y cognici&oacute;n alteraciones -->			
 					<div data-role="fieldcontain">  				
-						<label for="lenguaje">Lenguaje y cognici&oacute;n - alteraciones</label>
-						<select onchange="javascript:onchangeLenguaje();" name="lenguaje" id="lenguaje" data-role="slider">    
+						<label for="lenguajeCognicion">Lenguaje y cognici&oacute;n - alteraciones</label>
+						<select onchange="javascript:antecedentesPersonales.onChangeLenguaje();" name="lenguajeCognicion" id="lenguajeCognicion" data-role="slider">    
 							<option value="0">No</option>    
 							<option value="1">Si</option>  
 						</select>
 					</div>
 					
-					<div id="divLenguaje" style="display:none">
+					<div id="divLenguajeCognicion" style="display:none">
 						<!-- Compresion -->			
 						<div data-role="fieldcontain">
 							<fieldset data-role="controlgroup" data-type="horizontal">
-								<legend>Comprensi&oacute;n:</legend>
+								<legend>Comprensi&oacute;n</legend>
 									<input type="radio" name="comprension" id="comprensionComp" value="completa" />
 									<label for="comprensionComp">Completa</label>
 	
@@ -127,12 +143,15 @@
 	
 						<!--Entiende y sigue ordenes -->
 						<div data-role="fieldcontain">  
-							<label for="entiendeOrdSimple">Entiende y sigue ordenes:</label>  
-							Simples<select name="entiendeOrdSimple" id="entiendeOrdSimple" data-role="slider">    
+							<label for="entiendeOrdenesSimples">Entiende y sigue ordenes simples</label>  
+							<select name="entiendeOrdenesSimples" id="entiendeOrdenesSimples" data-role="slider">    
 								<option value="0">No</option>    
 								<option value="1">Si</option>  
 							</select>
-							&nbsp;&nbsp;&nbsp;&nbsp;Complejas<select id="entiendeOrdSimple" name="entiendeOrdSimple"  data-role="slider">    
+						</div>
+						<div data-role="fieldcontain">  
+							<label for="entiendeOrdenesComplejas">Entiende y sigue ordenes complejas</label>  
+							<select id="entiendeOrdenesComplejas" name="entiendeOrdenesComplejas" data-role="slider">    
 								<option value="0">No</option>    
 								<option value="1">Si</option>  
 							</select>
@@ -140,8 +159,8 @@
 					
 						<!-- Necesidades y dolor -->			
 						<div data-role="fieldcontain">  				
-							<label for="neceDolor">Capaz de expresar necesidades y dolor</label>
-							<select name="neceDolor" id="neceDolor" data-role="slider">    
+							<label for="expresarNecesidadDolor">Capaz de expresar necesidades y dolor</label>
+							<select name="expresarNecesidadDolor" id="expresarNecesidadDolor" data-role="slider">    
 								<option value="0">No</option>    
 								<option value="1">Si</option>  
 							</select>
@@ -159,24 +178,32 @@
 					<h3>ANTECEDENTES INYECCIONES CON TOXINA BOTUL&Iacute;NICA/FENOL</h3>
 					<!-- Número aproximado -->			
 					<div data-role="fieldcontain">  				
-						<label for="numCaidas">Número aproximado</label>				
-						<input type="range" name="numCaidas" id="numCaidas" value="0" min="0" max="4" />
+						<label for="numeroInyecciones">Número aproximado</label>				
+						<input type="range" name="numeroInyecciones" id="numeroInyecciones" value="0" min="0" max="4" />
 					</div>
 	
 					<!-- Fecha de dos ultimas sesiones -->			
 					<div data-role="fieldcontain">  				
-						<label for="fecUltSes">Fecha &uacute;ltima sesi&oacute;n</label>				
-						<input name="fecUltSes" id="fecUltSes" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />					
+						<label for="fechaUltimaSesion">Fecha &uacute;ltima sesi&oacute;n</label>			
+						<input id="fechaUltimaSesion" name="fechaUltimaSesion" class="txt-date" placeholder="dd/mm/yyyy" />
 					</div>
 					<div data-role="fieldcontain">  				
-						<label for="fecPenSes">Fecha penultima sesi&oacute;n</label>				
-						<input name="fecPenSes" id="fecPenSes" type="text" class="txt-date" readonly="true" placeholder="dd/mm/yyyy" data-options='{"mode":"flipbox", "useNewStyle":false}' />					
+						<label for="fechaPenultimaSesion">Fecha pen&uacute;ltima sesi&oacute;n</label>
+						<input id="fechaPenultimaSesion" name="fechaPenultimaSesion" class="txt-date" placeholder="dd/mm/yyyy" />					
 					</div>
 					
 					<!-- Localizaci&oacute;n del tratamiento -->			
 					<div data-role="fieldcontain">  				
-						<label for="localTratamiento">Localizaci&oacute;n del tratamiento</label>				
-						<textarea name="localTratamiento" class="txt-speech" id="localTratamiento"></textarea>
+						<label for="localizacionTratamiento">Localizaci&oacute;n del tratamiento</label>				
+						<select name="localizacionTratamiento" id="localizacionTratamiento" data-native-menu="false">    
+							<option value="1">Músculo 1</option>
+							<option value="2">Músculo 2</option>
+							<option value="3">Músculo 3</option>
+							<option value="4">Músculo 4</option>
+							<option value="5">Músculo 5</option>
+							<option value="6">Músculo 6</option>
+							<option value="7">Músculo 7</option>
+						</select>
 					</div>
 					
 					<h3>OTROS</h3>			

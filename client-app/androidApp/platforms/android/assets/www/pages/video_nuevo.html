@@ -10,83 +10,40 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>	
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>
-	
-		<script type="text/javascript">
-			generic.initialize();
-			
-			function captureSuccess(mediaFiles) {
-		    	for (var i = 0; i < mediaFiles.length; i++) {
-		            uploadFile(mediaFiles[i]);
-		        }
-		    }
-		
-		    // Called if something bad happens.
-		    function captureVideoError() {
-		        var msg = "Se ha producido un error durante la grabaci�n de v�deo";
-		        navigator.notification.alert(msg, null, 'Grabaci�n fallida');
-		    }
-		
-		    // A button will call this function
-		    //
-		    function captureVideo() {
-		        navigator.device.capture.captureVideo(captureSuccess, captureVideoError, {limit: 2});
-		    }
-		
-			function uploadFileSuccess(result){
-	            console.log('Upload success: ' + result.responseCode);
-	            console.log(result.bytesSent + ' bytes sent');
-	            var msg = "El v�deo se ha grabado y se ha subido correctamente al servidor";
-		        navigator.notification.alert(msg, null, 'Grabaci�n correcta');
-	        }
-	        
-	        function uploadFileError(error){
-	        	var msg = "Se ha producido un error durante la subida del v�deo al servidor";
-		        navigator.notification.alert(msg, null, 'Grabaci�n fallida');
-	        	console.log("An error has occurred: Code = " + error.code);
-	            console.log("upload error source " + error.source);
-	            console.log("upload error target " + error.target);
-	            console.log('Error uploading file ' + path + ': ' + error.code);
-	        }
-	        
-		    // Upload files to server
-		    function uploadFile(mediaFile) {
-		        var ft = new FileTransfer();
-		        var path = mediaFile.fullPath;
-		        var name = mediaFile.name;
-		        var options = new FileUploadOptions();
-		        options.fileKey = "file";
-		        options.fileName = mediaFile.name;
-		        options.mimeType = "multipart/form-data";
-		        options.chunkedMode = false;
-		        options.headers = { Connection: "close" };
-		        
-		        ft.upload(path,
-		            encodeURI(server.URI + "1/videoUpload"),
-		            uploadFileSuccess,
-		            uploadFileError,
-		            options);
-		    }
-		</script>
+		<script data-main="../js/pages/video" src="../js/require.min.js"></script>
 	</head>
 	<body>
 
 		<div data-role="page">
 			<!-- Cabecera -->
-			<div data-role="header">                    
-				<h3>Nuevo v&iacute;deo - LAM</h3>
-				<a data-rel="back" data-icon="back">Volver</a>
-			</div>			
+			<div data-role="header">
+				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>
+				<h1>LAM</h1>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 id="subtitle" class="subtitle">Grabaci&oacute;n de v&iacute;deo</h2>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Logout</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
+								<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
+								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>		
 			
 			<!-- Contenido -->
-			<div data-role="content">			
-				<h2>Nuevo v&iacute;deo</h2>
-				
+			<div data-role="content">
 				<div class="content2">
 					<!--Descripcion del video -->			
 					<div data-role="fieldcontain">  
@@ -95,8 +52,8 @@
 					</div>
 
 					<!--Grabacion -->
-					<div data-role="fieldcontain">					
-						<a data-role="button" data-icon="video" data-iconpos="top" onclick="captureVideo();">Grabar video</a>
+					<div data-role="fieldcontain" class="divBotonGrabar">					
+						<a data-role="button" data-icon="video" onclick="video.grabar();">Grabar video</a>
 					</div>
 				</div>				
 			</div>

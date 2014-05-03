@@ -10,65 +10,83 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>
-		<script type="text/javascript" src="../js/pages/antecedentes_relacionados_PCI.js"></script>
-		
-		<script type="text/javascript">
-			generic.initialize();		
-		</script>
+		<script data-main="../js/pages/antecedentes_relacionados_PCI" src="../js/require.min.js"></script>
 	</head>
 
 	<body>
-		<div data-role="page">		
-			<!-- Cabecera -->
-			<div data-role="header" >                    
-				<h3>Antecedentes relacionados con PCI</h3>
-				<a data-rel="back" data-icon="back">Volver</a>
-			   <a href="index.html" data-icon="check">Guardar</a>
-			</div>			
+		<div data-role="page">	
+			<div data-role="header">
+		        <div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>
+		        <h1>LAM</h1>
+		        <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+		            <a href="#" data-icon="delete" data-role="button" onclick="javascript:evaluacion_muscular_manual.server()" >Cancelar</a>
+		            <a href="#" data-icon="check" data-role="button" onclick="javascript:antecedentesRelacionadosPCI.insertar()" id="btnGuardar">Guardar</a>
+		        </div>
+		        
+		        <div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 id="subtitle" class="subtitle">Nuevos Antecedentes relacionados con PCI</h2>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Logout</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
+								<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
+								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+							</div>
+						</div>
+					</div>
+				</div>
+     		</div>
 			
 			<!-- Contenido -->
 			<div data-role="content">
-				
-				<h2>Antecedentes relacionados con PCI</h2>	
-				
+				<input type="hidden" id="idPaciente" />
+				<input type="hidden" id="idExploracion" />
+				<input type="hidden" id="idAntecedentes" />
 				<div class="content2">
 					<!--PCI tipo -->
 					<div data-role="fieldcontain">
 						<fieldset data-role="controlgroup">
 						   <legend>Diagn&oacute;stico: PCI tipo</legend>
-						   <input type="checkbox" name="cuadriEspatica" id="cuadriEspatica" class="custom" />
-						   <label for="cuadriEspatica">Cuadriplejia esp&aacute;tica</label>
+						   <input type="checkbox" name="cuadriplejiaEspatica" id="cuadriplejiaEspatica" class="custom" />
+						   <label for="cuadriplejiaEspatica">Cuadriplejia esp&aacute;tica</label>
 	
-						   <input type="checkbox" name="tripleEspatica" id="tripleEspatica" class="custom" />
-						   <label for="tripleEspatica">Triplejia esp&aacute;tica</label>
+						   <input type="checkbox" name="triplejiaEspatica" id="triplejiaEspatica" class="custom" />
+						   <label for="triplejiaEspatica">Triplejia esp&aacute;tica</label>
 	
-						   <input type="checkbox" name="dipleEspatica" id="dipleEspatica" class="custom" />
-						   <label for="dipleEspatica">Diplejia esp&aacute;tica</label>
+						   <input type="checkbox" name="diplejiaEspatica" id="diplejiaEspatica" class="custom" />
+						   <label for="diplejiaEspatica">Diplejia esp&aacute;tica</label>
 						   
 						   <input type="checkbox" name="pciMixta" id="pciMixta" class="custom" />
 						   <label for="pciMixta">PCI mixta</label>
 						   
-						   <input type="checkbox" name="otra" id="otra" class="custom" />
+						   <input type="checkbox" name="otra" id="otra" class="custom" onchange="javascript:antecedentesRelacionadosPCI.onChangeOtrosDiagnosticos();"/>
 						   <label for="otra">Otra</label>				   
 						</fieldset>
 					</div>
-				
+					
+					<div data-role="fieldcontain" id="divEspecificar" style="display:none">  
+						<label for="diagnosticoEspecificar">Especificar:</label>
+						<textarea class="txt-speech" name="diagnosticoEspecificar" id="diagnosticoEspecificar"></textarea>
+					</div>
+					
 					<!-- Etiologia -->
 					<div data-role="fieldcontain">  
-						<label for="etiologia">Etiolog&iacute;a:</label>  
-						<input type="text" class="txt-speech" name="etiologia" id="etiologia" value=""  />				
+						<label for="etiologia">Etiolog&iacute;a:</label>
+						<textarea class="txt-speech" name="etiologia" id="etiologia"></textarea>
 					</div>
 	
 					<!-- Localizacion de lesion -->
 					<div data-role="fieldcontain">  
-						<label for="localizacion">Localizaci&oacute;n:</label>  
-						<input type="text" class="txt-speech" name="localizacion" id="localizacion" value=""  />				
+						<label for="localizacion">Localizaci&oacute;n:</label>
+						<textarea class="txt-speech" name="localizacion" id="localizacion"></textarea>
 					</div>							
 				
 					<!--GMFCS -->
@@ -76,38 +94,38 @@
 						<fieldset data-role="controlgroup">
 						   <legend>GMFCS</legend>
 						   <input type="checkbox" name="grado1" id="grado1" class="custom" />
-						   <label for="grado1">Grado I</label>
+						   <label for="grado1">Grado I<img src="../img/GMFCS_grado1.png" style="padding-left:20px"/></label>
 	
 						   <input type="checkbox" name="grado2" id="grado2" class="custom" />
-						   <label for="grado2">Grado II</label>
+						   <label for="grado2">Grado II<img src="../img/GMFCS_grado2.png" style="padding-left:20px"/></label>
 	
 						   <input type="checkbox" name="grado3" id="grado3" class="custom" />
-						   <label for="grado3">Grado III</label>
+						   <label for="grado3">Grado III<img src="../img/GMFCS_grado3.png" style="padding-left:20px"/></label>
 						   
 						   <input type="checkbox" name="grado4" id="grado4" class="custom" />
-						   <label for="grado4">Grado IV</label>				   				   
+						   <label for="grado4">Grado IV<img src="../img/GMFCS_grado4.png" style="padding-left:20px"/></label>				   				   
 						   
 						   <input type="checkbox" name="grado5" id="grado5" class="custom" />
-						   <label for="grado5">Grado V</label>				   				   
+						   <label for="grado5">Grado V<img src="../img/GMFCS_grado5.png" style="padding-left:20px"/></label>				   				   
 						</fieldset>
 					</div>
 				
 					<!--Pruebas complementarias -->
 					<div data-role="fieldcontain">  
-						<label for="pruebascompl">Pruebas complementarias (RMN, TAC, EEG, RX):</label>  
-						<input type="text" class="txt-speech" name="pruebascompl" id="pruebascompl" value=""  />				
+						<label for="pruebasComplementarias">Pruebas complementarias (RMN, TAC, EEG, RX):</label>
+						<textarea class="txt-speech" name="pruebasComplementarias" id="pruebasComplementarias"></textarea>
 					</div>
 					
 					<!--Equipamiento -->
 					<div data-role="fieldcontain">  
-						<label for="equip">Equipamiento:</label>  
-						<input type="text" class="txt-speech" name="equip" id="equip" value=""  />				
+						<label for="equipamiento">Equipamiento:</label>  
+						<textarea class="txt-speech" name="equipamiento" id="equipamiento"></textarea>
 					</div>			
 				
 					<!--Ayudas marcha -->
 					<div data-role="fieldcontain">  
 						<label for="ayudasMarcha">Ayudas para la marcha:</label>  
-						<select onchange="javascript:onchangeAyuda();" name="ayudasMarcha" id="ayudasMarcha" data-native-menu="false">    
+						<select onchange="javascript:antecedentesRelacionadosPCI.onChangeAyuda();" name="ayudasMarcha" id="ayudasMarcha" data-native-menu="false">    
 							<option value=""></option>    
 							<option value="0">Andador</option>    
 							<option value="1">Muleta</option>  
@@ -118,32 +136,32 @@
 					
 					<!--Otras ayudas -->			
 					<div data-role="fieldcontain" id="divOtraAyuda" style="display:none">  
-						<label for="otraAyuda">Otra ayuda:</label>  
-						<input type="text" class="txt-speech" name="otraAyuda" id="otraAyuda" value=""  />				
+						<label for="otras">Otras ayudas:</label>
+						<textarea class="txt-speech" name="otras" id="otras"></textarea>
 					</div>
 					
 					<!--Interiores -->			
 					<div data-role="fieldcontain">  
 						<label for="interiores">Interiores:</label>  
-						<input type="text" class="txt-speech" name="interiores" id="interiores" value=""  />				
+						<textarea class="txt-speech" name="interiores" id="interiores"></textarea>
 					</div>
 				
 					<!--Exteriores -->			
 					<div data-role="fieldcontain">  
 						<label for="exteriores">Exteriores:</label>  
-						<input type="text" class="txt-speech" name="exteriores" id="exteriores" value=""  />				
+						<textarea class="txt-speech" name="exteriores" id="exteriores"></textarea>
 					</div>
 					
 					<!--Dispositivo m&aacute;s usado -->			
 					<div data-role="fieldcontain">  
-						<label for="dispoMasUsado">Dispositivo m&aacute;s usado:</label>  
-						<input type="text" class="txt-speech" name="dispoMasUsado" id="dispoMasUsado" value=""  />				
+						<label for="dispositivoMasUsado">Dispositivo m&aacute;s usado:</label>  
+						<textarea class="txt-speech" name="dispositivoMasUsado" id="dispositivoMasUsado"></textarea>
 					</div>
 				
 					<!--Ortesis diurna -->
 					<div data-role="fieldcontain">  
-						<label for="ortesis">Ortesis diurna:</label>  
-						<select onchange="javascript:onchangeOrtesis();" name="ortesis" id="ortesis" data-native-menu="false">    
+						<label for="ortesisDiurna">Ortesis diurna:</label>  
+						<select onchange="javascript:antecedentesRelacionadosPCI.onChangeOrtesis();" name="ortesisDiurna" id="ortesisDiurna" data-native-menu="false">    
 							<option value=""></option>    
 							<option value="0">AFO</option>    
 							<option value="1">GRAFO</option>  
@@ -154,26 +172,26 @@
 					
 					<!--Otras ortesis -->			
 					<div data-role="fieldcontain" id="divOtraOrtesis" style="display:none">  
-						<label for="otraOrtesis">Otra:</label>  
-						<input type="text" class="txt-speech" name="otraOrtesis" id="otraOrtesis" value=""  />				
+						<label for="otraOrtesis">Otra:</label> 
+						<textarea class="txt-speech" name="otraOrtesis" id="otraOrtesis"></textarea>			
 					</div>
 					
 					<!--Ortesis  nocturna -->			
 					<div data-role="fieldcontain">  
-						<label for="ortesisNoc">Ortesis nocturna:</label>  
-						<input type="text" class="txt-speech" name="ortesisNoc" id="ortesisNoc" value=""  />				
+						<label for="ortesisNocturna">Ortesis nocturna:</label>  
+						<textarea class="txt-speech" name="ortesisNocturna" id="ortesisNocturna"></textarea>
 					</div>
 					
 					<!--Tratamiento actual -->			
 					<div data-role="fieldcontain">  
-						<label for="tratActual">Tratamiento actual:</label>  
-						<input type="text" class="txt-speech" name="tratActual" id="tratActual" value=""  />				
+						<label for="tratamientoActual">Tratamiento actual:</label>
+						<textarea class="txt-speech" name="tratamientoActual" id="tratamientoActual"></textarea>		
 					</div>
 				
 					<!--Terapias hab -->			
 					<div data-role="fieldcontain">  
-						<label for="terapiaHab">Terapias habituales:</label>  
-						<input type="text" class="txt-speech" name="terapiaHab" id="terapiaHab" value=""  />				
+						<label for="terapiasHabituales">Terapias habituales:</label>
+						<textarea class="txt-speech" name="terapiasHabituales" id="terapiasHabituales"></textarea>	
 					</div>
 					
 					<br>
@@ -181,12 +199,12 @@
 					<fieldset>
 						<label for="terapiaHab">Fisioterapia:</label>  
 						<div  data-role="fieldcontain">  
-							<label for="numSesFisio">&nbsp;&nbsp;&nbsp;N&uacute;mero de sesiones/semana:</label>  
-							<input type="range" class="txt-speech" name="numSesFisio" id="numSesFisio" value="0" min="0" max="50" size="10" />	
+							<label for="fisioterapiaSesiones">&nbsp;&nbsp;&nbsp;N&uacute;mero de sesiones/semana:</label>  
+							<input type="range" name="fisioterapiaSesiones" id="fisioterapiaSesiones" value="0" min="0" max="50" size="10" />	
 						</div>
 						<div  data-role="fieldcontain">  
-							<label for="numSesFisioDur">&nbsp;&nbsp;&nbsp;Duraci&oacute;n:</label>  
-							<input type="text" class="txt-speech" name="numSesFisioDur" id="numSesFisioDur" value="" />						
+							<label for="fisioterapiaDuracion">&nbsp;&nbsp;&nbsp;Duraci&oacute;n:</label>  
+							<input type="text" class="txt-speech" name="fisioterapiaDuracion" id="fisioterapiaDuracion" value="" />						
 						</div>
 					</fieldset>
 				
@@ -196,11 +214,11 @@
 						<label for="terapiaHab">Terapia ocupacional:</label>  
 						<div  data-role="fieldcontain">  
 							<label for="numSesTerapia">&nbsp;&nbsp;&nbsp;N&uacute;mero de sesiones/semana:</label>  
-							<input type="range" name="numSesTerapia" id="numSesTerapia" value="0" min="0" max="50"  />	
+							<input type="range" name="terapiaOcupacionalSesiones" id="terapiaOcupacionalSesiones" value="0" min="0" max="50"  />	
 						</div>
 						<div  data-role="fieldcontain">  
 							<label for="numSesTerapiaDur">&nbsp;&nbsp;&nbsp;Duraci&oacute;n:</label>  
-							<input type="text" class="txt-speech" name="numSesTerapiaDur" id="numSesTerapiaDur" value="" />						
+							<input type="text" class="txt-speech" name="terapiaOcupacionalDuracion" id="terapiaOcupacionalDuracion" value="" />						
 						</div>
 					</fieldset>
 				
@@ -209,26 +227,26 @@
 					<fieldset>
 						<label for="terapiaHab">LG:</label>  
 						<div  data-role="fieldcontain">  
-							<label for="numSesLG">&nbsp;&nbsp;&nbsp;N&uacute;mero de sesiones/semana:</label>  
-							<input type="range" name="numSesLG" id="numSesLG" value="0" min="0" max="50" size="10" />	
+							<label for="lgSesiones">&nbsp;&nbsp;&nbsp;N&uacute;mero de sesiones/semana:</label>  
+							<input type="range" name="lgSesiones" id="lgSesiones" value="0" min="0" max="50" size="10" />	
 						</div>
 						<div  data-role="fieldcontain">  
-							<label for="numSesLGDur">&nbsp;&nbsp;&nbsp;Duraci&oacute;n:</label>  
-							<input type="text" class="txt-speech" name="numSesLGDur" id="numSesLGDur" value="" />						
+							<label for="lgDuracion">&nbsp;&nbsp;&nbsp;Duraci&oacute;n:</label>  
+							<input type="text" class="txt-speech" name="lgDuracion" id="lgDuracion" value="" />						
 						</div>
 					</fieldset>
 					<br>
 	
 					<!--Hidroterapia -->			
 					<div data-role="fieldcontain">  
-						<label for="hidro">Hidroterapia:</label>  
-						<input type="text" class="txt-speech" name="hidro" id="hidro" value=""  />				
+						<label for="hidro">Hidroterapia:</label> 
+						<textarea class="txt-speech" name="hidroterapia" id="hidroterapia"></textarea>		
 					</div>
 					
 					<!--Otras (hipoterapia) -->			
 					<div data-role="fieldcontain">  
 						<label for="hipo">Otras (hipoterapia...)</label>  
-						<input type="text" class="txt-speech" name="hipo" id="hipo" value=""  />				
+						<input type="text" class="txt-speech" name=otrasTerapias id="otrasTerapias" value=""  />				
 					</div>
 				
 					<!--Deportes -->			

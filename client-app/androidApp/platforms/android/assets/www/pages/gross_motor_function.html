@@ -10,291 +10,305 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />	
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>	
-		<script type="text/javascript" src="../js/pages/gross_motor_function.js"></script>
-				
-		<script type="text/javascript">
-			generic.initialize();
-		</script>		
-		
+		<script data-main="../js/pages/gross_motor_function" src="../js/require.min.js"></script>
 	</head>
 	
 	<body>
 		<div data-role="page">
 			<!-- cabecera-->
-			<div data-role="header" >               
-				<a data-rel="back" data-icon="back">Volver</a>     
-				<h1>Gross Motor Function</h1>
-				<a href="index.html" data-icon="check">Guardar</a>
+			<div data-role="header">                    
+				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>
+		        <h1>LAM</h1>
+				<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+		            <a href="#" data-icon="check" data-role="button" onclick="javascript:grossMotorFunction.insertar()" id="btnGuardar">Guardar</a>
+		        </div>
+		        
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 id="subtitle" class="subtitle">Gross Motor Function Classification System</h2>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Logout</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
+								<h3 class="ui-title">Â¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
+								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>		
 			
 			<!-- Contenido -->
 			<div data-role="content"> 	
-				<div class="content2">
-				
-				<h3>DE PIE</h3>
+				<div class="content2 listadoGross">
+					<input type="hidden" id="idPaciente" />
+					<input type="hidden" id="idExploracion" />
+					<input type="hidden" id="idGross" />
+					<h3>DE PIE</h3>
 					<ul data-role="listview">						
 						<li>
-							<label for="52">En el suelo se pone de pie ap&oacute;yandose en un banco alto:</label>  
+							<label id="lbl1">En el suelo se pone de pie ap&oacute;yandose en un banco alto:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="52" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="1" id="11" value="0" />
+								<label for="11">No evaluado</label>
 
-								<input type="radio" name="52" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="1" id="12" value="1"  />
+								<label for="12">No lo inicia</label>
 								
-								<input type="radio" name="52" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="1" id="13" value="2"  />
+								<label for="13">Lo inicia</label>
 
-								<input type="radio" name="52" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="1" id="14" value="3"  />
+								<label for="14">Parcialmente</label>
 								
-								<input type="radio" name="52" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="1" id="15" value="4"  />
+								<label for="15">Por completo</label>
 							</fieldset>							
 						</li>
 						<li>
-							<label for="53">De pie se mantiene sin apoyar los brazos durante 3 segundos:</label>  
+							<label id="lbl2">De pie se mantiene sin apoyar los brazos durante 3 segundos:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="53" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="2" id="21" value="0" />
+								<label for="21">No evaluado</label>
 
-								<input type="radio" name="53" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="2" id="22" value="1"  />
+								<label for="22">No lo inicia</label>
 								
-								<input type="radio" name="53" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="2" id="23" value="2"  />
+								<label for="23">Lo inicia</label>
 
-								<input type="radio" name="53" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="2" id="24" value="3"  />
+								<label for="24">Parcialmente</label>
 								
-								<input type="radio" name="53" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="2" id="25" value="4"  />
+								<label for="25">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-						<label for="54">De pie agarrado con una mano a un banco alto, levanta el pie izquierdo durante 3 segundos:</label>  
+						<label id="lbl3">De pie agarrado con una mano a un banco alto, levanta el pie izquierdo durante 3 segundos:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="54" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="3" id="31" value="0" />
+								<label for="31">No evaluado</label>
 
-								<input type="radio" name="54" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="3" id="32" value="1"  />
+								<label for="32">No lo inicia</label>
 								
-								<input type="radio" name="54" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="3" id="33" value="2"  />
+								<label for="33">Lo inicia</label>
 
-								<input type="radio" name="54" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="3" id="34" value="3"  />
+								<label for="34">Parcialmente</label>
 								
-								<input type="radio" name="54" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="3" id="35" value="4"  />
+								<label for="35">Por completo</label>
 							</fieldset>		
 						</li>
 						
 						<li>
-							<label for="55">De pie agarrado con una mano a un banco alto, levanta el pie izquierdo durante 3 segundos:</label>  
+							<label id="lbl4">De pie agarrado con una mano a un banco alto, levanta el pie izquierdo durante 3 segundos:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="55" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="4" id="41" value="0" />
+								<label for="41">No evaluado</label>
 
-								<input type="radio" name="55" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="4" id="42" value="1"  />
+								<label for="42">No lo inicia</label>
 								
-								<input type="radio" name="55" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="4" id="43" value="2"  />
+								<label for="43">Lo inicia</label>
 
-								<input type="radio" name="55" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="4" id="44" value="3"  />
+								<label for="44">Parcialmente</label>
 								
-								<input type="radio" name="55" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="4" id="45" value="4"  />
+								<label for="45">Por completo</label>
 							</fieldset>		
 						</li>
 						
 						<li>
-							<label for="56">De pie se mantiene sin apoyar los brazos durante 20 segundos:</label>  
+							<label id="lbl5">De pie se mantiene sin apoyar los brazos durante 20 segundos:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="56" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="5" id="51" value="0" />
+								<label for="51">No evaluado</label>
 
-								<input type="radio" name="56" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="5" id="52" value="1"  />
+								<label for="52">No lo inicia</label>
 								
-								<input type="radio" name="56" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="5" id="53" value="2"  />
+								<label for="53">Lo inicia</label>
 
-								<input type="radio" name="56" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="5" id="54" value="3"  />
+								<label for="54">Parcialmente</label>
 								
-								<input type="radio" name="56" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="5" id="55" value="4"  />
+								<label for="55">Por completo</label>
+							</fieldset>		
+						</li>
+						
+						<li>
+							<label id="lbl6">De pie levanta el pie izquierdo sin apoyar los brazos durante 10 segundos:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="6" id="61" value="0" />
+								<label for="61">No evaluado</label>
+
+								<input type="radio" name="6" id="62" value="1"  />
+								<label for="62">No lo inicia</label>
+								
+								<input type="radio" name="6" id="63" value="2"  />
+								<label for="63">Lo inicia</label>
+
+								<input type="radio" name="6" id="64" value="3"  />
+								<label for="64">Parcialmente</label>
+								
+								<input type="radio" name="6" id="65" value="4"  />
+								<label for="65">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="57">De pie levanta el pie izquierdo sin apoyar los brazos durante 10 segundos:</label>  
+							<label id="lbl7">De pie levanta el pie derecho sin apoyar los brazos durante 10 segundos:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="57" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="7" id="71" value="0" />
+								<label for="71">No evaluado</label>
 
-								<input type="radio" name="57" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="7" id="72" value="1"  />
+								<label for="72">No lo inicia</label>
 								
-								<input type="radio" name="57" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="7" id="73" value="2"  />
+								<label for="73">Lo inicia</label>
 
-								<input type="radio" name="57" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="7" id="74" value="3"  />
+								<label for="74">Parcialmente</label>
 								
-								<input type="radio" name="57" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="7" id="75" value="4"  />
+								<label for="75">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="58">De pie levanta el pie derecho sin apoyar los brazos durante 10 segundos:</label>  
+							<label id="lbl8">Sentado en un banco bajo consigue ponerse de pie sin usar los brazos:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="58" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="8" id="81" value="0" />
+								<label for="81">No evaluado</label>
 
-								<input type="radio" name="58" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="8" id="82" value="1"  />
+								<label for="82">No lo inicia</label>
 								
-								<input type="radio" name="58" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="8" id="83" value="2"  />
+								<label for="83">Lo inicia</label>
 
-								<input type="radio" name="58" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="8" id="84" value="3"  />
+								<label for="84">Parcialmente</label>
 								
-								<input type="radio" name="58" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="8" id="85" value="4"  />
+								<label for="85">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="59">Sentado en un banco bajo consigue ponerse de pie sin usar los brazos:</label>  
+							<label id="lbl9">De rodillas consigue ponerse de pie apoy&aacute;ndose en la rodilla derecha sin usar los brazos:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="59" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="9" id="91" value="0" />
+								<label for="91">No evaluado</label>
 
-								<input type="radio" name="59" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="9" id="92" value="1"  />
+								<label for="92">No lo inicia</label>
 								
-								<input type="radio" name="59" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="9" id="93" value="2"  />
+								<label for="93">Lo inicia</label>
 
-								<input type="radio" name="59" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="9" id="94" value="3"  />
+								<label for="94">Parcialmente</label>
 								
-								<input type="radio" name="59" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="9" id="95" value="4"  />
+								<label for="95">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl10">De rodillas consigue ponerse de pie apoy&aacute;ndose en la rodilla izquierda sin usar los brazos:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="10" id="101" value="0" />
+								<label for="101">No evaluado</label>
+
+								<input type="radio" name="10" id="102" value="1"  />
+								<label for="102">No lo inicia</label>
+								
+								<input type="radio" name="10" id="103" value="2"  />
+								<label for="103">Lo inicia</label>
+
+								<input type="radio" name="10" id="104" value="3"  />
+								<label for="104">Parcialmente</label>
+								
+								<input type="radio" name="10" id="105" value="4"  />
+								<label for="105">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="60">De rodillas consigue ponerse de pie apoy&aacute;ndose en la rodilla derecha sin usar los brazos:</label>  
+							<label id="lbl11">De pie se agacha para sentarse en el suelo con control sin apoyar los brazos:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="60" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="11" id="111" value="0" />
+								<label for="111">No evaluado</label>
 
-								<input type="radio" name="60" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="11" id="112" value="1"  />
+								<label for="112">No lo inicia</label>
 								
-								<input type="radio" name="60" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="11" id="113" value="2"  />
+								<label for="113">Lo inicia</label>
 
-								<input type="radio" name="60" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="11" id="114" value="3"  />
+								<label for="114">Parcialmente</label>
 								
-								<input type="radio" name="60" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="11" id="115" value="4"  />
+								<label for="115">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="61">De rodillas consigue ponerse de pie apoy&aacute;ndose en la rodilla izquierda sin usar los brazos:</label>  
+							<label id="lbl12">De pie consigue ponerse en cuclillas sin apoyar los brazos:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="61" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="12" id="121" value="0" />
+								<label for="121">No evaluado</label>
 
-								<input type="radio" name="61" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="12" id="122" value="1"  />
+								<label for="122">No lo inicia</label>
 								
-								<input type="radio" name="61" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="12" id="123" value="2"  />
+								<label for="123">Lo inicia</label>
 
-								<input type="radio" name="61" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="12" id="124" value="3"  />
+								<label for="124">Parcialmente</label>
 								
-								<input type="radio" name="61" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
+								<input type="radio" name="12" id="125" value="4"  />
+								<label for="125">Por completo</label>
+							</fieldset>
 						</li>
 						
 						<li>
-							<label for="62">De pie se agacha para sentarse en el suelo con control sin apoyar los brazos:</label>  
+							<label id="lbl13">De pie coge un objeto del suelo y vuelve a ponerse de pie sin apoyar los brazos:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="62" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="13" id="131" value="0" />
+								<label for="131">No evaluado</label>
 
-								<input type="radio" name="62" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="13" id="132" value="1"  />
+								<label for="132">No lo inicia</label>
 								
-								<input type="radio" name="62" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="13" id="133" value="2"  />
+								<label for="133">Lo inicia</label>
 
-								<input type="radio" name="62" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="13" id="134" value="3"  />
+								<label for="134">Parcialmente</label>
 								
-								<input type="radio" name="62" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="63">De pie consigue ponerse en cuclillas sin apoyar los brazos:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="63" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="63" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="63" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="63" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="63" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="64">De pie coge un objeto del suelo y vuelve a ponerse de pie sin apoyar los brazos:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="64" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="64" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="64" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="64" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="64" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="13" id="135" value="4"  />
+								<label for="135">Por completo</label>
 							</fieldset>
 						</li>
 					</ul>	
@@ -302,483 +316,483 @@
 					<BR><h3>ANDANDO, CORRIENDO Y SALTANDO</h3>
 					<ul data-role="listview">		
 						<li>
-							<label for="65">De pie con las 2 manos en un banco alto da 5 pasos hacia la derecha:</label>  
+							<label id="lbl14">De pie con las 2 manos en un banco alto da 5 pasos hacia la derecha:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="65" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="14" id="141" value="0" />
+								<label for="141">No evaluado</label>
 
-								<input type="radio" name="65" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="14" id="142" value="1"  />
+								<label for="142">No lo inicia</label>
 								
-								<input type="radio" name="65" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="14" id="143" value="2"  />
+								<label for="143">Lo inicia</label>
 
-								<input type="radio" name="65" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="14" id="144" value="3"  />
+								<label for="144">Parcialmente</label>
 								
-								<input type="radio" name="65" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="14" id="145" value="4"  />
+								<label for="145">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl15">De pie con las 2 manos en un banco alto da 5 pasos hacia la izquierda:</label>
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="15" id="151" value="0" />
+								<label for="151">No evaluado</label>
+
+								<input type="radio" name="15" id="152" value="1"  />
+								<label for="152">No lo inicia</label>
+								
+								<input type="radio" name="15" id="153" value="2"  />
+								<label for="153">Lo inicia</label>
+
+								<input type="radio" name="15" id="154" value="3"  />
+								<label for="154">Parcialmente</label>
+								
+								<input type="radio" name="15" id="155" value="4"  />
+								<label for="155">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl16">De pie agarrado por las 2 manos camina 10 pasos hacia delante:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="16" id="161" value="0" />
+								<label for="161">No evaluado</label>
+
+								<input type="radio" name="16" id="162" value="1"  />
+								<label for="162">No lo inicia</label>
+								
+								<input type="radio" name="16" id="163" value="2"  />
+								<label for="163">Lo inicia</label>
+
+								<input type="radio" name="16" id="164" value="3"  />
+								<label for="164">Parcialmente</label>
+								
+								<input type="radio" name="16" id="165" value="4"  />
+								<label for="165">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="66">De pie con las 2 manos en un banco alto da 5 pasos hacia la izquierda:</label>
+							<label id="lbl17">De pie agarrado por una mano camina 10 pasos hacia delante:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="66" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="17" id="171" value="0" />
+								<label for="171">No evaluado</label>
 
-								<input type="radio" name="66" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="17" id="172" value="1"  />
+								<label for="172">No lo inicia</label>
 								
-								<input type="radio" name="66" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="17" id="173" value="2"  />
+								<label for="173">Lo inicia</label>
 
-								<input type="radio" name="66" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="17" id="174" value="3"  />
+								<label for="174">Parcialmente</label>
 								
-								<input type="radio" name="66" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="17" id="175" value="4"  />
+								<label for="175">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl18">De pie camina 10 pasos hacia delante:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="18" id="181" value="0" />
+								<label for="181">No evaluado</label>
+
+								<input type="radio" name="18" id="182" value="1"  />
+								<label for="182">No lo inicia</label>
+								
+								<input type="radio" name="18" id="183" value="2"  />
+								<label for="183">Lo inicia</label>
+
+								<input type="radio" name="18" id="184" value="3"  />
+								<label for="184">Parcialmente</label>
+								
+								<input type="radio" name="18" id="185" value="4"  />
+								<label for="185">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl19">De pie camina 10 pasos hacia delante, se detiene, gira 180Âº y vuelve:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="19" id="191" value="0" />
+								<label for="191">No evaluado</label>
+
+								<input type="radio" name="19" id="192" value="1"  />
+								<label for="192">No lo inicia</label>
+								
+								<input type="radio" name="19" id="193" value="2"  />
+								<label for="193">Lo inicia</label>
+
+								<input type="radio" name="19" id="194" value="3"  />
+								<label for="194">Parcialmente</label>
+								
+								<input type="radio" name="19" id="195" value="4"  />
+								<label for="195">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="67">De pie agarrado por las 2 manos camina 10 pasos hacia delante:</label>  
+							<label id="lbl20">De pie camina 10 pasos hacia atr&aacute;s:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="67" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="20" id="201" value="0" />
+								<label for="201">No evaluado</label>
 
-								<input type="radio" name="67" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="20" id="202" value="1"  />
+								<label for="202">No lo inicia</label>
 								
-								<input type="radio" name="67" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="20" id="203" value="2"  />
+								<label for="203">Lo inicia</label>
 
-								<input type="radio" name="67" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="20" id="204" value="3"  />
+								<label for="204">Parcialmente</label>
 								
-								<input type="radio" name="67" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="20" id="205" value="4"  />
+								<label for="205">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl21">De pie camina 10 pasos consecutivos hacia delante, llevando un objeto grande con las 2 manos:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="21" id="211" value="0" />
+								<label for="211">No evaluado</label>
+
+								<input type="radio" name="21" id="212" value="1"  />
+								<label for="212">No lo inicia</label>
+								
+								<input type="radio" name="21" id="213" value="2"  />
+								<label for="213">Lo inicia</label>
+
+								<input type="radio" name="21" id="214" value="3"  />
+								<label for="214">Parcialmente</label>
+								
+								<input type="radio" name="21" id="215" value="4"  />
+								<label for="215">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl22">De pie camina 10 pasos consecutivos hacia delante entre l&iacute;neas paralelas separadas 20 cm:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="22" id="221" value="0" />
+								<label for="221">No evaluado</label>
+
+								<input type="radio" name="22" id="222" value="1"  />
+								<label for="222">No lo inicia</label>
+								
+								<input type="radio" name="22" id="223" value="2"  />
+								<label for="223">Lo inicia</label>
+
+								<input type="radio" name="22" id="224" value="3"  />
+								<label for="224">Parcialmente</label>
+								
+								<input type="radio" name="22" id="225" value="4"  />
+								<label for="225">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl23">De pie camina 10 pasos consecutivos hacia delante sobre una l&iacute;nea recta de 2 cm de ancho:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="23" id="231" value="0" />
+								<label for="231">No evaluado</label>
+
+								<input type="radio" name="23" id="232" value="1"  />
+								<label for="232">No lo inicia</label>
+								
+								<input type="radio" name="23" id="233" value="2"  />
+								<label for="233">Lo inicia</label>
+
+								<input type="radio" name="23" id="234" value="3"  />
+								<label for="234">Parcialmente</label>
+								
+								<input type="radio" name="23" id="235" value="4"  />
+								<label for="235">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl24">De pie pasa sobre un palo situado a nivel de sus rodillas, comenzando con el pie derecho:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="24" id="241" value="0" />
+								<label for="241">No evaluado</label>
+
+								<input type="radio" name="24" id="242" value="1"  />
+								<label for="242">No lo inicia</label>
+								
+								<input type="radio" name="24" id="243" value="2"  />
+								<label for="243">Lo inicia</label>
+
+								<input type="radio" name="24" id="244" value="3"  />
+								<label for="244">Parcialmente</label>
+								
+								<input type="radio" name="24" id="245" value="4"  />
+								<label for="245">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl25">De pie pasa sobre un palo situado a nivel de sus rodillas, comenzando con el pie izquierdo:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="25" id="251" value="0" />
+								<label for="251">No evaluado</label>
+
+								<input type="radio" name="25" id="252" value="1"  />
+								<label for="252">No lo inicia</label>
+								
+								<input type="radio" name="25" id="253" value="2"  />
+								<label for="253">Lo inicia</label>
+
+								<input type="radio" name="25" id="254" value="3"  />
+								<label for="254">Parcialmente</label>
+								
+								<input type="radio" name="25" id="255" value="4"  />
+								<label for="255">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="68">De pie agarrado por una mano camina 10 pasos hacia delante:</label>  
+							<label id="lbl26">De pie corre 4, 5m, se detiene y regresa:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="68" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="26" id="261" value="0" />
+								<label for="261">No evaluado</label>
 
-								<input type="radio" name="68" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="26" id="262" value="1"  />
+								<label for="262">No lo inicia</label>
 								
-								<input type="radio" name="68" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="26" id="263" value="2"  />
+								<label for="263">Lo inicia</label>
 
-								<input type="radio" name="68" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="26" id="264" value="3"  />
+								<label for="264">Parcialmente</label>
 								
-								<input type="radio" name="68" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="26" id="265" value="4"  />
+								<label for="265">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="69">De pie camina 10 pasos hacia delante:</label>  
+							<label id="lbl27">De pie da una patada a una pelota con el pie derecho:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="69" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="27" id="271" value="0" />
+								<label for="271">No evaluado</label>
 
-								<input type="radio" name="69" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="27" id="272" value="1"  />
+								<label for="272">No lo inicia</label>
 								
-								<input type="radio" name="69" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="27" id="273" value="2"  />
+								<label for="273">Lo inicia</label>
 
-								<input type="radio" name="69" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="27" id="274" value="3"  />
+								<label for="274">Parcialmente</label>
 								
-								<input type="radio" name="69" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="27" id="275" value="4"  />
+								<label for="275">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="70">De pie camina 10 pasos hacia delante, se detiene, gira 180º y vuelve:</label>  
+							<label id="lbl28">De pie da una patada a una pelota con el pie izquierdo:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="70" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="28" id="281" value="0" />
+								<label for="281">No evaluado</label>
 
-								<input type="radio" name="70" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="28" id="282" value="1"  />
+								<label for="282">No lo inicia</label>
 								
-								<input type="radio" name="70" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="28" id="283" value="2"  />
+								<label for="283">Lo inicia</label>
 
-								<input type="radio" name="70" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="28" id="284" value="3"  />
+								<label for="284">Parcialmente</label>
 								
-								<input type="radio" name="70" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="28" id="285" value="4"  />
+								<label for="285">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl29">De pie salta 30 cm de altura con los dos pies a la vez:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="29" id="291" value="0" />
+								<label for="291">No evaluado</label>
+
+								<input type="radio" name="29" id="292" value="1"  />
+								<label for="292">No lo inicia</label>
+								
+								<input type="radio" name="29" id="293" value="2"  />
+								<label for="293">Lo inicia</label>
+
+								<input type="radio" name="29" id="294" value="3"  />
+								<label for="294">Parcialmente</label>
+								
+								<input type="radio" name="29" id="295" value="4"  />
+								<label for="295">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl30">De pie salta 30 cm hacia delante con los dos pies a la vez:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="30" id="301" value="0" />
+								<label for="301">No evaluado</label>
+
+								<input type="radio" name="30" id="302" value="1"  />
+								<label for="302">No lo inicia</label>
+								
+								<input type="radio" name="30" id="303" value="2"  />
+								<label for="303">Lo inicia</label>
+
+								<input type="radio" name="30" id="304" value="3"  />
+								<label for="304">Parcialmente</label>
+								
+								<input type="radio" name="30" id="305" value="4"  />
+								<label for="305">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="71">De pie camina 10 pasos hacia atr&aacute;s:</label>  
+							<label id="lbl31">De pie sobre el pie derecho salta a la pata coja con el pie derecho 10 veces dentro de un c&iacute;rculo de 60 cm:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="71" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="31" id="311" value="0" />
+								<label for="311">No evaluado</label>
 
-								<input type="radio" name="71" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="31" id="312" value="1"  />
+								<label for="312">No lo inicia</label>
 								
-								<input type="radio" name="71" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="31" id="313" value="2"  />
+								<label for="313">Lo inicia</label>
 
-								<input type="radio" name="71" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="31" id="314" value="3"  />
+								<label for="314">Parcialmente</label>
 								
-								<input type="radio" name="71" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="31" id="315" value="4"  />
+								<label for="315">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl32">De pie sobre el pie izquierdo salta a la pata coja con el pie izquierdo 10 veces dentro de un c&iacute;rculo de 60 cm:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="32" id="321" value="0" />
+								<label for="321">No evaluado</label>
+
+								<input type="radio" name="32" id="322" value="1"  />
+								<label for="322">No lo inicia</label>
+								
+								<input type="radio" name="32" id="323" value="2"  />
+								<label for="323">Lo inicia</label>
+
+								<input type="radio" name="32" id="324" value="3"  />
+								<label for="324">Parcialmente</label>
+								
+								<input type="radio" name="32" id="325" value="4"  />
+								<label for="325">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="72">De pie camina 10 pasos consecutivos hacia delante, llevando un objeto grande con las 2 manos:</label>  
+							<label id="lbl33">De pie agarrado a una barandilla sube 4 escalones alternando los pies agarrado a una barandilla:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="72" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="33" id="331" value="0" />
+								<label for="331">No evaluado</label>
 
-								<input type="radio" name="72" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="33" id="332" value="1"  />
+								<label for="332">No lo inicia</label>
 								
-								<input type="radio" name="72" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="33" id="333" value="2"  />
+								<label for="333">Lo inicia</label>
 
-								<input type="radio" name="72" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="33" id="334" value="3"  />
+								<label for="334">Parcialmente</label>
 								
-								<input type="radio" name="72" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="33" id="335" value="4"  />
+								<label for="335">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="73">De pie camina 10 pasos consecutivos hacia delante entre l&iacute;neas paralelas separadas 20 cm:</label>  
+							<label id="lbl34">De pie agarrando a una barandilla baja 4 escalones alternando los pies agarrado a una barandilla:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="73" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="34" id="341" value="0" />
+								<label for="341">No evaluado</label>
 
-								<input type="radio" name="73" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="34" id="342" value="1"  />
+								<label for="342">No lo inicia</label>
 								
-								<input type="radio" name="73" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="34" id="343" value="2"  />
+								<label for="343">Lo inicia</label>
 
-								<input type="radio" name="73" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="34" id="344" value="3"  />
+								<label for="344">Parcialmente</label>
 								
-								<input type="radio" name="73" id="5" value="5"  />
-								<label for="5">Por completo</label>
+								<input type="radio" name="34" id="345" value="4"  />
+								<label for="345">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl35">De pie sube 4 escalones alternando los pies:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="35" id="351" value="0" />
+								<label for="351">No evaluado</label>
+
+								<input type="radio" name="35" id="352" value="1"  />
+								<label for="352">No lo inicia</label>
+								
+								<input type="radio" name="35" id="353" value="2"  />
+								<label for="353">Lo inicia</label>
+
+								<input type="radio" name="35" id="354" value="3"  />
+								<label for="354">Parcialmente</label>
+								
+								<input type="radio" name="35" id="355" value="4"  />
+								<label for="355">Por completo</label>
+							</fieldset>
+						</li>
+						
+						<li>
+							<label id="lbl36">De pie baja 4 escalones alternando los pies:</label>  
+							<fieldset data-role="controlgroup" data-type="horizontal">								
+								<input type="radio" name="36" id="361" value="0" />
+								<label for="361">No evaluado</label>
+
+								<input type="radio" name="36" id="362" value="1"  />
+								<label for="362">No lo inicia</label>
+								
+								<input type="radio" name="36" id="363" value="2"  />
+								<label for="363">Lo inicia</label>
+
+								<input type="radio" name="36" id="364" value="3"  />
+								<label for="364">Parcialmente</label>
+								
+								<input type="radio" name="36" id="365" value="4"  />
+								<label for="365">Por completo</label>
 							</fieldset>	
 						</li>
 						
 						<li>
-							<label for="74">De pie camina 10 pasos consecutivos hacia delante sobre una l&iacute;nea recta de 2 cm de ancho:</label>  
+							<label id="lbl37">De pie sobre un escal&oacute;n de 15 cm se baja de un salto con los dos pies a la vez:</label>  
 							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="74" id="1" value="1" />
-								<label for="1">No evaluado</label>
+								<input type="radio" name="37" id="371" value="0" />
+								<label for="371">No evaluado</label>
 
-								<input type="radio" name="74" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
+								<input type="radio" name="37" id="372" value="1"  />
+								<label for="372">No lo inicia</label>
 								
-								<input type="radio" name="74" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
+								<input type="radio" name="37" id="373" value="2"  />
+								<label for="373">Lo inicia</label>
 
-								<input type="radio" name="74" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
+								<input type="radio" name="37" id="374" value="3"  />
+								<label for="374">Parcialmente</label>
 								
-								<input type="radio" name="74" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="75">De pie pasa sobre un palo situado a nivel de sus rodillas, comenzando con el pie derecho:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="75" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="75" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="75" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="75" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="75" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="76">De pie pasa sobre un palo situado a nivel de sus rodillas, comenzando con el pie izquierdo:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="76" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="76" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="76" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="76" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="76" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="77">De pie corre 4,5m, se detiene y regresa:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="77" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="77" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="77" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="77" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="77" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="78">De pie da una patada a una pelota con el pie derecho:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="78" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="78" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="78" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="78" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="78" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="79">De pie da una patada a una pelota con el pie izquierdo:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="79" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="79" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="79" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="79" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="79" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="80">De pie salta 30 cm de altura con los dos pies a la vez:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="80" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="80" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="80" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="80" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="80" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="81">De pie salta 30 cm hacia delante con los dos pies a la vez:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="81" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="81" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="81" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="81" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="81" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="82">De pie sobre el pie derecho salta a la pata coja con el pie derecho 10 veces dentro de un c&iacute;rculo de 60 cm:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="82" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="82" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="82" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="82" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="82" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="83">De pie sobre el pie izquierdo salta a la pata coja con el pie izquierdo 10 veces dentro de un c&iacute;rculo de 60 cm:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="83" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="83" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="83" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="83" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="83" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="84">De pie agarrado a una barandilla sube 4 escalones alternando los pies agarrado a una barandilla:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="84" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="84" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="84" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="84" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="84" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="85">De pie agarrando a una barandilla baja 4 escalones alternando los pies agarrado a una barandilla:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="85" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="85" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="85" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="85" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="85" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="86">De pie sube 4 escalones alternando los pies:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="86" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="86" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="86" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="86" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="86" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="87">De pie baja 4 escalones alternando los pies:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="87" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="87" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="87" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="87" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="87" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
-						</li>
-						
-						<li>
-							<label for="88">De pie sobre un escal&oacute;n de 15 cm se baja de un salto con los dos pies a la vez:</label>  
-							<fieldset data-role="controlgroup" data-type="horizontal">								
-								<input type="radio" name="88" id="1" value="1" />
-								<label for="1">No evaluado</label>
-
-								<input type="radio" name="88" id="2" value="2"  />
-								<label for="2">No lo inicia</label>
-								
-								<input type="radio" name="88" id="3" value="3"  />
-								<label for="3">Lo inicia</label>
-
-								<input type="radio" name="88" id="4" value="4"  />
-								<label for="4">Parcialmente</label>
-								
-								<input type="radio" name="88" id="5" value="5"  />
-								<label for="5">Por completo</label>
-							</fieldset>	
+								<input type="radio" name="37" id="375" value="4"  />
+								<label for="375">Por completo</label>
+							</fieldset>
 						</li>
 					</ul>
 					
@@ -790,10 +804,10 @@
 					
 					<!-- Pregunta-->
 					<div data-role="fieldcontain">
-						<label for="pregunta">¿Ha sido esta evaluaci&oacute;n indicativa de la realizaci&oacute;n habitual de este ni&ntilde;o?</label>
+						<label for="evaluacionIndicativa">Â¿Ha sido esta evaluaci&oacute;n indicativa de la realizaci&oacute;n habitualÂ� de este ni&ntilde;o?</label>
 						
-			            <select id="pregunta" name="pregunta" data-role="slider">
-			            	 <option value="0">No</option>
+			            <select id="evaluacionIndicativa" name="evaluacionIndicativa" data-role="slider">
+			            	<option value="0">No</option>
 							<option value="1">Si</option>
 			            </select>
 			         </div>	

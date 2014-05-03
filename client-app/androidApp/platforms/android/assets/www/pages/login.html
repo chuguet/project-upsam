@@ -10,64 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>	
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>			
-		
-		<script type="text/javascript">
-			generic.initialize();
-
-            function login() {
-				$.ajax({
-					type : 'POST',
-					url : "http://localhost:8080/hospitalServer/j_spring_security_check",
-					data : {'j_username': $("#txtUsuario").val(), 'j_password': $("#txtPwd").val()},
-					dataType : 'json',
-					beforeSend: function (request) {
-						$.mobile.loading( 'show', {
-  						text: 'Procesando',
-  						textVisible: true,
-  						theme: "b",
-  						textonly: false
-  						});
-		                request.setRequestHeader("X-Ajax-call", true);
-		            },
-		            complete : function(jqXHR, textStatus) {
-		            	$.mobile.loading('hide');
-            			if (jqXHR.statusText == "No Autorizado") {
-                  			toast("Usuario y/o contrase&ntilde;a incorrectos");
-            			}
-            			else if (jqXHR.statusText == "OK") {
-                  			$.mobile.changePage('home.html','#loginpage', { transition: "slide"} ); 
-            			}
-            			else{
-            				toast("Se ha producido un error en servidor");
-            			}
-	            	}
-				});
-			}
-			
-			
-				var toast=function(msg){
-					$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>"+msg+"</h3></div>")
-					.css({ display: "block", 
-						opacity: 0.90, 
-						position: "fixed",
-						padding: "7px",
-						"text-align": "center",
-						width: "270px",
-						left: ($(window).width() - 284)/2,
-						top: $(window).height()/2 })
-					.appendTo( $.mobile.pageContainer ).delay( 1500 )
-					.fadeOut( 600, function(){
-						$(this).remove();
-					});
-				}
-        </script>
-		</script>
+		<script data-main="../js/pages/login" src="../js/require.min.js"></script>
 	</head>
 
 	<body>
@@ -85,27 +28,26 @@
 				
 				<h2 style="color:#77CDF1">Acceso al sistema</h2>
 				<div style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:10px;background-color:rgb(240,240,240)">
-					<h5><font style="font-weight: normal">Introduzca los</font> datos de acceso:</h5>
+					<label>Introduzca los datos de acceso:</label>
 					
 					<div data-role="fieldcontain" >
-						<label for="login">Login</label>
-						<input type="text" id="login" name="login"/>						
+						<label for="txtUsuario">Usuario</label>
+						<input type="text" id="txtUsuario" name="txtUsuario"/>						
 					</div>	
 					<div data-role="fieldcontain" >
-						<label for="Password">Password</label>
-						<input type="password" id="Password" name="Password" />						
+						<label for="txtPassword">Contrase&ntilde;a</label>
+						<input type="password" id="txtPassword" name="txtPassword" />						
 					</div>
 					
-					<ul data-role="listview" data-inset="true" data-filter="false" data-theme="b">						
-						<li><a data-transition="slidedown" rel="external" href="menu.html">Entrar</a></li>
-						<li><a data-transition="slidedown" rel="external" href="#">Recordar clave</a></li>             
-					</ul>
+					<a data-role="button" onclick="javascript:login.acceso();">Entrar</a>
+					<a data-role="button" rel="external" onclick="javascript:generic.changePage('recordar_contrasenna.html');">Recordar contrase&ntilde;a</a>             
+					
 				</div>
 			</div>
 
 			<!-- Footer -->
 			<div data-role="footer" data-position="inline" data-theme="c">
-				<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>		
+				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>		
 			</div>							
 		</div>
 	</body>

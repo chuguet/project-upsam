@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>Recordar Contrase&ntilde;a - Laboratorio de An&acute;lisis de Movimientos</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
+		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />		
+		
+		<script data-main="../js/pages/recordar_contrasenna" src="../js/require.min.js"></script>
+	</head>
+
+	<body>
+		<div data-role="page" id="page1">
+			<!-- Cabecera -->
+			<div data-role="header">
+				<h1>LAM</h1>
+				<a data-rel="back" data-icon="back">Volver</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 id="subtitle" class="subtitle">Recordar Contrase&ntilde;a</h2>
+				</div>
+			</div>
+			
+			<!-- contenido -->
+			<div data-role="content">				
+				<h1></h1>		
+				<div id="containerUsuarioEmail" class="content2">
+					<label for="txtUsuario">Introduzca su usuario/email</label>
+					<input type="text" id="txtUsuario" name="txtUsuario"/>	
+					<a data-role="button" href="#" onclick="javascript:recordarPassword.enviarUsuarioEmail();">Enviar usuario/email</a>
+				</div>
+				<div id="containerPassword" class="content2" style="display:none;">
+					<label for="txtToken">Llave de seguridad</label>
+					<input type="text" id="txtToken" name="txtToken"/>
+					<label for="txtPassword">Contrase&ntilde;a nueva</label>
+					<input type="password" id="txtPassword" name="txtPassword"/>
+					<label for="txtPasswordNueva">Repetir contrase&ntilde;a</label>
+					<input type="password" id="txtPasswordNueva" name="txtPasswordNueva"/>
+					<a data-role="button" href="#" onclick="javascript:recordarPassword.enviarNuevoPassword();">Enviar nueva contrase&ntilde;a</a>					
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<div data-role="footer" data-position="inline" data-theme="c">
+				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>		
+			</div>							
+		</div>
+	</body>
+</html>

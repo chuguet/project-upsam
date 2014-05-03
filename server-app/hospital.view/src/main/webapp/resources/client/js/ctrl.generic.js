@@ -32,7 +32,17 @@ var generic = {
 		$(".txt-speech").each(function (index) {
 			var that = $(this);
 			var id = $(this).attr('id');
-			var button = $( "<button id='btnSpeech-" + id + "' title='Escritura por voz' data-icon='microphone' class='ui-btn-icon-textbox ui-btn-icon-right ui-icon-microphone'>&nbsp;</button>" );
+			var button = $( "<div id='btnSpeech-" + id + "' title='Escritura por voz' data-icon='microphone' class='ui-btn-icon-textbox ui-btn-icon-right ui-icon-microphone'>&nbsp;</div>" );
+			button.css("position","absolute");
+			button.css("top","1px");
+			button.css("max-width","25px");
+			button.css("margin","0px");
+			button.css("right","1px");
+			button.css("padding","1em 0px 0px 2.5em");
+			button.css("max-height","35px");
+			button.css("border-width","0px");
+			button.css("background-color","transparent");
+			
 			button.bind('click', function() {
 				$.mobile.loading( 'show', {
 					text: 'Grabando',
@@ -59,12 +69,14 @@ var generic = {
 		$(".txt-date").each(function (index) {
 			var that = $(this);
 			var id = $(this).attr('id');
-			var button = $( "<button id='btnDate-" + id + "' title='Seleccionar Fecha' data-icon='calendar' class='ui-btn-icon-textbox ui-btn-icon-right ui-icon-calendar'>&nbsp;</button>" );
+			var button = $( "<div id='btnDate-" + id + "' title='Seleccionar Fecha' data-icon='calendar' class='ui-btn-icon-textbox ui-btn-icon-right ui-icon-calendar'>&nbsp;</div>" );
 			button.bind('click', function() {
-				app.getCalendar(that)
+				generic.alert("llega",app.getCalendar);
+				//app.getCalendar(that);
 			});
 			that.bind('click', function() {
-				app.getCalendar(this)
+				generic.alert("llega",app.getCalendar);
+				//app.getCalendar(this);
 			});
 			
 			$(this).parent().append(button);

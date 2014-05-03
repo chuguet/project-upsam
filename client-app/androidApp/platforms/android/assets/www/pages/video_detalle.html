@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+	<head>
 		<title>Exploraci&oacute;n f&iacute;sica - Laboratorio de An&acute;lisis de Movimientos</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="format-detection" content="telephone=no" />
@@ -11,48 +11,44 @@
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		<link type="text/css" rel="stylesheet" href="../css/video-js.min.css" /> 
 		
-		<script type="text/javascript" src="../cordova.js"></script> 
-		<script type="text/javascript" src="../index.js"></script>
-		<script type="text/javascript" src='../js/server.js'></script>
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.min.js'></script>		
-		<script type="text/javascript" src="../js/video.js"></script>
-				
-		<script type="text/javascript">
-			generic.initialize(cargarVideo);
-			videojs.options.flash.swf = "video-js.swf";
-			
-			function cargarVideo(){
-				var id = generic.getURLParameter("id");
-	            server.get('1/video/' + id, null, mostrarVideo);
-			}
-			
-			function mostrarVideo(parameters){
-				var numero = generic.getURLParameter("numero");
-				
-				$("#reproductorVideo").append("<source src='http://192.168.1.134:8080/hospitalServer/paciente/1/videoReproduce/" + parameters.id + "' type='video/mp4' />");
-				$("#numeroVideo").html("Video  " + numero);
-				$("#nombreVideo").html("Archivo: " + parameters.nombre);
-				$("#duracionVideo").html("Duraci&oacute;n: " + parameters.duracion);
-			}
-			
-		</script>
+		<script data-main="../js/pages/video" src="../js/require.min.js"></script>
 	</head>
 	
 	<body>
 		<div data-role="page">
 			<!-- Cabecera -->
-			<div data-role="header" >                    
-			    <h3>Detalle v&iacute;deo - LAM</h3>
-			    <a data-rel="back" data-icon="back">Volver</a>
-			</div>	
+			<div data-role="header">
+				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>
+		        <h1>LAM</h1>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 id="subtitle" class="subtitle">Reproducci&oacute;n de V&iacute;deo</h2>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Logout</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
+								<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
+								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			
 			<!-- Contenido -->
-			<div data-role="content"> 	
-				<h2>Detalle de V&iacute;deo</h2>
-				
+			<div data-role="content">
 				<div class="content2">
+					<input type="hidden" id="idPaciente" />
+					<input type="hidden" id="idExploracion" />
+					<input type="hidden" id="idVideo" />
 					<span id="numeroVideo"></span><br>
 					<span class="videoFeatures" id="nombreVideo"></span><br>
 					<span class="videoFeatures" id="duracionVideo"></span><br>

@@ -14,8 +14,8 @@
 		<script type="text/javascript" src="../index.js"></script>		
 		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
 		<script type="text/javascript" src="../js/server.js"></script>	
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>
+		<script type="text/javascript" src='../js/jquery/jquery-1.9.1.min.js'></script>
+		<script type="text/javascript" src='../js/jquery/jquery.mobile-1.4.1.js'></script>
 
         <style type="text/css">
             .hide { display: none; }
@@ -27,10 +27,29 @@
 	<body>
 	
 		<div data-role="page" data-theme="a" id="page1">
-			<div data-role="header" >
-				<h2>FAQs</h2>
-				<a href="../home.html" data-icon="home" data-iconpos="notext" data-direction="reverse">Home</a>
+			<div data-role="header">                    
+				<h1>LAM</h1>
+				<a data-rel="back" data-icon="back">Volver</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 id="subtitle" class="subtitle">FAQs</h2>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Logout</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
+								<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
+								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+			
 
 			<div data-role="content">
                 <a href="#" class="ui-btn ui-corner-all ui-icon-search ui-btn-icon-left showSearch">Buscar</a>

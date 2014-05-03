@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>B&uacute;squeda de Pacientes - Laboratorio de An&acute;lisis de Movimientos</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+
+		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
+		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
+		
+		<script data-main="../js/pages/paciente" src="../js/require.min.js"></script>
+	</head>
+
+	<body>
+		<div data-role="page" id="page1">
+			<!-- Cabecera -->
+			<div data-role="header">                    
+				<h1>LAM</h1>
+				<a data-rel="back" data-icon="back">Volver</a>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 id="subtitle" class="subtitle">B&uacute;squeda de Pacientes</h2>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Logout</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
+								<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
+								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- contenido -->
+			<div data-role="content">
+					
+				<div class="content2">		
+					<div data-role="fieldcontain">
+						<label for="txtBusqueda">N&deg; ident./Nombre:</label>
+						<input type="text" id="txtBusqueda" name="txtBusqueda" class="txt-speech"/>						
+					</div>
+					<a data-role="button" href="#" onclick="paciente.buscarListado();">Buscar</a>
+					
+					<!--Listado de videos -->
+					<ul data-role="listview" data-inset="true" id="listaPacientes"></ul>
+				</div>
+			</div>
+
+			<!-- Pie -->
+			<div data-role="footer" data-position="inline" data-theme="c">
+				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>
+			</div>							
+		</div>
+	</body>
+</html>

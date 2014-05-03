@@ -10,89 +10,102 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>
-		<script type="text/javascript" src="../js/pages/paciente.js"></script>
-		
-		<script type="text/javascript">
-			generic.initialize();
-		</script>
+		<script data-main="../js/pages/paciente" src="../js/require.min.js"></script>
 	</head>
 
 	<body>
 		<div data-role="page" id="page1">
 			<!-- Cabecera -->
-			<div data-role="header" >                    
-				<h3>Paciente - LAM</h3>
-				<a data-rel="back" data-icon="back">Volver</a>
-				<a onClick="javascript:postForm()" href="../home.html" data-icon="check">Guardar</a>
+			<div data-role="header">
+				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>                   
+				<h1>LAM</h1>
+				<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+		            <a href="#" data-icon="check" data-role="button" onclick="javascript:exploracionFisica.insertar()" id="btnGuardar">Guardar</a>
+		        </div>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 id="subtitle" class="subtitle">Alta de Paciente</h2>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Logout</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
+								<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
+								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			
 			<!-- contenido -->
-			<div data-role="content">				
-				<h1>Datos de paciente</h1>		
-					
+			<div data-role="content">
+				<input type="hidden" id="idPaciente" />
 				<div class="content2">		
 					<div data-role="fieldcontain">
-						<label for="numID">N&deg; de identificaci&oacute;n:</label>	
-						<input type="text" id="numID" name="numID" class="txt-speech"/>						
+						<label for="txtNumIdentificacion">N&deg; de identificaci&oacute;n:</label>	
+						<input type="text" id="txtNumIdentificacion" name="txtNumIdentificacion" class="txt-speech"/>						
 					</div>
 					
 					<div data-role="fieldcontain">
-						<label for="nombre">Nombre</label>	
-						<input type="text" id="nombre" name="nombre" class="txt-speech"/>
+						<label for="txtNombre">Nombre</label>	
+						<input type="text" id="txtNombre" name="txtNombre" class="txt-speech"/>
 					</div>
 					
 					<div data-role="fieldcontain">
-						<label for="apellidos">Apellidos</label>	
-						<input type="text" id="apellidos" name="apellidos" class="txt-speech"/>
+						<label for="txtApellidos">Apellidos</label>	
+						<input type="text" id="txtApellidos" name="txtApellidos" class="txt-speech"/>
+					</div>
+					<div data-role="fieldcontain">
+						<label for="txtTelefono">Tel&eacute;fono</label>	
+						<input type="text" id="txtTelefono" name="txtTelefono" class="txt-speech"/>
 					</div>
 						
 					<div data-role="fieldcontain">
-						<label for="fecNac">Fecha de nacimiento:</label>
-						<input id="fecNac" name="fecNac" class="txt-date" placeholder="dd/mm/yyyy" />
+						<label for="txtFechaNacimiento">Fecha de nacimiento:</label>
+						<input id="txtFechaNacimiento" name="txtFechaNacimiento" class="txt-date" placeholder="dd/mm/yyyy" />
 					</div>
 					
 					<div data-role="fieldcontain">
-						<label for="sexo">Sexo</label>
-						<select id="sexo" name="sexo" data-role="slider" style="width: 150px">
+						<label for="cmbSexo">Sexo</label>
+						<select id="cmbSexo" name="cmbSexo" data-role="slider" style="width: 170px">
 							<option value="0">Hombre</option>
 							<option value="1">Mujer</option>
 						</select>
 					</div>
 				
 					<div data-role="fieldcontain">
-						<label for="escolarizacion">Escolarizaci&oacute;n:</label>
-						<select id="escolarizacion" name="escolarizacion" data-native-menu="false">
-							<option value="0"></option>
-							<option value="1">Educaci&oacute;n especial</option>
-							<option value="2">Integraci&oacute;n</option>
-							<option value="3">Sin adaptaciones</option>		                    
+						<label for="cmbEscolarizacion">Escolarizaci&oacute;n:</label>
+						<select id="cmbEscolarizacion" name="cmbEscolarizacion" data-native-menu="false">
+							<option value="-1"></option>
+							<option value="0">Educaci&oacute;n especial</option>
+							<option value="1">Integraci&oacute;n</option>
+							<option value="2">Sin adaptaciones</option>		                    
 						</select>		            
 					</div>
 					
 					<div data-role="fieldcontain">
-						<label for="curso">Curso:</label>
-						<input type="text" id="curso" name="curso" class="txt-speech"/>		            
+						<label for="txtCurso">Curso:</label>
+						<input type="text" id="txtCurso" name="txtCurso" class="txt-speech"/>		            
 					</div>
-					
-					<h2>Exploraciones</h2>	
-					<div data-role="fieldcontain">
-						<label>Exploraciones</h2>	
-						<a href="exploracion_fisica.html" data-icon="plus" data-role="button" data-iconpos="notext" data-mini="true">Detalle</a></label>
-					</div>	
-					
-					<ul data-role="listview" data-inset="true">
-						<li data-role="list-divider">Listado de exploraciones</li>	
-						<li><a data-transition="slidedown" rel="external" href="exploracion_fisica.html">01-02-2014 15:25 (Jose Antonio Gomez)</a></li>
-						<li><a data-transition="slidedown" rel="external" href="exploracion_fisica.html">01-02-2014 15:25 (Jose Antonio Gomez)</a></li>
-						<li><a data-transition="slidedown" rel="external" href="exploracion_fisica.html">01-02-2014 15:25 (Jose Antonio Gomez)</a></li>
-						<li><a data-transition="slidedown" rel="external" href="exploracion_fisica.html">01-02-2014 15:25 (Jose Antonio Gomez)</a></li>
-					</ul>
+				</div>
+				
+				<div id="exploraciones">
+					<h3>Exploraciones</h3>	
+					<div class="content2">
+						<a href="#" onclick="paciente.irAExploracion();" data-icon="plus" data-role="button" data-mini="true" data-inline="true">A&ntilde;adir Exploraci&oacute;n</a></label>
+						
+						<ul data-role="listview" data-inset="true" id="listaExploraciones">
+							<li data-role="list-divider">Listado de exploraciones</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 

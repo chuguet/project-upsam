@@ -10,92 +10,40 @@
 		<link rel="stylesheet" type="text/css" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		<link rel="stylesheet" type="text/css" type="text/css" href="../css/jquery.jqplot.min.css" />
-		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>	
-		<script type="text/javascript" src='../js/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery.mobile-1.4.1.js'></script>
-		<script type="text/javascript" src="../js/jquery.jqplot.js"></script>
-		<script type="text/javascript" src="../js/jqplot.pointLabels.min.js"></script>
-		
-		<script type="text/javascript">
-			var anglesDTO = null;
-			generic.initialize(cargarGrafica);
-			
-			function cargarGrafica(){
-				var id = generic.getURLParameter("id");
-	            server.get('1/ficheroEMT/' + id, null, callbackCargarGrafica);
-	            $("#angleType").change( function(){
-	            	var value = this.value;
-	            	mostrarGrafica("aR" + value, "aL" + value);
-	            });
-			}
-			
-			function callbackCargarGrafica(parameters){
-				var numero = generic.getURLParameter("numero");
-				$("#numeroGrafica").html("Gr&aacute;fica  " + numero);
-				anglesDTO = parameters.tablaDatos.anglesDTO;
-				mostrarGrafica("aRAFE.M", "aLAFE.M")
-			}
-			
-			function mostrarGrafica(firstGraphic, secondGraphic){
-				generic.loading();
-				var line1 = recoverPoints(firstGraphic, "firstGraphic");
-				var line2 = recoverPoints(secondGraphic, "secondGraphic");
-				
-				if (line1 != null){
-				 	var size = line1.length * 50;
-				 	$("#chart1").children().remove();
-				  	$("#chart1").width(size);
-				  	var plot1 = $.jqplot('chart1', [line1, line2], {
-						seriesDefaults: { 
-							showMarker:false,
-							pointLabels: { show:true, formatString: "%#.3f", edgeTolerance : -10 } 
-					  	}
-				  	});
-				}
-				generic.noLoading();
-			}
-			
-			function recoverPoints(angleName, labelId){
-				var maxim = -10000;
-				var minim = 10000;
-				for (var i = 0; i < anglesDTO.length; i++){
-					if (anglesDTO[i].name == angleName){
-						var points = [];
-						for (var j = 0; j < anglesDTO[i].pointsDTO.length; j++){
-							var value = parseFloat(anglesDTO[i].pointsDTO[j].coord);
-							if (value > maxim) {
-								maxim = value;
-							}
-							if (value < minim){
-								minim = value;
-							}
-							points.push([j, value]);
-						}
-						$("#" + labelId).html("<b>" + angleName + "</b>&nbsp;&nbsp;[Min: " + minim + " - Max: " + maxim + "]");
-						return points;
-					}
-				}
-				return null;
-			}
-		</script>
+
+		<script data-main="../js/pages/grafica" src="../js/require.min.js"></script>
 	</head>
 	<body>
 
 		<div data-role="page">
-			<!-- Cabecera -->
 			<div data-role="header">                    
-				<h3>Gr&aacute;fica</h3>
-				<a data-rel="back" data-icon="back">Volver</a>
-			</div>			
+				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>
+		        <h1>LAM</h1>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 id="subtitle" class="subtitle">Gr&aacute;fica de fichero EMT</h2>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Logout</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
+								<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
+								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			
 			<!-- Contenido -->
-			<div data-role="content">			
-				<h2 id="numeroGrafica">Gr&aacute;fica</h2>
-				
+			<div data-role="content">
 				<div class="content2">
 					<div data-role="fieldcontain">	
 						<select id="angleType">

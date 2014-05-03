@@ -239,8 +239,19 @@ h2 {
 [data-role=page]{height: 100% !important; position:relative !important; margin-bottom:40px}
 [data-role=footer]{bottom:0px; position:absolute !important; top: auto !important; width:100%; padding:5px 0px;}
 */
+
 .ui-btn-icon-textbox { position: absolute; top: 1px; max-width: 25px; margin: 0px; right: 1px; padding: 1em 0px 0px 2.5em; max-height: 35px; border-width: 0px; background-color: transparent; }
+
 .blueLegend {border:solid 1px #666; background-color:#4bb2c5; height:15px; width:30px; display:block; float:left;}
 .yellowLegend {border:solid 1px #666; background-color:#eaa228; height:15px; width:30px; display:block; float:left;}
 .textLegend {margin:0px 35px 0px 6px; }
 .legend {margin-top:5px;}
+.ui-bar h2.subtitle {color:black;font-size:1.4em;margin-left:5px;}
+.ui-bar div.username { float:right; margin-top:5px;}
+.ui-bar div.username > div {display: inline-block;}
+.ui-bar div.username > a { display: inline-block; margin: -8px -3px 0px 10px;}
+.ui-select .ui-btn {padding:.4em; background-color:white;}
+body {display:none;}
+table#movie-table div.ui-select {width:130px;}
+.ui-content div.listadoGross .ui-listview {margin:0px;}
+div.divBotonGrabar .ui-btn-icon-left:after {left: 50%; margin-left: -68px;}
