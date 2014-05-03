@@ -18,11 +18,14 @@
 		<div data-role="page">
 			<!-- Cabecera -->
 			<div data-role="header">
-				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
-				<a data-rel="back" data-icon="back">Volver</a>
+				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>
+		        <h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
 				
 				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
-					<h2 class="subtitle">Reproducci&oacute;n de V&iacute;deo</h2>
+					<h2 id="subtitle" class="subtitle">Reproducci&oacute;n de V&iacute;deo</h2>
 					<div class="username">
 						<div id="username"></div>
 						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>

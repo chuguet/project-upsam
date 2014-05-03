@@ -10,28 +10,21 @@
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
-		<script type="text/javascript" src="../cordova.js"></script>
-		<script type="text/javascript" src="../index.js"></script>		
-		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
-		<script type="text/javascript" src="../js/server.js"></script>	
-		<script type="text/javascript" src='../js/jquery/jquery-1.9.1.min.js'></script>
-		<script type="text/javascript" src='../js/jquery/jquery.mobile-1.4.1.min.js'></script>
-		<script type="text/javascript" src='../js/pages/video.js'></script>
-	
-		<script type="text/javascript">
-			generic.initialize();
-		</script>
+		<script data-main="../js/pages/video" src="../js/require.min.js"></script>
 	</head>
 	<body>
 
 		<div data-role="page">
 			<!-- Cabecera -->
 			<div data-role="header">
+				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>
 				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
-				<a data-rel="back" data-icon="back">Volver</a>
 				
 				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
-					<h2 class="subtitle">Grabaci&oacute;n de v&iacute;deo</h2>
+					<h2 id="subtitle" class="subtitle">Grabaci&oacute;n de v&iacute;deo</h2>
 					<div class="username">
 						<div id="username"></div>
 						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
@@ -59,8 +52,8 @@
 					</div>
 
 					<!--Grabacion -->
-					<div data-role="fieldcontain">					
-						<a data-role="button" data-icon="video" data-iconpos="top" onclick="video.grabar();">Grabar video</a>
+					<div data-role="fieldcontain" class="divBotonGrabar">					
+						<a data-role="button" data-icon="video" onclick="video.grabar();">Grabar video</a>
 					</div>
 				</div>				
 			</div>

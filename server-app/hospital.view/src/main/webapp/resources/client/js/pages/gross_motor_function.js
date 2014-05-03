@@ -16,9 +16,9 @@ var grossMotorFunction = {
 	},
 	
 	'recuperarCallback' : function(gross){
-		if (gross != null){
+		if (gross.id != null){
 			$("#idGross").val(gross.id);
-			$("#subtitle").html("Consulta de Gross Motor Function");
+			$("#subtitle").html("Consulta de Gross Motor Function Classification System");
 			$("#btnGuardar").text("Modificar");
 			if (gross.var1 != null){
 				$("input[name=1][value='" + gross.var1 + "']").prop("checked", true).checkboxradio("refresh");

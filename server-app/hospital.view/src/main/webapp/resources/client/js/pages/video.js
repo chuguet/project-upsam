@@ -8,12 +8,13 @@ define([
 var video = {
     'recuperar' : function (){
     	videojs.options.flash.swf = "video-js.swf";
+    	var idVideo = generic.getURLParameter("idVideo");
     	$("#idPaciente").val(generic.getURLParameter("idPaciente"));
     	$("#idExploracion").val(generic.getURLParameter("idExploracion"));
-    	$("#idVideo").val(generic.getURLParameter("idVideo"));
+    	$("#idVideo").val(idVideo);
     	if (idVideo != null){
 			generic.loading();
-			server.get("pacientemovil/" + $("#idPaciente").val() + "/exploracion/" + $("#idExploracion").val() + "/video/" + $("#idVideo").val(), null, video.recuperarCallback);
+			server.get("pacientemovil/" + $("#idPaciente").val() + "/exploracion/" + $("#idExploracion").val() + "/video/" + idVideo, null, video.recuperarCallback);
 		}
 		else{
 			generic.noLoading();

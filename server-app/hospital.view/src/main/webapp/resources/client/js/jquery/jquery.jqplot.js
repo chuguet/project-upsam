@@ -1,87 +1,3 @@
-/**
- * Title: jqPlot Charts
- * 
- * Pure JavaScript plotting plugin for jQuery.
- * 
- * About: Version
- * 
- * version: 1.0.8 
- * revision: 1250
- * 
- * About: Copyright & License
- * 
- * Copyright (c) 2009-2013 Chris Leonello
- * jqPlot is currently available for use in all personal or commercial projects 
- * under both the MIT and GPL version 2.0 licenses. This means that you can 
- * choose the license that best suits your project and use it accordingly.
- * 
- * See <GPL Version 2> and <MIT License> contained within this distribution for further information. 
- *
- * The author would appreciate an email letting him know of any substantial
- * use of jqPlot.  You can reach the author at: chris at jqplot dot com 
- * or see http://www.jqplot.com/info.php.  This is, of course, not required.
- *
- * If you are feeling kind and generous, consider supporting the project by
- * making a donation at: http://www.jqplot.com/donate.php.
- *
- * sprintf functions contained in jqplot.sprintf.js by Ash Searle:
- * 
- *     version 2007.04.27
- *     author Ash Searle
- *     http://hexmen.com/blog/2007/03/printf-sprintf/
- *     http://hexmen.com/js/sprintf.js
- *     The author (Ash Searle) has placed this code in the public domain:
- *     "This code is unrestricted: you are free to use it however you like."
- * 
- * 
- * About: Introduction
- * 
- * jqPlot requires jQuery (1.4+ required for certain features). jQuery 1.4.2 is included in the distribution.  
- * To use jqPlot include jQuery, the jqPlot jQuery plugin, the jqPlot css file and optionally 
- * the excanvas script for IE support in your web page:
- * 
- * > <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="excanvas.js"></script><![endif]-->
- * > <script language="javascript" type="text/javascript" src="jquery-1.4.4.min.js"></script>
- * > <script language="javascript" type="text/javascript" src="jquery.jqplot.min.js"></script>
- * > <link rel="stylesheet" type="text/css" href="jquery.jqplot.css" />
- * 
- * jqPlot can be customized by overriding the defaults of any of the objects which make
- * up the plot. The general usage of jqplot is:
- * 
- * > chart = $.jqplot('targetElemId', [dataArray,...], {optionsObject});
- * 
- * The options available to jqplot are detailed in <jqPlot Options> in the jqPlotOptions.txt file.
- * 
- * An actual call to $.jqplot() may look like the 
- * examples below:
- * 
- * > chart = $.jqplot('chartdiv',  [[[1, 2],[3,5.12],[5,13.1],[7,33.6],[9,85.9],[11,219.9]]]);
- * 
- * or
- * 
- * > dataArray = [34,12,43,55,77];
- * > chart = $.jqplot('targetElemId', [dataArray, ...], {title:'My Plot', axes:{yaxis:{min:20, max:100}}});
- * 
- * For more inforrmation, see <jqPlot Usage>.
- * 
- * About: Usage
- * 
- * See <jqPlot Usage>
- * 
- * About: Available Options 
- * 
- * See <jqPlot Options> for a list of options available thorugh the options object (not complete yet!)
- * 
- * About: Options Usage
- * 
- * See <Options Tutorial>
- * 
- * About: Changes
- * 
- * See <Change Log>
- * 
- */
-
 (function($) {
     // make sure undefined is undefined
     var undefined;
@@ -9961,16 +9877,16 @@
         },
         
         'fr': {
-            monthNames: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
-            monthNamesShort: ['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'],
+            monthNames: ['Janvier','FÃ©vrier','Mars','Avril','Mai','Juin','Juillet','AoÃ»t','Septembre','Octobre','Novembre','DÃ©cembre'],
+            monthNamesShort: ['Jan','FÃ©v','Mar','Avr','Mai','Jun','Jul','AoÃ»','Sep','Oct','Nov','DÃ©c'],
             dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
             dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
             formatString: '%Y-%m-%d %H:%M:%S'
         },
         
         'de': {
-            monthNames: ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
-            monthNamesShort: ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],
+            monthNames: ['Januar','Februar','MÃ¤rz','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+            monthNamesShort: ['Jan','Feb','MÃ¤r','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],
             dayNames: ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'],
             dayNamesShort: ['So','Mo','Di','Mi','Do','Fr','Sa'],
             formatString: '%Y-%m-%d %H:%M:%S'
@@ -9985,18 +9901,18 @@
         },
         
         'ru': {
-            monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
-            monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'],
-            dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
-            dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+            monthNames: ['Ð¯Ð½Ð²Ð°Ñ€ÑŒ','Ð¤ÐµÐ²Ñ€Ð°Ð»ÑŒ','ÐœÐ°Ñ€Ñ‚','Ð�Ð¿Ñ€ÐµÐ»ÑŒ','ÐœÐ°Ð¹','Ð˜ÑŽÐ½ÑŒ','Ð˜ÑŽÐ»ÑŒ','Ð�Ð²Ð³ÑƒÑ�Ñ‚','Ð¡ÐµÐ½Ñ‚Ñ�Ð±Ñ€ÑŒ','ÐžÐºÑ‚Ñ�Ð±Ñ€ÑŒ','Ð�Ð¾Ñ�Ð±Ñ€ÑŒ','Ð”ÐµÐºÐ°Ð±Ñ€ÑŒ'],
+            monthNamesShort: ['Ð¯Ð½Ð²','Ð¤ÐµÐ²','ÐœÐ°Ñ€','Ð�Ð¿Ñ€','ÐœÐ°Ð¹','Ð˜ÑŽÐ½','Ð˜ÑŽÐ»','Ð�Ð²Ð³','Ð¡ÐµÐ½','ÐžÐºÑ‚','Ð�Ð¾Ñ�','Ð”ÐµÐº'],
+            dayNames: ['Ð²Ð¾Ñ�ÐºÑ€ÐµÑ�ÐµÐ½ÑŒÐµ','Ð¿Ð¾Ð½ÐµÐ´ÐµÐ»ÑŒÐ½Ð¸Ðº','Ð²Ñ‚Ð¾Ñ€Ð½Ð¸Ðº','Ñ�Ñ€ÐµÐ´Ð°','Ñ‡ÐµÑ‚Ð²ÐµÑ€Ð³','Ð¿Ñ�Ñ‚Ð½Ð¸Ñ†Ð°','Ñ�ÑƒÐ±Ð±Ð¾Ñ‚Ð°'],
+            dayNamesShort: ['Ð²Ñ�Ðº','Ð¿Ð½Ð´','Ð²Ñ‚Ñ€','Ñ�Ñ€Ð´','Ñ‡Ñ‚Ð²','Ð¿Ñ‚Ð½','Ñ�Ð±Ñ‚'],
             formatString: '%Y-%m-%d %H:%M:%S'
         },
         
         'ar': {
-            monthNames: ['كانون الثاني', 'شباط', 'آذار', 'نيسان', 'آذار', 'حزيران','تموز', 'آب', 'أيلول',   'تشرين الأول', 'تشرين الثاني', 'كانون الأول'],
+            monthNames: ['ÙƒØ§Ù†ÙˆÙ† Ø§Ù„Ø«Ø§Ù†ÙŠ', 'Ø´Ø¨Ø§Ø·', 'Ø¢Ø°Ø§Ø±', 'Ù†ÙŠØ³Ø§Ù†', 'Ø¢Ø°Ø§Ø±', 'Ø­Ø²ÙŠØ±Ø§Ù†','ØªÙ…ÙˆØ²', 'Ø¢Ø¨', 'Ø£ÙŠÙ„ÙˆÙ„',   'ØªØ´Ø±ÙŠÙ† Ø§Ù„Ø£ÙˆÙ„', 'ØªØ´Ø±ÙŠÙ† Ø§Ù„Ø«Ø§Ù†ÙŠ', 'ÙƒØ§Ù†ÙˆÙ† Ø§Ù„Ø£ÙˆÙ„'],
             monthNamesShort: ['1','2','3','4','5','6','7','8','9','10','11','12'],
-            dayNames: ['السبت', 'الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة'],
-            dayNamesShort: ['سبت', 'أحد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة'],
+            dayNames: ['Ø§Ù„Ø³Ø¨Øª', 'Ø§Ù„Ø£Ø­Ø¯', 'Ø§Ù„Ø§Ø«Ù†ÙŠÙ†', 'Ø§Ù„Ø«Ù„Ø§Ø«Ø§Ø¡', 'Ø§Ù„Ø£Ø±Ø¨Ø¹Ø§Ø¡', 'Ø§Ù„Ø®Ù…ÙŠØ³', 'Ø§Ù„Ø¬Ù…Ø¹Ø©'],
+            dayNamesShort: ['Ø³Ø¨Øª', 'Ø£Ø­Ø¯', 'Ø§Ø«Ù†ÙŠÙ†', 'Ø«Ù„Ø§Ø«Ø§Ø¡', 'Ø£Ø±Ø¨Ø¹Ø§Ø¡', 'Ø®Ù…ÙŠØ³', 'Ø¬Ù…Ø¹Ø©'],
             formatString: '%Y-%m-%d %H:%M:%S'
         },
         
@@ -10017,10 +9933,10 @@
         },
         
         'pl': {
-            monthNames: ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'],
-            monthNamesShort: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze','Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'],
-            dayNames: ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'],
-            dayNamesShort: ['Ni', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'Sb'],
+            monthNames: ['StyczeÅ„','Luty','Marzec','KwiecieÅ„','Maj','Czerwiec','Lipiec','SierpieÅ„','WrzesieÅ„','PaÅºdziernik','Listopad','GrudzieÅ„'],
+            monthNamesShort: ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze','Lip', 'Sie', 'Wrz', 'PaÅº', 'Lis', 'Gru'],
+            dayNames: ['Niedziela', 'PoniedziaÅ‚ek', 'Wtorek', 'Åšroda', 'Czwartek', 'PiÄ…tek', 'Sobota'],
+            dayNamesShort: ['Ni', 'Pn', 'Wt', 'Åšr', 'Cz', 'Pt', 'Sb'],
             formatString: '%Y-%m-%d %H:%M:%S'
         },
 
@@ -10035,8 +9951,8 @@
         'sv': {
             monthNames: ['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'],
           monthNamesShort: ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'],
-            dayNames: ['söndag','måndag','tisdag','onsdag','torsdag','fredag','lördag'],
-            dayNamesShort: ['sön','mån','tis','ons','tor','fre','lör'],
+            dayNames: ['sÃ¶ndag','mÃ¥ndag','tisdag','onsdag','torsdag','fredag','lÃ¶rdag'],
+            dayNamesShort: ['sÃ¶n','mÃ¥n','tis','ons','tor','fre','lÃ¶r'],
             formatString: '%Y-%m-%d %H:%M:%S'
         }
     
@@ -11408,4 +11324,306 @@
 
     };
 
+})(jQuery);
+
+(function($) {
+    $.jqplot.PointLabels = function(options) {
+        // Group: Properties
+        //
+        // prop: show
+        // show the labels or not.
+        this.show = $.jqplot.config.enablePlugins;
+        // prop: location
+        // compass location where to position the label around the point.
+        // 'n', 'ne', 'e', 'se', 's', 'sw', 'w', 'nw'
+        this.location = 'n';
+        // prop: labelsFromSeries
+        // true to use labels within data point arrays.
+        this.labelsFromSeries = false;
+        // prop: seriesLabelIndex
+        // array index for location of labels within data point arrays.
+        // if null, will use the last element of the data point array.
+        this.seriesLabelIndex = null;
+        // prop: labels
+        // array of arrays of labels, one array for each series.
+        this.labels = [];
+        // actual labels that will get displayed.
+        // needed to preserve user specified labels in labels array.
+        this._labels = [];
+        // prop: stackedValue
+        // true to display value as stacked in a stacked plot.
+        // no effect if labels is specified.
+        this.stackedValue = false;
+        // prop: ypadding
+        // vertical padding in pixels between point and label
+        this.ypadding = 6;
+        // prop: xpadding
+        // horizontal padding in pixels between point and label
+        this.xpadding = 6;
+        // prop: escapeHTML
+        // true to escape html entities in the labels.
+        // If you want to include markup in the labels, set to false.
+        this.escapeHTML = true;
+        // prop: edgeTolerance
+        // Number of pixels that the label must be away from an axis
+        // boundary in order to be drawn.  Negative values will allow overlap
+        // with the grid boundaries.
+        this.edgeTolerance = -5;
+        // prop: formatter
+        // A class of a formatter for the tick text.  sprintf by default.
+        this.formatter = $.jqplot.DefaultTickFormatter;
+        // prop: formatString
+        // string passed to the formatter.
+        this.formatString = '';
+        // prop: hideZeros
+        // true to not show a label for a value which is 0.
+        this.hideZeros = false;
+        this._elems = [];
+        
+        $.extend(true, this, options);
+    };
+    
+    var locations = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w'];
+    var locationIndicies = {'nw':0, 'n':1, 'ne':2, 'e':3, 'se':4, 's':5, 'sw':6, 'w':7};
+    var oppositeLocations = ['se', 's', 'sw', 'w', 'nw', 'n', 'ne', 'e'];
+    
+    // called with scope of a series
+    $.jqplot.PointLabels.init = function (target, data, seriesDefaults, opts, plot){
+        var options = $.extend(true, {}, seriesDefaults, opts);
+        options.pointLabels = options.pointLabels || {};
+        if (this.renderer.constructor === $.jqplot.BarRenderer && this.barDirection === 'horizontal' && !options.pointLabels.location) {
+            options.pointLabels.location = 'e';
+        }
+        // add a pointLabels attribute to the series plugins
+        this.plugins.pointLabels = new $.jqplot.PointLabels(options.pointLabels);
+        this.plugins.pointLabels.setLabels.call(this);
+    };
+    
+    // called with scope of series
+    $.jqplot.PointLabels.prototype.setLabels = function() {   
+        var p = this.plugins.pointLabels; 
+        var labelIdx;
+        if (p.seriesLabelIndex != null) {
+            labelIdx = p.seriesLabelIndex;
+        }
+        else if (this.renderer.constructor === $.jqplot.BarRenderer && this.barDirection === 'horizontal') {
+           labelIdx = (this._plotData[0].length < 3) ? 0 : this._plotData[0].length -1;
+        }
+        else {
+            labelIdx = (this._plotData.length === 0) ? 0 : this._plotData[0].length -1;
+        }
+        p._labels = [];
+        if (p.labels.length === 0 || p.labelsFromSeries) {    
+            if (p.stackedValue) {
+                if (this._plotData.length && this._plotData[0].length){
+                    // var idx = p.seriesLabelIndex || this._plotData[0].length -1;
+                    for (var i=0; i<this._plotData.length; i++) {
+                        p._labels.push(this._plotData[i][labelIdx]);
+                    }
+                }
+            }
+            else {
+                // var d = this._plotData;
+                var d = this.data;
+                if (this.renderer.constructor === $.jqplot.BarRenderer && this.waterfall) {
+                    d = this._data;
+                }
+                if (d.length && d[0].length) {
+                    // var idx = p.seriesLabelIndex || d[0].length -1;
+                    for (var i=0; i<d.length; i++) {
+                        p._labels.push(d[i][labelIdx]);
+                    }
+                }
+                d = null;
+            }
+        }
+        else if (p.labels.length){
+            p._labels = p.labels;
+        }
+    };
+    
+    $.jqplot.PointLabels.prototype.xOffset = function(elem, location, padding) {
+        location = location || this.location;
+        padding = padding || this.xpadding;
+        var offset;
+        
+        switch (location) {
+            case 'nw':
+                offset = -elem.outerWidth(true) - this.xpadding;
+                break;
+            case 'n':
+                offset = -elem.outerWidth(true)/2;
+                break;
+            case 'ne':
+                offset =  this.xpadding;
+                break;
+            case 'e':
+                offset = this.xpadding;
+                break;
+            case 'se':
+                offset = this.xpadding;
+                break;
+            case 's':
+                offset = -elem.outerWidth(true)/2;
+                break;
+            case 'sw':
+                offset = -elem.outerWidth(true) - this.xpadding;
+                break;
+            case 'w':
+                offset = -elem.outerWidth(true) - this.xpadding;
+                break;
+            default: // same as 'nw'
+                offset = -elem.outerWidth(true) - this.xpadding;
+                break;
+        }
+        return offset; 
+    };
+    
+    $.jqplot.PointLabels.prototype.yOffset = function(elem, location, padding) {
+        location = location || this.location;
+        padding = padding || this.xpadding;
+        var offset;
+        
+        switch (location) {
+            case 'nw':
+                offset = -elem.outerHeight(true) - this.ypadding;
+                break;
+            case 'n':
+                offset = -elem.outerHeight(true) - this.ypadding;
+                break;
+            case 'ne':
+                offset = -elem.outerHeight(true) - this.ypadding;
+                break;
+            case 'e':
+                offset = -elem.outerHeight(true)/2;
+                break;
+            case 'se':
+                offset = this.ypadding;
+                break;
+            case 's':
+                offset = this.ypadding;
+                break;
+            case 'sw':
+                offset = this.ypadding;
+                break;
+            case 'w':
+                offset = -elem.outerHeight(true)/2;
+                break;
+            default: // same as 'nw'
+                offset = -elem.outerHeight(true) - this.ypadding;
+                break;
+        }
+        return offset; 
+    };
+    
+    // called with scope of series
+    $.jqplot.PointLabels.draw = function (sctx, options, plot) {
+        var p = this.plugins.pointLabels;
+        // set labels again in case they have changed.
+        p.setLabels.call(this);
+        // remove any previous labels
+        for (var i=0; i<p._elems.length; i++) {
+            // Memory Leaks patch
+            // p._elems[i].remove();
+            p._elems[i].emptyForce();
+        }
+        p._elems.splice(0, p._elems.length);
+
+        if (p.show) {
+            var ax = '_'+this._stackAxis+'axis';
+        
+            if (!p.formatString) {
+                p.formatString = this[ax]._ticks[0].formatString;
+                p.formatter = this[ax]._ticks[0].formatter;
+            }
+        
+            var pd = this._plotData;
+            var ppd = this._prevPlotData;
+            var xax = this._xaxis;
+            var yax = this._yaxis;
+            var elem, helem;
+
+            for (var i=0, l=p._labels.length; i < l; i++) {
+                var label = p._labels[i];
+                
+                if (label == null || (p.hideZeros && parseInt(label, 10) == 0)) {
+                    continue;
+                }
+                
+                label = p.formatter(p.formatString, label);
+
+                helem = document.createElement('div');
+                p._elems[i] = $(helem);
+
+                elem = p._elems[i];
+
+
+                elem.addClass('jqplot-point-label jqplot-series-'+this.index+' jqplot-point-'+i);
+                elem.css('position', 'absolute');
+                elem.insertAfter(sctx.canvas);
+
+                if (p.escapeHTML) {
+                    elem.text(label);
+                }
+                else {
+                    elem.html(label);
+                }
+                var location = p.location;
+                if ((this.fillToZero && pd[i][1] < 0) || (this.fillToZero && this._type === 'bar' && this.barDirection === 'horizontal' && pd[i][0] < 0) || (this.waterfall && parseInt(label, 10)) < 0) {
+                    location = oppositeLocations[locationIndicies[location]];
+                }
+
+
+                var ell = xax.u2p(pd[i][0]) + p.xOffset(elem, location);
+                var elt = yax.u2p(pd[i][1]) + p.yOffset(elem, location);
+
+                // we have stacked chart but are not showing stacked values,
+                // place labels in center.
+                if (this._stack && !p.stackedValue) {
+                    if (this.barDirection === "vertical") {
+                        elt = (this._barPoints[i][0][1] + this._barPoints[i][1][1]) / 2 + plot._gridPadding.top - 0.5 * elem.outerHeight(true);
+                    }
+                    else {
+                        ell = (this._barPoints[i][2][0] + this._barPoints[i][0][0]) / 2 + plot._gridPadding.left - 0.5 * elem.outerWidth(true);
+                    }
+                }
+
+                if (this.renderer.constructor == $.jqplot.BarRenderer) {
+                    if (this.barDirection == "vertical") {
+                        ell += this._barNudge;
+                    }
+                    else {
+                        elt -= this._barNudge;
+                    }
+                }
+                elem.css('left', ell);
+                elem.css('top', elt);
+                var elr = ell + elem.width();
+                var elb = elt + elem.height();
+                var et = p.edgeTolerance;
+                var scl = $(sctx.canvas).position().left;
+                var sct = $(sctx.canvas).position().top;
+                var scr = sctx.canvas.width + scl;
+                var scb = sctx.canvas.height + sct;
+                // if label is outside of allowed area, remove it
+                if (ell - et < scl || elt - et < sct || elr + et > scr || elb + et > scb) {
+                    elem.remove();
+                }
+
+                elem = null;
+                helem = null;
+            }
+
+            // finally, animate them if the series is animated
+            // if (this.renderer.animation && this.renderer.animation._supported && this.renderer.animation.show && plot._drawCount < 2) {
+            //     var sel = '.jqplot-point-label.jqplot-series-'+this.index;
+            //     $(sel).hide();
+            //     $(sel).fadeIn(1000);
+            // }
+
+        }
+    };
+    
+    $.jqplot.postSeriesInitHooks.push($.jqplot.PointLabels.init);
+    $.jqplot.postDrawSeriesHooks.push($.jqplot.PointLabels.draw);
 })(jQuery);

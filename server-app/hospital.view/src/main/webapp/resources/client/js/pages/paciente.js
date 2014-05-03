@@ -36,7 +36,6 @@ var paciente = {
 		}
 		else {
 			// Entramos en modo alta
-			$("#subtitle").html("Alta de Paciente");
 			$("#exploraciones").hide();
 			generic.noLoading();
 		}

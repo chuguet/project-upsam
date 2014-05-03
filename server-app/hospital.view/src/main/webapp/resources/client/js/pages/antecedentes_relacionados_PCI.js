@@ -19,7 +19,7 @@ var antecedentesRelacionadosPCI = {
 	'recuperarCallback' : function(antecedentes){
 		if (antecedentes.id != null){
 			$("#idAntecedentes").val(antecedentes.id);
-			$(".subtitle").html("Consulta de Antecedentes relacionados con PCI");
+			$("#subtitle").html("Consulta de Antecedentes relacionados con PCI");
 			$("#btnGuardar").text("Modificar");
 			if (antecedentes.cuadriplejiaEspatica){
 				$("#cuadriplejiaEspatica").attr('checked', 'checked').checkboxradio('refresh');
@@ -97,10 +97,6 @@ var antecedentesRelacionadosPCI = {
 			$("#otrasTerapias").val(antecedentes.otrasTerapias);
 			$("#deportes").val(antecedentes.deportes);
 		}
-		else{
-			//Entramos en modo alta
-			$(".subtitle").html("Nuevos Antecedentes Relacionados con PCI");
-		}
 		generic.noLoading();
 	},
 	'onChangeOtrosDiagnosticos' : function() {
@@ -151,7 +147,7 @@ var antecedentesRelacionadosPCI = {
 	},
 
 	'insertarCallback' : function(params) {
-		$(".subtitle").html("Consulta de Antecedentes relacionados con PCI");
+		$("#subtitle").html("Consulta de Antecedentes relacionados con PCI");
 		$("#btnGuardar").text("Modificar");
 		$("#idAntecedentes").val(params.parameter.id);
 		generic.noLoading();

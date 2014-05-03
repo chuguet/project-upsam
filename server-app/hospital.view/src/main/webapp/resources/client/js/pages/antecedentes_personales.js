@@ -18,7 +18,7 @@ var antecedentesPersonales = {
 		'recuperarCallback' : function(antecedentes){
 			if (antecedentes.id != null){
 				$("#idAntecedentes").val(antecedentes.id);
-				$(".subtitle").html("Consulta de Antecedentes Personales");
+				$("#subtitle").html("Consulta de Antecedentes Personales");
 				$("#btnGuardar").text("Modificar");
 				if (antecedentes.epilepsia){
 					$("#divEpilepsia").show();
@@ -80,10 +80,6 @@ var antecedentesPersonales = {
 				
 				$("#alergias").val(antecedentes.alergias);
 				$("#tratamiento").val(antecedentes.tratamiento);
-			}
-			else{
-				//Entramos en modo alta
-				$(".subtitle").html("Nuevos Antecedentes Personales");
 			}
 			generic.noLoading();
 		},

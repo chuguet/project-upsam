@@ -252,3 +252,4 @@ h2 {
 body {display:none;}
 table#movie-table div.ui-select {width:130px;}
 .ui-content div.listadoGross .ui-listview {margin:0px;}
+div.divBotonGrabar .ui-btn-icon-left:after {left: 50%; margin-left: -68px;}
