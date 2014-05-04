@@ -1,7 +1,9 @@
 var generic = {
+	'appInitialized' : false,
 	'initialize' : function(methodToExecute) {
-		if (typeof app + "" != "undefined"){
+		if (typeof app + "" != "undefined" && ! this.appInitialized){
 			app.initialize();
+			this.appInitialized = true;
 		}
 		
 		var that = this;
@@ -23,7 +25,7 @@ var generic = {
     	if (methodToExecute && methodToExecute != null){
     		methodToExecute.apply(this, null);
     	}
-    	$("body").show();
+    	//$("body").show();
     	that.processSpeech();     
     	that.processDatebox();
 	},
@@ -32,16 +34,7 @@ var generic = {
 		$(".txt-speech").each(function (index) {
 			var that = $(this);
 			var id = $(this).attr('id');
-			var button = $( "<div id='btnSpeech-" + id + "' title='Escritura por voz' data-icon='microphone' class='ui-btn-icon-textbox ui-btn-icon-right ui-icon-microphone'>&nbsp;</div>" );
-			button.css("position","absolute");
-			button.css("top","1px");
-			button.css("max-width","25px");
-			button.css("margin","0px");
-			button.css("right","1px");
-			button.css("padding","1em 0px 0px 2.5em");
-			button.css("max-height","35px");
-			button.css("border-width","0px");
-			button.css("background-color","transparent");
+			var button = $( "<div id='btnSpeech-" + id + "' title='Escritura por voz' data-icon='microphone' class='ui-btn-icon-textbox ui-btn-icon-right ui-icon-microphone'>&nbsp;</div>");
 			
 			button.bind('click', function() {
 				$.mobile.loading( 'show', {
@@ -71,17 +64,40 @@ var generic = {
 			var id = $(this).attr('id');
 			var button = $( "<div id='btnDate-" + id + "' title='Seleccionar Fecha' data-icon='calendar' class='ui-btn-icon-textbox ui-btn-icon-right ui-icon-calendar'>&nbsp;</div>" );
 			button.bind('click', function() {
-				generic.alert("llega",app.getCalendar);
-				//app.getCalendar(that);
+				generic.handleDates(that);
 			});
 			that.bind('click', function() {
-				generic.alert("llega",app.getCalendar);
-				//app.getCalendar(this);
+				generic.handleDates(this);
 			});
 			
 			$(this).parent().append(button);
 		});
 	},
+	
+	'handleDates' : function(currentField, options) {
+        event.stopPropagation();
+        //var currentField = $(elm);
+        var opts = options || {};
+        var minVal = opts.min || 0;
+        var maxVal = opts.max || 0;
+
+        var myNewDate = Date.parse(currentField.val()) || new Date();
+        if(typeof myNewDate === "number") {
+            myNewDate = new Date (myNewDate);
+        }
+
+        window.plugins.datePicker.show({
+            date : myNewDate,
+            mode : 'date',
+            minDate: Date.parse(minVal),
+            maxDate: Date.parse(maxVal)
+        }, function(returnDate) {
+            if(returnDate !== "") {
+                currentField.val(generic.getFormattedDate(returnDate));
+            }
+            currentField.blur();
+        });
+    },
 	
 	'changePage' : function(uri, parameters){
 		var uriWithParameters = uri;
@@ -95,7 +111,8 @@ var generic = {
 				count++;
 			}
 		}
-		document.location.href = uriWithParameters;
+		$.mobile.changePage(uriWithParameters, { transition: "slide"});
+		//document.location.href = uriWithParameters;
 		//$.mobile.changePage(uri, { dataUrl : uriWithParameters, data : parameters, reloadPage : true, changeHash : true });
 	},
 	
@@ -126,15 +143,16 @@ var generic = {
 		}
 		else{
 			$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>" + message + "</h3></div>")
-			.css({ display: "block", 
-				opacity: 1, 
-				position: "fixed",
-				padding: "7px",
+			.css({ "display": "block",
+				"font-size" : "0.8em", 
+				"opacity": 1, 
+				"position": "fixed",
+				"padding": "6px",
 				"background-color" : "#ddd",
-				"text-align": "center",
-				width: "270px",
-				left: ($(window).width() - 284)/2,
-				top: $(window).height()/2 })
+				"text-align": "justify",
+				"width": "300px",
+				"left": ($(window).width() - 314)/2,
+				"top": $(window).height()/2 })
 			.appendTo( $.mobile.pageContainer ).delay( 1500 )
 			.fadeOut( 600, function(){
 				$(this).remove();
@@ -189,6 +207,12 @@ var generic = {
 	    }
 
 	    return true;
+	},
+	'getFormattedDate' : function(fecha){
+		var data = fecha.split("/");
+		var dd = data[2] <10 ? '0' + data[2] : data[2];
+		var mm = data[1] <10 ? '0' + data[1] : data[1];
+		var yyyy = data[0];
+		return dd + "/" + mm + "/" + yyyy;
 	}
-	
 };

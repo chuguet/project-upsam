@@ -1,36 +1,3 @@
-/*
-requirejs.config({
-   paths: {
-	   'cordova' : '../../cordova', 
-	   'index' : '../index', 
-	   'jquery' : '../jquery/jquery-1.9.1.min', 
-	   'jmobile' : '../jquery/jquery.mobile-1.4.1', 
-	   'generic' : '../ctrl.generic', 
-	   'server' : '../server', 
-	   'jqplot' : '../jquery/jquery.jqplot', 
-	   'pointLabels' : '../jquery/jqplot.pointLabels'
-    }, 
-
-    // Use shim for plugins that does not support ADM
-    shim: {
-        'generic': ['jquery'],
-        'jmobile': ['jquery'],
-        'server': ['jquery'],
-        'jqplot': ['jquery'],
-        'pointLabels': ['jquery', 'jqplot']
-    },
-    enforceDefine: true
-});
-*/
-
-
-define([
-		"../../cordova", "../index", "../jquery/jquery-1.9.1.min", "../jquery/jquery.mobile-1.4.1", "../ctrl.generic", "../server", "../jquery/jquery.jqplot" 
-], function($) {
-	generic.initialize();
-	grafica.recuperar();
-});
-
 var grafica = {
 		'anglesDTO' : null,
 		'recuperar' : function(){

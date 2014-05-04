@@ -9,17 +9,25 @@
 		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
-		
-		<script data-main="../js/pages/paciente" src="../js/require.min.js"></script>
 	</head>
 
 	<body>
-		<div data-role="page" id="page1">
-			<!-- Cabecera -->
-			<div data-role="header">                    
-				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
-				<a data-rel="back" data-icon="back">Volver</a>
-				<a data-icon="check" onclick="javascript:paciente.insertar()" >Guardar</a>
+		<div data-role="page" id="page_paciente">
+			<script type="text/javascript">
+				$(document).unbind("pageshow");
+				$(document).bind("pageshow", function(event, data) {
+			        generic.initialize(paciente.recuperar); 
+			    });
+			</script>
+			<div data-role="header" data-position="fixed">
+				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>                   
+				<h1>LAM</h1>
+				<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+		            <a href="#" data-icon="check" data-role="button" onclick="javascript:exploracionFisica.insertar()" id="btnGuardar">Guardar</a>
+		        </div>
 				
 				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
 					<h2 id="subtitle" class="subtitle">Alta de Paciente</h2>
@@ -43,7 +51,7 @@
 			<!-- contenido -->
 			<div data-role="content">
 				<input type="hidden" id="idPaciente" />
-				<div class="content2">		
+				<div class="content2">
 					<div data-role="fieldcontain">
 						<label for="txtNumIdentificacion">N&deg; de identificaci&oacute;n:</label>	
 						<input type="text" id="txtNumIdentificacion" name="txtNumIdentificacion" class="txt-speech"/>						
@@ -104,10 +112,7 @@
 				</div>
 			</div>
 
-			<!-- Pie -->
-			<div data-role="footer" data-position="inline" data-theme="c">
-				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>
-			</div>							
+			<div data-role="footer" data-position="fixed" data-theme="c"></div>
 		</div>
 	</body>
 </html>

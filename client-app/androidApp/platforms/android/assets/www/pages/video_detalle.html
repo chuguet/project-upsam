@@ -9,15 +9,18 @@
 		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
-		<link type="text/css" rel="stylesheet" href="../css/video-js.min.css" /> 
-		
-		<script data-main="../js/pages/video" src="../js/require.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="../css/video-js.min.css" />
 	</head>
 	
 	<body>
-		<div data-role="page">
-			<!-- Cabecera -->
-			<div data-role="header">
+		<div data-role="page" id="page_video_detalle">
+			<script type="text/javascript">
+				$(document).unbind("pageshow");
+				$(document).bind("pageshow", function(event, data) {
+			        generic.initialize(video.recuperar);  
+			    });
+			</script>
+			<div data-role="header" data-position="fixed">
 				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
 		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
 		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
@@ -59,10 +62,7 @@
 				</div>		
 			</div>
 			
-			<!-- Pie -->
-			<div data-role="footer" data-position="inline" data-theme="c">
-				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>
-			</div>
+			<div data-role="footer" data-position="fixed" data-theme="c"></div>
 		</div>
 	</body>
 </html>

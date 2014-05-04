@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+	<head>
 		<title>Exploraci&oacute;n f&iacute;sica - Laboratorio de An&acute;lisis de Movimientos</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<meta name="format-detection" content="telephone=no" />
@@ -8,240 +8,238 @@
 
 		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
-		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />	
-		
-		<script data-main="../js/pages/val_articular_muscular" src="../js/require.min.js"></script>
+		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 	</head>
-<body>
-
-	<div data-role="page" data-theme="a">
-		<!-- Cabecera -->
-		<div data-role="header">
-			<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
-	            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
-	      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
-	        </div>
-	        <h1>LAM</h1>
-			<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
-	            <a href="#" data-icon="check" data-role="button" onclick="javascript:valoracionArticularMuscular.insertar()" id="btnGuardar">Guardar</a>
-	        </div>
-			
-			<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
-				<h2 id="subtitle" class="subtitle">Valoraci&oacute;n Articular y Muscular</h2>
-				<div class="username">
-					<div id="username"></div>
-					<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
-					<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
-						<div data-role="header" data-theme="a" class="ui-corner-top">
-							<h1>Logout</h1>
-						</div>
-						<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
-							<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
-							<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
-							<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+	
+	<body>
+		<div data-role="page" id="page_val_articular_muscular">
+			<script type="text/javascript">
+				$(document).unbind("pageshow");
+				$(document).bind("pageshow", function(event, data) {
+			        generic.initialize(valoracionArticularMuscular.recuperar);  
+			    });
+			</script>
+			<div data-role="header" data-position="fixed">
+				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
+		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
+		        </div>
+		        <h1>LAM</h1>
+				<div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
+		            <a href="#" data-icon="check" data-role="button" onclick="javascript:valoracionArticularMuscular.insertar()" id="btnGuardar">Guardar</a>
+		        </div>
+				
+				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
+					<h2 id="subtitle" class="subtitle">Valoraci&oacute;n Articular y Muscular</h2>
+					<div class="username">
+						<div id="username"></div>
+						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
+						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Logout</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
+								<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
+								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			
+			<!-- Contenido -->
+			<div data-role="content"> 	
+				<div class="content2">
+					<input type="hidden" id="idPaciente" />
+					<input type="hidden" id="idExploracion" />
+					<input type="hidden" id="idValoracion" />
+					<form method="post" action="">
+					<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
+						<thead>
+							<tr>
+							  <th data-priority="1">Articulaci&oacute;n</th>
+							  <th data-priority="persist">Movimiento</th>
+							  <th data-priority="2">Derecha</th>
+							  <th data-priority="3">Izquierda</th>          
+							  <th data-priority="4"></th>   
+							  <th data-priority="5"></th>   
+							  <th data-priority="6"></th>   
+							  <th data-priority="7"></th>   
+							    
+							</tr>
+							
+							<tr>
+							  <th data-priority="1"></th>
+							  <th data-priority="persist"></th>
+							  <th data-priority="2">ROM</th>
+							  <th data-priority="3">MMT</th>          
+							  <th data-priority="4">Ctrl motor sel.</th>   
+							  <th data-priority="5">ROM</th>   
+							  <th data-priority="6">MMT</th>   
+							  <th data-priority="7">Ctrl motor sel.</th>   
+							    
+							</tr>
+							
+							<tr>
+							  <th data-priority="1"></th>
+							  <th data-priority="1"></th>
+							  <th data-priority="2">Activo</th>
+							  <th data-priority="3">Pasivo</th>          
+							  <th data-priority="4"></th>   
+							  <th data-priority="5"></th>   
+							  <th data-priority="6">Activo</th>   
+							  <th data-priority="7">Pasivo</th>   
+							     
+							</tr>
+						  </thead>
+						  <tbody>
+							<tr>
+							  <td><b>Cadera</b></td>
+							  <td>Flexi&oacute;n</td>
+							  <td><input type="text" class="txt-speech" id="var_1_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_1_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_1_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_1_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_1_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_1_6" /></td>
+							</tr>
+							<tr>
+							  <td></td>
+							  <td>Extensi&oacute;n</td>
+							  <td><input type="text" class="txt-speech" id="var_2_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_2_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_2_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_2_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_2_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_2_6" /></td>
+							</tr>
+							<tr>
+							  <td></td>
+							  <td>Abducci&oacute;n (cadera flex)</td>
+							  <td><input type="text" class="txt-speech" id="var_3_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_3_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_3_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_3_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_3_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_3_6" /></td>
+							</tr>					
 		
-		<!-- Contenido -->
-		<div data-role="content"> 	
-			<div class="content2">
-				<input type="hidden" id="idPaciente" />
-				<input type="hidden" id="idExploracion" />
-				<input type="hidden" id="idValoracion" />
-				<form method="post" action="">
-				<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
-					<thead>
-						<tr>
-						  <th data-priority="1">Articulaci&oacute;n</th>
-						  <th data-priority="persist">Movimiento</th>
-						  <th data-priority="2">Derecha</th>
-						  <th data-priority="3">Izquierda</th>          
-						  <th data-priority="4"></th>   
-						  <th data-priority="5"></th>   
-						  <th data-priority="6"></th>   
-						  <th data-priority="7"></th>   
-						    
-						</tr>
-						
-						<tr>
-						  <th data-priority="1"></th>
-						  <th data-priority="persist"></th>
-						  <th data-priority="2">ROM</th>
-						  <th data-priority="3">MMT</th>          
-						  <th data-priority="4">Ctrl motor sel.</th>   
-						  <th data-priority="5">ROM</th>   
-						  <th data-priority="6">MMT</th>   
-						  <th data-priority="7">Ctrl motor sel.</th>   
-						    
-						</tr>
-						
-						<tr>
-						  <th data-priority="1"></th>
-						  <th data-priority="1"></th>
-						  <th data-priority="2">Activo</th>
-						  <th data-priority="3">Pasivo</th>          
-						  <th data-priority="4"></th>   
-						  <th data-priority="5"></th>   
-						  <th data-priority="6">Activo</th>   
-						  <th data-priority="7">Pasivo</th>   
-						     
-						</tr>
-					  </thead>
-					  <tbody>
-						<tr>
-						  <td><b>Cadera</b></td>
-						  <td>Flexi&oacute;n</td>
-						  <td><input type="text" class="txt-speech" id="var_1_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_1_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_1_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_1_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_1_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_1_6" /></td>
-						</tr>
-						<tr>
-						  <td></td>
-						  <td>Extensi&oacute;n</td>
-						  <td><input type="text" class="txt-speech" id="var_2_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_2_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_2_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_2_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_2_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_2_6" /></td>
-						</tr>
-						<tr>
-						  <td></td>
-						  <td>Abducci&oacute;n (cadera flex)</td>
-						  <td><input type="text" class="txt-speech" id="var_3_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_3_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_3_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_3_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_3_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_3_6" /></td>
-						</tr>					
-	
-						<tr>
-						  <td></td>
-						  <td>Abducci&oacute;n (cadera ext)</td>
-						  <td><input type="text" class="txt-speech" id="var_4_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_4_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_4_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_4_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_4_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_4_6" /></td>
-						</tr>					
-						<tr>
-						  <td></td>
-						  <td>Rotaci&oacute;n Int</td>
-						  <td><input type="text" class="txt-speech" id="var_5_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_5_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_5_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_5_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_5_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_5_6" /></td>
-						</tr>					
-	
-						<tr>
-						  <td></td>
-						  <td>Rotaci&oacute;n ext</td>
-						  <td><input type="text" class="txt-speech" id="var_6_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_6_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_6_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_6_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_6_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_6_6" /></td>
-						</tr>					
-	
-						<tr>
-						  <td><b>Rodilla</b></td>
-						  <td>Flexi&oacute;n</td>
-						  <td><input type="text" class="txt-speech" id="var_7_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_7_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_7_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_7_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_7_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_7_6" /></td>
-						</tr>
-	
-						<tr>
-						  <td></td>
-						  <td>Extensi&oacute;n</td>
-						  <td><input type="text" class="txt-speech" id="var_8_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_8_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_8_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_8_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_8_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_8_6" /></td>
-						</tr>	
-	
-						<tr>
-						  <td><b>Tobillo</b></td>
-						  <td>Flex plantar</td>
-						  <td><input type="text" class="txt-speech" id="var_9_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_9_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_9_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_9_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_9_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_9_6" /></td>
-						</tr>
-	
-						<tr>
-						  <td></td>
-						  <td>Flex dorsal (rodilla ext)</td>
-						  <td><input type="text" class="txt-speech" id="var_10_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_10_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_10_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_10_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_10_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_10_6" /></td>
-						</tr>	
-	
-						<tr>
-						  <td></td>
-						  <td>Flex dorsal (rodilla 90&deg;)</td>
-						  <td><input type="text" class="txt-speech" id="var_11_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_11_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_11_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_11_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_11_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_11_6" /></td>
-						</tr>	
-	
-						<tr>
-						  <td></td>
-						  <td>Inversi&oacute;n</td>
-						  <td><input type="text" class="txt-speech" id="var_12_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_12_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_12_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_12_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_12_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_12_6" /></td>
-						</tr>	
-	
-						<tr>
-						  <td></td>
-						  <td>Eversi&oacute;n</td>
-						  <td><input type="text" class="txt-speech" id="var_13_1" /></td>
-						  <td><input type="text" class="txt-speech" id="var_13_2" /></td>
-						  <td><input type="text" class="txt-speech" id="var_13_3" /></td>
-						  <td><input type="text" class="txt-speech" id="var_13_4" /></td>
-						  <td><input type="text" class="txt-speech" id="var_13_5" /></td>
-						  <td><input type="text" class="txt-speech" id="var_13_6" /></td>
-						</tr>						
-					  </tbody>
-				</table>			
-			 </form>
-			</div>		
-		</div>
+							<tr>
+							  <td></td>
+							  <td>Abducci&oacute;n (cadera ext)</td>
+							  <td><input type="text" class="txt-speech" id="var_4_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_4_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_4_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_4_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_4_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_4_6" /></td>
+							</tr>					
+							<tr>
+							  <td></td>
+							  <td>Rotaci&oacute;n Int</td>
+							  <td><input type="text" class="txt-speech" id="var_5_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_5_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_5_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_5_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_5_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_5_6" /></td>
+							</tr>					
 		
-		<!-- Footer -->
-		<div data-role="footer" data-position="inline" data-theme="c">
-			<center><img src="../img/tituloLAMPie.png"/><br/><img src="../img/tituloLAMPie2.png"/></center>
-		</div>	
-	</div>
-		 
-
-</body>
+							<tr>
+							  <td></td>
+							  <td>Rotaci&oacute;n ext</td>
+							  <td><input type="text" class="txt-speech" id="var_6_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_6_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_6_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_6_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_6_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_6_6" /></td>
+							</tr>					
+		
+							<tr>
+							  <td><b>Rodilla</b></td>
+							  <td>Flexi&oacute;n</td>
+							  <td><input type="text" class="txt-speech" id="var_7_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_7_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_7_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_7_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_7_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_7_6" /></td>
+							</tr>
+		
+							<tr>
+							  <td></td>
+							  <td>Extensi&oacute;n</td>
+							  <td><input type="text" class="txt-speech" id="var_8_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_8_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_8_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_8_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_8_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_8_6" /></td>
+							</tr>	
+		
+							<tr>
+							  <td><b>Tobillo</b></td>
+							  <td>Flex plantar</td>
+							  <td><input type="text" class="txt-speech" id="var_9_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_9_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_9_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_9_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_9_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_9_6" /></td>
+							</tr>
+		
+							<tr>
+							  <td></td>
+							  <td>Flex dorsal (rodilla ext)</td>
+							  <td><input type="text" class="txt-speech" id="var_10_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_10_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_10_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_10_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_10_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_10_6" /></td>
+							</tr>	
+		
+							<tr>
+							  <td></td>
+							  <td>Flex dorsal (rodilla 90&deg;)</td>
+							  <td><input type="text" class="txt-speech" id="var_11_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_11_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_11_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_11_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_11_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_11_6" /></td>
+							</tr>	
+		
+							<tr>
+							  <td></td>
+							  <td>Inversi&oacute;n</td>
+							  <td><input type="text" class="txt-speech" id="var_12_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_12_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_12_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_12_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_12_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_12_6" /></td>
+							</tr>	
+		
+							<tr>
+							  <td></td>
+							  <td>Eversi&oacute;n</td>
+							  <td><input type="text" class="txt-speech" id="var_13_1" /></td>
+							  <td><input type="text" class="txt-speech" id="var_13_2" /></td>
+							  <td><input type="text" class="txt-speech" id="var_13_3" /></td>
+							  <td><input type="text" class="txt-speech" id="var_13_4" /></td>
+							  <td><input type="text" class="txt-speech" id="var_13_5" /></td>
+							  <td><input type="text" class="txt-speech" id="var_13_6" /></td>
+							</tr>						
+						  </tbody>
+					</table>			
+				 </form>
+				</div>		
+			</div>
+			
+			<div data-role="footer" data-position="fixed" data-theme="c"></div>
+		</div>
+	</body>
 </html>

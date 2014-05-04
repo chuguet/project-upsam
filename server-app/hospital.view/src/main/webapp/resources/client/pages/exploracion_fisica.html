@@ -9,21 +9,23 @@
 		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
-		
-		<script data-main="../js/pages/exploracion_fisica" src="../js/require.min.js"></script>
 	</head>
 
 	<body>
-		<div data-role="page" id="page1">
-			<!-- Cabecera -->
-			<div data-role="header">
+		<div data-role="page" id="page_exploracion_fisica">
+			<script type="text/javascript">
+				$(document).unbind("pageshow");
+				$(document).bind("pageshow", function(event, data) {
+			        generic.initialize(exploracionFisica.recuperar);  
+			    });
+			</script>
+			<div data-role="header" data-position="fixed">
 		        <div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
 		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
 		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
 		        </div>
-		        <h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
+		        <h1>LAM</h1>
 		        <div class="ui-btn-right" data-role="controlgroup" data-type="horizontal">
-		            <a href="#" data-icon="delete" data-role="button" onclick="javascript:evaluacion_muscular_manual.server()" >Cancelar</a>
 		            <a href="#" data-icon="check" data-role="button" onclick="javascript:exploracionFisica.insertar()" id="btnGuardar">Guardar</a>
 		        </div>
 		        
@@ -72,8 +74,8 @@
 				<h3>Antecedentes</h3>
 				<div class="content2">
 					<ul data-role="listview" data-inset="true" data-filter="false">
-						<li><a data-transition="slidedown" rel="external" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('antecedentes_personales.html');" href="#">Personales</a></li>
-						<li><a data-transition="slidedown" rel="external" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('antecedentes_relacionados_PCI.html');" href="#">Relacionados con PCI</a></li>						            
+						<li><a onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('antecedentes_personales.html');" href="#">Personales</a></li>
+						<li><a onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('antecedentes_relacionados_PCI.html');" href="#">Relacionados con PCI</a></li>						            
 					</ul>
 				</div>
 				
@@ -414,14 +416,7 @@
 				</div>	
 			</div>
 			
-			<!-- Pie -->
-			<div data-role="footer" data-position="inline" data-theme="c">
-				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>
-			</div>							
+			<div data-role="footer" data-position="fixed" data-theme="c"></div>
 		</div>
 	</body>
-	<style>
-		table#tabla2 {display: table;}
-		table#tabla2 div.ui-radio {width: 29px;height: 22px;float: left;margin: 0em 0.5em 0em 0em;}
-	</style>
 </html>

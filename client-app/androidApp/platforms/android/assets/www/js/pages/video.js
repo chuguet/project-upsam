@@ -1,10 +1,3 @@
-define([
-		"../../cordova", "../index", "../jquery/jquery-1.9.1.min", "../jquery/jquery.mobile-1.4.1", "../ctrl.generic", "../server", "../jquery/jquery.video-4.3.0"
-], function($) {
-	generic.initialize();
-	video.recuperar();
-});
-
 var video = {
     'recuperar' : function (){
     	videojs.options.flash.swf = "video-js.swf";

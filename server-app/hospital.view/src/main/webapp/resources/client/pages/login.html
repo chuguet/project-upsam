@@ -10,45 +10,60 @@
 		<link rel="stylesheet" type="text/css" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		
-		<script data-main="../js/pages/login" src="../js/require.min.js"></script>
+		<script type="text/javascript" src="../cordova.js"></script>
+		<script type="text/javascript" src="../js/server.js"></script>
+		<script type="text/javascript" src="../js/index.js"></script>
+		<script type="text/javascript" src="../js/jquery/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="../js/jquery/jquery.mobile-1.4.1.js"></script>
+		<script type="text/javascript" src="../js/ctrl.generic.js"></script>
+		<script type="text/javascript" src="../js/jquery/jquery.jqplot.js"></script>
+		<script type="text/javascript" src="../js/jquery/jquery.video-4.3.0.js"></script>
+		<script type="text/javascript" src="../js/pages/login.js"></script>
+		<script type="text/javascript" src="../js/pages/antecedentes_personales.js"></script>
+		<script type="text/javascript" src="../js/pages/antecedentes_relacionados_PCI.js"></script>
+		<script type="text/javascript" src="../js/pages/exploracion_fisica.js"></script>
+		<script type="text/javascript" src="../js/pages/grafica.js"></script>
+		<script type="text/javascript" src="../js/pages/gross_motor_function.js"></script>
+		<script type="text/javascript" src="../js/pages/paciente.js"></script>
+		<script type="text/javascript" src="../js/pages/recordar_contrasenna.js"></script>
+		<script type="text/javascript" src="../js/pages/val_articular_muscular.js"></script>
+		<script type="text/javascript" src="../js/pages/video.js"></script>
+		<script type="text/javascript">
+			generic.initialize();
+		</script>
 	</head>
 
 	<body>
 		<div data-role="page" id="page1">
-			<!-- Cabecera -->
+			<!-- Cabecera
 			<div data-role="header" >                    
 				<h3>Login - LAM</h3>
 			</div>
-			
+			 -->
 			<!-- contenido -->
-			<div data-role="content">							
-				<div>					
-					<img width="100%" src="../img/cabecera.jpg"/>
-				</div>
-				
-				<h2 style="color:#77CDF1">Acceso al sistema</h2>
-				<div style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:10px;background-color:rgb(240,240,240)">
-					<label>Introduzca los datos de acceso:</label>
+			<div data-role="content" style="padding:0em;">							
+				<img width="100%" src="../img/cabecera.jpg"/>
+		
+				<div style="padding:30px">
+					<h2 style="color:#77CDF1">Acceso al sistema</h2>
 					
 					<div data-role="fieldcontain" >
-						<label for="txtUsuario">Usuario</label>
+						<label for="txtUsuario"><b>Usuario:</b></label>
 						<input type="text" id="txtUsuario" name="txtUsuario"/>						
 					</div>	
 					<div data-role="fieldcontain" >
-						<label for="txtPassword">Contrase&ntilde;a</label>
+						<label for="txtPassword"><b>Contrase&ntilde;a</b></label>
 						<input type="password" id="txtPassword" name="txtPassword" />						
 					</div>
 					
-					<a data-role="button" onclick="javascript:login.acceso();">Entrar</a>
-					<a data-role="button" rel="external" onclick="javascript:generic.changePage('recordar_contrasenna.html');">Recordar contrase&ntilde;a</a>             
-					
+					<div data-role="controlgroup" data-type="horizontal" class="ui-grid-a">
+   						<a id="btnAccesso" data-role="button" onclick="javascript:login.acceso();">Entrar</a>
+						<a id="btnRecordar" data-role="button" rel="external" onclick="javascript:generic.changePage('recordar_contrasenna.html');">Recordar contrase&ntilde;a</a>             
+					</div>
 				</div>
 			</div>
-
 			<!-- Footer -->
-			<div data-role="footer" data-position="inline" data-theme="c">
-				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>		
-			</div>							
+			<div data-role="footer" data-position="fixed" data-theme="c"></div>							
 		</div>
 	</body>
 </html>

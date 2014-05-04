@@ -14,10 +14,15 @@
 	</head>
 
 	<body>
-		<div data-role="page" id="page1">
-			<!-- Cabecera -->
-			<div data-role="header">
-				<h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
+		<div data-role="page" id="page_recordar_contrasenna">
+			<script type="text/javascript">
+				$(document).unbind("pageshow");
+				$(document).bind("pageshow", function(event, data) {
+			        generic.initialize();  
+			    });
+			</script>
+			<div data-role="header" data-position="fixed">
+				<h1>LAM</h1>
 				<a data-rel="back" data-icon="back">Volver</a>
 				
 				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
@@ -44,10 +49,7 @@
 				</div>
 			</div>
 
-			<!-- Footer -->
-			<div data-role="footer" data-position="inline" data-theme="c">
-				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>		
-			</div>							
+			<div data-role="footer" data-position="fixed" data-theme="c"></div>
 		</div>
 	</body>
 </html>

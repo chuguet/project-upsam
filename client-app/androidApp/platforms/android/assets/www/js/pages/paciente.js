@@ -1,10 +1,3 @@
-define([
-		"../../cordova", "../index", "../jquery/jquery-1.9.1.min", "../jquery/jquery.mobile-1.4.1", "../ctrl.generic", "../server"
-], function($) {
-	generic.initialize();
-	paciente.recuperar();
-});
-
 var paciente = {
 	'buscarListado' : function() {
 		generic.loading();
@@ -16,7 +9,7 @@ var paciente = {
 	'buscarListadoCallback' : function(listaItems) {
 		$("#listaPacientes li").remove();
 		for(var i = 0; i < listaItems.length; i++) {
-			var li = $("<li><a rel='external' alt='Acceder al paciente' href='paciente.html?id=" + listaItems[i].id + "' data-transition='fade'>" + listaItems[i].nombre + "&nbsp;" + listaItems[i].apellidos + " [N&deg; ident:" + listaItems[i].numeroIdentificacion + "]<br/><span class='videoFeatures'>Fecha Nacimiento: " + listaItems[i].fechaNacimiento
+			var li = $("<li><a rel='external' alt='Acceder al paciente' href='#' onclick='generic.changePage(\"paciente.html?id=" + listaItems[i].id + "\");' data-transition='fade'>" + listaItems[i].nombre + "&nbsp;" + listaItems[i].apellidos + " [N&deg; ident:" + listaItems[i].numeroIdentificacion + "]<br/><span class='videoFeatures'>Fecha Nacimiento: " + listaItems[i].fechaNacimiento
 					+ "&nbsp;|&nbsp;Fecha &uacute;ltima evaluaci&oacute;n: " + listaItems[i].fechaUltimaEvaluacion + "</span></a></li>");
 			$("#listaPacientes").append(li);
 		}

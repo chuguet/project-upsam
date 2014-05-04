@@ -1,9 +1,3 @@
-define([
-		"../../cordova", "../index", "../jquery/jquery-1.9.1.min", "../jquery/jquery.mobile-1.4.1", "../ctrl.generic", "../server"
-], function($) {
-	generic.initialize();
-	exploracionFisica.recuperar();
-});
 var exploracionFisica = {
 	'recuperar' : function(){
 		var idPaciente = generic.getURLParameter("idPaciente");
@@ -135,16 +129,6 @@ var exploracionFisica = {
 			if (exploracion.analisisObservacionalMarcha != null){
 				$("input[name=analisisObservacionalMarcha][value=" + exploracion.analisisObservacionalMarcha + "]").attr('checked', 'checked');
 			}
-			
-			if (exploracion.videos != null && exploracion.videos.length > 0){
-				for (var i = 0; i < exploracion.videos.length; i++){
-					var video = exploracion.videos[i];
-					var cont = i + 1;
-					$("#listaVideos").append("<li><a rel='external' href='#' onclick='javascript:exploracion.irAVideo(" + video.id + ", " + cont + ");' data-transition='fade'>Video " + cont + "<br><span class='videoFeatures'>" + video.nombre + "&nbsp;|&nbsp;" + video.duracion + "</span></a></li>");
-				}
-				$("#listaVideos").listview('refresh');
-				$("#listaVideos").show();
-			}
 		}
 		generic.noLoading();
 	},
@@ -154,7 +138,7 @@ var exploracionFisica = {
     	var idExploracion = $("#idExploracion").val();
     	$("#listaVideos li").remove();
     	for (var i = 0; i < parameters.length; i++){
-    		$("#listaVideos").append("<li><a rel='external' alt='Acceder al video' href='video_detalle.html?idPaciente=" + idPaciente + "&idExploracion=" + idExploracion + "&idVideo=" + parameters[i].id + "&num=" + (i + 1) + "' data-transition='fade'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
+    		$("#listaVideos").append("<li><a rel='external' alt='Acceder al video' href='#' onclick='javascript:generic.changePage(\"video_detalle.html?idPaciente=" + idPaciente + "&idExploracion=" + idExploracion + "&idVideo=" + parameters[i].id + "&num=" + (i + 1) + "\");'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
     		
     	}
     	$("#listaVideos").listview('refresh');
@@ -165,7 +149,7 @@ var exploracionFisica = {
     	var idExploracion = $("#idExploracion").val();
     	$("#listaGraficas li").remove();
     	for (var i = 0; i < parameters.length; i++){
-    		$("#listaGraficas").append("<li><a rel='external' alt='Acceder a la gr&aacute;fica' href='grafica_detalle.html?idPaciente=" + idPaciente + "&idExploracion=" + idExploracion + "&idGrafica=" + parameters[i].id + "&num=" + (i + 1) + "' data-transition='fade'>Gr&aacute;fica " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].fecha + "</span></a></li>");
+    		$("#listaGraficas").append("<li><a rel='external' alt='Acceder a la gr&aacute;fica' href='#' onclick='javascript:generic.changePage(\"grafica_detalle.html?idPaciente=" + idPaciente + "&idExploracion=" + idExploracion + "&idGrafica=" + parameters[i].id + "&num=" + (i + 1) + "\");'>Gr&aacute;fica " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].fecha + "</span></a></li>");
     		
     	}
     	$("#listaGraficas").listview('refresh');
@@ -252,26 +236,6 @@ var exploracionFisica = {
 			return null;
 		}
 		return exploracionMovilDTO;
-	},
-	
-	'irAVideo' : function(idVideo, num) {
-		var params = {};
-		if (idVideo) {
-			params = {
-				'idPaciente' : $("#idPaciente").val(),
-				'idExploracion' : $("#idExploracion").val(),
-				'idVideo' : idVideo,
-				'num' : num
-			};
-			generic.changePage("video_detalle.html", params);
-		}
-		else {
-			params = {
-				'idPaciente' : $("#idPaciente").val(),
-				'idExploracion' : $("#idExploracion").val()
-			};
-			generic.changePage("video_nuevo.html", params);
-		}
 	},
 	
 	'irAPaginaAuxiliarDeExploracion' : function(pagina){

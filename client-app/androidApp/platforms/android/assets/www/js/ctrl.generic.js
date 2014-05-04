@@ -1,7 +1,9 @@
 var generic = {
+	'appInitialized' : false,
 	'initialize' : function(methodToExecute) {
-		if (typeof app + "" != "undefined"){
+		if (typeof app + "" != "undefined" && ! this.appInitialized){
 			app.initialize();
+			this.appInitialized = true;
 		}
 		
 		var that = this;
@@ -23,7 +25,7 @@ var generic = {
     	if (methodToExecute && methodToExecute != null){
     		methodToExecute.apply(this, null);
     	}
-    	$("body").show();
+    	//$("body").show();
     	that.processSpeech();     
     	that.processDatebox();
 	},
@@ -109,7 +111,8 @@ var generic = {
 				count++;
 			}
 		}
-		document.location.href = uriWithParameters;
+		$.mobile.changePage(uriWithParameters, { transition: "slide"});
+		//document.location.href = uriWithParameters;
 		//$.mobile.changePage(uri, { dataUrl : uriWithParameters, data : parameters, reloadPage : true, changeHash : true });
 	},
 	
@@ -140,15 +143,16 @@ var generic = {
 		}
 		else{
 			$("<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h3>" + message + "</h3></div>")
-			.css({ display: "block", 
-				opacity: 1, 
-				position: "fixed",
-				padding: "7px",
+			.css({ "display": "block",
+				"font-size" : "0.8em", 
+				"opacity": 1, 
+				"position": "fixed",
+				"padding": "6px",
 				"background-color" : "#ddd",
-				"text-align": "center",
-				width: "270px",
-				left: ($(window).width() - 284)/2,
-				top: $(window).height()/2 })
+				"text-align": "justify",
+				"width": "300px",
+				"left": ($(window).width() - 314)/2,
+				"top": $(window).height()/2 })
 			.appendTo( $.mobile.pageContainer ).delay( 1500 )
 			.fadeOut( 600, function(){
 				$(this).remove();

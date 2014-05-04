@@ -10,18 +10,22 @@
 		<link rel="stylesheet" type="text/css" href="../css/themes/jquery.mobile.icons.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 		<link rel="stylesheet" type="text/css" type="text/css" href="../css/jquery.jqplot.min.css" />
-
-		<script data-main="../js/pages/grafica" src="../js/require.min.js"></script>
 	</head>
+	
 	<body>
-
-		<div data-role="page">
-			<div data-role="header">                    
+		<div data-role="page" id="page_grafica_detalle">
+			<script type="text/javascript">
+				$(document).unbind("pageshow");
+				$(document).bind("pageshow", function(event, data) {
+			        generic.initialize(grafica.recuperar);  
+			    });
+			</script>
+			<div data-role="header" data-position="fixed">                    
 				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
 		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
 		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
 		        </div>
-		        <h1>Laboratorio An&aacute;lisis de Movimiento [LAM]</h1>
+		        <h1>LAM</h1>
 				
 				<div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
 					<h2 id="subtitle" class="subtitle">Gr&aacute;fica de fichero EMT</h2>
@@ -81,10 +85,7 @@
 				</div>				
 			</div>
 			
-			<!-- Footer -->
-			<div data-role="footer" data-position="inline" data-theme="c">
-				<center><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/></center>
-			</div>	
+			<div data-role="footer" data-position="fixed" data-theme="c"></div>	
 		</div>
 	</body>
 </html>

@@ -8,15 +8,19 @@
 	
 		<link rel="stylesheet" href="../css/themes/hospital_css.min.css" />
 		<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
-		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />	
-		
-		<script data-main="../js/pages/gross_motor_function" src="../js/require.min.js"></script>
+		<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.2.min.css" />
 	</head>
 	
 	<body>
-		<div data-role="page">
-			<!-- cabecera-->
-			<div data-role="header">                    
+		<div data-role="page" id="page_gross_motor_function">
+			<script type="text/javascript">
+				$(document).unbind("pageshow");
+				$(document).bind("pageshow", function(event, data) {
+			        generic.initialize(grossMotorFunction.recuperar);  
+			    });
+			</script>
+			
+			<div data-role="header" data-position="fixed">                    
 				<div class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
 		            <a data-rel="back" data-role="button" data-icon="back">Volver</a>
 		      		<a data-icon="home" data-role="button" href="#" onclick="javascript:generic.changePage('home.html');">Inicio</a>
@@ -814,10 +818,7 @@
 				</div>
 			</div>
 			
-			<!-- Footer -->
-			<div data-role="footer" data-position="inline" data-theme="c">
-				<center><br><br><img src="../img/tituloLAMPie.png"/><br><img src="../img/tituloLAMPie2.png"/><br></center>
-			</div>	
+			<div data-role="footer" data-position="fixed" data-theme="c"></div>
 		</div>
 	</body>
 </html>
