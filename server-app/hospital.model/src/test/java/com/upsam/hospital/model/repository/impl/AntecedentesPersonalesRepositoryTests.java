@@ -69,7 +69,7 @@ public class AntecedentesPersonalesRepositoryTests extends UnitTest{
     	List<AntecedentesPersonales> listaAntecedentes = new ArrayList<AntecedentesPersonales>();
     	AntecedentesPersonales antecedentes = antecedentesPersonales();
     	listaAntecedentes.add(antecedentes);
-        when(hibernateTemplate.find("Select new AntecedentesPersonales(alergiasMedicamentosasConocidas,antecedentesMedicos,audicion,caidasUltimoAnno,epilepsia,fechaPenultimaSesion,fechaUltimaCaida,fechaUltimaSesion,id,lenguajeCognicion,localizacionTratamiento,numeroAproximado,tratamientoActual,vision) from AntecedentesPersonales where (ID_EXPLORACION = ?)", AN_ID))
+        when(hibernateTemplate.find("Select new AntecedentesPersonales(id, epilepsia, tipoEpilepsia, fechaUltimaCrisis, fechaUltimaConvulsion, numeroCrisis, caidas, numeroCaidas, fechaUltimaCaida, audicion, vision, lenguajeCognicion, comprension, entiendeOrdenesSimples, entiendeOrdenesComplejas, expresarNecesidadDolor, numeroInyecciones, fechaUltimaSesion, fechaPenultimaSesion, localizacionTratamiento, alergias, tratamiento) from AntecedentesPersonales where (ID_EXPLORACION = ?)", AN_ID))
         					  .thenReturn(listaAntecedentes);
         			
         AntecedentesPersonales result = antecedentesPersonalesRepository.findByExploracion(AN_ID);
