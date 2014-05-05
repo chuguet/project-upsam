@@ -15,15 +15,15 @@ import java.util.List;
 import com.upsam.hospital.model.beans.Faq;
 import com.upsam.hospital.model.enums.ParteDelCuerpo;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.IFaqsRepository;
+import com.upsam.hospital.model.repository.IFaqRepository;
 import com.upsam.hospital.model.unit.UnitTest;
 
 public class FaqsServiceTest extends UnitTest{
 
     @Mock
-    private IFaqsRepository faqsRepository;
+    private IFaqRepository faqsRepository;
     @InjectMocks
-    private FaqsService faqsService;
+    private FaqService faqsService;
      
     @Test
     public void canSaveAFaq() throws SQLException, DataBaseException {

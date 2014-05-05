@@ -5,18 +5,15 @@ import java.util.List;
 import javax.inject.Inject;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import com.upsam.hospital.model.beans.Faq;
-import com.upsam.hospital.model.repository.IFaqsRepository;
+import com.upsam.hospital.model.beans.ParteCuerpo;
+import com.upsam.hospital.model.repository.IParteCuerpoRepository;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class FaqsRepository.
+ * The Class ParteCuerpoRepository.
  */
 @Repository
-class FaqsRepository implements IFaqsRepository {
-
-	/** The Constant QUERY_FINDBY_SECCION. */
-	private static final String QUERY_FINDBY_SECCION = "from Faq where SECCION = ?";
+public class ParteCuerpoRepository implements IParteCuerpoRepository {
 
 	/** The hibernate template. */
 	@Inject
@@ -29,8 +26,8 @@ class FaqsRepository implements IFaqsRepository {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void delete(Faq faq) throws SQLException {
-		hibernateTemplate.delete(faq);
+	public void delete(ParteCuerpo parteCuerpo) throws SQLException {
+		hibernateTemplate.delete(parteCuerpo);
 	}
 
 	/*
@@ -38,20 +35,8 @@ class FaqsRepository implements IFaqsRepository {
 	 * @see com.upsam.hospital.model.repository.IRepositoryDAO#findAll()
 	 */
 	@Override
-	public List<Faq> findAll() throws SQLException {
-		return hibernateTemplate.loadAll(Faq.class);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.repository.IFaqsRepository#findBySeccion(java
-	 * .lang.String)
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Faq> findBySeccion(String seccion) throws SQLException {
-		return hibernateTemplate.find(QUERY_FINDBY_SECCION, seccion);
+	public List<ParteCuerpo> findAll() throws SQLException {
+		return hibernateTemplate.loadAll(ParteCuerpo.class);
 	}
 
 	/*
@@ -61,8 +46,8 @@ class FaqsRepository implements IFaqsRepository {
 	 * Integer)
 	 */
 	@Override
-	public Faq findOne(Integer pId) throws SQLException {
-		return hibernateTemplate.get(Faq.class, pId);
+	public ParteCuerpo findOne(Integer pId) throws SQLException {
+		return hibernateTemplate.get(ParteCuerpo.class, pId);
 	}
 
 	/*
@@ -72,8 +57,8 @@ class FaqsRepository implements IFaqsRepository {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public Integer save(Faq faq) throws SQLException {
-		return (Integer) hibernateTemplate.save(faq);
+	public Integer save(ParteCuerpo parteCuerpo) throws SQLException {
+		return (Integer) hibernateTemplate.save(parteCuerpo);
 	}
 
 	/*
@@ -83,7 +68,8 @@ class FaqsRepository implements IFaqsRepository {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void update(Faq faq) throws SQLException {
-		hibernateTemplate.update(faq);
+	public void update(ParteCuerpo parteCuerpo) throws SQLException {
+		hibernateTemplate.update(parteCuerpo);
 	}
+
 }

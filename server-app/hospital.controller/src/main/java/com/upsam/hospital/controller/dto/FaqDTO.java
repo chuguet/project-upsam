@@ -6,108 +6,70 @@ package com.upsam.hospital.controller.dto;
  */
 public class FaqDTO extends AbstractDTO {
 
-	/** The descripcion. */
-	private String descripcion;
-	
-	/** The fotos. */
-	private String fotos;
-	
-	/** The seccion. */
-	private String seccion;
-	
-	/** The titulo. */
-	private String titulo;
-	
-	/** The titulo url. */
-	private String tituloUrl;
+	/** The id sintoma. */
+	private Integer idSintoma;
+
+	/** The pregunta. */
+	private String pregunta;
+
+	/** The respuesta. */
+	private String respuesta;
 
 	/**
-	 * Gets the descripcion.
-	 *
-	 * @return the descripcion
+	 * Gets the id sintoma.
+	 * 
+	 * @return the id sintoma
 	 */
-	public String getDescripcion() {
-		return descripcion;
+	public Integer getIdSintoma() {
+		return idSintoma;
 	}
 
 	/**
-	 * Gets the fotos.
-	 *
-	 * @return the fotos
+	 * Gets the pregunta.
+	 * 
+	 * @return the pregunta
 	 */
-	public String getFotos() {
-		return fotos;
+	public String getPregunta() {
+		return pregunta;
 	}
 
 	/**
-	 * Gets the seccion.
-	 *
-	 * @return the seccion
+	 * Gets the respuesta.
+	 * 
+	 * @return the respuesta
 	 */
-	public String getSeccion() {
-		return seccion;
+	public String getRespuesta() {
+		return respuesta;
 	}
 
 	/**
-	 * Gets the titulo.
-	 *
-	 * @return the titulo
+	 * Sets the id sintoma.
+	 * 
+	 * @param idSintoma
+	 *            the new id sintoma
 	 */
-	public String getTitulo() {
-		return titulo;
+	public void setIdSintoma(Integer idSintoma) {
+		this.idSintoma = idSintoma;
 	}
 
 	/**
-	 * Gets the titulo url.
-	 *
-	 * @return the titulo url
+	 * Sets the pregunta.
+	 * 
+	 * @param pregunta
+	 *            the new pregunta
 	 */
-	public String getTituloUrl() {
-		return tituloUrl;
+	public void setPregunta(String pregunta) {
+		this.pregunta = pregunta;
 	}
 
 	/**
-	 * Sets the descripcion.
-	 *
-	 * @param descripcion the new descripcion
+	 * Sets the respuesta.
+	 * 
+	 * @param respuesta
+	 *            the new respuesta
 	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setRespuesta(String respuesta) {
+		this.respuesta = respuesta;
 	}
 
-	/**
-	 * Sets the fotos.
-	 *
-	 * @param fotos the new fotos
-	 */
-	public void setFotos(String fotos) {
-		this.fotos = fotos;
-	}
-
-	/**
-	 * Sets the seccion.
-	 *
-	 * @param seccion the new seccion
-	 */
-	public void setSeccion(String seccion) {
-		this.seccion = seccion;
-	}
-
-	/**
-	 * Sets the titulo.
-	 *
-	 * @param titulo the new titulo
-	 */
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	/**
-	 * Sets the titulo url.
-	 *
-	 * @param tituloUrl the new titulo url
-	 */
-	public void setTituloUrl(String tituloUrl) {
-		this.tituloUrl = tituloUrl;
-	}
 }

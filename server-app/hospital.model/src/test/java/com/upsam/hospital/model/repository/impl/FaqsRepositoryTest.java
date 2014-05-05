@@ -18,7 +18,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import com.upsam.hospital.model.beans.Faq;
 import com.upsam.hospital.model.enums.ParteDelCuerpo;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.impl.FaqsRepository;
+import com.upsam.hospital.model.repository.impl.FaqRepository;
 import com.upsam.hospital.model.unit.UnitTest;
 
 public class FaqsRepositoryTest extends UnitTest{
@@ -26,7 +26,7 @@ public class FaqsRepositoryTest extends UnitTest{
 	@Mock
     private HibernateTemplate hibernateTemplate;
     @InjectMocks
-    private FaqsRepository faqsRepository;
+    private FaqRepository faqsRepository;
 
     @Test
     public void canSaveAFaq() throws SQLException, DataBaseException {

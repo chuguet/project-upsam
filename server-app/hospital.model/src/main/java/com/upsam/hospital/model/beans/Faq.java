@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 // TODO: Auto-generated Javadoc
@@ -19,61 +21,26 @@ public class Faq implements IModelHospital {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 3736054644363229796L;
 
-	/** The descripcion. */
-	@Basic
-	@Column(name = "DESCRIPCION", nullable = false, length = 1000)
-	private String descripcion;
-
-	/** The fotos. */
-	@Basic
-	@Column(name = "FOTOS", nullable = false, length = 500)
-	private String fotos;
-
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID_FAQ")
 	private Integer id;
 
+	/** The pregunta. */
+	@Basic
+	@Column(name = "PREGUNTA")
+	private String pregunta;
+
+	/** The respuesta. */
+	@Basic
+	@Column(name = "RESPUESTA")
+	private String respuesta;
+
 	/** The seccion. */
-	@Basic
-	@Column(name = "SECCION", nullable = false, length = 250)
-	private String seccion;
-
-	/** The titulo. */
-	@Basic
-	@Column(name = "TITULO", nullable = false, length = 250)
-	private String titulo;
-
-	/** The titulo url. */
-	@Basic
-	@Column(name = "TITULO_URL", nullable = false, length = 250)
-	private String tituloUrl;
-
-	/**
-	 * Instantiates a new faq.
-	 */
-	public Faq() {
-		super();
-	}
-
-	/**
-	 * Gets the descripcion.
-	 * 
-	 * @return the descripcion
-	 */
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	/**
-	 * Gets the fotos.
-	 * 
-	 * @return the fotos
-	 */
-	public String getFotos() {
-		return fotos;
-	}
+	@ManyToOne
+	@JoinColumn(name = "ID_SINTOMA")
+	private Sintoma sintoma;
 
 	/**
 	 * Gets the id.
@@ -85,50 +52,30 @@ public class Faq implements IModelHospital {
 	}
 
 	/**
-	 * Gets the seccion.
+	 * Gets the pregunta.
 	 * 
-	 * @return the seccion
+	 * @return the pregunta
 	 */
-	public String getSeccion() {
-		return seccion;
+	public String getPregunta() {
+		return pregunta;
 	}
 
 	/**
-	 * Gets the titulo.
+	 * Gets the respuesta.
 	 * 
-	 * @return the titulo
+	 * @return the respuesta
 	 */
-	public String getTitulo() {
-		return titulo;
+	public String getRespuesta() {
+		return respuesta;
 	}
 
 	/**
-	 * Gets the titulo url.
+	 * Gets the sintoma.
 	 * 
-	 * @return the titulo url
+	 * @return the sintoma
 	 */
-	public String getTituloUrl() {
-		return tituloUrl;
-	}
-
-	/**
-	 * Sets the descripcion.
-	 * 
-	 * @param descripcion
-	 *            the new descripcion
-	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	/**
-	 * Sets the fotos.
-	 * 
-	 * @param fotos
-	 *            the new fotos
-	 */
-	public void setFotos(String fotos) {
-		this.fotos = fotos;
+	public Sintoma getSintoma() {
+		return sintoma;
 	}
 
 	/**
@@ -142,32 +89,33 @@ public class Faq implements IModelHospital {
 	}
 
 	/**
-	 * Sets the seccion.
+	 * Sets the pregunta.
 	 * 
-	 * @param seccion
-	 *            the new seccion
+	 * @param pregunta
+	 *            the new pregunta
 	 */
-	public void setSeccion(String seccion) {
-		this.seccion = seccion;
+	public void setPregunta(String pregunta) {
+		this.pregunta = pregunta;
 	}
 
 	/**
-	 * Sets the titulo.
+	 * Sets the respuesta.
 	 * 
-	 * @param titulo
-	 *            the new titulo
+	 * @param respuesta
+	 *            the new respuesta
 	 */
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setRespuesta(String respuesta) {
+		this.respuesta = respuesta;
 	}
 
 	/**
-	 * Sets the titulo url.
+	 * Sets the sintoma.
 	 * 
-	 * @param tituloUrl
-	 *            the new titulo url
+	 * @param sintoma
+	 *            the new sintoma
 	 */
-	public void setTituloUrl(String tituloUrl) {
-		this.tituloUrl = tituloUrl;
+	public void setSintoma(Sintoma sintoma) {
+		this.sintoma = sintoma;
 	}
+
 }

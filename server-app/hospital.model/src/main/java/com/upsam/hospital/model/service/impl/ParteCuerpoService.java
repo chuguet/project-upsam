@@ -4,21 +4,21 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
-import com.upsam.hospital.model.beans.Faq;
+import com.upsam.hospital.model.beans.ParteCuerpo;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.IFaqsRepository;
-import com.upsam.hospital.model.service.IFaqsService;
+import com.upsam.hospital.model.repository.IParteCuerpoRepository;
+import com.upsam.hospital.model.service.IParteCuerpoService;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class FaqsService.
+ * The Class ParteCuerpoService.
  */
 @Service
-public class FaqsService implements IFaqsService {
+public class ParteCuerpoService implements IParteCuerpoService {
 
-	/** The faqs repository. */
+	/** The parte cuerpo repository. */
 	@Inject
-	private IFaqsRepository faqsRepository;
+	private IParteCuerpoRepository parteCuerpoRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -27,9 +27,9 @@ public class FaqsService implements IFaqsService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void delete(Faq faq) throws DataBaseException {
+	public void delete(ParteCuerpo parteCuerpo) throws DataBaseException {
 		try {
-			faqsRepository.delete(faq);
+			parteCuerpoRepository.delete(parteCuerpo);
 		}
 		catch (SQLException e) {
 			throw new DataBaseException(e);
@@ -41,28 +41,9 @@ public class FaqsService implements IFaqsService {
 	 * @see com.upsam.hospital.model.service.IModelService#findAll()
 	 */
 	@Override
-	public List<Faq> findAll() throws DataBaseException {
+	public List<ParteCuerpo> findAll() throws DataBaseException {
 		try {
-			return faqsRepository.findAll();
-		}
-		catch (SQLException e1) {
-			throw new DataBaseException(e1);
-		}
-	}
-
-	/**
-	 * Find by seccion.
-	 * 
-	 * @param seccion
-	 *            the seccion
-	 * @return the list
-	 * @throws DataBaseException
-	 *             the data base exception
-	 */
-	@Override
-	public List<Faq> findBySeccion(String seccion) throws DataBaseException {
-		try {
-			return faqsRepository.findBySeccion(seccion);
+			return parteCuerpoRepository.findAll();
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);
@@ -75,9 +56,9 @@ public class FaqsService implements IFaqsService {
 	 * com.upsam.hospital.model.service.IModelService#findOne(java.lang.Integer)
 	 */
 	@Override
-	public Faq findOne(Integer pId) throws DataBaseException {
+	public ParteCuerpo findOne(Integer pId) throws DataBaseException {
 		try {
-			return faqsRepository.findOne(pId);
+			return parteCuerpoRepository.findOne(pId);
 		}
 		catch (SQLException e) {
 			throw new DataBaseException(e);
@@ -91,9 +72,9 @@ public class FaqsService implements IFaqsService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public Integer save(Faq faq) throws DataBaseException {
+	public Integer save(ParteCuerpo parteCuerpo) throws DataBaseException {
 		try {
-			return faqsRepository.save(faq);
+			return parteCuerpoRepository.save(parteCuerpo);
 		}
 		catch (SQLException ex) {
 			throw new DataBaseException(ex);
@@ -107,12 +88,13 @@ public class FaqsService implements IFaqsService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void update(Faq faq) throws DataBaseException {
+	public void update(ParteCuerpo parteCuerpo) throws DataBaseException {
 		try {
-			faqsRepository.update(faq);
+			parteCuerpoRepository.update(parteCuerpo);
 		}
-		catch (SQLException e) {
-			throw new DataBaseException(e);
+		catch (SQLException ex) {
+			throw new DataBaseException(ex);
 		}
 	}
+
 }

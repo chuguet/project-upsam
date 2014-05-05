@@ -5,6 +5,7 @@ import com.upsam.hospital.controller.dto.FaqDTO;
 import com.upsam.hospital.controller.dto.util.IFaqUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Faq;
+import com.upsam.hospital.model.beans.Sintoma;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -22,12 +23,10 @@ public class FaqUtilDTO implements IFaqUtilDTO {
 	@Override
 	public Faq toBusiness(FaqDTO faqDTO) throws TransferObjectException {
 		Faq faq = new Faq();
-		faq.setDescripcion(faqDTO.getDescripcion());
-		faq.setFotos(faqDTO.getFotos());
+		faq.setPregunta(faqDTO.getPregunta());
+		faq.setRespuesta(faqDTO.getRespuesta());
 		faq.setId(faqDTO.getId());
-		faq.setSeccion(faqDTO.getSeccion());
-		faq.setTitulo(faqDTO.getTitulo());
-		faq.setTituloUrl(faqDTO.getTituloUrl());
+		faq.setSintoma(new Sintoma(faqDTO.getIdSintoma()));
 		return faq;
 	}
 
@@ -40,12 +39,9 @@ public class FaqUtilDTO implements IFaqUtilDTO {
 	@Override
 	public FaqDTO toRest(Faq faq) throws TransferObjectException {
 		FaqDTO faqDTO = new FaqDTO();
-		faqDTO.setDescripcion(faq.getDescripcion());
-		faqDTO.setFotos(faq.getFotos());
+		faqDTO.setPregunta(faq.getPregunta());
+		faqDTO.setRespuesta(faq.getRespuesta());
 		faqDTO.setId(faq.getId());
-		faqDTO.setSeccion(faq.getSeccion());
-		faqDTO.setTitulo(faq.getTitulo());
-		faqDTO.setTituloUrl(faq.getTituloUrl());
 		return faqDTO;
 	}
 
