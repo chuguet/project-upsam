@@ -3,11 +3,11 @@ package com.upsam.hospital.model.service.impl;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.List;
 import javax.inject.Inject;
 import javax.xml.bind.JAXBException;
+import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import com.upsam.hospital.model.beans.FicheroMDX;
@@ -67,8 +67,8 @@ public class FicheroMDXService implements IFicheroMDXService {
 	 */
 	@Override
 	public EmxDataFile fileReaderMDX(File file) throws JAXBException, IOException {
-		String fileXML = jaxbUtil.removeHeaderXmlFile(FileUtils.readFileToString(file, StandardCharsets.UTF_8));
-		EmxDataFile emxDataFile = (EmxDataFile) jaxbUtil.readXML(new ByteArrayInputStream(fileXML.getBytes(StandardCharsets.UTF_8)), EmxDataFile.class);
+		String fileXML = jaxbUtil.removeHeaderXmlFile(FileUtils.readFileToString(file, Charsets.UTF_8));
+		EmxDataFile emxDataFile = (EmxDataFile) jaxbUtil.readXML(new ByteArrayInputStream(fileXML.getBytes(Charsets.UTF_8)), EmxDataFile.class);
 		return emxDataFile;
 	}
 

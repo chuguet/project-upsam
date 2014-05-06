@@ -173,24 +173,24 @@ var antecedentesPersonales = {
 				tratamiento : $("#tratamiento").val() + "" != "" ? $("#tratamiento").val() : null
 			};
 			
-			var errores = "";
-			if (antecedentesPersonalesDTO.fechaUltimaCrisis != null && !generic.validateDate(antecedentesPersonalesDTO.fechaUltimaCrisis)){
-				errores += " - La fecha de la ultima crisis no tiene un formato valido (dd/mm/aaaa)";
-			}
-			if (antecedentesPersonalesDTO.fechaUltimaConvulsion != null && !generic.validateDate(antecedentesPersonalesDTO.fechaUltimaConvulsion)){
-				errores += " - La fecha de la ultima convulsion no tiene un formato valido (dd/mm/aaaa)";
-			}
-			if (antecedentesPersonalesDTO.fechaUltimaSesion != null && !generic.validateDate(antecedentesPersonalesDTO.fechaUltimaSesion)){
-				errores += " - La fecha de la ultima sesion no tiene un formato valido (dd/mm/aaaa)";
-			}
-			if (antecedentesPersonalesDTO.fechaPenultimaSesion != null && !generic.validateDate(antecedentesPersonalesDTO.fechaPenultimaSesion)){
-				errores += " - La fecha de la penultima sesion no tiene un formato valido (dd/mm/aaaa)";
-			}
-			if (errores != "") {
-				errores = "Se han producido los siguientes errores:<br/>" + errores;
-				generic.alert("Error en antecedentes personales", errores, null);
-				return null;
-			}
+//			var errores = "";
+//			if (antecedentesPersonalesDTO.fechaUltimaCrisis != null && !generic.validateDate(antecedentesPersonalesDTO.fechaUltimaCrisis)){
+//				errores += " - La fecha de la ultima crisis no tiene un formato valido (dd/mm/aaaa)";
+//			}
+//			if (antecedentesPersonalesDTO.fechaUltimaConvulsion != null && !generic.validateDate(antecedentesPersonalesDTO.fechaUltimaConvulsion)){
+//				errores += " - La fecha de la ultima convulsion no tiene un formato valido (dd/mm/aaaa)";
+//			}
+//			if (antecedentesPersonalesDTO.fechaUltimaSesion != null && !generic.validateDate(antecedentesPersonalesDTO.fechaUltimaSesion)){
+//				errores += " - La fecha de la ultima sesion no tiene un formato valido (dd/mm/aaaa)";
+//			}
+//			if (antecedentesPersonalesDTO.fechaPenultimaSesion != null && !generic.validateDate(antecedentesPersonalesDTO.fechaPenultimaSesion)){
+//				errores += " - La fecha de la penultima sesion no tiene un formato valido (dd/mm/aaaa)";
+//			}
+//			if (errores != "") {
+//				errores = "Se han producido los siguientes errores:<br/>" + errores;
+//				generic.alert("Error en antecedentes personales", errores, null);
+//				return null;
+//			}
 			return antecedentesPersonalesDTO;
 		}
 };

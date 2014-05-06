@@ -278,7 +278,10 @@ public class PacienteMovilController {
 			video = this.videoService.findOne(idPaciente, idExploracion, id);
 			result = this.videoUtilDTO.toRest(video);
 		}
-		catch (DataBaseException | NotFoundException e) {
+		catch (DataBaseException e) {
+			LOG.error(e.getMessage());
+		}
+		catch (NotFoundException e) {
 			LOG.error(e.getMessage());
 		}
 		catch (TransferObjectException e) {

@@ -43,7 +43,7 @@
 		<commons.fileupload.version>1.2.2</commons.fileupload.version>
 		<antlr.version>2.7.7</antlr.version>
 		<javassist.version>3.12.1.GA</javassist.version>
-		<jdk.version>1.7</jdk.version>
+		<jdk.version>1.6</jdk.version>
 		<maven.compiler.version>3.0</maven.compiler.version>
 		<mail.version>1.4.7</mail.version>
 		<jackson.version>1.9.2</jackson.version>

@@ -13,7 +13,7 @@ import com.upsam.hospital.model.enums.Sexo;
 
 @Component
 public class PacienteMovilUtilDTO implements IPacienteMovilUtilDTO {
-	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy");
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 
 	@Override
 	public PacienteMovilDTO toRest(Paciente paciente) {

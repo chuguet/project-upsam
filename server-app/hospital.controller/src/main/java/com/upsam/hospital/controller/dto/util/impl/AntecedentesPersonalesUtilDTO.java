@@ -17,7 +17,7 @@ import com.upsam.hospital.model.beans.Exploracion;
 public class AntecedentesPersonalesUtilDTO implements IAntecedentesPersonalesUtilDTO {
 
 	/** The Constant DATE_FORMATTER. */
-	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd/MM/yyyy");
+	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
 
 	/*
 	 * (non-Javadoc)

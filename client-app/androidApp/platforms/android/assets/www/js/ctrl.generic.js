@@ -63,12 +63,14 @@ var generic = {
 			var that = $(this);
 			var id = $(this).attr('id');
 			var button = $( "<div id='btnDate-" + id + "' title='Seleccionar Fecha' data-icon='calendar' class='ui-btn-icon-textbox ui-btn-icon-right ui-icon-calendar'>&nbsp;</div>" );
+			/*
 			button.bind('click', function() {
 				generic.handleDates(that);
 			});
 			that.bind('click', function() {
 				generic.handleDates(this);
 			});
+			*/
 			
 			$(this).parent().append(button);
 		});

@@ -9,6 +9,7 @@ var exploracionFisica = {
 			//Entramos en modo edicion
 			generic.loading();
 			$("#subtitle").html("Consulta de Exploraci&oacute;n");
+			$("#btnGuardar").text("Modificar");
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion, null, exploracionFisica.recuperarExploracionCallback);
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/video", null, exploracionFisica.recuperarListadoVideosCallback);
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/ficherosEMT", null, exploracionFisica.recuperarListadoGraficasCallback);

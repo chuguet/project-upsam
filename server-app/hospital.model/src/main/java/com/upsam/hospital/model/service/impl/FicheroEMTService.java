@@ -2,12 +2,12 @@ package com.upsam.hospital.model.service.impl;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
+import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import com.upsam.hospital.model.beans.Angle;
@@ -56,7 +56,7 @@ public class FicheroEMTService implements IFicheroEMTService {
 	 */
 	@Override
 	public FicheroEMT fileReaderEMT(File file, Integer idExploracion) throws IOException {
-		List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
+		List<String> lines = FileUtils.readLines(file, Charsets.UTF_8);
 		FicheroEMT result = new FicheroEMT();
 		result.setExploracion(new Exploracion(idExploracion));
 		Point point;
