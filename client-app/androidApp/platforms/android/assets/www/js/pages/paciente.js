@@ -23,6 +23,7 @@ var paciente = {
 			// Entramos en modo edicion
 			generic.loading();
 			$("#subtitle").html("Consulta de Paciente");
+			$("#btnGuardar").text("Modificar");
 			server.get('pacientemovil/' + idPaciente, null , paciente.recuperarCallback);
 			server.get('pacientemovil/' + idPaciente + "/exploracion", null, paciente.recuperarExploracionesCallback);
 			$("#exploraciones").show();
@@ -89,6 +90,7 @@ var paciente = {
 		$("#exploraciones").show();
 		$("#listaExploraciones").hide();
 		$("#subtitle").html("Consulta de Paciente");
+		$("#btnGuardar").text("Modificar");
 		$("#idPaciente").val(params.parameter.id);
 		generic.noLoading();
 	},
@@ -120,9 +122,9 @@ var paciente = {
 		if (pacienteMovilDTO.apellidos == "") {
 			errores += " - Debe introducir los apellidos<br/>";
 		}
-		if (pacienteMovilDTO.fechaNacimiento != null && !generic.validateDate(pacienteMovilDTO.fechaNacimiento)){
-			errores += " - La fecha de nacimiento no tiene un formato valido (dd/mm/aaaa)";
-		}
+//		if (pacienteMovilDTO.fechaNacimiento != null && pacienteMovilDTO.fechaNacimiento.length > 0 && !generic.validateDate(pacienteMovilDTO.fechaNacimiento)){
+//			errores += " - La fecha de nacimiento no tiene un formato valido (dd/mm/aaaa)";
+//		}
 		if (errores != "") {
 			errores = "Se han producido los siguientes errores:<br/>" + errores;
 			generic.alert("Error gestión de pacientes", errores, null);

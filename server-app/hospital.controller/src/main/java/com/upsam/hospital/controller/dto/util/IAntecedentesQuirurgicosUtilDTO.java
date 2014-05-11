@@ -1,0 +1,12 @@
+package com.upsam.hospital.controller.dto.util;
+
+import com.upsam.hospital.controller.dto.AntecedentesQuirurgicosOrtopedicosDTO;
+import com.upsam.hospital.controller.exception.TransferObjectException;
+import com.upsam.hospital.model.beans.AntecedentesQuirurgicosOrtopedicos;
+
+public interface IAntecedentesQuirurgicosUtilDTO {
+
+	AntecedentesQuirurgicosOrtopedicos toBusiness(AntecedentesQuirurgicosOrtopedicosDTO antecedentesQuirurgicosDTO) throws TransferObjectException;
+
+	AntecedentesQuirurgicosOrtopedicosDTO toRest(AntecedentesQuirurgicosOrtopedicos antecedentesQuirurgicos) throws TransferObjectException;
+}

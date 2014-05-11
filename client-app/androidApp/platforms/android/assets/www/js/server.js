@@ -1,5 +1,5 @@
 var server = {
-	"URI" : "http://192.168.2.179:8080/hospitalServer/",
+	"URI" : "http://lab.atsistemas.com/hospitalServer/",
 	//"URI" : "http://192.168.0.154:8080/hospitalServer/",
 	"post" : function(action, params, callbackSuccess, callbackError) {
 		this.executeJSon('POST', action, params, callbackSuccess, callbackError);
@@ -56,23 +56,21 @@ var server = {
 				else {
 					var cabeceraMensaje;
 					if (response.correcto) {
-						cabeceraMensaje = 'Operacion correcta';
-					}
-					else {
-						cabeceraMensaje = 'Operacion incorrecta';
-					}
-					generic.alert(cabeceraMensaje, response.mensaje, null);
-					if (response.correcto) {
+						generic.alert('Operacion correcta', response.mensaje, null);
 						if (callbackSuccess) {
 							var param = new Array();
 							param.push(response);
 							callbackSuccess.apply(this, param);
 						}
 					}
+					else {
+						generic.alert('Operacion incorrecta', response.mensaje, null);
+						generic.noLoading();
+					}
 				}
 			},
 			error : function(e) {
-				var message = 'Se ha producido el siguiente error al procesar la accion: '+ e.responseText;
+				var message = 'Se ha producido un error de servidor al realizar la acci&oacute;n. Si sigue sucediendo, p&oacute;ngase en contacto con el administrador del sistema';
 				switch (e.status) {
 				case 404:
 					message = 'La pagina a la que intenta acceder no existe';
@@ -110,7 +108,7 @@ var server = {
 		    	var sessionLose = ($("#myFrame").contents().find("form#f").length == 1);
 		    	iframe.remove();
 		    	if (sessionLose){
-		    		generic.alert("Sesion Finalizada", "Su sesion ha finalizado. Vuelva a logarse", function(){generic.changePage("login.html");})
+		    		generic.alert("Sesion Finalizada", "Su sesion ha finalizado. Vuelva a logarse", function(){window.location.href="login.html";})
 		    		
 		    	}
 		    });

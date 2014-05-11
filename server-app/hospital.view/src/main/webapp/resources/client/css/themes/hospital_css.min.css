@@ -248,7 +248,7 @@ h2 {
 .legend {margin-top:5px;}
 .ui-bar h2.subtitle {color:black;font-size:1.4em;margin-left:5px;}
 .ui-bar div.username { float:right; margin-top:5px;}
-.ui-bar div.username > div {display: inline-block;}
+.ui-bar div.username > div {display: inline-block;margin-left:20px;}
 .ui-bar div.username > a { display: inline-block; margin: -8px -3px 0px 10px;}
 .ui-select .ui-btn {padding:.4em; background-color:white;}
 table#movie-table div.ui-select {width:130px;}
@@ -258,6 +258,6 @@ div.ui-footer{height:60px; background-image:url('../../img/footer.png');backgrou
 table#tabla2 {display: table;}
 table#tabla2 div.ui-radio {width: 29px;height: 22px;float: left;margin: 0em 0.5em 0em 0em;}
 .ui-grid-a, .ui-grid-a .ui-controlgroup-controls {width: 100%; position: relative; height: 45px;}
-.ui-grid-a #btnAccesso {position: absolute;left: 0px;right: 50%;bottom: 1px;top: 1px;}
-.ui-grid-a #btnRecordar {position: absolute;top: 1px;bottom: 1px;left: 50%;right: 0px}
-
+.ui-grid-a .btnLeft {position: absolute;left: 0px;right: 50%;bottom: 1px;top: 1px;}
+.ui-grid-a .btnRight {position: absolute;top: 1px;bottom: 1px;left: 50%;right: 0px}
+div#content {opacity:0.3;}

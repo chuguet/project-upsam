@@ -2,11 +2,14 @@ package com.upsam.hospital.controller.dto.util.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 import com.upsam.hospital.controller.dto.AntecedentesPersonalesDTO;
+import com.upsam.hospital.controller.dto.AntecedentesQuirurgicosOrtopedicosDTO;
 import com.upsam.hospital.controller.dto.util.IAntecedentesPersonalesUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.AntecedentesPersonales;
+import com.upsam.hospital.model.beans.AntecedentesQuirurgicosOrtopedicos;
 import com.upsam.hospital.model.beans.Exploracion;
 
 // TODO: Auto-generated Javadoc
@@ -18,6 +21,9 @@ public class AntecedentesPersonalesUtilDTO implements IAntecedentesPersonalesUti
 
 	/** The Constant DATE_FORMATTER. */
 	private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd");
+
+	@Inject
+	private AntecedentesQuirurgicosOrtopedicosUtilDTO antecedentesQuirurgicosOrtopedicosUtilDTO;
 
 	/*
 	 * (non-Javadoc)
@@ -65,6 +71,24 @@ public class AntecedentesPersonalesUtilDTO implements IAntecedentesPersonalesUti
 			antecedentesPersonales.setTratamiento(antecedentesPersonalesDTO.getTratamiento());
 			antecedentesPersonales.setExploracion(new Exploracion(antecedentesPersonalesDTO.getIdExploracion()));
 
+			if (antecedentesPersonalesDTO.getAntecedentesQuirurgicos() != null && antecedentesPersonalesDTO.getAntecedentesQuirurgicos().size() > 0) {
+				for (AntecedentesQuirurgicosOrtopedicosDTO antecedenteDTO : antecedentesPersonalesDTO.getAntecedentesQuirurgicos()) {
+					AntecedentesQuirurgicosOrtopedicos antecedente = antecedentesQuirurgicosOrtopedicosUtilDTO.toBusiness(antecedenteDTO);
+					antecedente.setEsQuirurgico(true);
+					antecedente.setAntecedentesPersonales(antecedentesPersonales);
+					antecedentesPersonales.getAntecedentesQuirurgicosOrtopedicos().add(antecedente);
+				}
+			}
+
+			if (antecedentesPersonalesDTO.getAntecedentesOrtopedicos() != null && antecedentesPersonalesDTO.getAntecedentesOrtopedicos().size() > 0) {
+				for (AntecedentesQuirurgicosOrtopedicosDTO antecedenteDTO : antecedentesPersonalesDTO.getAntecedentesOrtopedicos()) {
+					AntecedentesQuirurgicosOrtopedicos antecedente = antecedentesQuirurgicosOrtopedicosUtilDTO.toBusiness(antecedenteDTO);
+					antecedente.setEsQuirurgico(false);
+					antecedente.setAntecedentesPersonales(antecedentesPersonales);
+					antecedentesPersonales.getAntecedentesQuirurgicosOrtopedicos().add(antecedente);
+				}
+			}
+
 			return antecedentesPersonales;
 		}
 		catch (ParseException e) {
@@ -110,6 +134,19 @@ public class AntecedentesPersonalesUtilDTO implements IAntecedentesPersonalesUti
 		antecedentesPersonalesDTO.setLocalizacionTratamiento(antecedentesPersonales.getLocalizacionTratamiento());
 		antecedentesPersonalesDTO.setAlergias(antecedentesPersonales.getAlergias());
 		antecedentesPersonalesDTO.setTratamiento(antecedentesPersonales.getTratamiento());
+
+		if (antecedentesPersonales.getAntecedentesQuirurgicosOrtopedicos() != null && antecedentesPersonales.getAntecedentesQuirurgicosOrtopedicos().size() > 0) {
+			for (AntecedentesQuirurgicosOrtopedicos antecedente : antecedentesPersonales.getAntecedentesQuirurgicosOrtopedicos()) {
+				AntecedentesQuirurgicosOrtopedicosDTO antecedenteDTO = antecedentesQuirurgicosOrtopedicosUtilDTO.toRest(antecedente);
+				if (antecedente.getEsQuirurgico()) {
+					antecedentesPersonalesDTO.getAntecedentesQuirurgicos().add(antecedenteDTO);
+				}
+				else {
+					antecedentesPersonalesDTO.getAntecedentesOrtopedicos().add(antecedenteDTO);
+				}
+			}
+		}
+
 		return antecedentesPersonalesDTO;
 	}
 }

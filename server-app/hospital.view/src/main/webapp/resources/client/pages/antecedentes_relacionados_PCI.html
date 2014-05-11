@@ -16,7 +16,7 @@
 			<script type="text/javascript">
 				$(document).unbind("pageshow");
 				$(document).bind("pageshow", function(event, data) {
-			        generic.initialize(antecedentesRelacionadosPCI.recuperar);  
+			        generic.initialize(antecedentesRelacionadosPCI.recuperar);
 			    });
 			</script>
 			<div data-role="header" data-position="fixed">
@@ -33,6 +33,27 @@
 		        <div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
 					<h2 id="subtitle" class="subtitle">Nuevos Antecedentes relacionados con PCI</h2>
 					<div class="username">
+						<a href="#popupInfo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="info" data-iconpos="notext" data-mini="true">Informaci&oacute;n</a>
+						<div data-role="popup" id="popupInfo" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="width:600px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Informaci&oacute;n de inter&eacute;s</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:left">
+								<div id="messageInfo"></div>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">Aceptar</a>    
+							</div>
+						</div>
+						<a href="#popupAlert" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="alert" data-iconpos="notext" data-mini="true">Advertencia</a>
+						<div data-role="popup" id="popupAlert" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="width:600px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Aviso</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:left">
+								<div id="messageAlert"></div>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">Aceptar</a>    
+							</div>
+						</div>
+						
 						<div id="username"></div>
 						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
 						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
@@ -50,7 +71,7 @@
      		</div>
 			
 			<!-- Contenido -->
-			<div data-role="content">
+			<div data-role="content" id="content">
 				<input type="hidden" id="idPaciente" />
 				<input type="hidden" id="idExploracion" />
 				<input type="hidden" id="idAntecedentes" />

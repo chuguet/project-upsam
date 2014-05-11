@@ -1,5 +1,8 @@
 package com.upsam.hospital.controller.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class AntecedentesPersonalesDTO.
@@ -71,6 +74,15 @@ public class AntecedentesPersonalesDTO extends AbstractDTO {
 
 	/** The vision. */
 	private String vision;
+
+	private List<AntecedentesQuirurgicosOrtopedicosDTO> antecedentesQuirurgicos;
+	private List<AntecedentesQuirurgicosOrtopedicosDTO> antecedentesOrtopedicos;
+
+	public AntecedentesPersonalesDTO() {
+		super();
+		this.antecedentesQuirurgicos = new ArrayList<AntecedentesQuirurgicosOrtopedicosDTO>();
+		this.antecedentesOrtopedicos = new ArrayList<AntecedentesQuirurgicosOrtopedicosDTO>();
+	}
 
 	/**
 	 * Gets the alergias.
@@ -490,4 +502,19 @@ public class AntecedentesPersonalesDTO extends AbstractDTO {
 		this.vision = vision;
 	}
 
+	public List<AntecedentesQuirurgicosOrtopedicosDTO> getAntecedentesQuirurgicos() {
+		return antecedentesQuirurgicos;
+	}
+
+	public void setAntecedentesQuirurgicos(List<AntecedentesQuirurgicosOrtopedicosDTO> antecedentesQuirurgicos) {
+		this.antecedentesQuirurgicos = antecedentesQuirurgicos;
+	}
+
+	public List<AntecedentesQuirurgicosOrtopedicosDTO> getAntecedentesOrtopedicos() {
+		return antecedentesOrtopedicos;
+	}
+
+	public void setAntecedentesOrtopedicos(List<AntecedentesQuirurgicosOrtopedicosDTO> antecedentesOrtopedicos) {
+		this.antecedentesOrtopedicos = antecedentesOrtopedicos;
+	}
 }

@@ -5,9 +5,11 @@ import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import com.upsam.hospital.model.beans.AntecedentesPersonales;
+import com.upsam.hospital.model.beans.AntecedentesQuirurgicosOrtopedicos;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.repository.IAntecedentesPersonalesRepository;
 import com.upsam.hospital.model.service.IAntecedentesPersonalesService;
+import com.upsam.hospital.model.service.IAntecedentesQuirurgicosOrtopedicosService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -19,6 +21,8 @@ public class AntecedentesPersonalesService implements IAntecedentesPersonalesSer
 	/** The antecedentes personales repository. */
 	@Inject
 	private IAntecedentesPersonalesRepository antecedentesPersonalesRepository;
+	@Inject
+	private IAntecedentesQuirurgicosOrtopedicosService antecedentesQuirurgicosOrtopedicosService;
 
 	/*
 	 * (non-Javadoc)
@@ -58,7 +62,9 @@ public class AntecedentesPersonalesService implements IAntecedentesPersonalesSer
 	@Override
 	public AntecedentesPersonales findByExploracion(Integer pId) throws DataBaseException {
 		try {
-			return antecedentesPersonalesRepository.findByExploracion(pId);
+			AntecedentesPersonales antecedentesPersonales = antecedentesPersonalesRepository.findByExploracion(pId);
+			antecedentesPersonales.setAntecedentesQuirurgicosOrtopedicos(antecedentesQuirurgicosOrtopedicosService.findByAntecedentePersonal(antecedentesPersonales.getId()));
+			return antecedentesPersonales;
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException("Se ha producido un error al recuperar un antecedente personal");
@@ -89,7 +95,12 @@ public class AntecedentesPersonalesService implements IAntecedentesPersonalesSer
 	@Override
 	public Integer save(AntecedentesPersonales antecedentesPersonales) throws DataBaseException {
 		try {
-			return antecedentesPersonalesRepository.save(antecedentesPersonales);
+			Integer id = antecedentesPersonalesRepository.save(antecedentesPersonales);
+
+			for (AntecedentesQuirurgicosOrtopedicos antecedentesQuirurgicosOrtopedicos : antecedentesPersonales.getAntecedentesQuirurgicosOrtopedicos()) {
+				this.antecedentesQuirurgicosOrtopedicosService.save(antecedentesQuirurgicosOrtopedicos);
+			}
+			return id;
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException("Se ha producido un error al insertar un antecedente personal");
@@ -106,6 +117,11 @@ public class AntecedentesPersonalesService implements IAntecedentesPersonalesSer
 	public void update(AntecedentesPersonales antecedentesPersonales) throws DataBaseException {
 		try {
 			antecedentesPersonalesRepository.update(antecedentesPersonales);
+			this.antecedentesQuirurgicosOrtopedicosService.deleteByAntecedentePersonal(antecedentesPersonales.getId());
+			for (AntecedentesQuirurgicosOrtopedicos antecedentesQuirurgicosOrtopedicos : antecedentesPersonales.getAntecedentesQuirurgicosOrtopedicos()) {
+				this.antecedentesQuirurgicosOrtopedicosService.save(antecedentesQuirurgicosOrtopedicos);
+			}
+
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException("Se ha producido un error al actualizar un antecedente personal");

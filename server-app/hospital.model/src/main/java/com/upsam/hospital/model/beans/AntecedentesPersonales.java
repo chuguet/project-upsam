@@ -1,14 +1,19 @@
 package com.upsam.hospital.model.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -90,6 +95,10 @@ public class AntecedentesPersonales implements IModelHospital {
 	@Column(name = "TRATAMIENTO")
 	private String tratamiento;
 
+	@OneToMany(mappedBy = "antecedentesPersonales")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<AntecedentesQuirurgicosOrtopedicos> antecedentesQuirurgicosOrtopedicos;
+
 	/** The exploracion. */
 	@OneToOne
 	@JoinColumn(name = "ID_EXPLORACION", unique = true)
@@ -100,6 +109,7 @@ public class AntecedentesPersonales implements IModelHospital {
 	 */
 	public AntecedentesPersonales() {
 		super();
+		this.antecedentesQuirurgicosOrtopedicos = new ArrayList<AntecedentesQuirurgicosOrtopedicos>();
 	}
 
 	/**
@@ -111,6 +121,7 @@ public class AntecedentesPersonales implements IModelHospital {
 	public AntecedentesPersonales(Integer id) {
 		super();
 		this.id = id;
+		this.antecedentesQuirurgicosOrtopedicos = new ArrayList<AntecedentesQuirurgicosOrtopedicos>();
 	}
 
 	public AntecedentesPersonales(Integer id, Boolean epilepsia, String tipoEpilepsia, Date fechaUltimaCrisis, Date fechaUltimaConvulsion, Integer numeroCrisis, Boolean caidas, Integer numeroCaidas, Date fechaUltimaCaida, String audicion, String vision, Boolean lenguajeCognicion, String comprension, Boolean entiendeOrdenesSimples, Boolean entiendeOrdenesComplejas, Boolean expresarNecesidadDolor, Integer numeroInyecciones, Date fechaUltimaSesion, Date fechaPenultimaSesion, Integer localizacionTratamiento, String alergias, String tratamiento) {
@@ -137,6 +148,7 @@ public class AntecedentesPersonales implements IModelHospital {
 		this.localizacionTratamiento = localizacionTratamiento;
 		this.alergias = alergias;
 		this.tratamiento = tratamiento;
+		this.antecedentesQuirurgicosOrtopedicos = new ArrayList<AntecedentesQuirurgicosOrtopedicos>();
 	}
 
 	public Integer getId() {
@@ -315,6 +327,14 @@ public class AntecedentesPersonales implements IModelHospital {
 		this.tratamiento = tratamiento;
 	}
 
+	public List<AntecedentesQuirurgicosOrtopedicos> getAntecedentesQuirurgicosOrtopedicos() {
+		return antecedentesQuirurgicosOrtopedicos;
+	}
+
+	public void setAntecedentesQuirurgicosOrtopedicos(List<AntecedentesQuirurgicosOrtopedicos> antecedentesQuirurgicosOrtopedicos) {
+		this.antecedentesQuirurgicosOrtopedicos = antecedentesQuirurgicosOrtopedicos;
+	}
+
 	public Exploracion getExploracion() {
 		return exploracion;
 	}
@@ -322,5 +342,4 @@ public class AntecedentesPersonales implements IModelHospital {
 	public void setExploracion(Exploracion exploracion) {
 		this.exploracion = exploracion;
 	}
-
 }
