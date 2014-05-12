@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Component;
 import com.upsam.hospital.controller.dto.AngleDTO;
 import com.upsam.hospital.controller.dto.ExploracionDTO;
+import com.upsam.hospital.controller.dto.FaqDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXDTO;
@@ -42,6 +43,18 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 	/** The video util dto. */
 	@Inject
 	private IVideoUtilDTO videoUtilDTO;
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.controller.dto.util.IExploracionUtilDTO#doFaq(com.
+	 * upsam.hospital.model.beans.Exploracion)
+	 */
+	@Override
+	public FaqDTO doFaq(Exploracion exploracion) throws TransferObjectException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	/*
 	 * (non-Javadoc)

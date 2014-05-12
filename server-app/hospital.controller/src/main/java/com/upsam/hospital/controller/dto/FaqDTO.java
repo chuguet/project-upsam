@@ -1,75 +1,53 @@
 package com.upsam.hospital.controller.dto;
 
+import java.util.List;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class FaqDTO.
  */
-public class FaqDTO extends AbstractDTO {
+public class FaqDTO {
 
-	/** The id sintoma. */
-	private Integer idSintoma;
-
-	/** The pregunta. */
-	private String pregunta;
-
-	/** The respuesta. */
-	private String respuesta;
+	/** The info messages. */
+	private List<String> infoMessages;
+	
+	/** The warning messages. */
+	private List<String> warningMessages;
 
 	/**
-	 * Gets the id sintoma.
-	 * 
-	 * @return the id sintoma
+	 * Gets the info messages.
+	 *
+	 * @return the info messages
 	 */
-	public Integer getIdSintoma() {
-		return idSintoma;
+	public List<String> getInfoMessages() {
+		return infoMessages;
 	}
 
 	/**
-	 * Gets the pregunta.
-	 * 
-	 * @return the pregunta
+	 * Gets the warning messages.
+	 *
+	 * @return the warning messages
 	 */
-	public String getPregunta() {
-		return pregunta;
+	public List<String> getWarningMessages() {
+		return warningMessages;
 	}
 
 	/**
-	 * Gets the respuesta.
-	 * 
-	 * @return the respuesta
+	 * Sets the info messages.
+	 *
+	 * @param infoMessages the new info messages
 	 */
-	public String getRespuesta() {
-		return respuesta;
+	public void setInfoMessages(List<String> infoMessages) {
+		this.infoMessages = infoMessages;
 	}
 
 	/**
-	 * Sets the id sintoma.
-	 * 
-	 * @param idSintoma
-	 *            the new id sintoma
+	 * Sets the warning messages.
+	 *
+	 * @param warningMessages the new warning messages
 	 */
-	public void setIdSintoma(Integer idSintoma) {
-		this.idSintoma = idSintoma;
-	}
-
-	/**
-	 * Sets the pregunta.
-	 * 
-	 * @param pregunta
-	 *            the new pregunta
-	 */
-	public void setPregunta(String pregunta) {
-		this.pregunta = pregunta;
-	}
-
-	/**
-	 * Sets the respuesta.
-	 * 
-	 * @param respuesta
-	 *            the new respuesta
-	 */
-	public void setRespuesta(String respuesta) {
-		this.respuesta = respuesta;
+	public void setWarningMessages(List<String> warningMessages) {
+		this.warningMessages = warningMessages;
 	}
 
 }
