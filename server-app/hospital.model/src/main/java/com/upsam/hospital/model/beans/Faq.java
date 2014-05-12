@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 // TODO: Auto-generated Javadoc
@@ -37,11 +35,6 @@ public class Faq implements IModelHospital {
 	@Column(name = "RESPUESTA")
 	private String respuesta;
 
-	/** The seccion. */
-	@ManyToOne
-	@JoinColumn(name = "ID_SINTOMA")
-	private Sintoma sintoma;
-
 	/**
 	 * Gets the id.
 	 * 
@@ -67,15 +60,6 @@ public class Faq implements IModelHospital {
 	 */
 	public String getRespuesta() {
 		return respuesta;
-	}
-
-	/**
-	 * Gets the sintoma.
-	 * 
-	 * @return the sintoma
-	 */
-	public Sintoma getSintoma() {
-		return sintoma;
 	}
 
 	/**
@@ -106,16 +90,6 @@ public class Faq implements IModelHospital {
 	 */
 	public void setRespuesta(String respuesta) {
 		this.respuesta = respuesta;
-	}
-
-	/**
-	 * Sets the sintoma.
-	 * 
-	 * @param sintoma
-	 *            the new sintoma
-	 */
-	public void setSintoma(Sintoma sintoma) {
-		this.sintoma = sintoma;
 	}
 
 }

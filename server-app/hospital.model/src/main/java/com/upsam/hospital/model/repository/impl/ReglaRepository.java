@@ -5,15 +5,15 @@ import java.util.List;
 import javax.inject.Inject;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import com.upsam.hospital.model.beans.Sintoma;
-import com.upsam.hospital.model.repository.ISintomaRepository;
+import com.upsam.hospital.model.beans.Regla;
+import com.upsam.hospital.model.repository.IReglaRepository;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class SintomaRepository.
+ * The Class ReglaRepository.
  */
 @Repository
-class SintomaRepository implements ISintomaRepository {
+public class ReglaRepository implements IReglaRepository {
 
 	/** The hibernate template. */
 	@Inject
@@ -26,8 +26,8 @@ class SintomaRepository implements ISintomaRepository {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void delete(Sintoma sintoma) throws SQLException {
-		hibernateTemplate.delete(sintoma);
+	public void delete(Regla regla) throws SQLException {
+		hibernateTemplate.delete(regla);
 	}
 
 	/*
@@ -35,8 +35,8 @@ class SintomaRepository implements ISintomaRepository {
 	 * @see com.upsam.hospital.model.repository.IRepositoryDAO#findAll()
 	 */
 	@Override
-	public List<Sintoma> findAll() throws SQLException {
-		return hibernateTemplate.loadAll(Sintoma.class);
+	public List<Regla> findAll() throws SQLException {
+		return hibernateTemplate.loadAll(Regla.class);
 	}
 
 	/*
@@ -46,8 +46,8 @@ class SintomaRepository implements ISintomaRepository {
 	 * Integer)
 	 */
 	@Override
-	public Sintoma findOne(Integer pId) throws SQLException {
-		return hibernateTemplate.get(Sintoma.class, pId);
+	public Regla findOne(Integer pId) throws SQLException {
+		return hibernateTemplate.get(Regla.class, pId);
 	}
 
 	/*
@@ -57,8 +57,8 @@ class SintomaRepository implements ISintomaRepository {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public Integer save(Sintoma sintoma) throws SQLException {
-		return (Integer) hibernateTemplate.save(sintoma);
+	public Integer save(Regla regla) throws SQLException {
+		return (Integer) hibernateTemplate.save(regla);
 	}
 
 	/*
@@ -68,8 +68,8 @@ class SintomaRepository implements ISintomaRepository {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void update(Sintoma sintoma) throws SQLException {
-		hibernateTemplate.update(sintoma);
+	public void update(Regla regla) throws SQLException {
+		hibernateTemplate.update(regla);
 	}
 
 }

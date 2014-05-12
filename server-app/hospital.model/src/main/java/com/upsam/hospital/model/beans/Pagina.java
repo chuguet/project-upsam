@@ -17,44 +17,35 @@ import org.hibernate.annotations.LazyCollectionOption;
  * The Class ParteCuerpo.
  */
 @Entity
-@Table(name = "PARTE_CUERPO")
-public class ParteCuerpo implements IModelHospital {
+@Table(name = "PAGINA")
+public class Pagina implements IModelHospital {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8095085880797559530L;
 
+	/** The sintomas. */
+	@OneToMany(mappedBy = "pagina")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<Campo> campos;
+
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_PARTE_CUERPO")
+	@Column(name = "ID_PAGINA")
 	private Integer id;
 
 	/** The parte. */
 	@Basic
-	@Column(name = "PARTE")
-	private String parte;
-
-	/** The sintomas. */
-	@OneToMany(mappedBy = "parteCuerpo")
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Sintoma> sintomas;
+	@Column(name = "NOMBRE")
+	private String nombre;
 
 	/**
-	 * Instantiates a new parte cuerpo.
-	 */
-	public ParteCuerpo() {
-		super();
-	}
-
-	/**
-	 * Instantiates a new parte cuerpo.
+	 * Gets the campos.
 	 * 
-	 * @param id
-	 *            the id
+	 * @return the campos
 	 */
-	public ParteCuerpo(Integer id) {
-		super();
-		this.id = id;
+	public List<Campo> getCampos() {
+		return campos;
 	}
 
 	/**
@@ -67,21 +58,22 @@ public class ParteCuerpo implements IModelHospital {
 	}
 
 	/**
-	 * Gets the parte.
+	 * Gets the nombre.
 	 * 
-	 * @return the parte
+	 * @return the nombre
 	 */
-	public String getParte() {
-		return parte;
+	public String getNombre() {
+		return nombre;
 	}
 
 	/**
-	 * Gets the sintomas.
+	 * Sets the campos.
 	 * 
-	 * @return the sintomas
+	 * @param campos
+	 *            the new campos
 	 */
-	public List<Sintoma> getSintomas() {
-		return sintomas;
+	public void setCampos(List<Campo> campos) {
+		this.campos = campos;
 	}
 
 	/**
@@ -95,23 +87,13 @@ public class ParteCuerpo implements IModelHospital {
 	}
 
 	/**
-	 * Sets the parte.
+	 * Sets the nombre.
 	 * 
-	 * @param parte
-	 *            the new parte
+	 * @param nombre
+	 *            the new nombre
 	 */
-	public void setParte(String parte) {
-		this.parte = parte;
-	}
-
-	/**
-	 * Sets the sintomas.
-	 * 
-	 * @param sintomas
-	 *            the new sintomas
-	 */
-	public void setSintomas(List<Sintoma> sintomas) {
-		this.sintomas = sintomas;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 }

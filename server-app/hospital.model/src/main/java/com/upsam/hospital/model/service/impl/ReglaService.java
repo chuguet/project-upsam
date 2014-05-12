@@ -4,21 +4,21 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
-import com.upsam.hospital.model.beans.ParteCuerpo;
+import com.upsam.hospital.model.beans.Regla;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.IParteCuerpoRepository;
-import com.upsam.hospital.model.service.IParteCuerpoService;
+import com.upsam.hospital.model.repository.IReglaRepository;
+import com.upsam.hospital.model.service.IReglaService;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ParteCuerpoService.
+ * The Class ReglasService.
  */
 @Service
-public class ParteCuerpoService implements IParteCuerpoService {
+public class ReglaService implements IReglaService {
 
-	/** The parte cuerpo repository. */
+	/** The Reglas repository. */
 	@Inject
-	private IParteCuerpoRepository parteCuerpoRepository;
+	private IReglaRepository reglaRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -27,9 +27,9 @@ public class ParteCuerpoService implements IParteCuerpoService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void delete(ParteCuerpo parteCuerpo) throws DataBaseException {
+	public void delete(Regla regla) throws DataBaseException {
 		try {
-			parteCuerpoRepository.delete(parteCuerpo);
+			reglaRepository.delete(regla);
 		}
 		catch (SQLException e) {
 			throw new DataBaseException(e);
@@ -41,9 +41,9 @@ public class ParteCuerpoService implements IParteCuerpoService {
 	 * @see com.upsam.hospital.model.service.IModelService#findAll()
 	 */
 	@Override
-	public List<ParteCuerpo> findAll() throws DataBaseException {
+	public List<Regla> findAll() throws DataBaseException {
 		try {
-			return parteCuerpoRepository.findAll();
+			return reglaRepository.findAll();
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);
@@ -56,9 +56,9 @@ public class ParteCuerpoService implements IParteCuerpoService {
 	 * com.upsam.hospital.model.service.IModelService#findOne(java.lang.Integer)
 	 */
 	@Override
-	public ParteCuerpo findOne(Integer pId) throws DataBaseException {
+	public Regla findOne(Integer pId) throws DataBaseException {
 		try {
-			return parteCuerpoRepository.findOne(pId);
+			return reglaRepository.findOne(pId);
 		}
 		catch (SQLException e) {
 			throw new DataBaseException(e);
@@ -72,9 +72,9 @@ public class ParteCuerpoService implements IParteCuerpoService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public Integer save(ParteCuerpo parteCuerpo) throws DataBaseException {
+	public Integer save(Regla regla) throws DataBaseException {
 		try {
-			return parteCuerpoRepository.save(parteCuerpo);
+			return reglaRepository.save(regla);
 		}
 		catch (SQLException ex) {
 			throw new DataBaseException(ex);
@@ -88,13 +88,12 @@ public class ParteCuerpoService implements IParteCuerpoService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void update(ParteCuerpo parteCuerpo) throws DataBaseException {
+	public void update(Regla regla) throws DataBaseException {
 		try {
-			parteCuerpoRepository.update(parteCuerpo);
+			reglaRepository.update(regla);
 		}
-		catch (SQLException ex) {
-			throw new DataBaseException(ex);
+		catch (SQLException e) {
+			throw new DataBaseException(e);
 		}
 	}
-
 }

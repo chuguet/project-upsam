@@ -14,6 +14,7 @@
 		<link href="resources/css/ui.jqgrid.css" rel="stylesheet" type="text/css">
 		<link href="resources/css/jquery.ui.plupload.css" rel="stylesheet" type="text/css">
 		<link href="resources/css/jquery.plupload.queue.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/jquery.ui.fancytree.css" rel="stylesheet" type="text/css">
 
 		<script src="resources/js/jquery.require.js" type="text/javascript"></script>
 		<script src="resources/js/jquery-1.8.2.min.js" type="text/javascript"></script>
@@ -25,11 +26,13 @@
 		
 		<script src="resources/js/views/usuario.js" type="text/javascript"></script>
 		<script src="resources/js/views/paciente.js" type="text/javascript"></script>
+		<script src="resources/js/views/faq.js" type="text/javascript"></script>
 		
 		<script src="resources/js/plupload.full.min.js" type="text/javascript"></script>
 		<script src="resources/js/jquery.ui.plupload.min.js" type="text/javascript"></script>
 		<script src="resources/js/i18n/plupload.locale-es.js" type="text/javascript"></script>
 		<script src="resources/js/jquery.plupload.queue.min.js" type="text/javascript"></script>
+		<script src="resources/js/jquery.fancytree.js" type="text/javascript"></script>
 		
 	</head>
 	<body id="hospital" class="web" >
@@ -42,6 +45,7 @@
 		<div id="menu">
 			<sec:authorize ifAnyGranted="ROLE_ADMIN">
 				<a href="javascript:void" onclick="javascript:generic.getList('usuario');" title="Ver usuarios" class="itemMenu">Usuarios</a>
+				<a href="javascript:void" onclick="javascript:generic.getList('faq');" title="Ver reglas" class="itemMenu">Reglas FAQs</a>
 			</sec:authorize>
 			<sec:authorize ifAnyGranted="ROLE_USER">
 				<a href="javascript:void" onclick="javascript:generic.getList('paciente');" title="Ver pacientes" class="itemMenu">Pacientes</a>
