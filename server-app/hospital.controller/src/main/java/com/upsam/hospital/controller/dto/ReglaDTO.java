@@ -1,6 +1,9 @@
 package com.upsam.hospital.controller.dto;
 
+import java.util.ArrayList;
 import java.util.List;
+import com.upsam.hospital.controller.dto.util.impl.CampoRellenadoDTO;
+import com.upsam.hospital.controller.dto.util.impl.CampoSugeridoDTO;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -8,14 +11,61 @@ import java.util.List;
  */
 public class ReglaDTO extends AbstractDTO {
 
+	/** The campos rellenados dto. */
+	private List<CampoRellenadoDTO> camposRellenadosDTO;
+
+	/** The camposSugeridos. */
+	private List<CampoSugeridoDTO> camposSugeridosDTO;
+
 	/** The descripcion. */
 	private String descripcion;
 
-	/** The tree1. */
-	private List<Integer> tree1;
+	/** The mensaje. */
+	private String mensaje;
 
-	/** The tree2. */
-	private List<Integer> tree2;
+	/**
+	 * Adds the campo rellenado dto.
+	 * 
+	 * @param campoRellenadoDTO
+	 *            the campo rellenado dto
+	 */
+	public void addCampoRellenadoDTO(CampoRellenadoDTO campoRellenadoDTO) {
+		if (this.getCamposRellenadosDTO() == null) {
+			this.setCamposRellenadosDTO(new ArrayList<CampoRellenadoDTO>());
+		}
+		this.getCamposRellenadosDTO().add(campoRellenadoDTO);
+	}
+
+	/**
+	 * Adds the campo sugerido dto.
+	 * 
+	 * @param campoSugeridoDTO
+	 *            the campo sugerido dto
+	 */
+	public void addCampoSugeridoDTO(CampoSugeridoDTO campoSugeridoDTO) {
+		if (this.getCamposSugeridosDTO() == null) {
+			this.setCamposSugeridosDTO(new ArrayList<CampoSugeridoDTO>());
+		}
+		this.getCamposSugeridosDTO().add(campoSugeridoDTO);
+	}
+
+	/**
+	 * Gets the campos rellenados dto.
+	 * 
+	 * @return the campos rellenados dto
+	 */
+	public List<CampoRellenadoDTO> getCamposRellenadosDTO() {
+		return camposRellenadosDTO;
+	}
+
+	/**
+	 * Gets the campos sugeridos dto.
+	 * 
+	 * @return the campos sugeridos dto
+	 */
+	public List<CampoSugeridoDTO> getCamposSugeridosDTO() {
+		return camposSugeridosDTO;
+	}
 
 	/**
 	 * Gets the descripcion.
@@ -27,21 +77,32 @@ public class ReglaDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Gets the tree1.
+	 * Gets the mensaje.
 	 * 
-	 * @return the tree1
+	 * @return the mensaje
 	 */
-	public List<Integer> getTree1() {
-		return tree1;
+	public String getMensaje() {
+		return mensaje;
 	}
 
 	/**
-	 * Gets the tree2.
+	 * Sets the campos rellenados dto.
 	 * 
-	 * @return the tree2
+	 * @param camposRellenadosDTO
+	 *            the new campos rellenados dto
 	 */
-	public List<Integer> getTree2() {
-		return tree2;
+	public void setCamposRellenadosDTO(List<CampoRellenadoDTO> camposRellenadosDTO) {
+		this.camposRellenadosDTO = camposRellenadosDTO;
+	}
+
+	/**
+	 * Sets the campos sugeridos dto.
+	 * 
+	 * @param camposSugeridosDTO
+	 *            the new campos sugeridos dto
+	 */
+	public void setCamposSugeridosDTO(List<CampoSugeridoDTO> camposSugeridosDTO) {
+		this.camposSugeridosDTO = camposSugeridosDTO;
 	}
 
 	/**
@@ -55,23 +116,13 @@ public class ReglaDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Sets the tree1.
+	 * Sets the mensaje.
 	 * 
-	 * @param tree1
-	 *            the new tree1
+	 * @param mensaje
+	 *            the new mensaje
 	 */
-	public void setTree1(List<Integer> tree1) {
-		this.tree1 = tree1;
-	}
-
-	/**
-	 * Sets the tree2.
-	 * 
-	 * @param tree2
-	 *            the new tree2
-	 */
-	public void setTree2(List<Integer> tree2) {
-		this.tree2 = tree2;
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}
 
 }

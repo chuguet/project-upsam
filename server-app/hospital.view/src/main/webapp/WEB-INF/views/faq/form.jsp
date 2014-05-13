@@ -7,10 +7,35 @@
 	faq.formatForm();
 	
 	<c:if test="${operacion == 'edit'}">
-	function showInformationIntoView(regla) {
-		$('input[id=id]').val(regla.id);
-	};
-
+		function showInformationIntoView(regla) {
+			$('input[id=id]').val(regla.id);
+			$('#mensaje').val(regla.mensaje);
+			$('#descripcion').val(regla.descripcion);
+			var treeRellenados = $("#treeRellenados").fancytree('getTree');
+			regla.camposRellenadosDTO.forEach(function(campoRellenado){
+				treeRellenados.options.source.forEach(function(pagina){
+					pagina.children.forEach(function(campo){
+						if(campo.key == campoRellenado.idCampo){
+							campo.id = campoRellenado.id;
+							campo.selected = true;
+						}
+					});
+				});
+			});
+			treeRellenados.reload();
+			var treeSugeridos = $("#treeSugeridos").fancytree('getTree');
+			regla.camposSugeridosDTO.forEach(function(campoSugerido){
+				treeSugeridos.options.source.forEach(function(pagina){
+					pagina.children.forEach(function(campo){
+						if(campo.key == campoSugerido.idCampo){
+							campo.id = campoSugerido.id;
+							campo.selected = true;
+						}
+					});
+				});
+			});
+			treeSugeridos.reload();
+		};
 	</c:if>
 </script>
 	<fieldset>
@@ -21,13 +46,18 @@
 			</c:choose>
 		</legend>
 		<input type="hidden" id="id" />
-		<label for="tree1" class="tree">Campos rellenados</label>
-		<div id="tree1" class="tree"></div>
-		<label for="tree2" class="tree">Campos sugeridos</label>
-		<div id="tree2" class="tree"></div>
-		<div>Descripci&oacute;n</div>
-		<textarea id="descripcion" cols="50" rows="9" class="text ui-widget-content ui-corner-all" />
-		
+		<label for="treeRellenados" class="tree">Campos rellenados</label>
+		<div id="treeRellenados" class="tree"></div>
+		<label for="treeSugeridos" class="tree">Campos sugeridos</label>
+		<div id="treeSugeridos" class="tree"></div>
+		<div class="containerTextTree">
+			<div class="textTree">Descripci&oacute;n
+				<textarea id="descripcion" cols="50" rows="9" class="text ui-widget-content ui-corner-all" />
+			</div>
+			<div class="textTree">Mensaje
+				<textarea id="mensaje" cols="50" rows="3" class="text ui-widget-content ui-corner-all" />
+			</div>
+		</div>
 		<div class="botonera">
 			<c:choose>
 				<c:when test="${operacion == 'new'}">

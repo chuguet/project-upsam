@@ -49,6 +49,11 @@ public class Regla implements IModelHospital {
 	@Column(name = "ID_REGLA")
 	private Integer id;
 
+	/** The mensaje. */
+	@Basic
+	@Column(name = "MENSAJE")
+	private String mensaje;
+
 	/**
 	 * Adds the campo rellenado.
 	 * 
@@ -112,6 +117,15 @@ public class Regla implements IModelHospital {
 	}
 
 	/**
+	 * Gets the mensaje.
+	 * 
+	 * @return the mensaje
+	 */
+	public String getMensaje() {
+		return mensaje;
+	}
+
+	/**
 	 * Sets the campos rellenados.
 	 * 
 	 * @param camposRellenados
@@ -149,5 +163,15 @@ public class Regla implements IModelHospital {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	/**
+	 * Sets the mensaje.
+	 * 
+	 * @param mensaje
+	 *            the new mensaje
+	 */
+	public void setMensaje(String mensaje) {
+		this.mensaje = mensaje;
 	}
 }

@@ -31,4 +31,15 @@ public interface IReglaUtilDTO {
 	 *             the transfer object exception
 	 */
 	ReglaDTO toRest(Regla regla) throws TransferObjectException;
+
+	/**
+	 * To rest info.
+	 * 
+	 * @param regla
+	 *            the regla
+	 * @return the regla dto
+	 * @throws TransferObjectException
+	 *             the transfer object exception
+	 */
+	ReglaDTO toRestInfo(Regla regla) throws TransferObjectException;
 }

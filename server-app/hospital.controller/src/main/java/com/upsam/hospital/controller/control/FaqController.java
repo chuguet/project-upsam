@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.upsam.hospital.controller.dto.FaqDTO;
+import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.PaginaDTO;
 import com.upsam.hospital.controller.dto.ReglaDTO;
 import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
@@ -86,10 +87,39 @@ public class FaqController {
 	 *            the regla dto
 	 */
 	@RequestMapping(value = "faq", method = RequestMethod.POST)
-	public void insertRegla(@RequestBody ReglaDTO reglaDTO) {
+	public @ResponseBody
+	MensajeDTO insertRegla(@RequestBody ReglaDTO reglaDTO) {
+		MensajeDTO mensajeDTO;
 		try {
 			Regla regla = reglaUtilDTO.toBusiness(reglaDTO);
 			reglaService.save(regla);
+			mensajeDTO = new MensajeDTO("Regla insertada correctamente", true);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+			mensajeDTO = new MensajeDTO("Error al insertar en base de datos", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			mensajeDTO = new MensajeDTO("Error al convertir una regla.", false);
+		}
+		return mensajeDTO;
+	}
+
+	/**
+	 * List all.
+	 * 
+	 * @return the list
+	 */
+	@RequestMapping(value = "faq", method = RequestMethod.GET)
+	public @ResponseBody
+	List<ReglaDTO> listAll() {
+		List<ReglaDTO> result = new ArrayList<ReglaDTO>();
+		try {
+			List<Regla> reglas = reglaService.findAll();
+			for (Regla regla : reglas) {
+				result.add(reglaUtilDTO.toRestInfo(regla));
+			}
 		}
 		catch (DataBaseException e) {
 			LOG.debug(e.getMessage());
@@ -97,6 +127,31 @@ public class FaqController {
 		catch (TransferObjectException e) {
 			LOG.debug(e.getMessage());
 		}
+		return result;
+	}
+
+	/**
+	 * Retrieve.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the regla dto
+	 */
+	@RequestMapping(value = "faq/{id}", method = RequestMethod.GET)
+	public @ResponseBody
+	ReglaDTO retrieve(@PathVariable("id") Integer id) {
+		ReglaDTO result = null;
+		try {
+			Regla regla = reglaService.findOne(id);
+			result = reglaUtilDTO.toRest(regla);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+		}
+		return result;
 	}
 
 	/**
@@ -145,6 +200,33 @@ public class FaqController {
 			LOG.debug(e.getMessage());
 		}
 		return result;
+	}
+
+	/**
+	 * Udpate.
+	 * 
+	 * @param reglaDTO
+	 *            the regla dto
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "faq/{id}", method = RequestMethod.POST)
+	public @ResponseBody
+	MensajeDTO udpate(@RequestBody ReglaDTO reglaDTO) {
+		MensajeDTO mensajeDTO;
+		try {
+			Regla regla = reglaUtilDTO.toBusiness(reglaDTO);
+			reglaService.update(regla);
+			mensajeDTO = new MensajeDTO("Se ha actualizado la regla correctamente.", true);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+			mensajeDTO = new MensajeDTO("Error al actualizar en base de datos", false);
+		}
+		catch (TransferObjectException e) {
+			LOG.debug(e.getMessage());
+			mensajeDTO = new MensajeDTO("Error al convertir una regla.", false);
+		}
+		return mensajeDTO;
 	}
 
 }
