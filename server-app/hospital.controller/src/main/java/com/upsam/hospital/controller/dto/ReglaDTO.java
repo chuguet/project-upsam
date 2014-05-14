@@ -17,11 +17,11 @@ public class ReglaDTO extends AbstractDTO {
 	/** The camposSugeridos. */
 	private List<CampoSugeridoDTO> camposSugeridosDTO;
 
-	/** The descripcion. */
-	private String descripcion;
-
 	/** The mensaje. */
 	private String mensaje;
+
+	/** The titulo. */
+	private String titulo;
 
 	/**
 	 * Adds the campo rellenado dto.
@@ -68,21 +68,21 @@ public class ReglaDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Gets the descripcion.
-	 * 
-	 * @return the descripcion
-	 */
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	/**
 	 * Gets the mensaje.
 	 * 
 	 * @return the mensaje
 	 */
 	public String getMensaje() {
 		return mensaje;
+	}
+
+	/**
+	 * Gets the titulo.
+	 * 
+	 * @return the titulo
+	 */
+	public String getTitulo() {
+		return titulo;
 	}
 
 	/**
@@ -106,16 +106,6 @@ public class ReglaDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Sets the descripcion.
-	 * 
-	 * @param descripcion
-	 *            the new descripcion
-	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	/**
 	 * Sets the mensaje.
 	 * 
 	 * @param mensaje
@@ -123,6 +113,16 @@ public class ReglaDTO extends AbstractDTO {
 	 */
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
+	}
+
+	/**
+	 * Sets the titulo.
+	 * 
+	 * @param titulo
+	 *            the new titulo
+	 */
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 }

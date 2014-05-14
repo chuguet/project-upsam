@@ -28,7 +28,7 @@ public class ReglaUtilDTO implements IReglaUtilDTO {
 		CampoSugerido campoSugerido;
 		Campo campo;
 		Regla regla = new Regla();
-		regla.setDescripcion(reglaDTO.getDescripcion());
+		regla.setTitulo(reglaDTO.getTitulo());
 		regla.setMensaje(reglaDTO.getMensaje());
 		regla.setId(reglaDTO.getId());
 		for (CampoRellenadoDTO campoRellenadoDTO : reglaDTO.getCamposRellenadosDTO()) {
@@ -64,7 +64,7 @@ public class ReglaUtilDTO implements IReglaUtilDTO {
 		CampoSugeridoDTO campoSugeridoDTO;
 		ReglaDTO reglaDTO = new ReglaDTO();
 		reglaDTO.setMensaje(regla.getMensaje());
-		reglaDTO.setDescripcion(regla.getDescripcion());
+		reglaDTO.setTitulo(regla.getTitulo());
 		reglaDTO.setId(regla.getId());
 		for (CampoRellenado campoRellenado : regla.getCamposRellenados()) {
 			campoRellenadoDTO = new CampoRellenadoDTO();
@@ -91,7 +91,7 @@ public class ReglaUtilDTO implements IReglaUtilDTO {
 	public ReglaDTO toRestInfo(Regla regla) throws TransferObjectException {
 		ReglaDTO reglaDTO = new ReglaDTO();
 		reglaDTO.setMensaje(regla.getMensaje());
-		reglaDTO.setDescripcion(regla.getDescripcion());
+		reglaDTO.setTitulo(regla.getTitulo());
 		reglaDTO.setId(regla.getId());
 		return reglaDTO;
 	}

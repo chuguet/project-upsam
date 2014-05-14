@@ -38,11 +38,6 @@ public class Regla implements IModelHospital {
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<CampoSugerido> camposSugeridos;
 
-	/** The descripcion. */
-	@Basic
-	@Column(name = "DESCRIPCION")
-	private String descripcion;
-
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +48,11 @@ public class Regla implements IModelHospital {
 	@Basic
 	@Column(name = "MENSAJE")
 	private String mensaje;
+
+	/** The titulo. */
+	@Basic
+	@Column(name = "TITULO")
+	private String titulo;
 
 	/**
 	 * Adds the campo rellenado.
@@ -99,15 +99,6 @@ public class Regla implements IModelHospital {
 	}
 
 	/**
-	 * Gets the descripcion.
-	 * 
-	 * @return the descripcion
-	 */
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	/**
 	 * Gets the id.
 	 * 
 	 * @return the id
@@ -123,6 +114,15 @@ public class Regla implements IModelHospital {
 	 */
 	public String getMensaje() {
 		return mensaje;
+	}
+
+	/**
+	 * Gets the titulo.
+	 * 
+	 * @return the titulo
+	 */
+	public String getTitulo() {
+		return titulo;
 	}
 
 	/**
@@ -146,16 +146,6 @@ public class Regla implements IModelHospital {
 	}
 
 	/**
-	 * Sets the descripcion.
-	 * 
-	 * @param descripcion
-	 *            the new descripcion
-	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	/**
 	 * Sets the id.
 	 * 
 	 * @param id
@@ -173,5 +163,15 @@ public class Regla implements IModelHospital {
 	 */
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
+	}
+
+	/**
+	 * Sets the titulo.
+	 * 
+	 * @param titulo
+	 *            the new titulo
+	 */
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 }
