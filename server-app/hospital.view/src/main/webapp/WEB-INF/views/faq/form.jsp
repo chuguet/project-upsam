@@ -4,39 +4,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script type="text/javascript">
-	faq.formatForm();
-	
 	<c:if test="${operacion == 'edit'}">
 		function showInformationIntoView(regla) {
 			$('input[id=id]').val(regla.id);
 			$('#mensaje').val(regla.mensaje);
 			$('#descripcion').val(regla.descripcion);
-			var treeRellenados = $("#treeRellenados").fancytree('getTree');
-			regla.camposRellenadosDTO.forEach(function(campoRellenado){
-				treeRellenados.options.source.forEach(function(pagina){
-					pagina.children.forEach(function(campo){
-						if(campo.key == campoRellenado.idCampo){
-							campo.id = campoRellenado.id;
-							campo.selected = true;
-						}
-					});
-				});
-			});
-			treeRellenados.reload();
-			var treeSugeridos = $("#treeSugeridos").fancytree('getTree');
-			regla.camposSugeridosDTO.forEach(function(campoSugerido){
-				treeSugeridos.options.source.forEach(function(pagina){
-					pagina.children.forEach(function(campo){
-						if(campo.key == campoSugerido.idCampo){
-							campo.id = campoSugerido.id;
-							campo.selected = true;
-						}
-					});
-				});
-			});
-			treeSugeridos.reload();
 		};
 	</c:if>
+	faq.formatForm("${operacion}");
 </script>
 	<fieldset>
 		<legend>

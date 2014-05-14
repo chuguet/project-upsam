@@ -62,7 +62,7 @@ var faq = {
 		});
 		$("#btnEditar").button("disable");
 	},
-	'formatForm' : function() {
+	'formatForm' : function(operacion) {
 		$("#btnCancel").button().click(function() {
 			generic.getList('faq');
 		});
@@ -71,37 +71,98 @@ var faq = {
 			faq.getParams();
 		});
 
-		generic.get("faq/paginas", null, function(paginas) {
-			var tree = [];
-			var i = 0;
-			paginas.forEach(function(pagina) {
-				tree.push({
-					title : pagina.nombre,
-					folder : true,
-					children : []
-				});
-				pagina.camposDTO.forEach(function(campoDTO) {
-					tree[i].children.push({
-						title : campoDTO.nombre,
-						key : campoDTO.id
+		if(operacion == 'new'){
+			generic.get("faq/paginas", null, function(paginas) {
+				var tree = [];
+				var i = 0;
+				paginas.forEach(function(pagina) {
+					tree.push({
+						title : pagina.nombre,
+						folder : true,
+						children : []
 					});
+					pagina.camposDTO.forEach(function(campoDTO) {
+						tree[i].children.push({
+							title : campoDTO.nombre,
+							key : campoDTO.id
+						});
+					});
+					i++;
 				});
-				i++;
-			});
 
-			$("#treeRellenados").fancytree({
-				source : tree,
-				icons : false,
-				checkbox : true,
-				selectMode : 3
+				$("#treeRellenados").fancytree({
+					source : tree,
+					icons : false,
+					checkbox : true,
+					selectMode : 3
+				});
+				$("#treeSugeridos").fancytree({
+					source : tree,
+					icons : false,
+					checkbox : true,
+					selectMode : 3
+				});
 			});
-			$("#treeSugeridos").fancytree({
-				source : tree,
-				icons : false,
-				checkbox : true,
-				selectMode : 3
+		}else if(operacion == 'edit'){
+			generic.get("faq/paginas", null, function(paginas) {
+				var tree = [];
+				var i = 0;
+				paginas.forEach(function(pagina) {
+					tree.push({
+						title : pagina.nombre,
+						folder : true,
+						children : []
+					});
+					pagina.camposDTO.forEach(function(campoDTO) {
+						tree[i].children.push({
+							title : campoDTO.nombre,
+							key : campoDTO.id
+						});
+					});
+					i++;
+				});
+
+				$("#treeRellenados").fancytree({
+					source : tree,
+					icons : false,
+					checkbox : true,
+					selectMode : 3
+				});
+				$("#treeSugeridos").fancytree({
+					source : tree,
+					icons : false,
+					checkbox : true,
+					selectMode : 3
+				});
+				generic.get("faq/", $("#id").val(), function(arguments) {
+					var regla = arguments[0];
+					var treeRellenados = $("#treeRellenados").fancytree('getTree');
+					regla.camposRellenadosDTO.forEach(function(campoRellenado){
+						treeRellenados.options.source.forEach(function(pagina){
+							pagina.children.forEach(function(campo){
+								if(campo.key == campoRellenado.idCampo){
+									campo.id = campoRellenado.id;
+									campo.selected = true;
+								}
+							});
+						});
+					});
+					treeRellenados.reload();
+					var treeSugeridos = $("#treeSugeridos").fancytree('getTree');
+					regla.camposSugeridosDTO.forEach(function(campoSugerido){
+						treeSugeridos.options.source.forEach(function(pagina){
+							pagina.children.forEach(function(campo){
+								if(campo.key == campoSugerido.idCampo){
+									campo.id = campoSugerido.id;
+									campo.selected = true;
+								}
+							});
+						});
+					});
+					treeSugeridos.reload();
+				});
 			});
-		});
+		}
 	},
 	'getParams' : function() {
 		var id = $("#id").val();
