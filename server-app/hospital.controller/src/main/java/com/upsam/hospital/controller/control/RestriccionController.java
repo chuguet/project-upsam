@@ -81,10 +81,34 @@ public class RestriccionController {
 	}
 
 	/**
+	 * Delete.
+	 * 
+	 * @param id
+	 *            the id
+	 * @return the mensaje dto
+	 */
+	@RequestMapping(value = "restriccion/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody
+	MensajeDTO delete(@PathVariable("id") Integer id) {
+		MensajeDTO mensajeDTO;
+		try {
+			Regla regla = reglaService.findOne(id);
+			reglaService.delete(regla);
+			mensajeDTO = new MensajeDTO("Se ha eliminado la regla.", true);
+		}
+		catch (DataBaseException e) {
+			LOG.debug(e.getMessage());
+			mensajeDTO = new MensajeDTO("Error al eliminar en base de datos", false);
+		}
+		return mensajeDTO;
+	}
+
+	/**
 	 * Insert regla.
 	 * 
 	 * @param reglaDTO
 	 *            the regla dto
+	 * @return the mensaje dto
 	 */
 	@RequestMapping(value = "restriccion", method = RequestMethod.POST)
 	public @ResponseBody
