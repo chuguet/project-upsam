@@ -46,7 +46,7 @@
 		<script src="resources/js/jquery.fancytree.js" type="text/javascript"></script>
 		<script src="resources/js/jquery.jqGrid.min.js" type="text/javascript"></script>
 		<script src="resources/js/i18n/grid.locale-es.js" type="text/javascript"></script>
-		<link href="resources/jquery.ui.fancytree.css" rel="stylesheet">
+		<link href="resources/css/jquery.ui.fancytree.css" rel="stylesheet">
 		
 	</head>
 	<body class="home">

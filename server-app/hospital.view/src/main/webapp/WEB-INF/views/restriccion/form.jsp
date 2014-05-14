@@ -33,16 +33,16 @@
 	<input type="hidden" id="id" />
 	
 	<div class="form-group">
-		<label for="descripcion" class="col-sm-2 control-label">Descripci&oacute;n</label>
+		<label for="descripcion" class="col-sm-2 control-label">T&iacute;tulo</label>
 	    <div class="col-sm-10">
-	    	<textarea id="descripcion" cols="50" rows="4" class="text ui-widget-content ui-corner-all" />
+	    	<input type="text" class="form-control" id="descripcion" placeholder="T&iacute;tulo" maxlength="200" required>
 	    </div>
 	</div>
 
 	<div class="form-group">
 		<label for="mensaje" class="col-sm-2 control-label">Mensaje</label>
 	    <div class="col-sm-10">
-			<textarea id="mensaje" cols="50" rows="4" class="text ui-widget-content ui-corner-all" />
+			<textarea id="mensaje" rows="4" class="text ui-widget-content ui-corner-all" style="width:100%"></textarea>
 	    </div>
 	</div>
 	
