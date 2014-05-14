@@ -58,7 +58,19 @@
 	</div>
 </div>
 
+
 <script type="text/javascript">
+	function AllTables(){
+			TestTable1();
+			LoadSelect2Script(MakeSelect2);
+		}
+		
+	function MakeSelect2(){
+		$('select').select2();
+		$('.dataTables_filter').each(function(){
+			$(this).find('label input[type=text]').attr('placeholder', 'Buscar');
+		});
+	}
 	function showInformationIntoView(information){
 		for (var i = 0; i < information.length; i++){
 			$("table.table tbody").append("<tr onclick='paciente.selectRow(this);'><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].nombre + "</td><td>" + information[i].apellidos + "</td><td>" + information[i].numeroIdentificacion + "</td><td>" + information[i].telefono + "</td><td>" + information[i].fechaNacimiento + "</td></tr>");
@@ -66,4 +78,40 @@
 
 		generic.processTable("paciente");
 	};
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<fieldset id="parent">
+	<legend>Listado de Reglas</legend>
+	<div class="botonera">
+		<input type="button" id="btnAlta" value="Alta" />
+		<input type="button" id="btnEditar" value="Editar" />
+	</div>
+	<table id="lista"></table>
+	<div id=paginadorLista></div>
+</fieldset>
+
+<script type="text/javascript">
+faq.formatList();
+function showInformationIntoView(information){
+	$("#lista").setGridParam({
+		data : information
+	}).trigger("reloadGrid");
+	$(window).bind('resize', function() {
+		$('#lista').setGridWidth($('.ui-jqgrid').parent().innerWidth() - 30);
+	}).trigger('resize');
+};
 </script>

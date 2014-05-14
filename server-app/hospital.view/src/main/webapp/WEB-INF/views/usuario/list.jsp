@@ -60,17 +60,6 @@
 
 
 <script type="text/javascript">
-	function AllTables(){
-			TestTable1();
-			LoadSelect2Script(MakeSelect2);
-		}
-		
-	function MakeSelect2(){
-		$('select').select2();
-		$('.dataTables_filter').each(function(){
-			$(this).find('label input[type=text]').attr('placeholder', 'Buscar');
-		});
-	}
 	function showInformationIntoView(information){
 		for (var i = 0; i < information.length; i++){
 			$("table.table tbody").append("<tr><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].nombre + "</td><td>" + information[i].apellidos + "</td><td>" + information[i].email + "</td><td>" + information[i].user + "</td><td>" + information[i].rol + "</td></tr>");

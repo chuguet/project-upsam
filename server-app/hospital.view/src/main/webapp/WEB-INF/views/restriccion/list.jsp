@@ -5,7 +5,7 @@
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="<c:url value="/home" />">Inicio</a></li>
-			<li>Pacientes</li>
+			<li>Restricciones</li>
 		</ol>
 	</div>
 </div>
@@ -14,7 +14,7 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<span>Listado de pacientes del sistema</span>
+					<span>Listado de restricciones del sistema</span>
 				</div>
 				<div class="box-icons">
 					<a class="expand-link">
@@ -33,11 +33,8 @@
 				<table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1">
 					<thead>
 						<tr>
-							<th>Nombre</th>
-							<th>Apellidos</th>
-							<th>Num. Identificaci&oacute;n</th>
-							<th>Telefono</th>
-							<th>Fecha Nacimiento</th>
+							<th>Mensaje</th>
+							<th>Descripci&oacute;n</th>
 						</tr>
 					</thead>
 					
@@ -45,11 +42,8 @@
 					
 					<tfoot>
 						<tr>
-							<th>Nombre</th>
-							<th>Apellidos</th>
-							<th>Num. Identificaci&oacute;n</th>
-							<th>Telefono</th>
-							<th>Fecha Nacimiento</th>
+							<th>Mensaje</th>
+							<th>Descripci&oacute;n</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -58,12 +52,13 @@
 	</div>
 </div>
 
+
 <script type="text/javascript">
 	function showInformationIntoView(information){
 		for (var i = 0; i < information.length; i++){
-			$("table.table tbody").append("<tr onclick='paciente.selectRow(this);'><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].nombre + "</td><td>" + information[i].apellidos + "</td><td>" + information[i].numeroIdentificacion + "</td><td>" + information[i].telefono + "</td><td>" + information[i].fechaNacimiento + "</td></tr>");
+			$("table.table tbody").append("<tr onclick='restriccion.selectRow(this);'><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].mensaje + "</td><td>" + information[i].descripcion + "</td></tr>");
 		}
 
-		generic.processTable("paciente");
+		generic.processTable("restriccion");
 	};
 </script>

@@ -4,21 +4,21 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.inject.Inject;
 import org.springframework.stereotype.Service;
-import com.upsam.hospital.model.beans.Sintoma;
+import com.upsam.hospital.model.beans.Pagina;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.repository.ISintomaRepository;
-import com.upsam.hospital.model.service.ISintomaService;
+import com.upsam.hospital.model.repository.IPaginaRepository;
+import com.upsam.hospital.model.service.IPaginaService;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class SintomaService.
+ * The Class PaginaService.
  */
 @Service
-public class SintomaService implements ISintomaService {
+public class PaginaService implements IPaginaService {
 
-	/** The sintoma repository. */
+	/** The parte cuerpo repository. */
 	@Inject
-	private ISintomaRepository sintomaRepository;
+	private IPaginaRepository paginaRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -27,9 +27,9 @@ public class SintomaService implements ISintomaService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void delete(Sintoma sintoma) throws DataBaseException {
+	public void delete(Pagina pagina) throws DataBaseException {
 		try {
-			sintomaRepository.delete(sintoma);
+			paginaRepository.delete(pagina);
 		}
 		catch (SQLException e) {
 			throw new DataBaseException(e);
@@ -41,9 +41,9 @@ public class SintomaService implements ISintomaService {
 	 * @see com.upsam.hospital.model.service.IModelService#findAll()
 	 */
 	@Override
-	public List<Sintoma> findAll() throws DataBaseException {
+	public List<Pagina> findAll() throws DataBaseException {
 		try {
-			return sintomaRepository.findAll();
+			return paginaRepository.findAll();
 		}
 		catch (SQLException e1) {
 			throw new DataBaseException(e1);
@@ -56,9 +56,9 @@ public class SintomaService implements ISintomaService {
 	 * com.upsam.hospital.model.service.IModelService#findOne(java.lang.Integer)
 	 */
 	@Override
-	public Sintoma findOne(Integer pId) throws DataBaseException {
+	public Pagina findOne(Integer pId) throws DataBaseException {
 		try {
-			return sintomaRepository.findOne(pId);
+			return paginaRepository.findOne(pId);
 		}
 		catch (SQLException e) {
 			throw new DataBaseException(e);
@@ -72,9 +72,9 @@ public class SintomaService implements ISintomaService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public Integer save(Sintoma sintoma) throws DataBaseException {
+	public Integer save(Pagina pagina) throws DataBaseException {
 		try {
-			return sintomaRepository.save(sintoma);
+			return paginaRepository.save(pagina);
 		}
 		catch (SQLException ex) {
 			throw new DataBaseException(ex);
@@ -88,9 +88,9 @@ public class SintomaService implements ISintomaService {
 	 * .model.beans.IModelHospital)
 	 */
 	@Override
-	public void update(Sintoma sintoma) throws DataBaseException {
+	public void update(Pagina pagina) throws DataBaseException {
 		try {
-			sintomaRepository.update(sintoma);
+			paginaRepository.update(pagina);
 		}
 		catch (SQLException ex) {
 			throw new DataBaseException(ex);

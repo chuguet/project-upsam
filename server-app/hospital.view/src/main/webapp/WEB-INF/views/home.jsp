@@ -36,10 +36,18 @@
 		<script src="resources/devoops/js/devoops.js"></script>
 		
 		<script src="resources/js/generic.js" type="text/javascript"></script>
-		<script src="resources/js/jquery.jqGrid.min.js" type="text/javascript"></script>
-		<script src="resources/js/i18n/grid.locale-es.js" type="text/javascript"></script>
+		
 		<script src="resources/js/views/usuario.js" type="text/javascript"></script>
 		<script src="resources/js/views/paciente.js" type="text/javascript"></script>
+		<script src="resources/js/views/restriccion.js" type="text/javascript"></script>
+		<script src="resources/js/views/sugerencia.js" type="text/javascript"></script>
+		
+		
+		<script src="resources/js/jquery.fancytree.js" type="text/javascript"></script>
+		<script src="resources/js/jquery.jqGrid.min.js" type="text/javascript"></script>
+		<script src="resources/js/i18n/grid.locale-es.js" type="text/javascript"></script>
+		<link href="resources/jquery.ui.fancytree.css" rel="stylesheet">
+		
 	</head>
 	<body class="home">
 	<!--Start Header-->
@@ -119,6 +127,18 @@
 						<a href="javascript:void" onclick="javascript:generic.getList('usuario');" class="active">
 							<i class="fa fa-user"></i>
 							<span class="hidden-xs">Usuarios</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void" onclick="javascript:generic.getList('restriccion');" class="active">
+							<i class="fa fa-ban"></i>
+							<span class="hidden-xs">Restricciones</span>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void" onclick="javascript:generic.getList('sugerencia');" class="active">
+							<i class="fa fa-comment-o"></i>
+							<span class="hidden-xs">Sugerencias</span>
 						</a>
 					</li>
 					</sec:authorize>

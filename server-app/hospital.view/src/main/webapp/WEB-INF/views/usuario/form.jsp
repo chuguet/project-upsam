@@ -95,10 +95,10 @@
 	<div class="botonera">
 		<c:choose>
 			<c:when test="${operacion == 'new'}">
-				<button class="btn btn-default" id="btnSaveUsuario"><i class='fa fa-check fa-fw'></i>Guardar</button>
+				<button class="btn btn-default" id="btnSaveUsuario" type="submit"><i class='fa fa-check fa-fw'></i>Guardar</button>
 			</c:when>
 			<c:otherwise>
-				<button class="btn btn-default" id="btnSaveUsuario"><i class='fa fa-check fa-fw'></i>Modificar</button>
+				<button class="btn btn-default" id="btnSaveUsuario" type="submit"><i class='fa fa-check fa-fw'></i>Modificar</button>
 			</c:otherwise>
 		</c:choose>
 		<button class="btn btn-default" id="btnCancel" onclick="javascript:generic.getList('usuario');"><i class='fa fa-times fa-fw'></i>Cancelar</button>

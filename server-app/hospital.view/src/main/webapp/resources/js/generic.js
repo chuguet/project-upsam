@@ -205,7 +205,7 @@ var generic = {
 		});
 	},
 	'processTable' : function(entity){
-		LoadDataTablesScripts(AllTables);
+		LoadDataTablesScripts(generic.AllTables);
 		
 		$('table.table tbody').on('click', 'tr', function () {
 			var clickedRow = $(this);
@@ -215,8 +215,6 @@ var generic = {
 				}
 			});
 			clickedRow.toggleClass('selected');
-			//$("#btnEditar").attr("disabled", false);
-			//$("#btnEliminar").attr("disabled", false);
 			$("#btnEditar").removeClass("disabled");
 			$("#btnEliminar").removeClass("disabled");
 		});
@@ -234,6 +232,18 @@ var generic = {
 			generic.delete(entity, id, function() {
 				generic.getList(entity);
 			});
+		});
+	},
+	
+	'AllTables' : function(){
+		TestTable1();
+		LoadSelect2Script(generic.MakeSelect2);
+	},
+	
+	'MakeSelect2' : function(){
+		$('select').select2();
+		$('.dataTables_filter').each(function(){
+			$(this).find('label input[type=text]').attr('placeholder', 'Buscar');
 		});
 	}
 };

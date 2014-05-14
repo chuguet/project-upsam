@@ -34,6 +34,9 @@ body.web div#content fieldset {border-radius: 10px; -webkit-border-radius: 10px;
 body.web div#content label {width:115px; display:inline-block;}
 body.web div#content input.text {width:220px; }
 body.web div#content .displayTable {display:inline-block; vertical-align:top; margin-left:20px; }
+body.web div#content .tree {display:inline-block; margin-left:20px; vertical-align:top; }
+body.web div#content .containerTextTree {display:block; }
+body.web div#content .textTree {display:inline-block; margin-left:20px; vertical-align:top; }
 
 body div.modal {display:none; position:fixed; z-index:1000; top:0; left: 0; height:100%; width:100%; background: rgba( 255, 255, 255, .8 ) url(../imgs/loading.gif) 50% 50% no-repeat;}
 body.loading {overflow: hidden;}

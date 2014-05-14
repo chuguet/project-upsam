@@ -2,6 +2,7 @@ package com.upsam.hospital.controller.dto.util;
 
 import java.util.List;
 import com.upsam.hospital.controller.dto.ExploracionDTO;
+import com.upsam.hospital.controller.dto.FaqDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXDTO;
@@ -17,6 +18,17 @@ import com.upsam.hospital.model.jaxb.EmxDataFile;
  * The Interface IExploracionUtilDTO.
  */
 public interface IExploracionUtilDTO {
+
+	/**
+	 * Do faq.
+	 * 
+	 * @param exploracion
+	 *            the exploracion
+	 * @return the faq dto
+	 * @throws TransferObjectException
+	 *             the transfer object exception
+	 */
+	FaqDTO doFaq(Exploracion exploracion) throws TransferObjectException;
 
 	/**
 	 * File emt to dto.
