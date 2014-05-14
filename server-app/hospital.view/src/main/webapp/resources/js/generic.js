@@ -137,7 +137,7 @@ var generic = {
 					});
 				}
 				else {
-					$('#content').html(response);
+					$('#ajax-content').html(response);
 					if (callback) {
 						callback.apply(this, arguments);
 					}
@@ -186,9 +186,6 @@ var generic = {
 		var bodyHeight = $('body').height();
 		$('#content').height(bodyHeight - 103);
 	},
-	'goHome' : function() {
-		$('#content').html('<img src="resources/imgs/copa.png" alt="imagenes"/>');
-	},
 	'alert' : function jAlert(output_msg, title_msg) {
 		if (!title_msg)
 			title_msg = 'Alert';
@@ -205,6 +202,38 @@ var generic = {
 					$(this).dialog("close");
 				}
 			}
+		});
+	},
+	'processTable' : function(entity){
+		LoadDataTablesScripts(AllTables);
+		
+		$('table.table tbody').on('click', 'tr', function () {
+			var clickedRow = $(this);
+			$("table.table tbody tr.selected").each(function(){
+				if (clickedRow != $(this)){
+					$(this).removeClass("selected");
+				}
+			});
+			clickedRow.toggleClass('selected');
+			//$("#btnEditar").attr("disabled", false);
+			//$("#btnEliminar").attr("disabled", false);
+			$("#btnEditar").removeClass("disabled");
+			$("#btnEliminar").removeClass("disabled");
+		});
+		
+		$("#btnAlta").button().click(function() {
+			generic.getForm(entity);
+		});
+		$("#btnEditar").button().click(function() {
+			var id = $("table.table tbody tr.selected input[type=hidden]").val();
+			generic.getForm(entity, id);
+		});
+
+		$("#btnEliminar").button().click(function() {
+			var id = $("table.table tbody tr.selected input[type=hidden]").val();
+			generic.delete(entity, id, function() {
+				generic.getList(entity);
+			});
 		});
 	}
 };

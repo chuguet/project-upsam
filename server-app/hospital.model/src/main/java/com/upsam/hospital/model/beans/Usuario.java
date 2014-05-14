@@ -1,17 +1,13 @@
 package com.upsam.hospital.model.beans;
 
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import com.upsam.hospital.model.enums.Rol;
 
 // TODO: Auto-generated Javadoc
@@ -34,11 +30,6 @@ public class Usuario implements IModelHospital {
 	@Basic
 	@Column(name = "EMAIL", unique = true, length = 200)
 	private String email;
-
-	/** The exploracion. */
-	@OneToMany(mappedBy = "usuario")
-	@LazyCollection(LazyCollectionOption.FALSE)
-	private List<Exploracion> exploracion;
 
 	/** The generate_token. */
 	@Basic
@@ -127,15 +118,6 @@ public class Usuario implements IModelHospital {
 	 */
 	public String getEmail() {
 		return email;
-	}
-
-	/**
-	 * Gets the exploracion.
-	 * 
-	 * @return the exploracion
-	 */
-	public List<Exploracion> getExploracion() {
-		return exploracion;
 	}
 
 	/**
@@ -232,16 +214,6 @@ public class Usuario implements IModelHospital {
 	 */
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	/**
-	 * Sets the exploracion.
-	 * 
-	 * @param exploracion
-	 *            the new exploracion
-	 */
-	public void setExploracion(List<Exploracion> exploracion) {
-		this.exploracion = exploracion;
 	}
 
 	/**

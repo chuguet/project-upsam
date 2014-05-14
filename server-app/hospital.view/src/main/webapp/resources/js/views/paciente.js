@@ -90,6 +90,7 @@ var paciente = {
 		});
 		$("#btnEliminar").button("disable");
 	},
+	
 
 	'formatForm' : function() {
 		$("#escolarizacion").buttonset();

@@ -1,25 +1,81 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<fieldset id="parent">
-	<legend>Listado de Usuarios</legend>
-	<div class="botonera">
-		<input type="button" id="btnAlta" value="Alta" />
-		<input type="button" id="btnEditar" value="Editar" />
-		<input type="button" id="btnEliminar" value="Eliminar" />
+<div class="row">
+	<div id="breadcrumb" class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="<c:url value="/home" />">Inicio</a></li>
+			<li>Usuarios</li>
+		</ol>
 	</div>
-	<table id="lista"></table>
-	<div id=paginadorLista></div>
-</fieldset>
+</div>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-header">
+				<div class="box-name">
+					<span>Listado de usuarios del sistema</span>
+				</div>
+				<div class="box-icons">
+					<a class="expand-link">
+						<i class="fa fa-expand"></i>
+					</a>
+				</div>
+				<div class="no-move"></div>
+				
+			</div>
+			<div class="box-content" style="padding:10px 15px 0px 31px">
+					<button id='btnAlta' class='btn btn-default'><i class='fa fa-plus fa-fw'></i>Nuevo</button>
+					<button id="btnEditar" class="btn btn-default disabled"><i class="fa fa-pencil fa-fw"></i>Modificar</button>
+					<button id="btnEliminar" class="btn btn-default disabled"><i class="fa fa-trash-o fa-fw"></i>Eliminar</button>
+				</div>
+			<div class="box-content no-padding">
+				<table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-2">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Apellidos</th>
+							<th>Email</th>
+							<th>Usuario</th>
+							<th>Rol</th>
+						</tr>
+					</thead>
+					
+					<tbody></tbody>
+					
+					<tfoot>
+						<tr>
+							<th>Nombre</th>
+							<th>Apellidos</th>
+							<th>Email</th>
+							<th>Usuario</th>
+							<th>Rol</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <script type="text/javascript">
-usuario.formatList();
-function showInformationIntoView(information){
-	$("#lista").setGridParam({
-		data : information
-	}).trigger("reloadGrid");
-	$(window).bind('resize', function() {
-		$('#lista').setGridWidth($('.ui-jqgrid').parent().innerWidth() - 30);
-	}).trigger('resize');
-};
+	function AllTables(){
+			TestTable1();
+			LoadSelect2Script(MakeSelect2);
+		}
+		
+	function MakeSelect2(){
+		$('select').select2();
+		$('.dataTables_filter').each(function(){
+			$(this).find('label input[type=text]').attr('placeholder', 'Buscar');
+		});
+	}
+	function showInformationIntoView(information){
+		for (var i = 0; i < information.length; i++){
+			$("table.table tbody").append("<tr><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].nombre + "</td><td>" + information[i].apellidos + "</td><td>" + information[i].email + "</td><td>" + information[i].user + "</td><td>" + information[i].rol + "</td></tr>");
+		}
+		
+		generic.processTable("usuario");
+	};
 </script>

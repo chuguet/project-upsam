@@ -24,14 +24,15 @@ var grafica = {
 			var line2 = grafica.recoverPoints(secondGraphic, "secondGraphic");
 			
 			if (line1 != null){
-			 	var size = line1.length * 50;
+				var size = $("#chartContainer").outerWidth();
+			 	//var size = line1.length * 50;
 			 	$("#chart1").children().remove();
 			  	$("#chart1").width(size);
 			  	$.jqplot.config.enablePlugins = true;
 			  	var plot1 = $.jqplot('chart1', [line1, line2], {
 					seriesDefaults: { 
 						showMarker:false,
-						pointLabels: { show:true, formatString: "%#.3f", edgeTolerance : -10 } 
+						pointLabels: { show:false, formatString: "%#.3f", edgeTolerance : -10 } 
 				  	}
 			  	});
 			}

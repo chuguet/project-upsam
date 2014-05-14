@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script type="text/javascript">
-	usuario.formatForm();
+	
 	<c:if test="${operacion == 'edit'}">
 		function showInformationIntoView(usuario){
 			$('input[id=id]').val(usuario.id);
@@ -20,52 +20,87 @@
 		};
 	</c:if>
 </script>
-<fieldset>
-	<legend>
-	<c:choose>
-		<c:when test="${operacion == 'new'}">Alta de Usuario</c:when>
-		<c:otherwise>Edici&oacute;n de Usuario</c:otherwise>
-	</c:choose>
-	</legend>
+
+<div class="row">
+	<div id="breadcrumb" class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="<c:url value="/home" />">Inicio</a></li>
+			<li><a href="javascript:void" onclick="javascript:generic.getList('usuario');">Usuarios</a></li>
+			<li>
+			<c:choose>
+				<c:when test="${operacion == 'new'}">Nuevo</c:when>
+				<c:otherwise>Modificar</c:otherwise>
+			</c:choose>
+			</li>
+		</ol>
+	</div>
+</div>
+
+
+<form class="form-horizontal" role="form" action="javascript:usuario.getParams();">
 	<input type="hidden" id="id" />
-	<p>
-		<label for="nombre">Nombre:</label>
-		<input id="nombre" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-	</p>
-	<p>
-		<label for="apellidos">Apellidos:</label>
-		<input id="apellidos" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-	</p>
-	<p>
-		<label for="email">Email:</label>
-		<input id="email" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-	</p>
-	<p>
-		<label for="usuario">Usuario:</label>
-		<input id="usuario" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-	</p>
-	<p>
-		<label for="pwd">Contrase&ntilde;a:</label>
-		<input id="pwd" type="password" maxlength="200" class="text ui-widget-content ui-corner-all" />
-	</p>
-	<p>
-		<div id="rol">
-			<label for="rol">Rol:</label>
-			<label for="administrador">Admin</label>
-		    <input type="radio" id="administrador" name="rol" value="Administrador"/>
-			<label for="user">Usuario</label>
-		    <input type="radio" id="user" name="rol" value="Usuario"/>
+	
+	<div class="form-group">
+		<label for="nombre" class="col-sm-2 control-label">Nombre</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="nombre" placeholder="Nombre" required autofocus>
+	    </div>
+	</div>
+
+	<div class="form-group">
+		<label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="apellidos" placeholder="Apellidos" maxlength="200" required autofocus>
+	    </div>
+	</div>
+	
+	<div class="form-group">
+		<label for="email" class="col-sm-2 control-label">Email</label>
+	    <div class="col-sm-10">
+	      <input type="email" class="form-control" id="email" placeholder="Email" maxlength="200" required>
+	    </div>
+	</div>
+	
+	<div class="form-group">
+		<label for="usuario" class="col-sm-2 control-label">Usuario</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="usuario" placeholder="Usuario" maxlength="200" required>
+	    </div>
+	</div>
+	
+	<div class="form-group">
+		<label for="password" class="col-sm-2 control-label">Contrase&ntilde;a</label>
+	    <div class="col-sm-10">
+	      <input type="password" class="form-control" id="password" placeholder="Contrase&ntilde;a" maxlength="200" required>
+	    </div>
+	</div>
+	<div class="form-group">
+		<label for="usuario" class="col-sm-2 control-label">Tipo de usuario</label>
+		<div class="col-sm-10">
+			<div class="radio">
+				<label>
+			    	<input type="radio" name="rol" id="Administrador" checked/>
+			    	Administrador
+			  	</label>
+			</div>
+			<div class="radio">
+		 		<label>
+		   			<input type="radio" name="rol" id="Usuario" />
+		   			M&eacute;dico
+		 		</label>
+			</div>
 		</div>
-	</p>
+	</div>
+	
 	<div class="botonera">
 		<c:choose>
 			<c:when test="${operacion == 'new'}">
-				<input type="button" id="btnSaveUsuario" value="Guardar" />
+				<button class="btn btn-default" id="btnSaveUsuario"><i class='fa fa-check fa-fw'></i>Guardar</button>
 			</c:when>
 			<c:otherwise>
-				<input type="button" id="btnSaveUsuario" value="Modificar" />
+				<button class="btn btn-default" id="btnSaveUsuario"><i class='fa fa-check fa-fw'></i>Modificar</button>
 			</c:otherwise>
 		</c:choose>
-		<input type="button" id="btnCancel" value="Cancelar" />
+		<button class="btn btn-default" id="btnCancel" onclick="javascript:generic.getList('usuario');"><i class='fa fa-times fa-fw'></i>Cancelar</button>
 	</div>
-</fieldset>
+</form>
