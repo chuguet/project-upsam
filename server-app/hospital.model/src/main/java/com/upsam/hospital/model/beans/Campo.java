@@ -37,6 +37,16 @@ public class Campo implements IModelHospital {
 	@JoinColumn(name = "ID_PAGINA")
 	private Pagina pagina;
 
+	/** The reflexion atributo. */
+	@Basic
+	@Column(name = "REFLEXION_ATRIBUTO")
+	private String reflexionAtributo;
+
+	/** The reflexion clase. */
+	@Basic
+	@Column(name = "REFLEXION_CLASE")
+	private String reflexionClase;
+
 	/**
 	 * Gets the id.
 	 * 
@@ -62,6 +72,24 @@ public class Campo implements IModelHospital {
 	 */
 	public Pagina getPagina() {
 		return pagina;
+	}
+
+	/**
+	 * Gets the reflexion atributo.
+	 * 
+	 * @return the reflexion atributo
+	 */
+	public String getReflexionAtributo() {
+		return reflexionAtributo;
+	}
+
+	/**
+	 * Gets the reflexion clase.
+	 * 
+	 * @return the reflexion clase
+	 */
+	public String getReflexionClase() {
+		return reflexionClase;
 	}
 
 	/**
@@ -92,6 +120,26 @@ public class Campo implements IModelHospital {
 	 */
 	public void setPagina(Pagina pagina) {
 		this.pagina = pagina;
+	}
+
+	/**
+	 * Sets the reflexion atributo.
+	 * 
+	 * @param reflexionAtributo
+	 *            the new reflexion atributo
+	 */
+	public void setReflexionAtributo(String reflexionAtributo) {
+		this.reflexionAtributo = reflexionAtributo;
+	}
+
+	/**
+	 * Sets the reflexion clase.
+	 * 
+	 * @param reflexionClase
+	 *            the new reflexion clase
+	 */
+	public void setReflexionClase(String reflexionClase) {
+		this.reflexionClase = reflexionClase;
 	}
 
 }

@@ -11,6 +11,7 @@ import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
+import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
 
 // TODO: Auto-generated Javadoc
@@ -27,8 +28,13 @@ public interface IExploracionUtilDTO {
 	 * @return the faq dto
 	 * @throws TransferObjectException
 	 *             the transfer object exception
+	 * @throws DataBaseException
+	 * @throws IllegalAccessException
+	 * @throws NoSuchFieldException
+	 * @throws IllegalArgumentException
+	 * @throws SecurityException
 	 */
-	FaqDTO doFaq(Exploracion exploracion) throws TransferObjectException;
+	FaqDTO doFaq(Exploracion exploracion) throws TransferObjectException, DataBaseException, SecurityException, IllegalArgumentException, NoSuchFieldException, IllegalAccessException;
 
 	/**
 	 * File emt to dto.

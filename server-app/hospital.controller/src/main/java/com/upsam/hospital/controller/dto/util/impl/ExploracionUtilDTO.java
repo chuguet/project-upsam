@@ -1,5 +1,6 @@
 package com.upsam.hospital.controller.dto.util.impl;
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,14 +22,30 @@ import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Angle;
+import com.upsam.hospital.model.beans.AntecedentesPersonales;
+import com.upsam.hospital.model.beans.AntecedentesQuirurgicosOrtopedicos;
+import com.upsam.hospital.model.beans.AntecedentesRelacionadosPCI;
+import com.upsam.hospital.model.beans.CampoRellenado;
+import com.upsam.hospital.model.beans.CampoSugerido;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
+import com.upsam.hospital.model.beans.GrossMotorFunction;
+import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Point;
+import com.upsam.hospital.model.beans.Regla;
 import com.upsam.hospital.model.beans.Usuario;
+import com.upsam.hospital.model.beans.ValoracionArticularMuscular;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.enums.AnalisisObservacionalMarcha;
+import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
+import com.upsam.hospital.model.service.IAntecedentesPersonalesService;
+import com.upsam.hospital.model.service.IAntecedentesQuirurgicosOrtopedicosService;
+import com.upsam.hospital.model.service.IAntecedentesRelacionadosPCIService;
+import com.upsam.hospital.model.service.IGrossMotorFunctionService;
+import com.upsam.hospital.model.service.IValoracionArticularMuscularService;
+import com.upsam.hospital.model.service.impl.ReglaService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,6 +56,30 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 
 	/** The Constant DATE_TIME_FORMATTER. */
 	private static final SimpleDateFormat DATE_TIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+	/** The antecedentes personales service. */
+	@Inject
+	private IAntecedentesPersonalesService antecedentesPersonalesService;
+
+	/** The antecedentes quirurgicos ortopedicos service. */
+	@Inject
+	private IAntecedentesQuirurgicosOrtopedicosService antecedentesQuirurgicosOrtopedicosService;
+
+	/** The antecedentes relacionados pci service. */
+	@Inject
+	private IAntecedentesRelacionadosPCIService antecedentesRelacionadosPCIService;
+
+	/** The gross motor function service. */
+	@Inject
+	private IGrossMotorFunctionService grossMotorFunctionService;
+
+	/** The regla service. */
+	@Inject
+	private ReglaService reglaService;
+
+	/** The valoracion articular muscular service. */
+	@Inject
+	private IValoracionArticularMuscularService valoracionArticularMuscularService;
 
 	/** The video util dto. */
 	@Inject
@@ -51,9 +92,29 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 	 * upsam.hospital.model.beans.Exploracion)
 	 */
 	@Override
-	public FaqDTO doFaq(Exploracion exploracion) throws TransferObjectException {
-		// TODO Auto-generated method stub
-		return null;
+	public FaqDTO doFaq(Exploracion exploracion) throws TransferObjectException, DataBaseException, SecurityException, IllegalArgumentException, NoSuchFieldException, IllegalAccessException {
+		FaqDTO faqDTO = new FaqDTO();
+		String result;
+		StringBuffer sb = new StringBuffer();
+		List<Regla> reglas = reglaService.findAll();
+		for (Regla regla : reglas) {
+			if (matchRegla(exploracion, regla)) {
+				sb.append(regla.getMensaje()).append("\n");
+				sb.append("Campos sugeridos: ");
+				for (CampoSugerido campoSugerido : regla.getCamposSugeridos()) {
+					sb.append(campoSugerido.getCampo().getNombre()).append(" de la pagina ").append(campoSugerido.getCampo().getPagina().getNombre()).append(", ");
+				}
+				if (!regla.getCamposSugeridos().isEmpty()) {
+					sb.trimToSize();
+					result = sb.substring(0, sb.length() - 2);
+				}
+				else {
+					result = sb.toString();
+				}
+				faqDTO.addWarningMessage(result);
+			}
+		}
+		return faqDTO;
 	}
 
 	/*
@@ -133,6 +194,101 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 			video3dInfoDTO.setNombre(fichero3D.getNombre());
 			video3dInfoDTO.setId(fichero3D.getId());
 			result.add(video3dInfoDTO);
+		}
+		return result;
+	}
+
+	/**
+	 * Match regla.
+	 * 
+	 * @param exploracion
+	 *            the exploracion
+	 * @param regla
+	 *            the regla
+	 * @return the boolean
+	 * @throws SecurityException
+	 *             the security exception
+	 * @throws NoSuchFieldException
+	 *             the no such field exception
+	 * @throws IllegalArgumentException
+	 *             the illegal argument exception
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
+	 * @throws DataBaseException
+	 *             the data base exception
+	 */
+	private Boolean matchRegla(Exploracion exploracion, Regla regla) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException, DataBaseException {
+		Boolean result = Boolean.TRUE;
+		String clase;
+		Field field;
+		String atributo;
+		for (CampoRellenado campoRellenado : regla.getCamposRellenados()) {
+			atributo = campoRellenado.getCampo().getReflexionAtributo();
+			clase = campoRellenado.getCampo().getReflexionClase();
+			if (clase.equals(Paciente.class.getName())) {
+				field = Paciente.class.getDeclaredField(atributo);
+				field.setAccessible(true);
+				Object obj = field.get(exploracion.getPaciente());
+				if (obj == null) {
+					result = Boolean.FALSE;
+					break;
+				}
+			}
+			else if (clase.equals(Exploracion.class.getName())) {
+				field = Exploracion.class.getDeclaredField(atributo);
+				field.setAccessible(true);
+				Object obj = field.get(exploracion);
+				if (obj == null) {
+					result = Boolean.FALSE;
+					break;
+				}
+			}
+			else if (clase.equals(AntecedentesPersonales.class.getName())) {
+				field = AntecedentesPersonales.class.getDeclaredField(atributo);
+				field.setAccessible(true);
+				Object obj = field.get(antecedentesPersonalesService.findByExploracion(exploracion.getId()));
+				if (obj == null) {
+					result = Boolean.FALSE;
+					break;
+				}
+			}
+			else if (clase.equals(AntecedentesRelacionadosPCI.class.getName())) {
+				field = AntecedentesRelacionadosPCI.class.getDeclaredField(atributo);
+				field.setAccessible(true);
+				Object obj = field.get(antecedentesRelacionadosPCIService.findByExploracion(exploracion.getId()));
+				if (obj == null) {
+					result = Boolean.FALSE;
+					break;
+				}
+			}
+			else if (clase.equals(AntecedentesQuirurgicosOrtopedicos.class.getName())) {
+				field = AntecedentesQuirurgicosOrtopedicos.class.getDeclaredField(atributo);
+				field.setAccessible(true);
+				Object obj = field.get(antecedentesQuirurgicosOrtopedicosService.findByAntecedentePersonal(antecedentesPersonalesService.findByExploracion(exploracion.getId()).getId()).get(0));
+				if (obj == null) {
+					result = Boolean.FALSE;
+					break;
+				}
+			}
+			else if (clase.equals(GrossMotorFunction.class.getName())) {
+				field = GrossMotorFunction.class.getDeclaredField(atributo);
+				field.setAccessible(true);
+				Object obj = field.get(grossMotorFunctionService.findByExploracion(exploracion.getId()));
+				if (obj == null) {
+					result = Boolean.FALSE;
+					break;
+				}
+			}
+			else if (clase.equals(ValoracionArticularMuscular.class.getName())) {
+				field = ValoracionArticularMuscular.class.getDeclaredField(atributo);
+				field.setAccessible(true);
+				Object obj = field.get(valoracionArticularMuscularService.findByExploracion(exploracion.getId()));
+				if (obj == null) {
+					result = Boolean.FALSE;
+					break;
+				}
+			}
+
 		}
 		return result;
 	}

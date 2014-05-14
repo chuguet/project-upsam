@@ -8,7 +8,7 @@
 		function showInformationIntoView(regla) {
 			$('input[id=id]').val(regla.id);
 			$('#mensaje').val(regla.mensaje);
-			$('#descripcion').val(regla.descripcion);
+			$('#titulo').val(regla.titulo);
 		};
 	</c:if>
 	restriccion.formatForm("${operacion}");
@@ -33,9 +33,9 @@
 	<input type="hidden" id="id" />
 	
 	<div class="form-group">
-		<label for="descripcion" class="col-sm-2 control-label">T&iacute;tulo</label>
+		<label for="titulo" class="col-sm-2 control-label">T&iacute;tulo</label>
 	    <div class="col-sm-10">
-	    	<input type="text" class="form-control" id="descripcion" placeholder="T&iacute;tulo" maxlength="200" required>
+	    	<input type="text" class="form-control" id="titulo" placeholder="T&iacute;tulo" maxlength="200" required>
 	    </div>
 	</div>
 

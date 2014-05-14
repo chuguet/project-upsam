@@ -199,6 +199,18 @@ public class RestriccionController {
 		catch (TransferObjectException e) {
 			LOG.debug(e.getMessage());
 		}
+		catch (SecurityException e) {
+			LOG.debug(e.getMessage());
+		}
+		catch (IllegalArgumentException e) {
+			LOG.debug(e.getMessage());
+		}
+		catch (NoSuchFieldException e) {
+			LOG.debug(e.getMessage());
+		}
+		catch (IllegalAccessException e) {
+			LOG.debug(e.getMessage());
+		}
 		return faqDTO;
 	}
 

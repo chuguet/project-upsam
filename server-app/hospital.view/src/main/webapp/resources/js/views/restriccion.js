@@ -1,9 +1,6 @@
 var restriccion = {
-
 	'formatForm' : function(operacion) {
-		
-
-		if(operacion == 'new'){
+		if (operacion == 'new') {
 			generic.get("restriccion/paginas", null, function(paginas) {
 				var tree = [];
 				var i = 0;
@@ -35,7 +32,8 @@ var restriccion = {
 					selectMode : 3
 				});
 			});
-		}else if(operacion == 'edit'){
+		}
+		else if (operacion == 'edit') {
 			generic.get("restriccion/paginas", null, function(paginas) {
 				var tree = [];
 				var i = 0;
@@ -69,10 +67,10 @@ var restriccion = {
 				generic.get("restriccion/", $("#id").val(), function(arguments) {
 					var regla = arguments[0];
 					var treeRellenados = $("#treeRellenados").fancytree('getTree');
-					regla.camposRellenadosDTO.forEach(function(campoRellenado){
-						treeRellenados.options.source.forEach(function(pagina){
-							pagina.children.forEach(function(campo){
-								if(campo.key == campoRellenado.idCampo){
+					regla.camposRellenadosDTO.forEach(function(campoRellenado) {
+						treeRellenados.options.source.forEach(function(pagina) {
+							pagina.children.forEach(function(campo) {
+								if (campo.key == campoRellenado.idCampo) {
 									campo.id = campoRellenado.id;
 									campo.selected = true;
 								}
@@ -81,10 +79,10 @@ var restriccion = {
 					});
 					treeRellenados.reload();
 					var treeSugeridos = $("#treeSugeridos").fancytree('getTree');
-					regla.camposSugeridosDTO.forEach(function(campoSugerido){
-						treeSugeridos.options.source.forEach(function(pagina){
-							pagina.children.forEach(function(campo){
-								if(campo.key == campoSugerido.idCampo){
+					regla.camposSugeridosDTO.forEach(function(campoSugerido) {
+						treeSugeridos.options.source.forEach(function(pagina) {
+							pagina.children.forEach(function(campo) {
+								if (campo.key == campoSugerido.idCampo) {
 									campo.id = campoSugerido.id;
 									campo.selected = true;
 								}
@@ -98,7 +96,7 @@ var restriccion = {
 	},
 	'getParams' : function() {
 		var id = $("#id").val();
-		var descripcion = $("#descripcion").val();
+		var titulo = $("#titulo").val();
 		var mensaje = $("#mensaje").val();
 		var camposSugeridos = [];
 		var camposRellenados = [];
@@ -124,7 +122,7 @@ var restriccion = {
 			id : id,
 			camposSugeridosDTO : camposSugeridos,
 			camposRellenadosDTO : camposRellenados,
-			descripcion : descripcion,
+			titulo : titulo,
 			mensaje : mensaje
 		};
 		var entity = (id != null) ? 'restriccion/' + id : 'restriccion';

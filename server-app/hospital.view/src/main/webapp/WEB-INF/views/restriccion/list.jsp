@@ -56,7 +56,7 @@
 <script type="text/javascript">
 	function showInformationIntoView(information){
 		for (var i = 0; i < information.length; i++){
-			$("table.table tbody").append("<tr onclick='restriccion.selectRow(this);'><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].descripcion + "</td><td>" + information[i].mensaje + "</td></tr>");
+			$("table.table tbody").append("<tr onclick='restriccion.selectRow(this);'><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].titulo + "</td><td>" + information[i].mensaje + "</td></tr>");
 		}
 
 		generic.processTable("restriccion");
