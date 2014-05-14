@@ -1,13 +1,7 @@
 var restriccion = {
 
 	'formatForm' : function(operacion) {
-		$("#btnCancel").button().click(function() {
-			generic.getList('restriccion');
-		});
-
-		$("#btnSaveRegla").button().click(function() {
-			faq.getParams();
-		});
+		
 
 		if(operacion == 'new'){
 			generic.get("restriccion/paginas", null, function(paginas) {

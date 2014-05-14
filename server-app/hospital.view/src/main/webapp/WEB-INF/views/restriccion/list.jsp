@@ -33,8 +33,8 @@
 				<table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1">
 					<thead>
 						<tr>
+							<th>T&iacute;tulo</th>
 							<th>Mensaje</th>
-							<th>Descripci&oacute;n</th>
 						</tr>
 					</thead>
 					
@@ -42,8 +42,8 @@
 					
 					<tfoot>
 						<tr>
+							<th>T&iacute;tulo</th>
 							<th>Mensaje</th>
-							<th>Descripci&oacute;n</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -56,7 +56,7 @@
 <script type="text/javascript">
 	function showInformationIntoView(information){
 		for (var i = 0; i < information.length; i++){
-			$("table.table tbody").append("<tr onclick='restriccion.selectRow(this);'><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].mensaje + "</td><td>" + information[i].descripcion + "</td></tr>");
+			$("table.table tbody").append("<tr onclick='restriccion.selectRow(this);'><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].descripcion + "</td><td>" + information[i].mensaje + "</td></tr>");
 		}
 
 		generic.processTable("restriccion");

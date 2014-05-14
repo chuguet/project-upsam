@@ -3455,7 +3455,7 @@ $.extend(Fancytree.prototype,
 		// this.debug("    activeNode: " + this.activeNode);
 		if( flag !== this.hasFocus() ){
 			this._hasFocus = flag;
-			this.$container.toggleClass("fancytree-treefocus", flag);
+			//this.$container.toggleClass("fancytree-treefocus", flag);
 			this._triggerTreeEvent(flag ? "focusTree" : "blurTree");
 		}
 	}
