@@ -1,3 +1,4 @@
+div.tree ul:focus{outline:none !important;}
 /*
  * Fancytree for use with ext-themeroller extension.
  */
@@ -65,8 +66,17 @@ ul.fancytree-no-connector > li
 span.fancytree-node
 {
 	display: inline-block;
-	width: 100%;
+	min-width: 300px;
 	border: 1px solid transparent;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #999;
+	border-radius: 5px;
+	display: inline-block;
+	padding: 3px 8px;
+	text-decoration: none;
+	background-color:white;
 }
 
 /*******************************************************************************

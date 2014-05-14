@@ -46,10 +46,19 @@
 	    </div>
 	</div>
 	
-	<label for="treeRellenados" class="tree">Campos rellenados</label>
-		<div id="treeRellenados" class="tree"></div>
-		<label for="treeSugeridos" class="tree">Campos sugeridos</label>
-		<div id="treeSugeridos" class="tree"></div>
+	<div class="form-group">
+		<label for="treeRellenados" class="col-sm-2 control-label">Campos rellenados</label>
+		<div class="col-sm-10">
+			<div id="treeRellenados" class="tree"></div>
+		 </div>
+	</div>
+	
+	<div class="form-group">
+		<label for="treeSugeridos" class="col-sm-2 control-label">Campos sugeridos</label>
+		<div class="col-sm-10">
+			<div id="treeSugeridos" class="tree"></div>
+		 </div>
+	</div>
 	
 	<div class="botonera">
 		<c:choose>
