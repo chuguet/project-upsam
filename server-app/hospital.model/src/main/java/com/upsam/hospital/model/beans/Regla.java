@@ -27,14 +27,14 @@ public class Regla implements IModelHospital {
 	private static final long serialVersionUID = -675589228240481204L;
 
 	/** The campos rellenados. */
-	@OneToMany(mappedBy = "regla")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@OneToMany(mappedBy = "regla", orphanRemoval = true)
+	@Cascade(value = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<CampoRellenado> camposRellenados;
 
 	/** The campos sugeridos. */
-	@OneToMany(mappedBy = "regla")
-	@Cascade(value = CascadeType.SAVE_UPDATE)
+	@OneToMany(mappedBy = "regla", orphanRemoval = true)
+	@Cascade(value = CascadeType.ALL)
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<CampoSugerido> camposSugeridos;
 
