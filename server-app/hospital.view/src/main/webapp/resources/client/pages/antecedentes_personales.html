@@ -33,7 +33,7 @@
 		        <div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
 					<h2 id="subtitle" class="subtitle">Nuevos Antecedentes Personales</h2>
 					<div class="username">
-						<a href="#popupInfo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="info" data-iconpos="notext" data-mini="true">Informaci&oacute;n</a>
+						<a href="#popupInfo" id="iconInfo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="info" data-iconpos="notext" data-mini="true" style="display:none">Informaci&oacute;n</a>
 						<div data-role="popup" id="popupInfo" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="width:600px;" class="ui-corner-all">
 							<div data-role="header" data-theme="a" class="ui-corner-top">
 								<h1>Informaci&oacute;n de inter&eacute;s</h1>
@@ -43,13 +43,13 @@
 								<a href="#" data-role="button" data-inline="true" data-rel="back">Aceptar</a>    
 							</div>
 						</div>
-						<a href="#popupAlert" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="alert" data-iconpos="notext" data-mini="true">Advertencia</a>
-						<div data-role="popup" id="popupAlert" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="width:600px;" class="ui-corner-all">
+						<a href="#popupRestricciones" id="iconRestricciones" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="alert" data-iconpos="notext" data-mini="true" style="display:none">Restricciones</a>
+						<div data-role="popup" id="popupRestricciones" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="width:600px;" class="ui-corner-all">
 							<div data-role="header" data-theme="a" class="ui-corner-top">
 								<h1>Aviso</h1>
 							</div>
 							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:left">
-								<div id="messageAlert"></div>
+								<div id="messageRestricciones"></div>
 								<a href="#" data-role="button" data-inline="true" data-rel="back">Aceptar</a>    
 							</div>
 						</div>

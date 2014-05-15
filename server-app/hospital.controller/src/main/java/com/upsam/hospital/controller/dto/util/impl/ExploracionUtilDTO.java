@@ -94,26 +94,44 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 	@Override
 	public FaqDTO doFaq(Exploracion exploracion) throws TransferObjectException, DataBaseException, SecurityException, IllegalArgumentException, NoSuchFieldException, IllegalAccessException {
 		FaqDTO faqDTO = new FaqDTO();
-		String result;
+		String result = null;
 		StringBuffer sb = new StringBuffer();
 		List<Regla> reglas = reglaService.findAll();
-		for (Regla regla : reglas) {
-			if (matchRegla(exploracion, regla)) {
-				sb.append(regla.getMensaje()).append("\n");
-				sb.append("Campos sugeridos: ");
-				for (CampoSugerido campoSugerido : regla.getCamposSugeridos()) {
-					sb.append(campoSugerido.getCampo().getNombre()).append(" de la pagina ").append(campoSugerido.getCampo().getPagina().getNombre()).append(", ");
-				}
-				if (!regla.getCamposSugeridos().isEmpty()) {
-					sb.trimToSize();
-					result = sb.substring(0, sb.length() - 2);
-				}
-				else {
-					result = sb.toString();
-				}
-				faqDTO.addWarningMessage(result);
+
+		Paciente paciente = exploracion.getPaciente();
+		AntecedentesPersonales antecedentesPersonales = antecedentesPersonalesService.findByExploracion(exploracion.getId());
+		AntecedentesRelacionadosPCI antecedentesRelacionadosPCI = antecedentesRelacionadosPCIService.findByExploracion(exploracion.getId());
+		GrossMotorFunction grossMotorFunction = grossMotorFunctionService.findByExploracion(exploracion.getId());
+		ValoracionArticularMuscular valoracionArticularMuscular = valoracionArticularMuscularService.findByExploracion(exploracion.getId());
+
+		AntecedentesQuirurgicosOrtopedicos antecedentesQuirurgicosOrtopedicos = null;
+		if (antecedentesPersonales != null) {
+			List<AntecedentesQuirurgicosOrtopedicos> listaAntecedentesQuirurgicosOrtopedicos = antecedentesQuirurgicosOrtopedicosService.findByAntecedentePersonal(antecedentesPersonales.getId());
+			if (listaAntecedentesQuirurgicosOrtopedicos != null && listaAntecedentesQuirurgicosOrtopedicos.size() > 0) {
+				antecedentesQuirurgicosOrtopedicos = listaAntecedentesQuirurgicosOrtopedicos.get(0);
 			}
 		}
+
+		int count = 0;
+		for (Regla regla : reglas) {
+			if (matchRegla(regla, paciente, exploracion, antecedentesPersonales, antecedentesRelacionadosPCI, grossMotorFunction, valoracionArticularMuscular, antecedentesQuirurgicosOrtopedicos)) {
+				count++;
+				sb.append("<li>").append(regla.getMensaje()).append("<br/>").append("Campos sugeridos a rellenar: ");
+				for (CampoSugerido campoSugerido : regla.getCamposSugeridos()) {
+					sb.append(campoSugerido.getCampo().getNombre()).append(" de la p&aacute;gina ").append(campoSugerido.getCampo().getPagina().getNombre());
+				}
+				sb.append("</li>");
+			}
+		}
+
+		if (count == 1) {
+			result = "Se ha encontrado la siguiente sugerencia: <ul>" + sb.toString() + "</ul>";
+		}
+		else if (count > 1) {
+			result = "Se han encontrado la siguientes sugerencias: <ul>" + sb.toString() + "</ul>";
+		}
+
+		faqDTO.addWarningMessage(result);
 		return faqDTO;
 	}
 
@@ -217,80 +235,152 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 	 * @throws DataBaseException
 	 *             the data base exception
 	 */
-	private Boolean matchRegla(Exploracion exploracion, Regla regla) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException, DataBaseException {
+	private Boolean matchRegla(Regla regla, Paciente paciente, Exploracion exploracion, AntecedentesPersonales antecedentesPersonales, AntecedentesRelacionadosPCI antecedentesRelacionadosPCI, GrossMotorFunction grossMotorFunction, ValoracionArticularMuscular valoracionArticularMuscular, AntecedentesQuirurgicosOrtopedicos antecedentesQuirurgicosOrtopedicos) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException, DataBaseException {
 		Boolean result = Boolean.TRUE;
 		String clase;
 		Field field;
 		String atributo;
+
 		for (CampoRellenado campoRellenado : regla.getCamposRellenados()) {
 			atributo = campoRellenado.getCampo().getReflexionAtributo();
 			clase = campoRellenado.getCampo().getReflexionClase();
 			if (clase.equals(Paciente.class.getName())) {
-				field = Paciente.class.getDeclaredField(atributo);
-				field.setAccessible(true);
-				Object obj = field.get(exploracion.getPaciente());
-				if (obj == null) {
-					result = Boolean.FALSE;
-					break;
-				}
+				result = this.validateField(paciente, Paciente.class.getDeclaredField(atributo));
+
+				// if (paciente != null) {
+				// field = Paciente.class.getDeclaredField(atributo);
+				// field.setAccessible(true);
+				// Object obj = field.get(paciente);
+				// if (obj == null) {
+				// result = Boolean.FALSE;
+				// break;
+				// }
+				// }
+				// else {
+				// result = Boolean.FALSE;
+				// break;
+				// }
 			}
 			else if (clase.equals(Exploracion.class.getName())) {
-				field = Exploracion.class.getDeclaredField(atributo);
-				field.setAccessible(true);
-				Object obj = field.get(exploracion);
-				if (obj == null) {
-					result = Boolean.FALSE;
-					break;
-				}
+				result = this.validateField(exploracion, Exploracion.class.getDeclaredField(atributo));
+				// if (exploracion != null) {
+				// field = Exploracion.class.getDeclaredField(atributo);
+				// field.setAccessible(true);
+				// Object obj = field.get(exploracion);
+				// if (obj == null) {
+				// result = Boolean.FALSE;
+				// break;
+				// }
+				// }
+				// else {
+				// result = Boolean.FALSE;
+				// break;
+				// }
 			}
+
 			else if (clase.equals(AntecedentesPersonales.class.getName())) {
-				field = AntecedentesPersonales.class.getDeclaredField(atributo);
-				field.setAccessible(true);
-				Object obj = field.get(antecedentesPersonalesService.findByExploracion(exploracion.getId()));
-				if (obj == null) {
-					result = Boolean.FALSE;
-					break;
-				}
+				result = this.validateField(antecedentesPersonales, AntecedentesPersonales.class.getDeclaredField(atributo));
+				// if (antecedentesPersonales != null) {
+				// field =
+				// AntecedentesPersonales.class.getDeclaredField(atributo);
+				// field.setAccessible(true);
+				// Object obj = field.get(antecedentesPersonales);
+				// if (obj == null) {
+				// result = Boolean.FALSE;
+				// break;
+				// }
+				// }
+				// else {
+				// result = Boolean.FALSE;
+				// break;
+				// }
 			}
 			else if (clase.equals(AntecedentesRelacionadosPCI.class.getName())) {
-				field = AntecedentesRelacionadosPCI.class.getDeclaredField(atributo);
-				field.setAccessible(true);
-				Object obj = field.get(antecedentesRelacionadosPCIService.findByExploracion(exploracion.getId()));
-				if (obj == null) {
-					result = Boolean.FALSE;
-					break;
-				}
+				result = this.validateField(antecedentesRelacionadosPCI, AntecedentesRelacionadosPCI.class.getDeclaredField(atributo));
+				// if (antecedentesRelacionadosPCI != null) {
+				// field =
+				// AntecedentesRelacionadosPCI.class.getDeclaredField(atributo);
+				// field.setAccessible(true);
+				// Object obj = field.get(antecedentesRelacionadosPCI);
+				// if (obj == null) {
+				// result = Boolean.FALSE;
+				// break;
+				// }
+				// }
+				// else {
+				// result = Boolean.FALSE;
+				// break;
+				// }
 			}
 			else if (clase.equals(AntecedentesQuirurgicosOrtopedicos.class.getName())) {
-				field = AntecedentesQuirurgicosOrtopedicos.class.getDeclaredField(atributo);
-				field.setAccessible(true);
-				Object obj = field.get(antecedentesQuirurgicosOrtopedicosService.findByAntecedentePersonal(antecedentesPersonalesService.findByExploracion(exploracion.getId()).getId()).get(0));
-				if (obj == null) {
-					result = Boolean.FALSE;
-					break;
-				}
+				result = this.validateField(antecedentesQuirurgicosOrtopedicos, AntecedentesQuirurgicosOrtopedicos.class.getDeclaredField(atributo));
+				// if (antecedentesQuirurgicosOrtopedicos != null) {
+				// field =
+				// AntecedentesQuirurgicosOrtopedicos.class.getDeclaredField(atributo);
+				// field.setAccessible(true);
+				// Object obj = field.get(antecedentesQuirurgicosOrtopedicos);
+				// if (obj == null) {
+				// result = Boolean.FALSE;
+				// break;
+				// }
+				// }
+				// else {
+				// result = Boolean.FALSE;
+				// break;
+				// }
 			}
 			else if (clase.equals(GrossMotorFunction.class.getName())) {
-				field = GrossMotorFunction.class.getDeclaredField(atributo);
-				field.setAccessible(true);
-				Object obj = field.get(grossMotorFunctionService.findByExploracion(exploracion.getId()));
-				if (obj == null) {
-					result = Boolean.FALSE;
-					break;
-				}
+				result = this.validateField(grossMotorFunction, GrossMotorFunction.class.getDeclaredField(atributo));
+				// if (grossMotorFunction != null) {
+				// field = GrossMotorFunction.class.getDeclaredField(atributo);
+				// field.setAccessible(true);
+				// Object obj = field.get(grossMotorFunction);
+				// if (obj == null) {
+				// result = Boolean.FALSE;
+				// break;
+				// }
+				// }
+				// else {
+				// result = Boolean.FALSE;
+				// break;
+				// }
 			}
 			else if (clase.equals(ValoracionArticularMuscular.class.getName())) {
-				field = ValoracionArticularMuscular.class.getDeclaredField(atributo);
-				field.setAccessible(true);
-				Object obj = field.get(valoracionArticularMuscularService.findByExploracion(exploracion.getId()));
-				if (obj == null) {
-					result = Boolean.FALSE;
-					break;
-				}
+				result = this.validateField(valoracionArticularMuscular, ValoracionArticularMuscular.class.getDeclaredField(atributo));
+				// if (valoracionArticularMuscular != null) {
+				// field =
+				// ValoracionArticularMuscular.class.getDeclaredField(atributo);
+				// field.setAccessible(true);
+				// Object obj = field.get(valoracionArticularMuscular);
+				// if (obj == null) {
+				// result = Boolean.FALSE;
+				// break;
+				// }
+				// }
+				// else {
+				// result = Boolean.FALSE;
+				// break;
+				// }
 			}
+			if (!result)
+				break;
 
 		}
 		return result;
+	}
+
+	private Boolean validateField(Object object, Field field) throws IllegalArgumentException, IllegalAccessException {
+		if (object != null) {
+			field.setAccessible(true);
+			Object valueObject = field.get(object);
+			if (valueObject == null) {
+				return Boolean.FALSE;
+			}
+		}
+		else {
+			return Boolean.FALSE;
+		}
+		return Boolean.TRUE;
 	}
 
 	/*

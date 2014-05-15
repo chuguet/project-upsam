@@ -63,7 +63,9 @@ public class AntecedentesPersonalesService implements IAntecedentesPersonalesSer
 	public AntecedentesPersonales findByExploracion(Integer pId) throws DataBaseException {
 		try {
 			AntecedentesPersonales antecedentesPersonales = antecedentesPersonalesRepository.findByExploracion(pId);
-			antecedentesPersonales.setAntecedentesQuirurgicosOrtopedicos(antecedentesQuirurgicosOrtopedicosService.findByAntecedentePersonal(antecedentesPersonales.getId()));
+			if (antecedentesPersonales != null) {
+				antecedentesPersonales.setAntecedentesQuirurgicosOrtopedicos(antecedentesQuirurgicosOrtopedicosService.findByAntecedentePersonal(antecedentesPersonales.getId()));
+			}
 			return antecedentesPersonales;
 		}
 		catch (SQLException e1) {

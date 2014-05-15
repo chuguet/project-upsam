@@ -13,6 +13,8 @@ var exploracionFisica = {
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion, null, exploracionFisica.recuperarExploracionCallback);
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/video", null, exploracionFisica.recuperarListadoVideosCallback);
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/ficherosEMT", null, exploracionFisica.recuperarListadoGraficasCallback);
+			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/restriccion", null, generic.recuperarRestriccionesCallback);
+			
 			$("#listaVideos").show();
 		}
 		else{

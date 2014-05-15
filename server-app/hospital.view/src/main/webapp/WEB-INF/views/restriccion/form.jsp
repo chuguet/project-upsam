@@ -4,14 +4,19 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script type="text/javascript">
-	<c:if test="${operacion == 'edit'}">
-		function showInformationIntoView(regla) {
-			$('input[id=id]').val(regla.id);
-			$('#mensaje').val(regla.mensaje);
-			$('#titulo').val(regla.titulo);
-		};
-	</c:if>
-	restriccion.formatForm("${operacion}");
+	<c:choose>
+		<c:when test="${operacion == 'edit'}">
+			function showInformationIntoView(regla) {
+				$('input[id=id]').val(regla.id);
+				$('#mensaje').val(regla.mensaje);
+				$('#titulo').val(regla.titulo);
+				restriccion.formatForm(regla);
+			};
+		</c:when>
+		<c:otherwise>
+			restriccion.formatForm(null);
+		</c:otherwise>
+	</c:choose>
 </script>
 
 <div class="row">

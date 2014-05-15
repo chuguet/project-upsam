@@ -8,6 +8,9 @@ var antecedentesPersonales = {
 			$("#idExploracion").val(idExploracion);
 			generic.loading();
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/antecedentesPersonales", null, antecedentesPersonales.recuperarCallback);
+			if (idExploracion != null){
+				server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/restriccion", null, generic.recuperarRestriccionesCallback);
+			}
 		},
 		
 		'recuperarCallback' : function(antecedentes){

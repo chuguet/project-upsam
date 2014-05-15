@@ -6,6 +6,9 @@ var antecedentesRelacionadosPCI = {
 		$("#idExploracion").val(idExploracion);
 		generic.loading();
 		server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/antecedentesRelacionadosPCI", null, antecedentesRelacionadosPCI.recuperarCallback);
+		if (idExploracion != null){
+			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/restriccion", null, generic.recuperarRestriccionesCallback);
+		}
 	},
 	
 	'recuperarCallback' : function(antecedentes){

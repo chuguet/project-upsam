@@ -1,98 +1,64 @@
 var restriccion = {
-	'formatForm' : function(operacion) {
-		if (operacion == 'new') {
-			generic.get("restriccion/paginas", null, function(paginas) {
-				var tree = [];
-				var i = 0;
-				paginas.forEach(function(pagina) {
-					tree.push({
-						title : pagina.nombre,
-						folder : true,
-						children : []
+	'formatForm' : function(regla) {
+		generic.get("restriccion/paginas", null, function(paginas) {
+			var tree = [];
+			var i = 0;
+			paginas.forEach(function(pagina) {
+				tree.push({
+					title : pagina.nombre,
+					folder : true,
+					children : []
+				});
+				pagina.camposDTO.forEach(function(campoDTO) {
+					tree[i].children.push({
+						title : campoDTO.nombre,
+						key : campoDTO.id
 					});
-					pagina.camposDTO.forEach(function(campoDTO) {
-						tree[i].children.push({
-							title : campoDTO.nombre,
-							key : campoDTO.id
-						});
-					});
-					i++;
 				});
-
-				$("#treeRellenados").fancytree({
-					source : tree,
-					icons : false,
-					checkbox : true,
-					selectMode : 3
-				});
-				$("#treeSugeridos").fancytree({
-					source : tree,
-					icons : false,
-					checkbox : true,
-					selectMode : 3
-				});
+				i++;
 			});
-		}
-		else if (operacion == 'edit') {
-			generic.get("restriccion/paginas", null, function(paginas) {
-				var tree = [];
-				var i = 0;
-				paginas.forEach(function(pagina) {
-					tree.push({
-						title : pagina.nombre,
-						folder : true,
-						children : []
-					});
-					pagina.camposDTO.forEach(function(campoDTO) {
-						tree[i].children.push({
-							title : campoDTO.nombre,
-							key : campoDTO.id
-						});
-					});
-					i++;
-				});
 
-				$("#treeRellenados").fancytree({
-					source : tree,
-					icons : false,
-					checkbox : true,
-					selectMode : 3
-				});
-				$("#treeSugeridos").fancytree({
-					source : tree,
-					icons : false,
-					checkbox : true,
-					selectMode : 3
-				});
-				generic.get("restriccion/", $("#id").val(), function(arguments) {
-					var regla = arguments[0];
-					var treeRellenados = $("#treeRellenados").fancytree('getTree');
-					regla.camposRellenadosDTO.forEach(function(campoRellenado) {
-						treeRellenados.options.source.forEach(function(pagina) {
-							pagina.children.forEach(function(campo) {
-								if (campo.key == campoRellenado.idCampo) {
-									campo.id = campoRellenado.id;
-									campo.selected = true;
-								}
-							});
-						});
-					});
-					treeRellenados.reload();
-					var treeSugeridos = $("#treeSugeridos").fancytree('getTree');
-					regla.camposSugeridosDTO.forEach(function(campoSugerido) {
-						treeSugeridos.options.source.forEach(function(pagina) {
-							pagina.children.forEach(function(campo) {
-								if (campo.key == campoSugerido.idCampo) {
-									campo.id = campoSugerido.id;
-									campo.selected = true;
-								}
-							});
-						});
-					});
-					treeSugeridos.reload();
-				});
+			$("#treeRellenados").fancytree({
+				source : tree,
+				icons : false,
+				checkbox : true,
+				selectMode : 3
 			});
-		}
+			$("#treeSugeridos").fancytree({
+				source : tree,
+				icons : false,
+				checkbox : true,
+				selectMode : 3
+			});
+			
+			if (regla != null){
+				var treeRellenados = $("#treeRellenados").fancytree('getTree');
+				regla.camposRellenadosDTO.forEach(function(campoRellenado) {
+					treeRellenados.options.source.forEach(function(pagina) {
+						pagina.children.forEach(function(campo) {
+							if (campo.key == campoRellenado.idCampo) {
+								campo.id = campoRellenado.id;
+								campo.selected = true;
+							}
+						});
+					});
+				});
+				treeRellenados.reload();
+				var treeSugeridos = $("#treeSugeridos").fancytree('getTree');
+				regla.camposSugeridosDTO.forEach(function(campoSugerido) {
+					treeSugeridos.options.source.forEach(function(pagina) {
+						pagina.children.forEach(function(campo) {
+							if (campo.key == campoSugerido.idCampo) {
+								campo.id = campoSugerido.id;
+								campo.selected = true;
+							}
+						});
+					});
+				});
+				treeSugeridos.reload();
+				
+			}
+		});
 	},
 	'getParams' : function() {
 		var id = $("#id").val();
