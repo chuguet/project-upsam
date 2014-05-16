@@ -1,95 +1,82 @@
 package com.upsam.hospital.model.beans;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class Faq.
  */
-@Entity
-@Table(name = "FAQ")
-public class Faq implements IModelHospital {
+public class Faq {
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 3736054644363229796L;
+	/** The info messages. */
+	private List<String> infoMessages;
 
-	/** The id. */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID_FAQ")
-	private Integer id;
-
-	/** The pregunta. */
-	@Basic
-	@Column(name = "PREGUNTA")
-	private String pregunta;
-
-	/** The respuesta. */
-	@Basic
-	@Column(name = "RESPUESTA")
-	private String respuesta;
+	/** The warning messages. */
+	private List<String> warningMessages;
 
 	/**
-	 * Gets the id.
+	 * Adds the info message.
 	 * 
-	 * @return the id
+	 * @param message
+	 *            the message
 	 */
-	public Integer getId() {
-		return id;
+	public void addInfoMessage(String message) {
+		if (this.getInfoMessages() == null) {
+			this.setInfoMessages(new ArrayList<String>());
+		}
+		this.getInfoMessages().add(message);
 	}
 
 	/**
-	 * Gets the pregunta.
+	 * Adds the warning message.
 	 * 
-	 * @return the pregunta
+	 * @param message
+	 *            the message
 	 */
-	public String getPregunta() {
-		return pregunta;
+	public void addWarningMessage(String message) {
+		if (this.getWarningMessages() == null) {
+			this.setWarningMessages(new ArrayList<String>());
+		}
+		this.getWarningMessages().add(message);
 	}
 
 	/**
-	 * Gets the respuesta.
+	 * Gets the info messages.
 	 * 
-	 * @return the respuesta
+	 * @return the info messages
 	 */
-	public String getRespuesta() {
-		return respuesta;
+	public List<String> getInfoMessages() {
+		return infoMessages;
 	}
 
 	/**
-	 * Sets the id.
+	 * Gets the warning messages.
 	 * 
-	 * @param id
-	 *            the new id
+	 * @return the warning messages
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public List<String> getWarningMessages() {
+		return warningMessages;
 	}
 
 	/**
-	 * Sets the pregunta.
+	 * Sets the info messages.
 	 * 
-	 * @param pregunta
-	 *            the new pregunta
+	 * @param infoMessages
+	 *            the new info messages
 	 */
-	public void setPregunta(String pregunta) {
-		this.pregunta = pregunta;
+	public void setInfoMessages(List<String> infoMessages) {
+		this.infoMessages = infoMessages;
 	}
 
 	/**
-	 * Sets the respuesta.
+	 * Sets the warning messages.
 	 * 
-	 * @param respuesta
-	 *            the new respuesta
+	 * @param warningMessages
+	 *            the new warning messages
 	 */
-	public void setRespuesta(String respuesta) {
-		this.respuesta = respuesta;
+	public void setWarningMessages(List<String> warningMessages) {
+		this.warningMessages = warningMessages;
 	}
 
 }

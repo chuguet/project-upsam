@@ -1,16 +1,16 @@
 package com.upsam.hospital.controller.dto.util.impl;
 
-import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import com.upsam.hospital.controller.dto.AngleDTO;
 import com.upsam.hospital.controller.dto.ExploracionDTO;
-import com.upsam.hospital.controller.dto.FaqDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTDTO;
 import com.upsam.hospital.controller.dto.FicheroEMTInfoDTO;
 import com.upsam.hospital.controller.dto.FicheroMDXDTO;
@@ -22,30 +22,14 @@ import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
 import com.upsam.hospital.controller.dto.util.IVideoUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Angle;
-import com.upsam.hospital.model.beans.AntecedentesPersonales;
-import com.upsam.hospital.model.beans.AntecedentesQuirurgicosOrtopedicos;
-import com.upsam.hospital.model.beans.AntecedentesRelacionadosPCI;
-import com.upsam.hospital.model.beans.CampoRellenado;
-import com.upsam.hospital.model.beans.CampoSugerido;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.beans.FicheroEMT;
 import com.upsam.hospital.model.beans.FicheroMDX;
-import com.upsam.hospital.model.beans.GrossMotorFunction;
-import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Point;
-import com.upsam.hospital.model.beans.Regla;
 import com.upsam.hospital.model.beans.Usuario;
-import com.upsam.hospital.model.beans.ValoracionArticularMuscular;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.enums.AnalisisObservacionalMarcha;
-import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.jaxb.EmxDataFile;
-import com.upsam.hospital.model.service.IAntecedentesPersonalesService;
-import com.upsam.hospital.model.service.IAntecedentesQuirurgicosOrtopedicosService;
-import com.upsam.hospital.model.service.IAntecedentesRelacionadosPCIService;
-import com.upsam.hospital.model.service.IGrossMotorFunctionService;
-import com.upsam.hospital.model.service.IValoracionArticularMuscularService;
-import com.upsam.hospital.model.service.impl.ReglaService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -57,83 +41,12 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 	/** The Constant DATE_TIME_FORMATTER. */
 	private static final SimpleDateFormat DATE_TIME_FORMATTER = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-	/** The antecedentes personales service. */
-	@Inject
-	private IAntecedentesPersonalesService antecedentesPersonalesService;
-
-	/** The antecedentes quirurgicos ortopedicos service. */
-	@Inject
-	private IAntecedentesQuirurgicosOrtopedicosService antecedentesQuirurgicosOrtopedicosService;
-
-	/** The antecedentes relacionados pci service. */
-	@Inject
-	private IAntecedentesRelacionadosPCIService antecedentesRelacionadosPCIService;
-
-	/** The gross motor function service. */
-	@Inject
-	private IGrossMotorFunctionService grossMotorFunctionService;
-
-	/** The regla service. */
-	@Inject
-	private ReglaService reglaService;
-
-	/** The valoracion articular muscular service. */
-	@Inject
-	private IValoracionArticularMuscularService valoracionArticularMuscularService;
+	/** The Constant LOG. */
+	private static final Log LOG = LogFactory.getLog(ExploracionUtilDTO.class);
 
 	/** The video util dto. */
 	@Inject
 	private IVideoUtilDTO videoUtilDTO;
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.controller.dto.util.IExploracionUtilDTO#doFaq(com.
-	 * upsam.hospital.model.beans.Exploracion)
-	 */
-	@Override
-	public FaqDTO doFaq(Exploracion exploracion) throws TransferObjectException, DataBaseException, SecurityException, IllegalArgumentException, NoSuchFieldException, IllegalAccessException {
-		FaqDTO faqDTO = new FaqDTO();
-		String result = null;
-		StringBuffer sb = new StringBuffer();
-		List<Regla> reglas = reglaService.findAll();
-
-		Paciente paciente = exploracion.getPaciente();
-		AntecedentesPersonales antecedentesPersonales = antecedentesPersonalesService.findByExploracion(exploracion.getId());
-		AntecedentesRelacionadosPCI antecedentesRelacionadosPCI = antecedentesRelacionadosPCIService.findByExploracion(exploracion.getId());
-		GrossMotorFunction grossMotorFunction = grossMotorFunctionService.findByExploracion(exploracion.getId());
-		ValoracionArticularMuscular valoracionArticularMuscular = valoracionArticularMuscularService.findByExploracion(exploracion.getId());
-
-		AntecedentesQuirurgicosOrtopedicos antecedentesQuirurgicosOrtopedicos = null;
-		if (antecedentesPersonales != null) {
-			List<AntecedentesQuirurgicosOrtopedicos> listaAntecedentesQuirurgicosOrtopedicos = antecedentesQuirurgicosOrtopedicosService.findByAntecedentePersonal(antecedentesPersonales.getId());
-			if (listaAntecedentesQuirurgicosOrtopedicos != null && listaAntecedentesQuirurgicosOrtopedicos.size() > 0) {
-				antecedentesQuirurgicosOrtopedicos = listaAntecedentesQuirurgicosOrtopedicos.get(0);
-			}
-		}
-
-		int count = 0;
-		for (Regla regla : reglas) {
-			if (matchRegla(regla, paciente, exploracion, antecedentesPersonales, antecedentesRelacionadosPCI, grossMotorFunction, valoracionArticularMuscular, antecedentesQuirurgicosOrtopedicos)) {
-				count++;
-				sb.append("<li>").append(regla.getMensaje()).append("<br/>").append("Campos sugeridos a rellenar: ");
-				for (CampoSugerido campoSugerido : regla.getCamposSugeridos()) {
-					sb.append(campoSugerido.getCampo().getNombre()).append(" de la p&aacute;gina ").append(campoSugerido.getCampo().getPagina().getNombre());
-				}
-				sb.append("</li>");
-			}
-		}
-
-		if (count == 1) {
-			result = "Se ha encontrado la siguiente sugerencia: <ul>" + sb.toString() + "</ul>";
-		}
-		else if (count > 1) {
-			result = "Se han encontrado la siguientes sugerencias: <ul>" + sb.toString() + "</ul>";
-		}
-
-		faqDTO.addWarningMessage(result);
-		return faqDTO;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -174,7 +87,8 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 	 */
 	@Override
 	public FicheroMDXDTO fileMDXToDTO(EmxDataFile emxDataFile) {
-		System.out.println("LLEGO");
+		// TODO
+		LOG.info("Conversor de fichero MDX incompleto. Sujeto a definicion de requisito.");
 		return null;
 	}
 
@@ -214,173 +128,6 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 			result.add(video3dInfoDTO);
 		}
 		return result;
-	}
-
-	/**
-	 * Match regla.
-	 * 
-	 * @param exploracion
-	 *            the exploracion
-	 * @param regla
-	 *            the regla
-	 * @return the boolean
-	 * @throws SecurityException
-	 *             the security exception
-	 * @throws NoSuchFieldException
-	 *             the no such field exception
-	 * @throws IllegalArgumentException
-	 *             the illegal argument exception
-	 * @throws IllegalAccessException
-	 *             the illegal access exception
-	 * @throws DataBaseException
-	 *             the data base exception
-	 */
-	private Boolean matchRegla(Regla regla, Paciente paciente, Exploracion exploracion, AntecedentesPersonales antecedentesPersonales, AntecedentesRelacionadosPCI antecedentesRelacionadosPCI, GrossMotorFunction grossMotorFunction, ValoracionArticularMuscular valoracionArticularMuscular, AntecedentesQuirurgicosOrtopedicos antecedentesQuirurgicosOrtopedicos) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException, DataBaseException {
-		Boolean result = Boolean.TRUE;
-		String clase;
-		Field field;
-		String atributo;
-
-		for (CampoRellenado campoRellenado : regla.getCamposRellenados()) {
-			atributo = campoRellenado.getCampo().getReflexionAtributo();
-			clase = campoRellenado.getCampo().getReflexionClase();
-			if (clase.equals(Paciente.class.getName())) {
-				result = this.validateField(paciente, Paciente.class.getDeclaredField(atributo));
-
-				// if (paciente != null) {
-				// field = Paciente.class.getDeclaredField(atributo);
-				// field.setAccessible(true);
-				// Object obj = field.get(paciente);
-				// if (obj == null) {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-				// }
-				// else {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-			}
-			else if (clase.equals(Exploracion.class.getName())) {
-				result = this.validateField(exploracion, Exploracion.class.getDeclaredField(atributo));
-				// if (exploracion != null) {
-				// field = Exploracion.class.getDeclaredField(atributo);
-				// field.setAccessible(true);
-				// Object obj = field.get(exploracion);
-				// if (obj == null) {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-				// }
-				// else {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-			}
-
-			else if (clase.equals(AntecedentesPersonales.class.getName())) {
-				result = this.validateField(antecedentesPersonales, AntecedentesPersonales.class.getDeclaredField(atributo));
-				// if (antecedentesPersonales != null) {
-				// field =
-				// AntecedentesPersonales.class.getDeclaredField(atributo);
-				// field.setAccessible(true);
-				// Object obj = field.get(antecedentesPersonales);
-				// if (obj == null) {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-				// }
-				// else {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-			}
-			else if (clase.equals(AntecedentesRelacionadosPCI.class.getName())) {
-				result = this.validateField(antecedentesRelacionadosPCI, AntecedentesRelacionadosPCI.class.getDeclaredField(atributo));
-				// if (antecedentesRelacionadosPCI != null) {
-				// field =
-				// AntecedentesRelacionadosPCI.class.getDeclaredField(atributo);
-				// field.setAccessible(true);
-				// Object obj = field.get(antecedentesRelacionadosPCI);
-				// if (obj == null) {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-				// }
-				// else {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-			}
-			else if (clase.equals(AntecedentesQuirurgicosOrtopedicos.class.getName())) {
-				result = this.validateField(antecedentesQuirurgicosOrtopedicos, AntecedentesQuirurgicosOrtopedicos.class.getDeclaredField(atributo));
-				// if (antecedentesQuirurgicosOrtopedicos != null) {
-				// field =
-				// AntecedentesQuirurgicosOrtopedicos.class.getDeclaredField(atributo);
-				// field.setAccessible(true);
-				// Object obj = field.get(antecedentesQuirurgicosOrtopedicos);
-				// if (obj == null) {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-				// }
-				// else {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-			}
-			else if (clase.equals(GrossMotorFunction.class.getName())) {
-				result = this.validateField(grossMotorFunction, GrossMotorFunction.class.getDeclaredField(atributo));
-				// if (grossMotorFunction != null) {
-				// field = GrossMotorFunction.class.getDeclaredField(atributo);
-				// field.setAccessible(true);
-				// Object obj = field.get(grossMotorFunction);
-				// if (obj == null) {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-				// }
-				// else {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-			}
-			else if (clase.equals(ValoracionArticularMuscular.class.getName())) {
-				result = this.validateField(valoracionArticularMuscular, ValoracionArticularMuscular.class.getDeclaredField(atributo));
-				// if (valoracionArticularMuscular != null) {
-				// field =
-				// ValoracionArticularMuscular.class.getDeclaredField(atributo);
-				// field.setAccessible(true);
-				// Object obj = field.get(valoracionArticularMuscular);
-				// if (obj == null) {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-				// }
-				// else {
-				// result = Boolean.FALSE;
-				// break;
-				// }
-			}
-			if (!result)
-				break;
-
-		}
-		return result;
-	}
-
-	private Boolean validateField(Object object, Field field) throws IllegalArgumentException, IllegalAccessException {
-		if (object != null) {
-			field.setAccessible(true);
-			Object valueObject = field.get(object);
-			if (valueObject == null) {
-				return Boolean.FALSE;
-			}
-		}
-		else {
-			return Boolean.FALSE;
-		}
-		return Boolean.TRUE;
 	}
 
 	/*
@@ -490,4 +237,5 @@ public class ExploracionUtilDTO implements IExploracionUtilDTO {
 
 		return exploracionDTO;
 	}
+
 }

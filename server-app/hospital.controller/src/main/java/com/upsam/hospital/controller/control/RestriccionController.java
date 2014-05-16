@@ -16,11 +16,12 @@ import com.upsam.hospital.controller.dto.FaqDTO;
 import com.upsam.hospital.controller.dto.MensajeDTO;
 import com.upsam.hospital.controller.dto.PaginaDTO;
 import com.upsam.hospital.controller.dto.ReglaDTO;
-import com.upsam.hospital.controller.dto.util.IExploracionUtilDTO;
+import com.upsam.hospital.controller.dto.util.IFaqUtilDTO;
 import com.upsam.hospital.controller.dto.util.IPaginaUtilDTO;
 import com.upsam.hospital.controller.dto.util.IReglaUtilDTO;
 import com.upsam.hospital.controller.exception.TransferObjectException;
 import com.upsam.hospital.model.beans.Exploracion;
+import com.upsam.hospital.model.beans.Faq;
 import com.upsam.hospital.model.beans.Pagina;
 import com.upsam.hospital.model.beans.Regla;
 import com.upsam.hospital.model.exceptions.DataBaseException;
@@ -42,9 +43,9 @@ public class RestriccionController {
 	@Inject
 	private IExploracionService exploracionService;
 
-	/** The exploracion util dto. */
+	/** The faq util dto. */
 	@Inject
-	private IExploracionUtilDTO exploracionUtilDTO;
+	private IFaqUtilDTO faqUtilDTO;
 
 	/** The pagina service. */
 	@Inject
@@ -191,7 +192,8 @@ public class RestriccionController {
 		FaqDTO faqDTO = null;
 		try {
 			Exploracion exploracion = exploracionService.findOne(idExploracion);
-			faqDTO = exploracionUtilDTO.doFaq(exploracion);
+			Faq faq = reglaService.doFaq(exploracion);
+			faqDTO = faqUtilDTO.toRest(faq);
 		}
 		catch (DataBaseException e) {
 			LOG.debug(e.getMessage());
