@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import com.upsam.hospital.model.enums.AyudasMarcha;
 import com.upsam.hospital.model.enums.OrtesisDiurna;
+import com.upsam.hospital.model.enums.TipoPCI;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -32,10 +33,9 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	@Column(name = "AYUDAS_MARCHA")
 	private AyudasMarcha ayudasMarcha;
 
-	/** The cuadriplejia espatica. */
 	@Basic
-	@Column(name = "CUADRIPLEJIA_ESPATICA")
-	private Boolean cuadriplejiaEspatica;
+	@Column(name = "TIPO_PCI")
+	private TipoPCI tipoPCI;
 
 	/** The deportes. */
 	@Basic
@@ -45,11 +45,6 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	@Basic
 	@Column(name = "DIAGNOSTICO_ESPECIFICAR")
 	private String diagnosticoEspecificar;
-
-	/** The diplejia espatica. */
-	@Basic
-	@Column(name = "DIPLEJIA_ESPATICA")
-	private Boolean diplejiaEspatica;
 
 	/** The dispositivo mas usado. */
 	@Basic
@@ -87,28 +82,8 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 
 	/** The grado i. */
 	@Basic
-	@Column(name = "GRADO_I")
-	private Boolean gradoI;
-
-	/** The grado ii. */
-	@Basic
-	@Column(name = "GRADO_II")
-	private Boolean gradoII;
-
-	/** The grado iii. */
-	@Basic
-	@Column(name = "GRADO_III")
-	private Boolean gradoIII;
-
-	/** The grado iv. */
-	@Basic
-	@Column(name = "GRADO_IV")
-	private Boolean gradoIV;
-
-	/** The grado v. */
-	@Basic
-	@Column(name = "GRADO_V")
-	private Boolean gradoV;
+	@Column(name = "GMFCS")
+	private Integer gmfcs;
 
 	/** The hidroterapia. */
 	@Basic
@@ -159,20 +134,10 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	@Column(name = "ORTESIS_NOCTURNA")
 	private String ortesisNocturna;
 
-	/** The otra. */
-	@Basic
-	@Column(name = "OTRA")
-	private Boolean otra;
-
 	/** The otras. */
 	@Basic
 	@Column(name = "OTRAS")
 	private String otras;
-
-	/** The pci mixta. */
-	@Basic
-	@Column(name = "PCI_MIXTA")
-	private Boolean pciMixta;
 
 	/** The pruebas comlementarias. */
 	@Basic
@@ -198,11 +163,6 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	@Basic
 	@Column(name = "TRATAMIENTO_ACTUAL")
 	private String tratamientoActual;
-
-	/** The triplejia espatica. */
-	@Basic
-	@Column(name = "TRIPLEJIA_ESPATICA")
-	private Boolean triplejiaEspatica;
 
 	/**
 	 * Instantiates a new antecedentes personales pci.
@@ -280,25 +240,19 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	 *            the triplejia espatica
 	 */
 
-	public AntecedentesRelacionadosPCI(Integer id, AyudasMarcha ayudasMarcha, Boolean cuadriplejiaEspatica, String deportes, Boolean diplejiaEspatica, String dispositivoMasUsado, String equipamiento, String etiologia, String exteriores, String fisioterapiaDuracion, Integer fisioterapiaSesiones, Boolean gradoI, Boolean gradoII, Boolean gradoIII, Boolean gradoIV, Boolean gradoV, String hidroterapia, String interiores, String lgDuracion, Integer lgSesiones, String localizacion, OrtesisDiurna ortesisDiurna, String otraOrtesis, String ortesisNocturna, Boolean otra, String otras, Boolean pciMixta, String pruebasComplementarias, String terapiaOcupacionalDuracion, Integer terapiaOcupacionalSesiones, String terapiasHabituales, String tratamientoActual, Boolean triplejiaEspatica, String diagnosticoEspecificar, String otrasTerapias) {
+	public AntecedentesRelacionadosPCI(Integer id, AyudasMarcha ayudasMarcha, String deportes, String dispositivoMasUsado, String equipamiento, String etiologia, String exteriores, String fisioterapiaDuracion, Integer fisioterapiaSesiones, Integer gmfcs, String hidroterapia, String interiores, String lgDuracion, Integer lgSesiones, String localizacion, OrtesisDiurna ortesisDiurna, String otraOrtesis, String ortesisNocturna, String otras, String pruebasComplementarias, String terapiaOcupacionalDuracion, Integer terapiaOcupacionalSesiones, String terapiasHabituales, String tratamientoActual, String diagnosticoEspecificar, String otrasTerapias, TipoPCI tipoPCI) {
 		super();
 		this.id = id;
 		this.ayudasMarcha = ayudasMarcha;
-		this.cuadriplejiaEspatica = cuadriplejiaEspatica;
 		this.deportes = deportes;
 		this.diagnosticoEspecificar = diagnosticoEspecificar;
-		this.diplejiaEspatica = diplejiaEspatica;
 		this.dispositivoMasUsado = dispositivoMasUsado;
 		this.equipamiento = equipamiento;
 		this.etiologia = etiologia;
 		this.exteriores = exteriores;
 		this.fisioterapiaDuracion = fisioterapiaDuracion;
 		this.fisioterapiaSesiones = fisioterapiaSesiones;
-		this.gradoI = gradoI;
-		this.gradoII = gradoII;
-		this.gradoIII = gradoIII;
-		this.gradoIV = gradoIV;
-		this.gradoV = gradoV;
+		this.gmfcs = gmfcs;
 		this.hidroterapia = hidroterapia;
 		this.interiores = interiores;
 		this.lgDuracion = lgDuracion;
@@ -307,16 +261,14 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 		this.ortesisDiurna = ortesisDiurna;
 		this.otraOrtesis = otraOrtesis;
 		this.ortesisNocturna = ortesisNocturna;
-		this.otra = otra;
 		this.otras = otras;
 		this.otrasTerapias = otrasTerapias;
-		this.pciMixta = pciMixta;
 		this.pruebasComplementarias = pruebasComplementarias;
 		this.terapiaOcupacionalDuracion = terapiaOcupacionalDuracion;
 		this.terapiaOcupacionalSesiones = terapiaOcupacionalSesiones;
 		this.terapiasHabituales = terapiasHabituales;
 		this.tratamientoActual = tratamientoActual;
-		this.triplejiaEspatica = triplejiaEspatica;
+		this.tipoPCI = tipoPCI;
 	}
 
 	/**
@@ -329,30 +281,12 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	}
 
 	/**
-	 * Gets the cuadriplejia espatica.
-	 * 
-	 * @return the cuadriplejia espatica
-	 */
-	public Boolean getCuadriplejiaEspatica() {
-		return cuadriplejiaEspatica;
-	}
-
-	/**
 	 * Gets the deportes.
 	 * 
 	 * @return the deportes
 	 */
 	public String getDeportes() {
 		return deportes;
-	}
-
-	/**
-	 * Gets the diplejia espatica.
-	 * 
-	 * @return the diplejia espatica
-	 */
-	public Boolean getDiplejiaEspatica() {
-		return diplejiaEspatica;
 	}
 
 	/**
@@ -423,44 +357,8 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	 * 
 	 * @return the grado i
 	 */
-	public Boolean getGradoI() {
-		return gradoI;
-	}
-
-	/**
-	 * Gets the grado ii.
-	 * 
-	 * @return the grado ii
-	 */
-	public Boolean getGradoII() {
-		return gradoII;
-	}
-
-	/**
-	 * Gets the grado iii.
-	 * 
-	 * @return the grado iii
-	 */
-	public Boolean getGradoIII() {
-		return gradoIII;
-	}
-
-	/**
-	 * Gets the grado iv.
-	 * 
-	 * @return the grado iv
-	 */
-	public Boolean getGradoIV() {
-		return gradoIV;
-	}
-
-	/**
-	 * Gets the grado v.
-	 * 
-	 * @return the grado v
-	 */
-	public Boolean getGradoV() {
-		return gradoV;
+	public Integer getGmfcs() {
+		return gmfcs;
 	}
 
 	/**
@@ -536,30 +434,12 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	}
 
 	/**
-	 * Gets the otra.
-	 * 
-	 * @return the otra
-	 */
-	public Boolean getOtra() {
-		return otra;
-	}
-
-	/**
 	 * Gets the otras.
 	 * 
 	 * @return the otras
 	 */
 	public String getOtras() {
 		return otras;
-	}
-
-	/**
-	 * Gets the pci mixta.
-	 * 
-	 * @return the pci mixta
-	 */
-	public Boolean getPciMixta() {
-		return pciMixta;
 	}
 
 	/**
@@ -608,15 +488,6 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	}
 
 	/**
-	 * Gets the triplejia espatica.
-	 * 
-	 * @return the triplejia espatica
-	 */
-	public Boolean getTriplejiaEspatica() {
-		return triplejiaEspatica;
-	}
-
-	/**
 	 * Sets the ayudas marcha.
 	 * 
 	 * @param ayudasMarcha
@@ -627,16 +498,6 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	}
 
 	/**
-	 * Sets the cuadriplejia espatica.
-	 * 
-	 * @param cuadriplejiaEspatica
-	 *            the new cuadriplejia espatica
-	 */
-	public void setCuadriplejiaEspatica(Boolean cuadriplejiaEspatica) {
-		this.cuadriplejiaEspatica = cuadriplejiaEspatica;
-	}
-
-	/**
 	 * Sets the deportes.
 	 * 
 	 * @param deportes
@@ -644,16 +505,6 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	 */
 	public void setDeportes(String deportes) {
 		this.deportes = deportes;
-	}
-
-	/**
-	 * Sets the diplejia espatica.
-	 * 
-	 * @param diplejiaEspatica
-	 *            the new diplejia espatica
-	 */
-	public void setDiplejiaEspatica(Boolean diplejiaEspatica) {
-		this.diplejiaEspatica = diplejiaEspatica;
 	}
 
 	/**
@@ -732,48 +583,8 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	 * @param gradoI
 	 *            the new grado i
 	 */
-	public void setGradoI(Boolean gradoI) {
-		this.gradoI = gradoI;
-	}
-
-	/**
-	 * Sets the grado ii.
-	 * 
-	 * @param gradoII
-	 *            the new grado ii
-	 */
-	public void setGradoII(Boolean gradoII) {
-		this.gradoII = gradoII;
-	}
-
-	/**
-	 * Sets the grado iii.
-	 * 
-	 * @param gradoIII
-	 *            the new grado iii
-	 */
-	public void setGradoIII(Boolean gradoIII) {
-		this.gradoIII = gradoIII;
-	}
-
-	/**
-	 * Sets the grado iv.
-	 * 
-	 * @param gradoIV
-	 *            the new grado iv
-	 */
-	public void setGradoIV(Boolean gradoIV) {
-		this.gradoIV = gradoIV;
-	}
-
-	/**
-	 * Sets the grado v.
-	 * 
-	 * @param gradoV
-	 *            the new grado v
-	 */
-	public void setGradoV(Boolean gradoV) {
-		this.gradoV = gradoV;
+	public void setGmfcs(Integer gmfcs) {
+		this.gmfcs = gmfcs;
 	}
 
 	/**
@@ -857,16 +668,6 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	}
 
 	/**
-	 * Sets the otra.
-	 * 
-	 * @param otra
-	 *            the new otra
-	 */
-	public void setOtra(Boolean otra) {
-		this.otra = otra;
-	}
-
-	/**
 	 * Sets the otras.
 	 * 
 	 * @param otras
@@ -874,16 +675,6 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 	 */
 	public void setOtras(String otras) {
 		this.otras = otras;
-	}
-
-	/**
-	 * Sets the pci mixta.
-	 * 
-	 * @param pciMixta
-	 *            the new pci mixta
-	 */
-	public void setPciMixta(Boolean pciMixta) {
-		this.pciMixta = pciMixta;
 	}
 
 	/**
@@ -936,16 +727,6 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 		this.tratamientoActual = tratamientoActual;
 	}
 
-	/**
-	 * Sets the triplejia espatica.
-	 * 
-	 * @param triplejiaEspatica
-	 *            the new triplejia espatica
-	 */
-	public void setTriplejiaEspatica(Boolean triplejiaEspatica) {
-		this.triplejiaEspatica = triplejiaEspatica;
-	}
-
 	public String getDiagnosticoEspecificar() {
 		return diagnosticoEspecificar;
 	}
@@ -968,5 +749,13 @@ public class AntecedentesRelacionadosPCI implements IModelHospital {
 
 	public void setOtrasTerapias(String otrasTerapias) {
 		this.otrasTerapias = otrasTerapias;
+	}
+
+	public TipoPCI getTipoPCI() {
+		return tipoPCI;
+	}
+
+	public void setTipoPCI(TipoPCI tipoPCI) {
+		this.tipoPCI = tipoPCI;
 	}
 }

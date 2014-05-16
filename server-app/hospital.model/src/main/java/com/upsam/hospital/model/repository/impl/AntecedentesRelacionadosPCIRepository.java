@@ -16,9 +16,7 @@ import com.upsam.hospital.model.repository.IAntecedentesRelacionadosPCIRepositor
 class AntecedentesRelacionadosPCIRepository implements IAntecedentesRelacionadosPCIRepository {
 
 	/** The Constant QUERY_FIND_BY_EXPLORACION. */
-	private static final String QUERY_FIND_BY_EXPLORACION = "Select new AntecedentesRelacionadosPCI(id,ayudasMarcha,cuadriplejiaEspatica,deportes,diplejiaEspatica,dispositivoMasUsado,equipamiento,etiologia,exteriores,fisioterapiaDuracion,fisioterapiaSesiones,gradoI,gradoII,gradoIII,gradoIV,gradoV,hidroterapia,interiores,lgDuracion,lgSesiones,localizacion,ortesisDiurna,otraOrtesis,ortesisNocturna,otra,otras,pciMixta,pruebasComplementarias,terapiaOcupacionalDuracion,terapiaOcupacionalSesiones,terapiasHabituales,tratamientoActual,triplejiaEspatica, diagnosticoEspecificar, otrasTerapias) from AntecedentesRelacionadosPCI where (ID_EXPLORACION = ?)";
-	// private static final String QUERY_FIND_BY_EXPLORACION =
-	// "Select new AntecedentesRelacionadosPCI(id,ayudasMarcha,cuadriplejiaEspatica,deportes,diplejiaEspatica,dispositivoMasUsado,equipamiento,etiologia,exteriores,fisioterapiaDuracion,fisioterapiaSesiones,gradoI,gradoII,gradoIII,gradoIV,gradoV,hidroterapia,interiores,lgDuracion,lgSesiones,localizacion,ortesisNocturna,otra,otras,pciMixta,pruebasComplementarias,terapiaOcupacionalDuracion,terapiaOcupacionalSesiones,terapiasHabituales,tratamientoActual,triplejiaEspatica, diagnosticoEspecificar) from AntecedentesRelacionadosPCI where (ID_EXPLORACION = ?)";
+	private static final String QUERY_FIND_BY_EXPLORACION = "Select new AntecedentesRelacionadosPCI(id,ayudasMarcha,deportes,dispositivoMasUsado,equipamiento,etiologia,exteriores,fisioterapiaDuracion,fisioterapiaSesiones,gmfcs,hidroterapia,interiores,lgDuracion,lgSesiones,localizacion,ortesisDiurna,otraOrtesis,ortesisNocturna,otras,pruebasComplementarias,terapiaOcupacionalDuracion,terapiaOcupacionalSesiones,terapiasHabituales,tratamientoActual, diagnosticoEspecificar, otrasTerapias, tipoPCI) from AntecedentesRelacionadosPCI where (ID_EXPLORACION = ?)";
 
 	/** The hibernate template. */
 	@Inject

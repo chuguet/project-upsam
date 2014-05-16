@@ -8,6 +8,7 @@ import com.upsam.hospital.model.beans.AntecedentesRelacionadosPCI;
 import com.upsam.hospital.model.beans.Exploracion;
 import com.upsam.hospital.model.enums.AyudasMarcha;
 import com.upsam.hospital.model.enums.OrtesisDiurna;
+import com.upsam.hospital.model.enums.TipoPCI;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -28,21 +29,18 @@ public class AntecedentesRelacionadosPCIUtilDTO implements IAntecedentesRelacion
 		if (antecedentesRelacionadosPCI.getAyudasMarcha() != null) {
 			antecedentesRelacionadosPCIDTO.setAyudasMarcha(antecedentesRelacionadosPCI.getAyudasMarcha().ordinal());
 		}
-		antecedentesRelacionadosPCIDTO.setCuadriplejiaEspatica(antecedentesRelacionadosPCI.getCuadriplejiaEspatica());
+		if (antecedentesRelacionadosPCI.getTipoPCI() != null) {
+			antecedentesRelacionadosPCIDTO.setTipoPCI(antecedentesRelacionadosPCI.getTipoPCI().ordinal());
+		}
 		antecedentesRelacionadosPCIDTO.setDeportes(antecedentesRelacionadosPCI.getDeportes());
 		antecedentesRelacionadosPCIDTO.setDiagnosticoEspecificar(antecedentesRelacionadosPCI.getDiagnosticoEspecificar());
-		antecedentesRelacionadosPCIDTO.setDiplejiaEspatica(antecedentesRelacionadosPCI.getDiplejiaEspatica());
 		antecedentesRelacionadosPCIDTO.setDispositivoMasUsado(antecedentesRelacionadosPCI.getDispositivoMasUsado());
 		antecedentesRelacionadosPCIDTO.setEquipamiento(antecedentesRelacionadosPCI.getEquipamiento());
 		antecedentesRelacionadosPCIDTO.setEtiologia(antecedentesRelacionadosPCI.getEtiologia());
 		antecedentesRelacionadosPCIDTO.setExteriores(antecedentesRelacionadosPCI.getExteriores());
 		antecedentesRelacionadosPCIDTO.setFisioterapiaDuracion(antecedentesRelacionadosPCI.getFisioterapiaDuracion());
 		antecedentesRelacionadosPCIDTO.setFisioterapiaSesiones(antecedentesRelacionadosPCI.getFisioterapiaSesiones());
-		antecedentesRelacionadosPCIDTO.setGradoI(antecedentesRelacionadosPCI.getGradoI());
-		antecedentesRelacionadosPCIDTO.setGradoII(antecedentesRelacionadosPCI.getGradoII());
-		antecedentesRelacionadosPCIDTO.setGradoIII(antecedentesRelacionadosPCI.getGradoIII());
-		antecedentesRelacionadosPCIDTO.setGradoIV(antecedentesRelacionadosPCI.getGradoIV());
-		antecedentesRelacionadosPCIDTO.setGradoV(antecedentesRelacionadosPCI.getGradoV());
+		antecedentesRelacionadosPCIDTO.setGmfcs(antecedentesRelacionadosPCI.getGmfcs());
 		antecedentesRelacionadosPCIDTO.setHidroterapia(antecedentesRelacionadosPCI.getHidroterapia());
 		antecedentesRelacionadosPCIDTO.setId(antecedentesRelacionadosPCI.getId());
 		antecedentesRelacionadosPCIDTO.setInteriores(antecedentesRelacionadosPCI.getInteriores());
@@ -54,16 +52,13 @@ public class AntecedentesRelacionadosPCIUtilDTO implements IAntecedentesRelacion
 		}
 		antecedentesRelacionadosPCIDTO.setOtraOrtesis(antecedentesRelacionadosPCI.getOtraOrtesis());
 		antecedentesRelacionadosPCIDTO.setOrtesisNocturna(antecedentesRelacionadosPCI.getOrtesisNocturna());
-		antecedentesRelacionadosPCIDTO.setOtra(antecedentesRelacionadosPCI.getOtra());
 		antecedentesRelacionadosPCIDTO.setOtras(antecedentesRelacionadosPCI.getOtras());
 		antecedentesRelacionadosPCIDTO.setOtrasTerapias(antecedentesRelacionadosPCI.getOtrasTerapias());
-		antecedentesRelacionadosPCIDTO.setPciMixta(antecedentesRelacionadosPCI.getPciMixta());
 		antecedentesRelacionadosPCIDTO.setPruebasComlementarias(antecedentesRelacionadosPCI.getPruebasComplementarias());
 		antecedentesRelacionadosPCIDTO.setTerapiaOcupacionalSesiones(antecedentesRelacionadosPCI.getTerapiaOcupacionalSesiones());
 		antecedentesRelacionadosPCIDTO.setTerapiasHabituales(antecedentesRelacionadosPCI.getTerapiasHabituales());
 		antecedentesRelacionadosPCIDTO.setTerapiaOcupacionalDuracion(antecedentesRelacionadosPCI.getTerapiaOcupacionalDuracion());
 		antecedentesRelacionadosPCIDTO.setTratamientoActual(antecedentesRelacionadosPCI.getTratamientoActual());
-		antecedentesRelacionadosPCIDTO.setTriplejiaEspatica(antecedentesRelacionadosPCI.getTriplejiaEspatica());
 		return antecedentesRelacionadosPCIDTO;
 	}
 
@@ -79,10 +74,11 @@ public class AntecedentesRelacionadosPCIUtilDTO implements IAntecedentesRelacion
 		if (antecedentesRelacionadosPCIDTO.getAyudasMarcha() != null) {
 			antecedentesRelacionadosPCI.setAyudasMarcha(AyudasMarcha.values()[antecedentesRelacionadosPCIDTO.getAyudasMarcha()]);
 		}
-		antecedentesRelacionadosPCI.setCuadriplejiaEspatica(antecedentesRelacionadosPCIDTO.getCuadriplejiaEspatica());
+		if (antecedentesRelacionadosPCIDTO.getTipoPCI() != null) {
+			antecedentesRelacionadosPCI.setTipoPCI(TipoPCI.values()[antecedentesRelacionadosPCIDTO.getTipoPCI()]);
+		}
 		antecedentesRelacionadosPCI.setDeportes(antecedentesRelacionadosPCIDTO.getDeportes());
 		antecedentesRelacionadosPCI.setDiagnosticoEspecificar(antecedentesRelacionadosPCIDTO.getDiagnosticoEspecificar());
-		antecedentesRelacionadosPCI.setDiplejiaEspatica(antecedentesRelacionadosPCIDTO.getDiplejiaEspatica());
 		antecedentesRelacionadosPCI.setDispositivoMasUsado(antecedentesRelacionadosPCIDTO.getDispositivoMasUsado());
 		antecedentesRelacionadosPCI.setEquipamiento(antecedentesRelacionadosPCIDTO.getEquipamiento());
 		antecedentesRelacionadosPCI.setEtiologia(antecedentesRelacionadosPCIDTO.getEtiologia());
@@ -90,11 +86,7 @@ public class AntecedentesRelacionadosPCIUtilDTO implements IAntecedentesRelacion
 		antecedentesRelacionadosPCI.setExteriores(antecedentesRelacionadosPCIDTO.getExteriores());
 		antecedentesRelacionadosPCI.setFisioterapiaDuracion(antecedentesRelacionadosPCIDTO.getFisioterapiaDuracion());
 		antecedentesRelacionadosPCI.setFisioterapiaSesiones(antecedentesRelacionadosPCIDTO.getFisioterapiaSesiones());
-		antecedentesRelacionadosPCI.setGradoI(antecedentesRelacionadosPCIDTO.getGradoI());
-		antecedentesRelacionadosPCI.setGradoII(antecedentesRelacionadosPCIDTO.getGradoII());
-		antecedentesRelacionadosPCI.setGradoIII(antecedentesRelacionadosPCIDTO.getGradoIII());
-		antecedentesRelacionadosPCI.setGradoIV(antecedentesRelacionadosPCIDTO.getGradoIV());
-		antecedentesRelacionadosPCI.setGradoV(antecedentesRelacionadosPCIDTO.getGradoV());
+		antecedentesRelacionadosPCI.setGmfcs(antecedentesRelacionadosPCIDTO.getGmfcs());
 		antecedentesRelacionadosPCI.setHidroterapia(antecedentesRelacionadosPCIDTO.getHidroterapia());
 		antecedentesRelacionadosPCI.setId(antecedentesRelacionadosPCIDTO.getId());
 		antecedentesRelacionadosPCI.setInteriores(antecedentesRelacionadosPCIDTO.getInteriores());
@@ -106,16 +98,13 @@ public class AntecedentesRelacionadosPCIUtilDTO implements IAntecedentesRelacion
 		}
 		antecedentesRelacionadosPCI.setOtraOrtesis(antecedentesRelacionadosPCIDTO.getOtraOrtesis());
 		antecedentesRelacionadosPCI.setOrtesisNocturna(antecedentesRelacionadosPCIDTO.getOrtesisNocturna());
-		antecedentesRelacionadosPCI.setOtra(antecedentesRelacionadosPCIDTO.getOtra());
 		antecedentesRelacionadosPCI.setOtras(antecedentesRelacionadosPCIDTO.getOtras());
 		antecedentesRelacionadosPCI.setOtrasTerapias(antecedentesRelacionadosPCIDTO.getOtrasTerapias());
-		antecedentesRelacionadosPCI.setPciMixta(antecedentesRelacionadosPCIDTO.getPciMixta());
 		antecedentesRelacionadosPCI.setPruebasComplementarias(antecedentesRelacionadosPCIDTO.getPruebasComplementarias());
 		antecedentesRelacionadosPCI.setTerapiaOcupacionalSesiones(antecedentesRelacionadosPCIDTO.getTerapiaOcupacionalSesiones());
 		antecedentesRelacionadosPCI.setTerapiasHabituales(antecedentesRelacionadosPCIDTO.getTerapiasHabituales());
 		antecedentesRelacionadosPCI.setTerapiaOcupacionalDuracion(antecedentesRelacionadosPCIDTO.getTerapiaOcupacionalDuracion());
 		antecedentesRelacionadosPCI.setTratamientoActual(antecedentesRelacionadosPCIDTO.getTratamientoActual());
-		antecedentesRelacionadosPCI.setTriplejiaEspatica(antecedentesRelacionadosPCIDTO.getTriplejiaEspatica());
 		return antecedentesRelacionadosPCI;
 	}
 }

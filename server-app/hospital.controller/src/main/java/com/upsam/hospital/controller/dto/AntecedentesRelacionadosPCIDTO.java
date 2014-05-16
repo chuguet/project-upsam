@@ -9,16 +9,13 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	/** The ayudas marcha. */
 	private Integer ayudasMarcha;
 
-	/** The cuadriplejia espatica. */
-	private Boolean cuadriplejiaEspatica;
+	/** The ayudas marcha. */
+	private Integer tipoPCI;
 
 	/** The deportes. */
 	private String deportes;
 
 	private String diagnosticoEspecificar;
-
-	/** The diplejia espatica. */
-	private Boolean diplejiaEspatica;
 
 	/** The dispositivo mas usado. */
 	private String dispositivoMasUsado;
@@ -39,19 +36,7 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	private Integer fisioterapiaSesiones;
 
 	/** The grado i. */
-	private Boolean gradoI;
-
-	/** The grado ii. */
-	private Boolean gradoII;
-
-	/** The grado iii. */
-	private Boolean gradoIII;
-
-	/** The grado iv. */
-	private Boolean gradoIV;
-
-	/** The grado v. */
-	private Boolean gradoV;
+	private Integer gmfcs;
 
 	/** The hidroterapia. */
 	private String hidroterapia;
@@ -80,16 +65,10 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	/** The Ortesis nocturna. */
 	private String ortesisNocturna;
 
-	/** The otra. */
-	private Boolean otra;
-
 	/** The otras. */
 	private String otras;
 
 	private String otrasTerapias;
-
-	/** The pci mixta. */
-	private Boolean pciMixta;
 
 	/** The pruebas comlementarias. */
 	private String pruebasComplementarias;
@@ -106,9 +85,6 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	/** The tratamiento actual. */
 	private String tratamientoActual;
 
-	/** The triplejia espatica. */
-	private Boolean triplejiaEspatica;
-
 	/**
 	 * Gets the ayudas marcha.
 	 * 
@@ -119,30 +95,12 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Gets the cuadriplejia espatica.
-	 * 
-	 * @return the cuadriplejia espatica
-	 */
-	public Boolean getCuadriplejiaEspatica() {
-		return cuadriplejiaEspatica;
-	}
-
-	/**
 	 * Gets the deportes.
 	 * 
 	 * @return the deportes
 	 */
 	public String getDeportes() {
 		return deportes;
-	}
-
-	/**
-	 * Gets the diplejia espatica.
-	 * 
-	 * @return the diplejia espatica
-	 */
-	public Boolean getDiplejiaEspatica() {
-		return diplejiaEspatica;
 	}
 
 	/**
@@ -199,49 +157,8 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 		return fisioterapiaSesiones;
 	}
 
-	/**
-	 * Gets the grado i.
-	 * 
-	 * @return the grado i
-	 */
-	public Boolean getGradoI() {
-		return gradoI;
-	}
-
-	/**
-	 * Gets the grado ii.
-	 * 
-	 * @return the grado ii
-	 */
-	public Boolean getGradoII() {
-		return gradoII;
-	}
-
-	/**
-	 * Gets the grado iii.
-	 * 
-	 * @return the grado iii
-	 */
-	public Boolean getGradoIII() {
-		return gradoIII;
-	}
-
-	/**
-	 * Gets the grado iv.
-	 * 
-	 * @return the grado iv
-	 */
-	public Boolean getGradoIV() {
-		return gradoIV;
-	}
-
-	/**
-	 * Gets the grado v.
-	 * 
-	 * @return the grado v
-	 */
-	public Boolean getGradoV() {
-		return gradoV;
+	public Integer getGmfcs() {
+		return gmfcs;
 	}
 
 	/**
@@ -317,30 +234,12 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Gets the otra.
-	 * 
-	 * @return the otra
-	 */
-	public Boolean getOtra() {
-		return otra;
-	}
-
-	/**
 	 * Gets the otras.
 	 * 
 	 * @return the otras
 	 */
 	public String getOtras() {
 		return otras;
-	}
-
-	/**
-	 * Gets the pci mixta.
-	 * 
-	 * @return the pci mixta
-	 */
-	public Boolean getPciMixta() {
-		return pciMixta;
 	}
 
 	/**
@@ -389,15 +288,6 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Gets the triplejia espatica.
-	 * 
-	 * @return the triplejia espatica
-	 */
-	public Boolean getTriplejiaEspatica() {
-		return triplejiaEspatica;
-	}
-
-	/**
 	 * Sets the ayudas marcha.
 	 * 
 	 * @param ayudasMarcha
@@ -408,16 +298,6 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Sets the cuadriplejia espatica.
-	 * 
-	 * @param cuadriplejiaEspatica
-	 *            the new cuadriplejia espatica
-	 */
-	public void setCuadriplejiaEspatica(Boolean cuadriplejiaEspatica) {
-		this.cuadriplejiaEspatica = cuadriplejiaEspatica;
-	}
-
-	/**
 	 * Sets the deportes.
 	 * 
 	 * @param deportes
@@ -425,16 +305,6 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	 */
 	public void setDeportes(String deportes) {
 		this.deportes = deportes;
-	}
-
-	/**
-	 * Sets the diplejia espatica.
-	 * 
-	 * @param diplejiaEspatica
-	 *            the new diplejia espatica
-	 */
-	public void setDiplejiaEspatica(Boolean diplejiaEspatica) {
-		this.diplejiaEspatica = diplejiaEspatica;
 	}
 
 	/**
@@ -503,48 +373,8 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	 * @param gradoI
 	 *            the new grado i
 	 */
-	public void setGradoI(Boolean gradoI) {
-		this.gradoI = gradoI;
-	}
-
-	/**
-	 * Sets the grado ii.
-	 * 
-	 * @param gradoII
-	 *            the new grado ii
-	 */
-	public void setGradoII(Boolean gradoII) {
-		this.gradoII = gradoII;
-	}
-
-	/**
-	 * Sets the grado iii.
-	 * 
-	 * @param gradoIII
-	 *            the new grado iii
-	 */
-	public void setGradoIII(Boolean gradoIII) {
-		this.gradoIII = gradoIII;
-	}
-
-	/**
-	 * Sets the grado iv.
-	 * 
-	 * @param gradoIV
-	 *            the new grado iv
-	 */
-	public void setGradoIV(Boolean gradoIV) {
-		this.gradoIV = gradoIV;
-	}
-
-	/**
-	 * Sets the grado v.
-	 * 
-	 * @param gradoV
-	 *            the new grado v
-	 */
-	public void setGradoV(Boolean gradoV) {
-		this.gradoV = gradoV;
+	public void setGmfcs(Integer gmfcs) {
+		this.gmfcs = gmfcs;
 	}
 
 	/**
@@ -628,16 +458,6 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	}
 
 	/**
-	 * Sets the otra.
-	 * 
-	 * @param otra
-	 *            the new otra
-	 */
-	public void setOtra(Boolean otra) {
-		this.otra = otra;
-	}
-
-	/**
 	 * Sets the otras.
 	 * 
 	 * @param otras
@@ -645,16 +465,6 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 	 */
 	public void setOtras(String otras) {
 		this.otras = otras;
-	}
-
-	/**
-	 * Sets the pci mixta.
-	 * 
-	 * @param pciMixta
-	 *            the new pci mixta
-	 */
-	public void setPciMixta(Boolean pciMixta) {
-		this.pciMixta = pciMixta;
 	}
 
 	/**
@@ -707,16 +517,6 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 		this.tratamientoActual = tratamientoActual;
 	}
 
-	/**
-	 * Sets the triplejia espatica.
-	 * 
-	 * @param triplejiaEspatica
-	 *            the new triplejia espatica
-	 */
-	public void setTriplejiaEspatica(Boolean triplejiaEspatica) {
-		this.triplejiaEspatica = triplejiaEspatica;
-	}
-
 	public String getDiagnosticoEspecificar() {
 		return diagnosticoEspecificar;
 	}
@@ -739,5 +539,13 @@ public class AntecedentesRelacionadosPCIDTO extends AbstractDTO {
 
 	public void setOtrasTerapias(String otrasTerapias) {
 		this.otrasTerapias = otrasTerapias;
+	}
+
+	public Integer getTipoPCI() {
+		return tipoPCI;
+	}
+
+	public void setTipoPCI(Integer tipoPCI) {
+		this.tipoPCI = tipoPCI;
 	}
 }
