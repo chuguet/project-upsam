@@ -105,10 +105,11 @@ public class ReglaService implements IReglaService {
 				if (matchRegla(regla, paciente, exploracion, antecedentesPersonales, antecedentesRelacionadosPCI, grossMotorFunction, valoracionArticularMuscular, antecedentesQuirurgicosOrtopedicos)) {
 					count++;
 					sb.append("<li>").append(regla.getMensaje()).append("<br/>").append("Campos sugeridos a rellenar: ");
+					sb.append("<ol>");
 					for (CampoSugerido campoSugerido : regla.getCamposSugeridos()) {
-						sb.append(campoSugerido.getCampo().getNombre()).append(" de la p&aacute;gina ").append(campoSugerido.getCampo().getPagina().getNombre()).append(" ");
+						sb.append("<li>").append(campoSugerido.getCampo().getNombre()).append(" (").append(campoSugerido.getCampo().getPagina().getNombre()).append(")</li>");
 					}
-					sb.append("</li>");
+					sb.append("</ol></li>");
 				}
 			}
 
@@ -119,7 +120,7 @@ public class ReglaService implements IReglaService {
 				result = "Se han encontrado la siguientes sugerencias: <ul>" + sb.toString() + "</ul>";
 			}
 
-			faq.addWarningMessage(result);
+			faq.setWarningMessages(result);
 			return faq;
 		}
 		catch (SQLException e) {

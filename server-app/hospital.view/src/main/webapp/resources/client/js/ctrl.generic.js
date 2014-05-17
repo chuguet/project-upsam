@@ -26,8 +26,7 @@ var generic = {
     	}
     	//$("body").show();
     	generic.processSpeech();     
-    	generic.processDatebox();
-    	generic.blink();    	
+    	generic.processDatebox();	
 	},
 	
 	'blink': function(){
@@ -38,15 +37,9 @@ var generic = {
 			setInterval(function () {
 		        if (opacity === 1) {
 		            opacity = 0.5;
-		            
-//		            alert.css({
-//		                opacity : 0.5
-//		            });
+
 		        } else {
 		        	opacity = 1;
-//		            alert.css({
-//		                opacity : 1
-//		            });
 		        }
 		        alert.fadeTo("fast", opacity)
 		    }, 400);
@@ -221,8 +214,10 @@ var generic = {
 	    return value && JSON.parse(value);
 	},
 	'unlogin' : function(){
-		generic.deleteValue("usuario");
-		generic.changePage("login.html");
+		server.get("j_spring_security_logout",null, function(){
+			generic.deleteValue("usuario");
+			document.location.href = "login.html";
+		});
 	},
 	'getActualDate' : function(){
 		var today = new Date();
@@ -268,6 +263,7 @@ var generic = {
 		if (restricciones.warningMessages != null && restricciones.warningMessages.length > 0){
 			$("#iconRestricciones").show();
 			$("#messageRestricciones").html(restricciones.warningMessages);
+	    	generic.blink();    
 		}
 		else{
 			$("#iconRestricciones").hide();
