@@ -69,7 +69,7 @@ public class ReglaRepository implements IReglaRepository {
 	 */
 	@Override
 	public void update(Regla regla) throws SQLException {
-		hibernateTemplate.update(regla);
+		hibernateTemplate.merge(regla);
 	}
 
 }

@@ -46,7 +46,7 @@ public class ReglaUtilDTO implements IReglaUtilDTO {
 			campo.setId(campoSugeridoDTO.getIdCampo());
 			campoSugerido.setCampo(campo);
 			campoSugerido.setRegla(regla);
-			campoSugerido.setId(campoSugerido.getId());
+			campoSugerido.setId(campoSugeridoDTO.getId());
 			regla.addCampoSugerido(campoSugerido);
 		}
 		return regla;

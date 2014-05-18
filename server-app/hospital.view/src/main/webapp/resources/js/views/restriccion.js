@@ -1,63 +1,72 @@
 var restriccion = {
 	'formatForm' : function(regla) {
 		generic.get("restriccion/paginas", null, function(paginas) {
-			var tree = [];
-			var i = 0;
+			var treeRellenados = [];
+			var treeSugeridos = [];
+			var i;
+
+			i = 0;
 			paginas.forEach(function(pagina) {
-				tree.push({
+				treeRellenados.push({
 					title : pagina.nombre,
 					folder : true,
 					children : []
 				});
 				pagina.camposDTO.forEach(function(campoDTO) {
-					tree[i].children.push({
+					var node = {
 						title : campoDTO.nombre,
 						key : campoDTO.id
-					});
+					};
+					if (regla != null) {
+						regla.camposRellenadosDTO.forEach(function(campoRellenado) {
+							if (node.key == campoRellenado.idCampo) {
+								node.id = campoRellenado.id;
+								node.selected = true;
+							}
+						});
+					}
+					treeRellenados[i].children.push(node);
+				});
+				i++;
+			});
+
+			i = 0;
+			paginas.forEach(function(pagina) {
+				treeSugeridos.push({
+					title : pagina.nombre,
+					folder : true,
+					children : []
+				});
+				pagina.camposDTO.forEach(function(campoDTO) {
+					var node = {
+						title : campoDTO.nombre,
+						key : campoDTO.id
+					};
+					if (regla != null) {
+						regla.camposSugeridosDTO.forEach(function(campoSugerido) {
+							if (node.key == campoSugerido.idCampo) {
+								node.id = campoSugerido.id;
+								node.selected = true;
+							}
+						});
+					}
+					treeSugeridos[i].children.push(node);
 				});
 				i++;
 			});
 
 			$("#treeRellenados").fancytree({
-				source : tree,
+				source : treeRellenados,
 				icons : false,
 				checkbox : true,
 				selectMode : 3
 			});
 			$("#treeSugeridos").fancytree({
-				source : tree,
+				source : treeSugeridos,
 				icons : false,
 				checkbox : true,
 				selectMode : 3
 			});
-			
-			if (regla != null){
-				var treeRellenados = $("#treeRellenados").fancytree('getTree');
-				regla.camposRellenadosDTO.forEach(function(campoRellenado) {
-					treeRellenados.options.source.forEach(function(pagina) {
-						pagina.children.forEach(function(campo) {
-							if (campo.key == campoRellenado.idCampo) {
-								campo.id = campoRellenado.id;
-								campo.selected = true;
-							}
-						});
-					});
-				});
-				treeRellenados.reload();
-				var treeSugeridos = $("#treeSugeridos").fancytree('getTree');
-				regla.camposSugeridosDTO.forEach(function(campoSugerido) {
-					treeSugeridos.options.source.forEach(function(pagina) {
-						pagina.children.forEach(function(campo) {
-							if (campo.key == campoSugerido.idCampo) {
-								campo.id = campoSugerido.id;
-								campo.selected = true;
-							}
-						});
-					});
-				});
-				treeSugeridos.reload();
-				
-			}
 		});
 	},
 	'getParams' : function() {
