@@ -225,6 +225,35 @@ public class ReglaService implements IReglaService {
 
 	/*
 	 * (non-Javadoc)
+	 * @see com.upsam.hospital.model.service.IReglaService#retrieveReglasInfo()
+	 */
+	@Override
+	public List<Regla> retrieveReglasInfo() throws DataBaseException {
+		try {
+			return reglaRepository.retrieveReglasInfo();
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IReglaService#retrieveReglasWarning()
+	 */
+	@Override
+	public List<Regla> retrieveReglasWarning() throws DataBaseException {
+		try {
+			return reglaRepository.retrieveReglasWarning();
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see
 	 * com.upsam.hospital.model.service.IModelService#save(com.upsam.hospital
 	 * .model.beans.IModelHospital)

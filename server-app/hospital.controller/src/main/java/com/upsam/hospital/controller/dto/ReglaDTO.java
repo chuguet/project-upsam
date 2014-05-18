@@ -11,6 +11,9 @@ import com.upsam.hospital.controller.dto.util.impl.CampoSugeridoDTO;
  */
 public class ReglaDTO extends AbstractDTO {
 
+	/** The campos info dto. */
+	private List<CampoInfoDTO> camposInfosDTO;
+
 	/** The campos rellenados dto. */
 	private List<CampoRellenadoDTO> camposRellenadosDTO;
 
@@ -20,8 +23,24 @@ public class ReglaDTO extends AbstractDTO {
 	/** The mensaje. */
 	private String mensaje;
 
+	/** The tipo regla. */
+	private Integer tipoRegla;
+
 	/** The titulo. */
 	private String titulo;
+
+	/**
+	 * Adds the campo info dto.
+	 * 
+	 * @param campoInfoDTO
+	 *            the campo info dto
+	 */
+	public void addCampoInfoDTO(CampoInfoDTO campoInfoDTO) {
+		if (this.getCamposInfosDTO() == null) {
+			this.setCamposInfosDTO(new ArrayList<CampoInfoDTO>());
+		}
+		this.getCamposInfosDTO().add(campoInfoDTO);
+	}
 
 	/**
 	 * Adds the campo rellenado dto.
@@ -47,6 +66,15 @@ public class ReglaDTO extends AbstractDTO {
 			this.setCamposSugeridosDTO(new ArrayList<CampoSugeridoDTO>());
 		}
 		this.getCamposSugeridosDTO().add(campoSugeridoDTO);
+	}
+
+	/**
+	 * Gets the campos infos dto.
+	 * 
+	 * @return the campos infos dto
+	 */
+	public List<CampoInfoDTO> getCamposInfosDTO() {
+		return camposInfosDTO;
 	}
 
 	/**
@@ -77,12 +105,31 @@ public class ReglaDTO extends AbstractDTO {
 	}
 
 	/**
+	 * Gets the tipo regla.
+	 * 
+	 * @return the tipo regla
+	 */
+	public Integer getTipoRegla() {
+		return tipoRegla;
+	}
+
+	/**
 	 * Gets the titulo.
 	 * 
 	 * @return the titulo
 	 */
 	public String getTitulo() {
 		return titulo;
+	}
+
+	/**
+	 * Sets the campos infos dto.
+	 * 
+	 * @param camposInfosDTO
+	 *            the new campos infos dto
+	 */
+	public void setCamposInfosDTO(List<CampoInfoDTO> camposInfosDTO) {
+		this.camposInfosDTO = camposInfosDTO;
 	}
 
 	/**
@@ -113,6 +160,16 @@ public class ReglaDTO extends AbstractDTO {
 	 */
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
+	}
+
+	/**
+	 * Sets the tipo regla.
+	 * 
+	 * @param tipoRegla
+	 *            the new tipo regla
+	 */
+	public void setTipoRegla(Integer tipoRegla) {
+		this.tipoRegla = tipoRegla;
 	}
 
 	/**

@@ -95,6 +95,7 @@ var restriccion = {
 		});
 		var data = {
 			id : id,
+			tipoRegla : 0,
 			camposSugeridosDTO : camposSugeridos,
 			camposRellenadosDTO : camposRellenados,
 			titulo : titulo,

@@ -32,4 +32,24 @@ public class PaginaUtilDTO implements IPaginaUtilDTO {
 		}
 		return paginaDTO;
 	}
+
+	@Override
+	public PaginaDTO toRestInfoPaginas(Pagina pagina) throws TransferObjectException {
+		CampoDTO campoDTO;
+		PaginaDTO paginaDTO = new PaginaDTO();
+		paginaDTO.setNombre(pagina.getNombre());
+		paginaDTO.setId(pagina.getId());
+		for (Campo campo : pagina.getCampos()) {
+			if (campo.getMinValue() != null && campo.getMaxValue() != null) {
+				campoDTO = new CampoDTO();
+				campoDTO.setIdPagina(pagina.getId());
+				campoDTO.setNombre(campo.getNombre());
+				campoDTO.setId(campo.getId());
+				campoDTO.setMaxValue(campo.getMaxValue());
+				campoDTO.setMinValue(campo.getMinValue());
+				paginaDTO.addCampoDTO(campoDTO);
+			}
+		}
+		return paginaDTO;
+	}
 }

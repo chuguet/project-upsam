@@ -27,6 +27,16 @@ public class Campo implements IModelHospital {
 	@Column(name = "ID_CAMPO")
 	private Integer id;
 
+	/** The max value. */
+	@Basic
+	@Column(name = "MAX_VALUE")
+	private Double maxValue;
+
+	/** The min value. */
+	@Basic
+	@Column(name = "MIN_VALUE")
+	private Double minValue;
+
 	/** The sintoma. */
 	@Basic
 	@Column(name = "NOMBRE")
@@ -54,6 +64,24 @@ public class Campo implements IModelHospital {
 	 */
 	public Integer getId() {
 		return id;
+	}
+
+	/**
+	 * Gets the max value.
+	 * 
+	 * @return the max value
+	 */
+	public Double getMaxValue() {
+		return maxValue;
+	}
+
+	/**
+	 * Gets the min value.
+	 * 
+	 * @return the min value
+	 */
+	public Double getMinValue() {
+		return minValue;
 	}
 
 	/**
@@ -100,6 +128,26 @@ public class Campo implements IModelHospital {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	/**
+	 * Sets the max value.
+	 * 
+	 * @param maxValue
+	 *            the new max value
+	 */
+	public void setMaxValue(Double maxValue) {
+		this.maxValue = maxValue;
+	}
+
+	/**
+	 * Sets the min value.
+	 * 
+	 * @param minValue
+	 *            the new min value
+	 */
+	public void setMinValue(Double minValue) {
+		this.minValue = minValue;
 	}
 
 	/**

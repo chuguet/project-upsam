@@ -15,6 +15,9 @@ import com.upsam.hospital.model.repository.IPaginaRepository;
 @Repository
 public class PaginaRepository implements IPaginaRepository {
 
+	/** The Constant QUERY_FIND_PAGINAS_INFO. */
+	private static final String QUERY_FIND_PAGINAS_INFO = "from Pagina where (infoPage = true)";
+
 	/** The hibernate template. */
 	@Inject
 	private HibernateTemplate hibernateTemplate;
@@ -48,6 +51,18 @@ public class PaginaRepository implements IPaginaRepository {
 	@Override
 	public Pagina findOne(Integer pId) throws SQLException {
 		return hibernateTemplate.get(Pagina.class, pId);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.repository.IPaginaRepository#retrievePaginasInfo
+	 * ()
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Pagina> retrievePaginasInfo() {
+		return hibernateTemplate.find(QUERY_FIND_PAGINAS_INFO);
 	}
 
 	/*

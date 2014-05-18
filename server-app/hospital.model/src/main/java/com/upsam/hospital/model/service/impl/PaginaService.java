@@ -68,6 +68,21 @@ public class PaginaService implements IPaginaService {
 	/*
 	 * (non-Javadoc)
 	 * @see
+	 * com.upsam.hospital.model.service.IPaginaService#retrievePaginasInfo()
+	 */
+	@Override
+	public List<Pagina> retrievePaginasInfo() throws DataBaseException {
+		try {
+			return paginaRepository.retrievePaginasInfo();
+		}
+		catch (SQLException e1) {
+			throw new DataBaseException(e1);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
 	 * com.upsam.hospital.model.service.IModelService#save(com.upsam.hospital
 	 * .model.beans.IModelHospital)
 	 */

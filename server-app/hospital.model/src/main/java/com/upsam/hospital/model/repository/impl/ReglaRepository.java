@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import com.upsam.hospital.model.beans.Regla;
+import com.upsam.hospital.model.enums.TipoRegla;
 import com.upsam.hospital.model.repository.IReglaRepository;
 
 // TODO: Auto-generated Javadoc
@@ -14,6 +15,12 @@ import com.upsam.hospital.model.repository.IReglaRepository;
  */
 @Repository
 public class ReglaRepository implements IReglaRepository {
+
+	/** The Constant QUERY_FIND_REGLAS_INFO. */
+	private static final String QUERY_FIND_REGLAS_INFO = "from Regla where (TIPO_REGLA = ?)";
+
+	/** The Constant QUERY_FIND_REGLAS_WARNING. */
+	private static final String QUERY_FIND_REGLAS_WARNING = "from Regla where (TIPO_REGLA = ?)";
 
 	/** The hibernate template. */
 	@Inject
@@ -48,6 +55,29 @@ public class ReglaRepository implements IReglaRepository {
 	@Override
 	public Regla findOne(Integer pId) throws SQLException {
 		return hibernateTemplate.get(Regla.class, pId);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.repository.IReglaRepository#retrieveReglasInfo()
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Regla> retrieveReglasInfo() throws SQLException {
+		return hibernateTemplate.find(QUERY_FIND_REGLAS_INFO, TipoRegla.INFO.ordinal());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.repository.IReglaRepository#retrieveReglasWarning
+	 * ()
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Regla> retrieveReglasWarning() throws SQLException {
+		return hibernateTemplate.find(QUERY_FIND_REGLAS_WARNING, TipoRegla.WARNING.ordinal());
 	}
 
 	/*

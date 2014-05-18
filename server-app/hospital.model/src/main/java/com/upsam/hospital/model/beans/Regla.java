@@ -14,6 +14,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import com.upsam.hospital.model.enums.TipoRegla;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -25,6 +26,12 @@ public class Regla implements IModelHospital {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -675589228240481204L;
+
+	/** The campos infos. */
+	@OneToMany(mappedBy = "regla", orphanRemoval = true)
+	@Cascade(value = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<CampoInfo> camposInfos;
 
 	/** The campos rellenados. */
 	@OneToMany(mappedBy = "regla", orphanRemoval = true)
@@ -49,10 +56,28 @@ public class Regla implements IModelHospital {
 	@Column(name = "MENSAJE")
 	private String mensaje;
 
+	/** The tipo regla. */
+	@Basic
+	@Column(name = "TIPO_REGLA")
+	private TipoRegla tipoRegla;
+
 	/** The titulo. */
 	@Basic
 	@Column(name = "TITULO")
 	private String titulo;
+
+	/**
+	 * Adds the campo info.
+	 * 
+	 * @param campoInfo
+	 *            the campo info
+	 */
+	public void addCampoInfo(CampoInfo campoInfo) {
+		if (this.getCamposInfos() == null) {
+			this.setCamposInfos(new ArrayList<CampoInfo>());
+		}
+		this.getCamposInfos().add(campoInfo);
+	}
 
 	/**
 	 * Adds the campo rellenado.
@@ -78,6 +103,15 @@ public class Regla implements IModelHospital {
 			this.setCamposSugeridos(new ArrayList<CampoSugerido>());
 		}
 		this.getCamposSugeridos().add(campoSugerido);
+	}
+
+	/**
+	 * Gets the campos infos.
+	 * 
+	 * @return the campos infos
+	 */
+	public List<CampoInfo> getCamposInfos() {
+		return camposInfos;
 	}
 
 	/**
@@ -117,12 +151,31 @@ public class Regla implements IModelHospital {
 	}
 
 	/**
+	 * Gets the tipo regla.
+	 * 
+	 * @return the tipo regla
+	 */
+	public TipoRegla getTipoRegla() {
+		return tipoRegla;
+	}
+
+	/**
 	 * Gets the titulo.
 	 * 
 	 * @return the titulo
 	 */
 	public String getTitulo() {
 		return titulo;
+	}
+
+	/**
+	 * Sets the campos infos.
+	 * 
+	 * @param camposInfos
+	 *            the new campos infos
+	 */
+	public void setCamposInfos(List<CampoInfo> camposInfos) {
+		this.camposInfos = camposInfos;
 	}
 
 	/**
@@ -163,6 +216,16 @@ public class Regla implements IModelHospital {
 	 */
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
+	}
+
+	/**
+	 * Sets the tipo regla.
+	 * 
+	 * @param tipoRegla
+	 *            the new tipo regla
+	 */
+	public void setTipoRegla(TipoRegla tipoRegla) {
+		this.tipoRegla = tipoRegla;
 	}
 
 	/**

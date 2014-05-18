@@ -29,15 +29,10 @@ import com.upsam.hospital.model.service.IExploracionService;
 import com.upsam.hospital.model.service.IPaginaService;
 import com.upsam.hospital.model.service.IReglaService;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class FaqController.
- */
 @Controller
-public class RestriccionController {
-
+public class SugerenciaController {
 	/** The Constant LOG. */
-	private final static Log LOG = LogFactory.getLog(RestriccionController.class);
+	private final static Log LOG = LogFactory.getLog(SugerenciaController.class);
 
 	/** The exploracion service. */
 	@Inject
@@ -72,13 +67,13 @@ public class RestriccionController {
 	 *            the ui model
 	 * @return the string
 	 */
-	@RequestMapping(value = "restriccion/form/{operacion}", method = RequestMethod.GET, produces = "text/html")
+	@RequestMapping(value = "sugerencia/form/{operacion}", method = RequestMethod.GET, produces = "text/html")
 	public String createForm(@PathVariable("operacion") String operacion, final Model uiModel) {
 		uiModel.addAttribute("operacion", operacion);
 		if (!operacion.equals("list")) {
 			operacion = "form";
 		}
-		return new StringBuffer("restriccion/").append(operacion).toString();
+		return new StringBuffer("sugerencia/").append(operacion).toString();
 	}
 
 	/**
@@ -88,7 +83,7 @@ public class RestriccionController {
 	 *            the id
 	 * @return the mensaje dto
 	 */
-	@RequestMapping(value = "restriccion/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "sugerencia/{id}", method = RequestMethod.DELETE)
 	public @ResponseBody
 	MensajeDTO delete(@PathVariable("id") Integer id) {
 		MensajeDTO mensajeDTO;
@@ -111,7 +106,7 @@ public class RestriccionController {
 	 *            the regla dto
 	 * @return the mensaje dto
 	 */
-	@RequestMapping(value = "restriccion", method = RequestMethod.POST)
+	@RequestMapping(value = "sugerencia", method = RequestMethod.POST)
 	public @ResponseBody
 	MensajeDTO insertRegla(@RequestBody ReglaDTO reglaDTO) {
 		MensajeDTO mensajeDTO;
@@ -136,12 +131,12 @@ public class RestriccionController {
 	 * 
 	 * @return the list
 	 */
-	@RequestMapping(value = "restriccion", method = RequestMethod.GET)
+	@RequestMapping(value = "sugerencia", method = RequestMethod.GET)
 	public @ResponseBody
 	List<ReglaDTO> listAll() {
 		List<ReglaDTO> result = new ArrayList<ReglaDTO>();
 		try {
-			List<Regla> reglas = reglaService.retrieveReglasWarning();
+			List<Regla> reglas = reglaService.retrieveReglasInfo();
 			for (Regla regla : reglas) {
 				result.add(reglaUtilDTO.toRestInfo(regla));
 			}
@@ -162,7 +157,7 @@ public class RestriccionController {
 	 *            the id
 	 * @return the regla dto
 	 */
-	@RequestMapping(value = "restriccion/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "sugerencia/{id}", method = RequestMethod.GET)
 	public @ResponseBody
 	ReglaDTO retrieve(@PathVariable("id") Integer id) {
 		ReglaDTO result = null;
@@ -186,7 +181,7 @@ public class RestriccionController {
 	 *            the id exploracion
 	 * @return the faq dto
 	 */
-	@RequestMapping(value = "pacientemovil/{idPaciente}/exploracion/{idExploracion}/restriccion", method = RequestMethod.GET)
+	@RequestMapping(value = "pacientemovil/{idPaciente}/exploracion/{idExploracion}/sugerencia", method = RequestMethod.GET)
 	public @ResponseBody
 	FaqDTO retrieveFaq(@PathVariable("idExploracion") Integer idExploracion) {
 		FaqDTO faqDTO = null;
@@ -221,14 +216,14 @@ public class RestriccionController {
 	 * 
 	 * @return the list
 	 */
-	@RequestMapping(value = "restriccion/paginas", method = RequestMethod.GET)
+	@RequestMapping(value = "sugerencia/paginas", method = RequestMethod.GET)
 	public @ResponseBody
 	List<PaginaDTO> retrievePaginas() {
 		List<PaginaDTO> result = new ArrayList<PaginaDTO>();
 		try {
-			List<Pagina> paginas = paginaService.findAll();
+			List<Pagina> paginas = paginaService.retrievePaginasInfo();
 			for (Pagina pagina : paginas) {
-				result.add(paginaUtilDTO.toRest(pagina));
+				result.add(paginaUtilDTO.toRestInfoPaginas(pagina));
 			}
 		}
 		catch (DataBaseException e) {
@@ -247,7 +242,7 @@ public class RestriccionController {
 	 *            the regla dto
 	 * @return the mensaje dto
 	 */
-	@RequestMapping(value = "restriccion/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "sugerencia/{id}", method = RequestMethod.POST)
 	public @ResponseBody
 	MensajeDTO udpate(@RequestBody ReglaDTO reglaDTO) {
 		MensajeDTO mensajeDTO;

@@ -31,4 +31,15 @@ public interface IPaginaUtilDTO {
 	 *             the transfer object exception
 	 */
 	PaginaDTO toRest(Pagina pagina) throws TransferObjectException;
+
+	/**
+	 * To rest info paginas.
+	 * 
+	 * @param pagina
+	 *            the pagina
+	 * @return the pagina dto
+	 * @throws TransferObjectException
+	 *             the transfer object exception
+	 */
+	PaginaDTO toRestInfoPaginas(Pagina pagina) throws TransferObjectException;
 }

@@ -5,7 +5,7 @@
 	<div id="breadcrumb" class="col-md-12">
 		<ol class="breadcrumb">
 			<li><a href="<c:url value="/home" />">Inicio</a></li>
-			<li>Pacientes</li>
+			<li>Sugerencias</li>
 		</ol>
 	</div>
 </div>
@@ -14,7 +14,7 @@
 		<div class="box">
 			<div class="box-header">
 				<div class="box-name">
-					<span>Listado de pacientes del sistema</span>
+					<span>Listado de sugerencias del sistema</span>
 				</div>
 				<div class="box-icons">
 					<a class="expand-link">
@@ -33,11 +33,8 @@
 				<table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1">
 					<thead>
 						<tr>
-							<th>Nombre</th>
-							<th>Apellidos</th>
-							<th>Num. Identificaci&oacute;n</th>
-							<th>Telefono</th>
-							<th>Fecha Nacimiento</th>
+							<th>T&iacute;tulo</th>
+							<th>Mensaje</th>
 						</tr>
 					</thead>
 					
@@ -45,11 +42,8 @@
 					
 					<tfoot>
 						<tr>
-							<th>Nombre</th>
-							<th>Apellidos</th>
-							<th>Num. Identificaci&oacute;n</th>
-							<th>Telefono</th>
-							<th>Fecha Nacimiento</th>
+							<th>T&iacute;tulo</th>
+							<th>Mensaje</th>
 						</tr>
 					</tfoot>
 				</table>
@@ -60,58 +54,11 @@
 
 
 <script type="text/javascript">
-	function AllTables(){
-			TestTable1();
-			LoadSelect2Script(MakeSelect2);
-		}
-		
-	function MakeSelect2(){
-		$('select').select2();
-		$('.dataTables_filter').each(function(){
-			$(this).find('label input[type=text]').attr('placeholder', 'Buscar');
-		});
-	}
 	function showInformationIntoView(information){
 		for (var i = 0; i < information.length; i++){
-			$("table.table tbody").append("<tr onclick='paciente.selectRow(this);'><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].nombre + "</td><td>" + information[i].apellidos + "</td><td>" + information[i].numeroIdentificacion + "</td><td>" + information[i].telefono + "</td><td>" + information[i].fechaNacimiento + "</td></tr>");
+			$("table.table tbody").append("<tr onclick='sugerencia.selectRow(this);'><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].titulo + "</td><td>" + information[i].mensaje + "</td></tr>");
 		}
 
-		generic.processTable("paciente");
+		generic.processTable("sugerencia");
 	};
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<fieldset id="parent">
-	<legend>Listado de Reglas</legend>
-	<div class="botonera">
-		<input type="button" id="btnAlta" value="Alta" />
-		<input type="button" id="btnEditar" value="Editar" />
-	</div>
-	<table id="lista"></table>
-	<div id=paginadorLista></div>
-</fieldset>
-
-<script type="text/javascript">
-faq.formatList();
-function showInformationIntoView(information){
-	$("#lista").setGridParam({
-		data : information
-	}).trigger("reloadGrid");
-	$(window).bind('resize', function() {
-		$('#lista').setGridWidth($('.ui-jqgrid').parent().innerWidth() - 30);
-	}).trigger('resize');
-};
 </script>

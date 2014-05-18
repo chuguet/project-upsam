@@ -34,6 +34,11 @@ public class Pagina implements IModelHospital {
 	@Column(name = "ID_PAGINA")
 	private Integer id;
 
+	/** The info page. */
+	@Basic
+	@Column(name = "INFO_PAGE")
+	private Boolean infoPage;
+
 	/** The parte. */
 	@Basic
 	@Column(name = "NOMBRE")
@@ -55,6 +60,15 @@ public class Pagina implements IModelHospital {
 	 */
 	public Integer getId() {
 		return id;
+	}
+
+	/**
+	 * Gets the info page.
+	 * 
+	 * @return the info page
+	 */
+	public Boolean getInfoPage() {
+		return infoPage;
 	}
 
 	/**
@@ -84,6 +98,16 @@ public class Pagina implements IModelHospital {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	/**
+	 * Sets the info page.
+	 * 
+	 * @param infoPage
+	 *            the new info page
+	 */
+	public void setInfoPage(Boolean infoPage) {
+		this.infoPage = infoPage;
 	}
 
 	/**
