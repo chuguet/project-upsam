@@ -16,6 +16,7 @@ import com.upsam.hospital.model.beans.GrossMotorFunction;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Regla;
 import com.upsam.hospital.model.beans.ValoracionArticularMuscular;
+import com.upsam.hospital.model.enums.TipoRegla;
 import com.upsam.hospital.model.exceptions.DataBaseException;
 import com.upsam.hospital.model.repository.IReglaRepository;
 import com.upsam.hospital.model.service.IAntecedentesPersonalesService;
@@ -91,7 +92,6 @@ public class ReglaService implements IReglaService {
 			AntecedentesRelacionadosPCI antecedentesRelacionadosPCI = antecedentesRelacionadosPCIService.findByExploracion(exploracion.getId());
 			GrossMotorFunction grossMotorFunction = grossMotorFunctionService.findByExploracion(exploracion.getId());
 			ValoracionArticularMuscular valoracionArticularMuscular = valoracionArticularMuscularService.findByExploracion(exploracion.getId());
-
 			AntecedentesQuirurgicosOrtopedicos antecedentesQuirurgicosOrtopedicos = null;
 			if (antecedentesPersonales != null) {
 				List<AntecedentesQuirurgicosOrtopedicos> listaAntecedentesQuirurgicosOrtopedicos = antecedentesQuirurgicosOrtopedicosService.findByAntecedentePersonal(antecedentesPersonales.getId());
@@ -102,7 +102,7 @@ public class ReglaService implements IReglaService {
 
 			int count = 0;
 			for (Regla regla : reglas) {
-				if (matchRegla(regla, paciente, exploracion, antecedentesPersonales, antecedentesRelacionadosPCI, grossMotorFunction, valoracionArticularMuscular, antecedentesQuirurgicosOrtopedicos)) {
+				if (regla.getTipoRegla().equals(TipoRegla.WARNING) && matchReglaWarning(regla, paciente, exploracion, antecedentesPersonales, antecedentesRelacionadosPCI, grossMotorFunction, valoracionArticularMuscular, antecedentesQuirurgicosOrtopedicos)) {
 					count++;
 					sb.append("<li>").append(regla.getMensaje()).append("<br/>").append("Campos sugeridos a rellenar: ");
 					sb.append("<ol>");
@@ -110,6 +110,9 @@ public class ReglaService implements IReglaService {
 						sb.append("<li>").append(campoSugerido.getCampo().getNombre()).append(" (").append(campoSugerido.getCampo().getPagina().getNombre()).append(")</li>");
 					}
 					sb.append("</ol></li>");
+				}
+				else if (regla.getTipoRegla().equals(TipoRegla.INFO)) {
+					// TODO
 				}
 			}
 
@@ -188,7 +191,7 @@ public class ReglaService implements IReglaService {
 	 * @throws DataBaseException
 	 *             the data base exception
 	 */
-	private Boolean matchRegla(Regla regla, Paciente paciente, Exploracion exploracion, AntecedentesPersonales antecedentesPersonales, AntecedentesRelacionadosPCI antecedentesRelacionadosPCI, GrossMotorFunction grossMotorFunction, ValoracionArticularMuscular valoracionArticularMuscular, AntecedentesQuirurgicosOrtopedicos antecedentesQuirurgicosOrtopedicos) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException, DataBaseException {
+	private Boolean matchReglaWarning(Regla regla, Paciente paciente, Exploracion exploracion, AntecedentesPersonales antecedentesPersonales, AntecedentesRelacionadosPCI antecedentesRelacionadosPCI, GrossMotorFunction grossMotorFunction, ValoracionArticularMuscular valoracionArticularMuscular, AntecedentesQuirurgicosOrtopedicos antecedentesQuirurgicosOrtopedicos) throws SecurityException, NoSuchFieldException, IllegalArgumentException, IllegalAccessException, DataBaseException {
 		Boolean result = Boolean.TRUE;
 		String clase;
 		String atributo;
