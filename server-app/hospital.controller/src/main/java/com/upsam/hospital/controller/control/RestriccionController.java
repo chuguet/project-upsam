@@ -186,7 +186,7 @@ public class RestriccionController {
 	 *            the id exploracion
 	 * @return the faq dto
 	 */
-	@RequestMapping(value = "pacientemovil/{idPaciente}/exploracion/{idExploracion}/restriccion", method = RequestMethod.GET)
+	@RequestMapping(value = "pacientemovil/{idPaciente}/exploracion/{idExploracion}/faq", method = RequestMethod.GET)
 	public @ResponseBody
 	FaqDTO retrieveFaq(@PathVariable("idExploracion") Integer idExploracion) {
 		FaqDTO faqDTO = null;
