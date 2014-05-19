@@ -228,6 +228,22 @@ public class ReglaService implements IReglaService {
 
 	/*
 	 * (non-Javadoc)
+	 * @see
+	 * com.upsam.hospital.model.service.IReglaService#merge(com.upsam.hospital
+	 * .model.beans.Regla)
+	 */
+	@Override
+	public Regla merge(Regla regla) throws DataBaseException {
+		try {
+			return reglaRepository.merge(regla);
+		}
+		catch (SQLException e) {
+			throw new DataBaseException(e);
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
 	 * @see com.upsam.hospital.model.service.IReglaService#retrieveReglasInfo()
 	 */
 	@Override

@@ -32,6 +32,17 @@ public interface IReglaService extends IModelService<Regla> {
 	Faq doFaq(Exploracion exploracion) throws DataBaseException, SecurityException, IllegalArgumentException, NoSuchFieldException, IllegalAccessException;
 
 	/**
+	 * Merge.
+	 * 
+	 * @param regla
+	 *            the regla
+	 * @return the regla
+	 * @throws DataBaseException
+	 *             the data base exception
+	 */
+	Regla merge(Regla regla) throws DataBaseException;
+
+	/**
 	 * Retrieve reglas info.
 	 * 
 	 * @return the list

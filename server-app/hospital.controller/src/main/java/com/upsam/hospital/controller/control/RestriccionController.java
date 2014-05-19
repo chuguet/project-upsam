@@ -253,7 +253,7 @@ public class RestriccionController {
 		MensajeDTO mensajeDTO;
 		try {
 			Regla regla = reglaUtilDTO.toBusiness(reglaDTO);
-			reglaService.update(regla);
+			reglaService.merge(regla);
 			mensajeDTO = new MensajeDTO("Se ha actualizado la regla correctamente.", true);
 		}
 		catch (DataBaseException e) {

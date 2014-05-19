@@ -2,8 +2,6 @@ package com.upsam.hospital.model.repository.impl;
 
 import java.sql.SQLException;
 import java.util.List;
-import javax.inject.Inject;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.repository.IPacienteRepository;
@@ -13,37 +11,13 @@ import com.upsam.hospital.model.repository.IPacienteRepository;
  * The Class PacienteRepository.
  */
 @Repository
-class PacienteRepository implements IPacienteRepository {
+class PacienteRepository extends AbstractRepositoryDAO<Paciente> implements IPacienteRepository {
 
 	/** The Constant QUERY_FIND_ONE_UNIQUE. */
 	private static final String QUERY_FIND_ONE_UNIQUE = "Select new Paciente(apellidos,curso,escolarizacion,examinador,fechaNacimiento,fechaUltimaEvaluacion,id,nombre,numeroIdentificacion,sexo,telefono) from Paciente where (ID_PACIENTE = ?)";
 
 	/** The Constant QUERY_FINDBY_ID_NAME_SURNAME. */
 	private static final String QUERY_FINDBY_ID_NAME_SURNAME = "Select new Paciente(id,numeroIdentificacion,nombre,apellidos,fechaNacimiento,fechaUltimaEvaluacion) from Paciente where (concat(NUMERO_IDENTIFICACION,' ',NOMBRE,' ',APELLIDOS) like concat('%',?,'%'))";
-
-	/** The hibernate template. */
-	@Inject
-	private HibernateTemplate hibernateTemplate;
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.repository.IRepositoryDAO#delete(com.upsam.hospital
-	 * .model.beans.IModelHospital)
-	 */
-	@Override
-	public void delete(Paciente paciente) throws SQLException {
-		hibernateTemplate.delete(paciente);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see com.upsam.hospital.model.repository.IRepositoryDAO#findAll()
-	 */
-	@Override
-	public List<Paciente> findAll() throws SQLException {
-		return hibernateTemplate.loadAll(Paciente.class);
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -54,18 +28,7 @@ class PacienteRepository implements IPacienteRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Paciente> findByIdNameSurname(String idNameSurname) throws SQLException {
-		return hibernateTemplate.find(QUERY_FINDBY_ID_NAME_SURNAME, idNameSurname);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.repository.IRepositoryDAO#findOne(java.lang.
-	 * Integer)
-	 */
-	@Override
-	public Paciente findOne(Integer pId) throws SQLException {
-		return hibernateTemplate.get(Paciente.class, pId);
+		return getHibernateTemplate().find(QUERY_FINDBY_ID_NAME_SURNAME, idNameSurname);
 	}
 
 	/*
@@ -76,29 +39,17 @@ class PacienteRepository implements IPacienteRepository {
 	 */
 	@Override
 	public Paciente findOneUnique(Integer pId) throws SQLException {
-		return (Paciente) hibernateTemplate.find(QUERY_FIND_ONE_UNIQUE, pId).get(0);
+		return (Paciente) getHibernateTemplate().find(QUERY_FIND_ONE_UNIQUE, pId).get(0);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * @see
-	 * com.upsam.hospital.model.repository.IRepositoryDAO#save(com.upsam.hospital
-	 * .model.beans.IModelHospital)
+	 * com.upsam.hospital.model.repository.impl.AbstractRepositoryDAO#getClazz()
 	 */
 	@Override
-	public Integer save(Paciente paciente) throws SQLException {
-		return (Integer) hibernateTemplate.save(paciente);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * com.upsam.hospital.model.repository.IRepositoryDAO#update(com.upsam.hospital
-	 * .model.beans.IModelHospital)
-	 */
-	@Override
-	public void update(Paciente paciente) throws SQLException {
-		hibernateTemplate.update(paciente);
+	protected Class<Paciente> getClazz() {
+		return Paciente.class;
 	}
 
 }
