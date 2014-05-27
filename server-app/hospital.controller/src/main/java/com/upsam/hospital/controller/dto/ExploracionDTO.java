@@ -11,85 +11,85 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/** The analisis observacional marcha. */
 	private Integer analisisObservacionalMarcha;
-	
+
 	/** The cadera flexion derecha. */
-	private String caderaFlexionDerecha;
-	
+	private Integer caderaFlexionDerecha;
+
 	/** The cadera flexion izquierda. */
-	private String caderaFlexionIzquierda;
-	
+	private Integer caderaFlexionIzquierda;
+
 	/** The cadera inflexion derecha. */
-	private String caderaInflexionDerecha;
-	
+	private Integer caderaInflexionDerecha;
+
 	/** The cadera inflexion izquierda. */
-	private String caderaInflexionIzquierda;
-	
+	private Integer caderaInflexionIzquierda;
+
 	/** The control motor selectivo. */
 	private String controlMotorSelectivo;
-	
+
 	/** The evaluacion muscular. */
-	private String evaluacionMuscular;
-	
+	private Integer evaluacionMuscular;
+
 	/** The fecha. */
 	private String fecha;
-	
+
 	/** The fecha actualizacion. */
 	private String fechaActualizacion;
-	
+
 	/** The id antecedentes personales. */
 	private Integer idAntecedentesPersonales;
-	
+
 	/** The id usuario. */
 	private Integer idUsuario;
-	
+
 	/** The longitud miembro derecho. */
 	private Integer longitudMiembroDerecho;
-	
+
 	/** The longitud miembro izquierdo. */
 	private Integer longitudMiembroIzquierdo;
-	
+
 	/** The nombre usuario. */
 	private String nombreUsuario;
-	
+
 	/** The puntuacion500 metros. */
 	private Integer puntuacion500Metros;
-	
+
 	/** The puntuacion50 metros. */
 	private Integer puntuacion50Metros;
-	
+
 	/** The puntuacion5 metros. */
 	private Integer puntuacion5Metros;
-	
+
 	/** The rodilla flexion derecha. */
-	private String rodillaFlexionDerecha;
-	
+	private Integer rodillaFlexionDerecha;
+
 	/** The rodilla flexion izquierda. */
-	private String rodillaFlexionIzquierda;
-	
+	private Integer rodillaFlexionIzquierda;
+
 	/** The rodilla inflexion derecha. */
-	private String rodillaInflexionDerecha;
-	
+	private Integer rodillaInflexionDerecha;
+
 	/** The rodilla inflexion izquierda. */
-	private String rodillaInflexionIzquierda;
-	
+	private Integer rodillaInflexionIzquierda;
+
 	/** The tobillo flexion derecha. */
-	private String tobilloFlexionDerecha;
-	
+	private Integer tobilloFlexionDerecha;
+
 	/** The tobillo flexion izquierda. */
-	private String tobilloFlexionIzquierda;
-	
+	private Integer tobilloFlexionIzquierda;
+
 	/** The tobillo inflexion derecha. */
-	private String tobilloInflexionDerecha;
-	
+	private Integer tobilloInflexionDerecha;
+
 	/** The tobillo inflexion izquierda. */
-	private String tobilloInflexionIzquierda;
+	private Integer tobilloInflexionIzquierda;
 
 	/** The videos. */
 	private List<VideoDTO> videos = new ArrayList<VideoDTO>();
 
 	/**
 	 * Gets the analisis observacional marcha.
-	 *
+	 * 
 	 * @return the analisis observacional marcha
 	 */
 	public Integer getAnalisisObservacionalMarcha() {
@@ -98,43 +98,43 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the cadera flexion derecha.
-	 *
+	 * 
 	 * @return the cadera flexion derecha
 	 */
-	public String getCaderaFlexionDerecha() {
+	public Integer getCaderaFlexionDerecha() {
 		return caderaFlexionDerecha;
 	}
 
 	/**
 	 * Gets the cadera flexion izquierda.
-	 *
+	 * 
 	 * @return the cadera flexion izquierda
 	 */
-	public String getCaderaFlexionIzquierda() {
+	public Integer getCaderaFlexionIzquierda() {
 		return caderaFlexionIzquierda;
 	}
 
 	/**
 	 * Gets the cadera inflexion derecha.
-	 *
+	 * 
 	 * @return the cadera inflexion derecha
 	 */
-	public String getCaderaInflexionDerecha() {
+	public Integer getCaderaInflexionDerecha() {
 		return caderaInflexionDerecha;
 	}
 
 	/**
 	 * Gets the cadera inflexion izquierda.
-	 *
+	 * 
 	 * @return the cadera inflexion izquierda
 	 */
-	public String getCaderaInflexionIzquierda() {
+	public Integer getCaderaInflexionIzquierda() {
 		return caderaInflexionIzquierda;
 	}
 
 	/**
 	 * Gets the control motor selectivo.
-	 *
+	 * 
 	 * @return the control motor selectivo
 	 */
 	public String getControlMotorSelectivo() {
@@ -143,16 +143,16 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the evaluacion muscular.
-	 *
+	 * 
 	 * @return the evaluacion muscular
 	 */
-	public String getEvaluacionMuscular() {
+	public Integer getEvaluacionMuscular() {
 		return evaluacionMuscular;
 	}
 
 	/**
 	 * Gets the fecha.
-	 *
+	 * 
 	 * @return the fecha
 	 */
 	public String getFecha() {
@@ -161,7 +161,7 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the fecha actualizacion.
-	 *
+	 * 
 	 * @return the fecha actualizacion
 	 */
 	public String getFechaActualizacion() {
@@ -170,7 +170,7 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the id antecedentes personales.
-	 *
+	 * 
 	 * @return the id antecedentes personales
 	 */
 	public Integer getIdAntecedentesPersonales() {
@@ -179,7 +179,7 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the id usuario.
-	 *
+	 * 
 	 * @return the id usuario
 	 */
 	public Integer getIdUsuario() {
@@ -188,7 +188,7 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the longitud miembro derecho.
-	 *
+	 * 
 	 * @return the longitud miembro derecho
 	 */
 	public Integer getLongitudMiembroDerecho() {
@@ -197,7 +197,7 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the longitud miembro izquierdo.
-	 *
+	 * 
 	 * @return the longitud miembro izquierdo
 	 */
 	public Integer getLongitudMiembroIzquierdo() {
@@ -206,7 +206,7 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the nombre usuario.
-	 *
+	 * 
 	 * @return the nombre usuario
 	 */
 	public String getNombreUsuario() {
@@ -215,7 +215,7 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the puntuacion500 metros.
-	 *
+	 * 
 	 * @return the puntuacion500 metros
 	 */
 	public Integer getPuntuacion500Metros() {
@@ -224,7 +224,7 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the puntuacion50 metros.
-	 *
+	 * 
 	 * @return the puntuacion50 metros
 	 */
 	public Integer getPuntuacion50Metros() {
@@ -233,7 +233,7 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the puntuacion5 metros.
-	 *
+	 * 
 	 * @return the puntuacion5 metros
 	 */
 	public Integer getPuntuacion5Metros() {
@@ -242,79 +242,79 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Gets the rodilla flexion derecha.
-	 *
+	 * 
 	 * @return the rodilla flexion derecha
 	 */
-	public String getRodillaFlexionDerecha() {
+	public Integer getRodillaFlexionDerecha() {
 		return rodillaFlexionDerecha;
 	}
 
 	/**
 	 * Gets the rodilla flexion izquierda.
-	 *
+	 * 
 	 * @return the rodilla flexion izquierda
 	 */
-	public String getRodillaFlexionIzquierda() {
+	public Integer getRodillaFlexionIzquierda() {
 		return rodillaFlexionIzquierda;
 	}
 
 	/**
 	 * Gets the rodilla inflexion derecha.
-	 *
+	 * 
 	 * @return the rodilla inflexion derecha
 	 */
-	public String getRodillaInflexionDerecha() {
+	public Integer getRodillaInflexionDerecha() {
 		return rodillaInflexionDerecha;
 	}
 
 	/**
 	 * Gets the rodilla inflexion izquierda.
-	 *
+	 * 
 	 * @return the rodilla inflexion izquierda
 	 */
-	public String getRodillaInflexionIzquierda() {
+	public Integer getRodillaInflexionIzquierda() {
 		return rodillaInflexionIzquierda;
 	}
 
 	/**
 	 * Gets the tobillo flexion derecha.
-	 *
+	 * 
 	 * @return the tobillo flexion derecha
 	 */
-	public String getTobilloFlexionDerecha() {
+	public Integer getTobilloFlexionDerecha() {
 		return tobilloFlexionDerecha;
 	}
 
 	/**
 	 * Gets the tobillo flexion izquierda.
-	 *
+	 * 
 	 * @return the tobillo flexion izquierda
 	 */
-	public String getTobilloFlexionIzquierda() {
+	public Integer getTobilloFlexionIzquierda() {
 		return tobilloFlexionIzquierda;
 	}
 
 	/**
 	 * Gets the tobillo inflexion derecha.
-	 *
+	 * 
 	 * @return the tobillo inflexion derecha
 	 */
-	public String getTobilloInflexionDerecha() {
+	public Integer getTobilloInflexionDerecha() {
 		return tobilloInflexionDerecha;
 	}
 
 	/**
 	 * Gets the tobillo inflexion izquierda.
-	 *
+	 * 
 	 * @return the tobillo inflexion izquierda
 	 */
-	public String getTobilloInflexionIzquierda() {
+	public Integer getTobilloInflexionIzquierda() {
 		return tobilloInflexionIzquierda;
 	}
 
 	/**
 	 * Gets the videos.
-	 *
+	 * 
 	 * @return the videos
 	 */
 	public List<VideoDTO> getVideos() {
@@ -323,8 +323,9 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the analisis observacional marcha.
-	 *
-	 * @param analisisObservacionalMarcha the new analisis observacional marcha
+	 * 
+	 * @param analisisObservacionalMarcha
+	 *            the new analisis observacional marcha
 	 */
 	public void setAnalisisObservacionalMarcha(Integer analisisObservacionalMarcha) {
 		this.analisisObservacionalMarcha = analisisObservacionalMarcha;
@@ -332,44 +333,49 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the cadera flexion derecha.
-	 *
-	 * @param caderaFlexionDerecha the new cadera flexion derecha
+	 * 
+	 * @param caderaFlexionDerecha
+	 *            the new cadera flexion derecha
 	 */
-	public void setCaderaFlexionDerecha(String caderaFlexionDerecha) {
+	public void setCaderaFlexionDerecha(Integer caderaFlexionDerecha) {
 		this.caderaFlexionDerecha = caderaFlexionDerecha;
 	}
 
 	/**
 	 * Sets the cadera flexion izquierda.
-	 *
-	 * @param caderaFlexionIzquierda the new cadera flexion izquierda
+	 * 
+	 * @param caderaFlexionIzquierda
+	 *            the new cadera flexion izquierda
 	 */
-	public void setCaderaFlexionIzquierda(String caderaFlexionIzquierda) {
+	public void setCaderaFlexionIzquierda(Integer caderaFlexionIzquierda) {
 		this.caderaFlexionIzquierda = caderaFlexionIzquierda;
 	}
 
 	/**
 	 * Sets the cadera inflexion derecha.
-	 *
-	 * @param caderaInflexionDerecha the new cadera inflexion derecha
+	 * 
+	 * @param caderaInflexionDerecha
+	 *            the new cadera inflexion derecha
 	 */
-	public void setCaderaInflexionDerecha(String caderaInflexionDerecha) {
+	public void setCaderaInflexionDerecha(Integer caderaInflexionDerecha) {
 		this.caderaInflexionDerecha = caderaInflexionDerecha;
 	}
 
 	/**
 	 * Sets the cadera inflexion izquierda.
-	 *
-	 * @param caderaInflexionIzquierda the new cadera inflexion izquierda
+	 * 
+	 * @param caderaInflexionIzquierda
+	 *            the new cadera inflexion izquierda
 	 */
-	public void setCaderaInflexionIzquierda(String caderaInflexionIzquierda) {
+	public void setCaderaInflexionIzquierda(Integer caderaInflexionIzquierda) {
 		this.caderaInflexionIzquierda = caderaInflexionIzquierda;
 	}
 
 	/**
 	 * Sets the control motor selectivo.
-	 *
-	 * @param controlMotorSelectivo the new control motor selectivo
+	 * 
+	 * @param controlMotorSelectivo
+	 *            the new control motor selectivo
 	 */
 	public void setControlMotorSelectivo(String controlMotorSelectivo) {
 		this.controlMotorSelectivo = controlMotorSelectivo;
@@ -377,17 +383,19 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the evaluacion muscular.
-	 *
-	 * @param evaluacionMuscular the new evaluacion muscular
+	 * 
+	 * @param evaluacionMuscular
+	 *            the new evaluacion muscular
 	 */
-	public void setEvaluacionMuscular(String evaluacionMuscular) {
+	public void setEvaluacionMuscular(Integer evaluacionMuscular) {
 		this.evaluacionMuscular = evaluacionMuscular;
 	}
 
 	/**
 	 * Sets the fecha.
-	 *
-	 * @param fecha the new fecha
+	 * 
+	 * @param fecha
+	 *            the new fecha
 	 */
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
@@ -395,8 +403,9 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the fecha actualizacion.
-	 *
-	 * @param fechaActualizacion the new fecha actualizacion
+	 * 
+	 * @param fechaActualizacion
+	 *            the new fecha actualizacion
 	 */
 	public void setFechaActualizacion(String fechaActualizacion) {
 		this.fechaActualizacion = fechaActualizacion;
@@ -404,8 +413,9 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the id antecedentes personales.
-	 *
-	 * @param idAntecedentesPersonales the new id antecedentes personales
+	 * 
+	 * @param idAntecedentesPersonales
+	 *            the new id antecedentes personales
 	 */
 	public void setIdAntecedentesPersonales(Integer idAntecedentesPersonales) {
 		this.idAntecedentesPersonales = idAntecedentesPersonales;
@@ -413,8 +423,9 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the id usuario.
-	 *
-	 * @param idUsuario the new id usuario
+	 * 
+	 * @param idUsuario
+	 *            the new id usuario
 	 */
 	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
@@ -422,8 +433,9 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the longitud miembro derecho.
-	 *
-	 * @param longitudMiembroDerecho the new longitud miembro derecho
+	 * 
+	 * @param longitudMiembroDerecho
+	 *            the new longitud miembro derecho
 	 */
 	public void setLongitudMiembroDerecho(Integer longitudMiembroDerecho) {
 		this.longitudMiembroDerecho = longitudMiembroDerecho;
@@ -431,8 +443,9 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the longitud miembro izquierdo.
-	 *
-	 * @param longitudMiembroIzquierdo the new longitud miembro izquierdo
+	 * 
+	 * @param longitudMiembroIzquierdo
+	 *            the new longitud miembro izquierdo
 	 */
 	public void setLongitudMiembroIzquierdo(Integer longitudMiembroIzquierdo) {
 		this.longitudMiembroIzquierdo = longitudMiembroIzquierdo;
@@ -440,8 +453,9 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the nombre usuario.
-	 *
-	 * @param nombreUsuario the new nombre usuario
+	 * 
+	 * @param nombreUsuario
+	 *            the new nombre usuario
 	 */
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
@@ -449,8 +463,9 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the puntuacion500 metros.
-	 *
-	 * @param puntuacion500Metros the new puntuacion500 metros
+	 * 
+	 * @param puntuacion500Metros
+	 *            the new puntuacion500 metros
 	 */
 	public void setPuntuacion500Metros(Integer puntuacion500Metros) {
 		this.puntuacion500Metros = puntuacion500Metros;
@@ -458,8 +473,9 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the puntuacion50 metros.
-	 *
-	 * @param puntuacion50Metros the new puntuacion50 metros
+	 * 
+	 * @param puntuacion50Metros
+	 *            the new puntuacion50 metros
 	 */
 	public void setPuntuacion50Metros(Integer puntuacion50Metros) {
 		this.puntuacion50Metros = puntuacion50Metros;
@@ -467,8 +483,9 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the puntuacion5 metros.
-	 *
-	 * @param puntuacion5Metros the new puntuacion5 metros
+	 * 
+	 * @param puntuacion5Metros
+	 *            the new puntuacion5 metros
 	 */
 	public void setPuntuacion5Metros(Integer puntuacion5Metros) {
 		this.puntuacion5Metros = puntuacion5Metros;
@@ -476,80 +493,89 @@ public class ExploracionDTO extends AbstractDTO {
 
 	/**
 	 * Sets the rodilla flexion derecha.
-	 *
-	 * @param rodillaFlexionDerecha the new rodilla flexion derecha
+	 * 
+	 * @param rodillaFlexionDerecha
+	 *            the new rodilla flexion derecha
 	 */
-	public void setRodillaFlexionDerecha(String rodillaFlexionDerecha) {
+	public void setRodillaFlexionDerecha(Integer rodillaFlexionDerecha) {
 		this.rodillaFlexionDerecha = rodillaFlexionDerecha;
 	}
 
 	/**
 	 * Sets the rodilla flexion izquierda.
-	 *
-	 * @param rodillaFlexionIzquierda the new rodilla flexion izquierda
+	 * 
+	 * @param rodillaFlexionIzquierda
+	 *            the new rodilla flexion izquierda
 	 */
-	public void setRodillaFlexionIzquierda(String rodillaFlexionIzquierda) {
+	public void setRodillaFlexionIzquierda(Integer rodillaFlexionIzquierda) {
 		this.rodillaFlexionIzquierda = rodillaFlexionIzquierda;
 	}
 
 	/**
 	 * Sets the rodilla inflexion derecha.
-	 *
-	 * @param rodillaInflexionDerecha the new rodilla inflexion derecha
+	 * 
+	 * @param rodillaInflexionDerecha
+	 *            the new rodilla inflexion derecha
 	 */
-	public void setRodillaInflexionDerecha(String rodillaInflexionDerecha) {
+	public void setRodillaInflexionDerecha(Integer rodillaInflexionDerecha) {
 		this.rodillaInflexionDerecha = rodillaInflexionDerecha;
 	}
 
 	/**
 	 * Sets the rodilla inflexion izquierda.
-	 *
-	 * @param rodillaInflexionIzquierda the new rodilla inflexion izquierda
+	 * 
+	 * @param rodillaInflexionIzquierda
+	 *            the new rodilla inflexion izquierda
 	 */
-	public void setRodillaInflexionIzquierda(String rodillaInflexionIzquierda) {
+	public void setRodillaInflexionIzquierda(Integer rodillaInflexionIzquierda) {
 		this.rodillaInflexionIzquierda = rodillaInflexionIzquierda;
 	}
 
 	/**
 	 * Sets the tobillo flexion derecha.
-	 *
-	 * @param tobilloFlexionDerecha the new tobillo flexion derecha
+	 * 
+	 * @param tobilloFlexionDerecha
+	 *            the new tobillo flexion derecha
 	 */
-	public void setTobilloFlexionDerecha(String tobilloFlexionDerecha) {
+	public void setTobilloFlexionDerecha(Integer tobilloFlexionDerecha) {
 		this.tobilloFlexionDerecha = tobilloFlexionDerecha;
 	}
 
 	/**
 	 * Sets the tobillo flexion izquierda.
-	 *
-	 * @param tobilloFlexionIzquierda the new tobillo flexion izquierda
+	 * 
+	 * @param tobilloFlexionIzquierda
+	 *            the new tobillo flexion izquierda
 	 */
-	public void setTobilloFlexionIzquierda(String tobilloFlexionIzquierda) {
+	public void setTobilloFlexionIzquierda(Integer tobilloFlexionIzquierda) {
 		this.tobilloFlexionIzquierda = tobilloFlexionIzquierda;
 	}
 
 	/**
 	 * Sets the tobillo inflexion derecha.
-	 *
-	 * @param tobilloInflexionDerecha the new tobillo inflexion derecha
+	 * 
+	 * @param tobilloInflexionDerecha
+	 *            the new tobillo inflexion derecha
 	 */
-	public void setTobilloInflexionDerecha(String tobilloInflexionDerecha) {
+	public void setTobilloInflexionDerecha(Integer tobilloInflexionDerecha) {
 		this.tobilloInflexionDerecha = tobilloInflexionDerecha;
 	}
 
 	/**
 	 * Sets the tobillo inflexion izquierda.
-	 *
-	 * @param tobilloInflexionIzquierda the new tobillo inflexion izquierda
+	 * 
+	 * @param tobilloInflexionIzquierda
+	 *            the new tobillo inflexion izquierda
 	 */
-	public void setTobilloInflexionIzquierda(String tobilloInflexionIzquierda) {
+	public void setTobilloInflexionIzquierda(Integer tobilloInflexionIzquierda) {
 		this.tobilloInflexionIzquierda = tobilloInflexionIzquierda;
 	}
 
 	/**
 	 * Sets the videos.
-	 *
-	 * @param videos the new videos
+	 * 
+	 * @param videos
+	 *            the new videos
 	 */
 	public void setVideos(List<VideoDTO> videos) {
 		this.videos = videos;

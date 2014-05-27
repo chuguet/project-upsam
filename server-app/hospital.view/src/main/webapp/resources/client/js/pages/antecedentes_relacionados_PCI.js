@@ -6,9 +6,7 @@ var antecedentesRelacionadosPCI = {
 		$("#idExploracion").val(idExploracion);
 		generic.loading();
 		server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/antecedentesRelacionadosPCI", null, antecedentesRelacionadosPCI.recuperarCallback);
-		if (idExploracion != null){
-			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/restriccion", null, generic.recuperarRestriccionesCallback);
-		}
+		restricciones.recuperar();
 	},
 	
 	'recuperarCallback' : function(antecedentes){
@@ -122,10 +120,12 @@ var antecedentesRelacionadosPCI = {
 		$("#subtitle").html("Consulta de Antecedentes relacionados con PCI");
 		$("#btnGuardar").text("Modificar");
 		$("#idAntecedentes").val(params.parameter.id);
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	
 	'actualizarCallback' : function(params) {
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	

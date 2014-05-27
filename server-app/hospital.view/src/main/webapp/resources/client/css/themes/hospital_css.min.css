@@ -261,3 +261,5 @@ table#tabla2 div.ui-radio {width: 29px;height: 22px;float: left;margin: 0em 0.5e
 .ui-grid-a .btnLeft {position: absolute;left: 0px;right: 50%;bottom: 1px;top: 1px;}
 .ui-grid-a .btnRight {position: absolute;top: 1px;bottom: 1px;left: 50%;right: 0px}
 div#content {opacity:0.3;}
+
+div#messageRestricciones ul{max-height:300px; overflow:auto;}

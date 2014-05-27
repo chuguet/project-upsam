@@ -43,35 +43,35 @@
 	<div class="form-group">
 		<label for="nombre" class="col-sm-2 control-label">Nombre</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="nombre" placeholder="Nombre" required autofocus>
+	      <input type="text" class="form-control" id="nombre" placeholder="Nombre" required autofocus />
 	    </div>
 	</div>
 
 	<div class="form-group">
 		<label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="apellidos" placeholder="Apellidos" maxlength="200" required autofocus>
+	      <input type="text" class="form-control" id="apellidos" placeholder="Apellidos" maxlength="200" required />
 	    </div>
 	</div>
 	
 	<div class="form-group">
 		<label for="email" class="col-sm-2 control-label">Email</label>
 	    <div class="col-sm-10">
-	      <input type="email" class="form-control" id="email" placeholder="Email" maxlength="200" required>
+	      <input type="email" class="form-control" id="email" placeholder="Email" maxlength="200" required />
 	    </div>
 	</div>
 	
 	<div class="form-group">
 		<label for="usuario" class="col-sm-2 control-label">Usuario</label>
 	    <div class="col-sm-10">
-	      <input type="text" class="form-control" id="usuario" placeholder="Usuario" maxlength="200" required>
+	      <input type="text" class="form-control" id="usuario" placeholder="Usuario" maxlength="200" required />
 	    </div>
 	</div>
 	
 	<div class="form-group">
 		<label for="password" class="col-sm-2 control-label">Contrase&ntilde;a</label>
 	    <div class="col-sm-10">
-	      <input type="password" class="form-control" id="password" placeholder="Contrase&ntilde;a" maxlength="200" required>
+	      <input type="password" class="form-control" id="password" placeholder="Contrase&ntilde;a" maxlength="200" required />
 	    </div>
 	</div>
 	<div class="form-group">
@@ -79,7 +79,7 @@
 		<div class="col-sm-10">
 			<div class="radio">
 				<label>
-			    	<input type="radio" name="rol" id="Administrador" checked/>
+			    	<input type="radio" name="rol" id="Administrador" checked />
 			    	Administrador
 			  	</label>
 			</div>

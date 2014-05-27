@@ -13,7 +13,7 @@ var exploracionFisica = {
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion, null, exploracionFisica.recuperarExploracionCallback);
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/video", null, exploracionFisica.recuperarListadoVideosCallback);
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/ficherosEMT", null, exploracionFisica.recuperarListadoGraficasCallback);
-			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/restriccion", null, generic.recuperarRestriccionesCallback);
+			restricciones.recuperar();
 			
 			$("#listaVideos").show();
 		}
@@ -180,11 +180,13 @@ var exploracionFisica = {
 		$("#btnGuardar").text("Modificar");
 		$("#idExploracion").val(params.parameter.id);
 		$("#lblFechaActualizacion").html(params.parameter.fechaActualizacion);
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	
 	'actualizarCallback' : function(params) {
 		$("#lblFechaActualizacion").html(params.parameter.fechaActualizacion);
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	

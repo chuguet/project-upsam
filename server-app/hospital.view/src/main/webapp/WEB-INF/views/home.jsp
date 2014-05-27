@@ -44,10 +44,17 @@
 		
 		
 		<script src="resources/js/jquery.fancytree.js" type="text/javascript"></script>
-		<script src="resources/js/jquery.jqGrid.min.js" type="text/javascript"></script>
-		<script src="resources/js/i18n/grid.locale-es.js" type="text/javascript"></script>
+		<script src="resources/js/bootstrap-moment.js" type="text/javascript"></script>
+		<script src="resources/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+		<link href="resources/css/bootstrap-datetimepicker.css" rel="stylesheet">
 		<link href="resources/css/jquery.ui.fancytree.css" rel="stylesheet">
 		
+		<script src="resources/js/plupload.full.min.js" type="text/javascript"></script>
+		<script src="resources/js/jquery.ui.plupload.min.js" type="text/javascript"></script>
+		<script src="resources/js/i18n/plupload.locale-es.js" type="text/javascript"></script>
+		<script src="resources/js/jquery.plupload.queue.min.js" type="text/javascript"></script>
+		<link href="resources/css/jquery.ui.plupload.css" rel="stylesheet" type="text/css">
+		<link href="resources/css/jquery.plupload.queue.css" rel="stylesheet" type="text/css">
 	</head>
 	<body class="home">
 	<!--Start Header-->

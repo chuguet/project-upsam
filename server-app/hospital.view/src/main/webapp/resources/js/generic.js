@@ -204,7 +204,7 @@ var generic = {
 			}
 		});
 	},
-	'processTable' : function(entity){
+	'processTable' : function(entity, onclickRow){
 		LoadDataTablesScripts(generic.AllTables);
 		
 		$('table.table tbody').on('click', 'tr', function () {
@@ -215,8 +215,14 @@ var generic = {
 				}
 			});
 			clickedRow.toggleClass('selected');
-			$("#btnEditar").removeClass("disabled");
-			$("#btnEliminar").removeClass("disabled");
+			if (typeof onclickRow + "" != "undefined"){
+				var id = $("table.table tbody tr.selected input[type=hidden]").val();
+				onclickRow.call(undefined, id);
+			}
+			else{
+				$("#btnEditar").removeClass("disabled");
+				$("#btnEliminar").removeClass("disabled");
+			}
 		});
 		
 		$("#btnAlta").button().click(function() {

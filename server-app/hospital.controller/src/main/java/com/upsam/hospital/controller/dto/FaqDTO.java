@@ -1,6 +1,5 @@
 package com.upsam.hospital.controller.dto;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class FaqDTO.

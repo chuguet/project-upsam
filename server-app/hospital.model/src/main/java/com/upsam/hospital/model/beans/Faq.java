@@ -1,6 +1,5 @@
 package com.upsam.hospital.model.beans;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class Faq.

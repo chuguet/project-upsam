@@ -8,9 +8,7 @@ var antecedentesPersonales = {
 			$("#idExploracion").val(idExploracion);
 			generic.loading();
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/antecedentesPersonales", null, antecedentesPersonales.recuperarCallback);
-			if (idExploracion != null){
-				server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/restriccion", null, generic.recuperarRestriccionesCallback);
-			}
+			restricciones.recuperar();
 		},
 		
 		'recuperarCallback' : function(antecedentes){
@@ -157,10 +155,12 @@ var antecedentesPersonales = {
 			$("#subtitle").html("Consulta de antecedentes personales");
 			$("#btnGuardar").text("Modificar");
 			$("#idAntecedentes").val(params.parameter.id);
+			restricciones.recuperar();
 			generic.noLoading();
 		},
 		
 		'actualizarCallback' : function(params) {
+			restricciones.recuperar();
 			generic.noLoading();
 		},
 		

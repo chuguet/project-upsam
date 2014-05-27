@@ -1,187 +1,16 @@
 var paciente = {
 	'rowID' : null,
-	'formatList' : function() {
-		$("#lista").jqGrid({
-			datatype : 'local',
-			data : [],
-			colNames : [
-					"Id", "Nombre", "Apellidos", "Num. Identificaci&oacute;n", "Telefono", "Fecha Nacimiento"
-			],
-			colModel : [
-					{
-						name : 'id',
-						index : 'id',
-						width : 0,
-						hidden : true
-					}, {
-						name : 'nombre',
-						index : 'nombre',
-						width : 30,
-						sorttype : 'string',
-						sortable : true,
-						align : 'left'
-					}, {
-						name : 'apellidos',
-						index : 'apellidos',
-						width : 40,
-						sorttype : 'string',
-						sortable : true,
-						align : 'left'
-					}, {
-						name : 'numeroIdentificacion',
-						index : 'numeroIdentificacion',
-						width : 20,
-						sorttype : 'string',
-						sortable : true,
-						align : 'right'
-					}, {
-						name : 'telefono',
-						index : 'telefono',
-						width : 20,
-						sorttype : 'string',
-						sortable : true,
-						align : 'right'
-					}, {
-						name : 'fechaNacimiento',
-						index : 'fechaNacimiento',
-						width : 20,
-						sorttype : 'string',
-						sortable : true,
-						align : 'right'
-					}
-			],
-			rowNum : 6,
-			rowList : [
-					3,6
-			],
-			pager : '#paginadorLista',
-			sortname : 'nombre',
-			sortorder : 'asc',
-			ondblClickRow : function(rowid){generic.getForm('paciente', rowid);},
-			viewrecords : true,
-			rownumbers : false,
-			scroll : false,
-			onSelectRow : function(rowid, status) {
-				$("#btnEditar").button("enable");
-				$("#btnEliminar").button("enable");
-				paciente.rowID = rowid;
-			}
-		});
-		$(window).bind('resize', function() {
-			$('#lista').setGridWidth($('.ui-jqgrid').parent().innerWidth() - 30);
-		}).trigger('resize');
-		
-		/**
-		 * *****Configuración de los botones del formulario de
-		 * pacientes**********
-		 */
-		$("#btnAlta").button().click(function() {
-			generic.getForm('paciente');
-		});
-		$("#btnEditar").button().click(function() {
-			generic.getForm('paciente', $('#lista').jqGrid('getRowData', paciente.rowID).id);
-		});
-		$("#btnEditar").button("disable");
-
-		$("#btnEliminar").button().click(function() {
-			generic.delete('paciente', $('#lista').jqGrid('getRowData', paciente.rowID).id, function() {
-				generic.getList('paciente');
-			});
-		});
-		$("#btnEliminar").button("disable");
-	},
-	
-
 	'formatForm' : function() {
-		$("#escolarizacion").buttonset();
-		$("#sexo").buttonset();
-		
-		$("#btnCancel").button().click(function() {
-			generic.getList('paciente');
-		});
-		
-		$("#btnSavePaciente").button().click(function(e) {
-			if($("#id").val() != "") {
-				var uploader = $('#uploader').pluploadQueue();
-				 
-		        // Validate number of uploaded files
-		        if (uploader.total.uploaded == 0) {
-		            // Files in queue upload them first
-		            if (uploader.files.length > 0) {
-		                uploader.start();
-		            } else{
-		            	paciente.submitForm();
-		            }
-		 
-		            e.preventDefault();
-		        }
-			} else{
-            	paciente.submitForm();
-			}
-		});
-		var datePickerParams = {
-                "dateFormat" : 'dd/mm/yy',
-                "yearRange":"-90:+0",
-                "dayNamesMin" : [
-                                "D", "L", "M", "X", "J", "V", "S"
-                ],
-                "firstDay" : 1,
-                "monthNames" : [
-                                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-                ],
-                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-                                  'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-        		changeMonth: true,
-        		changeYear: true,
-        };
-		$("#fechaEvaluacion").datepicker(datePickerParams);
-		$("#fechaNacimiento").datepicker(datePickerParams);
-		$("#lista").jqGrid({
-			datatype : 'local',
-			data : [],
-			colNames : [
-					"Id", "Nombre usuario", "Fecha"
-			],
-			colModel : [
-					{
-						name : 'id',
-						index : 'id',
-						width : 0,
-						hidden : true
-					}, {
-						name : 'nombreUsuario',
-						index : 'nombreUsuario',
-						width : 40,
-						sorttype : 'string',
-						sortable : true,
-						align : 'left'
-					}, {
-						name : 'fecha',
-						index : 'fecha',
-						width : 30,
-						sorttype : 'string',
-						sortable : true,
-						align : 'right'
-					}
-			],
-			rowNum : 6,
-			rowList : [
-					3,6
-			],
-			pager : '#paginadorLista',
-			sortname : 'nombreUsuario',
-			caption : "Exploraciones",
-			sortorder : 'asc',
-			viewrecords : true,
-			rownumbers : false,
-			onSelectRow : function(rowid, status) {
-				$("#uploader").show();
-			},
-			scroll : false
-		});
-		$(window).bind('resize', function() {
-			$('#lista').setGridWidth($('.ui-jqgrid').parent().innerWidth() - 30);
-		}).trigger('resize');
+		$('#fechaEvaluacion').datetimepicker({
+            pickTime: false
+        });
+		$('#fechaNacimiento').datetimepicker({
+            pickTime: false
+        });
+	},
+	'openUploader' : function(idExploracion){
+		$("#idExploracionSelect").val(idExploracion);
+		$('#uploaderModal').modal('show');
 	},
 	'prepareUploader' : function(idPaciente){
 		$("#uploader").pluploadQueue({
@@ -231,15 +60,19 @@ var paciente = {
 		var uploader = $('#uploader').pluploadQueue();
 		
 		var total_upload_files = 0;
-		uploader.bind('FileUploaded', function(up, file, res) {
+			uploader.bind('FileUploaded', function(up, file, res) {
        	 		 total_upload_files--;
 		         if(total_upload_files == 0 && res.response.indexOf('"correcto":false')==-1){
-		        	 paciente.submitForm();
-		         }else{
+		        	 $('#uploaderModal').modal('hide');
+		        	 up.destroy();
+		        	 paciente.prepareUploader();
+		        	 generic.alert("Fichos subidos correctamente","Subida correcta");
+		         }
+		         else{
 		        	 var mensaje = res.response.substring(res.response.indexOf('"mensaje":"')+11,res.response.indexOf('","parameter"'));
 		        	 generic.alert(mensaje, "Error");
-		        	 uploader.splice();
-		        	 uploader.refresh();
+		        	 up.splice();
+		        	 up.refresh();
 		         }
 		 });
 		
@@ -248,21 +81,10 @@ var paciente = {
 		 });
 		 
 		 uploader.bind('BeforeUpload', function(uploader, file) {
-				var myGrid = $('#lista');
-				var selectedRowId = myGrid.jqGrid ('getGridParam', 'selrow');
-				var cellValue = myGrid.jqGrid ('getCell', selectedRowId, 'id');
-			    uploader.settings.url = "../paciente/" + $("#id").val() + "/exploracion/" + cellValue + "/fileUpload";
-			});
-		 $("#uploader").hide();
-	},
-	'submitForm' : function() {
-		var data = paciente.getParams();
-		if (data != null){
-			var entity = (data.id != null) ? 'paciente/' + id : 'paciente';
-			generic.post(entity, data, function() {
-				generic.getList('paciente');
-			});
-		}
+			var idPaciente =  $("#id").val();
+			var idExploracion = $("#idExploracionSelect").val();
+		    uploader.settings.url = "../paciente/" + idPaciente + "/exploracion/" + idExploracion + "/fileUpload";
+		});
 	},
 	'getParams' : function() {
 		var id = ($("#id").val()) ? $("#id").val() : null;
@@ -309,7 +131,6 @@ var paciente = {
 		}
 		if (errores != '') {
 			generic.alert(errores, "Validaci&oacute;n");
-			return null;
 		}
 		else {
 			var data = {
@@ -327,7 +148,11 @@ var paciente = {
 				fichero : fichero,
 				exploraciones : exploraciones
 			};
-			return data;
+			
+			var entity = (data.id != null) ? 'paciente/' + id : 'paciente';
+			generic.post(entity, data, function() {
+				generic.getList('paciente');
+			});
 		}
 	}
 };
