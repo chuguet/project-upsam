@@ -86,8 +86,8 @@
 	<div class="form-group">
 		<label for="fechaNacimiento" class="col-sm-2 control-label">Fecha de nacimiento</label>
 	    <div class="col-sm-10">
-	    	<div class='input-group date' id='fechaNacimiento' data-date-format="DD/MM/YYYY">
-                <input type='text' class="form-control" />
+	    	<div class='input-group date' data-date-format="DD/MM/YYYY">
+                <input type='text' id='fechaNacimiento' class="form-control" />
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
 	    </div>
@@ -103,8 +103,8 @@
 	<div class="form-group">
 		<label for="fechaEvaluacion" class="col-sm-2 control-label">&Uacute;ltima evaluaci&oacute;n</label>
 	    <div class="col-sm-10">
-	    	<div class='input-group date' id='fechaEvaluacion' data-date-format="DD/MM/YYYY">
-                <input type='text' class="form-control" />
+	    	<div class='input-group date' data-date-format="DD/MM/YYYY">
+                <input type='text' id='fechaEvaluacion' class="form-control" />
                 <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
 	    </div>
@@ -115,13 +115,13 @@
 		<div class="col-sm-10">
 			<div class="radio">
 				<label>
-			    	<input type="radio" name="sexo" id="0" checked />
+			    	<input value="0" type="radio" name="sexo" id="0" checked />
 			    	Hombre
 			  	</label>
 			</div>
 			<div class="radio">
 		 		<label>
-		   			<input type="radio" name="sexo" id="1" />
+		   			<input value="1" type="radio" name="sexo" id="1" />
 		   			Mujer
 		 		</label>
 			</div>
@@ -161,19 +161,19 @@
 		<div class="col-sm-10">
 			<div class="radio">
 				<label>
-			    	<input type="radio" name="escolarizacion" id="0" checked />
+			    	<input value="0" type="radio" name="escolarizacion" id="0" checked />
 			    	Educaci&oacute;n especial
 			  	</label>
 			</div>
 			<div class="radio">
 		 		<label>
-		   			<input type="radio" name="escolarizacion" id="1" />
+		   			<input value="1" type="radio" name="escolarizacion" id="1" />
 		   			Escuela de integraci&oacute;n
 		 		</label>
 			</div>
 			<div class="radio">
 		 		<label>
-		   			<input type="radio" name="escolarizacion" id="2" />
+		   			<input value="2" type="radio" name="escolarizacion" id="2" />
 		   			Sin adaptaciones
 		 		</label>
 			</div>

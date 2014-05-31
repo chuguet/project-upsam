@@ -192,8 +192,7 @@ public class UsuarioController {
 			return new MensajeDTO("Un usuario es requerido", false);
 		}
 		try {
-			Usuario usuario = new Usuario();
-			usuario.setId(id);
+			Usuario usuario = this.usuarioService.findOne(id);
 			this.usuarioService.delete(usuario);
 			return new MensajeDTO("Usuario eliminado correctamente", true);
 		}
