@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>hospital</artifactId>
 	<groupId>com.upsam</groupId>
+	<artifactId>hospital</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>${project.groupId}.${project.artifactId}</name>
@@ -26,6 +26,7 @@
 	</build>
 
 	<properties>
+		<finalWarName>hospitalServer</finalWarName>
 		<javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
 		<javax.servlet.api.version>2.5</javax.servlet.api.version>
 		<slf4j.version>1.5.8</slf4j.version>
@@ -47,6 +48,7 @@
 		<maven.compiler.version>3.0</maven.compiler.version>
 		<mail.version>1.4.7</mail.version>
 		<jackson.version>1.9.2</jackson.version>
+		<log4j.version>1.2.15</log4j.version>
 	</properties>
 
 	<modules>
@@ -56,25 +58,44 @@
 		<module>hospital.util</module>
 	</modules>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>javax.mail</groupId>
-				<artifactId>mail</artifactId>
-				<version>${mail.version}</version>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>${mail.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+	</dependencies>
 
 	<developers>
+		<developer>
+			<name>David Llamazares Juarez</name>
+			<id>llamas</id>
+			<email>david.llamazares.juarez@gmail.com</email>
+			<roles>
+				<role>Java Architect</role>
+			</roles>
+		</developer>
+	
 		<developer>
 			<name>Carlos Huguet</name>
 			<id>huguet</id>
 			<email>huguet10@gmail.com</email>
-			<organization>Huguet S.L.</organization>
 			<roles>
-				<role>Java Architec</role>
 				<role>Java Developer</role>
+			</roles>
+		</developer>
+		
+		<developer>
+			<name>Jose Angel Rendo</name>
+			<id>rendo</id>
+			<email>joseangelrendo@gmail.com</email>
+			<roles>
+				<role>Documentation Manager</role>
 			</roles>
 		</developer>
 	</developers>

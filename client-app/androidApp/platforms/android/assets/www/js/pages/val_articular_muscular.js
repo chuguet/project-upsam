@@ -6,6 +6,7 @@ var valoracionArticularMuscular = {
 		$("#idExploracion").val(idExploracion);
 		generic.loading();
 		server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/valoracionArticularMuscular", null, valoracionArticularMuscular.recuperarCallback);
+		restricciones.recuperar();
 	},
 	
 	'recuperarCallback' : function(valoracion){
@@ -119,10 +120,12 @@ var valoracionArticularMuscular = {
 		$("#subtitle").html("Consulta de Valoraci&oacute;n Articular y Muscular");
 		$("#btnGuardar").text("Modificar");
 		$("#idValoracion").val(params.parameter.id);
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	
 	'actualizarCallback' : function(params) {
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	

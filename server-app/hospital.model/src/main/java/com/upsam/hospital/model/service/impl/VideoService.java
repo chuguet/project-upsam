@@ -1,25 +1,27 @@
 package com.upsam.hospital.model.service.impl;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import javassist.NotFoundException;
 import javax.inject.Inject;
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import com.coremedia.iso.IsoFile;
 import com.upsam.hospital.model.beans.Exploracion;
-import com.upsam.hospital.model.beans.Paciente;
 import com.upsam.hospital.model.beans.Video;
 import com.upsam.hospital.model.exceptions.DataBaseException;
-import com.upsam.hospital.model.service.IPacienteService;
+import com.upsam.hospital.model.repository.IVideoRepository;
+import com.upsam.hospital.model.service.IExploracionService;
 import com.upsam.hospital.model.service.IVideoService;
 
 // TODO: Auto-generated Javadoc
@@ -29,14 +31,17 @@ import com.upsam.hospital.model.service.IVideoService;
 @Service
 @PropertySource("classpath:/application.properties")
 class VideoService implements IVideoService {
-
+	static Logger logger = Logger.getLogger(VideoService.class);
 	/** The videos location. */
 	@Value("${videos.location}")
 	private String videosLocation;
 
 	/** The paciente service. */
 	@Inject
-	private IPacienteService pacienteService;
+	private IExploracionService exploracionService;
+
+	@Inject
+	private IVideoRepository videoRepository;
 
 	/*
 	 * (non-Javadoc)
@@ -44,22 +49,26 @@ class VideoService implements IVideoService {
 	 * java.lang.Integer, java.lang.Integer)
 	 */
 	@Override
-	public void save(byte[] content, Integer idPaciente, Integer idExploracion) throws FileNotFoundException, IOException, DataBaseException {
+	public void save(byte[] content, Integer idPaciente, Integer idExploracion, String descripcion) throws FileNotFoundException, IOException, DataBaseException, SQLException {
 		String nombre = saveInFolder(content, idExploracion);
 		String lengthInSeconds = getDuration(getFolderPath(idPaciente) + nombre);
-		Paciente paciente = pacienteService.findOne(idExploracion);
+		// Paciente paciente = pacienteService.findOne(idPaciente);
 
 		Video video = new Video();
 		video.setDuracion(lengthInSeconds);
 		video.setFecha(new Date());
 		video.setNombre(nombre);
-		for (Exploracion exploracion : paciente.getExploraciones()) {
-			if (exploracion.getId().equals(idExploracion)) {
-				video.setExploracion(exploracion);
-				exploracion.getVideos().add(video);
-			}
-		}
-		pacienteService.update(paciente);
+		video.setDescripcion(descripcion);
+		video.setExploracion(new Exploracion(idExploracion));
+		videoRepository.save(video);
+		// for (Exploracion exploracion : paciente.getExploraciones()) {
+		// if (exploracion.getId().equals(idExploracion)) {
+		// video.setExploracion(exploracion);
+		// exploracion.getVideos().add(video);
+		// break;
+		// }
+		// }
+		// pacienteService.update(paciente);
 	}
 
 	/**
@@ -75,8 +84,9 @@ class VideoService implements IVideoService {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	String saveInFolder(byte[] content, Integer idPaciente) throws FileNotFoundException, IOException {
+	private String saveInFolder(byte[] content, Integer idPaciente) throws FileNotFoundException, IOException {
 		String folderPath = getFolderPath(idPaciente);
+		logger.info("Save in folder: " + folderPath);
 		validateFolderExist(folderPath);
 		String nombre = getCurrentTimestamp() + ".mp4";
 		String filePath = folderPath + nombre;
@@ -177,16 +187,17 @@ class VideoService implements IVideoService {
 	 */
 	@Override
 	public Video findOne(Integer idPaciente, Integer idExploracion, Integer id) throws DataBaseException, NotFoundException {
-		Paciente paciente = pacienteService.findOne(idPaciente);
-		for (Exploracion exploracion : paciente.getExploraciones()) {
-			if (exploracion.getId().equals(idExploracion)) {
-				for (Video video : exploracion.getVideos()) {
-					if (video.getId().equals(id)) {
-						return video;
-					}
-				}
+		Exploracion exploracion = this.exploracionService.findOne(idExploracion);
+		// Paciente paciente = pacienteService.findOne(idPaciente);
+		// for (Exploracion exploracion : paciente.getExploraciones()) {
+		// if (exploracion.getId().equals(idExploracion)) {
+		for (Video video : exploracion.getVideos()) {
+			if (video.getId().equals(id)) {
+				return video;
 			}
 		}
+		// }
+		// }
 
 		throw new NotFoundException("Se ha producido un error al recuperar un vídeo de un paciente");
 	}
@@ -198,7 +209,7 @@ class VideoService implements IVideoService {
 	 * .OutputStream, java.lang.String, java.lang.Integer)
 	 */
 	@Override
-	public void recuperarVideo(OutputStream outStream, String nombre, Integer idPaciente) throws FileNotFoundException {
+	public File recuperarVideo(String nombre, Integer idPaciente) throws FileNotFoundException {
 		String folderPath = getFolderPath(idPaciente);
 
 		String filePath = folderPath + nombre;
@@ -206,25 +217,46 @@ class VideoService implements IVideoService {
 		if (!video.exists()) {
 			throw new FileNotFoundException();
 		}
-		byte[] buf = new byte[8192];
+		return video;
+	}
 
-		InputStream is = new FileInputStream(video);
+	@Override
+	public byte[] recuperarVideo2(String nombre, Integer idPaciente) throws IOException {
+		String folderPath = getFolderPath(idPaciente);
 
-		int c = 0;
+		String filePath = folderPath + nombre;
+		File video = new File(filePath);
+		if (!video.exists()) {
+			throw new FileNotFoundException();
+		}
+		return read(video);
+	}
 
+	private byte[] read(File file) throws IOException {
+		ByteArrayOutputStream ous = null;
+		InputStream ios = null;
 		try {
-			while ((c = is.read(buf, 0, buf.length)) > 0) {
-				outStream.write(buf, 0, c);
+			byte[] buffer = new byte[4096];
+			ous = new ByteArrayOutputStream();
+			ios = new FileInputStream(file);
+			int read = 0;
+			while ((read = ios.read(buffer)) != -1) {
+				ous.write(buffer, 0, read);
 			}
-
-			is.close();
-			// outStream.flush();
-			// outStream.close();
 		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		finally {
+			try {
+				if (ous != null)
+					ous.close();
+			}
+			catch (IOException e) {}
 
+			try {
+				if (ios != null)
+					ios.close();
+			}
+			catch (IOException e) {}
+		}
+		return ous.toByteArray();
 	}
 }
