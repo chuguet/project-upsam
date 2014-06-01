@@ -1,11 +1,11 @@
 var recordarPassword = {
 	'enviarUsuarioEmail' : function(){
-		if ($("#txtUsuario").val().length == 0){
+		if ($("#txtUsuarioEmail").val().length == 0){
 			generic.alert("Error de recordatorio", "Debe introducir su usuario o contrase&ntilde;a", null);
 			return;
 		}
 		generic.loading();
-		var params = {value : $("#txtUsuario").val()};
+		var params = {value : $("#txtUsuarioEmail").val()};
 		server.post('usuario/forget', params, recordarPassword.enviarUsuarioEmailCallback);
 	},
 	'enviarUsuarioEmailCallback' : function(parameters) {

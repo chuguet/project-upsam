@@ -35,5 +35,8 @@
     <feature name="FileTransfer">
         <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
     </feature>
+    <feature name="VideoPlayer">
+        <param name="android-package" value="org.apache.cordova.videoplayer.VideoPlayer" />
+    </feature>
     <plugin name="Notification" value="org.apache.cordova.Notification"/>
 </widget>

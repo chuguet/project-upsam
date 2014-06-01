@@ -11,8 +11,10 @@ var exploracionFisica = {
 			$("#subtitle").html("Consulta de Exploraci&oacute;n");
 			$("#btnGuardar").text("Modificar");
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion, null, exploracionFisica.recuperarExploracionCallback);
-			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/video", null, exploracionFisica.recuperarListadoVideosCallback);
+			exploracionFisica.recuperarListadoVideos();
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/ficherosEMT", null, exploracionFisica.recuperarListadoGraficasCallback);
+			restricciones.recuperar();
+			
 			$("#listaVideos").show();
 		}
 		else{
@@ -133,14 +135,19 @@ var exploracionFisica = {
 		}
 		generic.noLoading();
 	},
-	        
+	
+	'recuperarListadoVideos' : function(){
+		var idPaciente = generic.getURLParameter("idPaciente");
+		var idExploracion = generic.getURLParameter("idExploracion");
+		server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/video", null, exploracionFisica.recuperarListadoVideosCallback);
+	},
+	  
     'recuperarListadoVideosCallback' : function(parameters){
     	var idPaciente = $("#idPaciente").val();
     	var idExploracion = $("#idExploracion").val();
     	$("#listaVideos li").remove();
     	for (var i = 0; i < parameters.length; i++){
-    		$("#listaVideos").append("<li><a rel='external' alt='Acceder al video' href='#' onclick='javascript:generic.changePage(\"video_detalle.html?idPaciente=" + idPaciente + "&idExploracion=" + idExploracion + "&idVideo=" + parameters[i].id + "&num=" + (i + 1) + "\");'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
-    		
+    		$("#listaVideos").append("<li><a rel='external' alt='Acceder al video' href='#' onclick='javascript:window.videoPlayer.play(\"" + server.URI + "pacientemovil/" + idPaciente + "/exploracion/" + idExploracion + "/videoreproduce/" + parameters[i].id + "\");'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
     	}
     	$("#listaVideos").listview('refresh');
     },
@@ -178,11 +185,13 @@ var exploracionFisica = {
 		$("#btnGuardar").text("Modificar");
 		$("#idExploracion").val(params.parameter.id);
 		$("#lblFechaActualizacion").html(params.parameter.fechaActualizacion);
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	
 	'actualizarCallback' : function(params) {
 		$("#lblFechaActualizacion").html(params.parameter.fechaActualizacion);
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	

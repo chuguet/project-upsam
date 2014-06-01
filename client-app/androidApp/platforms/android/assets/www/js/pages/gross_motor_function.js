@@ -6,6 +6,7 @@ var grossMotorFunction = {
 		$("#idExploracion").val(idExploracion);
 		generic.loading();
 		server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/grossMotorFunction", null, grossMotorFunction.recuperarCallback);
+		restricciones.recuperar();
 	},
 	
 	'recuperarCallback' : function(gross){
@@ -160,10 +161,12 @@ var grossMotorFunction = {
 		$("#subtitle").html("Consulta de Gross Motor Function Classification System");
 		$("#btnGuardar").text("Modificar");
 		$("#idGross").val(params.parameter.id);
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	
 	'actualizarCallback' : function(params) {
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	
