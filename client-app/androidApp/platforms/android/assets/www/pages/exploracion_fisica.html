@@ -32,6 +32,28 @@
 		        <div data-theme="b" id="second-header" class="ui-bar ui-bar-b">
 					<h2 id="subtitle" class="subtitle">Nueva Exploraci&oacute;n F&iacute;sica</h2>
 					<div class="username">
+						<a href="#popupInfo" id="iconInfo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="info" data-iconpos="notext" data-mini="true" style="display:none">Informaci&oacute;n</a>
+						<div data-role="popup" id="popupInfo" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="width:600px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Informaci&oacute;n de inter&eacute;s</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:left">
+								<div id="messageInfo"></div>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">Aceptar</a>    
+							</div>
+						</div>
+						<a href="#popupRestricciones" id="iconRestricciones" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="alert" data-iconpos="notext" data-mini="true" style="display:none">Restricciones</a>
+						<div data-role="popup" id="popupRestricciones" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="width:600px;" class="ui-corner-all">
+							<div data-role="header" data-theme="a" class="ui-corner-top">
+								<h1>Aviso</h1>
+							</div>
+							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:left">
+								<div id="messageRestricciones"></div>
+								<a href="#" data-role="button" data-inline="true" data-rel="back">Aceptar</a>    
+							</div>
+						</div>
+					
+					
 						<div id="username"></div>
 						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
 						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
@@ -50,7 +72,7 @@
 			
 			
 			<!-- contenido -->
-			<div data-role="content">
+			<div data-role="content" id="content">
 				<input type="hidden" id="idPaciente" />
 				<input type="hidden" id="idExploracion" />
 				<div data-role="content" style="border:solid 1px black;">
@@ -82,7 +104,8 @@
 				<div id="videos">
 					<h3>V&iacute;deos sobre la exploraci&oacute;n</h3>
 					<div class="content2">
-						<a href="#" onclick="exploracionFisica.irAPaginaAuxiliarDeExploracion('video_nuevo.html');" data-icon="plus" data-role="button" data-mini="true" data-inline="true">A&ntilde;adir V&iacute;deo</a></label>					
+						<a data-role="button" data-icon="video" onclick="video.grabar();" data-mini="true" data-inline="true">Grabar video</a>
+						<!--<a href="#" onclick="exploracionFisica.irAPaginaAuxiliarDeExploracion('video_nuevo.html');" data-icon="plus" data-role="button" data-mini="true" data-inline="true">A&ntilde;adir V&iacute;deo</a></label>					-->
 						<ul data-role="listview" data-inset="true" id="listaVideos"></ul>
 					</div>
 				</div>
@@ -115,8 +138,8 @@
 							<option value="3">3 Movimiento activo, RAM completo contra gravedad</option>
 							<option value="4">4 Movimiento activo, RAM completo contra gravedad con resistencia moderada en una posici&oacute;n espec&iacute;fica del m&uacute;sculo</option>		 
 							<option value="5">5 (normal) Movimiento activo, completo RAM contra gravedad y con resistencia completa en una posici&oacute;n espec&iacute;fica del m&uacute;sculo esperable en una persona no discapacitada</option>		 
-							<option value="5*">5* (normal) movimiento activo, RAM completo contra gravedad y resistencia suficiente para ser considerado normal si los factores inhibidores identificados (es decir, dolor, desuso) no estuvieran presentes</option>		 
-							<option value="NT">NT No testable o no valorable (es decir, debido a la inmovilizaci&oacute;n, dolor tan severo que el paciente no pueda ser valorados, amputaci&oacute;n de la pierna, contractura >50% del rango articular)</option>                
+							<option value="6">5* (normal) movimiento activo, RAM completo contra gravedad y resistencia suficiente para ser considerado normal si los factores inhibidores identificados (es decir, dolor, desuso) no estuvieran presentes</option>		 
+							<option value="7">NT No testable o no valorable (es decir, debido a la inmovilizaci&oacute;n, dolor tan severo que el paciente no pueda ser valorados, amputaci&oacute;n de la pierna, contractura >50% del rango articular)</option>                
 						</select>
 					</div>
 						
@@ -223,10 +246,10 @@
 										<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>
+										<option value="5">4</option>		 
 									</select>
 							  	</td>
 							  	<td>
@@ -234,10 +257,10 @@
 							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>
+										<option value="5">4</option>		 
 									</select>
 							  	</td>
 							</tr>		
@@ -249,10 +272,10 @@
 							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>
+										<option value="5">4</option>		 
 									</select>
 							  	</td>
 							  	<td>
@@ -260,10 +283,10 @@
 							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>
+										<option value="5">4</option>		 
 									</select>
 							  	</td>
 							</tr>
@@ -276,10 +299,10 @@
 							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>
+										<option value="5">4</option>>		 
 									</select>
 							  	</td>
 							  	<td>
@@ -287,10 +310,10 @@
 							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>
+										<option value="5">4</option>		 
 									</select>
 							  	</td>       
 							</tr>		
@@ -302,10 +325,10 @@
 							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>
+										<option value="5">4</option>
 									</select>
 							  	</td>
 							  	<td>
@@ -313,10 +336,10 @@
 							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>		 
+										<option value="5">4</option>		 
 									</select>
 							  	</td>
 							</tr>        
@@ -328,10 +351,10 @@
 							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>		 
+										<option value="5">4</option>		 
 									</select>
 							  	</td>
 							  	<td>
@@ -339,10 +362,10 @@
 							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>		 
+										<option value="5">4</option>		 
 									</select>
 							  	</td>
 							</tr>		
@@ -354,10 +377,10 @@
 							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>		 
+										<option value="5">4</option>		 
 									</select>
 							  	</td>
 							  	<td>
@@ -365,10 +388,10 @@
 							  			<option value=""></option>
 										<option value="0">0</option>
 										<option value="1">1</option>
-										<option value="1+">1+</option>
-										<option value="2">2</option>
-										<option value="3">3</option>		 
-										<option value="4">4</option>		 
+										<option value="2">1+</option>
+										<option value="3">2</option>
+										<option value="4">3</option>		 
+										<option value="5">4</option>		 
 									</select>
 							  	</td>
 							</tr>

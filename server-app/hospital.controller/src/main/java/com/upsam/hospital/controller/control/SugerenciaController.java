@@ -221,6 +221,7 @@ public class SugerenciaController {
 	List<PaginaDTO> retrievePaginas() {
 		List<PaginaDTO> result = new ArrayList<PaginaDTO>();
 		try {
+			List<Pagina> paginas1 = paginaService.findAll();
 			List<Pagina> paginas = paginaService.retrievePaginasInfo();
 			for (Pagina pagina : paginas) {
 				result.add(paginaUtilDTO.toRestInfoPaginas(pagina));

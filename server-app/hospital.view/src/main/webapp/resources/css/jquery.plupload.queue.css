@@ -29,7 +29,7 @@
 .plupload_disabled, a.plupload_disabled:hover {
     color: #737373;
     border-color: #c5c5c5;
-    background: #ededed url('../imgs/buttons-disabled.png') no-repeat 0 center;
+    background: #ededed;
 	cursor: default;
 }
 
@@ -76,9 +76,9 @@
 }
 
 .plupload_scroll .plupload_filelist {
-	height: 185px;
+	height: 230px;
 	background: #F5F5F5;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .plupload_filelist li {
@@ -97,7 +97,7 @@
 	border-bottom: 1px solid #CDCDCD;
 }
 
-.plupload_filelist_footer {border-top: 1px solid #FFF; height: 22px; line-height: 20px; vertical-align: middle;}
+.plupload_filelist_footer {border-top: 1px solid #FFF; height: 38px; line-height: 20px; vertical-align: middle;}
 .plupload_file_name {float: left; overflow: hidden}
 .plupload_file_status {color: #777;}
 .plupload_file_status span {color: #42454A;}

@@ -25,10 +25,10 @@
 				
 			</div>
 			<div class="box-content" style="padding:10px 15px 0px 31px">
-					<button id='btnAlta' class='btn btn-default'><i class='fa fa-plus fa-fw'></i>Nuevo</button>
-					<button id="btnEditar" class="btn btn-default disabled"><i class="fa fa-pencil fa-fw"></i>Modificar</button>
-					<button id="btnEliminar" class="btn btn-default disabled"><i class="fa fa-trash-o fa-fw"></i>Eliminar</button>
-				</div>
+				<button id='btnAlta' class='btn btn-default'><i class='fa fa-plus fa-fw'></i>Nuevo</button>
+				<button id="btnEditar" class="btn btn-default disabled"><i class="fa fa-pencil fa-fw"></i>Modificar</button>
+				<button id="btnEliminar" class="btn btn-default disabled"><i class="fa fa-trash-o fa-fw"></i>Eliminar</button>
+			</div>
 			<div class="box-content no-padding">
 				<table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1">
 					<thead>
@@ -61,7 +61,7 @@
 <script type="text/javascript">
 	function showInformationIntoView(information){
 		for (var i = 0; i < information.length; i++){
-			$("table.table tbody").append("<tr onclick='paciente.selectRow(this);'><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].nombre + "</td><td>" + information[i].apellidos + "</td><td>" + information[i].numeroIdentificacion + "</td><td>" + information[i].telefono + "</td><td>" + information[i].fechaNacimiento + "</td></tr>");
+			$("table.table tbody").append("<tr><td><input type='hidden' id='id" + i + "' value='" + information[i].id + "' />" + information[i].nombre + "</td><td>" + information[i].apellidos + "</td><td>" + information[i].numeroIdentificacion + "</td><td>" + information[i].telefono + "</td><td>" + information[i].fechaNacimiento + "</td></tr>");
 		}
 
 		generic.processTable("paciente");

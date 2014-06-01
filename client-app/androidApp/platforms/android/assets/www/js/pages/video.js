@@ -1,4 +1,9 @@
 var video = {
+	'prepararSubida' : function(){
+		$("#idPaciente").val(generic.getURLParameter("idPaciente"));
+    	$("#idExploracion").val(generic.getURLParameter("idExploracion"));
+		generic.noLoading()
+	},
     'recuperar' : function (){
     	videojs.options.flash.swf = "video-js.swf";
     	var idVideo = generic.getURLParameter("idVideo");
@@ -15,9 +20,9 @@ var video = {
 	},
 	
 	'recuperarCallback' : function(parameters){
+		window.videoPlayer.play(server.URI + "pacientemovil/" + $("#idPaciente").val() + "/exploracion/" + $("#idExploracion").val() + "/reproductor/" + $("#idVideo").val());
 		var numero = generic.getURLParameter("num");
-		
-		$("#reproductorVideo_html5_api").append("<source src='" + server.URI + "pacientemovil/" + $("#idPaciente").val() + "/exploracion/" + $("#idExploracion").val() + "/videoreproduce/" + $("#idVideo").val() + "' type='video/mp4' />");
+		$("#reproductorVideo").append("<source src='" + server.URI + "pacientemovil/" + $("#idPaciente").val() + "/exploracion/" + $("#idExploracion").val() + "/videoreproduce/" + $("#idVideo").val() + "' type='video/mp4' />");
 		$("#numeroVideo").html("Video  " + numero);
 		$("#nombreVideo").html("Archivo: " + parameters.nombre);
 		$("#duracionVideo").html("Duraci&oacute;n: " + parameters.duracion);
@@ -48,9 +53,12 @@ var video = {
         options.mimeType = "multipart/form-data";
         options.chunkedMode = false;
         options.headers = { Connection: "close" };
+		var params = {};
+		params.descripcion = "mi descripcion";
+		options.params = params;
         
         ft.upload(path,
-            encodeURI(server.URI + "pacientemovil/1/videoupload"),
+            encodeURI(server.URI + "pacientemovil/" + $("#idPaciente").val() + "/exploracion/" + $("#idExploracion").val() + "/videoupload"),
             video.subirAlServidorSuccess,
             video.subirAlServidorError,
             options);
@@ -60,6 +68,7 @@ var video = {
         console.log('Upload success: ' + result.responseCode);
         console.log(result.bytesSent + ' bytes sent');
         generic.alert("Grabacion correcta", "El video se ha grabado y se ha subido correctamente al servidor", null);
+        exploracionFisica.recuperarListadoVideos();
     },
     
     'subirAlServidorError' : function(error){

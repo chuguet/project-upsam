@@ -1,11 +1,14 @@
 var antecedentesPersonales = {
+		'antecedenteQuirurgicoOrtopedico' : null,
 		'recuperar' : function(){
+			this.antecedenteQuirurgicoOrtopedico = null;
 			var idPaciente = generic.getURLParameter("idPaciente");
 			var idExploracion = generic.getURLParameter("idExploracion");
 			$("#idPaciente").val(idPaciente);
 			$("#idExploracion").val(idExploracion);
 			generic.loading();
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/antecedentesPersonales", null, antecedentesPersonales.recuperarCallback);
+			restricciones.recuperar();
 		},
 		
 		'recuperarCallback' : function(antecedentes){
@@ -73,6 +76,19 @@ var antecedentesPersonales = {
 				
 				$("#alergias").val(antecedentes.alergias);
 				$("#tratamiento").val(antecedentes.tratamiento);
+				
+				if (antecedentes.antecedentesQuirurgicos.length > 0){
+					for (var i = 0; i < antecedentes.antecedentesQuirurgicos.length; i++){
+						$("#listaAntecedentesQuirurgicos").append("<li data-icon='false'><a href='#' onclick='antecedentesPersonales.editarAntecedentesQuirurgicosOrtopedicos(this, \"quirurgico\");'><span class='fechaAntecedenteQuirurgico'>" + generic.getSpanishFormattedDate(antecedentes.antecedentesQuirurgicos[i].fecha) + "</span><br><span class='descripcionAntecedenteQuirurgico'>" + antecedentes.antecedentesQuirurgicos[i].descripcion + "</span></a></li>");
+					}
+					$("#listaAntecedentesQuirurgicos").listview('refresh');
+				}
+				if (antecedentes.antecedentesOrtopedicos.length > 0){
+					for (var i = 0; i < antecedentes.antecedentesOrtopedicos.length; i++){
+						$("#listaAntecedentesOrtopedicos").append("<li data-icon='false'><a href='#' onclick='antecedentesPersonales.editarAntecedentesQuirurgicosOrtopedicos(this, \"ortopedico\");'><span class='fechaAntecedenteOrtopedico'>" + generic.getSpanishFormattedDate(antecedentes.antecedentesOrtopedicos[i].fecha) + "</span><br><span class='descripcionAntecedenteOrtopedico'>" + antecedentes.antecedentesOrtopedicos[i].descripcion + "</span></a></li>");
+					}
+					$("#listaAntecedentesOrtopedicos").listview('refresh');
+				}
 			}
 			generic.noLoading();
 		},
@@ -139,10 +155,12 @@ var antecedentesPersonales = {
 			$("#subtitle").html("Consulta de antecedentes personales");
 			$("#btnGuardar").text("Modificar");
 			$("#idAntecedentes").val(params.parameter.id);
+			restricciones.recuperar();
 			generic.noLoading();
 		},
 		
 		'actualizarCallback' : function(params) {
+			restricciones.recuperar();
 			generic.noLoading();
 		},
 		
@@ -173,24 +191,94 @@ var antecedentesPersonales = {
 				tratamiento : $("#tratamiento").val() + "" != "" ? $("#tratamiento").val() : null
 			};
 			
-//			var errores = "";
-//			if (antecedentesPersonalesDTO.fechaUltimaCrisis != null && !generic.validateDate(antecedentesPersonalesDTO.fechaUltimaCrisis)){
-//				errores += " - La fecha de la ultima crisis no tiene un formato valido (dd/mm/aaaa)";
-//			}
-//			if (antecedentesPersonalesDTO.fechaUltimaConvulsion != null && !generic.validateDate(antecedentesPersonalesDTO.fechaUltimaConvulsion)){
-//				errores += " - La fecha de la ultima convulsion no tiene un formato valido (dd/mm/aaaa)";
-//			}
-//			if (antecedentesPersonalesDTO.fechaUltimaSesion != null && !generic.validateDate(antecedentesPersonalesDTO.fechaUltimaSesion)){
-//				errores += " - La fecha de la ultima sesion no tiene un formato valido (dd/mm/aaaa)";
-//			}
-//			if (antecedentesPersonalesDTO.fechaPenultimaSesion != null && !generic.validateDate(antecedentesPersonalesDTO.fechaPenultimaSesion)){
-//				errores += " - La fecha de la penultima sesion no tiene un formato valido (dd/mm/aaaa)";
-//			}
-//			if (errores != "") {
-//				errores = "Se han producido los siguientes errores:<br/>" + errores;
-//				generic.alert("Error en antecedentes personales", errores, null);
-//				return null;
-//			}
+			var antecedentesQuirurgicos = new Array();
+			$("#listaAntecedentesQuirurgicos li").each(function(index){
+				var fecha = generic.getEnglishFormattedDate($(this).find(".fechaAntecedenteQuirurgico").text());
+				var descripcion = $(this).find(".descripcionAntecedenteQuirurgico").text();
+				var id = $(this).find("input").val();
+				var antecedente = {id : id, fecha : fecha, descripcion : descripcion};
+				antecedentesQuirurgicos.push(antecedente);
+			});
+			
+			var antecedentesOrtopedicos = new Array();
+			$("#listaAntecedentesOrtopedicos li").each(function(index){
+				var fecha = generic.getEnglishFormattedDate($(this).find(".fechaAntecedenteOrtopedico").text());
+				var descripcion = $(this).find(".descripcionAntecedenteOrtopedico").text();
+				var antecedente = {fecha : fecha, descripcion : descripcion};
+				antecedentesOrtopedicos.push(antecedente);
+			});
+			
+			antecedentesPersonalesDTO.antecedentesQuirurgicos = antecedentesQuirurgicos;
+			antecedentesPersonalesDTO.antecedentesOrtopedicos = antecedentesOrtopedicos;
+			
+			
 			return antecedentesPersonalesDTO;
+		},
+		
+		'openPopup' : function(){
+			this.antecedenteQuirurgicoOrtopedico = null;
+			$( "#" + idPopup).popup("open");
+		},
+
+		'annadirAntecedenteQuirurgico' : function(){
+			var fecha = $("#fechaAntecedenteQuirurgico").val();
+			var descripcion = $("#descripcionAntecedenteQuirurgico").val();
+			if (fecha == null || fecha.length != 10){
+				generic.alert("Error", "Debe indicar la fecha del antecendente quir&uacute;rgico general");
+			}
+			else{
+				if (this.antecedenteQuirurgicoOrtopedico == null){
+					$("#listaAntecedentesQuirurgicos").append("<li data-icon='false'><a href='#' onclick=''><span class='fechaAntecedenteQuirurgico'>" + generic.getSpanishFormattedDate(fecha) + "</span><br><span class='descripcionAntecedenteQuirurgico'>" + descripcion + "</span></a></li>");
+					$("#listaAntecedentesQuirurgicos").listview('refresh');
+				}
+				else{
+					$(this.antecedenteQuirurgicoOrtopedico).find(".fechaAntecedenteQuirurgico").text(generic.getSpanishFormattedDate(fecha));
+					$(this.antecedenteQuirurgicoOrtopedico).find(".descripcionAntecedenteQuirurgico").text(descripcion);
+					this.antecedenteQuirurgicoOrtopedico = null;
+				}
+				$("#fechaAntecedenteQuirurgico").val("");
+				$("#descripcionAntecedenteQuirurgico").val("");
+				$( "#popupAntecedenteQuirurgico").popup("close");
+			}
+		},
+		
+		'annadirAntecedenteOrtopedico' : function(){
+			var fecha = $("#fechaAntecedenteOrtopedico").val();
+			var descripcion = $("#descripcionAntecedenteOrtopedico").val();
+			if (fecha == null || fecha.length != 10){
+				generic.alert("Error", "Debe indicar la fecha del antecendente ortop&eacute;dico");
+			}
+			else{
+				if (this.antecedenteQuirurgicoOrtopedico == null){
+					$("#listaAntecedentesOrtopedicos").append("<li data-icon='false'><a href='#' onclick=''><span class='fechaAntecedenteOrtopedico'>" + generic.getSpanishFormattedDate(fecha) + "</span><br><span class='descripcionAntecedenteOrtopedico'>" + descripcion + "</span></a></li>");
+					$("#listaAntecedentesOrtopedicos").listview('refresh');
+				}
+				else{
+					$(this.antecedenteQuirurgicoOrtopedico).find(".fechaAntecedenteOrtopedico").text(generic.getSpanishFormattedDate(fecha));
+					$(this.antecedenteQuirurgicoOrtopedico).find(".descripcionAntecedenteOrtopedico").text(descripcion);
+					this.antecedenteQuirurgicoOrtopedico = null;
+				}
+				$("#fechaAntecedenteOrtopedico").val("");
+				$("#descripcionAntecedenteOrtopedico").val("");
+				$( "#popupAntecedenteOrtopedico").popup("close");
+			}
+		},
+		
+		'editarAntecedentesQuirurgicosOrtopedicos' : function(element, tipo){
+			this.antecedenteQuirurgicoOrtopedico = element;
+			if (tipo=="quirurgico"){
+				var fecha = $(element).find(".fechaAntecedenteQuirurgico").text();
+				var descripcion =  $(element).find(".descripcionAntecedenteQuirurgico").text();
+				$("#fechaAntecedenteQuirurgico").val(generic.getEnglishFormattedDate(fecha));
+				$("#descripcionAntecedenteQuirurgico").val(descripcion);
+				$("#popupAntecedenteQuirurgico").popup("open");
+			}
+			else{
+				var fecha = $(element).find(".fechaAntecedenteOrtopedico").text();
+				var descripcion =  $(element).find(".descripcionAntecedenteOrtopedico").text();
+				$("#fechaAntecedenteOrtopedico").val(generic.getEnglishFormattedDate(fecha));
+				$("#descripcionAntecedenteOrtopedico").val(descripcion);
+				$("#popupAntecedenteOrtopedico").popup("open");
+			}
 		}
 };

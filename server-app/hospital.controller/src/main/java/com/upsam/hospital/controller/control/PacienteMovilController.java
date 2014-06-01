@@ -1,15 +1,23 @@
 package com.upsam.hospital.controller.control;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javassist.NotFoundException;
 import javax.inject.Inject;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import com.upsam.hospital.controller.dto.AntecedentesPersonalesDTO;
 import com.upsam.hospital.controller.dto.AntecedentesRelacionadosPCIDTO;
@@ -142,24 +151,103 @@ public class PacienteMovilController {
 	 * @throws Exception
 	 *             the exception
 	 */
-	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/videoreproduce/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/videoreproduce2/{id}", method = RequestMethod.GET)
 	public ModelAndView descargarVideo(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		try {
 			Video video = this.videoService.findOne(idPaciente, idExploracion, id);
-			response.setContentType("video/mp4");
+			// response.setContentType("video/mp4");
+			response.setContentType("application/x-download");
 			response.setHeader("Content-Disposition", "attachment; filename=\"" + video.getNombre() + "\"");
-			ServletOutputStream outStream = response.getOutputStream();
-			this.videoService.recuperarVideo(outStream, video.getNombre(), idPaciente);
-
-			outStream.flush();
-			outStream.close();
+			// ServletOutputStream outStream = response.getOutputStream();
+			File file = this.videoService.recuperarVideo(video.getNombre(), idPaciente);
+			int fileSize = (int) file.length();
+			response.addIntHeader("Content-Length", fileSize);
 			response.flushBuffer();
+			byte[] buf = new byte[8192];
+
+			InputStream is = new FileInputStream(file);
+
+			OutputStream os = response.getOutputStream();
+
+			// write to out output stream
+			while (true) {
+				int bytedata = is.read();
+
+				if (bytedata == -1) {
+					break;
+				}
+
+				os.write(bytedata);
+			}
+
+			// flush and close streams.....
+			is.close();
+			os.flush();
+			os.close();
+
+			/*
+			 * int c = 0; try { while ((c = is.read(buf, 0, buf.length)) > 0) {
+			 * outStream.write(buf, 0, c); } is.close(); } catch (IOException e)
+			 * { e.printStackTrace(); } outStream.flush(); outStream.close();
+			 * response.flushBuffer();
+			 */
 		}
 		catch (IOException ex) {
 			LOG.debug(ex.getMessage());
 			throw ex;
 		}
 		return null;
+	}
+
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/videoreproduce3/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<byte[]> getPreview1(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id, HttpServletResponse response) throws Exception {
+		ResponseEntity<byte[]> result = null;
+		try {
+			Video video = this.videoService.findOne(idPaciente, idExploracion, id);
+			byte[] image = this.videoService.recuperarVideo2(video.getNombre(), idPaciente);
+
+			response.setStatus(HttpStatus.OK.value());
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			headers.setContentLength(image.length);
+			result = new ResponseEntity<byte[]>(image, headers, HttpStatus.OK);
+		}
+		catch (Exception e) {
+			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		}
+		return result;
+	}
+
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/videoreproduce/{id}", method = RequestMethod.GET)
+	@ResponseBody
+	public void getPreview2(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id, HttpServletResponse response) {
+		try {
+			Video video = this.videoService.findOne(idPaciente, idExploracion, id);
+			File file = this.videoService.recuperarVideo(video.getNombre(), idPaciente);
+			response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+			response.setHeader("Content-Disposition", "attachment; filename=" + file.getName().replace(" ", "_"));
+			InputStream iStream = new FileInputStream(file);
+			IOUtils.copy(iStream, response.getOutputStream());
+			response.flushBuffer();
+		}
+		catch (Exception e) {
+			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		}
+	}
+
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/videoupload", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public @ResponseBody
+	MensajeDTO videoUpload(@RequestParam("file") MultipartFile file, @PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) throws IOException, DataBaseException {
+		try {
+			if (file.getSize() > 0) {
+				videoService.save(file.getBytes(), idPaciente, idExploracion, "");
+			}
+			return new MensajeDTO("Video guardado correctamente.", true);
+		}
+		catch (Exception e) {
+			return new MensajeDTO("No se ha podido guardar el vídeo. Vuelva a intentarlo. Si sigue fallando, póngase en contacto con el administrador del sistema", false);
+		}
 	}
 
 	/**
@@ -241,7 +329,7 @@ public class PacienteMovilController {
 	 */
 	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion/}")
 	public @ResponseBody
-	ExploracionDTO getVideoFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
+	ExploracionDTO getExploracionFromPaciente(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion) {
 		ExploracionDTO result = null;
 
 		try {

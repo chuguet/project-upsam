@@ -16,7 +16,7 @@
 			<script type="text/javascript">
 				$(document).unbind("pageshow");
 				$(document).bind("pageshow", function(event, data) {
-			        generic.initialize(generic.noLoading);  
+			        generic.initialize(video.prepararSubida);  
 			    });
 			</script>
 			<div data-role="header" data-position="fixed">
@@ -47,6 +47,8 @@
 			
 			<!-- Contenido -->
 			<div data-role="content" id="content">
+				<input type="hidden" id="idPaciente" />
+				<input type="hidden" id="idExploracion" />
 				<div class="content2">
 					<!--Descripcion del video -->			
 					<div data-role="fieldcontain">  

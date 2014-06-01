@@ -18,7 +18,7 @@
 			<script type="text/javascript">
 				$(document).unbind("pageshow");
 				$(document).bind("pageshow", function(event, data) {
-			        generic.initialize();  
+			        generic.initialize(generic.noLoading);
 			    });
 			</script>
 			<div data-role="header" data-position="fixed">
@@ -31,11 +31,11 @@
 			</div>
 			
 			<!-- contenido -->
-			<div data-role="content">				
+			<div data-role="content" id="content">				
 				<h1></h1>		
 				<div id="containerUsuarioEmail" class="content2">
-					<label for="txtUsuario">Introduzca su usuario/email</label>
-					<input type="text" id="txtUsuario" name="txtUsuario"/>	
+					<label for="txtUsuarioEmail">Introduzca su usuario/email</label>
+					<input type="text" id="txtUsuarioEmail" name="txtUsuarioEmail"/>	
 					<a data-role="button" href="#" onclick="javascript:recordarPassword.enviarUsuarioEmail();">Enviar usuario/email</a>
 				</div>
 				<div id="containerPassword" class="content2" style="display:none;">

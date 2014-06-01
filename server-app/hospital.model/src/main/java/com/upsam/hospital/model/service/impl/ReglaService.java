@@ -133,10 +133,12 @@ public class ReglaService implements IReglaService {
 			int countInfos = 0;
 			int countWarnings = 0;
 			List<CampoInfo> camposInfos;
+			String title;
 			for (Regla regla : reglas) {
 				if (regla.getTipoRegla().equals(TipoRegla.WARNING) && matchReglaWarning(regla, paciente, exploracion, antecedentesPersonales, antecedentesRelacionadosPCI, grossMotorFunction, valoracionArticularMuscular, antecedentesQuirurgicosOrtopedicos)) {
 					countWarnings++;
-					sbWarnings.append("<li>").append(regla.getMensaje()).append("<br/>").append("Campos sugeridos a rellenar: ");
+					title = regla.getCamposSugeridos().size() == 1 ? "Campo sugerido a rellenar:" : "Campos sugeridos a rellenar:";
+					sbWarnings.append("<li>").append(regla.getMensaje()).append("<br/>").append(title);
 					sbWarnings.append("<ol>");
 					for (CampoSugerido campoSugerido : regla.getCamposSugeridos()) {
 						sbWarnings.append("<li>").append(campoSugerido.getCampo().getNombre()).append(" (").append(campoSugerido.getCampo().getPagina().getNombre()).append(")</li>");
@@ -146,11 +148,12 @@ public class ReglaService implements IReglaService {
 				else if (regla.getTipoRegla().equals(TipoRegla.INFO)) {
 					camposInfos = matchReglaInfo(regla, paciente, exploracion, antecedentesPersonales, antecedentesRelacionadosPCI, grossMotorFunction, valoracionArticularMuscular, antecedentesQuirurgicosOrtopedicos);
 					if (!camposInfos.isEmpty()) {
-						countInfos = camposInfos.size();
-						sbInfos.append("<li>").append(regla.getMensaje()).append("<br/>").append("Se ofrecen las siguientes sugerencias: ");
+						countInfos++;
+						title = camposInfos.size() == 1 ? "Cumple la siguiente condici&oacute;n" : "Cumple las siguientes condiciones:";
+						sbInfos.append("<li>").append(regla.getMensaje()).append("<br/>").append(title);
 						sbInfos.append("<ol>");
 						for (CampoInfo campoInfo : camposInfos) {
-							sbInfos.append("<li>").append(campoInfo.getCampo().getNombre()).append(" (").append(campoInfo.getCampo().getPagina().getNombre()).append(") ").append("[").append(campoInfo.getCampo().getMinValue()).append(", ").append(campoInfo.getCampo().getMaxValue()).append("]").append(" debe ser ").append(campoInfo.getOperacion().getNameId()).append(" que ").append(campoInfo.getValor()).append("</li>");
+							sbInfos.append("<li>").append(campoInfo.getCampo().getNombre()).append(" (").append(campoInfo.getCampo().getPagina().getNombre()).append(") ").append(campoInfo.getOperacion().getNameId()).append(" que ").append(campoInfo.getValor()).append("</li>");
 						}
 						sbInfos.append("</ol></li>");
 					}
@@ -159,7 +162,7 @@ public class ReglaService implements IReglaService {
 
 			switch (countInfos) {
 			case 0:
-				resultInfos = "No se han encontrado sugerencias";
+				resultInfos = null;
 				break;
 			case 1:
 				resultInfos = "Se ha encontrado la siguiente sugerencia: <ul>" + sbInfos.toString() + "</ul>";
@@ -171,7 +174,7 @@ public class ReglaService implements IReglaService {
 
 			switch (countWarnings) {
 			case 0:
-				resultWarnings = "No se han encontrado alertas";
+				resultWarnings = null;
 				break;
 			case 1:
 				resultWarnings = "Se ha encontrado la siguiente alerta: <ul>" + sbWarnings.toString() + "</ul>";
@@ -255,11 +258,16 @@ public class ReglaService implements IReglaService {
 			if (object != null) {
 				field.setAccessible(true);
 				obj = field.get(object);
-				if (obj != null && (obj instanceof Double || obj instanceof Integer)) {
-					result = (Double) obj;
-				}
-				else if (obj != null && (obj instanceof String)) {
-					result = Double.valueOf((String) obj);
+				if (obj != null) {
+					if (obj instanceof Double) {
+						result = (Double) obj;
+					}
+					else if (obj instanceof Integer) {
+						result = Double.valueOf(obj.toString());
+					}
+					else if (obj instanceof String) {
+						result = Double.valueOf(obj.toString());
+					}
 				}
 			}
 		}
@@ -562,19 +570,19 @@ public class ReglaService implements IReglaService {
 		Boolean result = Boolean.FALSE;
 		if (value != null) {
 			if (operacion.equals(Operacion.IGUAL)) {
-				result = value != umbral;
+				result = value == umbral;
 			}
 			else if (operacion.equals(Operacion.MAYOR)) {
-				result = value <= umbral;
+				result = value > umbral;
 			}
 			else if (operacion.equals(Operacion.MAYOR_IGUAL)) {
-				result = value < umbral;
-			}
-			else if (operacion.equals(Operacion.MENOR)) {
 				result = value >= umbral;
 			}
+			else if (operacion.equals(Operacion.MENOR)) {
+				result = value < umbral;
+			}
 			else if (operacion.equals(Operacion.MENOR_IGUAL)) {
-				result = value > umbral;
+				result = value <= umbral;
 			}
 		}
 		return result;

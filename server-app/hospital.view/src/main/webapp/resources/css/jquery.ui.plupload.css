@@ -21,7 +21,7 @@
 
 .plupload_filelist_footer {border-width: 1px 0 0 0}
 .plupload_file {border-width: 0 0 1px 0}
-.plupload_container .plupload_header {border-width: 0 0 1px 0; position: relative;}
+.plupload_container .plupload_header {border-width: 0 0 1px 0; position: relative; display:none;}
 
 .plupload_delete .ui-icon, 
 .plupload_done .ui-icon,
@@ -71,11 +71,12 @@
 
 .plupload_content {
 	position: absolute;
-	top: 87px;
-	bottom: 44px;
+	top: 0px;
+	bottom: 0px;
+	/*overflow-y: auto;*/
 	left: 0;
 	right: 0;
-	overflow-y: auto;
+	
 	width: 100%;
 }
 

@@ -385,11 +385,11 @@ table.fancytree-ext-columnview span.fancytree-node {
 /*
 table.fancytree-ext-columnview span.fancytree-node.fancytree-expanded {
 	background-color: #CBE8F6;
-}
+}*/
 table.fancytree-ext-columnview span.fancytree-node.fancytree-active {
 	background-color: royalblue;
 }
-*/
+span.fancytree-exp-n.fancytree-active{border-color:red;}
 table.fancytree-ext-columnview span.fancytree-cv-right {
 	background-position: 0px -80px;
 	position: absolute;

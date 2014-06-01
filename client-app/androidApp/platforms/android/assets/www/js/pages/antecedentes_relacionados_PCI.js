@@ -6,6 +6,7 @@ var antecedentesRelacionadosPCI = {
 		$("#idExploracion").val(idExploracion);
 		generic.loading();
 		server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/antecedentesRelacionadosPCI", null, antecedentesRelacionadosPCI.recuperarCallback);
+		restricciones.recuperar();
 	},
 	
 	'recuperarCallback' : function(antecedentes){
@@ -13,40 +14,16 @@ var antecedentesRelacionadosPCI = {
 			$("#idAntecedentes").val(antecedentes.id);
 			$("#subtitle").html("Consulta de Antecedentes relacionados con PCI");
 			$("#btnGuardar").text("Modificar");
-			if (antecedentes.cuadriplejiaEspatica){
-				$("#cuadriplejiaEspatica").attr('checked', 'checked').checkboxradio('refresh');
-			}
-			if (antecedentes.triplejiaEspatica){
-				$("#triplejiaEspatica").attr('checked', 'checked').checkboxradio('refresh');
-			}
-			if (antecedentes.diplejiaEspatica){
-				$("#diplejiaEspatica").attr('checked', 'checked').checkboxradio('refresh');
-			}
-			if (antecedentes.pciMixta){
-				$("#pciMixta").attr('checked', 'checked').checkboxradio('refresh');
-			}
-			if (antecedentes.otra){
-				$("#otra").attr('checked', 'checked').checkboxradio('refresh');
+			$("#tipoPCI option[value=" + antecedentes.tipoPCI + "]").attr("selected", true).change();
+			if (antecedentes.tipoPCI + "" == "4"){
 				$("#divEspecificar").show();
 				$("#diagnosticoEspecificar").val(antecedentes.diagnosticoEspecificar);
 			}
 			$("#etiologia").val(antecedentes.etiologia);
 			$("#localizacion").val(antecedentes.localizacion);
 			
-			if (antecedentes.gradoI){
-				$("#grado1").attr('checked', 'checked').checkboxradio('refresh');
-			}
-			if (antecedentes.gradoII){
-				$("#grado2").attr('checked', 'checked').checkboxradio('refresh');
-			}
-			if (antecedentes.gradoIII){
-				$("#grado3").attr('checked', 'checked').checkboxradio('refresh');
-			}
-			if (antecedentes.gradoIV){
-				$("#grado4").attr('checked', 'checked').checkboxradio('refresh');
-			}
-			if (antecedentes.gradoV){
-				$("#grado5").attr('checked', 'checked').checkboxradio('refresh');
+			if (antecedentes.gmfcs){
+				$("input[name=gmfcs][value='" + antecedentes.gmfcs + "']").prop("checked", true).checkboxradio("refresh");
 			}
 			
 			$("#pruebasComplementarias").val(antecedentes.pruebasComplementarias);
@@ -92,11 +69,12 @@ var antecedentesRelacionadosPCI = {
 		generic.noLoading();
 	},
 	'onChangeOtrosDiagnosticos' : function() {
-		if ($("#otra").is(':checked')) {
+		if ($("#tipoPCI").val() == '4') {
 			$('#divEspecificar').show();
 		}
 		else {
 			$('#divEspecificar').hide();
+			$('#diagnosticoEspecificar').val("");
 		}
 	},
 		
@@ -142,10 +120,12 @@ var antecedentesRelacionadosPCI = {
 		$("#subtitle").html("Consulta de Antecedentes relacionados con PCI");
 		$("#btnGuardar").text("Modificar");
 		$("#idAntecedentes").val(params.parameter.id);
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	
 	'actualizarCallback' : function(params) {
+		restricciones.recuperar();
 		generic.noLoading();
 	},
 	
@@ -153,19 +133,11 @@ var antecedentesRelacionadosPCI = {
 		var antecedentesDTO = {
 			id : $("#idAntecedentes").val() != "" ? parseInt($("#idAntecedentes").val()) : null,
 			idExploracion : $("#idExploracion").val() != "" ? parseInt($("#idExploracion").val()) : null,
-			cuadriplejiaEspatica: $("#cuadriplejiaEspatica").is(':checked'),	
-			triplejiaEspatica: $("#triplejiaEspatica").is(':checked'),
-			diplejiaEspatica: $("#diplejiaEspatica").is(':checked'),
-			pciMixta: $("#pciMixta").is(':checked'),
-			otra: $("#otra").is(':checked'),
+			tipoPCI : $("#tipoPCI").val() + "" != "" ? parseInt($("#tipoPCI").val()) : null,	
 			diagnosticoEspecificar : $("#diagnosticoEspecificar").val() + "" != "" ? $("#diagnosticoEspecificar").val() : null,
 			etiologia : $("#etiologia").val() + "" != "" ? $("#etiologia").val() : null,
 			localizacion : $("#localizacion").val() + "" != "" ? $("#localizacion").val() : null,
-			gradoI : $("#grado1").is(':checked'),
-			gradoII : $("#grado2").is(':checked'),
-			gradoIII : $("#grado3").is(':checked'),
-			gradoIV : $("#grado4").is(':checked'),
-			gradoV : $("#grado5").is(':checked'),
+			gmfcs : $("input[name=gmfcs]:checked").val(),
 			pruebasComplementarias : $("#pruebasComplementarias").val() + "" != "" ? $("#pruebasComplementarias").val() : null,
 			equipamiento : $("#equipamiento").val() + "" != "" ? $("#equipamiento").val() : null,		
 			ayudasMarcha : $("#ayudasMarcha").val() + "" != "" ? parseInt($("#ayudasMarcha").val()) : null,				

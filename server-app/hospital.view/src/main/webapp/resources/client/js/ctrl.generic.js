@@ -258,25 +258,5 @@ var generic = {
 		var mm = parseInt(data[1]) <10 ? '0' + parseInt(data[1]) : data[1];
 		var yyyy = data[2];
 		return yyyy + "-" + mm + "-" + dd;
-	},
-	'recuperarRestriccionesCallback' : function(restricciones){
-		if (restricciones.warningMessages != null && restricciones.warningMessages.length > 0){
-			$("#iconRestricciones").show();
-			$("#messageRestricciones").html(restricciones.warningMessages);
-	    	generic.blink();    
-		}
-		else{
-			$("#iconRestricciones").hide();
-			$("#messageRestricciones").html("");
-		}
-		
-		if (restricciones.infoMessages != null && restricciones.infoMessages.length > 0){
-			$("#iconInfo").show();
-			$("#messageInfo").html(restricciones.infoMessages);
-		}
-		else{
-			$("#iconInfo").hide();
-			$("#messageInfo").html("");
-		}
 	}
 };

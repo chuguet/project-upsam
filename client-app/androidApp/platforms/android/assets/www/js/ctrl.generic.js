@@ -5,8 +5,7 @@ var generic = {
 			app.initialize();
 			this.appInitialized = true;
 		}
-		
-		var that = this;
+		$.mobile.silentScroll(10);
     	var divUsername = $("div#username");
     	var user = generic.getObject("usuario");
     	
@@ -26,8 +25,25 @@ var generic = {
     		methodToExecute.apply(this, null);
     	}
     	//$("body").show();
-    	that.processSpeech();     
-    	that.processDatebox();
+    	generic.processSpeech();     
+    	generic.processDatebox();	
+	},
+	
+	'blink': function(){
+		var alert = $('.ui-icon-alert');
+		if (alert.length > 0){
+			alert.css("background-color", "red");
+			var opacity = 1;
+			setInterval(function () {
+		        if (opacity === 1) {
+		            opacity = 0.5;
+
+		        } else {
+		        	opacity = 1;
+		        }
+		        alert.fadeTo("fast", opacity)
+		    }, 400);
+		}
 	},
 	
 	'processSpeech' : function() {
@@ -116,6 +132,23 @@ var generic = {
 		//$.mobile.changePage(uri, { dataUrl : uriWithParameters, data : parameters, reloadPage : true, changeHash : true });
 	},
 	
+	'changePageAjax' : function(uri, parameters){
+		var uriWithParameters = uri;
+		if (parameters != null){
+			uriWithParameters += "?";
+			var count = 1;
+			for(var name in parameters) {
+				if (count > 1)
+					uriWithParameters += "&";
+				uriWithParameters += name + "=" + parameters[name];
+				count++;
+			}
+		}
+		$("div#content").load( uriWithParameters + " #content", function() {
+			$("#content").trigger("create");
+		});
+	},
+	
 	'getURLParameter' : function(name){
 	    var results = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)').exec(window.location.href);
 	    if (results == null){
@@ -131,10 +164,12 @@ var generic = {
 			theme: "b",
 			textonly: false
 		});
+		$("div#content").css({ opacity: 0.3 });
 	},
 	
 	'noLoading': function(){
 		$.mobile.loading( 'hide');
+		$("div#content").fadeTo( 500, 1 );
 	},
 	
 	'alert' : function(title, message, resultCallback) {
@@ -179,8 +214,10 @@ var generic = {
 	    return value && JSON.parse(value);
 	},
 	'unlogin' : function(){
-		generic.deleteValue("usuario");
-		generic.changePage("login.html");
+		server.get("j_spring_security_logout",null, function(){
+			generic.deleteValue("usuario");
+			document.location.href = "login.html";
+		});
 	},
 	'getActualDate' : function(){
 		var today = new Date();
@@ -208,11 +245,18 @@ var generic = {
 
 	    return true;
 	},
-	'getFormattedDate' : function(fecha){
-		var data = fecha.split("/");
-		var dd = data[2] <10 ? '0' + data[2] : data[2];
-		var mm = data[1] <10 ? '0' + data[1] : data[1];
+	'getSpanishFormattedDate' : function(fecha){
+		var data = fecha.split("-");
+		var dd = parseInt(data[2]) <10 ? '0' + parseInt(data[2]) : data[2];
+		var mm = parseInt(data[1]) <10 ? '0' + parseInt(data[1]) : data[1];
 		var yyyy = data[0];
 		return dd + "/" + mm + "/" + yyyy;
+	},
+	'getEnglishFormattedDate' : function(fecha){
+		var data = fecha.split("/");
+		var dd = parseInt(data[0]) <10 ? '0' + parseInt(data[0]) : data[0];
+		var mm = parseInt(data[1]) <10 ? '0' + parseInt(data[1]) : data[1];
+		var yyyy = data[2];
+		return yyyy + "-" + mm + "-" + dd;
 	}
 };

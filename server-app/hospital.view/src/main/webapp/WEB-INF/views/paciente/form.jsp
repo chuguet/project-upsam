@@ -19,107 +19,217 @@
 		$('input[id=telefono]').val(p.telefono);
 		if(p.sexo==0){
 			$('#hombre').prop('checked', true).button("refresh");
-		}else if (p.sexo==1){
+		}
+		else if (p.sexo==1){
 			$('#mujer').prop('checked', true).button("refresh");
 		}
+		
 		if(p.escolarizacion==0){
 			$('#educacion_especial').prop('checked', true).button("refresh");
-		}else if (p.escolarizacion==1){
+		}
+		else if (p.escolarizacion==1){
 			$('#integracion').prop('checked', true).button("refresh");
-		}else if (p.escolarizacion==2){
+		}
+		else if (p.escolarizacion==2){
 			$('#sin_adaptaciones').prop('checked', true).button("refresh");
 		}
-		$("#lista").setGridParam({
-			data : p.exploraciones
-		}).trigger("reloadGrid");
-		paciente.prepareUploader(p.id);
+		
+		if (p.exploraciones != null){
+			for (var i = 0; i < p.exploraciones.length; i++){
+				$("table.table tbody").append("<tr><td><input type='hidden' id='id" + i + "' value='" + p.exploraciones[i].id + "' />" + p.exploraciones[i].nombreUsuario + "</td><td>" + p.exploraciones[i].fecha + "</td></tr>");
+			}
+			generic.processTable("paciente", paciente.openUploader);
+			paciente.prepareUploader(p.id);
+		}
+		else{
+			$("datatable-1").hide();
+		}
+
+		
 	};
 
 	</c:if>
 </script>
-	<fieldset>
-		<legend>
-			<c:choose>
-				<c:when test="${operacion == 'new'}">Alta de Paciente</c:when>
-				<c:otherwise>Edici&oacute;n de Paciente</c:otherwise>
-			</c:choose>
-		</legend>
-		<input type="hidden" id="id" />
-		<div class="displayTable">
-			<p>
-				<label for="nombre">Nombre:</label> 
-				<input id="nombre" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-			</p>
-			<p>
-				<label for="apellidos">Apellidos:</label> 
-				<input id="apellidos" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-			</p>
-			<p>
-				<label for="fechaNacimiento">Fecha de nacimiento:</label>
-				<input id="fechaNacimiento" type="textbox" maxlength="200" readonly class="text ui-widget-content ui-corner-all" />
-			</p>
-			<p>
-				<label for="fechaEvaluacion">Fecha de &uacute;ltima evaluaci&oacute;n:</label>
-				<input id="fechaEvaluacion" type="textbox" maxlength="200" readonly class="text ui-widget-content ui-corner-all" />
-			</p>
-			<p>
-				<div id="sexo">
-					<label for="sexo">Sexo:</label>
-					<label for="hombre">Hombre</label>
-				    <input type="radio" id="hombre" name="sexo" value="0"/>
-					<label for="mujer">Mujer</label>
-				    <input type="radio" id="mujer" name="sexo" value="1"/>
-				</div>
-			</p>
-		</div>
-		<div class="displayTable">
-			<p>
-				<label for="examinador">Examinador:</label>
-				<input id="examinador" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-			</p>
-			<p>
-				<label for="curso">Curso:</label>
-				<input id="curso" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-			</p>
-			<p>
-				<label for="numeroIdentificacion">N&uacute;mero de identificaci&oacute;n:</label>
-				<input id="numeroIdentificacion" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-			</p>
-			<p>
-				<label for="telefono">N&uacute;mero de tel&eacute;fono:</label>
-				<input id="telefono" type="textbox" maxlength="200" class="text ui-widget-content ui-corner-all" />
-			</p>
-			<p>
-				<div id="escolarizacion">
-					<label for="escolarizacion">Escolarizaci&oacute;n:</label>
-					<label for="educacion_especial">Educaci&oacute;n especial</label>
-				    <input type="radio" id="educacion_especial" name="escolarizacion" value="0"/>
-					<label for="integracion">Esc. de integraci&oacute;n</label>
-				    <input type="radio" id="integracion" name="escolarizacion" value="1"/>
-					<label for="sin_adaptaciones">Sin adaptaciones</label>
-				    <input type="radio" id="sin_adaptaciones" name="escolarizacion" value="2"/>
-				</div>
-			</p>
-		</div>
-		<c:choose>
-			<c:when test="${operacion == 'edit'}">
-				<table id="lista"></table>
-				<div id="paginadorLista"></div>
-				<div id="uploader">
-				    <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-				</div>
-			</c:when>
-		</c:choose>
-		<div class="botonera">
-			<c:choose>
-				<c:when test="${operacion == 'new'}">
-					<input type="button" id="btnSavePaciente" value="Guardar" />
-				</c:when>
-				<c:otherwise>
-					<input type="button" id="btnSavePaciente" value="Modificar" />
-				</c:otherwise>
-			</c:choose>
-			<input type="button" id="btnCancel" value="Cancelar" />
-		</div>
-	</fieldset>
 
+<div class="row">
+	<div id="breadcrumb" class="col-md-12">
+		<ol class="breadcrumb">
+			<li><a href="<c:url value="/home" />">Inicio</a></li>
+			<li><a href="javascript:void" onclick="javascript:generic.getList('paciente');">Pacientes</a></li>
+			<li>
+			<c:choose>
+				<c:when test="${operacion == 'new'}">Nuevo</c:when>
+				<c:otherwise>Modificar</c:otherwise>
+			</c:choose>
+			</li>
+		</ol>
+	</div>
+</div>
+
+<form class="form-horizontal" role="form" action="javascript:paciente.getParams();">
+	<input type="hidden" id="id" />
+	
+	<div class="form-group">
+		<label for="nombre" class="col-sm-2 control-label">Nombre</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="nombre" placeholder="Nombre" required autofocus maxlength="200" />
+	    </div>
+	</div>
+	
+	<div class="form-group">
+		<label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
+	    <div class="col-sm-10">
+	      <input type="text" class="form-control" id="apellidos" placeholder="Apellidos" required maxlength="200" />
+	    </div>
+	</div>
+	
+	<div class="form-group">
+		<label for="fechaNacimiento" class="col-sm-2 control-label">Fecha de nacimiento</label>
+	    <div class="col-sm-10">
+	    	<div class='input-group date' data-date-format="DD/MM/YYYY">
+                <input type='text' id='fechaNacimiento' class="form-control" />
+                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+            </div>
+	    </div>
+	    <script type="text/javascript">
+            /* $(function () {
+                $('#fechaNacimiento').datetimepicker({
+                    pickTime: false
+                });
+            }); */
+        </script>
+	</div>
+
+	<div class="form-group">
+		<label for="fechaEvaluacion" class="col-sm-2 control-label">&Uacute;ltima evaluaci&oacute;n</label>
+	    <div class="col-sm-10">
+	    	<div class='input-group date' data-date-format="DD/MM/YYYY">
+                <input type='text' id='fechaEvaluacion' class="form-control" />
+                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+            </div>
+	    </div>
+	</div>
+
+	<div class="form-group">
+		<label for="sexo" class="col-sm-2 control-label">Sexo</label>
+		<div class="col-sm-10">
+			<div class="radio">
+				<label>
+			    	<input value="0" type="radio" name="sexo" id="0" checked />
+			    	Hombre
+			  	</label>
+			</div>
+			<div class="radio">
+		 		<label>
+		   			<input value="1" type="radio" name="sexo" id="1" />
+		   			Mujer
+		 		</label>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="examinador" class="col-sm-2 control-label">Examinador</label>
+	    <div class="col-sm-10">
+			<input type="text" class="form-control" id="examinador" placeholder="Examinador" maxlength="200" />
+	    </div>
+	</div>
+	
+	<div class="form-group">
+		<label for="curso" class="col-sm-2 control-label">Curso</label>
+	    <div class="col-sm-10">
+			<input type="text" class="form-control" id="curso" placeholder="Curso" maxlength="200" />
+	    </div>
+	</div>
+		
+	<div class="form-group">
+		<label for="numeroIdentificacion" class="col-sm-2 control-label">N&uacute;mero de identificaci&oacute;n</label>
+	    <div class="col-sm-10">
+			<input type="text" class="form-control" id="numeroIdentificacion" placeholder="N&uacute;mero de identificaci&oacute;n" />
+	    </div>
+	</div>
+			
+	<div class="form-group">
+		<label for="telefono" class="col-sm-2 control-label">N&uacute;mero de tel&eacute;fono</label>
+	    <div class="col-sm-10">
+			<input type="text" class="form-control" id="telefono" placeholder="Tel&eacute;fono" />
+	    </div>
+	</div>		
+			
+	<div class="form-group">
+		<label for="usuario" class="col-sm-2 control-label">Escolarizaci&oacute;n</label>
+		<div class="col-sm-10">
+			<div class="radio">
+				<label>
+			    	<input value="0" type="radio" name="escolarizacion" id="0" checked />
+			    	Educaci&oacute;n especial
+			  	</label>
+			</div>
+			<div class="radio">
+		 		<label>
+		   			<input value="1" type="radio" name="escolarizacion" id="1" />
+		   			Escuela de integraci&oacute;n
+		 		</label>
+			</div>
+			<div class="radio">
+		 		<label>
+		   			<input value="2" type="radio" name="escolarizacion" id="2" />
+		   			Sin adaptaciones
+		 		</label>
+			</div>
+		</div>
+	</div>
+	
+	<c:choose>
+		<c:when test="${operacion == 'edit'}">
+			<div class="box-content no-padding">
+				<table class="table table-bordered table-striped table-hover table-heading table-datatable" id="datatable-1">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Fecha</th>
+						</tr>
+					</thead>
+					
+					<tbody></tbody>
+					
+					<tfoot>
+						<tr>
+							<th>Nombre</th>
+							<th>Fecha</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		
+			<div class="modal" id="uploaderModal">
+				<div class="modal-dialog uploadModal">
+					<input type="hidden" id="idExploracionSelect" />
+			      	<div class="modal-content">
+			        	<div class="modal-header">
+			          		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			          		<h4 class="modal-title">Subida de ficheros</h4>
+			        	</div>
+			        	<div class="modal-body">
+			          		<div id="uploader">
+					    		<p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+							</div>
+			        	</div>
+			      </div>
+			    </div>
+			</div>	
+		</c:when>
+	</c:choose>
+	
+	<div class="botonera">
+		<c:choose>
+			<c:when test="${operacion == 'new'}">
+				<button class="btn btn-default" id="btnSavePaciente" type="submit"><i class='fa fa-check fa-fw'></i>Guardar</button>
+			</c:when>
+			<c:otherwise>
+				<button class="btn btn-default" id="btnSavePaciente" type="submit"><i class='fa fa-check fa-fw'></i>Modificar</button>
+			</c:otherwise>
+		</c:choose>
+		<button class="btn btn-default" id="btnCancel" onclick="javascript:generic.getList('paciente');"><i class='fa fa-times fa-fw'></i>Cancelar</button>
+	</div>
+</form>
