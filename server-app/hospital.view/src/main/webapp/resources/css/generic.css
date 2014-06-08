@@ -38,10 +38,13 @@ body.web div#content .tree {display:inline-block; margin-left:20px; vertical-ali
 body.web div#content .containerTextTree {display:block; }
 body.web div#content .textTree {display:inline-block; margin-left:20px; vertical-align:top; }
 
-/*
-body div.modal {display:none; position:fixed; z-index:1000; top:0; left: 0; height:100%; width:100%; background: rgba( 255, 255, 255, .8 ) url(../imgs/loading.gif) 50% 50% no-repeat;}
-body.loading {overflow: hidden;}
-body.loading .modal {display: block;}
-*/
-body.home div.uploadModal {position:absolute; left:50%; margin:150px 0px 0px -150px; top:40px;}
+
+body.home div.uploadModal {position:absolute; left:50%; margin:-200px 0px 0px -300px; top:50%;}
 body.home div.uploadModal div.plupload_container {font-size:1.17em;}
+
+body.home div.alertModal {position:absolute; left:50%; margin:-100px 0px 0px -200px; top:50%; width:400px; height:200px;}
+body.home div.alertModal div.alertModal_container {font-size:1.17em;}
+
+
+.disableLabel{color:rgb(192, 188, 188)}
+.disableSelect{background-color: #eee; color: #9C9C9C; border-color:#ccc;}

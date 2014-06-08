@@ -11,7 +11,7 @@ var exploracionFisica = {
 			$("#subtitle").html("Consulta de Exploraci&oacute;n");
 			$("#btnGuardar").text("Modificar");
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion, null, exploracionFisica.recuperarExploracionCallback);
-			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/video", null, exploracionFisica.recuperarListadoVideosCallback);
+			exploracionFisica.recuperarListadoVideos();
 			server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/ficherosEMT", null, exploracionFisica.recuperarListadoGraficasCallback);
 			restricciones.recuperar();
 			
@@ -135,26 +135,38 @@ var exploracionFisica = {
 		}
 		generic.noLoading();
 	},
-	        
+	
+	'recuperarListadoVideos' : function(){
+		var idPaciente = generic.getURLParameter("idPaciente");
+		var idExploracion = generic.getURLParameter("idExploracion");
+		server.get('pacientemovil/' + idPaciente + "/exploracion/" + idExploracion + "/video", null, exploracionFisica.recuperarListadoVideosCallback);
+	},
+	  
     'recuperarListadoVideosCallback' : function(parameters){
     	var idPaciente = $("#idPaciente").val();
     	var idExploracion = $("#idExploracion").val();
     	$("#listaVideos li").remove();
-    	for (var i = 0; i < parameters.length; i++){
-    		$("#listaVideos").append("<li><a rel='external' alt='Acceder al video' href='#' onclick='javascript:generic.changePage(\"video_detalle.html?idPaciente=" + idPaciente + "&idExploracion=" + idExploracion + "&idVideo=" + parameters[i].id + "&num=" + (i + 1) + "\");'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
-    		
-    	}
-    	$("#listaVideos").listview('refresh');
+    	if (parameters.length > 0){
+    		$("#listaVideos").append("<li data-role='list-divider'>Listado de v&iacute;deos</li>");
+	    	for (var i = 0; i < parameters.length; i++){
+	    	    $("#listaVideos").append("<li><a rel='external' alt='Acceder al video' href='#' onclick='javascript:generic.changePage(\"video_detalle.html?idPaciente=" + idPaciente + "&idExploracion=" + idExploracion + "&idVideo=" + parameters[i].id + "&num=" + (i + 1) + "\");'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
+	    	
+	    		//$("#listaVideos").append("<li><a rel='external' alt='Acceder al video' href='#' onclick='javascript:window.videoPlayer.play(\"" + server.URI + "pacientemovil/" + idPaciente + "/exploracion/" + idExploracion + "/videoreproduce/" + parameters[i].id + "\");' class='itemFeatures'>Video " + (i + 1) + "<br><span>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
+	    	}
+	    }
+	    $("#listaVideos").listview('refresh');
     },
 
     'recuperarListadoGraficasCallback' : function(parameters){
     	var idPaciente = $("#idPaciente").val();
     	var idExploracion = $("#idExploracion").val();
     	$("#listaGraficas li").remove();
-    	for (var i = 0; i < parameters.length; i++){
-    		$("#listaGraficas").append("<li><a rel='external' alt='Acceder a la gr&aacute;fica' href='#' onclick='javascript:generic.changePage(\"grafica_detalle.html?idPaciente=" + idPaciente + "&idExploracion=" + idExploracion + "&idGrafica=" + parameters[i].id + "&num=" + (i + 1) + "\");'>Gr&aacute;fica " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].fecha + "</span></a></li>");
-    		
-    	}
+    	if (parameters.length > 0){
+    		$("#listaGraficas").append("<li data-role='list-divider'>Listado de gr&aacute;ficas</li>");
+	    	for (var i = 0; i < parameters.length; i++){
+	    		$("#listaGraficas").append("<li><a rel='external' alt='Acceder a la gr&aacute;fica' href='#' onclick='javascript:generic.changePage(\"grafica_detalle.html?idPaciente=" + idPaciente + "&idExploracion=" + idExploracion + "&idGrafica=" + parameters[i].id + "&num=" + (i + 1) + "\");' class='itemFeatures'>Gr&aacute;fica " + (i + 1) + "<br><span>" + parameters[i].fecha + "</span></a></li>");
+	    	}
+	    }
     	$("#listaGraficas").listview('refresh');
     },
 

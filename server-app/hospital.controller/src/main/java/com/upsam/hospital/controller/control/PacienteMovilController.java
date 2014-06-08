@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javassist.NotFoundException;
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
@@ -230,6 +231,58 @@ public class PacienteMovilController {
 			InputStream iStream = new FileInputStream(file);
 			IOUtils.copy(iStream, response.getOutputStream());
 			response.flushBuffer();
+			iStream.close();
+		}
+		catch (Exception e) {
+			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		}
+	}
+
+	@Inject
+	ServletContext context;
+
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/videoreproduce4/{id}", method = RequestMethod.GET)
+	public void doDownload(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		try {
+			int BUFFER_SIZE = 4096;
+			Video video = this.videoService.findOne(idPaciente, idExploracion, id);
+			File downloadFile = this.videoService.recuperarVideo(video.getNombre(), idPaciente);
+
+			String appPath = context.getRealPath("");
+			System.out.println("appPath = " + appPath);
+
+			FileInputStream inputStream = new FileInputStream(downloadFile);
+
+			// get MIME type of the file
+			String mimeType = context.getMimeType(downloadFile.getPath());
+			if (mimeType == null) {
+				// set to binary type if MIME mapping not found
+				mimeType = "application/octet-stream";
+			}
+			System.out.println("MIME type: " + mimeType);
+
+			// set content attributes for the response
+			response.setContentType(mimeType);
+			response.setContentLength((int) downloadFile.length());
+
+			// set headers for the response
+			String headerKey = "Content-Disposition";
+			String headerValue = String.format("attachment; filename=\"%s\"", downloadFile.getName());
+			response.setHeader(headerKey, headerValue);
+
+			// get output stream of the response
+			OutputStream outStream = response.getOutputStream();
+
+			byte[] buffer = new byte[BUFFER_SIZE];
+			int bytesRead = -1;
+
+			// write bytes read from the input stream into the output stream
+			while ((bytesRead = inputStream.read(buffer)) != -1) {
+				outStream.write(buffer, 0, bytesRead);
+			}
+
+			inputStream.close();
+			outStream.close();
 		}
 		catch (Exception e) {
 			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());

@@ -7,9 +7,6 @@
 	<c:choose>
 		<c:when test="${operacion == 'edit'}">
 			function showInformationIntoView(regla) {
-				$('input[id=id]').val(regla.id);
-				$('#mensaje').val(regla.mensaje);
-				$('#titulo').val(regla.titulo);
 				sugerencia.formatForm(regla);
 			};
 		</c:when>
@@ -53,9 +50,9 @@
 	
 	<div id="form-operacion" class="form-group">
 		<label for="operacion" class="col-sm-2 control-label">Operacion</label>
-		<div class="col-sm-10">
-			<div id="operacion">
-				<select>
+		<div class="row" id="operacion">
+			<div class="col-sm-2">
+				<select class="form-control">
 				  <option value="-1">Elija una operaci&oacute;n</option>
 				  <option value="0">Igual</option>
 				  <option value="1">Mayor</option>
@@ -63,6 +60,8 @@
 				  <option value="3">Menor</option>
 				  <option value="4">Menor igual</option>
 				</select>
+			</div>
+			<div class="col-sm-5">
 				<input type="text" class="form-control" id="valor" placeholder="Valor" maxlength="200">
 			</div>
 		 </div>
@@ -84,6 +83,6 @@
 				<button class="btn btn-default" id="btnSave" type="submit"><i class='fa fa-check fa-fw'></i>Modificar</button>
 			</c:otherwise>
 		</c:choose>
-		<button class="btn btn-default" id="btnCancel" onclick="javascript:generic.getList('sugerencia');"><i class='fa fa-times fa-fw'></i>Cancelar</button>
+		<a class="btn btn-default" id="btnCancel" onclick="javascript:generic.getList('sugerencia');"><i class='fa fa-times fa-fw'></i>Cancelar</a>
 	</div>
 </form>

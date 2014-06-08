@@ -4,7 +4,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <script type="text/javascript">
-	paciente.formatForm();
 	
 	<c:if test="${operacion == 'edit'}">
 	function showInformationIntoView(p) {
@@ -88,16 +87,8 @@
 	    <div class="col-sm-10">
 	    	<div class='input-group date' data-date-format="DD/MM/YYYY">
                 <input type='text' id='fechaNacimiento' class="form-control" />
-                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
 	    </div>
-	    <script type="text/javascript">
-            /* $(function () {
-                $('#fechaNacimiento').datetimepicker({
-                    pickTime: false
-                });
-            }); */
-        </script>
 	</div>
 
 	<div class="form-group">
@@ -105,7 +96,6 @@
 	    <div class="col-sm-10">
 	    	<div class='input-group date' data-date-format="DD/MM/YYYY">
                 <input type='text' id='fechaEvaluacion' class="form-control" />
-                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
             </div>
 	    </div>
 	</div>
@@ -230,6 +220,10 @@
 				<button class="btn btn-default" id="btnSavePaciente" type="submit"><i class='fa fa-check fa-fw'></i>Modificar</button>
 			</c:otherwise>
 		</c:choose>
-		<button class="btn btn-default" id="btnCancel" onclick="javascript:generic.getList('paciente');"><i class='fa fa-times fa-fw'></i>Cancelar</button>
+		<a class="btn btn-default" id="btnCancel" onclick="javascript:generic.getList('paciente');"><i class='fa fa-times fa-fw'></i>Cancelar</a>
 	</div>
 </form>
+<script type="text/javascript">
+
+paciente.formatForm();
+</script>

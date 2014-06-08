@@ -2,10 +2,12 @@ var paciente = {
 	'rowID' : null,
 	'formatForm' : function() {
 		$('#fechaEvaluacion').datetimepicker({
-            pickTime: false
+            pickTime: false,
+            language : 'es'
         });
 		$('#fechaNacimiento').datetimepicker({
-            pickTime: false
+            pickTime: false,
+            language : 'es'
         });
 	},
 	'openUploader' : function(idExploracion){

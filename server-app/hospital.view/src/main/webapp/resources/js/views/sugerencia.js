@@ -1,6 +1,7 @@
 var sugerencia = {
 	'formatForm' : function(regla) {
-		$("#form-operacion").hide();
+		sugerencia.disableOperation(true);
+		//$("#form-operacion").hide();
 
 		$("#valor").keyup(function() {
 			$("#tree").fancytree('getTree').getActiveNode().data.valor = $(this).val();
@@ -56,11 +57,12 @@ var sugerencia = {
 				selectMode : 1,
 				activate: function(event, node) {
 					if (!node.node.isActive() || node.node.hasChildren()) {
-						$("#form-operacion").hide();
+						sugerencia.disableOperation(true);
+						//$("#form-operacion").hide();
 					}
 					else {
-						
-						$("#form-operacion").show();
+						sugerencia.disableOperation(false);
+						//$("#form-operacion").show();
 						if (node.node.data.operacion != null && node.node.data.valor != null) {
 							$("#valor").val(node.node.data.valor);
 							var byDefault = node.node.data.operacion;
@@ -84,13 +86,15 @@ var sugerencia = {
 							});
 						}
 					}
-			      },
+			    },
 				select : function(flag, node) {
 					if (!node.node.isSelected() || node.node.hasChildren()) {
-						$("#form-operacion").hide();
+						sugerencia.disableOperation(true);
+						//$("#form-operacion").hide();
 					}
 					else {
-						$("#form-operacion").show();
+						sugerencia.disableOperation(false);
+						//$("#form-operacion").show();
 						if (node.node.data.operacion != null && node.node.data.valor != null) {
 							$("#valor").val(node.node.data.valor);
 							var byDefault = node.node.data.operacion;
@@ -116,7 +120,38 @@ var sugerencia = {
 					}
 				}
 			});
+			
+			if (regla != null){
+				$("#tree").fancytree("getRootNode").visit(function(node){
+			        node.setExpanded(true);
+			      });
+				
+		    	$('input[id=id]').val(regla.id);
+				$('#mensaje').val(regla.mensaje);
+				$('#titulo').val(regla.titulo);
+				if (regla.camposInfosDTO != null && regla.camposInfosDTO.length > 0){
+					for (var i = 0; i < regla.camposInfosDTO.length; i++){
+						var node = $("#tree").fancytree("getTree").getNodeByKey(regla.camposInfosDTO[i].idCampo);
+						var parentNode = node.parent;
+						$( "span:contains('" + parentNode.title + "')" ).parent().find("ul > li > span:contains('" + node.title + "')").css("background-color", "rgb(255, 145, 145)");
+					}
+				}
+		    }
 		});
+	},
+	'disableOperation' : function(disable){
+		if (disable){
+			$("div#form-operacion label").addClass("disableLabel");
+			$("div#form-operacion select").attr('disabled', 'disabled');
+			//$("div#form-operacion select").addClass("disableSelect");
+			$("div#form-operacion input").attr('disabled', 'disabled');
+		}
+		else{
+			$("div#form-operacion label").removeClass("disableLabel");
+			//$("div#form-operacion select").removeClass("disableSelect");
+			$("div#form-operacion select").removeAttr('disabled');
+			$("div#form-operacion input").removeAttr('disabled');
+		}
 	},
 	'getParams' : function() {
 		var id = $("#id").val();

@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -69,6 +70,10 @@ public class Capture extends CordovaPlugin {
     private JSONArray results;                      // The array of results to be returned to the user
     private int numPics;                            // Number of pictures before capture activity
 
+    private Uri fileUri;
+    public static final int MEDIA_TYPE_VIDEO = 2;
+    
+    
     //private CordovaInterface cordova;
 
 //    public void setContext(Context mCtx)
@@ -195,7 +200,7 @@ public class Capture extends CordovaPlugin {
      * Sets up an intent to capture audio.  Result handled by onActivityResult()
      */
     private void captureAudio() {
-        Intent intent = new Intent(android.provider.MediaStore.Audio.Media.RECORD_SOUND_ACTION);
+        Intent intent = new Intent(MediaStore.Audio.Media.RECORD_SOUND_ACTION);
 
         this.cordova.startActivityForResult((CordovaPlugin) this, intent, CAPTURE_AUDIO);
     }
@@ -225,11 +230,11 @@ public class Capture extends CordovaPlugin {
         // Save the number of images currently on disk for later
         this.numPics = queryImgDB(whichContentStore()).getCount();
 
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
         // Specify file so that large image is captured and returned
         File photo = new File(getTempDirectoryPath(), "Capture.jpg");
-        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
 
         this.cordova.startActivityForResult((CordovaPlugin) this, intent, CAPTURE_IMAGE);
     }
@@ -238,8 +243,17 @@ public class Capture extends CordovaPlugin {
      * Sets up an intent to capture video.  Result handled by onActivityResult()
      */
     private void captureVideo(int duration) {
-        Intent intent = new Intent(android.provider.MediaStore.ACTION_VIDEO_CAPTURE);
+        Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
+        
+        fileUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO); 
+        //intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
+        
+        // set the image file name  
+        if (Environment.getExternalStorageDirectory().getAbsolutePath().indexOf("mnt") == -1){
+        	intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+        }
+        
         if(Build.VERSION.SDK_INT > 7){
             intent.putExtra("android.intent.extra.durationLimit", duration);
         }
@@ -297,14 +311,14 @@ public class Capture extends CordovaPlugin {
                             // Create entry in media store for image
                             // (Don't use insertImage() because it uses default compression setting of 50 - no way to change it)
                             ContentValues values = new ContentValues();
-                            values.put(android.provider.MediaStore.Images.Media.MIME_TYPE, IMAGE_JPEG);
+                            values.put(MediaStore.Images.Media.MIME_TYPE, IMAGE_JPEG);
                             Uri uri = null;
                             try {
-                                uri = that.cordova.getActivity().getContentResolver().insert(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                                uri = that.cordova.getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
                             } catch (UnsupportedOperationException e) {
                                 LOG.d(LOG_TAG, "Can't write to external media storage.");
                                 try {
-                                    uri = that.cordova.getActivity().getContentResolver().insert(android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI, values);
+                                    uri = that.cordova.getActivity().getContentResolver().insert(MediaStore.Images.Media.INTERNAL_CONTENT_URI, values);
                                 } catch (UnsupportedOperationException ex) {
                                     LOG.d(LOG_TAG, "Can't write to internal media storage.");
                                     that.fail(createErrorObject(CAPTURE_INTERNAL_ERR, "Error capturing image - no media storage found."));
@@ -376,7 +390,17 @@ public class Capture extends CordovaPlugin {
 							    
 							    BaseWizard baseWizard = (BaseWizard) cordova.getActivity();
 							    baseWizard.setCallbackId(that.callbackContext.getCallbackId());
+							    
 							    baseWizard.setResults(results);
+							    
+							    if (Environment.getExternalStorageDirectory().getAbsolutePath().indexOf("mnt") == -1){
+							    	fullPath = fullPath.replace("file:", "");
+							    	baseWizard.setWorkingFolder(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/HospitalVideo/");
+							    	baseWizard.setOutFolder(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/HospitalVideo/");
+							    }
+							    else{
+							    	fullPath = fullPath.replace("file:/mnt", "");
+							    }
 							    baseWizard.compress(fullPath);
 							    
 	                            //that.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, results));
@@ -521,9 +545,82 @@ public class Capture extends CordovaPlugin {
      */
     private Uri whichContentStore() {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            return android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+            return MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
         } else {
-            return android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI;
+            return MediaStore.Images.Media.INTERNAL_CONTENT_URI;
         }
+    }
+    
+    
+    /******************************************************************************************/
+    
+    /** Create a file Uri for saving an image or video */
+    private static Uri getOutputMediaFileUri(int type){
+         
+          return Uri.fromFile(getOutputMediaFile(type));
+    }
+ 
+    /** Create a File for saving an image or video */
+    private static File getOutputMediaFile(int type){
+         
+        // Check that the SDCard is mounted
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM), "HospitalVideo");
+         
+         
+        // Create the storage directory(MyCameraVideo) if it does not exist
+        if (! mediaStorageDir.exists()){
+             
+            if (! mediaStorageDir.mkdirs()){
+                Log.d("MyCameraVideo", "Failed to create directory MyCameraVideo.");
+                return null;
+            }
+        }
+ 
+         
+        // Create a media file name
+         
+        // For unique file name appending current timeStamp with file name
+        java.util.Date date= new java.util.Date();
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(date.getTime());
+         
+        File mediaFile;
+         
+        if(type == MEDIA_TYPE_VIDEO) {
+             
+            // For unique video file name appending current timeStamp with file name
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator + "LAM_"+ timeStamp + ".mp4");
+             
+        }
+        else {
+            return null;
+        }
+        createCompressionFiles();
+        
+ 
+        return mediaFile;
+    }
+    
+    private static void createCompressionFiles(){
+    	try{
+	    	File license = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/HospitalVideo", "ffmpeglicense.lic");
+	    	if (!license.exists()){
+	    		license.createNewFile();
+	    	}
+	    	File ffmpeg4android = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/HospitalVideo", "ffmpeg4android.log");
+	    	if (!ffmpeg4android.exists()){
+	    		ffmpeg4android.createNewFile();
+	    	}
+	    	File videokit = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/HospitalVideo", "videokit.log");
+	    	if (!videokit.exists()){
+	    		videokit.createNewFile();
+	    	}
+	    	File vk = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/HospitalVideo", "vk.log");
+	    	if (!vk.exists()){
+	    		vk.createNewFile();
+	    	}
+    	}
+    	catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 }

@@ -46,6 +46,7 @@
 		<script src="resources/js/jquery.fancytree.js" type="text/javascript"></script>
 		<script src="resources/js/bootstrap-moment.js" type="text/javascript"></script>
 		<script src="resources/js/bootstrap-datetimepicker.js" type="text/javascript"></script>
+		<script src="resources/js/bootstrap-datetimepicker.es.js" type="text/javascript"></script>
 		<link href="resources/css/bootstrap-datetimepicker.css" rel="stylesheet">
 		<link href="resources/css/jquery.ui.fancytree.css" rel="stylesheet">
 		
@@ -74,10 +75,8 @@
 					</a>
 				</div>
 			</div>
-			<div class="devoops-modal-inner">
-			</div>
-			<div class="devoops-modal-bottom">
-			</div>
+			<div class="devoops-modal-inner"></div>
+			<div class="devoops-modal-bottom"></div>
 		</div>
 	</div>
 	<header class="navbar">
@@ -97,9 +96,6 @@
 							<ul class="nav navbar-nav pull-right panel-menu">
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle account" data-toggle="dropdown">
-										<div class="avatar">
-											<img src="resources/devoops/img/avatar.jpg" class="img-rounded" alt="avatar" />
-										</div>
 										<i class="fa fa-angle-down pull-right"></i>
 										<div class="user-mini pull-right">
 											<span class="welcome">Bienvenido,</span>
@@ -164,8 +160,22 @@
 				<div class="preloader" style="display:none">
 					<img src="resources/devoops/img/devoops_getdata.gif" class="devoops-getdata" alt="preloader"/>
 				</div>
-				<div id="ajax-content"><img src="resources/imgs/home.jpeg" alt="imagen home" style="position: absolute;top:80px;left: 50%;margin-left: -320px;"/></div>
+				<div id="ajax-content"><img src="resources/imgs/home.jpeg" alt="imagen home" style="opacity:0.5;position: absolute;top:80px;left: 50%;margin-left: -320px;"/></div>
 			</div>
+			
+			<div class="modal" id="alertModal">
+				<div class="modal-dialog alertModal">
+			      	<div class="modal-content">
+			        	<div class="modal-header">
+			          		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			          		<h4 class="modal-title">Subida de ficheros</h4>
+			        	</div>
+			        	<div class="modal-body">
+			          		
+			        	</div>
+			      </div>
+			    </div>
+			</div>	
 			<!--End Content-->
 		</div>
 	</div>

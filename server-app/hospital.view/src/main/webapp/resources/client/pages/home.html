@@ -26,6 +26,8 @@
 					<h2 id="subtitle" class="subtitle">Gesti&oacute;n de Pacientes</h2>
 					<div class="username">
 						<div id="username"></div>
+						<a data-position-to="window" data-role="button" data-inline="true" data-icon="arrow-u" data-iconpos="notext" data-mini="true" onclick="javascript:generic.fontSizePlus();">Aumentar Letra</a>
+						<a data-position-to="window" data-role="button" data-inline="true" data-icon="arrow-d" data-iconpos="notext" data-mini="true" onclick="javascript:generic.fontSizeMinus();">Disminuir Letra</a>
 						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
 						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
 							<div data-role="header" data-theme="a" class="ui-corner-top">
@@ -43,20 +45,15 @@
 			
 			<!-- contenido -->
 			<div data-role="content" id="content">
-				<div class="content2">
-					<div data-role="fieldcontain">
-						<label for="txtBusqueda">N&deg; ident./Nombre:</label>
-						<input type="text" id="txtBusqueda" name="txtBusqueda" class="txt-speech"/>						
-					</div>
-					
-					<div data-role="controlgroup" data-type="horizontal" class="ui-grid-a">
-   						<a data-role="button" class="btnLeft" href="#" onclick="paciente.buscarListado();">Buscar</a>
-						<a data-role="button" class="btnRight" href="#" onclick="javascript:generic.changePage('paciente.html');">Nuevo</a>             
-					</div>
-					
-					<!--Listado de videos -->
-					<ul data-role="listview" data-inset="true" id="listaPacientes"></ul>
+				<div data-role="fieldcontain">
+					<label for="txtBusqueda">N&deg; ident./Nombre:</label>
+					<input type="text" id="txtBusqueda" name="txtBusqueda" class="txt-speech"/>						
 				</div>
+				
+				<a data-role="button" class="btnLeft" href="#" onclick="paciente.buscarListado();">Buscar</a>
+				<a data-role="button" class="btnRight" href="#" onclick="javascript:generic.changePage('paciente.html');">Nuevo</a>             
+
+				<ul data-role="listview" data-inset="true" id="listaPacientes"></ul>
 			</div>
 
 			<div data-role="footer" data-position="fixed" data-theme="c"></div>
