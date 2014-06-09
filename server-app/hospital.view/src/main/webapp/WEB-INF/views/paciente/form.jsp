@@ -18,19 +18,24 @@
 		$('input[id=telefono]').val(p.telefono);
 		if(p.sexo==0){
 			$('#hombre').prop('checked', true).button("refresh");
+			$("#hombre").val(0);
 		}
 		else if (p.sexo==1){
 			$('#mujer').prop('checked', true).button("refresh");
+			$("#mujer").val(1);
 		}
 		
 		if(p.escolarizacion==0){
 			$('#educacion_especial').prop('checked', true).button("refresh");
+			$("#educacion_especial").val(0);
 		}
 		else if (p.escolarizacion==1){
 			$('#integracion').prop('checked', true).button("refresh");
+			$("#integracion").val(1);
 		}
 		else if (p.escolarizacion==2){
 			$('#sin_adaptaciones').prop('checked', true).button("refresh");
+			$("#sin_adaptaciones").val(2);
 		}
 		
 		if (p.exploraciones != null){
@@ -85,7 +90,7 @@
 	<div class="form-group">
 		<label for="fechaNacimiento" class="col-sm-2 control-label">Fecha de nacimiento</label>
 	    <div class="col-sm-10">
-	    	<div class='input-group date' data-date-format="DD/MM/YYYY">
+	    	<div class='input-group date'>
                 <input type='text' id='fechaNacimiento' class="form-control" />
             </div>
 	    </div>
@@ -94,7 +99,7 @@
 	<div class="form-group">
 		<label for="fechaEvaluacion" class="col-sm-2 control-label">&Uacute;ltima evaluaci&oacute;n</label>
 	    <div class="col-sm-10">
-	    	<div class='input-group date' data-date-format="DD/MM/YYYY">
+	    	<div class='input-group date'>
                 <input type='text' id='fechaEvaluacion' class="form-control" />
             </div>
 	    </div>
@@ -105,13 +110,13 @@
 		<div class="col-sm-10">
 			<div class="radio">
 				<label>
-			    	<input value="0" type="radio" name="sexo" id="0" checked />
+			    	<input value="0" type="radio" name="sexo" id="hombre"/>
 			    	Hombre
 			  	</label>
 			</div>
 			<div class="radio">
 		 		<label>
-		   			<input value="1" type="radio" name="sexo" id="1" />
+		   			<input value="1" type="radio" name="sexo" id="mujer"/>
 		   			Mujer
 		 		</label>
 			</div>
@@ -151,19 +156,19 @@
 		<div class="col-sm-10">
 			<div class="radio">
 				<label>
-			    	<input value="0" type="radio" name="escolarizacion" id="0" checked />
+			    	<input value="0" type="radio" name="escolarizacion" id="educacion_especial"/>
 			    	Educaci&oacute;n especial
 			  	</label>
 			</div>
 			<div class="radio">
 		 		<label>
-		   			<input value="1" type="radio" name="escolarizacion" id="1" />
+		   			<input value="1" type="radio" name="escolarizacion" id="integracion"/>
 		   			Escuela de integraci&oacute;n
 		 		</label>
 			</div>
 			<div class="radio">
 		 		<label>
-		   			<input value="2" type="radio" name="escolarizacion" id="2" />
+		   			<input value="2" type="radio" name="escolarizacion" id="sin_adaptaciones"/>
 		   			Sin adaptaciones
 		 		</label>
 			</div>
