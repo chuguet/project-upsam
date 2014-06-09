@@ -210,7 +210,10 @@ public class PacienteMovilController {
 
 			response.setStatus(HttpStatus.OK.value());
 			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			response.setContentType("video/mp4");
+			response.setHeader("Content-Length", String.valueOf(image.length));
+			// headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+			headers.setContentType(MediaType.parseMediaType("video/mp4"));
 			headers.setContentLength(image.length);
 			result = new ResponseEntity<byte[]>(image, headers, HttpStatus.OK);
 		}
@@ -220,13 +223,15 @@ public class PacienteMovilController {
 		return result;
 	}
 
-	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/videoreproduce/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "{idPaciente}/exploracion/{idExploracion}/videoreproduce/{id}", method = RequestMethod.POST)
 	@ResponseBody
 	public void getPreview2(@PathVariable("idPaciente") Integer idPaciente, @PathVariable("idExploracion") Integer idExploracion, @PathVariable("id") Integer id, HttpServletResponse response) {
 		try {
 			Video video = this.videoService.findOne(idPaciente, idExploracion, id);
 			File file = this.videoService.recuperarVideo(video.getNombre(), idPaciente);
 			response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
+			// response.setContentType("video/mp4");
+			response.setHeader("Content-Length", String.valueOf(file.length()));
 			response.setHeader("Content-Disposition", "attachment; filename=" + file.getName().replace(" ", "_"));
 			InputStream iStream = new FileInputStream(file);
 			IOUtils.copy(iStream, response.getOutputStream());
@@ -295,6 +300,9 @@ public class PacienteMovilController {
 		try {
 			if (file.getSize() > 0) {
 				videoService.save(file.getBytes(), idPaciente, idExploracion, "");
+			}
+			else {
+				return new MensajeDTO("No se ha podido guardar el vídeo porque no tiene tamaño", false);
 			}
 			return new MensajeDTO("Video guardado correctamente.", true);
 		}

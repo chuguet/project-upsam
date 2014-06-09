@@ -150,8 +150,7 @@ var exploracionFisica = {
     		$("#listaVideos").append("<li data-role='list-divider'>Listado de v&iacute;deos</li>");
 	    	for (var i = 0; i < parameters.length; i++){
 	    	    $("#listaVideos").append("<li><a rel='external' alt='Acceder al video' href='#' onclick='javascript:generic.changePage(\"video_detalle.html?idPaciente=" + idPaciente + "&idExploracion=" + idExploracion + "&idVideo=" + parameters[i].id + "&num=" + (i + 1) + "\");'>Video " + (i + 1) + "<br><span class='videoFeatures'>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
-	    	
-	    		//$("#listaVideos").append("<li><a rel='external' alt='Acceder al video' href='#' onclick='javascript:window.videoPlayer.play(\"" + server.URI + "pacientemovil/" + idPaciente + "/exploracion/" + idExploracion + "/videoreproduce/" + parameters[i].id + "\");' class='itemFeatures'>Video " + (i + 1) + "<br><span>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
+	    	    //$("#listaVideos").append("<li><a rel='external' alt='Acceder al video' href='#' onclick='javascript:window.videoPlayer.play(\"" + server.URI + "pacientemovil/" + idPaciente + "/exploracion/" + idExploracion + "/videoreproduce/" + parameters[i].id + "\");' class='itemFeatures'>Video " + (i + 1) + "<br><span>" + parameters[i].nombre +" | " + parameters[i].duracion + "</span></a></li>");
 	    	}
 	    }
 	    $("#listaVideos").listview('refresh');

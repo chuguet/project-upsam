@@ -29,6 +29,16 @@ var generic = {
     	generic.processDatebox();	
 	},
 	
+	'refreshResolution' : function(){
+		var screenWidth = generic.getOrientation() == "landscape" ? screen.availHeight : screen.availWidth;
+		var pixelRatio = (typeof window.devicePixelRatio + "" != "undefined") ? window.devicePixelRatio : 1;
+		$('html').css('fontSize', (screenWidth * pixelRatio)/100 + "px");
+	},
+	
+	'getOrientation' : function(){
+		return (typeof window.orientation != undefined && Math.abs(window.orientation) - 90 == 0) ? "landscape" : "portrait";
+	},
+	
 	'blink': function(){
 		var alert = $('.ui-icon-alert');
 		if (alert.length > 0){

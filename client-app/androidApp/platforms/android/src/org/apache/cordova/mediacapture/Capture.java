@@ -246,11 +246,12 @@ public class Capture extends CordovaPlugin {
         Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
 
         
-        fileUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO); 
+        
         //intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0);
         
         // set the image file name  
         if (Environment.getExternalStorageDirectory().getAbsolutePath().indexOf("mnt") == -1){
+        	fileUri = getOutputMediaFileUri(MEDIA_TYPE_VIDEO); 
         	intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
         }
         
@@ -399,7 +400,7 @@ public class Capture extends CordovaPlugin {
 							    	baseWizard.setOutFolder(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/HospitalVideo/");
 							    }
 							    else{
-							    	fullPath = fullPath.replace("file:/mnt", "");
+							    	fullPath = fullPath.replace("file:", "");
 							    }
 							    baseWizard.compress(fullPath);
 							    

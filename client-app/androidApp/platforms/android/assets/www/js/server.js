@@ -1,5 +1,5 @@
 var server = {
-	//"URI" : "http://192.168.2.179:8080/hospitalServer/",
+	//"URI" : "http://172.30.0.15:8080/hospitalServer/",
 	//"URI" : "http://lab.atsistemas.com/hospitalServer/",
 	"URI" : "http://192.168.0.158:8080/hospitalServer/",
 	"post" : function(action, params, callbackSuccess, callbackError) {

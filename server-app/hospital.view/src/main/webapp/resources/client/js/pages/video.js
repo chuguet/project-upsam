@@ -22,7 +22,7 @@ var video = {
 	'recuperarCallback' : function(parameters){
 		//window.videoPlayer.play(server.URI + "pacientemovil/" + $("#idPaciente").val() + "/exploracion/" + $("#idExploracion").val() + "/reproductor/" + $("#idVideo").val());
 		var numero = generic.getURLParameter("num");
-		$("#reproductorVideo").append("<source src='" + server.URI + "pacientemovil/" + $("#idPaciente").val() + "/exploracion/" + $("#idExploracion").val() + "/videoreproduce1/" + $("#idVideo").val() + "' type='video/mp4' />");
+		$("#reproductorVideo").append("<source src='" + server.URI + "pacientemovil/" + $("#idPaciente").val() + "/exploracion/" + $("#idExploracion").val() + "/videoreproduce/" + $("#idVideo").val() + "' type='video/mp4' />");
 		$("#numeroVideo").html("Video  " + numero);
 		$("#nombreVideo").html("Archivo: " + parameters.nombre);
 		$("#duracionVideo").html("Duraci&oacute;n: " + parameters.duracion);
