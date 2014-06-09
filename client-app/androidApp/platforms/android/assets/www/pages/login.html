@@ -31,32 +31,28 @@
 		<script type="text/javascript" src="../js/pages/video.js"></script>
 		<script type="text/javascript" src="../js/pages/restricciones.js"></script>
 		<script type="text/javascript">
-			generic.initialize();
+			generic.initialize(generic.refreshResolution);
 		</script>
 	</head>
 
 	<body>
 		<div data-role="page" id="page1">
-			<div data-role="content" style="padding:0em;">							
-				<img width="100%" src="../img/cabecera.jpg"/>
-		
-				<div style="padding:30px">
-					<h2 style="color:#77CDF1">Acceso al sistema</h2>
-					
-					<div data-role="fieldcontain" >
-						<label for="txtUsuario"><b>Usuario:</b></label>
-						<input type="text" id="txtUsuario" name="txtUsuario"/>						
-					</div>	
-					<div data-role="fieldcontain" >
-						<label for="txtPassword"><b>Contrase&ntilde;a</b></label>
-						<input type="password" id="txtPassword" name="txtPassword" />						
-					</div>
-					
-					<div data-role="controlgroup" data-type="horizontal" class="ui-grid-a">
-   						<a id="btnAccesso" class="btnLeft" data-role="button" onclick="javascript:login.acceso();">Entrar</a>
-						<a id="btnRecordar" class="btnRight" data-role="button" rel="external" onclick="javascript:generic.changePage('recordar_contrasenna.html');">Recordar contrase&ntilde;a</a>             
-					</div>
+			<img width="100%" src="../img/cabecera.jpg"/>
+			
+			<div data-role="content">
+				<h2 style="color:#77CDF1">Acceso al sistema</h2>
+				
+				<div data-role="fieldcontain" >
+					<label for="txtUsuario"><b>Usuario:</b></label>
+					<input type="text" id="txtUsuario" name="txtUsuario"/>						
+				</div>	
+				<div data-role="fieldcontain" >
+					<label for="txtPassword"><b>Contrase&ntilde;a</b></label>
+					<input type="password" id="txtPassword" name="txtPassword" />						
 				</div>
+				
+				<a id="btnAccesso" class="btnLeft" data-role="button" onclick="javascript:login.acceso();">Entrar</a>
+				<a id="btnRecordar" class="btnRight" data-role="button" rel="external" onclick="javascript:generic.changePage('recordar_contrasenna.html');">Recordar contrase&ntilde;a</a>             
 			</div>
 
 			<div data-role="footer" data-position="fixed" data-theme="c"></div>							

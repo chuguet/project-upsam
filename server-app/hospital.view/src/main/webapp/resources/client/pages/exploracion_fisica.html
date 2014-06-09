@@ -55,13 +55,15 @@
 					
 					
 						<div id="username"></div>
+						<a data-position-to="window" data-role="button" data-inline="true" data-icon="arrow-u" data-iconpos="notext" data-mini="true" onclick="javascript:generic.fontSizePlus();">Aumentar Letra</a>
+						<a data-position-to="window" data-role="button" data-inline="true" data-icon="arrow-d" data-iconpos="notext" data-mini="true" onclick="javascript:generic.fontSizeMinus();">Disminuir Letra</a>
 						<a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop" data-icon="power" data-iconpos="notext" data-mini="true">Salir</a>
 						<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
 							<div data-role="header" data-theme="a" class="ui-corner-top">
 								<h1>Logout</h1>
 							</div>
 							<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content" style="text-align:center">
-								<h3 class="ui-title">¿Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
+								<h3 class="ui-title">�Est&aacute; seguro que desea salir de la aplicaci&oacute;n?</h3>
 								<a href="#" data-role="button" data-inline="true" data-rel="back">No</a>    
 								<a href="#" onclick="javascript:generic.unlogin();" data-role="button" data-inline="true">Si</a>  
 							</div>
@@ -75,367 +77,356 @@
 			<div data-role="content" id="content">
 				<input type="hidden" id="idPaciente" />
 				<input type="hidden" id="idExploracion" />
-				<div data-role="content" style="border:solid 1px black;">
+				<div data-role="content" class="infoExploracion">
 					<div data-role="fieldcontain">
 						<label><b>Actualizado a:</b></label>
-						<label id="lblFechaActualizacion"></label>    
-						
-						<label><b>por:</b></label>
+						<label><b>por:</b></label>							
+					</div>
+					<div data-role="fieldcontain">
+						<label id="lblFechaActualizacion"></label>
 						<label id="lblNombreUsuario"></label>							
 					</div>
 					<div data-role="fieldcontain">
 						<label><b>Fecha de la exploraci&oacute;n:</b></label>
-						<label id="lblFechaExploracion"></label>   
-						
-						<label><b>Paciente:</b></label>
+						<label><b>Paciente:</b></label>					
+					</div>
+					<div data-role="fieldcontain">
+						<label id="lblFechaExploracion"></label>
 						<label id="lblNombrePaciente"></label>						
 					</div>
 				</div>	
 								
 				
 				<h3>Antecedentes</h3>
-				<div class="content2">
-					<ul data-role="listview" data-inset="true" data-filter="false">
-						<li><a onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('antecedentes_personales.html');" href="#">Personales</a></li>
-						<li><a onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('antecedentes_relacionados_PCI.html');" href="#">Relacionados con PCI</a></li>						            
-					</ul>
-				</div>
+				<ul data-role="listview" data-inset="true" data-filter="false">
+					<li><a onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('antecedentes_personales.html');" href="#">Personales</a></li>
+					<li><a onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('antecedentes_relacionados_PCI.html');" href="#">Relacionados con PCI</a></li>						            
+				</ul>
+				
 				
 				<div id="videos">
 					<h3>V&iacute;deos sobre la exploraci&oacute;n</h3>
-					<div class="content2">
-						<a href="#" onclick="exploracionFisica.irAPaginaAuxiliarDeExploracion('video_nuevo.html');" data-icon="plus" data-role="button" data-mini="true" data-inline="true">A&ntilde;adir V&iacute;deo</a></label>					
-						<ul data-role="listview" data-inset="true" id="listaVideos"></ul>
-					</div>
+					
+					<a data-role="button" data-icon="video" onclick="video.grabar();" data-mini="true" data-inline="true">Grabar video</a>
+					<ul data-role="listview" data-inset="true" id="listaVideos"></ul>
 				</div>
 				
 				<div id="graficas">
 					<h3>Gr&aacute;ficas de la exploraci&oacute;n</h3>
-					<div class="content2">					
-						<ul data-role="listview" data-inset="true" id="listaGraficas"></ul>
-					</div>
+					<ul data-role="listview" data-inset="true" id="listaGraficas"></ul>
 				</div>
 								
-				<h3>Valoraciones</h3>		
-				<div class="content2">
-					<div data-role="fieldcontain">  
-						<label for="controlMotorSelectivo">Control motor selectivo:</label>  			
-						<select id="controlMotorSelectivo" data-native-menu="false">
-							<option value=""></option>
-							<option value="0">1 Incapacidad de aislar el movimiento</option>
-							<option value="1">2 Logra aislar parcialmente el movimiento</option>
-							<option value="2">3 Logra aislar completamente el movimiento</option>		                    
-						</select>
-					</div>
-					<div data-role="fieldcontain">  
-						<label for="evaluacionMuscular">Evaluaci&oacute;n Muscular Manual:</label>  
-						<select id="evaluacionMuscular" data-native-menu="false">
-							<option value=""></option>
-							<option value="0">0 Par&aacute;lisis total</option>
-							<option value="1">1 Contracci&oacute;n visible o palpable</option>
-							<option value="2">2 Movimiento activo, rango de movimiento completo (RAM) con gravedad eliminada</option>
-							<option value="3">3 Movimiento activo, RAM completo contra gravedad</option>
-							<option value="4">4 Movimiento activo, RAM completo contra gravedad con resistencia moderada en una posici&oacute;n espec&iacute;fica del m&uacute;sculo</option>		 
-							<option value="5">5 (normal) Movimiento activo, completo RAM contra gravedad y con resistencia completa en una posici&oacute;n espec&iacute;fica del m&uacute;sculo esperable en una persona no discapacitada</option>		 
-							<option value="6">5* (normal) movimiento activo, RAM completo contra gravedad y resistencia suficiente para ser considerado normal si los factores inhibidores identificados (es decir, dolor, desuso) no estuvieran presentes</option>		 
-							<option value="7">NT No testable o no valorable (es decir, debido a la inmovilizaci&oacute;n, dolor tan severo que el paciente no pueda ser valorados, amputaci&oacute;n de la pierna, contractura >50% del rango articular)</option>                
-						</select>
-					</div>
-						
-								
-					<div data-role="fieldcontain">
-						<ul data-role="listview" data-inset="true" data-filter="false">						
-							<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('gross_motor_function.html');">Gross Motor Function Classification System</a></li>
-							<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('val_articular_muscular.html');">Articular / muscular</a></li>                       
-						</ul>						  									
-					</div>						
-				</div>	
+				<h3>Valoraciones</h3>	
+				<div data-role="fieldcontain">  
+					<label for="controlMotorSelectivo">Control motor selectivo:</label>  			
+					<select id="controlMotorSelectivo" data-native-menu="false">
+						<option value=""></option>
+						<option value="0">1 Incapacidad de aislar el movimiento</option>
+						<option value="1">2 Logra aislar parcialmente el movimiento</option>
+						<option value="2">3 Logra aislar completamente el movimiento</option>		                    
+					</select>
+				</div>
+				<div data-role="fieldcontain">  
+					<label for="evaluacionMuscular">Evaluaci&oacute;n Muscular Manual:</label>  
+					<select id="evaluacionMuscular" data-native-menu="false">
+						<option value=""></option>
+						<option value="0">0 Par&aacute;lisis total</option>
+						<option value="1">1 Contracci&oacute;n visible o palpable</option>
+						<option value="2">2 Movimiento activo, rango de movimiento completo (RAM) con gravedad eliminada</option>
+						<option value="3">3 Movimiento activo, RAM completo contra gravedad</option>
+						<option value="4">4 Movimiento activo, RAM completo contra gravedad con resistencia moderada en una posici&oacute;n espec&iacute;fica del m&uacute;sculo</option>		 
+						<option value="5">5 (normal) Movimiento activo, completo RAM contra gravedad y con resistencia completa en una posici&oacute;n espec&iacute;fica del m&uacute;sculo esperable en una persona no discapacitada</option>		 
+						<option value="6">5* (normal) movimiento activo, RAM completo contra gravedad y resistencia suficiente para ser considerado normal si los factores inhibidores identificados (es decir, dolor, desuso) no estuvieran presentes</option>		 
+						<option value="7">NT No testable o no valorable (es decir, debido a la inmovilizaci&oacute;n, dolor tan severo que el paciente no pueda ser valorados, amputaci&oacute;n de la pierna, contractura >50% del rango articular)</option>                
+					</select>
+				</div>
+					
+							
+				<div data-role="fieldcontain">
+					<ul data-role="listview" data-inset="true" data-filter="false">						
+						<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('gross_motor_function.html');">Gross Motor Function Classification System</a></li>
+						<li><a data-transition="slidedown" rel="external" href="#" onclick="javascript:exploracionFisica.irAPaginaAuxiliarDeExploracion('val_articular_muscular.html');">Articular / muscular</a></li>                       
+					</ul>						  									
+				</div>
 				
-				<h3>Longitud de miembros inferiores</h3>				
-				<div class="content2">
-					<!-- Derecho -->
-					<div data-role="fieldcontain">  
-						<label for="longitudMiembroDerecho">Derecho: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
-						<input type="range" name="longitudMiembroDerecho" id="longitudMiembroDerecho" min="0" max="100" value="0"/>
-					</div>
+				<h3>Longitud de miembros inferiores</h3>
+				<!-- Derecho -->
+				<div data-role="fieldcontain">  
+					<label for="longitudMiembroDerecho">Derecho: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
+					<input type="range" name="longitudMiembroDerecho" id="longitudMiembroDerecho" min="0" max="100" value="0"/>
+				</div>
 
-					<!-- Izquierdo -->
-					<div data-role="fieldcontain">
-						<label for="longitudMiembroIzquierdo">Izquierdo: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
-						<input type="range" name="longitudMiembroIzquierdo" id="longitudMiembroIzquierdo" min="0" max="100" value="0"/>
-					</div>
-				</div>	
+				<!-- Izquierdo -->
+				<div data-role="fieldcontain">
+					<label for="longitudMiembroIzquierdo">Izquierdo: Troc&aacute;ter-mal&eacute;olo (cm):</label>  
+					<input type="range" name="longitudMiembroIzquierdo" id="longitudMiembroIzquierdo" min="0" max="100" value="0"/>
+				</div>
 				 
 				<h3>Escala de movilidad funcional (distancia a caminar)</h3>
-				<div class="content2">	
-					<div data-role="fieldcontain">
-						<label for="puntuacion5Metros">5 metros :</label>  
-						<select id="puntuacion5Metros" name="puntuacion5Metros" data-native-menu="false">
-							<option value=""></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>		 
-							<option value="6">6</option>
-							<option value="7">G</option>
-							<option value="8">N.N</option>		 
-						</select>
-					</div>
-					
-					<div data-role="fieldcontain">
-						<label for="puntuacion50Metros">50 metros :</label>  
-						<select id="puntuacion50Metros" name="puntuacion50Metros" data-native-menu="false">
-							<option value=""></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>		 
-							<option value="6">6</option>
-							<option value="7">G</option>
-							<option value="8">N.N</option>		 
-						</select>
-					</div>
-					
-					<div data-role="fieldcontain">
-						<label for="puntuacion500Metros">500 metros :</label>
-						<select id="puntuacion500Metros" name="puntuacion500Metros" data-native-menu="false">
-							<option value=""></option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>		 
-							<option value="6">6</option>
-							<option value="7">G</option>
-							<option value="8">N.N</option>		 
-						</select>
-					</div>	
-					
-					<ul>
-						<li>1 - Usa silla de ruedas, silla de paseo o cochecito: puede ponerse de pie para transferencias y puede dar algunos pasos aguantado por otra persona o usando un andador.</li>
-						<li>2 - Usa un andador u otra estructura de ayuda para la marcha: sin ayuda de otra persona.</li>
-						<li>3 - Usa dos muletas: sin ayuda de otra persona.</li>
-						<li>4 - Usa una muleta o dos bastones: sin ayuda de otra persona.</li>
-						<li>5 - Independiente en superficies llanas: no utiliza ayudas de marcha o necesita ayuda de otra persona. Si utiliza muebles, paredes, vallas o los bordes delanteros de las tiendas para sujetarse, haga el favor de escoger 4 como descripci&oacute;n adecuada.</li>
-						<li>6 - Independiente en todas las superficies: no utiliza ninguna ayuda de marcha o necesita ninguna ayuda de otra persona mientras camina, corre, asciende o sube escaleras.</li>
-						<li>G - Gatea: el ni&ntilde;o gatea para moverse en casa (5m).</li>
-						<li>N.N - No aplicable. Por ejemplo, el ni&ntilde;o no completa esa distancia (500 m).</li>
-					</ul>
+				
+				<div data-role="fieldcontain">
+					<label for="puntuacion5Metros">5 metros :</label>  
+					<select id="puntuacion5Metros" name="puntuacion5Metros" data-native-menu="false">
+						<option value=""></option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>		 
+						<option value="6">6</option>
+						<option value="7">G</option>
+						<option value="8">N.N</option>		 
+					</select>
 				</div>
 				
-				<h3>Tono muscular - Escala Ashworth</h3>		
-				<div class="content2">					
-					<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
-						<thead>
-							<tr>
-								<th data-priority="1">Escala de Ashworth</th>
-								<th data-priority="persist">&nbsp;</th>
-								<th data-priority="2">Izquierda</th>
-								<th data-priority="3">Derecha</th>          
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th>CADERA</th>
-								<td>Flexi&oacute;n</td>
-								<td>
-									<select id="caderaFlexionIzquierda" name="caderaFlexionIzquierda" data-native-menu="false">
-										<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>
-										<option value="5">4</option>		 
-									</select>
-							  	</td>
-							  	<td>
-							  		<select id="caderaFlexionDerecha" name="caderaFlexionDerecha" data-native-menu="false">
-							  			<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>
-										<option value="5">4</option>		 
-									</select>
-							  	</td>
-							</tr>		
-							<tr>
-								<th></th>
-								<td>Inflexi&oacute;n</td>
-								<td>
-									<select id="caderaInflexionIzquierda" name="caderaInflexionIzquierda" data-native-menu="false">
-							  			<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>
-										<option value="5">4</option>		 
-									</select>
-							  	</td>
-							  	<td>
-							  		<select id="caderaInflexionDerecha" name="caderaInflexionDerecha" data-native-menu="false">
-							  			<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>
-										<option value="5">4</option>		 
-									</select>
-							  	</td>
-							</tr>
-							
-							<tr>
-							  	<th>RODILLA</th>
-							  	<td>Flexi&oacute;n</td>
-							  	<td>
-									<select id="rodillaFlexionIzquierda" name="rodillaFlexionIzquierda" data-native-menu="false">
-							  			<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>
-										<option value="5">4</option>>		 
-									</select>
-							  	</td>
-							  	<td>
-							  		<select id="rodillaFlexionDerecha" name="rodillaFlexionDerecha" data-native-menu="false">
-							  			<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>
-										<option value="5">4</option>		 
-									</select>
-							  	</td>       
-							</tr>		
-							<tr>
-								<th></th>
-								<td>Inflexi&oacute;n</td>
-								<td>
-									<select id="rodillaInflexionIzquierda" name="rodillaInflexionIzquierda" data-native-menu="false">
-							  			<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>
-										<option value="5">4</option>
-									</select>
-							  	</td>
-							  	<td>
-							  		<select id="rodillaInflexionDerecha" name="rodillaInflexionDerecha" data-native-menu="false">
-							  			<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>		 
-										<option value="5">4</option>		 
-									</select>
-							  	</td>
-							</tr>        
-							<tr>
-								<th>TOBILLO</th>
-								<td>Flexi&oacute;n</td>
-								<td>
-									<select id="tobilloFlexionIzquierda" name="tobilloFlexionIzquierda" data-native-menu="false">
-							  			<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>		 
-										<option value="5">4</option>		 
-									</select>
-							  	</td>
-							  	<td>
-							  		<select id="tobilloFlexionDerecha" name="tobilloFlexionDerecha" data-native-menu="false">
-							  			<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>		 
-										<option value="5">4</option>		 
-									</select>
-							  	</td>
-							</tr>		
-							<tr>
-								<th></th>
-								<td>Inflexi&oacute;n</td>
-								<td>
-									<select id="tobilloInflexionIzquierda" name="tobilloInflexionIzquierda" data-native-menu="false">
-							  			<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>		 
-										<option value="5">4</option>		 
-									</select>
-							  	</td>
-							  	<td>
-							  		<select id="tobilloInflexionDerecha" name="tobilloInflexionDerecha" data-native-menu="false">
-							  			<option value=""></option>
-										<option value="0">0</option>
-										<option value="1">1</option>
-										<option value="2">1+</option>
-										<option value="3">2</option>
-										<option value="4">3</option>		 
-										<option value="5">4</option>		 
-									</select>
-							  	</td>
-							</tr>
-						  </tbody>
-					</table>
-					<ul>
-						<li>0 - Tono muscular normal.</li>
-						<li>1 - Discreto aumento del tono muscular que se manifiesta por un enganche o una resistencia m&iacute;nima al final del movimiento cuando el miembro afectado es movilizado en flexi&oacute;n o extensi&oacute;n.</li>
-						<li>1+ - Discreto aumento del tono muscular, que se manifiesta por un enganche discreto seguido de una resistencia m&iacute;nima durante al menos la mitad del resto del movimiento.</li>
-						<li>2 - Aumento m&aacute;s marcado del tono muscular a lo largo del movimiento, aunque permite una f&aacute;cil movilización del miembro afectado.</li>
-						<li>3 - Aumento considerable del tono dificultando la movilizaci&oacute;n pasiva.</li>
-						<li>4 - El miembro afectado est&aacute; fijado en extensi&iacute;n o en flexi&oacute;n.</li>
-					</ul>
+				<div data-role="fieldcontain">
+					<label for="puntuacion50Metros">50 metros :</label>  
+					<select id="puntuacion50Metros" name="puntuacion50Metros" data-native-menu="false">
+						<option value=""></option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>		 
+						<option value="6">6</option>
+						<option value="7">G</option>
+						<option value="8">N.N</option>		 
+					</select>
+				</div>
+				
+				<div data-role="fieldcontain">
+					<label for="puntuacion500Metros">500 metros :</label>
+					<select id="puntuacion500Metros" name="puntuacion500Metros" data-native-menu="false">
+						<option value=""></option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>		 
+						<option value="6">6</option>
+						<option value="7">G</option>
+						<option value="8">N.N</option>		 
+					</select>
 				</div>	
 				
-				<h3>An&aacute;lisis observacional de la marcha</h3>				
-				<div class="content2">										
-					<h4>Common gait patterns: Spastic Diplegia</h4>	
-					<div class="content2">					
-						<table data-role="table" id="tabla2" data-mode="reflow" class="ui-responsive table-stroke">
-							<thead>
-							<tr>
-								<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha1" value="0" /><b>True equinus</b></td>
-								<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha2" value="1" /><b>Jump knee</b></td>
-								<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha3" value="2" /><b>Apparent equinus</b></td>
-								<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha4" value="3" /><b>Crouch gait</b></td>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<td><img src="../img/analisisMarcha1.png"/></td>
-								<td><img src="../img/analisisMarcha2.png"/></td>
-								<td><img src="../img/analisisMarcha3.png"/></td>
-								<td><img src="../img/analisisMarcha4.png"/></td>
-							</tr>
-							<tr>
-								<td>&gt;&nbsp;90º<br/>Gastroc<br/>-<br/>-<br/>Hinged AFO</td>
-								<td>&gt;&nbsp;90º<br/>Gastroc<br/>Hamstrings/RF<br/>(Psoas)<br/>Hinged AFO</td>
-								<td>=&nbsp;90º<br/>(Gastroc)<br/>Hamstrings/RF<br/>Psoas<br/>Solid AFO</td>
-								<td>&lt;&nbsp;90º<br/>-<br/>Hamstrings/RF<br/>Psoas<br/>Grafo</td>
-							</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>	
+				<ul>
+					<li>1 - Usa silla de ruedas, silla de paseo o cochecito: puede ponerse de pie para transferencias y puede dar algunos pasos aguantado por otra persona o usando un andador.</li>
+					<li>2 - Usa un andador u otra estructura de ayuda para la marcha: sin ayuda de otra persona.</li>
+					<li>3 - Usa dos muletas: sin ayuda de otra persona.</li>
+					<li>4 - Usa una muleta o dos bastones: sin ayuda de otra persona.</li>
+					<li>5 - Independiente en superficies llanas: no utiliza ayudas de marcha o necesita ayuda de otra persona. Si utiliza muebles, paredes, vallas o los bordes delanteros de las tiendas para sujetarse, haga el favor de escoger 4 como descripci&oacute;n adecuada.</li>
+					<li>6 - Independiente en todas las superficies: no utiliza ninguna ayuda de marcha o necesita ninguna ayuda de otra persona mientras camina, corre, asciende o sube escaleras.</li>
+					<li>G - Gatea: el ni&ntilde;o gatea para moverse en casa (5m).</li>
+					<li>N.N - No aplicable. Por ejemplo, el ni&ntilde;o no completa esa distancia (500 m).</li>
+				</ul>
+				
+				<h3>Tono muscular - Escala Ashworth</h3>			
+				<table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
+					<thead>
+						<tr>
+							<th data-priority="1">Escala de Ashworth</th>
+							<th data-priority="persist">&nbsp;</th>
+							<th data-priority="2">Izquierda</th>
+							<th data-priority="3">Derecha</th>          
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>CADERA</th>
+							<td>Flexi&oacute;n</td>
+							<td>
+								<select id="caderaFlexionIzquierda" name="caderaFlexionIzquierda" data-native-menu="false">
+									<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>
+									<option value="5">4</option>		 
+								</select>
+						  	</td>
+						  	<td>
+						  		<select id="caderaFlexionDerecha" name="caderaFlexionDerecha" data-native-menu="false">
+						  			<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>
+									<option value="5">4</option>		 
+								</select>
+						  	</td>
+						</tr>		
+						<tr>
+							<th></th>
+							<td>Inflexi&oacute;n</td>
+							<td>
+								<select id="caderaInflexionIzquierda" name="caderaInflexionIzquierda" data-native-menu="false">
+						  			<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>
+									<option value="5">4</option>		 
+								</select>
+						  	</td>
+						  	<td>
+						  		<select id="caderaInflexionDerecha" name="caderaInflexionDerecha" data-native-menu="false">
+						  			<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>
+									<option value="5">4</option>		 
+								</select>
+						  	</td>
+						</tr>
+						
+						<tr>
+						  	<th>RODILLA</th>
+						  	<td>Flexi&oacute;n</td>
+						  	<td>
+								<select id="rodillaFlexionIzquierda" name="rodillaFlexionIzquierda" data-native-menu="false">
+						  			<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>
+									<option value="5">4</option>		 
+								</select>
+						  	</td>
+						  	<td>
+						  		<select id="rodillaFlexionDerecha" name="rodillaFlexionDerecha" data-native-menu="false">
+						  			<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>
+									<option value="5">4</option>		 
+								</select>
+						  	</td>       
+						</tr>		
+						<tr>
+							<th></th>
+							<td>Inflexi&oacute;n</td>
+							<td>
+								<select id="rodillaInflexionIzquierda" name="rodillaInflexionIzquierda" data-native-menu="false">
+						  			<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>
+									<option value="5">4</option>
+								</select>
+						  	</td>
+						  	<td>
+						  		<select id="rodillaInflexionDerecha" name="rodillaInflexionDerecha" data-native-menu="false">
+						  			<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>		 
+									<option value="5">4</option>		 
+								</select>
+						  	</td>
+						</tr>        
+						<tr>
+							<th>TOBILLO</th>
+							<td>Flexi&oacute;n</td>
+							<td>
+								<select id="tobilloFlexionIzquierda" name="tobilloFlexionIzquierda" data-native-menu="false">
+						  			<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>		 
+									<option value="5">4</option>		 
+								</select>
+						  	</td>
+						  	<td>
+						  		<select id="tobilloFlexionDerecha" name="tobilloFlexionDerecha" data-native-menu="false">
+						  			<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>		 
+									<option value="5">4</option>		 
+								</select>
+						  	</td>
+						</tr>		
+						<tr>
+							<th></th>
+							<td>Inflexi&oacute;n</td>
+							<td>
+								<select id="tobilloInflexionIzquierda" name="tobilloInflexionIzquierda" data-native-menu="false">
+						  			<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>		 
+									<option value="5">4</option>		 
+								</select>
+						  	</td>
+						  	<td>
+						  		<select id="tobilloInflexionDerecha" name="tobilloInflexionDerecha" data-native-menu="false">
+						  			<option value=""></option>
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">1+</option>
+									<option value="3">2</option>
+									<option value="4">3</option>		 
+									<option value="5">4</option>		 
+								</select>
+						  	</td>
+						</tr>
+					  </tbody>
+				</table>
+				<ul>
+					<li>0 - Tono muscular normal.</li>
+					<li>1 - Discreto aumento del tono muscular que se manifiesta por un enganche o una resistencia m&iacute;nima al final del movimiento cuando el miembro afectado es movilizado en flexi&oacute;n o extensi&oacute;n.</li>
+					<li>1+ - Discreto aumento del tono muscular, que se manifiesta por un enganche discreto seguido de una resistencia m&iacute;nima durante al menos la mitad del resto del movimiento.</li>
+					<li>2 - Aumento m&aacute;s marcado del tono muscular a lo largo del movimiento, aunque permite una f&aacute;cil movilización del miembro afectado.</li>
+					<li>3 - Aumento considerable del tono dificultando la movilizaci&oacute;n pasiva.</li>
+					<li>4 - El miembro afectado est&aacute; fijado en extensi&iacute;n o en flexi&oacute;n.</li>
+				</ul>
+				
+				<h3>An&aacute;lisis observacional de la marcha</h3>			
+				<h4>Common gait patterns: Spastic Diplegia</h4>	
+				<div class="content2">					
+					<table data-role="table" id="tabla2" data-mode="reflow" class="ui-responsive table-stroke">
+						<thead>
+						<tr>
+							<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha1" value="0" /><b>True equinus</b></td>
+							<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha2" value="1" /><b>Jump knee</b></td>
+							<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha3" value="2" /><b>Apparent equinus</b></td>
+							<td><input type="radio" name="analisisObservacionalMarcha" id="analisisObservacionalMarcha4" value="3" /><b>Crouch gait</b></td>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td><img src="../img/analisisMarcha1.png"/></td>
+							<td><img src="../img/analisisMarcha2.png"/></td>
+							<td><img src="../img/analisisMarcha3.png"/></td>
+							<td><img src="../img/analisisMarcha4.png"/></td>
+						</tr>
+						<tr>
+							<td>&gt;&nbsp;90º<br/>Gastroc<br/>-<br/>-<br/>Hinged AFO</td>
+							<td>&gt;&nbsp;90º<br/>Gastroc<br/>Hamstrings/RF<br/>(Psoas)<br/>Hinged AFO</td>
+							<td>=&nbsp;90º<br/>(Gastroc)<br/>Hamstrings/RF<br/>Psoas<br/>Solid AFO</td>
+							<td>&lt;&nbsp;90º<br/>-<br/>Hamstrings/RF<br/>Psoas<br/>Grafo</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			
 			<div data-role="footer" data-position="fixed" data-theme="c"></div>

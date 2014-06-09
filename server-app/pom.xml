@@ -9,6 +9,13 @@
 	<packaging>pom</packaging>
 	<name>${project.groupId}.${project.artifactId}</name>
 
+	<repositories>
+		<repository>
+			<id>repo</id>
+			<url>http://www.datanucleus.org/downloads/maven2/</url>
+		</repository>
+	</repositories>
+
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -80,7 +87,7 @@
 				<role>Java Architect</role>
 			</roles>
 		</developer>
-	
+
 		<developer>
 			<name>Carlos Huguet</name>
 			<id>huguet</id>
@@ -89,7 +96,7 @@
 				<role>Java Developer</role>
 			</roles>
 		</developer>
-		
+
 		<developer>
 			<name>Jose Angel Rendo</name>
 			<id>rendo</id>

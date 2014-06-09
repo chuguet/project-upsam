@@ -141,6 +141,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/org.apache.cordova.videoplayer/www/VideoPlayer.js",
+        "id": "org.apache.cordova.videoplayer.VideoPlayer",
+        "clobbers": [
+            "window.videoPlayer"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.file-transfer/www/FileTransferError.js",
         "id": "org.apache.cordova.file-transfer.FileTransferError",
         "clobbers": [

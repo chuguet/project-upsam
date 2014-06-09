@@ -101,6 +101,6 @@
 				<button class="btn btn-default" id="btnSaveUsuario" type="submit"><i class='fa fa-check fa-fw'></i>Modificar</button>
 			</c:otherwise>
 		</c:choose>
-		<button class="btn btn-default" id="btnCancel" onclick="javascript:generic.getList('usuario');"><i class='fa fa-times fa-fw'></i>Cancelar</button>
+		<a class="btn btn-default" id="btnCancel" onclick="javascript:generic.getList('usuario');"><i class='fa fa-times fa-fw'></i>Cancelar</a>
 	</div>
 </form>

@@ -256,6 +256,10 @@ public class BaseWizard extends Base {
 		Prefs.setWorkFolder(workingFolder);
 	}
 	
+	public void setOutFolder(String outFolder) {
+		Prefs.setOutFolder(outFolder);
+	}
+	
 	public void runTranscoing() {
 		setRemoteNotificaitonIcon();
 		releaseService();
@@ -550,11 +554,13 @@ public class BaseWizard extends Base {
     
     
 	public void compress(String fullPath){
-		fullPath = fullPath.replace("file:/mnt", "");
 		String outputFullPath = fullPath.replace(".mp4", "_out.mp4");
 			//String commandStr = "ffmpeg -y -i /sdcard/videokit/in.mp4 -strict experimental -vf transpose=1 -s 160x120 -r 30 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k /sdcard/videokit/out.mp4";
-		String commandStr = "ffmpeg -y -i " + fullPath + " -strict experimental -vf transpose=1 -s 160x120 -r 30 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k " + outputFullPath;
-				
+		//-vf transpose=1 -r 30 -aspect 4:3 
+		String commandStr = "ffmpeg -y -i " + fullPath + " -strict experimental -s 640×360 -aspect 16:9 -ab 48000 -ac 2 -ar 22050 -b 2097k " + outputFullPath;	
+		//String commandStr = "ffmpeg -y -i " + fullPath + " -strict experimental -vf transpose=1 -s 160x120 -r 0 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k " + outputFullPath;
+		//String[] complexCommand = {"ffmpeg","-y" ,"-i", fullPath,"-strict","experimental","-vf", "-s", "160x120", "-aspect", "4:3", "-b", "2097k", "-vcodec", "mpeg4", outputFullPath};
+		
 		//Log.i(Prefs.TAG, "Overriding the command with hard coded command");
 		//commandStr = "ffmpeg -y -i /sdcard/videokit/in.mp4 -strict experimental -vf transpose=1 -s 160x120 -r 30 -aspect 4:3 -ab 48000 -ac 2 -ar 22050 -b 2097k /sdcard/videokit/vid_trans.mp4";
 		

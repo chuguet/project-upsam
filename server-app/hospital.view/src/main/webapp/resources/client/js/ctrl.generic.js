@@ -29,6 +29,15 @@ var generic = {
     	generic.processDatebox();	
 	},
 	
+	'refreshResolution' : function(){
+		var screenWidth = generic.getOrientation() == "landscape" ? screen.availHeight : screen.availWidth;
+		$('html').css('fontSize', screenWidth/110 + "px");
+	},
+	
+	'getOrientation' : function(){
+		return (typeof window.orientation != undefined && Math.abs(window.orientation) - 90 == 0) ? "landscape" : "portrait";
+	},
+	
 	'blink': function(){
 		var alert = $('.ui-icon-alert');
 		if (alert.length > 0){
@@ -41,7 +50,7 @@ var generic = {
 		        } else {
 		        	opacity = 1;
 		        }
-		        alert.fadeTo("fast", opacity)
+		        alert.fadeTo("fast", opacity);
 		    }, 400);
 		}
 	},
@@ -258,5 +267,17 @@ var generic = {
 		var mm = parseInt(data[1]) <10 ? '0' + parseInt(data[1]) : data[1];
 		var yyyy = data[2];
 		return yyyy + "-" + mm + "-" + dd;
+	},
+	'fontSizePlus' : function(){
+		var size = $('html').css('fontSize');
+		size = parseInt(size.replace('px', ''));
+		size = size + 1;
+		$('html').css('fontSize', size + "px");
+	},
+	'fontSizeMinus' : function(){
+		var size = $('html').css('fontSize');
+		size = parseInt(size.replace('px', ''));
+		size = size - 1;
+		$('html').css('fontSize', size + "px");
 	}
 };

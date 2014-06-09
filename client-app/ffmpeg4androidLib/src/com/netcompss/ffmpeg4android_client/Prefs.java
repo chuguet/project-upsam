@@ -31,7 +31,7 @@ public class Prefs {
 	public static boolean transcodingIsRunning = false;
 	public static String durationOfCurrent = null;
 	
-	private String outFolder = null;
+	private static String _outFolder = null;
 	
 	public static long inputFileSize = -1;
 	public static long outputFileSize = -1;
@@ -58,11 +58,11 @@ public class Prefs {
 	}
 	
 	public String getOutFolder() {
-		if (outFolder == null) {
+		if (_outFolder == null) {
 			return DEFAULT_OUT_FOLDER;
 		}
 		else {
-			return outFolder;
+			return _outFolder;
 		}
 	}
 	
@@ -124,6 +124,10 @@ public class Prefs {
 
 	public static void setWorkFolder(String workFolder) {
 		_workFolder = workFolder;
+	}
+	
+	public static void setOutFolder(String outFolder){
+		_outFolder = outFolder;
 	}
 
 	

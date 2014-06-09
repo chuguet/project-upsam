@@ -9,7 +9,7 @@ var paciente = {
 	'buscarListadoCallback' : function(listaItems) {
 		$("#listaPacientes li").remove();
 		for(var i = 0; i < listaItems.length; i++) {
-			var li = $("<li><a rel='external' alt='Acceder al paciente' href='#' onclick='generic.changePage(\"paciente.html?id=" + listaItems[i].id + "\");' data-transition='fade'>" + listaItems[i].nombre + "&nbsp;" + listaItems[i].apellidos + " [N&deg; ident:" + listaItems[i].numeroIdentificacion + "]<br/><span class='videoFeatures'>Fecha Nacimiento: " + listaItems[i].fechaNacimiento
+			var li = $("<li><a rel='external' alt='Acceder al paciente' href='#' onclick='generic.changePage(\"paciente.html?id=" + listaItems[i].id + "\");' data-transition='fade' class='itemFeatures'>" + listaItems[i].nombre + "&nbsp;" + listaItems[i].apellidos + " [N&deg; ident:" + listaItems[i].numeroIdentificacion + "]<br/><span>Fecha Nacimiento: " + listaItems[i].fechaNacimiento
 					+ "&nbsp;|&nbsp;Fecha &uacute;ltima evaluaci&oacute;n: " + listaItems[i].fechaUltimaEvaluacion + "</span></a></li>");
 			$("#listaPacientes").append(li);
 		}
@@ -61,7 +61,7 @@ var paciente = {
 			for(var i = 0; i < exploraciones.length; i++) {
 				var exploracion = exploraciones[i];
 				var cont = i + 1;
-				$("#listaExploraciones").append("<li><a rel='external' href='#' onclick='javascript:paciente.irAExploracion(" + exploracion.id + ", " + cont + ");' data-transition='fade'>Exploraci&oacute;n " + cont + "<br><span class='videoFeatures'>" + exploracion.fecha + "&nbsp;|&nbsp;" + exploracion.nombreUsuario + "</span></a></li>");
+				$("#listaExploraciones").append("<li><a rel='external' href='#' onclick='javascript:paciente.irAExploracion(" + exploracion.id + ", " + cont + ");' data-transition='fade' class='itemFeatures'>Exploraci&oacute;n " + cont + "<br><span>" + exploracion.fecha + "&nbsp;|&nbsp;" + exploracion.nombreUsuario + "</span></a></li>");
 			}
 			$("#listaExploraciones").listview('refresh');
 			$("#listaExploraciones").show();

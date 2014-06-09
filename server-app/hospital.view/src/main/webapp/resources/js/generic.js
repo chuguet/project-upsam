@@ -186,23 +186,16 @@ var generic = {
 		var bodyHeight = $('body').height();
 		$('#content').height(bodyHeight - 103);
 	},
-	'alert' : function jAlert(output_msg, title_msg) {
+	'alert' : function (output_msg, title_msg) {
 		if (!title_msg)
-			title_msg = 'Alert';
+			title_msg = 'Alerta';
 
 		if (!output_msg)
 			output_msg = 'Sin informaci&oacute;n.';
 
-		$("<div title=" + title_msg + "></div>").html(output_msg).dialog({
-			resizable : false,
-			width : "auto",
-			modal : true,
-			buttons : {
-				"Cerrar" : function() {
-					$(this).dialog("close");
-				}
-			}
-		});
+		$("div#alertModal h4.modal-title").html(title_msg);
+		$("div#alertModal div.modal-body").html(output_msg);
+		$('div#alertModal').modal('show');
 	},
 	'processTable' : function(entity, onclickRow){
 		LoadDataTablesScripts(generic.AllTables);

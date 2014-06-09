@@ -90,7 +90,8 @@ class VideoService implements IVideoService {
 		validateFolderExist(folderPath);
 		String nombre = getCurrentTimestamp() + ".mp4";
 		String filePath = folderPath + nombre;
-		FileUtils.writeByteArrayToFile(new File(filePath), content);
+		File video = new File(filePath);
+		FileUtils.writeByteArrayToFile(video, content);
 		return nombre;
 	}
 
